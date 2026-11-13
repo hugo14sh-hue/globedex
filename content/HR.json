@@ -1,0 +1,661 @@
+{
+ "places": [
+  {
+   "id": "HR",
+   "kind": "country",
+   "name": "Kroatien",
+   "iso2": "HR",
+   "lat": 45.1,
+   "lon": 15.2,
+   "airport": "ZAG"
+  },
+  {
+   "id": "HR-dubrovnik",
+   "kind": "city",
+   "parent_id": "HR",
+   "name": "Dubrovnik",
+   "lat": 42.6507,
+   "lon": 18.0944,
+   "airport": "DBV",
+   "data": {
+    "transport": [
+     {
+      "mode": "Stadsbuss",
+      "rating": "bra",
+      "text": "Ingår i Dubrovnik Pass tillsammans med stadsmuren och flera museer."
+     },
+     {
+      "mode": "Flygbuss",
+      "rating": "bast",
+      "text": "Ca 35 minuter till Pločeporten vid gamla stan, sedan vidare till busstationen i Gruž. Avgår ungefär 30 minuter efter varje landning."
+     }
+    ],
+    "sources": [
+     "https://kompas.hr/dubrovnik/attractions/dubrovnik-pass",
+     "https://platanus.hr"
+    ],
+    "day_budget_sek": 1900,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Två nätter",
+      "days": 2,
+      "text": "Stadsmuren tidigt och gamla stan på kvällen.",
+      "recommended": false
+     },
+     {
+      "label": "Tre nätter",
+      "days": 3,
+      "text": "Hinner en ö eller en stranddag.",
+      "recommended": true
+     },
+     {
+      "label": "Fem nätter",
+      "days": 5,
+      "text": "Lägg till en dagstur längs kusten.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Ploče",
+      "stay": true,
+      "text": "Strax öster om gamla stan, där flygbussen stannar. Utsikt mot muren."
+     },
+     {
+      "name": "Lapad",
+      "stay": true,
+      "text": "Stränder och lugnare kvällar. Buss in till gamla stan."
+     },
+     {
+      "name": "Gruž",
+      "stay": true,
+      "text": "Vid färjehamnen och busstationen. Billigast."
+     },
+     {
+      "name": "Inne i gamla stan",
+      "stay": false,
+      "text": "Trappor, inga bilar och dyrt. Jobbigt med resväska."
+     }
+    ],
+    "best_text": "Maj, juni och september. I juli och augusti fyller kryssningsfartygen gamla stan.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    3,
+    5,
+    5,
+    3,
+    3,
+    5,
+    4,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "HR-split",
+   "kind": "city",
+   "parent_id": "HR",
+   "name": "Split",
+   "lat": 43.5081,
+   "lon": 16.4402,
+   "airport": "SPU",
+   "data": {
+    "transport": [
+     {
+      "mode": "Flygbuss",
+      "rating": "bast",
+      "text": "Ca 30 minuter utan stopp till busstationen, som ligger intill färjehamnen och fem minuters promenad från gamla stan."
+     }
+    ],
+    "sources": [
+     "https://platanus.hr"
+    ],
+    "day_budget_sek": 1500,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Två nätter",
+      "days": 2,
+      "text": "Palatset och Marjan.",
+      "recommended": false
+     },
+     {
+      "label": "Tre nätter",
+      "days": 3,
+      "text": "Hinner en dagstur till Krka eller en ö.",
+      "recommended": true
+     },
+     {
+      "label": "Fem nätter",
+      "days": 5,
+      "text": "Bra bas för öluff med färjorna.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Gamla stan och palatset",
+      "stay": true,
+      "text": "Allt på gångavstånd, fem minuter från busstationen och färjorna."
+     },
+     {
+      "name": "Veli Varoš",
+      "stay": true,
+      "text": "Gamla fiskarkvarter vid foten av Marjan. Lugnare."
+     },
+     {
+      "name": "Bačvice",
+      "stay": true,
+      "text": "Nära stranden och ändå gångavstånd till palatset."
+     }
+    ],
+    "best_text": "Maj, juni och september.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    3,
+    5,
+    5,
+    4,
+    4,
+    5,
+    4,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "HR-zagreb",
+   "kind": "city",
+   "parent_id": "HR",
+   "name": "Zagreb",
+   "lat": 45.815,
+   "lon": 15.9819,
+   "airport": "ZAG",
+   "data": {
+    "transport": [
+     {
+      "mode": "Flygbuss",
+      "rating": "bast",
+      "text": "35–40 minuter till centrala busstationen. Därifrån tar du spårvagn till torget."
+     }
+    ],
+    "sources": [
+     "https://zagreb-airport.hr/en/passengers/to-from-the-airport/by-bus/89"
+    ],
+    "day_budget_sek": 1200,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "En dag",
+      "days": 1,
+      "text": "Övre staden med kanonskottet, Markuskyrkan och museet.",
+      "recommended": false
+     },
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Hinner marknaden och nedre stadens parker.",
+      "recommended": true
+     },
+     {
+      "label": "Fyra dagar",
+      "days": 4,
+      "text": "Lägg till en dagstur till Plitvicesjöarna.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Nedre staden (Donji grad)",
+      "stay": true,
+      "text": "Parker, kaféer och spårvagn överallt. Gångavstånd till bergbanan."
+     },
+     {
+      "name": "Övre staden (Gornji grad)",
+      "stay": true,
+      "text": "Lugnt och vackert, men backigt."
+     }
+    ],
+    "best_text": "Maj, juni och september, eller december för julmarknaden.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    4,
+    5,
+    5,
+    3,
+    3,
+    5,
+    4,
+    2,
+    5
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "HR-fakta-betala",
+   "place_id": "HR",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: euro (EUR)",
+   "summary": "Landet har euro (EUR)."
+  },
+  {
+   "id": "HR-fakta-inresa",
+   "place_id": "HR",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen. Svenskt körkort accepteras normalt inte som resehandling.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-fakta-mobil",
+   "place_id": "HR",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "EU-roaming: samma pris som i Sverige.",
+   "body": "Du betalar som hemma för samtal, sms och surf, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-dubrovnik-fakta-pass",
+   "place_id": "HR-dubrovnik",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Dubrovnik Pass kan löna sig",
+   "summary": "Passet ger fritt inträde till stadsmuren, museer och stadsbussarna.",
+   "body": "Stadsmuren, Rektorspalatset, Franciskanklostrets museum, Sjöfartsmuseet och Etnografiska museet ingår i alla tre varianter av passet.",
+   "source_url": "https://kompas.hr/dubrovnik/attractions/dubrovnik-pass",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-fakta-alkohol",
+   "place_id": "HR",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Alkohol från 18 år",
+   "summary": "Butiken ska neka den som ser ut att vara under 18 och saknar legitimation.",
+   "body": "Samma regel gäller energidryck. En ny lag ger också städer och kommuner rätt att begränsa butikernas alkoholförsäljning nattetid, så tiderna kan skilja sig mellan orter.",
+   "min_age": 18,
+   "source_url": "https://ftnnews.com/travel-news/retail/croatia-lets-cities-ban-late-night-shop-alcohol-sales-to-curb-rowdy-tourists/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-dubrovnik-fakta-ta-sig-dit",
+   "place_id": "HR-dubrovnik",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygbuss till gamla stan på 35 minuter",
+   "summary": "Bussen stannar vid Pločeporten och går vidare till Gruž.",
+   "body": "Enkelbiljett kostar 10 euro och tur och retur 15 euro. Biljetten gäller valfri avgång samma dag. Mot flygplatsen går bussen från busstationen i Gruž och stannar vid linbanan nära gamla stan.",
+   "source_url": "https://platanus.hr",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-split-fakta-ta-sig-dit",
+   "place_id": "HR-split",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygbuss till Split på 30 minuter",
+   "summary": "Bussen går direkt till busstationen vid färjehamnen.",
+   "body": "Enkelbiljett kostar 10 euro och tur och retur 15 euro. Från flygplatsen avgår bussen ungefär 30 minuter efter varje landning. På sommaren kan trafiken göra resan längre.",
+   "source_url": "https://platanus.hr",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-fakta-krka-bad",
+   "place_id": "HR",
+   "topic": "fun-fact",
+   "is_rule": true,
+   "title": "Badförbud i Krka",
+   "summary": "Det är förbjudet att bada i Krka nationalpark sedan 1 januari 2021.",
+   "body": "Äldre bilder och guider visar folk som badar nedanför vattenfallet Skradinski buk. Det är inte längre tillåtet.",
+   "source_url": "https://www.npkrka.hr/en_US/?p=4284",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-zagreb-fakta-ta-sig-dit",
+   "place_id": "HR-zagreb",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygbuss till busstationen på 35–40 minuter",
+   "summary": "Pleso Prijevoz kör mellan flygplatsen och centrala busstationen.",
+   "body": "Stadens lokalbussar går också från flygplatsen men tar längre tid.",
+   "source_url": "https://zagreb-airport.hr/en/passengers/to-from-the-airport/by-bus/89",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "HR-dubrovnik-stadsmuren",
+   "place_id": "HR-dubrovnik",
+   "category": "sevardhet",
+   "name": "Stadsmuren",
+   "summary": "Ett varv runt gamla stan. Biljetten gäller en gång.",
+   "body": "Lämnar du muren måste du köpa ny biljett. Fortet Lovrijenac ingår. Räkna med 1,5–2 timmar för hela varvet, och gå tidigt på dagen.",
+   "lat": 42.641,
+   "lon": 18.107,
+   "must_rank": 1,
+   "source_url": "https://www.kompas.hr/dubrovnik/attractions/city-walls/tickets",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-plitvice",
+   "place_id": "HR",
+   "category": "natur",
+   "name": "Plitvicesjöarna",
+   "summary": "Nationalpark med sjöar och vattenfall. Köp biljett på nätet.",
+   "body": "Biljetten gäller den ingång och den tid du valde vid köpet. Spara den i mobilen eller skriv ut den.",
+   "lat": 44.8654,
+   "lon": 15.582,
+   "must_rank": 1,
+   "source_url": "https://np-plitvicka-jezera.hr/en/faq/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-split-diocletianus-palats",
+   "place_id": "HR-split",
+   "category": "sevardhet",
+   "name": "Diocletianus palats",
+   "summary": "Romerskt kejsarpalats som blev gamla stan. Gratis och öppet dygnet runt.",
+   "body": "Världsarv sedan 1979, samma år som Dubrovniks gamla stad och Plitvice. Själva palatsområdet kostar inget. Källarvalven har biljett, som säljs i kassan i palatset eller hos Splits stadsmuseum.",
+   "lat": 43.5081,
+   "lon": 16.4402,
+   "must_rank": 1,
+   "source_url": "https://www.visit-croatia.co.uk/blog/spotlight-on-diocletians-palace-split/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-split-marjan",
+   "place_id": "HR-split",
+   "category": "natur",
+   "name": "Marjan",
+   "summary": "Skogsklädd höjd med stans högsta utsiktspunkt. Gratis året runt.",
+   "body": "Stigarna genom tallskogen är öppna hela året. Från toppen Telegrin ser du gamla stan, öarna och bergen. Du går dit från gamla stan eller tar buss 12.",
+   "lat": 43.5086,
+   "lon": 16.4108,
+   "must_rank": 2,
+   "source_url": "https://www.nomadotravel.app/en/guides/free-things-to-do-in-split",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-krka",
+   "place_id": "HR",
+   "category": "natur",
+   "name": "Krka nationalpark",
+   "summary": "Vattenfallet Skradinski buk. Bad är förbjudet sedan 2021.",
+   "body": "Parkens egna regler förbjuder bad från 1 januari 2021. Räkna med att se fallen från spängerna, inte från vattnet.",
+   "lat": 43.8046,
+   "lon": 15.9631,
+   "must_rank": 2,
+   "source_url": "https://www.npkrka.hr/en_US/?p=4284",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-zagreb-lotrscak",
+   "place_id": "HR-zagreb",
+   "category": "sevardhet",
+   "name": "Lotrščaktornet och middagskanonen",
+   "summary": "Varje dag klockan tolv avfyras en kanon från tornet.",
+   "body": "Tornet byggdes 1266 för att försvara stadens södra port. Kanonen har skjutit ett skott mitt på dagen sedan 1877. Stå på promenaden nedanför strax före tolv.",
+   "lat": 45.8146,
+   "lon": 15.9732,
+   "must_rank": 1,
+   "source_url": "https://www.inyourpocket.com/zagreb/sightseeing-culture/Sightseeing-Tour",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-zagreb-markuskyrkan",
+   "place_id": "HR-zagreb",
+   "category": "byggnad",
+   "name": "Markuskyrkan",
+   "summary": "Kyrka från 1200-talet med färgglatt tegeltak i övre staden.",
+   "body": "Taket är lagt som en mosaik med två vapensköldar: Zagrebs och det treeniga kungariket Kroatien, Slavonien och Dalmatien.",
+   "lat": 45.8164,
+   "lon": 15.9736,
+   "must_rank": 2,
+   "source_url": "https://www.lonelyplanet.com/articles/weekend-itinerary-zagreb-croatia",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-zagreb-brustna-relationer",
+   "place_id": "HR-zagreb",
+   "category": "museum",
+   "name": "Museet för brustna relationer",
+   "summary": "Skänkta föremål från kärlek som tog slut, med historien bakom.",
+   "body": "Museet ligger i övre staden nära Markuskyrkan och ingår i Zagreb Card.",
+   "lat": 45.815,
+   "lon": 15.9735,
+   "must_rank": 3,
+   "source_url": "https://www.lonelyplanet.com/articles/top-things-to-do-in-zagreb",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "HR-zagreb-uspinjaca",
+   "place_id": "HR-zagreb",
+   "category": "upplevelse",
+   "name": "Bergbanan",
+   "summary": "Bara 66 meter lång. Går från Tomićeva-gatan upp till Lotrščaktornet.",
+   "body": "Bergbanan binder ihop nedre och övre staden.",
+   "lat": 45.8142,
+   "lon": 15.9731,
+   "source_url": "https://appsavvytraveller.com/things-to-do-in-zagreb/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-cevapi",
+   "category": "mat",
+   "name": "Ćevapi",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Små grillade färsrullar i bröd med rå lök.",
+   "place_id": "HR"
+  },
+  {
+   "id": "mat-burek",
+   "category": "mat",
+   "name": "Burek",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Fylld filodegspaj som köps i bageriet.",
+   "place_id": "HR"
+  },
+  {
+   "id": "mat-svart-risotto",
+   "category": "mat",
+   "name": "Svart risotto",
+   "rarity": "ovanlig",
+   "icon": "food",
+   "hint": "Färgen kommer från bläckfiskens bläck.",
+   "place_id": "HR"
+  },
+  {
+   "id": "bakverk-fritule",
+   "category": "bakverk",
+   "name": "Fritule",
+   "rarity": "ovanlig",
+   "icon": "food",
+   "hint": "Små friterade munkar, vanligast kring jul.",
+   "place_id": "HR"
+  },
+  {
+   "id": "sevardhet-havsorgeln",
+   "category": "sevardhet",
+   "name": "Havsorgeln i Zadar",
+   "rarity": "sallsynt",
+   "icon": "build",
+   "hint": "Trappsteg vid vattnet där vågorna spelar.",
+   "place_id": "HR"
+  },
+  {
+   "id": "daggdjur-delfin-adriatiska",
+   "category": "havsdjur",
+   "name": "Delfin i Adriatiska havet",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Störst chans från en båt mellan öarna.",
+   "place_id": "HR"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "HR-dubrovnik-ide-muren",
+   "place_id": "HR-dubrovnik",
+   "kind": "i-stan",
+   "title": "Stadsmuren tidigt på morgonen",
+   "body": "Gå hela varvet innan värmen och kryssningsgästerna kommer.",
+   "duration": "ca 2 h",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "HR-ide-plitvice",
+   "place_id": "HR",
+   "kind": "utflykt",
+   "title": "Heldag vid Plitvicesjöarna",
+   "body": "Boka ingång och tid på nätet och var där tidigt.",
+   "duration": "En dag",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "HR-split-ide-palatset",
+   "place_id": "HR-split",
+   "kind": "i-stan",
+   "title": "Kväll i Diocletianus palats",
+   "body": "Gå in genom en av portarna efter mörkrets inbrott, när gränderna är som lugnast.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "HR-split-ide-marjan",
+   "place_id": "HR-split",
+   "kind": "ut-en-svang",
+   "title": "Solnedgång på Marjan",
+   "body": "Gå upp till Telegrin med något att dricka och se solen gå ner över öarna.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "HR-split-ide-krka",
+   "place_id": "HR-split",
+   "kind": "dagstripp",
+   "title": "Dagstur till Krka",
+   "body": "Titta på Skradinski buk från spängerna. Lämna badkläderna hemma, det är badförbud.",
+   "duration": "En dag",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "HR-zagreb-ide-ovre-staden",
+   "place_id": "HR-zagreb",
+   "kind": "i-stan",
+   "title": "Övre staden till kanonskottet",
+   "body": "Ta bergbanan upp strax före tolv, hör kanonen och gå vidare till Markuskyrkan och museet.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "HR-present-slips",
+   "place_id": "HR",
+   "name": "Slips",
+   "body": "Kravatten har fått sitt namn efter kroaterna.",
+   "for_whom": [
+    "pappa",
+    "van"
+   ],
+   "keywords": [
+    "klader"
+   ]
+  },
+  {
+   "id": "HR-present-lavendel",
+   "place_id": "HR",
+   "name": "Lavendelpåsar",
+   "body": "Säljs på marknaderna längs kusten.",
+   "for_whom": [
+    "mamma",
+    "van"
+   ],
+   "keywords": [
+    "doft",
+    "inredning"
+   ]
+  },
+  {
+   "id": "HR-present-keramik",
+   "place_id": "HR",
+   "name": "Keramik från kusten",
+   "body": "Muggar och fat i blått och vitt.",
+   "for_whom": [
+    "mig",
+    "mamma"
+   ],
+   "keywords": [
+    "kaffe",
+    "keramik"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Blåvit mugg med adriatiskt motiv"
+   }
+  }
+ ]
+}

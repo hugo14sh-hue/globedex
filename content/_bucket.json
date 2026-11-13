@@ -1,0 +1,768 @@
+[
+ {
+  "id": "bucket-fallskarm",
+  "name": "Hoppa fallskärm i tandem",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "season": "Vår till höst",
+  "where_text": "Fallskärmsklubbar runt om i Sverige",
+  "place_ids": [
+   "SE"
+  ]
+ },
+ {
+  "id": "bucket-bungyjump",
+  "name": "Hoppa bungyjump",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-paragliding",
+  "name": "Flyga skärm i tandem",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-luftballong",
+  "name": "Åka luftballong",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "where_text": "Kappadokien är känt för ballongerna",
+  "place_ids": [
+   "TR",
+   "SE"
+  ]
+ },
+ {
+  "id": "bucket-zipline",
+  "name": "Åka zipline",
+  "category": "aventyr",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-forsranning",
+  "name": "Åka forsränning",
+  "category": "aventyr",
+  "cost_level": "medel",
+  "season": "Sommar",
+  "place_ids": [
+   "SE",
+   "NO",
+   "HR"
+  ]
+ },
+ {
+  "id": "bucket-dykcert",
+  "name": "Ta dykcertifikat",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-snorkla-rev",
+  "name": "Snorkla vid ett korallrev",
+  "category": "aventyr",
+  "cost_level": "medel",
+  "place_ids": [
+   "AU"
+  ]
+ },
+ {
+  "id": "bucket-surfa",
+  "name": "Stå på en surfbräda",
+  "category": "aventyr",
+  "cost_level": "medel",
+  "place_ids": [
+   "AU"
+  ]
+ },
+ {
+  "id": "bucket-hundspann",
+  "name": "Åka hundspann",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "season": "Vinter",
+  "where_text": "Norra Norden",
+  "place_ids": [
+   "SE-lappland",
+   "SE-norrbotten",
+   "NO",
+   "FI"
+  ]
+ },
+ {
+  "id": "bucket-skoter",
+  "name": "Köra snöskoter",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "season": "Vinter",
+  "where_text": "Norra Norden",
+  "place_ids": [
+   "SE-lappland",
+   "SE-jamtland",
+   "FI",
+   "IS"
+  ]
+ },
+ {
+  "id": "bucket-via-ferrata",
+  "name": "Klättra en via ferrata",
+  "category": "aventyr",
+  "cost_level": "medel",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-helikopter",
+  "name": "Flyga helikopter",
+  "category": "aventyr",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-rida-strand",
+  "name": "Rida på en strand",
+  "category": "aventyr",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-kajak-natt",
+  "name": "Paddla kajak och sova på en ö",
+  "category": "aventyr",
+  "cost_level": "billigt",
+  "season": "Sommar",
+  "place_ids": [
+   "SE-bohuslan",
+   "SE-stockholm",
+   "HR"
+  ]
+ },
+ {
+  "id": "bucket-vinterbad",
+  "name": "Vinterbada och basta",
+  "category": "aventyr",
+  "cost_level": "billigt",
+  "season": "Vinter",
+  "place_ids": [
+   "SE",
+   "FI-helsingfors",
+   "DK-kopenhamn",
+   "NO-oslo"
+  ]
+ },
+ {
+  "id": "bucket-norrsken",
+  "name": "Se norrsken",
+  "category": "natur",
+  "cost_level": "medel",
+  "season": "Mörka månaderna, ungefär september till mars",
+  "where_text": "Norra Norden och Island",
+  "place_ids": [
+   "SE-lappland",
+   "SE-norrbotten",
+   "NO",
+   "FI",
+   "IS"
+  ]
+ },
+ {
+  "id": "bucket-midnattssol",
+  "name": "Se midnattssolen",
+  "category": "natur",
+  "cost_level": "medel",
+  "season": "Runt midsommar",
+  "where_text": "Norr om polcirkeln",
+  "place_ids": [
+   "SE-lappland",
+   "SE-norrbotten",
+   "NO",
+   "FI"
+  ]
+ },
+ {
+  "id": "bucket-delfiner",
+  "name": "Simma med delfiner i det fria",
+  "category": "natur",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-valar",
+  "name": "Se valar",
+  "category": "natur",
+  "cost_level": "dyrt",
+  "place_ids": [
+   "IS",
+   "NO",
+   "AU-sydney"
+  ]
+ },
+ {
+  "id": "bucket-skoldpaddor",
+  "name": "Simma med havssköldpaddor",
+  "category": "natur",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-vulkan",
+  "name": "Stå på en vulkan",
+  "category": "natur",
+  "cost_level": "medel",
+  "place_ids": [
+   "IS",
+   "GR-santorini"
+  ]
+ },
+ {
+  "id": "bucket-glaciar",
+  "name": "Gå på en glaciär",
+  "category": "natur",
+  "cost_level": "dyrt",
+  "place_ids": [
+   "IS",
+   "NO"
+  ]
+ },
+ {
+  "id": "bucket-varm-kalla",
+  "name": "Bada i en varm källa",
+  "category": "natur",
+  "cost_level": "medel",
+  "place_ids": [
+   "IS"
+  ]
+ },
+ {
+  "id": "bucket-vattenfall",
+  "name": "Stå bakom ett vattenfall",
+  "category": "natur",
+  "cost_level": "gratis",
+  "place_ids": [
+   "IS"
+  ]
+ },
+ {
+  "id": "bucket-soluppgang-topp",
+  "name": "Se soluppgången från en bergstopp",
+  "category": "natur",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-stjarnhimmel",
+  "name": "Sova under bar himmel",
+  "category": "natur",
+  "cost_level": "gratis",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-stjarnfall",
+  "name": "Se ett stjärnfall tillsammans",
+  "category": "natur",
+  "cost_level": "gratis",
+  "season": "Perseiderna i augusti",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-fjalltopp",
+  "name": "Bestiga en fjälltopp",
+  "category": "natur",
+  "cost_level": "billigt",
+  "season": "Sommar",
+  "place_ids": [
+   "SE-lappland",
+   "SE-jamtland",
+   "SE-harjedalen",
+   "NO"
+  ]
+ },
+ {
+  "id": "bucket-oken",
+  "name": "Sova en natt i öknen",
+  "category": "natur",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-regnskog",
+  "name": "Vandra i en regnskog",
+  "category": "natur",
+  "cost_level": "medel",
+  "place_ids": [
+   "AU"
+  ]
+ },
+ {
+  "id": "bucket-korsbar",
+  "name": "Se körsbärsblommorna",
+  "category": "natur",
+  "cost_level": "gratis",
+  "season": "Vår",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-tagluff",
+  "name": "Tågluffa i Europa",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-roadtrip",
+  "name": "Göra en roadtrip utan fast plan",
+  "category": "resa",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-nattag",
+  "name": "Åka nattåg",
+  "category": "resa",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-ensam-biljett",
+  "name": "Boka en resa med en veckas varsel",
+  "category": "resa",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-alla-norden",
+  "name": "Besöka alla nordiska länder",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "place_ids": [
+   "SE",
+   "NO",
+   "DK",
+   "FI",
+   "IS"
+  ]
+ },
+ {
+  "id": "bucket-tre-kontinenter",
+  "name": "Besöka tre kontinenter",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-ekvatorn",
+  "name": "Korsa ekvatorn",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-nyar-utomlands",
+  "name": "Fira nyår utomlands",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "season": "Nyår",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-ohopp",
+  "name": "Öluffa",
+  "category": "resa",
+  "cost_level": "medel",
+  "season": "Sommar",
+  "place_ids": [
+   "GR",
+   "HR"
+  ]
+ },
+ {
+  "id": "bucket-husbil",
+  "name": "Bo i husbil en vecka",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-spontan-flygplats",
+  "name": "Åka till flygplatsen och välja resa där",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemlandet",
+  "name": "Resa till ett land som någon av er har rötter i",
+  "category": "resa",
+  "cost_level": "medel",
+  "place_ids": [
+   "TR",
+   "GR",
+   "HR"
+  ]
+ },
+ {
+  "id": "bucket-alla-landskap",
+  "name": "Besöka alla 25 landskap i Sverige",
+  "category": "resa",
+  "cost_level": "dyrt",
+  "place_ids": [
+   "SE"
+  ]
+ },
+ {
+  "id": "bucket-stjarnkrog",
+  "name": "Äta på en stjärnkrog",
+  "category": "mat",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-matlagningskurs",
+  "name": "Gå en matlagningskurs utomlands",
+  "category": "mat",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-gatumat",
+  "name": "Äta gatumat på en nattmarknad",
+  "category": "mat",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-vinprovning",
+  "name": "Gå på vinprovning på en vingård",
+  "category": "mat",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-fanga-fisk",
+  "name": "Fånga och laga egen fisk",
+  "category": "mat",
+  "cost_level": "billigt",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-pasta-fran-grunden",
+  "name": "Laga pasta från grunden",
+  "category": "mat",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-frukost-sang",
+  "name": "Frukost på sängen med hela hotellbrickan",
+  "category": "mat",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-ratt-per-land",
+  "name": "Laga en rätt från varje land ni besökt",
+  "category": "mat",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-opera",
+  "name": "Gå på opera",
+  "category": "kultur",
+  "cost_level": "medel",
+  "place_ids": [
+   "AU-sydney",
+   "SE-stockholm"
+  ]
+ },
+ {
+  "id": "bucket-festival",
+  "name": "Åka på musikfestival",
+  "category": "kultur",
+  "cost_level": "dyrt",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-fotboll-utomlands",
+  "name": "Se en fotbollsmatch utomlands",
+  "category": "kultur",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-underverk",
+  "name": "Se ett av världens sju nya underverk",
+  "category": "kultur",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-konsert-utomlands",
+  "name": "Se en favoritartist utomlands",
+  "category": "kultur",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-spraket",
+  "name": "Lära er hundra ord på varandras språk",
+  "category": "kultur",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-dansa",
+  "name": "Gå en danskurs",
+  "category": "kultur",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-julmarknad",
+  "name": "Gå på julmarknad utomlands",
+  "category": "kultur",
+  "cost_level": "medel",
+  "season": "Advent",
+  "place_ids": [
+   "DE-berlin",
+   "DK-kopenhamn"
+  ]
+ },
+ {
+  "id": "bucket-dejt-overraskning",
+  "name": "Planera en överraskningsdejt åt den andra",
+  "category": "tillsammans",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-picknick-solnedgang",
+  "name": "Picknick i solnedgången",
+  "category": "tillsammans",
+  "cost_level": "billigt",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-spa",
+  "name": "Åka på spahelg",
+  "category": "tillsammans",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-fotobok",
+  "name": "Göra en fotobok av årets resor",
+  "category": "tillsammans",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-tidskapsel",
+  "name": "Skriva brev till er själva om fem år",
+  "category": "tillsammans",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-samma-plats",
+  "name": "Återvända till platsen för första dejten",
+  "category": "tillsammans",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-dans-regn",
+  "name": "Dansa i regnet",
+  "category": "tillsammans",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-keramik",
+  "name": "Dreja eller måla keramik tillsammans",
+  "category": "tillsammans",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-fotoautomat",
+  "name": "Ta kort i en fotoautomat",
+  "category": "tillsammans",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-stuga",
+  "name": "Hyra en stuga utan wifi",
+  "category": "tillsammans",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-bio-drive-in",
+  "name": "Gå på utomhusbio",
+  "category": "tillsammans",
+  "cost_level": "billigt",
+  "season": "Sommar",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-tradkoja",
+  "name": "Sova i en trädkoja",
+  "category": "tillsammans",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-filmmaraton",
+  "name": "Filmmaraton med en hel filmserie",
+  "category": "hemma",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-land-kvall",
+  "name": "Temakväll med mat och musik från ett land",
+  "category": "hemma",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-koja",
+  "name": "Bygga en koja i vardagsrummet",
+  "category": "hemma",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-pussel",
+  "name": "Lägga ett pussel på tusen bitar",
+  "category": "hemma",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-blindtest",
+  "name": "Blindtesta choklad, läsk eller chips",
+  "category": "hemma",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-spelkvall",
+  "name": "Spelkväll med turnering och pris",
+  "category": "hemma",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-baka",
+  "name": "Baka något ni aldrig bakat förut",
+  "category": "hemma",
+  "cost_level": "billigt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-planera",
+  "name": "Planera drömresan med karta och budget",
+  "category": "hemma",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-skarmfri",
+  "name": "En helt skärmfri dag",
+  "category": "hemma",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-hemma-soluppgang",
+  "name": "Gå upp och se soluppgången med kaffe",
+  "category": "hemma",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-lopp",
+  "name": "Springa ett lopp",
+  "category": "milstolpe",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-klassiker",
+  "name": "Göra En svensk klassiker",
+  "category": "milstolpe",
+  "cost_level": "dyrt",
+  "place_ids": [
+   "SE"
+  ]
+ },
+ {
+  "id": "bucket-mil-sprak",
+  "name": "Klara en konversation på ett nytt språk",
+  "category": "milstolpe",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-korkort",
+  "name": "Ta körkort eller en ny behörighet",
+  "category": "milstolpe",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-flytta",
+  "name": "Flytta ihop",
+  "category": "milstolpe",
+  "cost_level": "dyrt",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-buffert",
+  "name": "Spara ihop till en resa utan att låna",
+  "category": "milstolpe",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-solo",
+  "name": "Göra en resa helt på egen hand",
+  "category": "milstolpe",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-talang",
+  "name": "Lära sig ett instrument",
+  "category": "milstolpe",
+  "cost_level": "medel",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-volontar",
+  "name": "Jobba ideellt en dag",
+  "category": "milstolpe",
+  "cost_level": "gratis",
+  "place_ids": []
+ },
+ {
+  "id": "bucket-mil-tio-lander",
+  "name": "Besöka tio länder",
+  "category": "milstolpe",
+  "cost_level": "dyrt",
+  "place_ids": []
+ }
+]

@@ -1,0 +1,2550 @@
+{
+ "places": [
+  {
+   "id": "SE",
+   "kind": "country",
+   "name": "Sverige",
+   "iso2": "SE",
+   "lat": 62.0,
+   "lon": 15.0
+  },
+  {
+   "id": "SE-skane",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Skåne",
+   "lat": 55.99,
+   "lon": 13.6
+  },
+  {
+   "id": "SE-blekinge",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Blekinge",
+   "lat": 56.28,
+   "lon": 15.18
+  },
+  {
+   "id": "SE-halland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Halland",
+   "lat": 56.9,
+   "lon": 12.8
+  },
+  {
+   "id": "SE-smaland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Småland",
+   "lat": 57.2,
+   "lon": 14.9
+  },
+  {
+   "id": "SE-oland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Öland",
+   "lat": 56.73,
+   "lon": 16.67
+  },
+  {
+   "id": "SE-gotland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Gotland",
+   "lat": 57.5,
+   "lon": 18.55
+  },
+  {
+   "id": "SE-vastergotland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Västergötland",
+   "lat": 58.0,
+   "lon": 13.0
+  },
+  {
+   "id": "SE-bohuslan",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Bohuslän",
+   "lat": 58.25,
+   "lon": 11.6
+  },
+  {
+   "id": "SE-dalsland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Dalsland",
+   "lat": 58.85,
+   "lon": 12.25
+  },
+  {
+   "id": "SE-ostergotland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Östergötland",
+   "lat": 58.4,
+   "lon": 15.6
+  },
+  {
+   "id": "SE-sodermanland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Södermanland",
+   "lat": 59.05,
+   "lon": 16.75
+  },
+  {
+   "id": "SE-narke",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Närke",
+   "lat": 59.15,
+   "lon": 15.1
+  },
+  {
+   "id": "SE-varmland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Värmland",
+   "lat": 59.85,
+   "lon": 13.2
+  },
+  {
+   "id": "SE-vastmanland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Västmanland",
+   "lat": 59.75,
+   "lon": 16.0
+  },
+  {
+   "id": "SE-uppland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Uppland",
+   "lat": 60.0,
+   "lon": 17.75
+  },
+  {
+   "id": "SE-dalarna",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Dalarna",
+   "lat": 61.0,
+   "lon": 14.5
+  },
+  {
+   "id": "SE-gastrikland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Gästrikland",
+   "lat": 60.65,
+   "lon": 16.75
+  },
+  {
+   "id": "SE-halsingland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Hälsingland",
+   "lat": 61.65,
+   "lon": 16.3
+  },
+  {
+   "id": "SE-harjedalen",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Härjedalen",
+   "lat": 62.25,
+   "lon": 13.6
+  },
+  {
+   "id": "SE-medelpad",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Medelpad",
+   "lat": 62.45,
+   "lon": 16.6
+  },
+  {
+   "id": "SE-jamtland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Jämtland",
+   "lat": 63.3,
+   "lon": 14.5
+  },
+  {
+   "id": "SE-angermanland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Ångermanland",
+   "lat": 63.4,
+   "lon": 17.8
+  },
+  {
+   "id": "SE-vasterbotten",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Västerbotten",
+   "lat": 64.4,
+   "lon": 20.3
+  },
+  {
+   "id": "SE-norrbotten",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Norrbotten",
+   "lat": 66.0,
+   "lon": 22.5
+  },
+  {
+   "id": "SE-lappland",
+   "kind": "region",
+   "parent_id": "SE",
+   "layer": "landskap",
+   "name": "Lappland",
+   "lat": 67.0,
+   "lon": 18.5
+  },
+  {
+   "id": "SE-boras",
+   "kind": "city",
+   "parent_id": "SE-vastergotland",
+   "name": "Borås",
+   "lat": 57.721,
+   "lon": 12.94,
+   "data": {
+    "transport": [
+     {
+      "mode": "Till fots",
+      "rating": "bast",
+      "text": "Skulpturerna och muralmålningarna står ute i stadskärnan och går att se dygnet runt."
+     }
+    ],
+    "sources": [
+     "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/"
+    ]
+   }
+  },
+  {
+   "id": "SE-stockholm",
+   "kind": "city",
+   "parent_id": "SE-uppland",
+   "name": "Stockholm",
+   "lat": 59.329,
+   "lon": 18.069,
+   "airport": "ARN",
+   "data": {
+    "transport": [
+     {
+      "mode": "Djurgårdsfärjan",
+      "rating": "bast",
+      "text": "Går mellan Slussen och Djurgården via Skeppsholmen. SL-kort gäller och enkelbiljett kan köpas på kajen."
+     },
+     {
+      "mode": "Tunnelbana",
+      "rating": "bra",
+      "text": "Stationerna är utsmyckade med konst, så resan är en sevärdhet i sig."
+     }
+    ],
+    "sources": [
+     "https://www.visitstockholm.com/o/djurgardsfarjan",
+     "https://visitstockholm.com/travel-info/local-boat-transport",
+     "https://www.kth.se/blogs/studentblog/2022/02/tunnelbana-the-worlds-longest-art-gallery"
+    ],
+    "day_budget_sek": 1700,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Gamla stan, Vasamuseet och en färja över till Djurgården.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 4,
+      "text": "Hinner Skansen, tunnelbanekonsten och en halvdag på Drottningholm.",
+      "recommended": true
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Lägg till skärgården med övernattning och lugnare dagar på Södermalm.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Södermalm",
+      "stay": true,
+      "text": "Mest restauranger och barer, utsikt från höjderna och tunnelbana åt alla håll."
+     },
+     {
+      "name": "Norrmalm och City",
+      "stay": true,
+      "text": "Närmast Centralen och flygtåget. Praktiskt men opersonligt."
+     },
+     {
+      "name": "Vasastan",
+      "stay": true,
+      "text": "Lugnare bostadskvarter med bra mat och promenadavstånd till city."
+     },
+     {
+      "name": "Gamla stan",
+      "stay": false,
+      "text": "Vackert att gå i men dyrt och trångt att bo i. Besök på dagen."
+     }
+    ],
+    "best_text": "Juni till augusti för skärgården och ljusa kvällar, december för julmarknaderna.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    3,
+    4,
+    5,
+    5,
+    5,
+    4,
+    3,
+    1,
+    3
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "SE-fakta-systembolaget",
+   "place_id": "SE",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 20,
+   "title": "Systembolaget från 20 år",
+   "summary": "20 år på Systembolaget, 18 år på restaurang.",
+   "body": "På Systembolaget gäller 20-årsgräns. På restaurang och bar får den som fyllt 18 köpa alkohol.",
+   "source_url": "https://www.systembolaget.se/kundservice/salja-med-ansvar/4c066a63-c510-4c62-9fc3-a245f3980d2f/varfor-ar-det-18-arsgrans-pa-krogen-men-20-arsgrans-pa-systembolaget/6467ed28-758e-4dc1-9179-18dcdd6c9978/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-fakta-servering",
+   "place_id": "SE",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 18,
+   "title": "Alkohol på krogen från 18 år",
+   "summary": "Servering av alkohol är tillåten från 18 år.",
+   "body": "Riksdagen har satt myndighetsåldern 18 år som gräns för att köpa alkohol på restaurang. Enskilda ställen får ha högre åldersgräns i dörren.",
+   "source_url": "https://www.systembolaget.se/kundservice/salja-med-ansvar/4c066a63-c510-4c62-9fc3-a245f3980d2f/varfor-ar-det-18-arsgrans-pa-krogen-men-20-arsgrans-pa-systembolaget/6467ed28-758e-4dc1-9179-18dcdd6c9978/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-fakta-systemet-tider",
+   "place_id": "SE",
+   "topic": "alkohol",
+   "is_rule": false,
+   "title": "Systembolaget stänger tidigt",
+   "summary": "Stänger senast 20 på vardagar och 15 på lördagar. Stängt söndagar.",
+   "body": "Butikerna stänger senast kl. 20 på vardagar och kl. 15 på lördagar. Söndagar, helgdagar, julafton och midsommarafton är det stängt. Handla innan helgen.",
+   "source_url": "https://Www.Wikipedia.org/wiki/Systembolaget",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-fakta-allemansratten",
+   "place_id": "SE",
+   "topic": "boende",
+   "is_rule": true,
+   "title": "Allemansrätten: tälta något dygn",
+   "summary": "Inte störa, inte förstöra. Tältning ett enstaka dygn ingår.",
+   "body": "Det finns ingen lag om hur länge du får tälta på samma plats, men tumregeln är något enstaka dygn med ett par, tre tält. Stör inte markägaren och skada inte naturen. I nationalparker och reservat gäller egna regler.",
+   "source_url": "https://www.naturvardsverket.se/vagledning-och-stod/allemansratten/kommunicera-om-allemansratten/informationsmaterial/samtalskort/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-fakta-varldsarv",
+   "place_id": "SE",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "15 världsarv",
+   "summary": "Sverige har 15 världsarv, från Laponia till Karlskrona.",
+   "body": "Det äldsta svenska världsarvet är Drottningholm från 1991 och det senaste är Hälsingegårdarna från 2012.",
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-fakta-nationalparker",
+   "place_id": "SE",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Först i Europa med nationalparker",
+   "summary": "De nio första nationalparkerna bildades 1909.",
+   "body": "Sverige bildade sina nio första nationalparker 1909 och var då först i Europa. Bland dem finns Abisko, Sarek och Garphyttan.",
+   "source_url": "https://www.naturvardsverket.se/globalassets/media/publikationer-pdf/8800/978-91-620-8814-9.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-fakta-pinocchio",
+   "place_id": "SE-boras",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Nio meter Pinocchio",
+   "summary": "Jim Dines bronsskulptur Walking to Borås är nio meter hög.",
+   "body": "Skulpturen kom 2008 och blev starten för Borås som skulpturstad. Namnet förknippas ofta med knallarna, handelsmännen som gick landet runt och sålde textilier.",
+   "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-fakta-arenan",
+   "place_id": "SE-boras",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Elfsborg började som Borås Fotbollslag",
+   "summary": "IF Elfsborg grundades 26 juni 1904 och spelar på Borås Arena sedan 2005.",
+   "body": "Klubben bildades som Borås Fotbollslag och kallas Di Gule. Första matchen på Borås Arena spelades 17 april 2005.",
+   "source_url": "https://en.wikipedia.org/wiki/IF_Elfsborg",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-fakta-skansen",
+   "place_id": "SE-stockholm",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Världens äldsta friluftsmuseum",
+   "summary": "Skansen på Djurgården grundades 1891 av Artur Hazelius.",
+   "body": "Skansen räknas som världens första friluftsmuseum och ligger kvar på Djurgården.",
+   "source_url": "https://museums.eu/museum/details/722",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "SE-boras-walking-to-boras",
+   "place_id": "SE-boras",
+   "category": "sevardhet",
+   "name": "Walking to Borås",
+   "summary": "Nio meter hög Pinocchio i brons av Jim Dine.",
+   "body": "Stadens mest omtalade skulptur. Bra startpunkt för en skulpturpromenad genom centrum.",
+   "must_rank": 1,
+   "lat": 57.7156,
+   "lon": 12.942,
+   "compendium_id": "sevardhet-pinocchio-boras",
+   "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-gatukonsten",
+   "place_id": "SE-boras",
+   "category": "upplevelse",
+   "name": "Muralmålningarna",
+   "summary": "Väggmålningar stora som sjuvåningshus, kvar från No Limit Street Art.",
+   "body": "Festivalen startade 2014 och har gått ihop med skulpturbiennalen till Borås Art Biennial. Verken står ute och är gratis att se.",
+   "must_rank": 2,
+   "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-textilmuseet",
+   "place_id": "SE-boras",
+   "category": "museum",
+   "name": "Textilmuseet",
+   "summary": "Mode och textilindustri i Textile Fashion Center.",
+   "body": "Ligger på Skaraborgsvägen 3A i Simonsland, mellan centrum och Knalleland. Biljetten köps i informationsdisken utanför museets entré.",
+   "must_rank": 3,
+   "lat": 57.7272,
+   "lon": 12.9365,
+   "source_url": "https://www.textilmuseet.se/en/visit/plan-your-visit",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-djurparken",
+   "place_id": "SE-boras",
+   "category": "natur",
+   "name": "Borås djurpark",
+   "summary": "40 hektar med afrikanska och nordiska djur mitt i stan.",
+   "body": "Parken har savann, björnar, grillplatser och lekplatser. Kolla öppettiderna, de varierar med säsongen.",
+   "must_rank": 4,
+   "lat": 57.7414,
+   "lon": 12.9492,
+   "source_url": "https://www.vastsverige.com/foretag/boras/boras-djurpark/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-abecita",
+   "place_id": "SE-boras",
+   "category": "museum",
+   "name": "Abecita Popkonst & Foto",
+   "summary": "Omkring 500 verk på tre våningar, bland annat Warhol och Lichtenstein.",
+   "body": "Ligger norr om Textile Fashion Center, mot Knalleland och djurparken.",
+   "must_rank": 5,
+   "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-konstmuseet",
+   "place_id": "SE-boras",
+   "category": "museum",
+   "name": "Borås Konstmuseum",
+   "summary": "Alltid fri entré.",
+   "body": "Museet leder arbetet med stadens nya muralmålningar och arrangerar Borås Art Biennial tillsammans med Textilmuseet.",
+   "must_rank": 6,
+   "source_url": "https://via.tt.se/pressmeddelande/4372495/boras-art-biennial-2026?publisherId=3237378",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-boras-arena",
+   "place_id": "SE-boras",
+   "category": "fotboll",
+   "name": "Borås Arena",
+   "summary": "IF Elfsborgs hemmaplan sedan 2005.",
+   "body": "Se Di Gule spela hemma. Arenan används även av Norrby IF.",
+   "must_rank": 7,
+   "lat": 57.735,
+   "lon": 12.935,
+   "compendium_id": "arena-boras-arena",
+   "source_url": "https://en.wikipedia.org/wiki/IF_Elfsborg",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-vasamuseet",
+   "place_id": "SE-stockholm",
+   "category": "museum",
+   "name": "Vasamuseet",
+   "summary": "Fri entré till och med 18 år. Räkna med 90 minuter.",
+   "body": "Museet rekommenderar 90 minuter för ett besök. Priset för vuxna är högre maj–september än resten av året.",
+   "must_rank": 1,
+   "lat": 59.328,
+   "lon": 18.0914,
+   "compendium_id": "sevardhet-skeppet-vasa",
+   "source_url": "https://vasamuseet.se/globalassets/vasamuseet/dokument/bransch/2025/uppdaterade-2025/t_vasa-museum_2025_swedish_2.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-skansen",
+   "place_id": "SE-stockholm",
+   "category": "sevardhet",
+   "name": "Skansen",
+   "summary": "Världens äldsta friluftsmuseum, grundat 1891.",
+   "body": "Hus från hela landet och nordiska djur på Djurgården.",
+   "must_rank": 2,
+   "lat": 59.3261,
+   "lon": 18.1036,
+   "source_url": "https://museums.eu/museum/details/722",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-djurgardsfarjan",
+   "place_id": "SE-stockholm",
+   "category": "upplevelse",
+   "name": "Djurgårdsfärjan",
+   "summary": "Pendelbåt Slussen–Skeppsholmen–Djurgården.",
+   "body": "Trevligaste vägen till Djurgården. SL-kort gäller, och enkelbiljett går att köpa på kajen.",
+   "must_rank": 3,
+   "lat": 59.3225,
+   "lon": 18.0745,
+   "compendium_id": "fardmedel-djurgardsfarjan",
+   "source_url": "https://www.visitstockholm.com/o/djurgardsfarjan",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-tunnelbanekonsten",
+   "place_id": "SE-stockholm",
+   "category": "upplevelse",
+   "name": "Konsten i tunnelbanan",
+   "summary": "Kallas världens längsta konstutställning.",
+   "body": "Över 150 konstnärer har bidragit. Tekniska högskolans station fick ett nationellt arkitekturpris 1973.",
+   "must_rank": 4,
+   "source_url": "https://www.kth.se/blogs/studentblog/2022/02/tunnelbana-the-worlds-longest-art-gallery",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-drottningholm",
+   "place_id": "SE-stockholm",
+   "category": "byggnad",
+   "name": "Drottningholm",
+   "summary": "Sveriges första världsarv, 1991.",
+   "body": "Kungligt slott efter fransk förebild, med Kina slott och slottsteatern.",
+   "must_rank": 5,
+   "lat": 59.3217,
+   "lon": 17.8862,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-stockholm-skogskyrkogarden",
+   "place_id": "SE-stockholm",
+   "category": "sevardhet",
+   "name": "Skogskyrkogården",
+   "summary": "Världsarv sedan 1994.",
+   "body": "Räknas som ett av den moderna arkitekturens stora verk. Ligger i södra Stockholm.",
+   "must_rank": 6,
+   "lat": 59.275,
+   "lon": 18.099,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-uppland-birka",
+   "place_id": "SE-uppland",
+   "category": "sevardhet",
+   "name": "Birka och Hovgården",
+   "summary": "Vikingastad i Mälaren, världsarv sedan 1993.",
+   "body": "Handelsplats med vida kontakter under 700- och 800-talen.",
+   "must_rank": 1,
+   "lat": 59.3353,
+   "lon": 17.544,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-sodermanland-tyresta",
+   "place_id": "SE-sodermanland",
+   "category": "natur",
+   "name": "Tyresta nationalpark",
+   "summary": "Nationalpark sedan 1993 i Haninge och Tyresö.",
+   "body": "1 964 hektar skog strax söder om Stockholm.",
+   "must_rank": 1,
+   "lat": 59.175,
+   "lon": 18.29,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-lappland-laponia",
+   "place_id": "SE-lappland",
+   "category": "natur",
+   "name": "Laponia",
+   "summary": "Världsarv sedan 1996 och samiskt kulturlandskap.",
+   "body": "Vidsträckt och avlägsen vildmark som också är samernas kulturlandskap.",
+   "must_rank": 1,
+   "lat": 67.3,
+   "lon": 17.7,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-lappland-abisko",
+   "place_id": "SE-lappland",
+   "category": "natur",
+   "name": "Abisko nationalpark",
+   "summary": "En av de nio första nationalparkerna, 1909.",
+   "body": "7 700 hektar söder om Torneträsk i Kiruna kommun.",
+   "must_rank": 2,
+   "lat": 68.32,
+   "lon": 18.7,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-lappland-sarek",
+   "place_id": "SE-lappland",
+   "category": "natur",
+   "name": "Sarek",
+   "summary": "197 000 hektar fjäll utan leder, nationalpark sedan 1909.",
+   "body": "Ligger i Jokkmokks kommun. För vana fjällvandrare.",
+   "must_rank": 3,
+   "lat": 67.28,
+   "lon": 17.7,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-norrbotten-gammelstad",
+   "place_id": "SE-norrbotten",
+   "category": "sevardhet",
+   "name": "Gammelstads kyrkstad",
+   "summary": "Omkring 400 kyrkstugor, världsarv sedan 1996.",
+   "body": "Stugorna användes bara vid kyrkhelger och högtider.",
+   "must_rank": 1,
+   "lat": 65.646,
+   "lon": 22.028,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-norrbotten-haparanda-skargard",
+   "place_id": "SE-norrbotten",
+   "category": "natur",
+   "name": "Haparanda skärgård",
+   "summary": "Nationalpark sedan 1995 i Bottenviken.",
+   "body": "6 000 hektar skärgård söder om Haparanda och Kalix.",
+   "must_rank": 2,
+   "lat": 65.57,
+   "lon": 23.75,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-angermanland-hoga-kusten",
+   "place_id": "SE-angermanland",
+   "category": "natur",
+   "name": "Höga kusten",
+   "summary": "Världsarv sedan 2000, format av is och landhöjning.",
+   "body": "Här syns tydligt hur inlandsisen, den snabba landhöjningen och vågorna har format landskapet.",
+   "must_rank": 1,
+   "lat": 63.0,
+   "lon": 18.4,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-angermanland-skuleskogen",
+   "place_id": "SE-angermanland",
+   "category": "natur",
+   "name": "Skuleskogens nationalpark",
+   "summary": "Nationalpark sedan 1984 i Örnsköldsvik och Kramfors.",
+   "body": "3 062 hektar mitt i Höga kusten.",
+   "must_rank": 2,
+   "lat": 63.11,
+   "lon": 18.5,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-halsingland-halsingegardar",
+   "place_id": "SE-halsingland",
+   "category": "byggnad",
+   "name": "Hälsingegårdarna",
+   "summary": "Rikt dekorerade bondgårdar, världsarv sedan 2012.",
+   "body": "Gårdarnas festrum är höjdpunkten på en lång byggtradition bland bönderna.",
+   "must_rank": 1,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalarna-falu-gruva",
+   "place_id": "SE-dalarna",
+   "category": "sevardhet",
+   "name": "Falun och Kopparbergslagen",
+   "summary": "Stora Kopparberget, världsarv sedan 2001.",
+   "body": "Gruvan och bygden runt den är ett sällsynt minne av tidig svensk industri.",
+   "must_rank": 1,
+   "lat": 60.599,
+   "lon": 15.613,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalarna-fulufjallet",
+   "place_id": "SE-dalarna",
+   "category": "natur",
+   "name": "Fulufjällets nationalpark",
+   "summary": "38 500 hektar fjäll i Älvdalen, nationalpark sedan 2002.",
+   "body": "Dalarnas största nationalpark.",
+   "must_rank": 2,
+   "lat": 61.57,
+   "lon": 12.68,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vastmanland-engelsberg",
+   "place_id": "SE-vastmanland",
+   "category": "byggnad",
+   "name": "Engelsbergs bruk",
+   "summary": "Välbevarat järnbruk, världsarv sedan 1993.",
+   "body": "Byggnader och anläggningar står kvar som de var.",
+   "must_rank": 1,
+   "lat": 59.967,
+   "lon": 16.008,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gastrikland-farnebofjarden",
+   "place_id": "SE-gastrikland",
+   "category": "natur",
+   "name": "Färnebofjärdens nationalpark",
+   "summary": "Nationalpark sedan 1998 vid Dalälven.",
+   "body": "10 100 hektar, varav 4 110 vatten, delat mellan Västmanlands, Dalarnas och Gävleborgs län.",
+   "must_rank": 1,
+   "lat": 60.2,
+   "lon": 16.78,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-bohuslan-tanum",
+   "place_id": "SE-bohuslan",
+   "category": "sevardhet",
+   "name": "Hällristningarna i Tanum",
+   "summary": "Europas största samling hällristningar från bronsåldern.",
+   "body": "Världsarv sedan 1994.",
+   "must_rank": 1,
+   "lat": 58.701,
+   "lon": 11.341,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-bohuslan-kosterhavet",
+   "place_id": "SE-bohuslan",
+   "category": "natur",
+   "name": "Kosterhavet",
+   "summary": "Marin nationalpark sedan 2009.",
+   "body": "38 878 hektar i norra Bohuslän, till 98 procent vatten.",
+   "must_rank": 2,
+   "lat": 58.87,
+   "lon": 11.02,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gotland-visby",
+   "place_id": "SE-gotland",
+   "category": "sevardhet",
+   "name": "Hansestaden Visby",
+   "summary": "Ringmur och kyrkoruiner, världsarv sedan 1995.",
+   "body": "Medeltida hansestad med småskalig bebyggelse innanför muren.",
+   "must_rank": 1,
+   "lat": 57.639,
+   "lon": 18.294,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gotland-gotska-sandon",
+   "place_id": "SE-gotland",
+   "category": "natur",
+   "name": "Gotska Sandön",
+   "summary": "Nationalpark sedan 1909.",
+   "body": "4 490 hektar ö och hav norr om Gotland.",
+   "must_rank": 2,
+   "lat": 58.37,
+   "lon": 19.25,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-halland-grimeton",
+   "place_id": "SE-halland",
+   "category": "byggnad",
+   "name": "Radiostationen i Grimeton",
+   "summary": "Världsarv sedan 2004 utanför Varberg.",
+   "body": "Byggdes efter första världskriget som del av ett globalt nät av radiosändare.",
+   "must_rank": 1,
+   "lat": 57.113,
+   "lon": 12.39,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-oland-sodra-oland",
+   "place_id": "SE-oland",
+   "category": "natur",
+   "name": "Södra Ölands odlingslandskap",
+   "summary": "Världsarv sedan 2000.",
+   "body": "Ett landskap format av jordbruk under århundraden.",
+   "must_rank": 1,
+   "lat": 56.35,
+   "lon": 16.48,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-blekinge-karlskrona",
+   "place_id": "SE-blekinge",
+   "category": "sevardhet",
+   "name": "Örlogsstaden Karlskrona",
+   "summary": "Världsarv sedan 1998.",
+   "body": "Beskrivs som världens bäst bevarade och mest kompletta örlogsstad.",
+   "must_rank": 1,
+   "lat": 56.161,
+   "lon": 15.586,
+   "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-skane-soderasen",
+   "place_id": "SE-skane",
+   "category": "natur",
+   "name": "Söderåsens nationalpark",
+   "summary": "Nationalpark sedan 2001, ca 3 mil öster om Helsingborg.",
+   "body": "1 625 hektar.",
+   "must_rank": 1,
+   "lat": 56.03,
+   "lon": 13.23,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-skane-stenshuvud",
+   "place_id": "SE-skane",
+   "category": "natur",
+   "name": "Stenshuvud",
+   "summary": "Nationalpark sedan 1986 i Simrishamns kommun.",
+   "body": "390 hektar på Österlen.",
+   "must_rank": 2,
+   "lat": 55.66,
+   "lon": 14.27,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-smaland-store-mosse",
+   "place_id": "SE-smaland",
+   "category": "natur",
+   "name": "Store Mosse",
+   "summary": "Nationalpark sedan 1982.",
+   "body": "7 850 hektar i Gnosjö, Vaggeryds och Värnamo kommuner.",
+   "must_rank": 1,
+   "lat": 57.27,
+   "lon": 13.92,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-smaland-asnen",
+   "place_id": "SE-smaland",
+   "category": "natur",
+   "name": "Åsnens nationalpark",
+   "summary": "Sjönationalpark sedan 2018.",
+   "body": "1 868 hektar i Tingsryds och Alvesta kommuner, till 75 procent vatten.",
+   "must_rank": 2,
+   "lat": 56.62,
+   "lon": 14.72,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vastergotland-tiveden",
+   "place_id": "SE-vastergotland",
+   "category": "natur",
+   "name": "Tivedens nationalpark",
+   "summary": "Nationalpark sedan 1983 i Laxå och Karlsborgs kommuner.",
+   "body": "2 040 hektar på gränsen mellan Örebro och Västra Götalands län.",
+   "must_rank": 1,
+   "lat": 58.72,
+   "lon": 14.6,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-narke-garphyttan",
+   "place_id": "SE-narke",
+   "category": "natur",
+   "name": "Garphyttans nationalpark",
+   "summary": "En av de nio första nationalparkerna, 1909.",
+   "body": "111 hektar i Lekebergs kommun.",
+   "must_rank": 1,
+   "lat": 59.28,
+   "lon": 14.88,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalsland-tresticklan",
+   "place_id": "SE-dalsland",
+   "category": "natur",
+   "name": "Tresticklans nationalpark",
+   "summary": "Nationalpark sedan 1996 i Dals-Eds kommun.",
+   "body": "2 897 hektar.",
+   "must_rank": 1,
+   "lat": 59.03,
+   "lon": 11.75,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-harjedalen-sonfjallet",
+   "place_id": "SE-harjedalen",
+   "category": "natur",
+   "name": "Sonfjällets nationalpark",
+   "summary": "En av de nio första nationalparkerna, 1909.",
+   "body": "10 300 hektar i Härjedalens kommun.",
+   "must_rank": 1,
+   "lat": 62.28,
+   "lon": 13.55,
+   "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-blekinge-landskapsdjur",
+   "place_id": "SE-blekinge",
+   "category": "symbol",
+   "name": "Landskapsdjur: Ekoxe",
+   "summary": "Ekoxe är Blekinges landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Blekinge.",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-blekinge-landskapsblomma",
+   "place_id": "SE-blekinge",
+   "category": "symbol",
+   "name": "Landskapsblomma: Ek och kungsljus",
+   "summary": "Ek och kungsljus är Blekinges landskapsblommor.",
+   "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Blekinge.",
+   "compendium_id": "trad-ek",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-bohuslan-landskapsdjur",
+   "place_id": "SE-bohuslan",
+   "category": "symbol",
+   "name": "Landskapsdjur: Knubbsäl",
+   "summary": "Knubbsäl är Bohusläns landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Bohuslän.",
+   "compendium_id": "daggdjur-knubbsal",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-bohuslan-landskapsblomma",
+   "place_id": "SE-bohuslan",
+   "category": "symbol",
+   "name": "Landskapsblomma: Vildkaprifol",
+   "summary": "Vildkaprifol är Bohusläns landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Bohuslän.",
+   "compendium_id": "blomma-vildkaprifol",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalarna-landskapsdjur",
+   "place_id": "SE-dalarna",
+   "category": "symbol",
+   "name": "Landskapsdjur: Berguv",
+   "summary": "Berguv är Dalarnas landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Dalarna.",
+   "compendium_id": "fagel-berguv",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalarna-landskapsblomma",
+   "place_id": "SE-dalarna",
+   "category": "symbol",
+   "name": "Landskapsblomma: Blåklocka och ängsklocka",
+   "summary": "Blåklocka och ängsklocka är Dalarnas landskapsblommor.",
+   "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Dalarna.",
+   "compendium_id": "blomma-blaklocka",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalsland-landskapsdjur",
+   "place_id": "SE-dalsland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Korp",
+   "summary": "Korp är Dalslands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Dalsland.",
+   "compendium_id": "fagel-korp",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-dalsland-landskapsblomma",
+   "place_id": "SE-dalsland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Förgätmigej",
+   "summary": "Förgätmigej är Dalslands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Dalsland.",
+   "compendium_id": "blomma-forgatmigej",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gotland-landskapsdjur",
+   "place_id": "SE-gotland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Igelkott",
+   "summary": "Igelkott är Gotlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret på Gotland.",
+   "compendium_id": "daggdjur-igelkott",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gotland-landskapsblomma",
+   "place_id": "SE-gotland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Murgröna",
+   "summary": "Murgröna är Gotlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den på Gotland.",
+   "compendium_id": "blomma-murgrona",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gastrikland-landskapsdjur",
+   "place_id": "SE-gastrikland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Tjäder",
+   "summary": "Tjäder är Gästriklands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Gästrikland.",
+   "compendium_id": "fagel-tjader",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-gastrikland-landskapsblomma",
+   "place_id": "SE-gastrikland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Liljekonvalj",
+   "summary": "Liljekonvalj är Gästriklands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Gästrikland.",
+   "compendium_id": "blomma-liljekonvalj",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-halland-landskapsdjur",
+   "place_id": "SE-halland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Lax",
+   "summary": "Lax är Hallands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Halland.",
+   "compendium_id": "havsdjur-lax",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-halland-landskapsblomma",
+   "place_id": "SE-halland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Hårginst",
+   "summary": "Hårginst är Hallands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Halland.",
+   "compendium_id": "blomma-harginst",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-halsingland-landskapsdjur",
+   "place_id": "SE-halsingland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Lodjur",
+   "summary": "Lodjur är Hälsinglands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Hälsingland.",
+   "compendium_id": "daggdjur-lodjur",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-halsingland-landskapsblomma",
+   "place_id": "SE-halsingland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Lin",
+   "summary": "Lin är Hälsinglands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Hälsingland.",
+   "compendium_id": "blomma-lin",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-harjedalen-landskapsdjur",
+   "place_id": "SE-harjedalen",
+   "category": "symbol",
+   "name": "Landskapsdjur: Brunbjörn",
+   "summary": "Brunbjörn är Härjedalens landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Härjedalen.",
+   "compendium_id": "daggdjur-brunbjorn",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-harjedalen-landskapsblomma",
+   "place_id": "SE-harjedalen",
+   "category": "symbol",
+   "name": "Landskapsblomma: Mosippa och fjällviol",
+   "summary": "Mosippa och fjällviol är Härjedalens landskapsblommor.",
+   "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Härjedalen.",
+   "compendium_id": "blomma-mosippa",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-jamtland-landskapsdjur",
+   "place_id": "SE-jamtland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Älg",
+   "summary": "Älg är Jämtlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Jämtland.",
+   "compendium_id": "daggdjur-alg",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-jamtland-landskapsblomma",
+   "place_id": "SE-jamtland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Brunkulla",
+   "summary": "Brunkulla är Jämtlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Jämtland.",
+   "compendium_id": "blomma-brunkulla",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-lappland-landskapsdjur",
+   "place_id": "SE-lappland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Fjällräv",
+   "summary": "Fjällräv är Lapplands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Lappland.",
+   "compendium_id": "daggdjur-fjallrav",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-lappland-landskapsblomma",
+   "place_id": "SE-lappland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Fjällsippa",
+   "summary": "Fjällsippa är Lapplands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Lappland.",
+   "compendium_id": "blomma-fjallsippa",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-medelpad-landskapsdjur",
+   "place_id": "SE-medelpad",
+   "category": "symbol",
+   "name": "Landskapsdjur: Skogshare",
+   "summary": "Skogshare är Medelpads landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Medelpad.",
+   "compendium_id": "daggdjur-skogshare",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-medelpad-landskapsblomma",
+   "place_id": "SE-medelpad",
+   "category": "symbol",
+   "name": "Landskapsblomma: Gran och smörboll",
+   "summary": "Gran och smörboll är Medelpads landskapsblommor.",
+   "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Medelpad.",
+   "compendium_id": "trad-gran",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-norrbotten-landskapsdjur",
+   "place_id": "SE-norrbotten",
+   "category": "symbol",
+   "name": "Landskapsdjur: Lavskrika",
+   "summary": "Lavskrika är Norrbottens landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Norrbotten.",
+   "compendium_id": "fagel-lavskrika",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-norrbotten-landskapsblomma",
+   "place_id": "SE-norrbotten",
+   "category": "symbol",
+   "name": "Landskapsblomma: Åkerbär",
+   "summary": "Åkerbär är Norrbottens landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Norrbotten.",
+   "compendium_id": "blomma-akerbar",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-narke-landskapsdjur",
+   "place_id": "SE-narke",
+   "category": "symbol",
+   "name": "Landskapsdjur: Hasselmus",
+   "summary": "Hasselmus är Närkes landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Närke.",
+   "compendium_id": "daggdjur-hasselmus",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-narke-landskapsblomma",
+   "place_id": "SE-narke",
+   "category": "symbol",
+   "name": "Landskapsblomma: Gullviva",
+   "summary": "Gullviva är Närkes landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Närke.",
+   "compendium_id": "blomma-gullviva",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-skane-landskapsdjur",
+   "place_id": "SE-skane",
+   "category": "symbol",
+   "name": "Landskapsdjur: Kronhjort",
+   "summary": "Kronhjort är Skånes landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Skåne.",
+   "compendium_id": "daggdjur-kronhjort",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-skane-landskapsblomma",
+   "place_id": "SE-skane",
+   "category": "symbol",
+   "name": "Landskapsblomma: Prästkrage",
+   "summary": "Prästkrage är Skånes landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Skåne.",
+   "compendium_id": "blomma-prastkrage",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-smaland-landskapsdjur",
+   "place_id": "SE-smaland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Utter",
+   "summary": "Utter är Smålands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Småland.",
+   "compendium_id": "daggdjur-utter",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-smaland-landskapsblomma",
+   "place_id": "SE-smaland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Linnea",
+   "summary": "Linnea är Smålands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Småland.",
+   "compendium_id": "blomma-linnea",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-sodermanland-landskapsdjur",
+   "place_id": "SE-sodermanland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Fiskgjuse",
+   "summary": "Fiskgjuse är Södermanlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Södermanland.",
+   "compendium_id": "fagel-fiskgjuse",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-sodermanland-landskapsblomma",
+   "place_id": "SE-sodermanland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Vit näckros",
+   "summary": "Vit näckros är Södermanlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Södermanland.",
+   "compendium_id": "blomma-vit-nackros",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-uppland-landskapsdjur",
+   "place_id": "SE-uppland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Havsörn",
+   "summary": "Havsörn är Upplands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Uppland.",
+   "compendium_id": "fagel-havsorn",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-uppland-landskapsblomma",
+   "place_id": "SE-uppland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Kungsängslilja",
+   "summary": "Kungsängslilja är Upplands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Uppland.",
+   "compendium_id": "blomma-kungsangslilja",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-varmland-landskapsdjur",
+   "place_id": "SE-varmland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Varg",
+   "summary": "Varg är Värmlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Värmland.",
+   "compendium_id": "daggdjur-varg",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-varmland-landskapsblomma",
+   "place_id": "SE-varmland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Skogsstjärna",
+   "summary": "Skogsstjärna är Värmlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Värmland.",
+   "compendium_id": "blomma-skogsstjarna",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vasterbotten-landskapsdjur",
+   "place_id": "SE-vasterbotten",
+   "category": "symbol",
+   "name": "Landskapsdjur: Storspov",
+   "summary": "Storspov är Västerbottens landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Västerbotten.",
+   "compendium_id": "fagel-storspov",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vasterbotten-landskapsblomma",
+   "place_id": "SE-vasterbotten",
+   "category": "symbol",
+   "name": "Landskapsblomma: Kung Karls spira",
+   "summary": "Kung Karls spira är Västerbottens landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Västerbotten.",
+   "compendium_id": "blomma-kung-karls-spira",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vastergotland-landskapsdjur",
+   "place_id": "SE-vastergotland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Trana",
+   "summary": "Trana är Västergötlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Västergötland.",
+   "compendium_id": "fagel-trana",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vastergotland-landskapsblomma",
+   "place_id": "SE-vastergotland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Ljung",
+   "summary": "Ljung är Västergötlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Västergötland.",
+   "compendium_id": "blomma-ljung",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vastmanland-landskapsdjur",
+   "place_id": "SE-vastmanland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Rådjur",
+   "summary": "Rådjur är Västmanlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Västmanland.",
+   "compendium_id": "daggdjur-radjur",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vastmanland-landskapsblomma",
+   "place_id": "SE-vastmanland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Mistel",
+   "summary": "Mistel är Västmanlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Västmanland.",
+   "compendium_id": "blomma-mistel",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-angermanland-landskapsdjur",
+   "place_id": "SE-angermanland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Bäver",
+   "summary": "Bäver är Ångermanlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Ångermanland.",
+   "compendium_id": "daggdjur-baver",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-angermanland-landskapsblomma",
+   "place_id": "SE-angermanland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Styvmorsviol",
+   "summary": "Styvmorsviol är Ångermanlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Ångermanland.",
+   "compendium_id": "blomma-styvmorsviol",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-oland-landskapsdjur",
+   "place_id": "SE-oland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Näktergal",
+   "summary": "Näktergal är Ölands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret på Öland.",
+   "compendium_id": "fagel-naktergal",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-oland-landskapsblomma",
+   "place_id": "SE-oland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Ölandssolvända",
+   "summary": "Ölandssolvända är Ölands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den på Öland.",
+   "compendium_id": "blomma-olandssolvanda",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-ostergotland-landskapsdjur",
+   "place_id": "SE-ostergotland",
+   "category": "symbol",
+   "name": "Landskapsdjur: Knölsvan",
+   "summary": "Knölsvan är Östergötlands landskapsdjur.",
+   "body": "Bocka av när ni har sett djuret i Östergötland.",
+   "compendium_id": "fagel-knolsvan",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-ostergotland-landskapsblomma",
+   "place_id": "SE-ostergotland",
+   "category": "symbol",
+   "name": "Landskapsblomma: Blåklint",
+   "summary": "Blåklint är Östergötlands landskapsblomma.",
+   "body": "Bocka av när ni har hittat den i Östergötland.",
+   "compendium_id": "blomma-blaklint",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-ostergotland-bergs-slussar",
+   "place_id": "SE-ostergotland",
+   "category": "sevardhet",
+   "name": "Bergs slussar",
+   "summary": "Sju kopplade slussar lyfter båtarna 18,8 meter från Roxen.",
+   "body": "Carl Johans slusstrappa är en del av Göta kanal, som är 190 km lång och har 58 slussar. Gå eller cykla längs den bilfria dragvägen.",
+   "must_rank": 1,
+   "lat": 58.4855,
+   "lon": 15.529,
+   "source_url": "https://www.gotakanal.se/sv/media/258",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-varmland-marbacka",
+   "place_id": "SE-varmland",
+   "category": "byggnad",
+   "name": "Mårbacka",
+   "summary": "Selma Lagerlöfs barndomshem i Sunne kommun.",
+   "body": "Här föddes och växte den första kvinnan som fick Nobelpriset i litteratur upp. Gården visas som minnesgård.",
+   "must_rank": 1,
+   "lat": 59.779,
+   "lon": 13.233,
+   "source_url": "https://en.wikipedia.org/wiki/M%C3%A5rbacka",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-medelpad-stenstaden",
+   "place_id": "SE-medelpad",
+   "category": "sevardhet",
+   "name": "Stenstaden i Sundsvall",
+   "summary": "Påkostade stenhus byggda efter stadsbranden 1888.",
+   "body": "En junidag 1888 brann större delen av Sundsvall ner. Staden byggdes upp igen i sten, och Hotell Knaust från 1891 tar fortfarande emot gäster.",
+   "must_rank": 1,
+   "lat": 62.3908,
+   "lon": 17.3069,
+   "source_url": "https://catalog.lansstyrelsen.se/store/21/resource/2010__8",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-jamtland-tannforsen",
+   "place_id": "SE-jamtland",
+   "category": "natur",
+   "name": "Tännforsen",
+   "summary": "Sveriges största outbyggda vattenfall, 37 meters fallhöjd.",
+   "body": "Naturreservat i Åre kommun, cirka 15 km nordväst om Duved. Stigen kan vara isig på vintern.",
+   "must_rank": 1,
+   "lat": 63.444,
+   "lon": 12.739,
+   "source_url": "https://skyddadnatur.naturvardsverket.se/handlingar/rest/dokument/286231",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "SE-vasterbotten-vasterbottensost",
+   "place_id": "SE-vasterbotten",
+   "category": "mat",
+   "name": "Västerbottensost i Burträsk",
+   "summary": "Osten tillverkas bara i Burträsk, första gången 1872.",
+   "body": "Besökscentret ligger vid mejeriet och har utställning och butik. Receptet skapades av mejerskan Ulrika Eleonora Lindström.",
+   "must_rank": 1,
+   "lat": 64.518,
+   "lon": 20.655,
+   "source_url": "https://www.mynewsdesk.com/se/norrmejerier_ek/pressreleases/vaesterbottensost-r-besoekscenter-omtyckt-resmaal-med-utoekade-oeppettider-i-sommar-2882068",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "sevardhet-pinocchio-boras",
+   "category": "sevardhet",
+   "name": "Walking to Borås",
+   "rarity": "vanlig",
+   "icon": "pin",
+   "hint": "Nio meter brons med lång näsa.",
+   "place_id": "SE-boras",
+   "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/"
+  },
+  {
+   "id": "arena-boras-arena",
+   "category": "arena",
+   "name": "Borås Arena",
+   "rarity": "vanlig",
+   "icon": "ball",
+   "hint": "Di Gules hemmaplan.",
+   "place_id": "SE-boras",
+   "source_url": "https://en.wikipedia.org/wiki/IF_Elfsborg"
+  },
+  {
+   "id": "sevardhet-skeppet-vasa",
+   "category": "sevardhet",
+   "name": "Regalskeppet Vasa",
+   "rarity": "ovanlig",
+   "icon": "pin",
+   "hint": "Står inomhus på Djurgården.",
+   "place_id": "SE-stockholm",
+   "source_url": "https://vasamuseet.se/globalassets/vasamuseet/dokument/bransch/2025/uppdaterade-2025/t_vasa-museum_2025_swedish_2.pdf"
+  },
+  {
+   "id": "fardmedel-djurgardsfarjan",
+   "category": "fardmedel",
+   "name": "Djurgårdsfärjan",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "Går från Slussen.",
+   "place_id": "SE-stockholm",
+   "source_url": "https://www.visitstockholm.com/o/djurgardsfarjan"
+  },
+  {
+   "id": "trad-ek",
+   "category": "trad",
+   "name": "Ek",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Blekinge.",
+   "place_id": "SE-blekinge",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "blomma-kungsljus",
+   "category": "blomma",
+   "name": "Kungsljus",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Blekinge.",
+   "place_id": "SE-blekinge",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-knubbsal",
+   "category": "daggdjur",
+   "name": "Knubbsäl",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Bohuslän.",
+   "place_id": "SE-bohuslan",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-vildkaprifol",
+   "category": "blomma",
+   "name": "Vildkaprifol",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Bohuslän.",
+   "place_id": "SE-bohuslan",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-berguv",
+   "category": "fagel",
+   "name": "Berguv",
+   "rarity": "sallsynt",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Dalarna.",
+   "place_id": "SE-dalarna",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-blaklocka",
+   "category": "blomma",
+   "name": "Blåklocka",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Dalarna.",
+   "place_id": "SE-dalarna",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "blomma-angsklocka",
+   "category": "blomma",
+   "name": "Ängsklocka",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Dalarna.",
+   "place_id": "SE-dalarna",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-korp",
+   "category": "fagel",
+   "name": "Korp",
+   "rarity": "vanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Dalsland.",
+   "place_id": "SE-dalsland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-forgatmigej",
+   "category": "blomma",
+   "name": "Förgätmigej",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Dalsland.",
+   "place_id": "SE-dalsland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-igelkott",
+   "category": "daggdjur",
+   "name": "Igelkott",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Gotland.",
+   "place_id": "SE-gotland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-murgrona",
+   "category": "blomma",
+   "name": "Murgröna",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Gotland.",
+   "place_id": "SE-gotland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-tjader",
+   "category": "fagel",
+   "name": "Tjäder",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Gästrikland.",
+   "place_id": "SE-gastrikland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-liljekonvalj",
+   "category": "blomma",
+   "name": "Liljekonvalj",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Gästrikland.",
+   "place_id": "SE-gastrikland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "havsdjur-lax",
+   "category": "havsdjur",
+   "name": "Lax",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Halland.",
+   "place_id": "SE-halland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-harginst",
+   "category": "blomma",
+   "name": "Hårginst",
+   "rarity": "sallsynt",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Halland.",
+   "place_id": "SE-halland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-lodjur",
+   "category": "daggdjur",
+   "name": "Lodjur",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Hälsingland.",
+   "place_id": "SE-halsingland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-lin",
+   "category": "blomma",
+   "name": "Lin",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Hälsingland.",
+   "place_id": "SE-halsingland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-brunbjorn",
+   "category": "daggdjur",
+   "name": "Brunbjörn",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Härjedalen.",
+   "place_id": "SE-harjedalen",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-mosippa",
+   "category": "blomma",
+   "name": "Mosippa",
+   "rarity": "sallsynt",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Härjedalen.",
+   "place_id": "SE-harjedalen",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "blomma-fjallviol",
+   "category": "blomma",
+   "name": "Fjällviol",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Härjedalen.",
+   "place_id": "SE-harjedalen",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-alg",
+   "category": "daggdjur",
+   "name": "Älg",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Jämtland.",
+   "place_id": "SE-jamtland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-brunkulla",
+   "category": "blomma",
+   "name": "Brunkulla",
+   "rarity": "sallsynt",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Jämtland.",
+   "place_id": "SE-jamtland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-fjallrav",
+   "category": "daggdjur",
+   "name": "Fjällräv",
+   "rarity": "legendarisk",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Lappland.",
+   "place_id": "SE-lappland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-fjallsippa",
+   "category": "blomma",
+   "name": "Fjällsippa",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Lappland.",
+   "place_id": "SE-lappland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-skogshare",
+   "category": "daggdjur",
+   "name": "Skogshare",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Medelpad.",
+   "place_id": "SE-medelpad",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "trad-gran",
+   "category": "trad",
+   "name": "Gran",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Medelpad.",
+   "place_id": "SE-medelpad",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "blomma-smorboll",
+   "category": "blomma",
+   "name": "Smörboll",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Medelpad.",
+   "place_id": "SE-medelpad",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-lavskrika",
+   "category": "fagel",
+   "name": "Lavskrika",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Norrbotten.",
+   "place_id": "SE-norrbotten",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-akerbar",
+   "category": "blomma",
+   "name": "Åkerbär",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Norrbotten.",
+   "place_id": "SE-norrbotten",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-hasselmus",
+   "category": "daggdjur",
+   "name": "Hasselmus",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Närke.",
+   "place_id": "SE-narke",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-gullviva",
+   "category": "blomma",
+   "name": "Gullviva",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Närke.",
+   "place_id": "SE-narke",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-kronhjort",
+   "category": "daggdjur",
+   "name": "Kronhjort",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Skåne.",
+   "place_id": "SE-skane",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-prastkrage",
+   "category": "blomma",
+   "name": "Prästkrage",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Skåne.",
+   "place_id": "SE-skane",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-utter",
+   "category": "daggdjur",
+   "name": "Utter",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Småland.",
+   "place_id": "SE-smaland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-linnea",
+   "category": "blomma",
+   "name": "Linnea",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Småland.",
+   "place_id": "SE-smaland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-fiskgjuse",
+   "category": "fagel",
+   "name": "Fiskgjuse",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Södermanland.",
+   "place_id": "SE-sodermanland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-vit-nackros",
+   "category": "blomma",
+   "name": "Vit näckros",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Södermanland.",
+   "place_id": "SE-sodermanland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-havsorn",
+   "category": "fagel",
+   "name": "Havsörn",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Uppland.",
+   "place_id": "SE-uppland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-kungsangslilja",
+   "category": "blomma",
+   "name": "Kungsängslilja",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Uppland.",
+   "place_id": "SE-uppland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-varg",
+   "category": "daggdjur",
+   "name": "Varg",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Värmland.",
+   "place_id": "SE-varmland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-skogsstjarna",
+   "category": "blomma",
+   "name": "Skogsstjärna",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Värmland.",
+   "place_id": "SE-varmland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-storspov",
+   "category": "fagel",
+   "name": "Storspov",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Västerbotten.",
+   "place_id": "SE-vasterbotten",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-kung-karls-spira",
+   "category": "blomma",
+   "name": "Kung Karls spira",
+   "rarity": "sallsynt",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Västerbotten.",
+   "place_id": "SE-vasterbotten",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-trana",
+   "category": "fagel",
+   "name": "Trana",
+   "rarity": "vanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Västergötland.",
+   "place_id": "SE-vastergotland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-ljung",
+   "category": "blomma",
+   "name": "Ljung",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Västergötland.",
+   "place_id": "SE-vastergotland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-radjur",
+   "category": "daggdjur",
+   "name": "Rådjur",
+   "rarity": "vanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Västmanland.",
+   "place_id": "SE-vastmanland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-mistel",
+   "category": "blomma",
+   "name": "Mistel",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Västmanland.",
+   "place_id": "SE-vastmanland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "daggdjur-baver",
+   "category": "daggdjur",
+   "name": "Bäver",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Landskapsdjur i Ångermanland.",
+   "place_id": "SE-angermanland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-styvmorsviol",
+   "category": "blomma",
+   "name": "Styvmorsviol",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Ångermanland.",
+   "place_id": "SE-angermanland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-naktergal",
+   "category": "fagel",
+   "name": "Näktergal",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Öland.",
+   "place_id": "SE-oland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-olandssolvanda",
+   "category": "blomma",
+   "name": "Ölandssolvända",
+   "rarity": "sallsynt",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Öland.",
+   "place_id": "SE-oland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  },
+  {
+   "id": "fagel-knolsvan",
+   "category": "fagel",
+   "name": "Knölsvan",
+   "rarity": "vanlig",
+   "icon": "bird",
+   "hint": "Landskapsdjur i Östergötland.",
+   "place_id": "SE-ostergotland",
+   "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden"
+  },
+  {
+   "id": "blomma-blaklint",
+   "category": "blomma",
+   "name": "Blåklint",
+   "rarity": "vanlig",
+   "icon": "flower",
+   "hint": "Landskapsblomma i Östergötland.",
+   "place_id": "SE-ostergotland",
+   "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "SE-boras-skulpturpromenad",
+   "kind": "i-stan",
+   "title": "Skulpturpromenad genom centrum",
+   "body": "Börja vid Pinocchio och gå mot Textile Fashion Center. Räkna hur många skulpturer ni hittar på vägen.",
+   "place_id": "SE-boras",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis",
+    "nara"
+   ],
+   "lat": 57.7156,
+   "lon": 12.942
+  },
+  {
+   "id": "SE-boras-muraljakt",
+   "kind": "i-stan",
+   "title": "Muraljakt",
+   "body": "Leta upp de största väggmålningarna i stan och fota er favorit.",
+   "place_id": "SE-boras",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-boras-museidag",
+   "kind": "i-stan",
+   "title": "Två museer på en eftermiddag",
+   "body": "Konstmuseet har alltid fri entré. Ta Textilmuseet eller Abecita efteråt.",
+   "place_id": "SE-boras",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "inne",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-boras-djurparken-matsack",
+   "kind": "i-stan",
+   "title": "Djurparken med matsäck",
+   "body": "Gå savannen runt och grilla vid någon av grillplatserna.",
+   "place_id": "SE-boras",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "nara"
+   ],
+   "lat": 57.7414,
+   "lon": 12.9492
+  },
+  {
+   "id": "SE-boras-elfsborg",
+   "kind": "fotboll",
+   "title": "Elfsborg hemma",
+   "body": "Se en match på Borås Arena.",
+   "place_id": "SE-boras",
+   "duration": "ca 3 h",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "nara"
+   ],
+   "lat": 57.735,
+   "lon": 12.935
+  },
+  {
+   "id": "SE-boras-grimeton",
+   "kind": "dagstripp",
+   "title": "Världsarv i Grimeton och hav i Varberg",
+   "body": "Besök radiostationen i Grimeton och avsluta vid havet i Varberg.",
+   "place_id": "SE-boras",
+   "duration": "En dag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ],
+   "lat": 57.113,
+   "lon": 12.39
+  },
+  {
+   "id": "SE-boras-store-mosse",
+   "kind": "dagstripp",
+   "title": "Spångvandring på Store Mosse",
+   "body": "Nationalpark i Småland med vandring över myren.",
+   "place_id": "SE-boras",
+   "duration": "En dag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ],
+   "lat": 57.27,
+   "lon": 13.92
+  },
+  {
+   "id": "SE-boras-tiveden",
+   "kind": "dagstripp",
+   "title": "Tivedens nationalpark",
+   "body": "Skogsvandring i nationalparken på gränsen mot Närke.",
+   "place_id": "SE-boras",
+   "duration": "En dag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ],
+   "lat": 58.72,
+   "lon": 14.6
+  },
+  {
+   "id": "SE-stockholm-djurgardsdag",
+   "kind": "i-stan",
+   "title": "Djurgårdsdag med båt",
+   "body": "Ta Djurgårdsfärjan från Slussen, gå på Vasamuseet och fortsätt till Skansen.",
+   "place_id": "SE-stockholm",
+   "duration": "En dag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ],
+   "lat": 59.3225,
+   "lon": 18.0745
+  },
+  {
+   "id": "SE-stockholm-tunnelbanekonst",
+   "kind": "i-stan",
+   "title": "Konstrunda i tunnelbanan",
+   "body": "Välj tre stationer och kliv av på varje. Fungerar i alla väder.",
+   "place_id": "SE-stockholm",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-stockholm-skogskyrkogarden-promenad",
+   "kind": "i-stan",
+   "title": "Promenad på Skogskyrkogården",
+   "body": "Stillsam promenad i ett världsarv.",
+   "place_id": "SE-stockholm",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ],
+   "lat": 59.275,
+   "lon": 18.099
+  },
+  {
+   "id": "SE-stockholm-drottningholm-utflykt",
+   "kind": "utflykt",
+   "title": "Drottningholm",
+   "body": "Slottsparken, Kina slott och slottsteatern på samma utflykt.",
+   "place_id": "SE-stockholm",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ],
+   "lat": 59.3217,
+   "lon": 17.8862
+  },
+  {
+   "id": "SE-stockholm-tyresta",
+   "kind": "utflykt",
+   "title": "Tyresta nationalpark",
+   "body": "Skogsvandring strax söder om stan.",
+   "place_id": "SE-stockholm",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ],
+   "lat": 59.175,
+   "lon": 18.29
+  },
+  {
+   "id": "SE-stockholm-helg",
+   "kind": "helg",
+   "title": "Stockholm över helgen",
+   "body": "En dag på Djurgården och en dag med tunnelbanekonst och Skogskyrkogården eller Drottningholm.",
+   "place_id": "SE-stockholm",
+   "duration": "Helg",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-nasta-resa",
+   "kind": "hemma",
+   "title": "Planera nästa resa",
+   "body": "Öppna kartan, välj varsitt land och jämför vad som lockar mest.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-laga-ett-land",
+   "kind": "hemma",
+   "title": "Laga ett land",
+   "body": "Välj ett land från bucketlistan och laga en rätt därifrån.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-bucketlistkvall",
+   "kind": "hemma",
+   "title": "Bucketlistkväll",
+   "body": "Swipa igenom förslagen var för sig och se var ni matchar.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "SE-present-dalahast",
+   "place_id": "SE",
+   "name": "Dalahäst",
+   "body": "Den målade trähästen från Dalarna. Välj en liten som ryms i handbagaget.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "inredning",
+    "hantverk"
+   ],
+   "collection_motifs": {
+    "Kylskåpsmagneter": "Röd dalahäst",
+    "Kaffemuggar": "Kurbitsmönster eller dalahäst"
+   }
+  },
+  {
+   "id": "SE-present-polkagrisar",
+   "place_id": "SE",
+   "name": "Polkagrisar från Gränna",
+   "body": "Rödvita pepparmyntsstänger. Håller länge och tål att packas.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van",
+    "barn"
+   ],
+   "keywords": [
+    "godis"
+   ]
+  },
+  {
+   "id": "SE-present-knackebrod",
+   "place_id": "SE",
+   "name": "Knäckebröd i rund kaka",
+   "body": "Den stora runda kakan med hål i mitten. Lätt, billig och ser svensk ut.",
+   "for_whom": [
+    "van",
+    "pappa",
+    "mig"
+   ],
+   "keywords": [
+    "mat",
+    "fika"
+   ]
+  },
+  {
+   "id": "SE-present-lakrits",
+   "place_id": "SE",
+   "name": "Saltlakrits",
+   "body": "Bra present till den som redan gillar det, och ett roligt test för den som aldrig har smakat.",
+   "for_whom": [
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "godis"
+   ]
+  },
+  {
+   "id": "SE-present-hjortronsylt",
+   "place_id": "SE",
+   "name": "Hjortronsylt",
+   "body": "Bär från myrarna i norr. Glasburk, så packa den i incheckat bagage.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "mig"
+   ],
+   "keywords": [
+    "mat",
+    "frukost"
+   ]
+  },
+  {
+   "id": "SE-present-tramugg",
+   "place_id": "SE",
+   "name": "Kåsa i trä",
+   "body": "Dryckeskärl med handtag för fika ute. Finns både i trä och i plast för vandring.",
+   "for_whom": [
+    "pappa",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "friluftsliv",
+    "kaffe"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Kåsa i trä eller emaljmugg med fjällmotiv"
+   }
+  },
+  {
+   "id": "SE-present-glas",
+   "place_id": "SE",
+   "name": "Glas från Glasriket",
+   "body": "Handblåst glas från bruken i Småland. Köp något litet, till exempel en ljuslykta.",
+   "for_whom": [
+    "mamma",
+    "mig"
+   ],
+   "keywords": [
+    "inredning",
+    "hantverk"
+   ],
+   "collection_motifs": {
+    "Shotglas": "Handblåst snapsglas från Småland"
+   }
+  },
+  {
+   "id": "SE-present-lovikka",
+   "place_id": "SE",
+   "name": "Lovikkavantar",
+   "body": "Tjocka ullvantar med färgad tofs, från Lovikka i Norrbotten.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van"
+   ],
+   "keywords": [
+    "klader",
+    "vinter"
+   ]
+  }
+ ]
+}

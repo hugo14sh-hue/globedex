@@ -1,0 +1,442 @@
+{
+ "places": [
+  {
+   "id": "FI",
+   "kind": "country",
+   "name": "Finland",
+   "iso2": "FI",
+   "lat": 62.5,
+   "lon": 26.0,
+   "airport": "HEL"
+  },
+  {
+   "id": "FI-helsingfors",
+   "kind": "city",
+   "parent_id": "FI",
+   "name": "Helsingfors",
+   "lat": 60.1699,
+   "lon": 24.9384,
+   "airport": "HEL",
+   "data": {
+    "transport": [
+     {
+      "mode": "Tåg I och P från flygplatsen",
+      "rating": "bast",
+      "text": "Ca 27–32 minuter till centrum. Du behöver en ABC-biljett och kan betala kontaktlöst."
+     }
+    ],
+    "sources": [
+     "https://hsl.fi/en/travelling/visitors/airport-train"
+    ],
+    "day_budget_sek": 1700,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Sveaborg, Oodi och en bastu vid vattnet.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 3,
+      "text": "Hinner designkvarteren och en förmiddag på salutorget.",
+      "recommended": true
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Lägg till en dagstur med färja till Tallinn eller tåg till Borgå.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Kampen och centrum",
+      "stay": true,
+      "text": "Nära järnvägsstationen och flygtåget. Allt på gångavstånd."
+     },
+     {
+      "name": "Berghäll (Kallio)",
+      "stay": true,
+      "text": "Billigare, yngre och med mycket barer. Metro och spårvagn in."
+     },
+     {
+      "name": "Rödbergen (Punavuori)",
+      "stay": true,
+      "text": "Designbutiker och kaféer, lugnt på kvällen."
+     }
+    ],
+    "best_text": "Juni till augusti för Sveaborg och uteserveringarna.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    2,
+    4,
+    5,
+    5,
+    5,
+    3,
+    2,
+    1,
+    2
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "FI-fakta-inresa",
+   "place_id": "FI",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas normalt inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen, dit också Island och Norge hör. Inom Norden kan svenskt körkort räcka i vissa fall, men pass eller nationellt id-kort rekommenderas.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-fakta-mobil",
+   "place_id": "FI",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "Samma pris som i Sverige för samtal, sms och surf.",
+   "body": "EU:s roamingregler gäller: du betalar som hemma, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-fakta-betala",
+   "place_id": "FI",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: euro (EUR)",
+   "summary": "Landet har euro (EUR)."
+  },
+  {
+   "id": "FI-fakta-alkohol-18",
+   "place_id": "FI",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 18,
+   "title": "Öl och vin från 18 år",
+   "summary": "18 år för drycker under 22 procent.",
+   "body": "Alko har ensamrätt på drycker över 8 procent. Svagare drycker säljs i vanliga butiker.",
+   "source_url": "https://ehyt.fi/wp-content/uploads/2025/02/Pohjoismaiset-alkoholimonopolit-FI.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-fakta-alkohol-20",
+   "place_id": "FI",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 20,
+   "title": "Sprit från 20 år",
+   "summary": "20 år för drycker på 22 procent eller mer.",
+   "body": "Samma åldersgränser gäller den som tar med sig alkohol in i landet: ingen under 18, och bara svaga drycker före 20.",
+   "source_url": "https://tulli.fi/en/restrictions/alcohol/traveller-imports",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-helsingfors-fakta-ta-sig-dit",
+   "place_id": "FI-helsingfors",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygplatsen till centrum på en halvtimme",
+   "summary": "Tågen I och P går till centrum på ca 27–32 min.",
+   "body": "Stationen ligger under terminalen. Båda tågen går till centralstationen åt varsitt håll runt en ringbana, så ta det som kommer först. Köp ABC-biljett i HSL-appen, i automat eller kontaktlöst.",
+   "source_url": "https://hsl.fi/en/travelling/visitors/airport-train",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-fakta-varldsarv",
+   "place_id": "FI",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Aalto blev världsarv",
+   "summary": "Alvar Aaltos byggnader är Finlands nyaste världsarv.",
+   "body": "Fem av verken ligger i Helsingfors, bland dem Finlandiahuset.",
+   "source_url": "https://www.hel.fi/sv/nyheter/alvar-aaltos-arkitektoniska-verk-godkandes-till-unescos-varldsarvslista-fem-av-verken-finns-i",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-helsingfors-fakta-sveaborgsfarjan",
+   "place_id": "FI-helsingfors",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Färjan till Sveaborg går på vanlig biljett",
+   "summary": "15 minuter från Salutorget med en AB-biljett.",
+   "body": "Färjan går året runt från östra sidan av Salutorget, framför presidentens slott. Köp biljett före spärrarna: kontaktlöst, i HSL-appen eller i automaten på kajen. Kontanter tas inte emot ombord.",
+   "source_url": "https://www.hsl.fi/en/travelling/visitors/suomenlinna",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "FI-helsingfors-sveaborg",
+   "place_id": "FI-helsingfors",
+   "category": "sevardhet",
+   "name": "Sveaborg",
+   "summary": "Sjöfästning på öar utanför stan, världsarv sedan 1991.",
+   "body": "Finlands första världsarv tillsammans med Gamla Raumo.",
+   "lat": 60.1454,
+   "lon": 24.9881,
+   "must_rank": 1,
+   "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-helsingfors-finlandiahuset",
+   "place_id": "FI-helsingfors",
+   "category": "byggnad",
+   "name": "Finlandiahuset",
+   "summary": "Alvar Aaltos mest kända byggnad i stan, nu världsarv.",
+   "body": "Ett av fem Aalto-verk i Helsingfors på världsarvslistan.",
+   "lat": 60.1756,
+   "lon": 24.933,
+   "must_rank": 2,
+   "source_url": "https://www.hel.fi/sv/nyheter/alvar-aaltos-arkitektoniska-verk-godkandes-till-unescos-varldsarvslista-fem-av-verken-finns-i",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-gamla-raumo",
+   "place_id": "FI",
+   "category": "sevardhet",
+   "name": "Gamla Raumo",
+   "summary": "Trästad, världsarv sedan 1991.",
+   "body": "Ligger på västkusten.",
+   "lat": 61.128,
+   "lon": 21.511,
+   "must_rank": 1,
+   "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-petajavesi",
+   "place_id": "FI",
+   "category": "byggnad",
+   "name": "Petäjävesi gamla kyrka",
+   "summary": "Träkyrka, världsarv sedan 1994.",
+   "body": "Ligger i mellersta Finland.",
+   "lat": 62.25,
+   "lon": 25.183,
+   "must_rank": 2,
+   "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-verla",
+   "place_id": "FI",
+   "category": "byggnad",
+   "name": "Verla träsliperi och pappfabrik",
+   "summary": "Världsarv sedan 1996.",
+   "body": "Bevarad bruksmiljö.",
+   "lat": 61.063,
+   "lon": 26.64,
+   "must_rank": 3,
+   "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-sammallahdenmaki",
+   "place_id": "FI",
+   "category": "sevardhet",
+   "name": "Sammallahdenmäki",
+   "summary": "Gravrösen från bronsåldern, världsarv sedan 1999.",
+   "body": "Ligger i Raumo-trakten.",
+   "lat": 61.12,
+   "lon": 21.77,
+   "must_rank": 4,
+   "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-kvarken",
+   "place_id": "FI",
+   "category": "natur",
+   "name": "Kvarkens skärgård",
+   "summary": "Finlands enda naturarv, sedan 2006.",
+   "body": "Hör ihop med Höga kusten på den svenska sidan.",
+   "lat": 63.3,
+   "lon": 21.3,
+   "must_rank": 5,
+   "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "FI-helsingfors-oodi",
+   "place_id": "FI-helsingfors",
+   "category": "byggnad",
+   "name": "Centrumbiblioteket Oodi",
+   "summary": "Bibliotek i tre våningar vid järnvägsstationen. Fri entré.",
+   "body": "Öppet mån–fre 8–21 och lör–sön 10–20. Gratis wifi i hela huset.",
+   "lat": 60.1734,
+   "lon": 24.9381,
+   "must_rank": 3,
+   "source_url": "https://oodihelsinki.fi/en/arrival",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "bakverk-karelsk-pirog",
+   "category": "bakverk",
+   "name": "Karelsk pirog",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Rågskal med risgrynsgröt, äts med äggsmör.",
+   "place_id": "FI"
+  },
+  {
+   "id": "bakverk-korvapuusti",
+   "category": "bakverk",
+   "name": "Korvapuusti",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Finsk kanelbulle, namnet betyder örfil.",
+   "place_id": "FI"
+  },
+  {
+   "id": "godis-salmiakki",
+   "category": "godis",
+   "name": "Salmiakki",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Salt lakrits i finsk tappning.",
+   "place_id": "FI"
+  },
+  {
+   "id": "sevardhet-bastu-allman",
+   "category": "sevardhet",
+   "name": "Allmän bastu",
+   "rarity": "ovanlig",
+   "icon": "build",
+   "hint": "Bastu som vem som helst kan gå till, ofta vid vatten.",
+   "place_id": "FI"
+  },
+  {
+   "id": "fardmedel-sparvagn-helsingfors",
+   "category": "fardmedel",
+   "name": "Spårvagn i Helsingfors",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "Grön och gul, går genom hela innerstaden.",
+   "place_id": "FI"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "FI-helsingfors-ide-sveaborg",
+   "place_id": "FI-helsingfors",
+   "kind": "utflykt",
+   "title": "Halvdag på Sveaborg",
+   "body": "Ta båten ut till fästningsöarna och gå runt vallarna.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "FI-helsingfors-ide-aalto",
+   "place_id": "FI-helsingfors",
+   "kind": "i-stan",
+   "title": "Aalto-promenad",
+   "body": "Börja vid Finlandiahuset och leta upp fler av Aaltos byggnader.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "FI-helsingfors-ide-oodi",
+   "place_id": "FI-helsingfors",
+   "kind": "i-stan",
+   "title": "Regndag på Oodi",
+   "body": "Gå upp till översta våningen, läs en stund och titta ut över stan.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "FI-helsingfors-ide-helg",
+   "place_id": "FI-helsingfors",
+   "kind": "helg",
+   "title": "Helsingfors över helgen",
+   "body": "Sveaborg en halv dag, Aalto-promenad och Oodi resten.",
+   "duration": "Helg",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "FI-present-muminmugg",
+   "place_id": "FI",
+   "name": "Muminmugg",
+   "body": "Samlarmuggar med nya motiv varje år.",
+   "for_whom": [
+    "mamma",
+    "barn",
+    "mig",
+    "van"
+   ],
+   "keywords": [
+    "kaffe",
+    "mumin",
+    "samlare"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Muminmugg med årets säsongsmotiv"
+   }
+  },
+  {
+   "id": "FI-present-choklad",
+   "place_id": "FI",
+   "name": "Finsk mjölkchoklad",
+   "body": "Den blå kakan finns i alla butiker.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "barn",
+    "van"
+   ],
+   "keywords": [
+    "godis",
+    "choklad"
+   ]
+  },
+  {
+   "id": "FI-present-salmiak",
+   "place_id": "FI",
+   "name": "Salmiak",
+   "body": "Salt lakrits i många styrkor.",
+   "for_whom": [
+    "van",
+    "pappa"
+   ],
+   "keywords": [
+    "godis",
+    "lakrits"
+   ]
+  }
+ ]
+}

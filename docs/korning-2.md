@@ -1,0 +1,12 @@
+Läs CLAUDE.md, docs/FORMAT.md, docs/schema.sql och kartdelen av docs/prototyp.html innan du gör något. Körning 1 är klar.
+
+Gör Körning 2 (Karta och innehåll):
+1. Import: bygg scripts/import-content.mjs enligt docs/FORMAT.md. Den läser content/??.json i ordningen places, compendium, facts, items, ideas, gifts och därefter content/_bucket.json till bucket_catalog. Validera allt före första skrivningen, stoppa vid fel med filnamn, id och fält, vägra regler utan source_url och verified_on, och gör upsert på id så att skriptet kan köras om. Platser sorteras så att land kommer före region och stad. Nyckeln läses från .env.local (SUPABASE_SECRET_KEY) och får aldrig importeras i src/. Lägg till npm run import och npm run import:check (bara validering). Skriv tester för valideringen.
+2. Karta: MapLibre med OpenFreeMap. Kontrollera aktuell stil-URL och villkor först och visa attribution. Länder färgas efter place_status med statusfärgerna i CLAUDE.md. Tryck på ett land öppnar bottenark där status sätts. Växling Europa och världen.
+3. De fyra lägena: Ren, Upptäck (platser och listpunkter som markörer), Terräng 3D (enkel höjdskuggning, ingen detaljerad 3D) och Smart månad (färgar länder efter places.smart_months för vald månad).
+4. Listan Dina platser eller Era platser under kartan, grupperad på status.
+5. Landssida och stadssida med vyerna Översikt, Lista, Guide, Månad, Boka och Köp med hem, som i prototypen. Översikt visar stay, day_budget_sek med day_budget_note, areas, transport och flight_tips ur places.data. Fält som står i data.own_judgment märks med texten knapp.uppskattning. Guide visar place_facts, regler för sig med källa och kontrolldatum och texten land.regler.ansvar. Lista visar place_items med avbockning (item_checks). Köp med hem visar gift_tips. Boka bygger länkar i src/lib/links.ts (Google Flights, Skyscanner, Booking, Airbnb, Google Maps) med tester.
+6. Saknas innehåll för ett land: visa land.saknar-innehall, status ska fungera ändå.
+7. Kartan ska fungera på 390 px bredd utan att sidan hackar: ladda MapLibre först när fliken öppnas.
+
+Regler för körningen: Skriv inga innehållstexter och inga egna gränssnittstexter (använd t() och content/_texter.json, lista nycklar som saknas). Gör inga databasändringar själv: behövs en ändring ger du mig ett färdigt SQL-block och förklarar varför. Lägg inte till funktioner utöver det som står här, skriv idéer i docs/fas2.md. Avsluta med npm run build, npm run typecheck och npm test, och lista: klart, inte klart, saknade textnycklar, och vad jag behöver göra själv.

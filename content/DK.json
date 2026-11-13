@@ -1,0 +1,472 @@
+{
+ "places": [
+  {
+   "id": "DK",
+   "kind": "country",
+   "name": "Danmark",
+   "iso2": "DK",
+   "lat": 56.0,
+   "lon": 10.0,
+   "airport": "CPH"
+  },
+  {
+   "id": "DK-kopenhamn",
+   "kind": "city",
+   "parent_id": "DK",
+   "name": "Köpenhamn",
+   "lat": 55.6761,
+   "lon": 12.5683,
+   "airport": "CPH",
+   "data": {
+    "transport": [
+     {
+      "mode": "Metro M2 från flygplatsen",
+      "rating": "bast",
+      "text": "Ca 13 minuter till Kongens Nytorv. Metron går dygnet runt."
+     }
+    ],
+    "sources": [
+     "https://www.visitcopenhagen.com/copenhagen-airport-gdk712443",
+     "https://www.visitdenmark.com/denmark/explore/copenhagen-airport-gdk712443"
+    ],
+    "day_budget_sek": 2000,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Nyhavn, Tivoli och ett torn med utsikt.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 3,
+      "text": "Hinner cykla runt, äta er igenom Vesterbro och ta en kanaltur.",
+      "recommended": true
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Lägg till en dagstur med tåg, till exempel Louisiana eller Helsingör.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Vesterbro",
+      "stay": true,
+      "text": "Nära Hovedbanegården och Tivoli, med stans tätaste utbud av mat och barer."
+     },
+     {
+      "name": "Indre By",
+      "stay": true,
+      "text": "Gångavstånd till allt. Dyrast."
+     },
+     {
+      "name": "Nørrebro",
+      "stay": true,
+      "text": "Yngre och billigare, med metro in till centrum."
+     },
+     {
+      "name": "Kvarteren precis bakom Hovedbanegården",
+      "stay": false,
+      "text": "Stökigt på nätterna längs Istedgade närmast stationen. Välj ett par kvarter längre in i Vesterbro."
+     }
+    ],
+    "best_text": "Maj till september när Tivoli har öppet och man äter ute, december för julmarknaderna.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    3,
+    5,
+    5,
+    5,
+    5,
+    4,
+    3,
+    1,
+    3
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "DK-fakta-inresa",
+   "place_id": "DK",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas normalt inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen, dit också Island och Norge hör. Inom Norden kan svenskt körkort räcka i vissa fall, men pass eller nationellt id-kort rekommenderas.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-fakta-mobil",
+   "place_id": "DK",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "Samma pris som i Sverige för samtal, sms och surf.",
+   "body": "EU:s roamingregler gäller: du betalar som hemma, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-fakta-betala",
+   "place_id": "DK",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: danska kronor (DKK)",
+   "summary": "Landet har danska kronor (DKK)."
+  },
+  {
+   "id": "DK-fakta-alkohol-16",
+   "place_id": "DK",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 16,
+   "title": "Öl och cider från 16 år i butik",
+   "summary": "16–17-åringar får köpa drycker på högst 6 procent i butik.",
+   "body": "Sedan 1 april 2025 går gränsen vid 6 procent i stället för 16,5. Det gäller varje enskild produkt.",
+   "source_url": "https://www.danskerhverv.dk/presse-og-nyheder/nyheder/2025/februar/nye-aldersgranser-for-salg-af-alkohol-galder-fra-1.-april-2025",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-fakta-alkohol-18",
+   "place_id": "DK",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 18,
+   "title": "Vin och sprit från 18 år",
+   "summary": "Allt över 6 procent kräver 18 år.",
+   "body": "Drycker starkare än 6 procent får bara säljas till den som fyllt 18. I praktiken betyder det allt vin och all sprit.",
+   "source_url": "https://movendi.ngo/policy-updates/2025/03/31/denmark-new-legal-age-limits-come-into-effect-in-april/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-kopenhamn-fakta-ta-sig-dit",
+   "place_id": "DK-kopenhamn",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygplatsen till centrum på 13 minuter",
+   "summary": "Metron M2 går till Kongens Nytorv på ca 13 min.",
+   "body": "Metrostationen ligger vid Terminal 3. Linjen stannar också vid Christianshavn och Nørreport.",
+   "source_url": "https://www.visitcopenhagen.com/copenhagen-airport-gdk712443",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-fakta-varldsarv",
+   "place_id": "DK",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Runstenarna var först",
+   "summary": "Jellingmonumenten blev Danmarks första världsarv 1994.",
+   "body": "Därefter kom Roskilde domkyrka 1995 och Kronborg 2000.",
+   "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "DK-kronborg",
+   "place_id": "DK",
+   "category": "byggnad",
+   "name": "Kronborg",
+   "summary": "Slottet i Helsingör, världsarv sedan 2000.",
+   "body": "Ligger vid Öresunds smalaste del, mittemot Helsingborg.",
+   "lat": 56.039,
+   "lon": 12.621,
+   "must_rank": 1,
+   "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-roskilde-domkyrka",
+   "place_id": "DK",
+   "category": "byggnad",
+   "name": "Roskilde domkyrka",
+   "summary": "Världsarv sedan 1995.",
+   "body": "Kyrkan i Roskilde väster om Köpenhamn.",
+   "lat": 55.6426,
+   "lon": 12.0804,
+   "must_rank": 2,
+   "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-jelling",
+   "place_id": "DK",
+   "category": "sevardhet",
+   "name": "Jellingmonumenten",
+   "summary": "Gravhögar, runstenar och kyrka, världsarv sedan 1994.",
+   "body": "Danmarks första världsarv.",
+   "lat": 55.756,
+   "lon": 9.419,
+   "must_rank": 3,
+   "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-stevns-klint",
+   "place_id": "DK",
+   "category": "natur",
+   "name": "Stevns Klint",
+   "summary": "Kritklippa på Själland, världsarv sedan 2014.",
+   "body": "Naturarv söder om Köpenhamn.",
+   "lat": 55.279,
+   "lon": 12.447,
+   "must_rank": 4,
+   "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-vadehavet",
+   "place_id": "DK",
+   "category": "natur",
+   "name": "Vadehavet",
+   "summary": "Den danska delen blev världsarv 2014.",
+   "body": "Tidvattenlandskap längs Jyllands västkust, delat med Tyskland och Nederländerna.",
+   "lat": 55.2,
+   "lon": 8.55,
+   "must_rank": 5,
+   "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-kopenhamn-nyhavn",
+   "place_id": "DK-kopenhamn",
+   "category": "sevardhet",
+   "name": "Nyhavn",
+   "summary": "Hamnkvarteret vid Kongens Nytorv.",
+   "body": "Kliv av metron vid Kongens Nytorv, så ligger Nyhavn och Strøget intill.",
+   "lat": 55.6798,
+   "lon": 12.591,
+   "must_rank": 1,
+   "source_url": "https://www.holidayextras.com/da/metro-koebenhavns-lufthavn.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-kopenhamn-tivoli",
+   "place_id": "DK-kopenhamn",
+   "category": "upplevelse",
+   "name": "Tivoli",
+   "summary": "Nöjespark från 1843 som bara har öppet under säsongerna.",
+   "body": "Öppet under påsk, sommar, halloween och jul, stängt däremellan. Julsäsongen 2026 pågår 13 november–31 december, med stängt på julafton. Åkturer kostar extra utöver entrén.",
+   "lat": 55.6737,
+   "lon": 12.5681,
+   "must_rank": 2,
+   "source_url": "https://www.stromma.com/da-dk/kobenhavn/attraktioner/attraktioner/tivoli/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-kopenhamn-christiansborg-tornet",
+   "place_id": "DK-kopenhamn",
+   "category": "byggnad",
+   "name": "Tornet på Christiansborg",
+   "summary": "Gratis utsikt från 106 meter, högst i stan.",
+   "body": "Hissen upp är gratis, men du går igenom en säkerhetskontroll som på en flygplats.",
+   "lat": 55.6762,
+   "lon": 12.5805,
+   "must_rank": 3,
+   "source_url": "https://www.afar.com/places/christiansborg-palace-tower-kobenhavn",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DK-kopenhamn-rundetarn",
+   "place_id": "DK-kopenhamn",
+   "category": "byggnad",
+   "name": "Rundetårn",
+   "summary": "Tornet med spiralramp i stället för trappor.",
+   "body": "Rampen är 209 meter lång. Entrén kostar en mindre summa.",
+   "lat": 55.6814,
+   "lon": 12.5757,
+   "must_rank": 4,
+   "source_url": "https://www.routesnorth.com/denmark/copenhagen/copenhagens-best-viewpoints-and-lookouts/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-smorrebrod",
+   "category": "mat",
+   "name": "Smørrebrød",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Öppen smörgås på rågbröd med mycket pålägg.",
+   "place_id": "DK"
+  },
+  {
+   "id": "mat-rod-polse",
+   "category": "mat",
+   "name": "Rød pølse",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Röd korv från en pølsevogn.",
+   "place_id": "DK"
+  },
+  {
+   "id": "bakverk-wienerbrod",
+   "category": "bakverk",
+   "name": "Wienerbröd",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Danskarna kallar det wienerbrød, resten av världen danish.",
+   "place_id": "DK"
+  },
+  {
+   "id": "bakverk-flodeboller",
+   "category": "godis",
+   "name": "Flødebolle",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Skum på en botten, doppat i choklad.",
+   "place_id": "DK"
+  },
+  {
+   "id": "fardmedel-lastcykel",
+   "category": "fardmedel",
+   "name": "Lådcykel",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "Cykel med stor låda fram, ofta med barn i.",
+   "place_id": "DK"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "DK-kopenhamn-ide-nyhavn",
+   "place_id": "DK-kopenhamn",
+   "kind": "i-stan",
+   "title": "Nyhavn och Strøget till fots",
+   "body": "Börja vid Kongens Nytorv och gå längs kajen.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "DK-kopenhamn-ide-kronborg",
+   "place_id": "DK-kopenhamn",
+   "kind": "utflykt",
+   "title": "Kronborg i Helsingör",
+   "body": "Slottet som är världsarv. Går att kombinera med färjan över till Helsingborg.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "DK-kopenhamn-ide-roskilde",
+   "place_id": "DK-kopenhamn",
+   "kind": "utflykt",
+   "title": "Roskilde domkyrka",
+   "body": "Världsarv väster om stan.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "DK-kopenhamn-ide-torn",
+   "place_id": "DK-kopenhamn",
+   "kind": "i-stan",
+   "title": "Två torn på en eftermiddag",
+   "body": "Gratis utsikt från Christiansborg och spiralrampen i Rundetårn.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "DK-kopenhamn-ide-jul-i-tivoli",
+   "place_id": "DK-kopenhamn",
+   "kind": "i-stan",
+   "title": "Jul i Tivoli",
+   "body": "Gå en kväll när ljusen är tända. Kolla säsongsdatumen först, parken är stängd mellan säsongerna.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "DK-kopenhamn-ide-helg",
+   "place_id": "DK-kopenhamn",
+   "kind": "helg",
+   "title": "Köpenhamn över helgen",
+   "body": "Nyhavn och tornen första dagen, Tivoli på kvällen och Kronborg eller Roskilde dag två.",
+   "duration": "Helg",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "DK-present-lakrits",
+   "place_id": "DK",
+   "name": "Dansk lakrits",
+   "body": "Finns i allt från påsar till presentburkar.",
+   "for_whom": [
+    "van",
+    "pappa",
+    "mig"
+   ],
+   "keywords": [
+    "godis",
+    "lakrits"
+   ]
+  },
+  {
+   "id": "DK-present-porslin",
+   "place_id": "DK",
+   "name": "Blåvitt danskt porslin",
+   "body": "En mugg är lättast att få hem hel.",
+   "for_whom": [
+    "mamma",
+    "mig"
+   ],
+   "keywords": [
+    "inredning",
+    "kaffe",
+    "keramik"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Blåvit räfflad mugg i klassiskt danskt mönster"
+   }
+  },
+  {
+   "id": "DK-present-lego",
+   "place_id": "DK",
+   "name": "Lego",
+   "body": "Danskt från början. Leta efter set som bara säljs i märkesbutiken.",
+   "for_whom": [
+    "barn",
+    "van"
+   ],
+   "keywords": [
+    "bygga",
+    "leksaker"
+   ]
+  }
+ ]
+}

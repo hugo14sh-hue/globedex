@@ -1,0 +1,688 @@
+{
+ "places": [
+  {
+   "id": "GR",
+   "kind": "country",
+   "name": "Grekland",
+   "iso2": "GR",
+   "lat": 39.0,
+   "lon": 22.0,
+   "airport": "ATH"
+  },
+  {
+   "id": "GR-aten",
+   "kind": "city",
+   "parent_id": "GR",
+   "name": "Aten",
+   "lat": 37.9838,
+   "lon": 23.7275,
+   "airport": "ATH",
+   "data": {
+    "transport": [
+     {
+      "mode": "Metro linje 3 från flygplatsen",
+      "rating": "bast",
+      "text": "Ca 40 minuter till Syntagma. Tågen går var 30:e minut, första ca 06.30 och sista ca 23.30."
+     },
+     {
+      "mode": "Flygbuss X95",
+      "rating": "bra",
+      "text": "Går till Syntagma och är alternativet på natten när metron inte går."
+     },
+     {
+      "mode": "Metro till Pireus hamn",
+      "rating": "bast",
+      "text": "Gröna linjen från Omonia och Monastiraki, blå linjen från Syntagma. Stationen ligger mitt framför hamnen."
+     }
+    ],
+    "sources": [
+     "https://www.athenstransport.com/?p=41388",
+     "https://www.greeka.com/greek-ferries/athens-ferry-ports.htm"
+    ],
+    "day_budget_sek": 1300,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Akropolis första tidsluckan, museet och Agora.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 3,
+      "text": "Hinner en kväll i Psyrri och en halvdag vid havet.",
+      "recommended": true
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Lägg till Delfi eller en dagstur med färja från Pireus.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Plaka",
+      "stay": true,
+      "text": "Nedanför Akropolis med allt på gångavstånd. Turistigt och dyrare."
+     },
+     {
+      "name": "Koukaki",
+      "stay": true,
+      "text": "Lugnare bostadskvarter intill Akropolismuseet."
+     },
+     {
+      "name": "Psyrri och Monastiraki",
+      "stay": true,
+      "text": "Mat och barer, och metro direkt till flygplatsen och Pireus."
+     },
+     {
+      "name": "Runt Omonia",
+      "stay": false,
+      "text": "Billiga hotell men stökigt på nätterna."
+     }
+    ],
+    "best_text": "April till maj och oktober. I juli och augusti är det för varmt för Akropolis mitt på dagen.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    2,
+    2,
+    3,
+    5,
+    5,
+    4,
+    2,
+    2,
+    4,
+    5,
+    4,
+    2
+   ]
+  },
+  {
+   "id": "GR-santorini",
+   "kind": "region",
+   "parent_id": "GR",
+   "name": "Santorini",
+   "lat": 36.3932,
+   "lon": 25.4615,
+   "airport": "JTR",
+   "data": {
+    "transport": [
+     {
+      "mode": "Snabbfärja från Pireus",
+      "rating": "dyrt",
+      "text": "4–5 timmar. Snabbast, men dyrare och utan däck att stå på."
+     },
+     {
+      "mode": "Vanlig färja från Pireus",
+      "rating": "bra",
+      "text": "7–8 timmar. Går dagligen året runt och har hytter på nattavgångarna."
+     },
+     {
+      "mode": "Buss från hamnen",
+      "rating": "bast",
+      "text": "Lokalbussen går bara mellan hamnen Athinios och Fira. Till andra byar byter du i Fira."
+     }
+    ],
+    "sources": [
+     "https://www.go-ferry.com/routes/greek-routes/ferry-athens-santorini",
+     "https://www.santorinisecrets.com/santorini-ferries/"
+    ],
+    "day_budget_sek": 2200,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Två nätter",
+      "days": 2,
+      "text": "Kalderan, en solnedgång och Akrotiri.",
+      "recommended": false
+     },
+     {
+      "label": "Tre nätter",
+      "days": 3,
+      "text": "Hinner en båttur och en stranddag på östsidan.",
+      "recommended": true
+     },
+     {
+      "label": "Fem nätter",
+      "days": 5,
+      "text": "Bara om ni vill ta det lugnt. Kombinera hellre med en ö till.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Fira",
+      "stay": true,
+      "text": "Bussnavet. Härifrån når ni resten av ön utan hyrbil."
+     },
+     {
+      "name": "Imerovigli",
+      "stay": true,
+      "text": "Lugnare än Fira med samma utsikt över kalderan. Dyrt."
+     },
+     {
+      "name": "Kamari och Perissa",
+      "stay": true,
+      "text": "Stränderna på östsidan. Klart billigare, men ingen kalderautsikt."
+     },
+     {
+      "name": "Oia",
+      "stay": false,
+      "text": "Vackrast men dyrast och trängst vid solnedgången. Åk dit över dagen."
+     }
+    ],
+    "best_text": "Maj, juni och september. Juli och augusti är dyrast och trängst, och på vintern är mycket stängt.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    0,
+    0,
+    1,
+    3,
+    5,
+    5,
+    3,
+    3,
+    5,
+    4,
+    1,
+    0
+   ]
+  },
+  {
+   "id": "GR-kreta",
+   "kind": "region",
+   "parent_id": "GR",
+   "name": "Kreta",
+   "lat": 35.24,
+   "lon": 24.81,
+   "airport": "HER",
+   "data": {
+    "transport": [
+     {
+      "mode": "Färja Heraklion–Santorini",
+      "rating": "bra",
+      "text": "1,5–3 timmar. Snabbfärjor går dagligen under säsongen."
+     }
+    ],
+    "sources": [
+     "https://ferrygogo.com/destinations/santorini/"
+    ],
+    "day_budget_sek": 1300,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Välj en sida av ön. Väster för Samaria, öster för Knossos.",
+      "recommended": false
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Hinner både Chania och Heraklion med hyrbil.",
+      "recommended": true
+     },
+     {
+      "label": "Tio dagar",
+      "days": 10,
+      "text": "Lägg till sydkusten och bergsbyarna.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Chania",
+      "stay": true,
+      "text": "Venetiansk hamn och bäst läge för Samariaravinen."
+     },
+     {
+      "name": "Rethymno",
+      "stay": true,
+      "text": "Mitt på nordkusten, bra om ni vill nå båda hållen."
+     },
+     {
+      "name": "Heraklion",
+      "stay": true,
+      "text": "Närmast Knossos, flygplatsen och färjan till Santorini."
+     }
+    ],
+    "best_text": "Maj, juni och september. Samariaravinen har bara öppet maj till oktober.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    4,
+    5,
+    5,
+    4,
+    4,
+    5,
+    4,
+    2,
+    1
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "GR-fakta-betala",
+   "place_id": "GR",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: euro (EUR)",
+   "summary": "Landet har euro (EUR)."
+  },
+  {
+   "id": "GR-fakta-inresa",
+   "place_id": "GR",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen. Svenskt körkort accepteras normalt inte som resehandling.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-fakta-mobil",
+   "place_id": "GR",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "EU-roaming: samma pris som i Sverige.",
+   "body": "Du betalar som hemma för samtal, sms och surf, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-fakta-turistskatt",
+   "place_id": "GR",
+   "topic": "turistskatt",
+   "is_rule": true,
+   "title": "Klimatavgift per rum och natt",
+   "summary": "0,50–15 euro per rum och natt beroende på hotellklass och säsong.",
+   "body": "Avgiften tas ut per rum, inte per person, och betalas oftast på plats vid in- eller utcheckning. Högsäsong räknas från 1 april till 31 oktober. Avgiften är densamma på alla öar.",
+   "source_url": "https://greektriplanner.me/insights/greece-tourism-taxes-fees-2025",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-aten-fakta-ta-sig-dit",
+   "place_id": "GR-aten",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygplatsen till Syntagma på 40 minuter",
+   "summary": "Metro linje 3 går direkt till centrum.",
+   "body": "Flygplatsresan kräver en särskild biljett, den vanliga 90-minutersbiljetten gäller inte. En tredagars turistbiljett inkluderar en resa till och från flygplatsen.",
+   "source_url": "https://www.athenstransport.com/?p=41388",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-fakta-alkohol",
+   "place_id": "GR",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Alkohol från 18 år, legitimation krävs",
+   "summary": "Du måste kunna visa legitimation på att du fyllt 18 för att köpa alkohol.",
+   "body": "En lag från juli 2025 kräver giltig legitimation vid köp. Den som är under 18 får inte heller gå in på barer och nattklubbar. Ställen som bryter mot reglerna kan få böter på upp till 10 000 euro.",
+   "min_age": 18,
+   "source_url": "https://movendi.ngo/policy-updates/2025/07/10/greek-parliament-passes-bill-to-better-protect-minors-from-alcohol-harms/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-aten-fakta-pireus",
+   "place_id": "GR-aten",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Färjorna går från Pireus",
+   "summary": "Metron går ända fram till hamnen. Kolla vilken gate din färja har.",
+   "body": "Hamnen är stor. Kykladerna går från E6, E7, E9 och E10, Saroniska öarna från E8, Dodekaneserna från E1 och Heraklion på Kreta från E2 och E3. Blå linjen går direkt från flygplatsen till hamnen. Gaten står på biljetten.",
+   "source_url": "https://www.greeka.com/greek-ferries/athens-ferry-ports.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-santorini-fakta-ta-sig-dit",
+   "place_id": "GR-santorini",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Alla färjor lägger till i Athinios",
+   "summary": "Hamnen ligger 8 km från Fira och 20 km från Oia.",
+   "body": "Athinios ligger på öns västkust, nedanför kalderans klippor. Med en vanlig färja glider du in under klippväggarna, vilket är en av resans höjdpunkter. Bara ett rederi kör snabbfärja från Pireus.",
+   "source_url": "https://www.ferryhopper.com/en/ferry-routes/direct/athens-piraeus-to-santorini",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-santorini-fakta-kryssningsavgift",
+   "place_id": "GR-santorini",
+   "topic": "turistskatt",
+   "is_rule": true,
+   "title": "20 euro gäller bara kryssningsgäster",
+   "summary": "Avgiften och taket på 8 000 per dag gäller den som kommer med kryssning.",
+   "body": "Kommer du med färja eller flyg och stannar över natten påverkas du inte. Avgiften dras på kryssningskontot varje gång passageraren går i land i en grekisk hamn.",
+   "source_url": "https://greekcitytimes.com/2026/06/09/santorini-cruise-passenger-cap-2026/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "GR-aten-akropolis",
+   "place_id": "GR-aten",
+   "category": "sevardhet",
+   "name": "Akropolis",
+   "summary": "Boka tidslucka i förväg. Högst 20 000 besökare per dag.",
+   "body": "Biljetten gäller en bestämd timme. Den officiella försäljningen sker på hhticket.gr och morgontiderna på sommaren tar slut flera veckor i förväg. Ta första tiden, värmen blir svår vid elva.",
+   "lat": 37.9715,
+   "lon": 23.7257,
+   "must_rank": 1,
+   "source_url": "https://www.artvisitguide.com/acropolis-of-athens-tickets-guide/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-aten-akropolismuseet",
+   "place_id": "GR-aten",
+   "category": "museum",
+   "name": "Akropolismuseet",
+   "summary": "Egen biljett och egen bokning, skild från själva Akropolis.",
+   "body": "Museet ligger på Akropolis södra sluttning och säljer biljetter med tidslucka på sin egen sida.",
+   "lat": 37.9684,
+   "lon": 23.7285,
+   "must_rank": 2,
+   "source_url": "https://grandpl.com/en/poland/article/how-and-where-to-buy-official-acropolis-museum-tickets/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-aten-agora",
+   "place_id": "GR-aten",
+   "category": "sevardhet",
+   "name": "Antika Agora",
+   "summary": "Här står Hefaistostemplet, med tak och kolonner kvar.",
+   "body": "Agora ligger nedanför Akropolis norra sluttning. Den har egen biljett, den gamla kombibiljetten med Akropolis finns inte längre. Biljett går oftast att köpa i kassan eller på hhticket.gr samma dag.",
+   "lat": 37.9747,
+   "lon": 23.722,
+   "must_rank": 3,
+   "source_url": "https://departly.pages.dev/to/greece/ancient-agora/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-meteora",
+   "place_id": "GR",
+   "category": "sevardhet",
+   "name": "Meteora",
+   "summary": "Sex aktiva kloster på klipptoppar. Världsarv sedan 1988.",
+   "body": "Varje kloster tar 5 euro i inträde, kontant vid ingången. Klostren har olika öppettider och var sin stängd veckodag, så två eller tre per dag är lagom. Klädkod gäller. Räkna med 4–6 timmar.",
+   "lat": 39.7217,
+   "lon": 21.6306,
+   "must_rank": 2,
+   "source_url": "https://www.visitmeteora.travel/meteora-monasteries",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-delfi",
+   "place_id": "GR",
+   "category": "sevardhet",
+   "name": "Delfi",
+   "summary": "Apollons helgedom och oraklets plats. Världsarv sedan 1987.",
+   "body": "Ligger 185 km från Aten, ungefär 2,5 timmar med bil. På området finns Apollontemplet, teatern, stadion, atenarnas skattkammare och ett arkeologiskt museum. Våren är finast, då blommar sluttningarna.",
+   "lat": 38.4824,
+   "lon": 22.501,
+   "must_rank": 3,
+   "source_url": "https://www.discovergreece.com/experiences/feel-aura-delphis-world-famous-archaeological-site",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-santorini-akrotiri",
+   "place_id": "GR-santorini",
+   "category": "sevardhet",
+   "name": "Akrotiri",
+   "summary": "Bronsåldersstad som bevarats under vulkanaska.",
+   "body": "Staden var ett handelscentrum med förbindelser till Kreta och Egypten. Biljetten kostar 20 euro, 10 euro med rabatt. Öppettiderna skiftar med säsongen och en dag i veckan är stängd, så kolla den officiella sidan samma vecka. Buss går från Fira.",
+   "lat": 36.3577,
+   "lon": 25.3961,
+   "must_rank": 1,
+   "source_url": "https://www.santorinisecrets.com/places/akrotiri/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-kreta-knossos",
+   "place_id": "GR-kreta",
+   "category": "sevardhet",
+   "name": "Knossos",
+   "summary": "Det minoiska palatset utanför Heraklion. Biljett med tidslucka krävs.",
+   "body": "Du väljer en bestämd tid när du köper biljetten. Den kostar 20 euro, 10 euro med rabatt, och säljs på hhticket.gr. Det går att köpa i kassan, men köerna är långa i högsäsong.",
+   "lat": 35.298,
+   "lon": 25.1632,
+   "must_rank": 1,
+   "source_url": "https://visitcrete.com/info/museums-sites-guide/category/archaeological-sites/archaeological-site-of-knossos-palace/?lang=gr",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "GR-kreta-samaria",
+   "place_id": "GR-kreta",
+   "category": "natur",
+   "name": "Samariaravinen",
+   "summary": "16 km vandring från bergen ner till havet. Öppen maj–oktober.",
+   "body": "Parken har öppet 1 maj–31 oktober, klockan 7–16, med ingångar i Xyloskalo och Agia Roumeli. Inträdet är 5 euro och barn under 15 går gratis. Spara biljetten, den kontrolleras vid utgången. Hela vandringen tar 6–7 timmar. Södra ingången nås bara med båt.",
+   "lat": 35.2711,
+   "lon": 23.9614,
+   "must_rank": 2,
+   "source_url": "https://www.samaria.gr/?p=949",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-souvlaki",
+   "category": "mat",
+   "name": "Souvlaki",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Grillspett, ofta i pitabröd.",
+   "place_id": "GR"
+  },
+  {
+   "id": "mat-grekisk-sallad",
+   "category": "mat",
+   "name": "Horiatiki",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Bondsallad med en hel skiva fetaost överst.",
+   "place_id": "GR"
+  },
+  {
+   "id": "dryck-freddo",
+   "category": "dryck",
+   "name": "Freddo espresso",
+   "rarity": "vanlig",
+   "icon": "cup",
+   "hint": "Iskaffe som skakas kallt.",
+   "place_id": "GR"
+  },
+  {
+   "id": "bakverk-loukoumades",
+   "category": "bakverk",
+   "name": "Loukoumades",
+   "rarity": "ovanlig",
+   "icon": "food",
+   "hint": "Friterade degbollar med honung.",
+   "place_id": "GR"
+  },
+  {
+   "id": "trad-olivtrad",
+   "category": "trad",
+   "name": "Gammalt olivträd",
+   "rarity": "ovanlig",
+   "icon": "flower",
+   "hint": "Leta efter en riktigt knotig och vriden stam.",
+   "place_id": "GR"
+  },
+  {
+   "id": "sevardhet-vaderkvarn-kykladerna",
+   "category": "sevardhet",
+   "name": "Vitkalkad väderkvarn",
+   "rarity": "ovanlig",
+   "icon": "build",
+   "hint": "Rund, vit och med halmtak, på öarna.",
+   "place_id": "GR"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "GR-aten-ide-akropolis-morgon",
+   "place_id": "GR-aten",
+   "kind": "i-stan",
+   "title": "Akropolis i första tidsluckan",
+   "body": "Var där när det öppnar och gå till museet efteråt när solen står högt.",
+   "duration": "Halvdag",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "GR-aten-ide-delfi",
+   "place_id": "GR-aten",
+   "kind": "dagstripp",
+   "title": "Dagstur till Delfi",
+   "body": "Åk tidigt, gå den heliga vägen upp till templet och ta museet sist.",
+   "duration": "En dag",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "GR-ide-meteora",
+   "place_id": "GR",
+   "kind": "utflykt",
+   "title": "Två dagar i Meteora",
+   "body": "Bo i Kalambaka och dela klostren på två dagar. Ta med kontanter och täckande kläder.",
+   "duration": "Två dagar",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "GR-aten-ide-agora",
+   "place_id": "GR-aten",
+   "kind": "i-stan",
+   "title": "Agora efter Akropolis",
+   "body": "Gå ner från Akropolis till Agora när folkmassorna är som störst däruppe.",
+   "duration": "ca 2 h",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "GR-ide-oluff",
+   "place_id": "GR",
+   "kind": "utflykt",
+   "title": "Öluffa från Pireus",
+   "body": "Vanlig färja till Santorini med däcksplats, och snabbfärja vidare till Kreta.",
+   "duration": "En vecka",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "GR-santorini-ide-akrotiri",
+   "place_id": "GR-santorini",
+   "kind": "ut-en-svang",
+   "title": "Akrotiri vid öppning",
+   "body": "Ta bussen från Fira och var där när de öppnar. Det ekar under taket när grupperna kommer.",
+   "duration": "ca 2 h",
+   "cost_level": "medel",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "GR-kreta-ide-samaria",
+   "place_id": "GR-kreta",
+   "kind": "dagstripp",
+   "title": "Vandra Samariaravinen",
+   "body": "Börja vid Xyloskalo när grindarna öppnar och avsluta med ett dopp i Agia Roumeli. Kolla att ravinen är öppen dagen innan.",
+   "duration": "En dag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "GR-present-olivolja",
+   "place_id": "GR",
+   "name": "Olivolja i plåtdunk",
+   "body": "Plåt tål resväskan bättre än glas.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "mig"
+   ],
+   "keywords": [
+    "mat",
+    "matlagning"
+   ]
+  },
+  {
+   "id": "GR-present-honung",
+   "place_id": "GR",
+   "name": "Timjanhonung",
+   "body": "Mörk, kryddig honung som säljs i små burkar.",
+   "for_whom": [
+    "mamma",
+    "van"
+   ],
+   "keywords": [
+    "mat",
+    "fika"
+   ]
+  },
+  {
+   "id": "GR-present-keramik",
+   "place_id": "GR",
+   "name": "Handmålad keramik",
+   "body": "Koppar och skålar med meandermönster eller havsblått.",
+   "for_whom": [
+    "mig",
+    "mamma"
+   ],
+   "keywords": [
+    "kaffe",
+    "keramik",
+    "inredning"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Blåvit mugg med meanderbård"
+   }
+  }
+ ]
+}

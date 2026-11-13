@@ -1,0 +1,468 @@
+{
+ "places": [
+  {
+   "id": "DE",
+   "kind": "country",
+   "name": "Tyskland",
+   "iso2": "DE",
+   "lat": 51.2,
+   "lon": 10.4,
+   "airport": "BER"
+  },
+  {
+   "id": "DE-berlin",
+   "kind": "city",
+   "parent_id": "DE",
+   "name": "Berlin",
+   "lat": 52.52,
+   "lon": 13.405,
+   "airport": "BER",
+   "data": {
+    "transport": [
+     {
+      "mode": "Flygplatståget FEX",
+      "rating": "bast",
+      "text": "Ca 23 minuter till Hauptbahnhof via Südkreuz och Potsdamer Platz. Tillsammans med RE20 går upp till fem tåg i timmen."
+     },
+     {
+      "mode": "S-Bahn, U-Bahn, buss och spårvagn",
+      "rating": "bra",
+      "text": "En och samma biljett gäller i allt. Enkelbiljetten gäller två timmar i en riktning."
+     }
+    ],
+    "sources": [
+     "https://ber.berlin-airport.de/de/orientierung/anreiseundabreise/fernverkehr/deutsche-bahn.html",
+     "https://www.berlin.de/en/public-transportation/1772016-2913840-fahrkarten-tickets-liniennetze.en.html"
+    ],
+    "day_budget_sek": 1500,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Riksdagskupolen, Förintelsemonumentet och East Side Gallery.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 4,
+      "text": "Hinner Bernauer Straße, Museumsinsel och en kväll i Kreuzberg.",
+      "recommended": true
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Lägg till Potsdam och lugnare dagar i Prenzlauer Berg.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Mitte",
+      "stay": true,
+      "text": "Närmast sevärdheterna och Hauptbahnhof. Dyrast och minst lokalt."
+     },
+     {
+      "name": "Prenzlauer Berg",
+      "stay": true,
+      "text": "Lugna gator, kaféer och söndagsmarknad. Spårvagn och U-Bahn in."
+     },
+     {
+      "name": "Kreuzberg",
+      "stay": true,
+      "text": "Mest mat och uteliv. Livligt på nätterna."
+     },
+     {
+      "name": "Friedrichshain",
+      "stay": true,
+      "text": "Billigare, nära East Side Gallery och klubbarna."
+     },
+     {
+      "name": "Runt Kottbusser Tor och Görlitzer Park",
+      "stay": false,
+      "text": "Bra att äta i, men stökigt på nätterna. Bo några kvarter bort."
+     }
+    ],
+    "best_text": "Maj, juni och september för uteliv utan högsommarvärme, december för julmarknaderna.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    3,
+    5,
+    5,
+    4,
+    4,
+    5,
+    3,
+    2,
+    4
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "DE-fakta-betala",
+   "place_id": "DE",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: euro (EUR)",
+   "summary": "Landet har euro (EUR)."
+  },
+  {
+   "id": "DE-fakta-inresa",
+   "place_id": "DE",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen. Svenskt körkort accepteras normalt inte som resehandling.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-fakta-mobil",
+   "place_id": "DE",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "EU-roaming: samma pris som i Sverige.",
+   "body": "Du betalar som hemma för samtal, sms och surf, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-fakta-alkohol-16",
+   "place_id": "DE",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Öl och vin från 16 år",
+   "summary": "Öl, vin och mousserande får säljas till den som fyllt 16.",
+   "body": "Gränsen gäller både butik och servering.",
+   "min_age": 16,
+   "source_url": "https://www.cm10.bmfsfj.de/resource/blob/94084/853f5170202dec9395e3bae9b3cbf8dc/jugenschutz-wir-halten-uns-daran-flyer-deutsch-data.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-fakta-alkohol-18",
+   "place_id": "DE",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Sprit från 18 år",
+   "summary": "Sprit, likör och alkoläsk kräver 18 år.",
+   "body": "Det gäller även blanddrycker som innehåller sprit.",
+   "min_age": 18,
+   "source_url": "https://www.cm10.bmfsfj.de/resource/blob/94084/853f5170202dec9395e3bae9b3cbf8dc/jugenschutz-wir-halten-uns-daran-flyer-deutsch-data.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-fakta-ta-sig-dit",
+   "place_id": "DE-berlin",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "BER till Hauptbahnhof på 23 minuter",
+   "summary": "Flygplatståget FEX går via Südkreuz och Potsdamer Platz.",
+   "body": "Stationen ligger direkt under terminalen. Till Südkreuz tar det ca 14 minuter.",
+   "source_url": "https://ber.berlin-airport.de/de/orientierung/anreiseundabreise/fernverkehr/deutsche-bahn.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-fakta-abc-biljett",
+   "place_id": "DE-berlin",
+   "topic": "ta-sig-dit",
+   "is_rule": true,
+   "title": "Flygplatsen kräver ABC-biljett",
+   "summary": "BER ligger i zon C. En vanlig AB-biljett räcker inte.",
+   "body": "Biljetten gäller i alla färdmedel inom zonerna, även flygplatståget. Köp ABC redan på flygplatsen för resan in till stan.",
+   "source_url": "https://ber.berlin-airport.de/de/orientierung/anreiseundabreise/oeffentlicheverkehrsmittel.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-fakta-biljettpriser",
+   "place_id": "DE-berlin",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Enkelbiljett 4 euro, till flygplatsen 5 euro",
+   "summary": "AB kostar 4 euro och ABC 5 euro. Dygnsbiljett AB kostar 11,20 euro.",
+   "body": "Dygnsbiljett ABC kostar 12,90 euro. En dygnsbiljett för smågrupp gäller upp till fem personer och kostar 35,30 euro för AB. Priserna gäller 2026 och höjs delvis i januari 2027.",
+   "source_url": "https://www.berlin.de/en/public-transportation/1772016-2913840-fahrkarten-tickets-liniennetze.en.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-fakta-turistskatt",
+   "place_id": "DE-berlin",
+   "topic": "turistskatt",
+   "is_rule": true,
+   "title": "Hotellskatt på 7,5 procent",
+   "summary": "Skatten är 7,5 % av rummets nettopris. Frukost räknas inte in.",
+   "body": "Den gäller alla betalda övernattningar, sedan april 2024 även tjänsteresor. Kolla om skatten ingår i priset du ser när du bokar.",
+   "source_url": "https://service.berlin.de/dienstleistung/326105/pdf/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-fakta-sondagsstangt",
+   "place_id": "DE-berlin",
+   "topic": "fun-fact",
+   "is_rule": true,
+   "title": "Butikerna har stängt på söndagar",
+   "summary": "Nästan alla butiker är stängda på söndagar. Handla mat på lördagen.",
+   "body": "Undantagen är butiker på järnvägsstationer och flygplatser. Åtta söndagar om året, bland annat några i advent, får butikerna ha öppet 13–20. Måndag till lördag får de ha öppet dygnet runt.",
+   "source_url": "https://www.visitberlin.de/de/node/22983",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "DE-berlin-reichstagskupolen",
+   "place_id": "DE-berlin",
+   "category": "byggnad",
+   "name": "Riksdagshusets kupol",
+   "summary": "Gratis, men du måste anmäla dig i förväg.",
+   "body": "Kupolen och takterrassen kostar inget. Anmäl dig via förbundsdagens formulär med namn och födelsedatum. Det går inte att boka per telefon. Gratis ljudguide ingår.",
+   "lat": 52.5186,
+   "lon": 13.3762,
+   "must_rank": 1,
+   "source_url": "https://www.bundestag.de/besuche/kuppel-dachterrasseunddachgartenrestaurant/kuppel/244990",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-murmuseet-bernauer",
+   "place_id": "DE-berlin",
+   "category": "sevardhet",
+   "name": "Minnesplatsen Berlinmuren",
+   "summary": "Gratis. Här står en bit mur kvar med gränsremsa och vakttorn.",
+   "body": "Minnesplatsen ligger längs Bernauer Straße, som var gräns mellan öst och väst. Utomhusutställningen är öppen alla dagar 8–22. Dokumentationscentret och besökscentret har öppet tisdag–söndag 10–18.",
+   "lat": 52.535,
+   "lon": 13.3903,
+   "must_rank": 2,
+   "source_url": "https://www.berlin.de/museum/3109351-2926344-gedenkstaette-berliner-mauer.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-east-side-gallery",
+   "place_id": "DE-berlin",
+   "category": "sevardhet",
+   "name": "East Side Gallery",
+   "summary": "1 316 meter mur med målningar längs Spree. Gratis och alltid öppet.",
+   "body": "Det här är den längsta sammanhängande bit av muren som finns kvar. Den ligger i Friedrichshain och förvaltas sedan 2018 av stiftelsen Berliner Mauer.",
+   "lat": 52.505,
+   "lon": 13.4397,
+   "must_rank": 3,
+   "source_url": "https://www.visitberlin.de/en/node/14832",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-museumsinsel",
+   "place_id": "DE-berlin",
+   "category": "museum",
+   "name": "Museumsinsel",
+   "summary": "Fem museer på en ö i Spree. Världsarv sedan 1999.",
+   "body": "Pergamonmuseet är helt stängt för renovering och öppnar igen 4 juni 2027, då med Pergamonaltaret. Tills dess visas utställningen Pergamonmuseum. Das Panorama mittemot ön. De andra museerna har öppet.",
+   "lat": 52.5169,
+   "lon": 13.4019,
+   "must_rank": 4,
+   "source_url": "https://www.visitberlin.de/de/node/15051",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-forintelsemonumentet",
+   "place_id": "DE-berlin",
+   "category": "sevardhet",
+   "name": "Förintelsemonumentet",
+   "summary": "2 711 betongblock i olika höjd nära Brandenburger Tor. Alltid öppet.",
+   "body": "Fältet är gratis och går att gå in i från alla håll. Under det ligger en utställning, Ort der Information, som har öppet tisdag–söndag 10–18 och också är gratis.",
+   "lat": 52.5139,
+   "lon": 13.3787,
+   "must_rank": 5,
+   "source_url": "https://www.berlin.de/museum/3128015-2926344-denkmal-fuer-die-ermordeten-juden-europa.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "DE-berlin-tv-tornet",
+   "place_id": "DE-berlin",
+   "category": "byggnad",
+   "name": "Tv-tornet",
+   "summary": "368 meter högt vid Alexanderplatz. Boka tid på nätet.",
+   "body": "Med nätbiljett väljer du dag och klockslag och slipper kassakön. Biljetterna tar ofta slut, så boka i förväg.",
+   "lat": 52.5208,
+   "lon": 13.4094,
+   "must_rank": 6,
+   "source_url": "https://visitberlin.de/en/node/1476567",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-currywurst",
+   "category": "mat",
+   "name": "Currywurst",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Skivad korv med ketchup och currypulver.",
+   "place_id": "DE"
+  },
+  {
+   "id": "mat-doner-berlin",
+   "category": "mat",
+   "name": "Döner i bröd",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Berlins vanligaste snabbmat.",
+   "place_id": "DE"
+  },
+  {
+   "id": "bakverk-brezel",
+   "category": "bakverk",
+   "name": "Brezel",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Saltad kringla av lutbröd.",
+   "place_id": "DE"
+  },
+  {
+   "id": "bakverk-berliner",
+   "category": "bakverk",
+   "name": "Syltmunk",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Friterad bulle fylld med sylt.",
+   "place_id": "DE"
+  },
+  {
+   "id": "dryck-gluhwein",
+   "category": "dryck",
+   "name": "Glühwein på julmarknad",
+   "rarity": "ovanlig",
+   "icon": "cup",
+   "hint": "Varmt kryddat vin i en mugg med pant.",
+   "place_id": "DE"
+  },
+  {
+   "id": "sevardhet-ampelmann",
+   "category": "sevardhet",
+   "name": "Ampelmännchen",
+   "rarity": "vanlig",
+   "icon": "pin",
+   "hint": "Gubben med hatt i övergångsställets ljus.",
+   "place_id": "DE"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "DE-berlin-ide-kupolen",
+   "place_id": "DE-berlin",
+   "kind": "i-stan",
+   "title": "Kvällsbesök i riksdagskupolen",
+   "body": "Anmäl er innan resan och välj en tid i skymningen.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "DE-berlin-ide-muren",
+   "place_id": "DE-berlin",
+   "kind": "i-stan",
+   "title": "Följ muren på en dag",
+   "body": "Börja vid Bernauer Straße på förmiddagen och ta S-Bahn till East Side Gallery på eftermiddagen. Båda är gratis.",
+   "duration": "En dag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "DE-berlin-ide-gratis",
+   "place_id": "DE-berlin",
+   "kind": "i-stan",
+   "title": "Gratisdag i centrum",
+   "body": "Riksdagskupolen, Förintelsemonumentet och Brandenburger Tor ligger på gångavstånd från varandra.",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "DE-berlin-ide-museumsinsel",
+   "place_id": "DE-berlin",
+   "kind": "i-stan",
+   "title": "Regnig dag på Museumsinsel",
+   "body": "Välj ett eller två museer. Pergamonmuseet är stängt till juni 2027.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "inne"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "DE-present-julmarknadsmugg",
+   "place_id": "DE",
+   "name": "Glöggmugg från julmarknad",
+   "body": "Varje marknad har sin egen mugg för året. Du betalar pant och får behålla den.",
+   "for_whom": [
+    "mig",
+    "mamma",
+    "van"
+   ],
+   "keywords": [
+    "kaffe",
+    "jul",
+    "samlare"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Årets glöggmugg från stadens julmarknad"
+   }
+  },
+  {
+   "id": "DE-present-choklad",
+   "place_id": "DE",
+   "name": "Tysk choklad",
+   "body": "Fyrkantiga kakor i många smaker som inte säljs hemma.",
+   "for_whom": [
+    "barn",
+    "van",
+    "pappa",
+    "mamma"
+   ],
+   "keywords": [
+    "godis",
+    "choklad"
+   ]
+  },
+  {
+   "id": "DE-present-ampelmann",
+   "place_id": "DE-berlin",
+   "name": "Ampelmann-pryl",
+   "body": "Gubben från de östtyska trafikljusen finns på allt från muggar till nyckelringar.",
+   "for_whom": [
+    "van",
+    "barn",
+    "mig"
+   ],
+   "keywords": [
+    "design",
+    "berlin"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Ampelmann, grön eller röd gubbe",
+    "Kylskåpsmagneter": "Ampelmann"
+   }
+  }
+ ]
+}

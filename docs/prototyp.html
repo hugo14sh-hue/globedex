@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Globedex – prototyp v2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;600;800&family=Playfair+Display:wght@600;700&family=DM+Serif+Display&family=Outfit:wght@600;700&family=Sora:wght@600;700&family=Nunito:wght@400;700&family=Work+Sans:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#e9e5dd;display:grid;place-items:center;font-family:system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0;text-align:left}
+#phone{--r:16px;position:relative;width:min(100vw,430px);height:min(100dvh,900px);overflow:hidden;background:var(--bg);color:var(--tx);font:15px/1.45 var(--fb)}
+@media (min-width:520px){#phone{border-radius:44px;border:9px solid #16181b}}
+#scr{height:100%;overflow-y:auto;padding:22px 16px 100px;display:flex;flex-direction:column;gap:14px;scrollbar-width:none}
+#scr::-webkit-scrollbar{display:none}
+#scr>*{flex-shrink:0}
+h2{font:700 28px/1.1 var(--fh);margin:0}
+h3{font:700 18px/1.2 var(--fh);margin:0}
+.mu{color:var(--mu);font-size:13px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.col{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:8px;width:100%}
+.hero{background:var(--p);color:var(--onp);border-radius:calc(var(--r) + 6px);padding:18px;display:flex;flex-direction:column;gap:10px}
+.hero .big{font:700 40px/1 var(--fh)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.num{font:700 24px/1.1 var(--fh);color:var(--p)}
+.eb{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}
+.chip{padding:8px 13px;border-radius:999px;border:1px solid var(--ln);background:var(--sf);font-size:13px;font-weight:700;min-height:36px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--p);color:var(--onp);border-color:var(--p)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.soft{background:var(--soft);border:0}
+.seg{display:flex;gap:4px;padding:4px;border-radius:calc(var(--r) - 2px);background:var(--tr)}
+.seg button{flex:1;text-align:center;padding:9px 4px;border-radius:calc(var(--r) - 6px);font-size:13px;font-weight:700;color:var(--mu);min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--sf);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.btn{display:block;text-align:center;padding:13px 16px;border-radius:var(--r);background:var(--p);color:var(--onp);font-weight:800;min-height:48px;text-decoration:none}
+.btn.acc{background:var(--a);color:#1b1b1f}
+.btn.ghost{background:var(--sf);color:var(--tx);border:1px solid var(--ln)}
+.bar{height:8px;border-radius:4px;background:var(--tr);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--p);border-radius:4px;transition:width .4s}
+.hero .bar{background:rgba(255,255,255,.25)}.hero .bar i{background:var(--a)}
+.li{display:flex;align-items:center;gap:12px;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:12px;min-height:56px;width:100%}
+.li .t{flex:1;min-width:0;display:flex;flex-direction:column}
+.li b{font-size:15px}
+.box{width:28px;height:28px;flex:none;border-radius:9px;border:2px solid var(--mu);display:grid;place-items:center;color:var(--onp)}
+.box.on{background:var(--p);border-color:var(--p)}
+.badge{width:40px;height:40px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--soft);color:var(--p)}
+.chev{color:var(--mu);flex:none}
+.back{font-weight:700;color:var(--p);display:flex;align-items:center;gap:4px;min-height:40px;align-self:flex-start}
+#nav{position:absolute;left:0;right:0;bottom:0;height:78px;padding:0 6px 12px;display:flex;align-items:center;background:var(--sf);border-top:1px solid var(--ln)}
+#nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:700;color:var(--mu);min-height:52px;justify-content:center}
+#nav button[aria-pressed="true"]{color:var(--p)}
+.map{position:relative;height:290px;border-radius:calc(var(--r) + 6px);overflow:hidden;border:1px solid var(--ln)}
+.map svg{width:100%;height:100%;display:block}
+.map .zoom{position:absolute;right:10px;top:10px;display:flex;gap:6px}
+.pin{cursor:pointer}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.months button{text-align:center;padding:7px 0;border-radius:8px;background:var(--sf);font-size:12px;font-weight:800;min-height:34px}
+.months button[aria-pressed="true"]{background:var(--p);color:var(--onp)}
+.lg{display:flex;gap:10px;flex-wrap:wrap;font-size:12px}
+.lg span{display:flex;align-items:center;gap:5px}
+.lg i{width:10px;height:10px;border-radius:5px;display:block}
+.hs{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:0 16px;scrollbar-width:none}
+.hs::-webkit-scrollbar{display:none}
+.hs .card{flex:none;width:160px}
+.ring{width:76px;height:76px;flex:none;border-radius:50%;display:grid;place-items:center}
+.ring span{width:58px;height:58px;border-radius:50%;background:var(--p);display:grid;place-items:center;font:700 16px var(--fh)}
+.bars{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:130px}
+.bars div{display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;height:100%;font-size:11px;font-weight:700;color:var(--mu)}
+.bars i{width:100%;border-radius:6px;display:block}
+.bok{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.bc{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px 10px;border-radius:var(--r);border:2px solid var(--ln);min-height:128px;text-align:center;font-size:13px;font-weight:700}
+.bc .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--tr);color:var(--mu)}
+.bc small{font-size:11px}
+.idea{min-height:230px;justify-content:flex-end;background:linear-gradient(160deg,var(--p),color-mix(in srgb,var(--p) 68%,var(--a)));width:100%}
+.idea .ti{font:700 26px/1.15 var(--fh)}
+.idea .chip{background:rgba(255,255,255,.2);border:0;color:inherit;min-height:0;padding:6px 10px;font-size:12px}
+.tl>div{border-left:2px solid var(--p);padding:0 0 14px 12px;position:relative}
+.tl>div:before{content:"";position:absolute;left:-6px;top:3px;width:10px;height:10px;border-radius:5px;background:var(--a)}
+.tl>div:last-child{border-color:transparent;padding-bottom:0}
+.who{width:30px;height:30px;border-radius:15px;display:grid;place-items:center;font-size:11px;font-weight:800;background:var(--tr);flex:none}
+.who.on{background:var(--p);color:var(--onp)}
+#sheet{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;z-index:5}
+#sheet[hidden]{display:none}
+#sheet .in{background:var(--bg);width:100%;max-height:82%;overflow-y:auto;border-radius:26px 26px 0 0;padding:10px 16px 26px;display:flex;flex-direction:column;gap:12px;animation:up .25s ease}
+#sheet .grab{width:44px;height:5px;border-radius:3px;background:var(--ln);align-self:center}
+#sheet p{margin:0}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+#toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);padding:11px 18px;border-radius:999px;background:var(--tx);color:var(--bg);font-size:14px;font-weight:700;white-space:nowrap;z-index:7;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#fx{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6}
+#fx i{position:absolute;top:-20px;border-radius:2px;animation:conf 1.3s ease-in forwards}
+@keyframes conf{to{transform:translateY(640px) rotate(620deg);opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadein{to{opacity:1;transform:none}}
+.leg{opacity:0;transform:translateY(6px);animation:fadein .4s ease forwards}
+input,select{font:15px var(--fb);color:var(--tx);background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:11px 12px;width:100%;min-height:46px}
+label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:800;color:var(--mu);text-transform:uppercase;letter-spacing:.05em}
+.sw{width:52px;height:52px;border-radius:16px;border:3px solid transparent;display:flex;align-items:flex-end;justify-content:flex-end;padding:4px}
+.sw[aria-pressed="true"]{border-color:var(--tx)}
+.sw i{width:16px;height:16px;border-radius:8px;border:2px solid #fff;display:block}
+.stack{position:relative;height:300px}
+.stack .idea{position:absolute;inset:0;border-radius:calc(var(--r) + 8px);padding:18px;display:flex;flex-direction:column;gap:8px;color:var(--onp)}
+.stack .under{position:absolute;inset:10px -4px -8px 4px;border-radius:calc(var(--r) + 8px);background:var(--tr);transform:rotate(3deg)}
+.rnd{width:60px;height:60px;border-radius:30px;display:grid;place-items:center;background:var(--sf);border:1px solid var(--ln)}
+:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="phone">
+  <div id="scr"></div>
+  <nav id="nav" aria-label="Huvudmeny"></nav>
+  <div id="sheet" hidden></div>
+  <div id="fx"></div>
+  <div id="toast" hidden></div>
+</div>
+<script>
+const LAND = [
+  '-168,66 -162,70 -156,71.3 -140,69.6 -128,70 -115,68.5 -95,72 -85,69.5 -80,64 -77,60 -72,61 -64,60 -61,56 -56,52 -60,48 -64,45 -70,43.5 -70.5,41.5 -74,40.5 -76,37 -75.5,35.2 -81,31 -80,26 -81.5,25 -82.8,28.5 -84,30 -89,30.2 -94,29.6 -97.3,27.5 -97.5,22 -96.5,19 -94.5,18.2 -91,18.8 -90.3,21 -87,21.5 -88,16 -84,15.9 -83.3,12 -82,9 -79.5,9.5 -77.4,8.6 -78.5,7.5 -80,7.3 -81,8 -84,9.8 -86,12 -88,13.3 -92,14.5 -95,16 -98,16.3 -102,17.8 -105.5,20 -105.5,23 -109,26 -112.5,29.5 -114.7,31.7 -112.2,29 -110,24 -112,24.5 -114.5,28 -117.2,32.5 -118.5,34 -121,35 -122.5,37.5 -124,40.5 -124.3,43 -124,46.5 -124.7,48.4 -123,49 -127,50.5 -130,54 -133,57 -137,58.5 -140,60 -146,60.7 -150,61 -152,59 -154,57.5 -158,56.6 -162,55 -158,58 -162,58.8 -164.5,60.5 -165,62.5 -164,64 -166,64.6',
+  '-73,78 -60,82 -40,83.5 -20,82.5 -18,77 -22,72 -22,70 -26,68.5 -34,66 -40,65 -43,60 -48,61 -51,64 -53,67 -55,70.5 -58,75.5 -67,76.5',
+  '-77.4,8.6 -76,10 -72,11.8 -71,12.4 -64,10.6 -61,10.5 -57,6 -52,5 -50,1.5 -48,-1 -44.5,-2.5 -40,-3 -35,-5.5 -35,-9 -38.5,-13 -39,-17.5 -41,-22 -44,-23 -48.5,-27 -48.8,-28.5 -52,-32.2 -55,-35 -57.5,-36.5 -56.8,-38.5 -62,-39 -65,-41 -63.6,-42.6 -65.5,-45 -67.5,-46.5 -66,-48 -69,-51 -68.5,-52.5 -71,-54 -74,-52 -75.5,-48 -73.5,-43 -73.6,-37 -71.5,-32 -71.3,-26 -70.5,-21 -70.3,-18.3 -71.5,-17.5 -76.3,-14 -78,-10 -79.7,-7 -81.2,-5.5 -80.3,-3.4 -80.9,-1.5 -80,0.8 -79,1.7 -78.8,3.5 -77.2,5.5',
+  '57.5,25.6 59,22.5 57,19 55,17 52,16 45,13 43,13 39,21 35,28 34.5,29.5 32.6,30 32.4,31.2 34.3,31.3 35.8,34.5 35.9,36.6 34.5,36.8 32.5,36.1 30.5,36.6 29,36.6 27.4,37 26.8,38.5 26.3,39.3 26.2,40.2 26,40.8 24.5,40.9 23.7,40.3 22.8,40.5 22.6,39.9 23,39 24.1,38.2 23.2,37.9 23,36.5 22.5,36.5 21.7,36.8 21.1,37.8 21.3,38.3 20.2,39.6 19.4,41 19.4,42 18.5,42.5 16,43.5 15.2,44.3 13.6,45.7 12.3,45.3 12.4,44.3 13.5,43.6 14.5,42.3 16,41.9 17.2,41 18.5,40.2 17,40.4 16.5,39.6 17.1,39 16.1,38 15.6,38 15.8,39.5 15.3,40.1 14,40.8 12.5,41.5 11,42.5 10.5,43.3 9.8,44 8.5,44.3 7,43.7 5,43.3 3.2,43 3.2,41.9 1,41.1 0,39.8 -0.3,38.5 -0.8,37.6 -2,36.7 -4.4,36.7 -5.6,36 -6.3,36.8 -7.4,37.2 -8.9,37 -8.8,38.7 -9.5,39.4 -8.7,41 -8.9,42.3 -9.2,43.1 -7.7,43.7 -4.5,43.4 -1.8,43.4 -1.2,44.5 -1.1,46 -2.2,47.1 -4.6,47.9 -4.2,48.7 -1.6,48.7 -1.3,49.6 0.2,49.4 1.6,50.2 2.5,51.1 3.6,51.4 4.5,52.3 4.8,53 6.2,53.4 7,53.6 8.6,53.9 8.7,55 8.1,55.6 8.2,56.8 9.4,57.2 10.6,57.7 10.5,58.3 8,58.1 6.5,58.1 5.5,58.9 5,60.5 5,62 7,63 10,64 12.5,66 14,67.5 16,68.5 19,69.8 23,70.6 26,71 28.5,70.9 31,70.3 33,69.3 36,69 41,67.5 44,68.5 53,68.5 58,68.8 68,69 70,73 80,73 100,77 113,73.5 130,71 140,72 160,69.5 170,70 180,68.5 180,65 178,64.5 172,61 163,59.8 162,57 156,51 155,55.5 156.5,57.8 163,60 157,61 152,59 143,59.3 137,54 140.5,53 141,48.5 138,46 133,42.8 130,42.5 129.5,40 129.3,35.3 126.5,34.5 126,37.5 124.7,39.6 121.5,39 122.3,40.5 121,41 117.7,39 119,37.2 122.5,36.9 119.5,34.5 121.5,32 122,29.8 119.5,25.5 116,22.8 113,22 110,21 108.5,21.5 106,19.5 107.5,16.5 109.3,13 109,11.5 105,8.6 104.8,10.5 103,10.5 102,12.5 100.5,13.5 100,12 99.2,9.2 100.3,7.2 102.2,6.2 103.4,4 104.2,1.3 103.5,1.3 101.3,2.8 100.4,4.5 98.3,8 98.5,10.5 97.6,16.5 94.5,16 94,19 92.5,21 91.8,22.5 90,21.8 88.5,21.7 86.9,20.8 85,19.3 82,16.5 80.2,15 80,10.3 77.5,8 76.3,9.5 74.5,14.5 73,19 72.6,21.4 70,22.5 68.6,23.5 67,24.8 62,25.2',
+  '-17,21 -16,28 -10,30.5 -9.5,33 -6,35.8 -2,35.2 3,36.8 10,37.3 11,35 10,34 11.5,33 15,32.3 20,31 20.3,32.5 23,32.6 25,31.7 29,30.9 32.3,31.2 32.5,30 33.5,27 35.5,23.5 37.3,21 38.5,18 39.7,15.5 43.3,12.5 51,11.8 51,10.5 48,5 44,1 41,-2 39.5,-5 39.5,-10 40.5,-15 35.5,-20 35.5,-24 32.5,-26 32,-29 28,-33 25,-34 20,-34.8 18.3,-34 17.8,-31 15,-26 13.5,-22 11.8,-17 13.5,-11 12,-5 9,-1 9.5,3 8.5,4.5 5.5,4.3 2,6.3 -2,4.8 -7.5,4.4 -11,6.9 -13.3,9 -15,11 -16.8,13 -17.5,14.7 -16.5,16.5 -16.5,19.5',
+  '113.5,-22 114,-26 115,-30.5 115,-34.3 118,-35 122,-34 124,-33 129,-31.7 132,-32 135,-34.8 138,-34.3 138,-35.6 140.5,-38 143.5,-38.8 146.3,-39.1 150,-37.5 151,-34 153,-31 153.5,-28 153,-25 151,-23 149.5,-22 146.5,-19 145.3,-15 143.5,-14 142.5,-10.7 141.5,-13 141.5,-17 140,-17.7 137,-16 135.5,-14.8 136.8,-12 133,-11.3 130,-12 129.5,-14.8 127,-14 125,-15.5 123,-16.5 122,-18 119,-20 116,-20.6',
+  '172.7,-34.4 175,-36.8 178.5,-37.7 177,-39.3 176,-41.3 174.7,-41.3 175,-39.5 173.8,-39.2 174.6,-37.5',
+  '172.7,-40.5 174.3,-41.7 173,-43.8 171,-45.9 168.5,-46.7 166.5,-46 168.5,-44 171.5,-41.8',
+  '49.3,-12 50.5,-15.5 49.5,-17.5 48,-21 47,-25 45,-25.5 43.5,-22 44.3,-19 44,-16.5 46.5,-15.7 48,-13.5',
+  '95.3,5.6 98,4 101,1.8 104,-1 106,-3 105.8,-5.8 104.5,-5.8 102,-4 100,-1 98.7,1.7 96,3.8',
+  '105.5,-6.8 108,-6.3 111,-6.5 114.5,-7.7 114.4,-8.7 111,-8.2 108,-7.8 105.5,-6.9',
+  '109,1.5 110,-1 111,-3 114.5,-4 116.5,-3 117.5,0 118.8,1 119,5 117,7 115.5,5.2 114,4.4 111,1.6',
+  '131,-1 135,-3.3 138,-1.7 141,-2.6 144,-3.8 146,-5.5 147.5,-6.5 147,-8 150,-10.6 147,-10 143,-9 141,-9.1 138,-8.3 138.8,-7 138,-5.5 135,-4.3 132.7,-4 131,-2.5',
+  '120,18.5 122.2,18.5 121.8,15 124,13 121.5,13.8 120.5,14.5',
+  '130,31 131.7,33 133,34 135,33.5 137,34.6 140,35 141,38.3 141.5,41.4 140.3,41.2 140,40 139.8,38 137,37 136,35.8 133,35.5 131,34.4',
+  '141,41.8 143.3,42 145.5,43.3 144,44.2 141.8,45.3 141.4,43.3',
+  '120.1,23 120.8,22 121.9,24.7 121.5,25.3 120.7,24.5',
+  '79.8,8 80.3,6 81.8,7.2 80.6,9.8',
+  '-5.7,50 -3,50.6 1.4,51.2 1.7,52.7 0.3,53.4 -0.6,54.5 -1.6,55.6 -2.1,57.7 -3.5,58.6 -5,58.6 -6.2,57.5 -5.6,56 -4.9,55 -3.1,54.8 -3.4,53.4 -4.6,53.3 -4.3,52.4 -5.2,51.7 -3.2,51.4 -4.5,51.1',
+  '-6,52.2 -6,53.9 -5.5,54.6 -6.2,55.3 -8.2,55.2 -8.6,54.2 -10,54.2 -9.9,53.3 -10.4,51.9 -9.5,51.5 -8,51.8',
+  '-22.5,63.9 -18.5,63.4 -14.5,64.4 -13.6,65.2 -15,66.2 -18,66.2 -22.4,66.4 -24.3,65.6 -21.7,64.6',
+  '12.4,37.8 15.1,36.7 15.6,38.2 13.3,38.2',
+  '8.4,39 9.6,39.1 9.8,41 8.2,40.9',
+  '8.6,41.4 9.4,41.5 9.5,42.9 8.6,42.4',
+  '23.5,35.3 26.3,35.1 26,35.4 24,35.6',
+  '32.3,34.7 34.5,35.6 33,35.4',
+  '18.1,56.9 18.8,57.4 19.2,57.9 18.5,57.8',
+  '11,78.5 16,80 21,80.3 27,79.5 21,78 17,76.6 14,77.5',
+  '-85,21.8 -82,23.1 -77,22 -74.2,20.2 -77.6,19.9 -79.5,21.6 -84,21.9',
+  '-74.4,19.8 -71.5,19.9 -68.4,18.6 -70,18.2 -71.5,17.6 -74.4,18.3'
+];
+const WATER = [
+  '10.5,57.6 11.7,57.7 12.6,56.2 13,55.4 14.2,55.4 14.5,56 16,56.2 16.5,57 17,58.7 18.8,60.1 17.3,61 17.5,62.3 19,63.5 21,64.6 22,65.6 24.2,65.8 25,65 22.5,63.8 21.4,62.5 21.5,60.5 23,59.9 28,60.5 30,60 28,59.7 23.5,59.2 24.2,58.3 23.5,57.2 21,57 21,55.3 18.5,54.6 14,54 12,54.3 10.8,54 10,55 10.4,56.5',
+  '27.5,42 28,43.5 28.7,44.3 30,45.5 31.5,46.6 33.5,46 33,45 35,45 36.5,45.3 38,47 39.5,47 38,46 37.5,44.7 39,44 41.5,41.5 38,41 34,42 31,41.2 29,41.2',
+  '47,44.5 50,46.7 53,46.5 53,44.5 51,42 53,40 53.5,37.3 50.5,37 49,38.3 49.5,40.2 48,42 47.5,43.2',
+  '48,30 50,30 51,28 53.5,26.8 56.3,27 56.4,26.2 56,24.5 54,24.2 51.6,24.4 51.3,26 50.2,26 50,27 48.5,28.3',
+  '-94.5,59 -92.5,57 -88,56 -82.5,55.2 -79.5,51.5 -78.6,52.5 -77,56 -77.5,60 -78,62.5 -81,62.7 -86,64 -88,64 -90.5,63 -93,61.5'
+];
+const proj=s=>s.split(' ').map(q=>{const p=q.split(',');return (+p[0]+180).toFixed(2)+','+(90-p[1]).toFixed(2)}).join(' ');
+const LANDP=LAND.map(proj),WATERP=WATER.map(proj);
+const PAL=[
+ {n:'Djuphav',p:'#0F4C5C',pd:'#5FB0C2',a:'#FF6B4A',bg:'#FBF7F0',bgd:'#0E1A20',sd:'#172830'},
+ {n:'Medelhav',p:'#1D4ED8',pd:'#7B9BFF',a:'#F59E0B',bg:'#F8FAFC',bgd:'#0B1220',sd:'#141E33'},
+ {n:'Terrakotta',p:'#C2410C',pd:'#F08A5D',a:'#0D9488',bg:'#FFF7ED',bgd:'#1C1210',sd:'#2A1C18'},
+ {n:'Skog och fjäll',p:'#166534',pd:'#5CCB84',a:'#EAB308',bg:'#F7F7F2',bgd:'#0F1A14',sd:'#18261D'},
+ {n:'Nattflyg',p:'#6D28D9',pd:'#AE8BFA',a:'#22D3EE',bg:'#FAF5FF',bgd:'#120B1F',sd:'#1E1530'}];
+const FONTS=[
+ {n:'Fraunces + DM Sans',h:"'Fraunces',Georgia,serif",b:"'DM Sans',system-ui,sans-serif"},
+ {n:'Bricolage Grotesque + Inter',h:"'Bricolage Grotesque',system-ui,sans-serif",b:"'Inter',system-ui,sans-serif"},
+ {n:'Space Grotesk + Manrope',h:"'Space Grotesk',system-ui,sans-serif",b:"'Manrope',system-ui,sans-serif"}];
+const HF=[['Fraunces',"'Fraunces',Georgia,serif"],['Bricolage Grotesque',"'Bricolage Grotesque',system-ui,sans-serif"],['Space Grotesk',"'Space Grotesk',system-ui,sans-serif"],['Playfair Display',"'Playfair Display',Georgia,serif"],['DM Serif Display',"'DM Serif Display',Georgia,serif"],['Outfit',"'Outfit',system-ui,sans-serif"],['Sora',"'Sora',system-ui,sans-serif"]];
+const BF=[['DM Sans',"'DM Sans',system-ui,sans-serif"],['Inter',"'Inter',system-ui,sans-serif"],['Manrope',"'Manrope',system-ui,sans-serif"],['Nunito',"'Nunito',system-ui,sans-serif"],['Work Sans',"'Work Sans',system-ui,sans-serif"],['IBM Plex Sans',"'IBM Plex Sans',system-ui,sans-serif"]];
+const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const mix=(a,b,t)=>{const x=hx(a),y=hx(b);return '#'+x.map((v,i)=>Math.round(v+(y[i]-v)*t).toString(16).padStart(2,'0')).join('')};
+const lum=h=>{const c=hx(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+const pal=()=>{if(S.pal<5)return PAL[S.pal];const c=S.cp;return {n:'Egen',p:c.p,pd:mix(c.p,'#ffffff',.45),a:c.a,bg:c.bg,bgd:mix(c.p,'#000000',.86),sd:mix(c.p,'#000000',.74)}};
+const ST={ej:'Ej satt',vill:'Vill åka',planerad:'Planerad',besokt:'Besökt',bor:'Bor här',bott:'Har bott',mellan:'Mellanlandat'};
+const PLACES=[
+ {id:'SE',n:'Sverige',city:'Borås',lon:12.94,lat:57.72,m:[2,2,3,3,4,5,5,5,4,3,2,3]},
+ {id:'DK',n:'Danmark',city:'Köpenhamn',lon:12.57,lat:55.68,m:[2,2,3,4,5,5,4,4,5,4,2,3]},
+ {id:'PL',n:'Polen',city:'Gdańsk',lon:18.65,lat:54.35,m:[2,2,3,3,4,5,4,4,5,3,2,3]},
+ {id:'DE',n:'Tyskland',city:'Frankfurt',lon:8.68,lat:50.11,m:[2,2,3,4,5,4,4,4,5,4,2,4]},
+ {id:'NL',n:'Nederländerna',city:'Amsterdam',lon:4.9,lat:52.37,m:[2,2,3,4,5,4,3,3,5,4,2,3]},
+ {id:'TR',n:'Turkiet',city:'Istanbul',lon:28.97,lat:41,m:[2,2,3,5,5,4,2,2,4,5,3,2]},
+ {id:'GR',n:'Grekland',city:'Aten',lon:23.73,lat:37.98,m:[2,2,3,4,5,4,1,1,4,5,3,2]},
+ {id:'HR',n:'Kroatien',city:'Split',lon:16.44,lat:43.51,m:[1,1,2,3,5,5,2,2,5,4,2,1]}];
+const MON=['J','F','M','A','M','J','J','A','S','O','N','D'],MONF=['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+const SMART=['#D64545','#D64545','#F28C4B','#F4B942','#7CC26B','#2E9E5B'];
+const ITEMS=[
+ {id:'stamppot',c:'Mat och dryck',n:'Stamppot',s:'Nationalrätt',d:'Potatismos blandat med grönsaker som grönkål eller morot, serverat med rökt korv. Vintermat som finns på traditionella restauranger.',must:4},
+ {id:'bitter',c:'Mat och dryck',n:'Bitterballen',s:'Barsnacks',d:'Friterade bollar med krämig köttragu. Beställs till ölen och doppas i senap.'},
+ {id:'stroop',c:'Mat och dryck',n:'Färsk stroopwafel',s:'Bäst varm från en marknad',d:'Två tunna våfflor med kolasirap emellan. Köp en nygräddad på Albert Cuypmarkt i Amsterdam.',must:3},
+ {id:'haring',c:'Mat och dryck',n:'Sill med lök',s:'Från en sillvagn',d:'Rå, lättsaltad sill med hackad lök och gurka. Äts som den är eller i bröd.'},
+ {id:'rijks',c:'Sevärdheter',n:'Rijksmuseum',s:'Rembrandts Nattvakten',d:'Landets nationalmuseum med Rembrandt och Vermeer. Räkna med minst två timmar.',must:1},
+ {id:'anne',c:'Sevärdheter',n:'Anne Frank Huis',s:'Boka biljett i god tid',d:'Huset där familjen Frank gömde sig. Biljetter säljs bara online och tar slut tidigt.',must:2},
+ {id:'kanal',c:'Sevärdheter',n:'Kanaltur',s:'Kanalringen är världsarv',d:'Amsterdams kanalring från 1600-talet finns på UNESCO:s världsarvslista. En tur tar ungefär en timme.',must:5},
+ {id:'kinder',c:'Sevärdheter',n:'Kinderdijk',s:'Väderkvarnar, världsarv',d:'En rad väderkvarnar från 1700-talet utanför Rotterdam. Dagstur med tåg och båt.'},
+ {id:'keuken',c:'Natur och symboler',n:'Keukenhof',s:'Bara öppet på våren',d:'Tulpanparken utanför Lisse. Öppen några veckor från mars till maj.'},
+ {id:'tulpan',c:'Natur och symboler',n:'Tulpan',s:'Nationalblomma',d:'Räknas direkt i samlingsboken under Blommor.'},
+ {id:'grutto',c:'Natur och symboler',n:'Rödspov',s:'Nationalfågel',d:'Vadarfågel som häckar på de holländska ängarna om våren.'},
+ {id:'arena',c:'Fotboll',n:'Johan Cruijff ArenA',s:'Ajax hemmaplan',d:'Ajax arena i sydöstra Amsterdam. Arenaturer går de flesta dagar.',must:6},
+ {id:'kuip',c:'Fotboll',n:'De Kuip',s:'Feyenoord, Rotterdam',d:'Feyenoords klassiska arena. Mötet mot Ajax kallas De Klassieker.'}];
+const CATS=['Mat och dryck','Sevärdheter','Natur och symboler','Fotboll'];
+const GUIDE=[
+ {k:'Ta sig dit',v:'Bil, flyg, tåg. Ca 3,5 h dörr till dörr.',d:'Från Borås: bil eller buss till Landvetter (ca 40 min), direktflyg till Schiphol (ca 1 h 45), tåg till Amsterdam Centraal (ca 15 min). Från Ängelholm eller Helsingborg är Kastrup närmast.'},
+ {k:'Smart månad',v:'Maj och september',d:'Bra väder och färre turister än på sommaren. April har tulpaner men mest folk.'},
+ {k:'Mobil',v:'EU-roaming gäller',d:'Du surfar och ringer som hemma utan extra kostnad. Inget eSIM behövs.'},
+ {k:'Betala',v:'Kort nästan överallt',d:'Vissa ställen tar bara kort. Ha en liten summa euro för marknader.'},
+ {k:'Eluttag',v:'Samma som i Sverige',d:'Ingen adapter behövs.'},
+ {k:'Dricks',v:'Avrunda uppåt',d:'5–10 % på restaurang om ni är nöjda. Inget krav.'},
+ {k:'Tänk på',v:'Gå inte i cykelbanorna',d:'Cykelbanorna är ofta röda och cyklisterna kör fort. Titta åt båda håll.'},
+ {k:'Fun fact',v:'Under havsnivån',d:'En stor del av landet ligger under havsnivån och skyddas av vallar och pumpar.'},
+ {k:'Hur länge',v:'En weekend räcker för Amsterdam',d:'Weekend (3 dagar): Amsterdams höjdpunkter. Långhelg (5 dagar): lägg till Haarlem och Kinderdijk. En vecka: hela landet med Rotterdam och Utrecht.'}];
+const NLM=[2,2,3,4,5,4,3,3,5,4,2,3];
+const RAR={v:['Vanlig','#8A939B'],o:['Ovanlig','#3FA34D'],s:['Sällsynt','#3B82F6'],l:['Legendarisk','#E0A21B']};
+const IC={
+ food:'M4 11h16M5 11a7 7 0 0 0 14 0M12 4v3M9 5l1 2M15 5l-1 2M8 20h8',cup:'M5 8h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 9h2a2 2 0 0 1 0 4h-2M8 3v2M11 3v2',
+ paw:'M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 13c-3 0-5 3-5 5 0 1.5 1.5 2 3 1.5 1.3-.4 2.7-.4 4 0 1.5.5 3 0 3-1.5 0-2-2-5-5-5z',
+ sky:'M3 16c3-6 6-6 9-2s6 4 9-2M3 20c3-4 6-4 9-1s6 3 9-1M12 3v3',bird:'M4 14c4 0 6-2 8-6 1.5 3 4 4 8 4-2 4-6 6-10 6l-3 3v-3c-1.5 0-3-1.5-3-4z',
+ sun:'M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 2v2M12 20v2M2 12h2M20 12h2',ball:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7l4 3-1.5 4.5h-5L8 10z',
+ flower:'M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 10V5M14 12h5M10 12H5M12 14v7',pin:'M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12zM12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
+ tram:'M6 4h12v11a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3zM6 10h12M9 21l1.5-3M15 21l-1.5-3',mush:'M3 12a9 7 0 0 1 18 0zM9 12v6a3 3 0 0 0 6 0v-6',build:'M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6',
+ check:'M5 12.5l4.5 4.5L19 7.5',chev:'M9 6l6 6-6 6',back:'M15 6l-6 6 6 6',x:'M6 6l12 12M18 6L6 18',heart:'M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20z',
+ lock:'M5 11h14v9H5zM8 11V8a4 4 0 0 1 8 0v3',map:'M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14',star:'M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z',
+ book:'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6',plane:'M2 16l20-6-6 9-3-4-11 1z',us:'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 6.5M18 14.5a6.5 6.5 0 0 1 3.5 5.5'};
+const BOK=[
+ {id:'bulle',c:'smak',n:'Kanelbulle',r:'v',i:'food',h:'Finns på varje svenskt fik.'},{id:'baklava',c:'smak',n:'Baklava',r:'o',i:'food',h:'Söt filodegsbakelse. Bäst i Turkiet eller Grekland.'},
+ {id:'nata',c:'smak',n:'Pastel de nata',r:'v',i:'food',h:'Portugisisk vaniljkrämstårta.'},{id:'surs',c:'smak',n:'Surströmming',r:'s',i:'food',h:'Äts i Norrland i augusti. Öppna burken utomhus.'},
+ {id:'kaffe',c:'smak',n:'Turkiskt kaffe',r:'o',i:'cup',h:'Kokas i cezve och serveras med sumpen kvar.'},{id:'cevapi',c:'smak',n:'Ćevapi',r:'v',i:'food',h:'Grillade färsrullar från Balkan.'},
+ {id:'alg',c:'natur',n:'Älg',r:'o',i:'paw',h:'Störst chans i gryning och skymning.'},{id:'lunne',c:'natur',n:'Lunnefågel',r:'s',i:'bird',h:'Häckar på Island och i Nordnorge om sommaren.'},
+ {id:'norrsken',c:'natur',n:'Norrsken',r:'s',i:'sky',h:'Abisko, Tromsø eller Island, oktober till mars.'},{id:'delfin',c:'natur',n:'Delfin i det vilda',r:'s',i:'paw',h:'Till exempel utanför Kroatiens kust.'},
+ {id:'sol',c:'natur',n:'Total solförmörkelse',r:'l',i:'sun',h:'Nästa stora i Europa: 2 augusti 2027 i södra Spanien.'},{id:'fjallrav',c:'natur',n:'Fjällräv',r:'l',i:'paw',h:'En av Sveriges mest sällsynta däggdjur. Fjällen.'},
+ {id:'ullevi',c:'arenor',n:'Ullevi',r:'v',i:'ball',h:'Göteborg.'},{id:'borasarena',c:'arenor',n:'Borås Arena',r:'v',i:'ball',h:'Elfsborgs hemmaplan.'},
+ {id:'anfield',c:'arenor',n:'Anfield',r:'s',i:'ball',h:'Liverpool.'},{id:'signal',c:'arenor',n:'Signal Iduna Park',r:'s',i:'ball',h:'Dortmund, med den gula väggen.'},
+ {id:'maracana',c:'arenor',n:'Maracanã',r:'l',i:'ball',h:'Rio de Janeiro.'},{id:'cruijff',c:'arenor',n:'Johan Cruijff ArenA',r:'o',i:'ball',h:'Amsterdam. Bockas av på resan.'}];
+const COMP=[['Länder',4,250,'pin'],['Maträtter',23,412,'food','smak'],['Drycker',9,180,'cup'],['Djur och natur',14,320,'paw','natur'],['Blommor',3,150,'flower'],['Svampar',1,60,'mush'],['Sevärdheter',31,900,'build'],['Arenor',6,120,'ball','arenor'],['Naturfenomen',2,25,'sky'],['Färdmedel',7,40,'tram']];
+const BUCKET=[
+ {id:'b1',n:'Se norrsken',c:'Natur',k:'Medel',s:'Okt–mars',w:'Abisko, Tromsø, Island'},{id:'b2',n:'Hoppa fallskärm',c:'Adrenalin',k:'Dyrt',s:'Sommar',w:'Finns nära Göteborg'},
+ {id:'b3',n:'Bada med delfiner',c:'Djur',k:'Dyrt',s:'Året om',w:'Azorerna, Röda havet'},{id:'b4',n:'Oktoberfest i München',c:'Event',k:'Medel',s:'Sep–okt',w:'München'},
+ {id:'b5',n:'Bestiga Kebnekaise',c:'Prestation',k:'Billigt',s:'Juli–aug',w:'Lappland'},{id:'b6',n:'Äta på en Michelinkrog',c:'Mat',k:'Dyrt',s:'Året om',w:'Valfri stad'},
+ {id:'b7',n:'Se en CL-match på plats',c:'Fotboll',k:'Dyrt',s:'Sep–maj',w:'Europa'},{id:'b8',n:'Nyår i en ny stad',c:'Vi två',k:'Medel',s:'December',w:'Valfri'},
+ {id:'b9',n:'Ta dykcertifikat',c:'Lära sig',k:'Dyrt',s:'Sommar',w:'Kroatien, Grekland'},{id:'b10',n:'Åka nattåg genom Europa',c:'Färdmedel',k:'Medel',s:'Året om',w:'Stockholm–Berlin'}];
+const HON={b1:1,b2:0,b3:1,b4:1,b5:0,b6:1,b7:1,b8:1,b9:0,b10:1};
+const IDEAS=[
+ {k:'Dejt hemma',t:'Laga en nationalrätt från ett land ni vill besöka',w:'Hemma',ti:'ca 2 h',c:'Billigt',tg:['inne','gratis','nara'],d:'Välj land på kartan, handla ingredienserna och laga tillsammans. Rätten bockas av i samlingsboken.'},
+ {k:'Dagstripp',t:'Kallbad och bastu i Varberg',w:'ca 1 h bort',ti:'Halvdag',c:'Medel',tg:['ute'],d:'Kallbadhuset vid stranden och en promenad till fästningen efteråt.'},
+ {k:'Ut en sväng',t:'Fika i Ulricehamn och promenad vid Åsunden',w:'ca 30 min',ti:'ca 3 h',c:'Billigt',tg:['ute','nara'],d:'Parkera i centrum, gå längs sjön och avsluta på ett kafé.'},
+ {k:'Dejt hemma',t:'Planera nästa resa med snacks från resmålet',w:'Hemma',ti:'ca 1 h',c:'Gratis',tg:['inne','gratis','nara'],d:'Öppna resan i appen, välj tre saker var ur Missa inte-listan och lägg dem i planen.'},
+ {k:'Ut en sväng',t:'Kvällspromenad runt Ramnasjön',w:'Borås',ti:'ca 1 h',c:'Gratis',tg:['ute','gratis','nara'],d:'Ta med varm choklad i termos.'},
+ {k:'Dagstripp',t:'Universeum och middag i Göteborg',w:'ca 45 min',ti:'Heldag',c:'Dyrt',tg:['inne'],d:'Regnskogen och akvariet, sedan middag på Linnégatan.'},
+ {k:'Ut en sväng',t:'Skulpturpromenad genom Borås centrum',w:'Borås',ti:'ca 1 h 30',c:'Gratis',tg:['ute','gratis','nara'],d:'Gå mellan stadens skulpturer och väggmålningar. Räkna hur många ni hittar.'},
+ {k:'I stan',t:'Textilmuseet och fika i Textile Fashion Center',w:'Borås',ti:'ca 2 h',c:'Billigt',tg:['inne','nara'],d:'Stadens textilhistoria i den gamla fabriken.'},
+ {k:'Ut en sväng',t:'Borås djurpark',w:'Borås',ti:'Halvdag',c:'Medel',tg:['ute','nara'],d:'Savannen med elefanter och giraffer. Djuren kan bockas av i samlingsboken.'},
+ {k:'Dejt hemma',t:'Provsmaka godis och snacks från tre länder',w:'Hemma',ti:'ca 1 h',c:'Billigt',tg:['inne','nara'],d:'Köp från en internationell butik, betygsätt och bocka av i samlingsboken.'},
+ {k:'Ut en sväng',t:'Loppisrunda efter något till samlingen',w:'ca 30 min',ti:'ca 3 h',c:'Billigt',tg:['ute','nara'],d:'Leta efter en mugg, ett glas eller något annat ni samlar på.'}];
+const NEAR={h1:[['Ulricehamn','Fika och promenad längs Åsunden','ca 30 min'],['Göteborg','Liseberg, Universeum, Ullevi och Haga','ca 45 min'],['Varberg','Fästningen och Kallbadhuset','ca 1 h']],
+ h3:[['Kinnekulle','Utsikt över Vänern och vandring','ca 1 h 30'],['Gränna och Visingsö','Polkagrisar och cykling på ön','ca 1 h 45'],['Ängelholm','Släktbesök och stränderna vid Skälderviken','ca 2 h 45']],
+ dag:[['Köpenhamn','Nyhavn, Tivoli och smørrebrød','ca 3 h 30'],['Kosterhavet','Marin nationalpark','ca 3 h 30'],['Oslo','Operan, Vigelandsparken, Holmenkollen','ca 4 h 30']]};
+const LEGS=[['Bil','Borås → Landvetter','ca 40 min','Parkering bokad, 4 nätter.'],['Flyg','Landvetter → Schiphol','ca 1 h 45','Direktflyg. Incheckning öppnar 30 h innan.'],['Tåg','Schiphol → Amsterdam Centraal','ca 15 min','Går flera gånger i timmen. Betala med kort i spärren.']];
+const BOOK=[['Flyg','GOT → AMS','Bokningsref ABC123','PDF sparad offline'],['Hotell','4 nätter, Jordaan','Incheckning 15:00','Bekräftelse sparad offline']];
+const PACK=[['Dokument',['Pass','EU-kort','Bokningar offline']],['Kläder',['Regnjacka','Bekväma skor','Tröja']],['Teknik',['Laddare','Powerbank','Hörlurar']],['Delat',['Hårfön','Solkräm','Reseapotek']]];
+const BUD={Resa:2500,Boende:3500,Mat:2000,Aktiviteter:1000};
+const RATE={SEK:1,EUR:11.5};
+const BADGES=[['10','Tio rätter','Ätit 10 nationalrätter',1],['Öl','Ölbaronen brons','Öl från 10 länder',1],['25','Dejtmaskinen','25 dejter från Idag-fliken',1],['N','Nordens mästare','Besök alla nordiska länder',0],['L','Landskapsjägaren','Alla 25 landskap',0],['R','Rötterna','Turkiet, Grekland och Kroatien',0]];
+const WRAP=[['Ert 2026','2 nya länder','Polen och Danmark'],['Smak','11 nya rätter','Favorit: pierogi'],['På väg','312 mil','Längsta etapp: Göteborg → Gdańsk'],['Samlingsboken','18 nya fynd','Sällsyntast: surströmming'],['Tillsammans','14 dejter','Flest i oktober']];
+const VAULT=[['Pass','Går ut april 2031','Påminnelse sätts 6 månader innan.'],['Personnummer','•••••• ••••','Visas först när valvet är upplåst.'],['Reseförsäkring','Skadetelefon sparad','Försäkringsnummer och telefon dygnet runt.'],['Nödkontakt','Sparad','Namn och telefonnummer.'],['EU-kort','Går ut 2029','Ger rätt till vård i EU.']];
+const PRE=[['pass','Pass giltigt hela resan','Vissa länder kräver 3–6 månader kvar efter hemresa'],['visum','Visum eller inresetillstånd','Behövs inte inom EU. Kolla alltid utanför'],['fors','Reseförsäkring och EU-kort','Hemförsäkringen täcker ofta 45 dagar'],['bilj','Biljetter som tar slut','Anne Frank Huis och Rijksmuseum bokas i förväg'],['transfer','Från flygplatsen till boendet','Tåg till Centraal, ca 15 min'],['roam','Mobil och surf','EU-roaming gäller här. Utanför EU: eSIM'],['betal','Kort och kontanter','Kort räcker nästan överallt i Nederländerna'],['skatt','Turistskatt','Läggs ofta på hotellnotan, kolla priset'],['bord','Bordsbokning','Populära restauranger på helger'],['park','Parkering vid Landvetter','Billigare att boka i förväg'],['offline','Offlinekarta och bokningar','Ladda ned innan ni åker'],['appar','Lokala appar','Kollektivtrafik och reseplanerare'],['nod','Nödnummer och ambassad','112 gäller i hela EU'],['hem','Hemma','Lämna resplanen till någon, vattna blommor']];
+const S={tab:'karta',page:null,view:{land:'oversikt',idag:'slumpa',listor:'bok',bok:'kort',swipe:'bunt',kassa:'skulder',vi:'siffror',valv:'lista'},pal:0,fh:0,fb:0,fs:1,tone:0,cp:{p:'#B5179E',a:'#FFD166',bg:'#FFF8F0'},rec:[{n:'Mamma',r:'mamma',i:'trädgård'},{n:'Pappa',r:'pappa',i:'ost'}],buy:[],buyBud:800,dark:false,rad:16,
+ mode:'ren',eu:true,month:4,playing:false,who:0,status:{SE:'bor',DK:'besokt',PL:'besokt',DE:'mellan',NL:'planerad',TR:'vill',GR:'vill',HR:'vill'},
+ checks:{stroop:1,bitter:1,tulpan:1},found:{bulle:1,surs:1,alg:1,ullevi:1,borasarena:1,kaffe:1},bokCat:'alla',bucket:{b4:1},votes:{b1:1,b4:1},sw:0,pack:{Pass:1,Laddare:1,Regnjacka:1},
+ exp:[{n:'Flyg',amt:2400,cur:'SEK',by:'du',c:'Resa'},{n:'Hotell',amt:2100,cur:'SEK',by:'hon',c:'Boende'},{n:'Middag vid kanalen',amt:64,cur:'EUR',by:'du',c:'Mat'},{n:'Kanaltur',amt:36,cur:'EUR',by:'hon',c:'Aktiviteter'},{n:'Parkering Landvetter',amt:358,cur:'SEK',by:'du',c:'Resa'}],
+ hp:{born:'2005-03-14',al:{},co:{}},preL:PRE.map(x=>x.slice()),preX:[['bil','Hyrbil','Körkort, åldersgräns och vägtullar'],['vacc','Vaccinationer och mediciner','Mest utanför Europa'],['rod','Röda dagar och stängt','Kolla museer och butiker'],['bag','Bagageregler','Mått och vikt hos flygbolaget']],st:{type:'hotell',max:1500,rooms:1},pre:{pass:1,roam:1},xk:'allt',rm:'par',trips:[],plan:null,fl:{from:'GOT',d1:'2027-05-13',d2:'2027-05-17'},cols:[{n:'Kaffemuggar',got:{DK:1,PL:1}}],gift:'alla',bought:{},loc:'Borås',home:'Borås',when:'idag',flt:{},idea:0,near:'h1',open:false,wrap:0};
+const $=id=>document.getElementById(id);
+const T={tab:{solo:'Jag',par:'Vi',grupp:'Gruppen'},karta:{solo:'Min karta',par:'Vår karta',grupp:'Vår karta'},lista:{solo:'Min lista',par:'Vår lista',grupp:'Gruppens lista'},idag:{solo:'Vad gör jag idag?',par:'Vad gör vi idag?',grupp:'Vad gör vi idag?'},sub:{solo:'Soloresenär',par:'Du och hon',grupp:'Du och 3 till'},n:{solo:1,par:2,grupp:4}};
+const t=k=>T[k][S.rm],solo=()=>S.rm==='solo';
+const whoL=()=>S.rm==='par'?['Vi två','Bara du','Bara hon']:['Hela gruppen','Bara du'];
+const kind=k=>solo()&&k==='Dejt hemma'?'Hemmakväll':k;
+const isM=b=>!!S.votes[b.id]&&(solo()||!!HON[b.id]);
+const payer=e=>e.by==='du'?'Du':S.rm==='grupp'?'En i gruppen':'Hon';
+const owe=m=>Math.abs(m.bal)<1?'Ni är kvitt':m.bal>0?(S.rm==='grupp'?'Gruppen är skyldig dig':'Hon är skyldig dig'):(S.rm==='grupp'?'Du är skyldig gruppen':'Du är skyldig henne');
+const ppl=()=>S.rm==='par'?['Du','Hon']:['Du','Resenär 2','Resenär 3','Resenär 4'];
+const wrapL=()=>solo()?[['Ditt 2026','2 nya länder','Polen och Danmark'],WRAP[1],WRAP[2],WRAP[3],['På egen hand','6 soloäventyr','Flest i oktober']]:WRAP;
+const rmSeg=()=>`<div class="seg">${[['solo','Solo'],['par','Par'],['grupp','Grupp']].map(x=>`<button type="button" ${a('rm',{v:x[0]})} aria-pressed="${S.rm===x[0]}">${x[1]}</button>`).join('')}</div>`;
+const DEST={NL:{to:'AMS',rec:0,day:1100,stay:[['Weekend',3,'Räcker för Amsterdams höjdpunkter'],['Långhelg',5,'Hinner med dagsturer till Haarlem och Kinderdijk'],['En vecka',7,'Hela landet med Rotterdam och Utrecht']]},
+ GR:{to:'ATH',rec:1,day:900,stay:[['Weekend',3,'Aten och Akropolis'],['En vecka',7,'Aten plus en ö'],['Två veckor',14,'Öluffa mellan flera öar']]},
+ TR:{to:'IST',rec:0,day:700,stay:[['Långhelg',4,'Istanbul räcker gott'],['En vecka',7,'Istanbul och Kappadokien'],['Två veckor',14,'Lägg till kusten vid Antalya']]},
+ HR:{to:'SPU',rec:1,day:950,stay:[['Långhelg',4,'Split och en ö'],['En vecka',7,'Split, Hvar och Dubrovnik'],['Tio dagar',10,'Hela kusten med bil']]}};
+const iso=d=>d.toISOString().slice(0,10);
+function setDates(){const p=S.plan,y=p.month>10?2026:2027,d=new Date(Date.UTC(y,p.month,10));while(d.getUTCDay()!==4)d.setUTCDate(d.getUTCDate()+1);S.fl.d1=iso(d);d.setUTCDate(d.getUTCDate()+DEST[p.dest].stay[p.len][1]);S.fl.d2=iso(d)}
+const sv=x=>{const q=x.split('-');return +q[2]+' '+MONF[+q[1]-1].slice(0,3)+' '+q[0]};
+function flightBox(to){const f=S.fl,ok=/^\d{4}-\d\d-\d\d$/.test(f.d1)&&/^\d{4}-\d\d-\d\d$/.test(f.d2),ym=x=>x.slice(2).replace(/-/g,'');
+ return `<div class="card"><h3>Sök flyg</h3><label>Från<select data-fl="from"><option value="GOT"${f.from==='GOT'?' selected':''}>Landvetter (Borås)</option><option value="CPH"${f.from==='CPH'?' selected':''}>Kastrup (Ängelholm/Helsingborg)</option></select></label>
+ <div class="g2"><label>Ut<input type="date" data-fl="d1" value="${f.d1}"></label><label>Hem<input type="date" data-fl="d2" value="${f.d2}"></label></div>
+ ${ok?`<a class="btn" href="https://www.google.com/travel/flights?q=${encodeURIComponent(`Flights to ${to} from ${f.from} on ${f.d1} through ${f.d2}`)}" target="_blank" rel="noopener">Google Flights, ${sv(f.d1)} till ${sv(f.d2)}</a><a class="btn ghost" href="https://www.skyscanner.se/transport/flights/${f.from.toLowerCase()}/${to.toLowerCase()}/${ym(f.d1)}/${ym(f.d2)}/" target="_blank" rel="noopener">Skyscanner, samma datum</a>`:'<span class="mu">Välj båda datumen.</span>'}</div>`}
+const stayHtml=(id,pick)=>DEST[id].stay.map((x,i)=>`<button type="button" class="li" ${a(pick?'planlen':'noop',{v:i})} ${pick?`aria-pressed="${S.plan.len===i}" style="${S.plan.len===i?'border-color:var(--p);border-width:2px':''}"`:''}><span class="badge">${x[1]}d</span><span class="t"><b>${x[0]} · ${x[1]} dagar</b><span class="mu">${x[2]}</span></span>${i===DEST[id].rec?'<span class="chip soft" style="min-height:0;padding:5px 10px;font-size:12px">Rekommenderas</span>':'<span></span>'}</button>`).join('');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ic=(n,s=22,w=1.9)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
+const a=(act,o={})=>`data-act="${act}"`+Object.keys(o).map(k=>` data-${k}="${esc(o[k])}"`).join('');
+const seg=(k,o)=>`<div class="seg">${o.map(x=>`<button type="button" ${a('view',{k,v:x[0]})} aria-pressed="${S.view[k]===x[0]}">${x[1]}</button>`).join('')}</div>`;
+const bar=p=>`<div class="bar"><i style="width:${Math.max(2,Math.min(100,Math.round(p)))}%"></i></div>`;
+const kr=n=>Math.round(n).toLocaleString('sv-SE')+' kr';
+const back=`<button type="button" class="back" ${a('back')}>${ic('back',20)}Tillbaka</button>`;
+const li=(act,o,left,t,s,right)=>`<button type="button" class="li" ${a(act,o)}>${left||''}<span class="t"><b>${t}</b>${s?`<span class="mu">${s}</span>`:''}</span>${right||`<span class="chev">${ic('chev',18)}</span>`}</button>`;
+function stc(k){const P=pal(),p=S.dark?P.pd:P.p;return {ej:S.dark?'#2A353C':'#E8E2D6',vill:`color-mix(in srgb,${P.a} 62%,${S.dark?P.sd:'#fff'})`,planerad:'#F4B942',besokt:'#2EC4B6',bor:p,bott:`color-mix(in srgb,${p} 55%,${S.dark?P.sd:'#fff'})`,mellan:'#B8C4C9'}[k]}
+function theme(){const P=pal(),F={h:HF[S.fh][1],b:BF[S.fb][1]},d=S.dark,r=$('phone').style,p=d?P.pd:P.p,sf=d?P.sd:'#fff';
+ [['--p',p],['--a',P.a],['--bg',d?P.bgd:P.bg],['--sf',sf],['--tx',d?'#F2EFE9':'#1B1B1F'],['--mu',d?'#A9B0B8':'#5B5E66'],['--ln',d?'rgba(255,255,255,.11)':'rgba(20,20,30,.09)'],['--tr',d?'rgba(255,255,255,.1)':'rgba(20,20,30,.07)'],['--onp',lum(p)>.45?'#1b1b1f':'#fff'],['font-size',[14,15,17][S.fs]+'px'],['--soft',`color-mix(in srgb,${p} 14%,${sf})`],['--fh',F.h],['--fb',F.b],['--r',S.rad+'px']].forEach(x=>r.setProperty(x[0],x[1]))}
+function toast(t){const e=$('toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2000)}
+function party(t){const P=pal(),c=[P.p,P.a,'#F4B942','#2EC4B6','#fff'],f=$('fx');let h='';for(let i=0;i<26;i++){const w=6+i%3*2;h+=`<i style="left:${(i*37+11)%100}%;width:${w}px;height:${w*1.6}px;background:${c[i%5]};animation-delay:${(i%7)*.05}s"></i>`}f.innerHTML=h;clearTimeout(party.t);party.t=setTimeout(()=>f.innerHTML='',1700);if(t)toast(t)}
+function sheet(t,b){$('sheet').innerHTML=`<div class="in" role="dialog" aria-label="${esc(t)}"><span class="grab"></span><div class="row"><h3>${t}</h3><button type="button" class="chip" ${a('close')}>Stäng</button></div>${b}</div>`;$('sheet').hidden=false}
+const maps=q=>`<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener">Öppna i Google Maps</a>`;
+
+const AREAS=[[1,'Jordaan','Kanaler, småbutiker och gångavstånd till det mesta. Dyrast.'],[1,'De Pijp','Matställen, Albert Cuyp-marknaden och yngre publik. Bra pris för läget.'],[1,'Oud-West','Lugnare och mer lokalt, 10 min med spårvagn till centrum. Prisvärt.'],[1,'Noord','Billigast. Gratis färja bakom Centraal dygnet runt.'],
+ [0,'De Wallen och Damrak','Stökigt och högljutt på natten, många turistfällor. Bra att besöka, sämre att sova i.'],[0,'Långt ut (Sloterdijk, Zuidoost)','Billiga hotell men 20–30 min pendling varje väg. Lönar sig sällan på en weekend.']];
+const MOVE=[['Gå och cykla','Bäst','Centrum är litet och platt. Hyrcykel kostar ungefär som en lunch per dag.'],['Spårvagn och metro','Bra','Blippa bankkortet in och ut, ingen biljett behövs. Dagskort lönar sig vid många resor.'],['Tåg från flygplatsen','Bäst','Ca 15 min till Centraal, går hela tiden.'],['Uber och taxi','Dyrt','Finns, men kostar mycket och fastnar i trafiken. Bara sent på natten eller med mycket bagage.']];
+const FLY=[['Tid på dygnet','Tidiga morgonflyg och sena kvällsflyg är ofta billigast.'],['Veckodag','Tisdag, onsdag och lördag brukar vara billigare än fredag och söndag.'],['Boka när','För Europa ofta 1–3 månader innan. Skollov och storhelger tidigare.'],['Tänk på','Ett billigt flyg 06:00 kan kräva hotellnatt eller parkering vid flygplatsen. Räkna hela kostnaden.']];
+function stayBox(city){const f=S.fl,x=S.st,n=T.n[S.rm],ht={hotell:204,hostel:203,lagenhet:201}[x.type],nf='price=SEK-min-'+x.max+'-1'+(ht?';ht_id='+ht:'');
+ const bk=`https://www.booking.com/searchresults.sv.html?ss=${encodeURIComponent(city)}&checkin=${f.d1}&checkout=${f.d2}&group_adults=${n}&no_rooms=${x.rooms}&selected_currency=SEK&nflt=${encodeURIComponent(nf)}`,ab=`https://www.airbnb.se/s/${encodeURIComponent(city)}/homes?checkin=${f.d1}&checkout=${f.d2}&adults=${n}&price_max=${x.max}`;
+ return `<div class="card"><h3>Sök boende i ${city}</h3><span class="mu">${sv(f.d1)} till ${sv(f.d2)} · ${n} ${n===1?'gäst':'gäster'}</span>
+ <label>Typ<select data-st="type">${[['hotell','Hotell'],['hostel','Hostel'],['lagenhet','Lägenhet'],['alla','Alla typer']].map(o=>`<option value="${o[0]}"${x.type===o[0]?' selected':''}>${o[1]}</option>`).join('')}</select></label>
+ <div class="g2"><label>Max per natt<select data-st="max">${[500,800,1000,1500,2000,3000].map(v=>`<option value="${v}"${+x.max===v?' selected':''}>${v} kr</option>`).join('')}</select></label><label>Rum<select data-st="rooms">${[1,2,3].map(v=>`<option${+x.rooms===v?' selected':''}>${v}</option>`).join('')}</select></label></div>
+ <a class="btn" href="${bk}" target="_blank" rel="noopener">Booking.com med filtren</a>${x.type==='hotell'||x.type==='hostel'?'':`<a class="btn ghost" href="${ab}" target="_blank" rel="noopener">Airbnb med datum och maxpris</a>`}</div>`}
+function expText(){const m=money(),L=['Här är min resedata från Globedex. Ge råd utifrån den.','','Reseläge: '+S.rm,'Länder: '+PLACES.map(p=>p.n+' ('+ST[S.status[p.id]]+')').join(', ')];
+ if(S.xk==='allt'){L.push('Bucketlist klara: '+(BUCKET.filter(b=>S.bucket[b.id]).map(b=>b.n).join(', ')||'inga'),t('lista')+': '+(BUCKET.filter(isM).map(b=>b.n).join(', ')||'tom'),'Samlingsboken: '+BOK.filter(b=>S.found[b.id]).map(b=>b.n).join(', '),'Samlar på: '+(S.cols.map(c=>c.n+' ('+PLACES.filter(p=>c.got[p.id]).map(p=>p.n).join(', ')+')').join('; ')||'inget'))}
+ L.push('','Nästa resa: Amsterdam, 4 nätter i maj','Budget: '+kr(m.bud)+', hittills '+kr(m.tot),'Utgifter: '+S.exp.map(e=>e.n+' '+kr(sek(e))).join(', '),'Inköpslista: '+(S.buy.map(b=>b.n+(b.f?' till '+b.f:'')).join(', ')||'tom'),'Avbockat i Nederländerna: '+(ITEMS.filter(i=>S.checks[i.id]).map(i=>i.n).join(', ')||'inget'),'Klart innan avresa: '+preN()+' av '+S.preL.length,'Ålder: '+ageAt(today()));
+ if(S.trips.length)L.push('Planerade resor: '+S.trips.map(x=>x.city+' '+x.d1+' till '+x.d2).join(', '));return L.join('\n')}
+function expSheet(){sheet('Exportera till Claude',`<div class="seg">${[['allt','All data'],['resa','Senaste resan']].map(o=>`<button type="button" ${a('xk',{v:o[0]})} aria-pressed="${S.xk===o[0]}">${o[1]}</button>`).join('')}</div><span class="mu">Det här kopieras:</span><pre style="white-space:pre-wrap;margin:0;font:13px/1.5 var(--fb);background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:12px">${esc(expText())}</pre><button type="button" class="btn" ${a('copyexp')}>Kopiera texten</button>`)}
+
+const MOTIF={Kaffemuggar:'Delfts blått med väderkvarn eller kanalhus',Shotglas:'Amsterdams tre kryss eller Delfts blått',Magneter:'Kanalhus i rad',Vykort:'Kanalerna i kvällsljus',Snöglober:'Väderkvarn i snö',Fotbollshalsdukar:'Ajax, eller en mindre klubb med udda historia'};
+const COLSUG=['Shotglas','Magneter','Vykort','Snöglober','Fotbollshalsdukar'];
+const WHO=[['alla','Alla'],['mamma','Mamma'],['pappa','Pappa'],['barn','Barn'],['van','Vän'],['mig','Mig själv']];
+const SHOP=[['stroop','Stroopwafels i plåtburk','Håller länge, och burken blir en present i sig.',['mamma','pappa','van','barn'],0,90,['sött','fika','godis']],['gouda','Lagrad gouda, vakuumpackad','Från en ostbutik eller marknad. Klarar resan hem.',['pappa','mamma','mig'],0,150,['ost','mat','matlagning']],['lok','Tulpanlökar','Landets symbol. Köp förpackade lökar på blomstermarknaden och plantera på hösten.',['mamma','mig'],0,80,['trädgård','blommor','odling']],['delft','Delfts blått porslin','Det äkta har märkning i botten. Finns från liten skål till vas.',['mamma','mig'],0,250,['inredning','porslin','design']],['drop','Drop, holländsk lakrits','Finns söt och salt. Köp lösvikt.',['van','pappa'],0,50,['godis','lakrits']],['hagel','Hagelslag','Chokladströssel som holländare har på smörgåsen.',['barn','mig'],0,35,['choklad','sött','frukost']],['kanin','Gosedjur från en holländsk barnboksklassiker','Den vita kaninen har sitt eget museum i Utrecht.',['barn'],0,180,['gosedjur','böcker']],['klomp','Små träskor','Som nyckelring eller prydnad. Billigt och lätt att packa.',['van','barn'],0,40,['prydnad']],['jen','Jenever','Föregångaren till gin, säljs i spritbutik.',['pappa','van'],1,220,['dryck','gin','sprit']]];
+const REL=[['mamma','Mamma'],['pappa','Pappa'],['barn','Barn'],['van','Vän eller annan']];
+function colsHtml(){const ab=PLACES.filter(p=>p.id!=='SE');return `<span class="mu">Saker ni köper från varje resa. Tryck på ett land när ni har köpt.</span>${S.cols.map((c,i)=>{const n=ab.filter(p=>c.got[p.id]).length,vis=ab.filter(p=>['besokt','bott','bor'].includes(S.status[p.id])).length;return `<div class="card"><div class="row"><h3>${esc(c.n)}</h3><button type="button" class="chip" ${a('coldel',{i})} aria-label="Ta bort samlingen ${esc(c.n)}">Ta bort</button></div><span class="mu">${n} länder samlade, ${vis} besökta</span>${bar(vis?n/vis*100:0)}<div class="chips">${ab.map(p=>`<button type="button" class="chip" ${a('coltog',{i,id:p.id})} aria-pressed="${!!c.got[p.id]}">${p.n}</button>`).join('')}</div></div>`}).join('')}
+ <span class="eb">Ny samling</span><div class="chips">${COLSUG.filter(x=>!S.cols.some(c=>c.n===x)).map(x=>`<button type="button" class="chip" ${a('coladd',{v:x})}>+ ${x}</button>`).join('')}</div><form id="colform" class="row"><input name="n" aria-label="Egen samling" placeholder="Egen samling, t.ex. Kepsar" required><button type="submit" class="chip" style="background:var(--p);color:var(--onp)">Lägg till</button></form>`}
+function shopHtml(){const minor=ageAt(S.fl.d1)<18,rc=S.gift[0]==='r'?S.rec[+S.gift.slice(1)]:null,key=rc?rc.r:S.gift;
+ const hit=x=>rc&&rc.i?x[6].filter(k=>rc.i.toLowerCase().includes(k)):[];
+ const l=SHOP.filter(x=>(key==='alla'||x[3].includes(key)||hit(x).length)&&!(x[4]&&minor)).sort((x,y)=>hit(y).length-hit(x).length);
+ const tot=S.buy.reduce((n,b)=>n+b.p,0);
+ return `<span class="eb">Inköpslista</span><div class="card"><div class="row"><b>${kr(tot)} av ${kr(S.buyBud)}</b><span class="mu">${S.buy.filter(b=>b.d).length} av ${S.buy.length} köpta</span></div>${bar(S.buyBud?tot/S.buyBud*100:0)}${tot>S.buyBud?`<span class="mu" style="color:#D64545">${kr(tot-S.buyBud)} över budget</span>`:''}<label>Budget för inköp<input type="number" min="0" step="50" data-bb="1" value="${S.buyBud}"></label></div>
+ ${S.buy.map((b,i)=>`<div class="li"><button type="button" class="box${b.d?' on':''}" ${a('buytog',{i})} aria-label="Markera ${esc(b.n)} som köpt" aria-pressed="${!!b.d}">${b.d?ic('check',16,3):''}</button><span class="t"><b style="${b.d?'text-decoration:line-through;opacity:.6':''}">${esc(b.n)}</b><span class="mu">${b.f?'Till '+esc(b.f)+' · ':''}ca ${kr(b.p)}</span></span><button type="button" class="chev" style="min-width:40px;min-height:40px;display:grid;place-items:center" ${a('buydel',{i})} aria-label="Ta bort ${esc(b.n)}">${ic('x',18)}</button></div>`).join('')}
+ <form id="buyform" class="row"><input name="n" aria-label="Egen sak" placeholder="Egen sak" required><input name="p" type="number" min="0" aria-label="Pris i kronor" placeholder="kr" style="width:90px;flex:none"><button type="submit" class="chip" style="background:var(--p);color:var(--onp)">Lägg till</button></form>
+ <span class="eb">Till dina samlingar</span>${S.cols.length?S.cols.map((c,i)=>`<div class="li"><span class="t"><b>${esc(c.n)}</b><span class="mu">Motiv som passar: ${MOTIF[c.n]||'tulpaner, väderkvarnar eller kanalhus'}</span></span><button type="button" class="chip" ${a('coltog',{i,id:'NL'})} aria-pressed="${!!c.got.NL}">${c.got.NL?'Köpt':'Markera köpt'}</button></div>`).join(''):`<span class="mu">Du har inga samlingar än.</span>`}
+ <button type="button" class="btn ghost" ${a('gocols')}>Hantera samlingar</button>
+ <span class="eb">Presenttips</span><div class="chips"><button type="button" class="chip" ${a('gift',{v:'alla'})} aria-pressed="${S.gift==='alla'}">Alla</button>${S.rec.map((r,i)=>`<button type="button" class="chip" ${a('gift',{v:'r'+i})} aria-pressed="${S.gift==='r'+i}">${esc(r.n)}</button>`).join('')}<button type="button" class="chip" ${a('gift',{v:'mig'})} aria-pressed="${S.gift==='mig'}">Mig själv</button></div>
+ ${rc?`<div class="card soft"><div class="row"><span><b>${esc(rc.n)}</b>${rc.i?' gillar '+esc(rc.i):''}</span><button type="button" class="chip" ${a('recdel',{i:S.gift.slice(1)})}>Ta bort</button></div></div>`:''}
+ ${l.map(x=>{const on=S.buy.some(b=>b.id===x[0]),h=hit(x);return `<div class="li"><span class="t"><b>${x[1]}</b><span class="mu">${x[2]}</span><span class="mu">ca ${kr(x[5])}${h.length?' · Träffar intresset '+h[0]:''}${x[4]?' · 18 år krävs':''}</span></span><button type="button" class="chip" ${a('addbuy',{v:x[0]})} aria-pressed="${on}">${on?'På listan':'+ Lista'}</button></div>`}).join('')}
+ <span class="eb">Ny mottagare</span><form id="recform" class="col"><div class="g2"><input name="n" aria-label="Namn" placeholder="Namn, t.ex. Mormor" required><select name="r" aria-label="Relation">${REL.map(r=>`<option value="${r[0]}">${r[1]}</option>`).join('')}</select></div><div class="row"><input name="i" aria-label="Intressen" placeholder="Intressen, t.ex. trädgård, choklad"><button type="submit" class="chip" style="background:var(--p);color:var(--onp)">Spara</button></div></form>
+ <span class="mu">Exempeltips och ungefärliga priser. Sådant som mest finns här eller är typiskt för landet.</span>`}
+
+/* ---------- Karta ---------- */
+function mapSvg(){
+ const eu=S.eu,P=pal(),d=S.dark,ter=S.mode==='terrang';
+ const sea=d?`color-mix(in srgb,${P.pd} 14%,${P.bgd})`:`color-mix(in srgb,${P.p} 9%,${P.bg})`,land=ter?(d?'#3D5240':'#A9C29A'):(d?'#2B3A42':'#E4DED2');
+ const r=eu?.95:2.3;
+ return `<svg viewBox="${eu?'163 14 60 48':'0 6 360 152'}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Karta med era platser"><rect width="360" height="180" style="fill:${sea}"/>
+ ${LANDP.map(p=>`<polygon points="${p}" fill="${land}" stroke="${d?'rgba(255,255,255,.12)':'rgba(0,0,0,.1)'}" stroke-width="${eu?.12:.3}" stroke-linejoin="round"/>`).join('')}
+ ${WATERP.map(p=>`<polygon points="${p}" style="fill:${sea}"/>`).join('')}
+ ${S.playing&&eu?`<path d="M192.9,32.3 L192.3,32.3" stroke="${P.a}" stroke-width=".5" stroke-linecap="round"/><path d="M192.3,32.3 Q186,26.5 184.8,37.7" fill="none" stroke="${P.a}" stroke-width=".45" stroke-linecap="round" pathLength="20" stroke-dasharray="20" stroke-dashoffset="20" style="animation:draw 2.2s ease .6s forwards"/>`:''}
+ ${PLACES.map(p=>{const x=(p.lon+180).toFixed(2),y=(90-p.lat).toFixed(2),f=S.mode==='smart'?SMART[p.m[S.month]]:stc(S.status[p.id]);
+  return `<g class="pin" ${a('land',{id:p.id})}><circle cx="${x}" cy="${y}" r="${r*2.6}" fill="transparent"/><circle cx="${x}" cy="${y}" r="${r}" style="fill:${f}" stroke="${d?P.sd:'#fff'}" stroke-width="${r/3}"/>${S.mode==='upptack'?`<text x="${(+x+r*1.4).toFixed(2)}" y="${y}" font-size="${eu?1.5:4}" font-weight="700" fill="${d?'#F2EFE9':'#1B1B1F'}" dominant-baseline="middle">${p.city}</text>`:''}</g>`}).join('')}</svg>`}
+function vKarta(){
+ if(S.page)return vLand(S.page);
+ const vis=PLACES.filter(p=>['besokt','bor','bott'].includes(S.status[p.id])).length,want=PLACES.filter(p=>S.status[p.id]==='vill').length;
+ return `<div class="row"><h2>${t('karta')}</h2>${solo()?'':`<button type="button" class="chip soft" ${a('who')}>${whoL()[S.who%whoL().length]}</button>`}</div>
+ <div class="g3">${[[vis,'länder','lander'],[Math.round(vis/250*1000)/10+' %','av världen','pct'],[want,'vill åka','vill']].map(x=>`<button type="button" class="card" ${a('stat',{id:x[2]})}><span class="num">${x[0]}</span><span class="mu">${x[1]}</span></button>`).join('')}</div>
+ <div class="map">${mapSvg()}<div class="zoom"><button type="button" class="chip" ${a('zoom',{v:1})} aria-pressed="${S.eu}">Europa</button><button type="button" class="chip" ${a('zoom',{v:0})} aria-pressed="${!S.eu}">Världen</button></div></div>
+ <div class="chips">${[['ren','Ren'],['upptack','Upptäck'],['terrang','Terräng 3D'],['smart','Smart månad']].map(m=>`<button type="button" class="chip" ${a('mode',{v:m[0]})} aria-pressed="${S.mode===m[0]}">${m[1]}</button>`).join('')}</div>
+ ${S.mode==='smart'?`<div class="months">${MON.map((m,i)=>`<button type="button" ${a('month',{v:i})} aria-pressed="${S.month===i}" aria-label="${MONF[i]}">${m}</button>`).join('')}</div><div class="lg"><span><i style="background:#2E9E5B"></i>Perfekt i ${MONF[S.month]}</span><span><i style="background:#F4B942"></i>Okej</span><span><i style="background:#D64545"></i>Undvik</span></div>`
+ :`<div class="lg">${['bor','besokt','planerad','vill','mellan','bott'].map(k=>`<span><i style="background:${stc(k)}"></i>${ST[k]}</span>`).join('')}</div>`}
+ ${S.mode==='terrang'?'<span class="mu">Riktig 3D-terräng med berg, sjöar och skog kommer med kartmotorn i appen.</span>':''}
+ <div class="card"><div class="row"><div><h3>Nästa resa: Amsterdam</h3><span class="mu">Tre etapper, dörr till dörr</span></div><button type="button" class="chip" style="background:var(--p);color:var(--onp)" ${a('play')}>Spela upp</button></div>
+  <div class="chips">${LEGS.map((l,i)=>`<span class="chip soft${S.playing?' leg':''}" style="min-height:0;padding:6px 10px;font-size:12px;${S.playing?`animation-delay:${.3+i*.9}s`:''}"><b>${l[0]}</b>&nbsp;${l[1]}</span>`).join('')}</div>
+  <button type="button" class="btn ghost" ${a('tab',{v:'resor'})}>Öppna resan</button></div>
+ <span class="eb">Era platser</span>
+ ${PLACES.map(p=>li('land',{id:p.id},`<span class="badge" style="background:${stc(S.status[p.id])};color:${S.status[p.id]==='bor'?'var(--onp)':'#1b1b1f'}">${p.id}</span>`,p.n,ST[S.status[p.id]]+' · '+p.city)).join('')}`}
+function vLand(id){
+ const p=PLACES.find(x=>x.id===id),st=S.status[id],nl=id==='NL',done=ITEMS.filter(i=>S.checks[i.id]).length,pct=Math.round(done/ITEMS.length*100);
+ let h=`${back}<div class="hero"><div class="row"><div><h2>${p.n}</h2><span style="font-size:13px;opacity:.85">${ST[st]} · ${p.city}</span></div>${nl?`<div class="ring" style="background:conic-gradient(var(--a) ${pct*3.6}deg,rgba(255,255,255,.25) 0)"><span>${pct} %</span></div>`:''}</div>
+ ${nl?`<span style="font-size:13px">${done} av ${ITEMS.length} avbockade</span>`:''}</div>
+ <div class="chips">${Object.keys(ST).map(k=>`<button type="button" class="chip" ${a('status',{id,v:k})} aria-pressed="${st===k}">${ST[k]}</button>`).join('')}</div>`;
+ if(!nl)return h+`<div class="card"><h3>Innehåll på väg</h3><span class="mu">Checklista, guide och smart månad för ${p.n} skrivs i sin innehållsomgång. Nederländerna är färdigt som exempel.</span>${DEST[id]?`<span class="eb">Hur länge?</span>${stayHtml(id)}<button type="button" class="btn" ${a('plan',{v:id})}>Planera resa hit</button>`:''}<button type="button" class="btn ghost" ${a('land',{id:'NL'})}>Visa Nederländerna</button></div>`;
+ h+=seg('land',[['oversikt','Översikt'],['check','Lista'],['guide','Guide'],['manad','Månad'],['boka','Boka']]);
+ const v=S.view.land;
+ const row=i=>`<div class="li"><button type="button" class="box${S.checks[i.id]?' on':''}" ${a('check',{id:i.id})} aria-label="Bocka av ${esc(i.n)}" aria-pressed="${!!S.checks[i.id]}">${S.checks[i.id]?ic('check',16,3):''}</button><button type="button" class="t" ${a('item',{id:i.id})}><b style="${S.checks[i.id]?'text-decoration:line-through;opacity:.6':''}">${i.n}</b><span class="mu">${i.s}</span></button><span class="chev">${ic('chev',18)}</span></div>`;
+ if(v==='oversikt')h+=`<div class="g2">${CATS.map(c=>{const it=ITEMS.filter(i=>i.c===c),d=it.filter(i=>S.checks[i.id]).length;return `<button type="button" class="card" ${a('view',{k:'land',v:'check'})}><span class="eb">${c}</span><span class="num">${d}/${it.length}</span>${bar(d/it.length*100)}</button>`}).join('')}</div>
+  <span class="eb">Missa inte</span><div class="hs">${ITEMS.filter(i=>i.must).sort((x,y)=>x.must-y.must).map(i=>`<button type="button" class="card" style="${S.checks[i.id]?'background:var(--soft)':''}" ${a('item',{id:i.id})}><span class="num">${i.must}</span><b>${i.n}</b><span class="mu">${i.s}</span><span class="chip soft" style="min-height:0;padding:5px 10px;font-size:12px;align-self:flex-start">${S.checks[i.id]?'Avbockad':'Läs mer'}</span></button>`).join('')}</div>
+  ${li('view',{k:'land',v:'kop'},`<span class="badge">${ic('heart',20)}</span>`,'Köp med hem och presenter','Souvenirer, presenttips och motiv till dina samlingar')}<span class="eb">Bra att veta</span><div class="g2">${[0,8,2,6].map(i=>`<button type="button" class="card" ${a('guide',{i})}><span class="eb" style="color:var(--p)">${GUIDE[i].k}</span><span>${GUIDE[i].v}</span></button>`).join('')}</div><button type="button" class="btn ghost" ${a('view',{k:'land',v:'guide'})}>Hela guiden</button>`;
+ if(v==='check')h+=CATS.map(c=>{const it=ITEMS.filter(i=>i.c===c);return `<div class="row"><span class="eb">${c}</span><span class="mu">${it.filter(i=>S.checks[i.id]).length}/${it.length}</span></div>${it.map(row).join('')}`}).join('');
+ if(v==='guide')h+=GUIDE.map((g,i)=>li('guide',{i},'',g.k,g.v)).join('');
+ if(v==='manad')h+=`<div class="card"><h3>Smart månad</h3><span class="mu">Väder, trängsel och pris vägt ihop. Högre stapel är bättre.</span><div class="bars">${NLM.map((x,i)=>`<div><i style="height:${x*20}px;background:${x===5?'var(--p)':x>=4?'color-mix(in srgb,var(--p) 55%,var(--sf))':'var(--tr)'}"></i>${MON[i]}</div>`).join('')}</div><div class="card soft"><span><b>Bäst: maj och september.</b> Bra väder och färre turister än i juli.</span></div></div>
+  <button type="button" class="btn" ${a('view',{k:'land',v:'boka'})}>Sök flyg och boende</button><button type="button" class="btn ghost" ${a('plan',{v:'NL'})}>Planera resa hit</button>`;
+ if(v==='kop')h+=shopHtml();
+ if(v==='boka')h+=`${flightBox('AMS')}<span class="eb">Billigare flyg</span>${FLY.map(x=>`<div class="li"><span class="t"><b>${x[0]}</b><span class="mu">${x[1]}</span></span></div>`).join('')}
+  ${stayBox('Amsterdam')}<span class="eb">Bo här</span>${AREAS.filter(x=>x[0]).map(x=>`<div class="li"><span class="badge" style="background:#2E9E5B;color:#fff">${ic('check',18,3)}</span><span class="t"><b>${x[1]}</b><span class="mu">${x[2]}</span></span></div>`).join('')}
+  <span class="eb">Undvik att bo här</span>${AREAS.filter(x=>!x[0]).map(x=>`<div class="li"><span class="badge" style="background:#D64545;color:#fff">${ic('x',18,3)}</span><span class="t"><b>${x[1]}</b><span class="mu">${x[2]}</span></span></div>`).join('')}
+  <span class="eb">Ta sig runt på plats</span>${MOVE.map(x=>`<div class="li"><span class="t"><b>${x[0]}</b><span class="mu">${x[2]}</span></span><span class="chip soft" style="min-height:0;padding:5px 10px;font-size:12px">${x[1]}</span></div>`).join('')}<span class="mu">Rutorna öppnar sajterna med era val ifyllda. Sökresultat inne i appen kräver avtal med sajterna.</span>`;
+ return h}
+
+/* ---------- Idag ---------- */
+const STHLM={ideas:[
+ {k:'I stan',t:'Vasamuseet och promenad på Djurgården',w:'Djurgården',ti:'Halvdag',c:'Medel',tg:['inne'],d:'Skeppet från 1628 och sedan en promenad längs vattnet. Bockas av under Sevärdheter.'},
+ {k:'I stan',t:'Fotografiska och utsikten från Söder',w:'Södermalm',ti:'ca 3 h',c:'Medel',tg:['inne'],d:'Utställningarna först, sedan fika högst upp med utsikt över inloppet.'},
+ {k:'Ut en sväng',t:'Gamla stan till fots och fika på Stortorget',w:'Gamla stan',ti:'ca 2 h',c:'Billigt',tg:['ute','nara'],d:'Gå gränderna utan karta och avsluta med en kanelbulle.'},
+ {k:'Ut en sväng',t:'Monteliusvägen i solnedgången',w:'Södermalm',ti:'ca 1 h',c:'Gratis',tg:['ute','gratis','nara'],d:'Gångväg med utsikt över Riddarfjärden och Stadshuset.'},
+ {k:'Utflykt',t:'Båt till Vaxholm',w:'ca 1 h med båt',ti:'Halvdag',c:'Medel',tg:['ute'],d:'Skärgårdsbåt från Strömkajen. Ny ö att bocka av.'},
+ {k:'Fotboll',t:'Match eller arenatur i Johanneshov',w:'Söder om Söder',ti:'Kväll',c:'Medel',tg:['ute'],d:'Kolla spelschemat för helgen. Arenan räknas i samlingsboken.'}],
+ near:{h1:[['Drottningholm','Slottet och parken, världsarv','ca 20 min'],['Vaxholm','Skärgårdsstad med fästning','ca 45 min'],['Sigtuna','Sveriges äldsta stad','ca 45 min']],
+  h3:[['Uppsala','Domkyrkan och slottet','ca 1 h'],['Mariefred','Gripsholms slott vid Mälaren','ca 1 h'],['Trosa','Småstad vid kusten','ca 1 h']],
+  dag:[['Örebro','Slottet och Wadköping','ca 2 h'],['Västerås','Anundshög och Mälaren','ca 1 h 15'],['Nyköping','Nyköpingshus och hamnen','ca 1 h 15']],
+  helg:[['Gotland','Färja från Nynäshamn till Visby','ca 4 h'],['Dalarna','Siljan, Mora och Dalhalla','ca 3 h 30'],['Åland','Färja från Kapellskär eller Grisslehamn','ca 3 h']]}};
+const HELG=[['Stockholm','Gamla stan, Djurgården och skärgården','ca 4 h 30'],['Österlen','Stränder, konst och äppelodlingar','ca 4 h'],['Siljan','Mora, Rättvik och Dalhalla','ca 5 h'],['Oslo','Operan och Vigelandsparken','ca 4 h 30']];
+const LOCS=['Borås','Göteborg','Stockholm','Ängelholm','Helsingborg'];
+const idagT=()=>{const w=S.when==='helg'?'i helgen':'idag';return (S.tone===1?(solo()?'Vad hittar jag på ':'Vad hittar vi på '):S.tone===2?(solo()?'Vad unnar jag mig ':'Vad gör vi tillsammans '):(solo()?'Vad gör jag ':'Vad gör vi '))+w+'?'};
+const atHome=()=>S.loc===S.home;
+function ideas(){const base=atHome()?IDEAS:S.loc==='Stockholm'?STHLM.ideas:[],f=Object.keys(S.flt).filter(k=>S.flt[k]),l=base.filter(i=>f.every(x=>i.tg.includes(x)));return l.length?l:base}
+const nearL=()=>atHome()?(S.near==='helg'?HELG:NEAR[S.near]):S.loc==='Stockholm'?STHLM.near[S.near]:[];
+function vIdag(){
+ const has=atHome()||S.loc==='Stockholm';
+ let h=`<div class="row"><h2>${idagT()}</h2></div>
+ <div class="chips"><button type="button" class="chip" style="background:var(--p);color:var(--onp);border-color:var(--p)" ${a('locsheet')}>${ic('pin',16)}&nbsp;${esc(S.loc)}${atHome()?' (hemma)':''}</button><button type="button" class="chip" ${a('when',{v:'idag'})} aria-pressed="${S.when==='idag'}">Idag</button><button type="button" class="chip" ${a('when',{v:'helg'})} aria-pressed="${S.when==='helg'}">I helgen</button></div>`;
+ if(!has)return h+`<div class="card"><h3>${esc(S.loc)}</h3><span class="mu">Tips för den här platsen skrivs i innehållsomgångarna. Borås och Stockholm är färdiga som exempel.</span>${maps('Saker att göra i '+S.loc)}<button type="button" class="btn ghost" ${a('mkutflykt')}>Gör om till resa</button><button type="button" class="btn ghost" ${a('locsheet')}>Byt plats</button></div>`;
+ h+=seg('idag',[['slumpa','Slumpa'],['nara',solo()?'Nära mig':'Nära oss']]);
+ if(S.view.idag==='slumpa'){const l=ideas(),i=l[S.idea%l.length];
+  h+=`<div class="chips">${[['inne','Inne'],['ute','Ute'],['gratis','Gratis'],['nara','Nära']].map(f=>`<button type="button" class="chip" ${a('flt',{v:f[0]})} aria-pressed="${!!S.flt[f[0]]}">${f[1]}</button>`).join('')}</div>
+  <button type="button" class="hero idea" ${a('idea')}><span class="eb" style="color:inherit;opacity:.85">${kind(i.k)}</span><span class="ti">${i.t}</span><span class="chips"><span class="chip">${i.w}</span><span class="chip">${i.ti}</span><span class="chip">${i.c}</span></span></button>
+  <div class="g2"><button type="button" class="btn acc" ${a('shuffle')}>Slumpa igen</button><button type="button" class="btn ghost" ${a('idea')}>Läs mer</button></div><span class="mu">${l.length} idéer i ${esc(S.loc)}. Tryck på kortet för hela planen.</span>`}
+ else h+=`<div class="seg">${[['h1','1 h'],['h3','3 h'],['dag','En dag'],['helg','Helg']].map(r=>`<button type="button" ${a('near',{v:r[0]})} aria-pressed="${S.near===r[0]}">${r[1]}</button>`).join('')}</div>${nearL().map((n,i)=>li('nearby',{i},'',n[0],n[1],`<span class="chip soft" style="min-height:0;padding:6px 10px;font-size:12px">${n[2]}</span>`)).join('')}<span class="mu">Restid med bil från ${esc(S.loc)}${S.near==='helg'?'. Värt minst en övernattning.':'.'}</span>`;
+ if(!atHome())h+=`<div class="card"><h3>Utflykt, inte resa</h3><span class="mu">Det ni bockar av i ${esc(S.loc)} räknas i samlingsboken och på kartan ändå. Gör om den till en resa om ni vill ha packlista, budget och bokningar.</span><button type="button" class="btn ghost" ${a('mkutflykt')}>Gör om till resa</button><button type="button" class="btn ghost" ${a('setloc',{v:S.home})}>Tillbaka till ${esc(S.home)}</button></div>`;
+ return h}
+
+/* ---------- Listor ---------- */
+function vListor(){
+ let h=`<h2>Listor</h2>${seg('listor',[['bok','Samlingsbok'],['bucket','Bucketlist'],['swipe',solo()?'Sortera':'Swipe']])}`,v=S.view.listor;
+ if(v==='bok'){const f=COMP.reduce((n,c)=>n+c[1],0),t=COMP.reduce((n,c)=>n+c[2],0);
+  h+=`<div class="hero"><span class="eb" style="color:inherit;opacity:.85">Livsprogress</span><div class="row" style="justify-content:flex-start;align-items:baseline"><span class="big">${(f/t*100).toFixed(1).replace('.',',')} %</span><span>${f} av ${t.toLocaleString('sv-SE')} fynd</span></div><span style="font-size:13px">Resenärsnivå 7 · 2 340 XP</span></div>${seg('bok',[['kort','Kort'],['komp','Kompendium'],['saml','Samlingar']])}`;
+  if(S.view.bok==='kort'){const l=BOK.filter(b=>S.bokCat==='alla'||b.c===S.bokCat);
+   h+=`<div class="chips">${[['alla','Allt'],['smak','Smak'],['natur','Natur'],['arenor','Arenor']].map(c=>`<button type="button" class="chip" ${a('bokcat',{v:c[0]})} aria-pressed="${S.bokCat===c[0]}">${c[1]}</button>`).join('')}</div><span class="mu">${l.filter(b=>S.found[b.id]).length} av ${l.length} hittade. Tryck på ett kort.</span>
+   <div class="bok">${l.map(b=>{const f=S.found[b.id],c=RAR[b.r][1];return `<button type="button" class="bc" ${a('bok',{id:b.id})} aria-label="${f?esc(b.n):'Okänt fynd'}" style="${f?`border-color:${c};background:var(--sf)`:''}"><span class="ic" style="${f?`background:color-mix(in srgb,${c} 18%,var(--sf));color:${c}`:''}">${ic(b.i,28,1.8)}</span>${f?b.n:'???'}<small style="color:${f?c:'var(--mu)'}">${RAR[b.r][0]}</small></button>`}).join('')}</div>
+   <div class="lg">${Object.keys(RAR).map(k=>`<span><i style="background:${RAR[k][1]}"></i>${RAR[k][0]}</span>`).join('')}</div>`}
+  else if(S.view.bok==='saml')h+=colsHtml();
+  else h+=COMP.map((c,i)=>li('comp',{i},`<span class="badge">${ic(c[3],20)}</span>`,c[0],'',`<span style="width:96px;display:flex;flex-direction:column;gap:5px;align-items:flex-end"><span class="mu">${c[1]} / ${c[2]}</span><span style="width:100%">${bar(c[1]/c[2]*400)}</span></span>`)).join('')}
+ if(v==='bucket'){const d=BUCKET.filter(b=>S.bucket[b.id]).length;
+  h+=`<div class="card"><div class="row"><b>${t('lista')}</b><span class="mu">${d} av ${BUCKET.length} klara</span></div>${bar(d/BUCKET.length*100)}</div>
+  ${BUCKET.map(b=>`<div class="li"><button type="button" class="box${S.bucket[b.id]?' on':''}" ${a('bcheck',{id:b.id})} aria-label="Bocka av ${esc(b.n)}" aria-pressed="${!!S.bucket[b.id]}">${S.bucket[b.id]?ic('check',16,3):''}</button><button type="button" class="t" ${a('bucket',{id:b.id})}><b>${b.n}</b><span class="mu">${b.c} · ${b.s}</span></button><span class="chev">${ic('chev',18)}</span></div>`).join('')}`}
+ if(v==='swipe'){const m=BUCKET.filter(b=>isM(b));
+  h+=`<div class="row">${seg('swipe',[['bunt','Kortbunt'],['lista','Lista']])}</div><button type="button" class="chip soft" style="align-self:flex-start" ${a('matches')}>${m.length} ${solo()?'på min lista':'matchningar'}</button>`;
+  if(S.view.swipe==='bunt'){const b=BUCKET[S.sw];
+   h+=b?`<div class="stack"><div class="under"></div><div class="idea"><span class="chip" style="align-self:flex-start;background:#fff;color:#1b1b1f;border:0;min-height:0;padding:6px 10px;font-size:12px">${b.c} · ${b.k}</span><span style="flex:1"></span><span class="ti" style="font:700 28px/1.1 var(--fh)">${b.n}</span><span>${b.w} · ${b.s}</span></div></div>
+    <div class="row" style="justify-content:center;gap:26px"><button type="button" class="rnd" ${a('vote',{v:0})} aria-label="Nej">${ic('x',24)}</button><button type="button" class="rnd" style="background:var(--a);color:#1b1b1f;border:0;width:72px;height:72px;border-radius:36px" ${a('vote',{v:1})} aria-label="Ja">${ic('heart',30)}</button></div><span class="mu" style="text-align:center">${S.sw+1} av ${BUCKET.length}</span>`
+   :`<div class="card"><h3>Slut på kort</h3><span class="mu">${m.length} ${solo()?'saker':'matchningar'} ligger nu på ${t('lista')}.</span><button type="button" class="btn" ${a('matches')}>Visa matchningar</button><button type="button" class="btn ghost" ${a('resw')}>Börja om</button></div>`}
+  else h+=`<span class="mu">${solo()?'Ja lägger punkten på din lista.':'Rösta var för sig. Ja från alla blir en matchning.'}</span>${BUCKET.map(b=>`<div class="li"><button type="button" class="t" ${a('bucket',{id:b.id})}><b>${b.n}</b><span class="mu">${isM(b)?(solo()?'På min lista':'Matchning'):b.c}</span></button><button type="button" class="who${S.votes[b.id]?' on':''}" ${a('tvote',{id:b.id})} aria-label="Din röst" aria-pressed="${!!S.votes[b.id]}">Du</button>${solo()?'':`<span class="who${HON[b.id]?' on':''}" style="${S.rm==='grupp'?'width:auto;padding:0 8px':''}">${S.rm==='grupp'?(HON[b.id]?'3 av 3':'1 av 3'):'Hon'}</span>`}</div>`).join('')}`}
+ return h}
+
+/* ---------- Resor ---------- */
+const sek=e=>e.amt*RATE[e.cur];
+function money(){const tot=S.exp.reduce((n,e)=>n+sek(e),0),du=S.exp.filter(e=>e.by==='du').reduce((n,e)=>n+sek(e),0);return {tot,bal:du-tot/T.n[S.rm],bud:Object.values(BUD).reduce((x,y)=>x+y,0)}}
+const AL=['Nötter','Gluten','Laktos','Pollen','Bi och geting'],CO=['Diabetes','Astma','Receptbelagd medicin'];
+function hpPack(){const h=S.hp,o=[];if(h.al['Nötter']||h.al['Gluten']||h.al['Laktos'])o.push('Allergikort på engelska och nederländska');if(h.al['Pollen'])o.push('Allergitabletter');if(h.al['Bi och geting'])o.push('Adrenalinpenna om du har en utskriven');
+ if(h.co['Diabetes'])o.push('Insulin och mätare i handbagaget','Läkarintyg för sprutor');if(h.co['Astma'])o.push('Inhalator i handbagaget');if(h.co['Receptbelagd medicin'])o.push('Medicin i originalförpackning','Recept eller intyg');return o}
+const packG=()=>PACK.concat(hpPack().length?[['Anpassat för dig',hpPack()]]:[]);
+const packAll=()=>packG().flatMap(g=>g[1]);
+function rules(){const h=S.hp,a=ageAt(S.fl.d1),r=[];
+ r.push(a<18?['Alkohol','Inte tillåtet för dig. Gränsen är 18 år i Nederländerna.',0]:['Alkohol','Tillåtet från 18 år här. Ta med legitimation. Gränsen varierar, till exempel 21 år i USA.',1]);
+ r.push(a<21?['Hyrbil','De flesta firmor kräver minst 21 år. Räkna med tåg och spårvagn.',0]:a<25?['Hyrbil','Går att hyra, men under 25 år tillkommer ofta en ungdomsavgift per dag. Jämför totalpriset.',2]:['Hyrbil','Inga ålderstillägg för dig.',1]);
+ if(a<18)r.push(['Boende','Många hotell och hostel kräver att en gäst är 18 år vid incheckning.',0]);
+ if(h.co['Receptbelagd medicin'])r.push(['Medicin','Narkotikaklassad medicin kräver ett Schengenintyg från apoteket. Andra länder kan ha hårdare regler.',2]);
+ if(h.co['Diabetes'])r.push(['Säkerhetskontroll','Insulin och sprutor får tas med i handbagaget. Ha intyget lätt åtkomligt.',1]);
+ if(h.al['Nötter']||h.al['Gluten']||h.al['Laktos'])r.push(['Mat','Restauranger i EU ska kunna uppge allergener. Fråga alltid och visa allergikortet.',1]);
+ return `${bdayNote()}<span class="eb">Regler för dig, ${a} år vid resan ${sv(S.fl.d1)}</span>${r.map(x=>`<div class="li"><span class="badge" style="background:${['#D64545','#2E9E5B','#F4B942'][x[2]]};color:${x[2]===2?'#1b1b1f':'#fff'}">${ic(x[2]===0?'x':'check',18,3)}</span><span class="t"><b>${x[0]}</b><span class="mu">${x[1]}</span></span></div>`).join('')}<span class="mu">Exempelregler. Kontrolleras mot källor per land.</span>`}
+const hpHtml=()=>`<span class="eb">Hälsa och ålder</span><div class="card"><label>Födelsedatum<input type="date" data-hp="born" value="${S.hp.born}"></label><span class="mu">${ageAt(today())} år idag, ${ageAt(S.fl.d1)} år vid nästa resa. Åldern räknas om automatiskt.</span><span class="eb">Allergier</span><div class="chips">${AL.map(x=>`<button type="button" class="chip" ${a('hpt',{k:'al',v:x})} aria-pressed="${!!S.hp.al[x]}">${x}</button>`).join('')}</div><span class="eb">Sjukdomar och medicin</span><div class="chips">${CO.map(x=>`<button type="button" class="chip" ${a('hpt',{k:'co',v:x})} aria-pressed="${!!S.hp.co[x]}">${x}</button>`).join('')}</div><span class="mu">Styr packlistan och reglerna under Innan avresa. Sparas bara krypterat i valvet.</span></div>`;
+const ageAt=x=>{const b=S.hp.born.split('-').map(Number),d=x.split('-').map(Number);if(b.length<3||!b[0])return 0;return Math.max(0,d[0]-b[0]-((d[1]<b[1]||(d[1]===b[1]&&d[2]<b[2]))?1:0))};
+const today=()=>iso(new Date());
+const bdayNote=()=>{const b=S.hp.born.slice(5),y=S.fl.d1.slice(0,4),x=y+'-'+b;return /^\d\d-\d\d$/.test(b)&&x>=S.fl.d1&&x<=S.fl.d2?`<div class="card soft"><b>Du fyller ${ageAt(x)} år under resan, ${sv(x)}.</b><span class="mu">Appen föreslår att boka bord eller något extra den dagen.</span></div>`:''};
+const preN=()=>S.preL.filter(p=>S.pre[p[0]]).length;
+function vResor(){
+ const m=money(),pk=packAll().filter(x=>S.pack[x]).length;
+ if(S.page==='kassa'){
+  const kv=solo()?'budget':S.view.kassa;let h=`${back}<h2>Resekassa</h2>${solo()?'':seg('kassa',[['skulder','Skulder'],['budget','Budget']])}`;
+  if(kv==='skulder')h+=`<div class="hero"><span>Just nu</span><span class="big">${kr(Math.abs(m.bal))}</span><span>${owe(m)}</span></div>
+   <button type="button" class="btn acc" ${a('swish')}>Gör upp med Swish</button><span class="eb">Utgifter</span>${S.exp.map((e,i)=>li('exp',{i},'',e.n,payer(e)+' betalade'+(solo()?'':' · delat lika'),`<b>${e.cur==='EUR'?'€'+e.amt+' · ':''}${kr(sek(e))}</b>`)).join('')}`;
+  else h+=`<div class="card"><div class="row"><b>Totalt</b><span>${kr(m.tot)} / ${kr(m.bud)}</span></div>${bar(m.tot/m.bud*100)}</div>
+   ${Object.keys(BUD).map(c=>{const s=S.exp.filter(e=>e.c===c).reduce((n,e)=>n+sek(e),0);return `<button type="button" class="card" ${a('budcat',{c})}><div class="row"><b>${c}</b><span class="mu">${kr(s)} / ${kr(BUD[c])}</span></div>${bar(s/BUD[c]*100)}</button>`}).join('')}
+   ${solo()?'':`<div class="card"><div class="row"><b>${owe(m)}</b><span class="chip soft">${kr(Math.abs(m.bal))}</span></div></div>`}`;
+  return h+`<button type="button" class="btn" ${a('addexp')}>Lägg till utgift</button><span class="mu">Kurs: 1 € = 11,50 kr (exempel). Varje utgift sparar dagens kurs.</span>`}
+ if(S.page==='innan'){const d=preN();return `${back}<h2>Innan avresa</h2><div class="card"><div class="row"><b>${d} av ${S.preL.length} klart</b><span class="mu">Amsterdam</span></div>${bar(S.preL.length?d/S.preL.length*100:0)}</div>
+  ${S.preL.map(p=>`<div class="li"><button type="button" class="box${S.pre[p[0]]?' on':''}" ${a('pre',{v:p[0]})} aria-label="Bocka av ${esc(p[1])}" aria-pressed="${!!S.pre[p[0]]}">${S.pre[p[0]]?ic('check',16,3):''}</button><button type="button" class="t" ${a('pre',{v:p[0]})}><b>${esc(p[1])}</b><span class="mu">${esc(p[2])}</span></button><button type="button" class="chev" style="min-width:40px;min-height:40px;display:grid;place-items:center" ${a('predel',{v:p[0]})} aria-label="Ta bort ${esc(p[1])}">${ic('x',18)}</button></div>`).join('')}
+  <form id="preform" class="row"><input name="n" aria-label="Egen punkt" placeholder="Egen punkt, t.ex. Skjuts till flygplatsen" required><button type="submit" class="chip" style="background:var(--p);color:var(--onp)">Lägg till</button></form>
+  ${S.preX.length?`<span class="eb">Förslag och borttagna</span><div class="chips">${S.preX.map(p=>`<button type="button" class="chip" ${a('preadd',{v:p[0]})}>+ ${esc(p[1])}</button>`).join('')}</div>`:''}
+  ${rules()}${li('govalv',{},`<span class="badge">${ic('lock',20)}</span>`,'Ändra ålder och hälsa','Finns i Valvet')}`}
+ if(S.page==='pack')return `${back}<h2>Packlista</h2><div class="card"><div class="row"><b>${pk} av ${packAll().length} packat</b><span class="mu">17° och växlande i maj</span></div>${bar(pk/packAll().length*100)}</div>
+  ${packG().map(g=>`<span class="eb">${g[0]}</span>${g[1].map(x=>`<button type="button" class="li" ${a('pack',{v:x})} aria-pressed="${!!S.pack[x]}"><span class="box${S.pack[x]?' on':''}">${S.pack[x]?ic('check',16,3):''}</span><span class="t"><b>${x}</b>${g[0]==='Delat'?(solo()?'':'<span class="mu">En räcker för er</span>'):''}</span></button>`).join('')}`).join('')}${li('govalv',{},`<span class="badge">${ic('lock',20)}</span>`,'Anpassa efter hälsa och allergier',hpPack().length?hpPack().length+' saker tillagda från Valvet':'Fyll i under Valvet')}`;
+ if(S.page==='plan'){const p=S.plan,D=DEST[p.dest],pl=PLACES.find(x=>x.id===p.dest),days=D.stay[p.len][1],n=T.n[S.rm],best=pl.m.map((x,i)=>x===5?MONF[i]:'').filter(Boolean);
+  return `${back}<h2>Planera nästa resa</h2><span class="eb">1. Vart?</span><div class="chips">${Object.keys(DEST).map(k=>`<button type="button" class="chip" ${a('plandest',{v:k})} aria-pressed="${p.dest===k}">${PLACES.find(x=>x.id===k).city}</button>`).join('')}<button type="button" class="chip soft" ${a('plandest',{v:'?'})}>Slumpa</button></div>
+  <span class="eb">2. Hur länge?</span>${stayHtml(p.dest,1)}
+  <span class="eb">3. När?</span><div class="months">${MON.map((m,i)=>`<button type="button" ${a('planmonth',{v:i})} aria-pressed="${p.month===i}" aria-label="${MONF[i]}" style="${p.month===i?'':`box-shadow:inset 0 -4px 0 ${SMART[pl.m[i]]}`}">${m}</button>`).join('')}</div><span class="mu">Bäst för ${pl.city}: ${best.join(' och ')}. Strecket visar hur bra månaden är.</span>
+  <span class="eb">4. Datum och flyg</span>${flightBox(D.to)}<span class="eb">5. Boende</span>${stayBox(pl.city)}
+  <div class="card"><h3>Ungefärlig budget</h3><div class="row"><span>${days} dagar, ${n} ${n===1?'person':'personer'}</span><b>ca ${kr(days*D.day*n)}</b></div><span class="mu">Boende, mat och aktiviteter. Flyg tillkommer. Exempelnivåer.</span></div>
+  <button type="button" class="btn acc" ${a('mktrip')}>Skapa resan</button>`}
+ return `<h2>Resor</h2><button type="button" class="btn" ${a('plan',{v:''})}>Planera nästa resa</button>${S.trips.length?`<span class="eb">Planerade</span>${S.trips.map((x,i)=>li('trip',{i},`<span class="badge">${x.id}</span>`,x.city,x.days+' dagar · '+sv(x.d1)+' till '+sv(x.d2))).join('')}`:''}<div class="hero"><span>Nästa resa</span><span class="big">142 dagar</span><span>Amsterdam · 4 nätter · maj</span><span style="font-size:13px;opacity:.85">14:05 där · 14:05 hemma</span></div>
+ <div class="g2">${[['Etapper',LEGS.length,'etapper'],['Bokningar',BOOK.length,'bok'],['Packlista',pk+'/'+packAll().length,'pack'],['Budget',Math.round(m.tot/m.bud*100)+' %','kassa'],['Väder i maj','17°','vader'],['Event då',2,'event']].map(t=>`<button type="button" class="card" ${a('tile',{v:t[2]})}><span class="num">${t[1]}</span><span class="mu">${t[0]}</span></button>`).join('')}</div>
+ <button type="button" class="btn acc" ${a('playtrip')}>Spela upp resan på kartan</button>
+ <span class="eb">Resplan</span><div class="card"><div class="tl">${LEGS.map((l,i)=>`<div><button type="button" ${a('leg',{i})}><b>${l[0]}</b> ${l[1]}<br><span class="mu">${l[2]}</span></button></div>`).join('')}</div></div>
+ ${li('tile',{v:'kassa'},`<span class="badge">kr</span>`,'Resekassa',solo()?kr(m.bud-m.tot)+' kvar av budget':owe(m)+(Math.abs(m.bal)<1?'':' '+kr(Math.abs(m.bal))))}
+ ${li('goboka',{},`<span class="badge">${ic('build',20)}</span>`,'Flyg, boende och transport','Sök med filter, områden att bo i, ta sig runt')}
+ ${li('tile',{v:'innan'},`<span class="badge">${ic('check',20)}</span>`,'Innan avresa',preN()+' av '+S.preL.length+' klart')}
+ ${li('gokop',{},`<span class="badge">${ic('heart',20)}</span>`,'Köp med hem och presenter','Presenttips och motiv till samlingarna')}
+ ${li('goland',{},`<span class="badge">NL</span>`,'Guide och checklista','Missa inte-listan för Nederländerna')}
+ ${li('govalv',{},`<span class="badge">${ic('lock',20)}</span>`,solo()?'Valvet':'Resesällskap och Valvet','Pass, försäkring och nödkontakter offline')}
+ <span class="eb">Tidigare resor</span>${li('old',{i:0},`<span class="badge">PL</span>`,'Gdańsk','5–8 november 2026 · 3 etapper')}${li('old',{i:1},`<span class="badge">DK</span>`,'Köpenhamn','Sommaren 2025 · dagstur')}
+ <button type="button" class="btn ghost" ${a('import')}>Importera gamla resor</button>`}
+
+/* ---------- Vi ---------- */
+function vVi(){
+ if(S.page==='valv'){let h=`${back}<div class="row"><h2>Valvet</h2><span class="badge">${ic('lock',20)}</span></div><span class="mu">Krypteras på telefonen och finns offline. Exempeldata.</span>`;
+  if(!S.open)return h+`<div class="card"><h3>Låst</h3><span class="mu">Lås upp för att se pass, försäkring och nödkontakter.</span><button type="button" class="btn" ${a('unlock')}>Lås upp med Face ID</button></div>`;
+  if(!solo())h+=seg('valv',[['lista','Mina uppgifter'],['person','Per person']]);
+  if(solo()||S.view.valv==='lista')h+=VAULT.map((v,i)=>li('vault',{i},'',v[0],v[1])).join('')+hpHtml();
+  else h+=ppl().map(n=>`<div class="card"><div class="row"><h3>${n}</h3><span class="chip soft" style="min-height:0;padding:6px 10px;font-size:12px">Delar 3 av 5</span></div>${[0,2,3].map(i=>`<button type="button" class="row" ${a('vault',{i})}><span>${VAULT[i][0]}</span><span class="mu">${VAULT[i][1]}</span></button>`).join('')}</div>`).join('');
+  return h+`<button type="button" class="btn ghost" ${a('lockit')}>Lås valvet</button>`}
+ if(S.page==='anpassa'){const P=pal(),cr=(Math.max(lum(P.p),lum(lum(P.p)>.45?'#1b1b1f':'#ffffff'))+.05)/(Math.min(lum(P.p),lum(lum(P.p)>.45?'#1b1b1f':'#ffffff'))+.05);
+  return `${back}<h2>Anpassning</h2><span class="eb">Reseläge</span>${rmSeg()}<span class="mu">Styr fliken ${t('tab')}, swipe, resekassan och valvet.</span>
+  <span class="eb">Palett: ${P.n}</span><div class="chips">${PAL.map((p,i)=>`<button type="button" class="sw" style="background:${p.p}" ${a('pal',{v:i})} aria-pressed="${S.pal===i}" aria-label="${p.n}"><i style="background:${p.a}"></i></button>`).join('')}<button type="button" class="sw" style="background:${S.cp.p}" ${a('pal',{v:5})} aria-pressed="${S.pal===5}" aria-label="Egen palett"><i style="background:${S.cp.a}"></i></button></div>
+  ${S.pal===5?`<div class="card"><h3>Egen palett</h3><div class="g3">${[['p','Primär'],['a','Accent'],['bg','Bakgrund']].map(x=>`<label>${x[1]}<input type="color" data-cp="${x[0]}" value="${S.cp[x[0]]}" style="padding:4px;height:46px"></label>`).join('')}</div><span class="mu">Mörkt läge räknas ut från primärfärgen. Textkontrast på primärfärgen: ${cr>=4.5?'bra':'svag, välj en mörkare eller ljusare primärfärg'}.</span></div>`:`<span class="mu">Sista rutan är din egen palett.</span>`}
+  <span class="eb">Fonter</span><div class="g2"><label>Rubriker<select data-fo="fh">${HF.map((f,i)=>`<option value="${i}"${S.fh===i?' selected':''}>${f[0]}</option>`).join('')}</select></label><label>Brödtext<select data-fo="fb">${BF.map((f,i)=>`<option value="${i}"${S.fb===i?' selected':''}>${f[0]}</option>`).join('')}</select></label></div>
+  <div class="card"><h3>Vart åker vi härnäst?</h3><span>Så här ser rubriker och vanlig text ut med dina val.</span></div>
+  <span class="eb">Färdiga fontpar</span><div class="chips">${FONTS.map((f,i)=>`<button type="button" class="chip" ${a('font',{v:i})} aria-pressed="${S.fh===i&&S.fb===i}">${f.n}</button>`).join('')}</div>
+  <span class="eb">Textstorlek</span><div class="seg">${['Liten','Normal','Stor'].map((x,i)=>`<button type="button" ${a('fs',{v:i})} aria-pressed="${S.fs===i}">${x}</button>`).join('')}</div>
+  <span class="eb">Läge</span><div class="seg"><button type="button" ${a('dark',{v:0})} aria-pressed="${!S.dark}">Ljust</button><button type="button" ${a('dark',{v:1})} aria-pressed="${S.dark}">Mörkt</button></div>
+  <label>Rundning: ${S.rad} px<input type="range" min="4" max="26" value="${S.rad}" id="rad"></label>
+  <span class="eb">Språkstil</span><div class="seg">${['Neutral','Lekfull','Romantisk'].map((x,i)=>`<button type="button" ${a('tone',{v:i})} aria-pressed="${S.tone===i}">${x}</button>`).join('')}</div><span class="mu">Exempel: "${idagT()}"</span>`}
+ let h=`<div class="row"><div><h2>${t('tab')}</h2><span class="mu">${t('sub')} · Resenärsnivå 7</span></div><button type="button" class="chip soft" ${a('goanpassa')}>Anpassa</button></div>${rmSeg()}${seg('vi',[['siffror','Siffror'],['wrapped','Wrapped']])}`;
+ if(S.view.vi==='siffror')h+=`<div class="g2">${[['4','länder','lander'],['2 %','av världen','pct'],['1 240','mil med flyg','mil'],['23','maträtter','mat']].map(x=>`<button type="button" class="card" ${a('stat',{id:x[2]})}><span class="num">${x[0]}</span><span class="mu">${x[1]}</span></button>`).join('')}</div>
+  <div class="card"><h3>Kontinenter</h3>${[['Europa',4,50],['Asien',0,49],['Afrika',0,54],['Nordamerika',0,23]].map(c=>`<div class="row"><span>${c[0]}</span><span class="mu">${c[1]}/${c[2]}</span></div>${bar(c[1]/c[2]*100)}`).join('')}</div>
+  <span class="eb">Märken</span><div class="g3">${BADGES.map((b,i)=>`<button type="button" class="card" style="align-items:center;text-align:center;${b[3]?'':'opacity:.55'}" ${a('badge',{i})}><span class="badge" style="${b[3]?'background:#F4B942;color:#1b1b1f':''}">${b[3]?b[0]:'?'}</span><span style="font-size:12px;font-weight:700">${b[1]}</span></button>`).join('')}</div>
+  <span class="eb">Tidslinje</span><div class="card"><div class="tl"><div><b>Gdańsk</b><br><span class="mu">November 2026</span></div><div><b>Köpenhamn</b><br><span class="mu">Sommaren 2025</span></div><div><b>Flyttade till Borås</b><br><span class="mu">Bor här</span></div></div></div>`;
+ else{const w=wrapL()[S.wrap];h+=`<div class="hero" style="min-height:300px;justify-content:center;gap:14px"><span class="eb" style="color:inherit;opacity:.85">${w[0]}</span><span class="big" style="font-size:46px">${w[1]}</span><span>${w[2]}</span></div><div class="row"><span class="mu">${S.wrap+1} av ${WRAP.length}</span><div class="chips"><button type="button" class="chip" ${a('wrap',{v:-1})}>Förra</button><button type="button" class="chip" style="background:var(--a);color:#1b1b1f;border:0" ${a('wrap',{v:1})}>Nästa</button></div></div>`}
+ return h+`${li('govalv',{},`<span class="badge">${ic('lock',20)}</span>`,'Valvet','Pass, försäkring, nödkontakter')}${li('guideown',{},`<span class="badge">${ic('star',20)}</span>`,solo()?'Min guide':'Vår guide',solo()?'Dina egna betyg på ställen du varit på':'Era egna betyg på ställen ni varit på')}${li('export',{},`<span class="badge">${ic('book',20)}</span>`,'Exportera till Claude','Kopiera er data för personliga råd')}`}
+
+/* ---------- Render ---------- */
+const NAV=[['karta','Karta','map'],['idag','Idag','star'],['listor','Listor','book'],['resor','Resor','plane'],['vi','Vi','us']];
+const VIEWS={karta:vKarta,idag:vIdag,listor:vListor,resor:vResor,vi:vVi};
+let lastKey='';
+function render(){
+ theme();const sc=$('scr'),key=S.tab+'/'+S.page,top=sc.scrollTop;
+ sc.innerHTML=VIEWS[S.tab]();
+ sc.scrollTop=key===lastKey?top:0;lastKey=key;
+ $('nav').innerHTML=NAV.map(n=>`<button type="button" ${a('tab',{v:n[0]})} aria-pressed="${S.tab===n[0]}">${ic(n[2],24)}${n[0]==='vi'?t('tab'):n[1]}</button>`).join('')}
+function playMap(){S.tab='karta';S.page=null;S.eu=true;S.playing=false;render();clearTimeout(playMap.t);setTimeout(()=>{S.playing=true;render();$('scr').scrollTop=90;playMap.t=setTimeout(()=>toast('Amsterdam: 3 etapper, ca 3,5 h'),3100)},40)}
+const STATS={lander:['Länder','Besökta: Sverige, Danmark och Polen. Mellanlandning i Tyskland räknas inte in.'],pct:['Av världen','Räknat mot 250 platser. Ni kan byta till FN:s 193 länder i inställningarna.'],vill:['Vill åka','Turkiet, Grekland och Kroatien. Tryck Slumpa i Idag-fliken om ni inte kan välja.'],mil:['Mil med flyg','Räknas automatiskt från resornas etapper. Bil, tåg och båt räknas var för sig.'],mat:['Maträtter','23 av 412 i samlingsboken. Senast: pierogi i Gdańsk.']};
+const ACT={
+ tab(d){S.tab=d.v;S.page=null;S.playing=false},back(){S.page=null},close(){$('sheet').hidden=true;return 1},
+ view(d){S.view[d.k]=d.v},who(){S.who=(S.who+1)%whoL().length},rm(d){S.rm=d.v;S.who=0},noop(){return 1},zoom(d){S.eu=d.v==='1';if(!S.eu)S.playing=false},mode(d){S.mode=d.v},month(d){S.month=+d.v},
+ play(){playMap();return 1},playtrip(){playMap();return 1},
+ land(d){S.tab='karta';S.page=d.id;$('sheet').hidden=true},goland(){S.tab='karta';S.page='NL'},gokop(){S.tab='karta';S.page='NL';S.view.land='kop'},gocols(){S.tab='listor';S.page=null;S.view.listor='bok';S.view.bok='saml'},coltog(d){const c=S.cols[+d.i];c.got[d.id]=!c.got[d.id];if(c.got[d.id])party(c.n+': '+PLACES.find(p=>p.id===d.id).n+' samlat!')},coldel(d){S.cols.splice(+d.i,1)},coladd(d){if(!S.cols.some(c=>c.n===d.v))S.cols.push({n:d.v,got:{}})},gift(d){S.gift=d.v},addbuy(d){const x=SHOP.find(q=>q[0]===d.v),i=S.buy.findIndex(b=>b.id===d.v);if(i>=0)S.buy.splice(i,1);else S.buy.push({id:x[0],n:x[1],p:x[5],f:S.gift[0]==='r'?S.rec[+S.gift.slice(1)].n:'',d:0})},buytog(d){const b=S.buy[+d.i];b.d=!b.d},buydel(d){S.buy.splice(+d.i,1)},recdel(d){S.rec.splice(+d.i,1);S.gift='alla'},goboka(){S.tab='karta';S.page='NL';S.view.land='boka'},pre(d){S.pre[d.v]=!S.pre[d.v]},predel(d){const i=S.preL.findIndex(p=>p[0]===d.v);if(i>=0){S.preX.push(S.preL.splice(i,1)[0]);toast('Borttagen. Finns under Förslag')}},preadd(d){const i=S.preX.findIndex(p=>p[0]===d.v);if(i>=0)S.preL.push(S.preX.splice(i,1)[0])},hpt(d){S.hp[d.k][d.v]=!S.hp[d.k][d.v]},xk(d){S.xk=d.v;expSheet();return 1},copyexp(){const x=expText();navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(x).then(()=>toast('Kopierat. Klistra in i chatten'),()=>toast('Markera texten och kopiera själv')):toast('Markera texten och kopiera själv');return 1},govalv(){S.tab='vi';S.page='valv'},goanpassa(){S.page='anpassa'},
+ status(d){const was=S.status[d.id];S.status[d.id]=d.v;if(['besokt','bor','bott'].includes(d.v)&&!['besokt','bor','bott'].includes(was))party(PLACES.find(p=>p.id===d.id).n+' avbockat! +50 XP')},
+ check(d){S.checks[d.id]=!S.checks[d.id];if(S.checks[d.id])party(ITEMS.find(i=>i.id===d.id).n+' avbockat!');$('sheet').hidden=true},
+ item(d){const i=ITEMS.find(x=>x.id===d.id);sheet(i.n,`<span class="eb">${i.c} · ${i.s}</span><p>${i.d}</p><button type="button" class="btn" ${a('check',{id:i.id})}>${S.checks[i.id]?'Ångra avbockning':'Bocka av'}</button>${maps(i.n+' Nederländerna')}`);return 1},
+ guide(d){const g=GUIDE[+d.i];sheet(g.k,`<p><b>${g.v}</b></p><p>${g.d}</p><span class="mu">Senast uppdaterad november 2026 · Rapportera fel</span>`);return 1},
+ stat(d){const s=STATS[d.id];sheet(s[0],`<p>${s[1]}</p>`);return 1},
+ when(d){S.when=d.v},
+ locsheet(){sheet('Var är ni?',`<span class="mu">Välj var ni är eller ska vara. Tipsen och restiderna räknas därifrån.</span>${LOCS.map(x=>`<button type="button" class="li" ${a('setloc',{v:x})} style="${S.loc===x?'border-color:var(--p);border-width:2px':''}"><span class="t"><b>${x}</b><span class="mu">${x===S.home?'Hemma':x==='Stockholm'?'Färdigt exempel':'Sparad plats'}</span></span></button>`).join('')}<form id="locform" class="row"><input name="n" aria-label="Annan plats" placeholder="Annan plats" required><button type="submit" class="chip" style="background:var(--p);color:var(--onp)">Välj</button></form><button type="button" class="btn ghost" ${a('usepos')}>Använd min position</button>`);return 1},
+ setloc(d){S.loc=d.v;S.idea=0;S.flt={};if(S.near==='helg'&&!atHome()&&S.loc!=='Stockholm')S.near='h1';$('sheet').hidden=true},
+ usepos(){toast('I appen hämtas positionen här');return 1},
+ mkutflykt(){const d=new Date();while(d.getUTCDay()!==6)d.setUTCDate(d.getUTCDate()+1);const d1=iso(d);d.setUTCDate(d.getUTCDate()+1);S.trips.push({id:'SE',city:S.loc,days:2,d1,d2:iso(d)});S.tab='resor';S.page=null;party('Helgen i '+S.loc+' är nu en resa')},
+ flt(d){S.flt[d.v]=!S.flt[d.v];S.idea=0},shuffle(){S.idea++},near(d){S.near=d.v},
+ idea(){const l=ideas(),i=l[S.idea%l.length];sheet(i.t,`<span class="eb">${kind(i.k)} · ${i.w} · ${i.ti} · ${i.c}</span><p>${i.d}</p><button type="button" class="btn" ${a('saveidea')}>Spara till ${t('lista')}</button>${i.w==='Hemma'?'':maps(i.t)}`);return 1},
+ saveidea(){$('sheet').hidden=true;toast('Sparad till '+t('lista'));return 1},
+ nearby(d){const n=nearL()[+d.i];sheet(n[0],`<span class="eb">${n[2]} från ${esc(S.loc)}</span><p>${n[1]}</p>${maps(n[0])}<button type="button" class="btn" ${a('saveidea')}>Spara till ${t('lista')}</button>`);return 1},
+ bokcat(d){S.bokCat=d.v},
+ bok(d){const b=BOK.find(x=>x.id===d.id),f=S.found[b.id];sheet(f?b.n:'Okänt fynd',`<span class="eb" style="color:${RAR[b.r][1]}">${RAR[b.r][0]}</span><p>${f?b.h:'Ledtråd: '+b.h}</p>${f?`<span class="mu">${solo()?'Hittad av dig':'Hittad av er'} · Lägg till datum, plats och kommentar</span>`:''}<button type="button" class="btn" ${a('find',{id:b.id})}>${f?'Ta bort fyndet':'Vi har hittat den'}</button>`);return 1},
+ find(d){const b=BOK.find(x=>x.id===d.id);S.found[b.id]=!S.found[b.id];$('sheet').hidden=true;if(S.found[b.id])party((b.r==='l'?'Legendariskt fynd! ':'Nytt fynd! ')+b.n)},
+ comp(d){const c=COMP[+d.i];if(c[4]){S.bokCat=c[4];S.view.bok='kort'}else{sheet(c[0],`<p>${c[1]} av ${c[2]} hittade.</p><span class="mu">Korten för den här kategorin fylls på i innehållsomgångarna.</span>`);return 1}},
+ bcheck(d){S.bucket[d.id]=!S.bucket[d.id];$('sheet').hidden=true;if(S.bucket[d.id])party('Avbockat från bucketlisten!')},
+ bucket(d){const b=BUCKET.find(x=>x.id===d.id);sheet(b.n,`<div class="g2"><div class="card"><span class="eb">Kategori</span>${b.c}</div><div class="card"><span class="eb">Kostnad</span>${b.k}</div><div class="card"><span class="eb">Säsong</span>${b.s}</div><div class="card"><span class="eb">Var</span>${b.w}</div></div><span class="mu">${S.votes[b.id]?'Du vill':'Du har inte röstat'}${solo()?'':' · '+(HON[b.id]?(S.rm==='grupp'?'Gruppen vill':'Hon vill'):'Inget ja från '+(S.rm==='grupp'?'gruppen':'henne')+' än')}</span><button type="button" class="btn" ${a('bcheck',{id:b.id})}>${S.bucket[b.id]?'Ångra':'Bocka av'}</button>`);return 1},
+ vote(d){const b=BUCKET[S.sw];if(d.v==='1'){S.votes[b.id]=1;if(!solo()&&HON[b.id])party('Matchning! '+b.n)}else delete S.votes[b.id];S.sw++},
+ tvote(d){S.votes[d.id]?delete S.votes[d.id]:S.votes[d.id]=1;if(!solo()&&S.votes[d.id]&&HON[d.id])party('Matchning!')},resw(){S.sw=0},
+ matches(){const m=BUCKET.filter(b=>isM(b));sheet(solo()?'Min lista':'Matchningar',m.length?m.map(b=>`<div class="li"><span class="t"><b>${b.n}</b><span class="mu">${b.c} · ${b.s}</span></span></div>`).join(''):'<p>Inga matchningar än.</p>');return 1},
+ tile(d){const v=d.v;if(v==='kassa'||v==='pack'||v==='innan'){S.page=v;return}
+  if(v==='etapper')sheet('Etapper',`<div class="tl">${LEGS.map(l=>`<div><b>${l[0]}</b> ${l[1]}<br><span class="mu">${l[2]} · ${l[3]}</span></div>`).join('')}</div><span class="mu">Totalt ca 3,5 h dörr till dörr. Från Ängelholm är Kastrup närmast.</span>`);
+  if(v==='bok')sheet('Bokningar',BOOK.map(b=>`<div class="card"><div class="row"><b>${b[0]}</b><span class="chip soft" style="min-height:0;padding:5px 10px;font-size:12px">Offline</span></div><span>${b[1]}</span><span class="mu">${b[2]} · ${b[3]}</span></div>`).join('')+`<button type="button" class="btn ghost" ${a('addbook')}>Lägg till bokning</button>`);
+  if(v==='vader')sheet('Väder i maj','<p><b>Ca 17° på dagen</b>, växlande med några regndagar.</p><p>Packlistan föreslår regnjacka och en tröja. Prognosen visas här från tio dagar innan avresa.</p>');
+  if(v==='event')sheet('Event under resan','<div class="card"><b>Marknad på Albert Cuypstraat</b><span class="mu">Måndag till lördag</span></div><div class="card"><b>Hemmamatch på Johan Cruijff ArenA</b><span class="mu">Kolla spelschemat närmare resan</span></div><span class="mu">Exempel. Hämtas för era datum.</span>');return 1},
+ leg(d){const l=LEGS[+d.i];sheet(l[0]+': '+l[1],`<span class="eb">${l[2]}</span><p>${l[3]}</p><span class="mu">Försenat flyg mer än 3 timmar? Ni kan ha rätt till ersättning enligt EU-reglerna.</span>`);return 1},
+ old(d){sheet(['Gdańsk','Köpenhamn'][+d.i],'<p>Minnessidan visar rutten, vad ni bockade av, kostnader och dagboken.</p><button type="button" class="btn ghost" '+a('export')+'>Kopiera resan till Claude</button>');return 1},
+ import(){sheet('Importera gamla resor',`<p>Tre sätt:</p>${[['Snabbimport','Tryck på länderna på kartan och välj år'],['Från bilder','Appen läser plats och datum ur några foton'],['Via Claude','Klistra in skärmbilder från Booking eller mejlen i chatten']].map(x=>`<div class="li"><span class="t"><b>${x[0]}</b><span class="mu">${x[1]}</span></span></div>`).join('')}`);return 1},
+ addbook(){sheet('Lägg till bokning','<p>Spara en PDF eller skärmbild som den är, eller fyll i typ, datum och bokningsreferens. Allt går att se offline.</p>');return 1},
+ pack(d){S.pack[d.v]=!S.pack[d.v]},swish(){toast('Öppnar Swish med beloppet ifyllt');return 1},
+ exp(d){const e=S.exp[+d.i];sheet(e.n,`<div class="g2"><div class="card"><span class="eb">Belopp</span>${e.cur==='EUR'?'€'+e.amt:kr(e.amt)}</div><div class="card"><span class="eb">I kronor</span>${kr(sek(e))}</div><div class="card"><span class="eb">Betalade</span>${payer(e)}</div><div class="card"><span class="eb">Kategori</span>${e.c}</div></div><p>${solo()?'':`Delat lika: ${kr(sek(e)/T.n[S.rm])} var.`}${e.cur==='EUR'?' Kurs 11,50 kr per euro.':''}</p><button type="button" class="btn ghost" ${a('delexp',{i:d.i})}>Ta bort utgiften</button>`);return 1},
+ delexp(d){S.exp.splice(+d.i,1);$('sheet').hidden=true},
+ budcat(d){const l=S.exp.filter(e=>e.c===d.c);sheet(d.c,(l.length?l.map(e=>`<div class="li"><span class="t"><b>${e.n}</b><span class="mu">${payer(e)} betalade</span></span><b>${kr(sek(e))}</b></div>`).join(''):'<p>Inga utgifter än.</p>')+`<span class="mu">Budget: ${kr(BUD[d.c])}</span>`);return 1},
+ addexp(){sheet('Ny utgift',`<form id="expform" class="col"><label>Vad<input name="n" required placeholder="t.ex. Lunch"></label><div class="g2"><label>Belopp<input name="amt" type="number" min="1" step="any" required></label><label>Valuta<select name="cur"><option>EUR</option><option>SEK</option></select></label></div><div class="g2"><label>Vem betalade<select name="by"><option value="du">Du</option>${solo()?'':`<option value="hon">${S.rm==='grupp'?'En i gruppen':'Hon'}</option>`}</select></label><label>Kategori<select name="c">${Object.keys(BUD).map(c=>`<option>${c}</option>`).join('')}</select></label></div><button type="submit" class="btn">Spara</button></form>`);return 1},
+ plan(d){const id=d.v&&DEST[d.v]?d.v:(S.plan?S.plan.dest:'GR'),pl=PLACES.find(x=>x.id===id);S.tab='resor';S.page='plan';S.plan={dest:id,len:DEST[id].rec,month:pl.m.indexOf(5)};setDates()},
+ plandest(d){const k=Object.keys(DEST),id=d.v==='?'?k[(k.indexOf(S.plan.dest)+1+Math.floor(Math.random()*(k.length-1)))%k.length]:d.v;S.plan={dest:id,len:DEST[id].rec,month:PLACES.find(x=>x.id===id).m.indexOf(5)};setDates()},
+ planlen(d){S.plan.len=+d.v;setDates()},planmonth(d){S.plan.month=+d.v;setDates()},
+ mktrip(){const p=S.plan,pl=PLACES.find(x=>x.id===p.dest);S.trips.push({id:p.dest,city:pl.city,days:DEST[p.dest].stay[p.len][1],d1:S.fl.d1,d2:S.fl.d2});if(['ej','vill'].includes(S.status[p.dest]))S.status[p.dest]='planerad';S.page=null;party('Resan till '+pl.city+' är skapad!')},
+ trip(d){const x=S.trips[+d.i];sheet(x.city,`<p><b>${x.days} dagar</b>, ${sv(x.d1)} till ${sv(x.d2)}.</p><p>Härifrån lägger ni till etapper, bokningar, packlista och budget, precis som för Amsterdam.</p><button type="button" class="btn ghost" ${a('land',{id:x.id})}>Öppna landssidan</button>`);return 1},
+ unlock(){S.open=true;toast('Upplåst')},lockit(){S.open=false},
+ vault(d){const v=VAULT[+d.i];sheet(v[0],`<p><b>${v[1]}</b></p><p>${v[2]}</p><div class="row"><span>Dela med resesällskapet</span><span class="chip soft">På</span></div>`);return 1},
+ pal(d){S.pal=+d.v},font(d){S.fh=S.fb=+d.v},fs(d){S.fs=+d.v},tone(d){S.tone=+d.v},dark(d){S.dark=d.v==='1'},
+ badge(d){const b=BADGES[+d.i];sheet(b[1],`<p>${b[2]}.</p><span class="mu">${b[3]?'Upplåst':'Inte upplåst än'} · Finns i brons, silver och guld</span>`);return 1},
+ wrap(d){S.wrap=(S.wrap+ +d.v+WRAP.length)%WRAP.length},
+ guideown(){sheet('Vår guide','<div class="card"><div class="row"><b>Pierogarnia i Gdańsk</b><span class="chip soft">9/10</span></div><span class="mu">"Ta de stekta med svamp."</span></div><div class="card"><div class="row"><b>Torvehallerne, Köpenhamn</b><span class="chip soft">8/10</span></div><span class="mu">"Kom hungrig."</span></div><span class="mu">Exempel. Era betyg kan delas med vänner.</span>');return 1},
+ export(){expSheet();return 1}
+};
+$('phone').addEventListener('click',e=>{
+ if(e.target.id==='sheet'){$('sheet').hidden=true;return}
+ const t=e.target.closest('[data-act]');if(!t)return;
+ const f=ACT[t.dataset.act];if(!f)return;
+ if(!f(t.dataset))render()});
+$('phone').addEventListener('submit',e=>{e.preventDefault();if(e.target.id==='buyform'){const f=new FormData(e.target),n=String(f.get('n')).trim().slice(0,40);if(n){S.buy.push({id:'e'+Date.now(),n,p:Math.max(0,+f.get('p')||0),f:'',d:0});render()}return}if(e.target.id==='recform'){const f=new FormData(e.target),n=String(f.get('n')).trim().slice(0,24);if(n){S.rec.push({n,r:f.get('r'),i:String(f.get('i')).trim().slice(0,60)});S.gift='r'+(S.rec.length-1);render()}return}if(e.target.id==='colform'){const n=String(new FormData(e.target).get('n')).trim().slice(0,30);if(n){ACT.coladd({v:n});render()}return}if(e.target.id==='locform'){const n=String(new FormData(e.target).get('n')).trim().slice(0,40);if(n){ACT.setloc({v:n});render()}return}if(e.target.id==='preform'){const n=String(new FormData(e.target).get('n')).trim().slice(0,60);if(n){S.preL.push(['egen'+Date.now(),n,'Egen punkt']);render()}return}if(e.target.id!=='expform')return;const f=new FormData(e.target),amt=parseFloat(f.get('amt'));if(!(amt>0))return;S.exp.push({n:String(f.get('n')).slice(0,40),amt,cur:f.get('cur'),by:f.get('by'),c:f.get('c')});$('sheet').hidden=true;render();toast('Utgift sparad')});
+$('phone').addEventListener('change',e=>{const k=e.target.dataset.fl,q=e.target.dataset.st;const D=e.target.dataset;if(D.cp){if(/^#[0-9a-f]{6}$/i.test(e.target.value))S.cp[D.cp]=e.target.value;render();return}if(D.fo){S[D.fo]=+e.target.value;render();return}if(D.bb){S.buyBud=Math.max(0,+e.target.value||0);render();return}if(e.target.dataset.hp){if(/^\d{4}-\d\d-\d\d$/.test(e.target.value))S.hp.born=e.target.value;render();return}if(k)S.fl[k]=e.target.value;if(q)S.st[q]=e.target.value;if(k||q)render()});
+$('phone').addEventListener('input',e=>{if(e.target.id==='rad'){S.rad=+e.target.value;theme();e.target.parentNode.firstChild.textContent='Rundning: '+S.rad+' px'}});
+render();
+</script>
+</body>
+</html>

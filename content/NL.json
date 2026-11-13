@@ -1,0 +1,731 @@
+{
+  "places": [
+    {
+      "id": "NL",
+      "kind": "country",
+      "name": "Nederländerna",
+      "iso2": "NL",
+      "lat": 52.13,
+      "lon": 5.29,
+      "airport": "AMS",
+      "smart_months": [
+        1,
+        1,
+        2,
+        5,
+        5,
+        4,
+        3,
+        3,
+        4,
+        3,
+        1,
+        2
+      ],
+      "data": {
+        "best_text": "April till mitten av maj för tulpanerna, september för mildare väder och mindre trängsel.",
+        "transport": [
+          {
+            "mode": "Tåg",
+            "rating": "bast",
+            "text": "Checka in och ut med samma bankkort eller mobil i spärrarna. Ingen biljett behöver köpas i förväg."
+          },
+          {
+            "mode": "Buss, spårvagn och metro",
+            "rating": "bra",
+            "text": "Samma kort som på tåget. Glöm inte att checka ut när du kliver av."
+          }
+        ],
+        "sources": [
+          "https://9292.nl/en/fares-and-season-tickets/checking-in-checking-out/",
+          "https://keukenhof.nl/en/"
+        ]
+      }
+    },
+    {
+      "id": "NL-amsterdam",
+      "kind": "city",
+      "parent_id": "NL",
+      "name": "Amsterdam",
+      "lat": 52.3676,
+      "lon": 4.9041,
+      "airport": "AMS",
+      "smart_months": [
+        1,
+        1,
+        2,
+        5,
+        5,
+        4,
+        3,
+        3,
+        4,
+        3,
+        1,
+        2
+      ],
+      "data": {
+        "stay": [
+          {
+            "label": "Weekend",
+            "days": 2,
+            "text": "Kanalringen, ett museum och färjan till Noord. Boka museitiderna innan ni åker.",
+            "recommended": false
+          },
+          {
+            "label": "Långhelg",
+            "days": 4,
+            "text": "Hinner två museer, De Pijp och en halvdag i Zaanse Schans eller Keukenhof i säsong.",
+            "recommended": true
+          },
+          {
+            "label": "En vecka",
+            "days": 7,
+            "text": "Lägg till dagsturer med tåg, till exempel Kinderdijk, och lugnare dagar i Noord och Oost.",
+            "recommended": false
+          }
+        ],
+        "areas": [
+          {
+            "name": "Jordaan och kanalringen",
+            "stay": true,
+            "text": "Gångavstånd till det mesta och lugnt på kvällen. Dyrast i stan."
+          },
+          {
+            "name": "De Pijp",
+            "stay": true,
+            "text": "Albert Cuyp-marknaden, mycket mat och nära museerna. Metro 52 till Centraal."
+          },
+          {
+            "name": "Oud-West",
+            "stay": true,
+            "text": "Bostadskvarter nära Vondelpark med spårvagn in till centrum. Ofta billigare än kanalringen."
+          },
+          {
+            "name": "Noord",
+            "stay": true,
+            "text": "Billigare och nyare hotell. Gratisfärjan till Centraal går dygnet runt på linjen till Buiksloterweg."
+          },
+          {
+            "name": "De Wallen (Red Light District)",
+            "stay": false,
+            "text": "Stökigt och högljutt på nätterna, och hårdast regler för alkohol och cannabis på gatan. Besök, men sov någon annanstans."
+          }
+        ],
+        "transport": [
+          {
+            "mode": "Till fots och cykel",
+            "rating": "bast",
+            "text": "Centrum är litet. Det mesta inom kanalringen nås till fots."
+          },
+          {
+            "mode": "Spårvagn, metro och buss (GVB)",
+            "rating": "bra",
+            "text": "Blippa bankkort eller mobil vid på- och avstigning. Samma kort båda gångerna."
+          },
+          {
+            "mode": "Färja över IJ",
+            "rating": "bast",
+            "text": "Gratis för gående och cyklister, avgår bakom Centraalstationen till Noord och NDSM."
+          },
+          {
+            "mode": "Tåg från Schiphol",
+            "rating": "bast",
+            "text": "Direkttåg till Amsterdam Centraal på ca 16–17 min. Betala med kort i spärren."
+          }
+        ],
+        "best_text": "Mitten av april för tulpaner och Keukenhof, september för mindre köer.",
+        "sources": [
+          "https://iamsterdam.com/en/travel-stay/getting-around/public-transport/ferry",
+          "https://schiphol.com/en/page/by-train-from-schiphol/",
+          "https://9292.nl/en/journeyadvice/station-schiphol-airport/station-amsterdam-centraal",
+          "https://9292.nl/en/fares-and-season-tickets/checking-in-checking-out/",
+          "https://iamsterdam.com/en/travel-stay/visitor-information/rules-and-regulations"
+        ],
+        "day_budget_sek": 2000,
+        "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+        "own_judgment": [
+          "areas",
+          "best_text",
+          "day_budget_sek",
+          "smart_months",
+          "stay"
+        ]
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "NL-fakta-inresa",
+      "place_id": "NL",
+      "topic": "inresa",
+      "is_rule": true,
+      "title": "Pass eller nationellt id-kort",
+      "summary": "Svenskt körkort räcker inte. Ta pass eller nationellt id-kort från polisen.",
+      "body": "Nederländerna är med i EU och Schengen. Som svensk medborgare reser du med pass eller nationellt id-kort utfärdat av Polisen. Körkort och vanliga id-kort är inte resehandlingar. Normalt sker ingen gränskontroll, men du ska kunna visa handlingen.",
+      "source_url": "https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/giltiga-svenska-resehandlingar/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-alkohol",
+      "place_id": "NL",
+      "topic": "alkohol",
+      "is_rule": true,
+      "min_age": 18,
+      "title": "Alkohol från 18 år",
+      "summary": "18 år för all alkohol, även öl och vin.",
+      "body": "Du måste ha fyllt 18 för att köpa alkohol. Den som är under 18 och har alkohol med sig på allmän plats kan straffas. Räkna med att få visa legitimation.",
+      "source_url": "https://www.government.nl/faq/how-old-do-i-need-to-be-to-buy-alcohol-or-have-it-in-my-possession-in-public",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-droger",
+      "place_id": "NL",
+      "topic": "alkohol",
+      "is_rule": true,
+      "min_age": 18,
+      "title": "Cannabis tolereras bara i coffeeshops",
+      "summary": "Droger är olagliga. Cannabis tolereras i coffeeshops, inte fritt.",
+      "body": "Droger är olagliga i Nederländerna. Försäljning av små mängder cannabis tolereras i coffeeshops för vuxna, men det gör inte drogen laglig, och kommunerna har egna regler för gatan. Ta aldrig med något hem till Sverige.",
+      "source_url": "https://www.government.nl/topics/holidays-and-travels/alcohol-drugs-in-netherlands",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-hyrbil",
+      "place_id": "NL",
+      "topic": "hyrbil",
+      "is_rule": true,
+      "min_age": 21,
+      "title": "Hyrbil från 21 år",
+      "summary": "Minst 21 år hos Sixt och Avis, med avgift för förare under 25.",
+      "body": "Hos Sixt i Nederländerna ska föraren vara minst 21 och ha haft körkort i två år. Förare under 25 betalar en ung förare-avgift. Villkoren skiljer sig mellan firmor och bilklasser, så läs dem i bokningen.",
+      "source_url": "https://Sixt.com/car-rental/netherlands/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-medicin",
+      "place_id": "NL",
+      "topic": "medicin",
+      "is_rule": true,
+      "title": "Narkotikaklassad medicin kräver Schengenintyg",
+      "summary": "Hämta Schengenintyg på apotek för narkotikaklassade läkemedel.",
+      "body": "Reser du inom Schengen med narkotikaklassade läkemedel behöver du ett Schengenintyg från ett apotek. Det gäller högst 30 dagars förbrukning och ett intyg per läkemedel. Insulin får tas med i handbagaget.",
+      "source_url": "https://www.1177.se/undersokning-behandling/behandling-med-lakemedel/rad-om-lakemedel/resa-med-lakemedel/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-mobil",
+      "place_id": "NL",
+      "topic": "mobil",
+      "is_rule": false,
+      "title": "Surfa och ring som hemma",
+      "summary": "EU-roaming: samma pris som i Sverige för samtal, sms och surf.",
+      "body": "I EU betalar du lika mycket som hemma för samtal, sms och surf. Operatören får sätta ett tak för hur mycket surf som ingår utomlands, så kolla ditt abonnemang om du har en stor pott.",
+      "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-eluttag",
+      "place_id": "NL",
+      "topic": "eluttag",
+      "is_rule": false,
+      "title": "Samma kontakter som hemma",
+      "summary": "Typ C och F, 230 V. Ingen adapter behövs.",
+      "body": "Nederländerna har uttag av typ C och F med 230 V och 50 Hz, samma som i Sverige.",
+      "source_url": "https://Www.Cia.gov/the-world-factbook/countries/netherlands/travel-facts",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-betala",
+      "place_id": "NL",
+      "topic": "betala",
+      "is_rule": false,
+      "title": "Bankkortet är biljetten",
+      "summary": "Checka in och ut i kollektivtrafiken med samma kort eller mobil.",
+      "body": "All kollektivtrafik bygger på incheckning och utcheckning. Du kan använda ett kontaktlöst bankkort eller mobilen. Använd exakt samma kort eller enhet båda gångerna, annars räknas det som en ny resa. I Amsterdam sitter läsarna inne i spårvagnen.",
+      "source_url": "https://9292.nl/en/fares-and-season-tickets/checking-in-checking-out/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-fakta-ta-sig-dit",
+      "place_id": "NL-amsterdam",
+      "topic": "ta-sig-dit",
+      "is_rule": false,
+      "title": "Schiphol till centrum på en kvart",
+      "summary": "Direkttåg Schiphol–Amsterdam Centraal, ca 16–17 min.",
+      "body": "Tågstationen ligger under flygplatsen. Direkttåg går till Amsterdam Centraal på ca 16–17 minuter. Du betalar genom att blippa bankkort eller mobil i spärren, och checkar ut med samma kort.",
+      "source_url": "https://9292.nl/en/journeyadvice/station-schiphol-airport/station-amsterdam-centraal",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-fakta-turistskatt",
+      "place_id": "NL-amsterdam",
+      "topic": "turistskatt",
+      "is_rule": true,
+      "title": "Turistskatt 12,5 % på boendet",
+      "summary": "12,5 % av rumspriset under 2026. Höjning 2027 är föreslagen.",
+      "body": "Amsterdam tar 12,5 % av övernattningspriset i turistskatt under 2026. Kolla om den ingår i priset du ser när du bokar. Stadens styre har föreslagit 16 % från 2027 och därefter mer, men det var inte beslutat när detta skrevs.",
+      "source_url": "https://khn.nl/nieuws/toeristenbelasting-amsterdam-blijft-in-2026-gelijk-12-5",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-fakta-gaturegler",
+      "place_id": "NL-amsterdam",
+      "topic": "alkohol",
+      "is_rule": true,
+      "title": "Inte dricka eller röka på gatan i centrum",
+      "summary": "Alkohol och cannabis är förbjudet på gatan i gamla centrum. Böter 100 euro.",
+      "body": "Alkohol och cannabis är förbjudet på de flesta allmänna platser i centrum. Sedan 25 maj 2023 är det förbjudet att röka cannabis på gatan i gamla centrum, bland annat Red Light District, Nieuwmarkt och Dam. Böterna är 100 euro.",
+      "source_url": "https://iamsterdam.com/en/travel-stay/visitor-information/rules-and-regulations",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-fakta-kanalringen",
+      "place_id": "NL-amsterdam",
+      "topic": "fun-fact",
+      "is_rule": false,
+      "title": "Kanalerna är världsarv",
+      "summary": "Kanalringen från 1600-talet blev Unesco-världsarv 2010.",
+      "body": "Amsterdams kanalring innanför Singelgracht skrevs in på Unescos världsarvslista 2010.",
+      "source_url": "https://whc.unesco.org/en/list/1349/documents",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-fakta-kinderdijk",
+      "place_id": "NL",
+      "topic": "fun-fact",
+      "is_rule": false,
+      "title": "19 väderkvarnar på rad",
+      "summary": "Kinderdijks 19 kvarnar är världsarv sedan 1997.",
+      "body": "De 19 väderkvarnarna i Kinderdijk byggdes för att pumpa bort vatten. 17 av dem är från 1738–1740. Området är världsarv sedan 1997.",
+      "source_url": "https://werelderfgoed.nl/en/world-heritage/mill-network-kinderdijk-elshout",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-fakta-arenan",
+      "place_id": "NL-amsterdam",
+      "topic": "fun-fact",
+      "is_rule": false,
+      "title": "Arenan som bytte namn",
+      "summary": "Ajax hemmaarena hette Amsterdam ArenA fram till namnbytet efter Johan Cruijff.",
+      "body": "Ajax spelar på Johan Cruijff ArenA, byggd 1993–1996. Den ersatte De Meer, som bara rymde 19 000 åskådare.",
+      "source_url": "https://www.stadiumguide.com/arena/",
+      "verified_on": "2026-11-11"
+    }
+  ],
+  "items": [
+    {
+      "id": "NL-amsterdam-anne-frank-huset",
+      "place_id": "NL-amsterdam",
+      "category": "museum",
+      "name": "Anne Franks hus",
+      "must_rank": 1,
+      "lat": 52.3752,
+      "lon": 4.884,
+      "summary": "Biljetter säljs bara på nätet och släpps tisdagar kl. 10.",
+      "body": "Det går inte att köpa biljett i dörren. Varje tisdag kl. 10.00 släpps biljetter för besök sex veckor senare, bara på annefrank.org. Det finns ingen väntelista, så sätt en påminnelse.",
+      "source_url": "https://www.annefrank.org/en/museum/tickets/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-rijksmuseum",
+      "place_id": "NL-amsterdam",
+      "category": "museum",
+      "name": "Rijksmuseum",
+      "must_rank": 2,
+      "lat": 52.36,
+      "lon": 4.8852,
+      "summary": "Nattvakten och Vermeer. Boka starttid på nätet.",
+      "body": "Besöket börjar med en bokad starttid. Fri entré till och med 18 år, men starttid krävs ändå. Rembrandts Nattvakten och Vermeers Mjölkpigan hänger i Hedersgalleriet.",
+      "compendium_id": "sevardhet-nattvakten",
+      "source_url": "https://www.rijksmuseum.nl/visit-museum",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-van-gogh-museet",
+      "place_id": "NL-amsterdam",
+      "category": "museum",
+      "name": "Van Gogh-museet",
+      "must_rank": 3,
+      "lat": 52.3584,
+      "lon": 4.8811,
+      "summary": "Biljetter finns bara på nätet.",
+      "body": "Biljetter säljs bara online. Biljetten gäller både den fasta samlingen och aktuella utställningar. Köp via museets egen sida eller de återförsäljare museet listar.",
+      "source_url": "https://www.vangoghmuseum.nl/en/visit/tickets",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-kanalringen",
+      "place_id": "NL-amsterdam",
+      "category": "sevardhet",
+      "name": "Kanalringen",
+      "must_rank": 4,
+      "lat": 52.365,
+      "lon": 4.888,
+      "summary": "1600-talskanalerna innanför Singelgracht, världsarv sedan 2010.",
+      "body": "Gå längs Herengracht, Keizersgracht och Prinsengracht. Gratis och bäst tidigt på morgonen eller i skymningen.",
+      "source_url": "https://whc.unesco.org/en/list/1349/documents",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-farjan-till-noord",
+      "place_id": "NL-amsterdam",
+      "category": "upplevelse",
+      "name": "Gratisfärjan till Noord",
+      "must_rank": 5,
+      "lat": 52.3806,
+      "lon": 4.9003,
+      "summary": "Blåvita färjor bakom Centraalstationen. Gratis.",
+      "body": "Färjorna går ofta från baksidan av Centraalstationen över IJ till Noord och NDSM. Linjen till Buiksloterweg tar er till Eye Filmmuseum. Kliv på, ingen biljett.",
+      "compendium_id": "fardmedel-ij-farjan",
+      "source_url": "https://iamsterdam.com/en/travel-stay/getting-around/public-transport/ferry",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-stroopwafel-albert-cuyp",
+      "place_id": "NL-amsterdam",
+      "category": "mat",
+      "name": "Nygräddad stroopwafel på Albert Cuyp",
+      "must_rank": 6,
+      "lat": 52.3559,
+      "lon": 4.8954,
+      "summary": "Varm sirapsvåffla från ett marknadsstånd i De Pijp.",
+      "body": "På Albert Cuyp-marknaden gräddas stroopwafels medan du väntar. Våfflan kommer ursprungligen från Gouda.",
+      "compendium_id": "bakverk-stroopwafel",
+      "source_url": "https://www.theculturetrip.com/europe/the-netherlands/amsterdam/articles/where-to-eat-stroopwafels-in-amsterdam",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-amsterdam-johan-cruijff-arena",
+      "place_id": "NL-amsterdam",
+      "category": "fotboll",
+      "name": "Johan Cruijff ArenA",
+      "must_rank": 7,
+      "lat": 52.3143,
+      "lon": 4.9419,
+      "summary": "Ajax hemmaplan, med rundturer bakom kulisserna.",
+      "body": "Guidade turer på engelska och nederländska tar ca 60–75 minuter och går genom pressrum, mixad zon och omklädningsrum. Arenan ligger ca 10 km sydost om centrum.",
+      "compendium_id": "arena-johan-cruijff-arena",
+      "source_url": "https://www.stadiumguide.com/arena/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-keukenhof",
+      "place_id": "NL",
+      "category": "natur",
+      "name": "Keukenhof",
+      "must_rank": 1,
+      "lat": 52.2697,
+      "lon": 4.5469,
+      "summary": "Tulpanparken är öppen 18 mars–9 maj 2027.",
+      "body": "Parken är bara öppen på våren: 18 mars till 9 maj 2027, kl. 08.00–19.00, sista insläpp 18.15. Biljetter säljs på keukenhof.nl.",
+      "compendium_id": "blomma-tulpan",
+      "source_url": "https://keukenhof.nl/en/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-zaanse-schans",
+      "place_id": "NL",
+      "category": "sevardhet",
+      "name": "Zaanse Schans",
+      "must_rank": 2,
+      "lat": 52.4736,
+      "lon": 4.8214,
+      "summary": "Väderkvarnar ca 17 min med tåg från Amsterdam Centraal.",
+      "body": "Tåget till Zaandijk Zaanse Schans tar ca 17 minuter, sedan 15 minuters promenad. Enligt områdets egen sida är det gratis att gå runt i byn, medan kvarnar och vissa museer tar entré.",
+      "compendium_id": "sevardhet-vaderkvarn",
+      "source_url": "https://www.zaanseschans.com/en/contact/",
+      "verified_on": "2026-11-11"
+    },
+    {
+      "id": "NL-kinderdijk",
+      "place_id": "NL",
+      "category": "sevardhet",
+      "name": "Kinderdijk",
+      "must_rank": 3,
+      "lat": 51.8825,
+      "lon": 4.6494,
+      "summary": "19 väderkvarnar, världsarv sedan 1997.",
+      "body": "Landets mest kända kvarnlandskap, med 17 kvarnar byggda 1738–1740 och två ännu äldre. Ligger i Zuid-Holland öster om Rotterdam.",
+      "compendium_id": "sevardhet-vaderkvarn",
+      "source_url": "https://werelderfgoed.nl/en/world-heritage/mill-network-kinderdijk-elshout",
+      "verified_on": "2026-11-11"
+    }
+  ],
+  "compendium": [
+    {
+      "id": "bakverk-stroopwafel",
+      "category": "bakverk",
+      "name": "Stroopwafel",
+      "rarity": "vanlig",
+      "icon": "food",
+      "hint": "Två tunna våfflor med sirap emellan.",
+      "place_id": "NL",
+      "source_url": "https://www.theculturetrip.com/europe/the-netherlands/amsterdam/articles/where-to-eat-stroopwafels-in-amsterdam"
+    },
+    {
+      "id": "blomma-tulpan",
+      "category": "blomma",
+      "name": "Tulpanfält i blom",
+      "rarity": "ovanlig",
+      "icon": "flower",
+      "hint": "Bara några veckor på våren.",
+      "place_id": "NL",
+      "source_url": "https://keukenhof.nl/en/"
+    },
+    {
+      "id": "sevardhet-vaderkvarn",
+      "category": "sevardhet",
+      "name": "Holländsk väderkvarn",
+      "rarity": "vanlig",
+      "icon": "build",
+      "hint": "Byggd för att pumpa vatten, inte mala mjöl.",
+      "place_id": "NL",
+      "source_url": "https://werelderfgoed.nl/en/world-heritage/mill-network-kinderdijk-elshout"
+    },
+    {
+      "id": "sevardhet-nattvakten",
+      "category": "sevardhet",
+      "name": "Nattvakten",
+      "rarity": "sallsynt",
+      "icon": "pin",
+      "hint": "Rembrandt, 1642.",
+      "place_id": "NL-amsterdam",
+      "source_url": "https://www.rijksmuseum.nl/visit-museum"
+    },
+    {
+      "id": "arena-johan-cruijff-arena",
+      "category": "arena",
+      "name": "Johan Cruijff ArenA",
+      "rarity": "ovanlig",
+      "icon": "ball",
+      "hint": "Ajax hemmaplan.",
+      "place_id": "NL-amsterdam",
+      "source_url": "https://www.stadiumguide.com/arena/"
+    },
+    {
+      "id": "fardmedel-ij-farjan",
+      "category": "fardmedel",
+      "name": "Färjan över IJ",
+      "rarity": "vanlig",
+      "icon": "tram",
+      "hint": "Blåvit och gratis.",
+      "place_id": "NL-amsterdam",
+      "source_url": "https://iamsterdam.com/en/travel-stay/getting-around/public-transport/ferry"
+    }
+  ],
+  "ideas": [
+    {
+      "id": "NL-amsterdam-ide-farja-noord",
+      "place_id": "NL-amsterdam",
+      "kind": "i-stan",
+      "title": "Färjan till Noord i solnedgången",
+      "body": "Ta gratisfärjan bakom Centraal till Buiksloterweg, gå längs vattnet och åk tillbaka när det mörknar.",
+      "duration": "ca 2 h",
+      "cost_level": "gratis",
+      "tags": [
+        "ute",
+        "gratis"
+      ],
+      "lat": 52.3806,
+      "lon": 4.9003
+    },
+    {
+      "id": "NL-amsterdam-ide-kanalpromenad",
+      "place_id": "NL-amsterdam",
+      "kind": "i-stan",
+      "title": "Morgonpromenad längs tre kanaler",
+      "body": "Herengracht, Keizersgracht och Prinsengracht innan staden vaknar. Avsluta med kaffe i Jordaan.",
+      "duration": "ca 2 h",
+      "cost_level": "gratis",
+      "tags": [
+        "ute",
+        "gratis"
+      ],
+      "lat": 52.365,
+      "lon": 4.888
+    },
+    {
+      "id": "NL-amsterdam-ide-albert-cuyp",
+      "place_id": "NL-amsterdam",
+      "kind": "i-stan",
+      "title": "Ät er igenom Albert Cuyp",
+      "body": "Dela en nygräddad stroopwafel och plocka lunch från stånden på marknaden i De Pijp.",
+      "duration": "ca 2 h",
+      "cost_level": "billigt",
+      "tags": [
+        "ute"
+      ],
+      "lat": 52.3559,
+      "lon": 4.8954
+    },
+    {
+      "id": "NL-amsterdam-ide-museikvall",
+      "place_id": "NL-amsterdam",
+      "kind": "i-stan",
+      "title": "Ett museum, bokat i förväg",
+      "body": "Välj Rijksmuseum eller Van Gogh-museet och boka starttid innan resan. Anne Franks hus kräver att ni bokar sex veckor i förväg.",
+      "duration": "Halvdag",
+      "cost_level": "medel",
+      "tags": [
+        "inne"
+      ]
+    },
+    {
+      "id": "NL-amsterdam-ide-zaanse-schans",
+      "place_id": "NL-amsterdam",
+      "kind": "utflykt",
+      "title": "Halvdag bland väderkvarnarna",
+      "body": "Tåg till Zaandijk Zaanse Schans på ca 17 minuter och promenad över bron till kvarnarna.",
+      "duration": "Halvdag",
+      "cost_level": "billigt",
+      "tags": [
+        "ute"
+      ],
+      "lat": 52.4736,
+      "lon": 4.8214
+    },
+    {
+      "id": "NL-amsterdam-ide-keukenhof",
+      "place_id": "NL-amsterdam",
+      "kind": "dagstripp",
+      "title": "Keukenhof i tulpantid",
+      "body": "Går bara mellan 18 mars och 9 maj 2027. Köp biljett i förväg och åk tidigt.",
+      "duration": "En dag",
+      "cost_level": "medel",
+      "tags": [
+        "ute"
+      ],
+      "lat": 52.2697,
+      "lon": 4.5469
+    },
+    {
+      "id": "NL-amsterdam-ide-arenatur",
+      "place_id": "NL-amsterdam",
+      "kind": "fotboll",
+      "title": "Rundtur på Johan Cruijff ArenA",
+      "body": "Gå spelartunneln och se omklädningsrummen på Ajax hemmaplan. Turen tar ca 60–75 minuter.",
+      "duration": "ca 2 h",
+      "cost_level": "medel",
+      "tags": [
+        "inne"
+      ],
+      "lat": 52.3143,
+      "lon": 4.9419
+    }
+  ],
+  "gifts": [
+    {
+      "id": "NL-present-stroopwafels",
+      "place_id": "NL",
+      "name": "Stroopwafels i plåtburk",
+      "body": "Håller sig hela resan och burken blir kvar. Finns i mataffärer och på marknader.",
+      "for_whom": [
+        "mamma",
+        "pappa",
+        "van",
+        "mig"
+      ],
+      "keywords": [
+        "fika",
+        "godis",
+        "bakning"
+      ]
+    },
+    {
+      "id": "NL-present-delfts-blauw",
+      "place_id": "NL",
+      "name": "Delfts blauw",
+      "body": "Blåvit keramik med kvarnar och tulpaner. Välj en mugg eller liten skål hellre än en stor vas.",
+      "for_whom": [
+        "mamma",
+        "mig"
+      ],
+      "keywords": [
+        "inredning",
+        "keramik",
+        "kaffe"
+      ],
+      "collection_motifs": {
+        "Kaffemuggar": "Blåvit Delft-mugg med väderkvarn eller kanalhus",
+        "Kylskåpsmagneter": "Kanalhus i keramik",
+        "Shotglas": "Blåvitt med tulpan"
+      }
+    },
+    {
+      "id": "NL-present-tulpanlokar",
+      "place_id": "NL",
+      "name": "Tulpanlökar",
+      "body": "Säljs förpackade för resenärer. Planteras på hösten, så de passar bäst som present efter en vårresa om mottagaren har trädgård.",
+      "for_whom": [
+        "mamma",
+        "pappa"
+      ],
+      "keywords": [
+        "tradgard",
+        "blommor",
+        "odling"
+      ]
+    },
+    {
+      "id": "NL-present-gouda",
+      "place_id": "NL",
+      "name": "Lagrad gouda",
+      "body": "Vaxad hel eller i bit. Välj en lagrad sort, den tål resan bäst.",
+      "for_whom": [
+        "pappa",
+        "van",
+        "mig"
+      ],
+      "keywords": [
+        "mat",
+        "ost",
+        "matlagning"
+      ]
+    },
+    {
+      "id": "NL-present-ajax",
+      "place_id": "NL-amsterdam",
+      "name": "Ajax-halsduk",
+      "body": "Från klubbens officiella butik vid arenan.",
+      "for_whom": [
+        "pappa",
+        "van",
+        "barn",
+        "mig"
+      ],
+      "keywords": [
+        "fotboll",
+        "sport"
+      ]
+    },
+    {
+      "id": "NL-present-nijntje",
+      "place_id": "NL",
+      "name": "Nijntje (Miffy)",
+      "body": "Den holländska kaninen finns som gosedjur och böcker.",
+      "for_whom": [
+        "barn"
+      ],
+      "keywords": [
+        "gosedjur",
+        "bocker"
+      ]
+    },
+    {
+      "id": "NL-present-jenever",
+      "place_id": "NL",
+      "name": "Jenever",
+      "body": "Holländsk enbärssprit, föregångaren till gin. Finns i små flaskor.",
+      "for_whom": [
+        "pappa",
+        "van"
+      ],
+      "keywords": [
+        "dryck",
+        "gin"
+      ],
+      "min_age": 18
+    }
+  ]
+}

@@ -1,0 +1,419 @@
+{
+ "places": [
+  {
+   "id": "IS",
+   "kind": "country",
+   "name": "Island",
+   "iso2": "IS",
+   "lat": 64.9,
+   "lon": -18.6,
+   "airport": "KEF"
+  },
+  {
+   "id": "IS-reykjavik",
+   "kind": "city",
+   "parent_id": "IS",
+   "name": "Reykjavik",
+   "lat": 64.1466,
+   "lon": -21.9426,
+   "airport": "KEF",
+   "data": {
+    "transport": [
+     {
+      "mode": "Flybus från Keflavik",
+      "rating": "bast",
+      "text": "45 minuter till busstationen BSÍ. En buss avgår 35–45 minuter efter varje ankomst."
+     }
+    ],
+    "sources": [
+     "https://www.re.is/flybus"
+    ],
+    "day_budget_sek": 2500,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 3,
+      "text": "Stan, Blå lagunen och Gyllene cirkeln med Þingvellir, Strokkur och Gullfoss.",
+      "recommended": false
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Hinner sydkusten med övernattning på vägen.",
+      "recommended": true
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Lägg till Vatnajökull eller kör längre österut med hyrbil.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Centrum (101)",
+      "stay": true,
+      "text": "Gångavstånd till Hallgrímskirkja, Harpa och restaurangerna. Dyrast."
+     },
+     {
+      "name": "Laugardalur",
+      "stay": true,
+      "text": "Billigare, nära stans stora utomhusbad. Buss in till centrum."
+     }
+    ],
+    "best_text": "Juni till augusti för ljusa nätter och öppna vägar, september till mars för norrsken.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    2,
+    3,
+    3,
+    2,
+    3,
+    5,
+    5,
+    5,
+    4,
+    3,
+    2,
+    2
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "IS-fakta-inresa",
+   "place_id": "IS",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas normalt inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen, dit också Island och Norge hör. Inom Norden kan svenskt körkort räcka i vissa fall, men pass eller nationellt id-kort rekommenderas.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-fakta-mobil",
+   "place_id": "IS",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "Samma pris som i Sverige för samtal, sms och surf.",
+   "body": "Roaming som hemma gäller även i EES-länderna Island, Liechtenstein och Norge. Kolla om ditt abonnemang har ett tak för surf utomlands.",
+   "source_url": "https://telekomradgivarna.se/globalassets/faq-roamlikeathomesv.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-fakta-betala",
+   "place_id": "IS",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: isländska kronor (ISK)",
+   "summary": "Landet har isländska kronor (ISK)."
+  },
+  {
+   "id": "IS-fakta-alkohol",
+   "place_id": "IS",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 20,
+   "title": "Alkohol från 20 år",
+   "summary": "20 år gäller för all alkohol.",
+   "body": "Statliga Vínbúðin har ensamrätt på alkohol över 2,25 procent. Legitimation kontrolleras både i butik och på bar.",
+   "source_url": "https://www.tripbase.com/drug-laws/iceland/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-reykjavik-fakta-ta-sig-dit",
+   "place_id": "IS-reykjavik",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Keflavik till Reykjavik på 45 minuter",
+   "summary": "Flybus går till BSÍ efter varje ankommande flyg.",
+   "body": "Bussen passar alla ankomster, så du kan ta den som står inne. Wifi finns ombord.",
+   "source_url": "https://www.re.is/flybus",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-fakta-surtsey",
+   "place_id": "IS",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Ön som föddes ur havet",
+   "summary": "Vulkanön Surtsey är världsarv sedan 2008.",
+   "body": "Island har tre världsarv: Þingvellir (2004), Surtsey (2008) och Vatnajökull (2019).",
+   "source_url": "https://www.icelandreview.com/news/vatnajokull-national-park-approved-as-a-unesco-world-heritage-site/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "IS-thingvellir",
+   "place_id": "IS",
+   "category": "natur",
+   "name": "Þingvellir",
+   "summary": "Nationalpark och världsarv sedan 2004.",
+   "body": "Här grundades alltinget år 930. Landskapet och sjön Þingvallavatn hör ihop geologiskt.",
+   "lat": 64.2559,
+   "lon": -21.1299,
+   "must_rank": 1,
+   "source_url": "https://www.government.is/topics/environment-climate-and-nature-protection/national-parks-and-protected-areas/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-vatnajokull",
+   "place_id": "IS",
+   "category": "natur",
+   "name": "Vatnajökulls nationalpark",
+   "summary": "Täcker 14 procent av Island, världsarv sedan 2019.",
+   "body": "Vulkaner, glaciärer och öken i samma park.",
+   "lat": 64.42,
+   "lon": -16.8,
+   "must_rank": 2,
+   "source_url": "https://www.government.is/topics/environment-climate-and-nature-protection/national-parks-and-protected-areas/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-reykjavik-hallgrimskirkja",
+   "place_id": "IS-reykjavik",
+   "category": "byggnad",
+   "name": "Hallgrímskirkja",
+   "summary": "Kyrkan är gratis, tornet kostar.",
+   "body": "Stans landmärke med utsikt från tornet. Kyrkan används för gudstjänster och konserter, så torn och kyrka kan stänga tillfälligt.",
+   "lat": 64.1417,
+   "lon": -21.9266,
+   "must_rank": 1,
+   "source_url": "https://visitreykjavik.is/service/hallgrimskirkja-church",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-bla-lagunen",
+   "place_id": "IS",
+   "category": "upplevelse",
+   "name": "Blå lagunen",
+   "summary": "Måste förbokas. Biljetten har en ankomsttimme.",
+   "body": "Lagunen är oftast fullbokad året om. En biljett till kl. 13 gäller för ankomst 13–14, och sedan får du stanna så länge du vill. Alla duschar utan badkläder före badet.",
+   "lat": 63.8804,
+   "lon": -22.4495,
+   "must_rank": 3,
+   "source_url": "https://bluelagoon.com/support/blue-lagoon/before-you-visit",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-reykjavik-harpa",
+   "place_id": "IS-reykjavik",
+   "category": "byggnad",
+   "name": "Harpa",
+   "summary": "Konserthuset i glas vid hamnen. Gratis att gå in.",
+   "body": "De allmänna delarna är öppna sön–tis 10–18 och ons–lör 10–20. Konserter och guidade turer kräver biljett.",
+   "lat": 64.1503,
+   "lon": -21.9326,
+   "must_rank": 2,
+   "source_url": "https://www.centerhotels.com/en/blog/post/visiting-harpa-concert-hall-reykjavik-iceland",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-strokkur",
+   "place_id": "IS",
+   "category": "natur",
+   "name": "Strokkur och Geysir",
+   "summary": "Gejsern Strokkur har utbrott var sjätte till tionde minut.",
+   "body": "Ingen entré, gratis parkering och alltid öppet. Ligger i Haukadalur, ca 1,5 timme från Reykjavik. Själva Geysir har varit vilande sedan 2003.",
+   "lat": 64.3127,
+   "lon": -20.3007,
+   "must_rank": 4,
+   "source_url": "https://www.icelandtours.is/attractions/geysir-strokkur/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "IS-gullfoss",
+   "place_id": "IS",
+   "category": "natur",
+   "name": "Gullfoss",
+   "summary": "Vattenfallet tio minuter öster om Geysir.",
+   "body": "Tredje stoppet på Gyllene cirkeln tillsammans med Þingvellir och Geysir.",
+   "lat": 64.3271,
+   "lon": -20.1199,
+   "must_rank": 5,
+   "source_url": "https://www.icelandtours.is/attractions/geysir-strokkur/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-skyr",
+   "category": "mat",
+   "name": "Skyr",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Tjock syrad mjölkprodukt som äts med sked.",
+   "place_id": "IS"
+  },
+  {
+   "id": "mat-pylsa",
+   "category": "mat",
+   "name": "Isländsk varmkorv",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Beställ den med allt på.",
+   "place_id": "IS"
+  },
+  {
+   "id": "daggdjur-islandshast",
+   "category": "daggdjur",
+   "name": "Islandshäst",
+   "rarity": "vanlig",
+   "icon": "paw",
+   "hint": "Liten och lurvig, står ofta vid vägkanten.",
+   "place_id": "IS"
+  },
+  {
+   "id": "fagel-lunnefagel",
+   "category": "fagel",
+   "name": "Lunnefågel",
+   "rarity": "sallsynt",
+   "icon": "bird",
+   "hint": "Svartvit med färgglad näbb, vid kusten på sommaren.",
+   "place_id": "IS"
+  },
+  {
+   "id": "naturfenomen-gejser",
+   "category": "naturfenomen",
+   "name": "Gejser i utbrott",
+   "rarity": "ovanlig",
+   "icon": "sky",
+   "hint": "Varm källa som kastar upp vatten med jämna mellanrum.",
+   "place_id": "IS"
+  },
+  {
+   "id": "naturfenomen-norrsken",
+   "category": "naturfenomen",
+   "name": "Norrsken",
+   "rarity": "sallsynt",
+   "icon": "sky",
+   "hint": "Kräver mörker och klar himmel.",
+   "place_id": "IS"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "IS-reykjavik-ide-thingvellir",
+   "place_id": "IS-reykjavik",
+   "kind": "utflykt",
+   "title": "Dagstur till Þingvellir",
+   "body": "Gå i sprickdalen där alltinget möttes.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "IS-reykjavik-ide-kyrktornet",
+   "place_id": "IS-reykjavik",
+   "kind": "i-stan",
+   "title": "Utsikt från Hallgrímskirkja",
+   "body": "Åk upp i tornet en klar dag och gå sedan ner längs huvudgatan.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "IS-ide-bla-lagunen",
+   "place_id": "IS",
+   "kind": "utflykt",
+   "title": "Blå lagunen på väg till eller från flyget",
+   "body": "Boka tiden i god tid och lägg badet första eller sista dagen.",
+   "duration": "Halvdag",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "IS-reykjavik-ide-gyllene-cirkeln",
+   "place_id": "IS-reykjavik",
+   "kind": "dagstripp",
+   "title": "Gyllene cirkeln",
+   "body": "Þingvellir, Strokkur och Gullfoss på en dag. Går med hyrbil eller busstur.",
+   "duration": "En dag",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "IS-reykjavik-ide-harpa",
+   "place_id": "IS-reykjavik",
+   "kind": "i-stan",
+   "title": "Harpa i skymningen",
+   "body": "Gå in och titta på glasfasaden inifrån, och fortsätt längs hamnen.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "IS-present-ull",
+   "place_id": "IS",
+   "name": "Isländsk ull",
+   "body": "Mössa eller vantar är billigare och lättare än en hel tröja.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "klader",
+    "vinter",
+    "stickning"
+   ]
+  },
+  {
+   "id": "IS-present-brennivin",
+   "place_id": "IS",
+   "name": "Brennivín",
+   "body": "Isländsk kumminsprit i liten flaska.",
+   "for_whom": [
+    "pappa",
+    "van"
+   ],
+   "keywords": [
+    "dryck"
+   ],
+   "min_age": 20
+  },
+  {
+   "id": "IS-present-mugg",
+   "place_id": "IS",
+   "name": "Mugg i lavakeramik",
+   "body": "Lokal keramik med svart, sträv yta.",
+   "for_whom": [
+    "mig",
+    "mamma"
+   ],
+   "keywords": [
+    "kaffe",
+    "keramik"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Svart mugg i lavaglasyr"
+   }
+  }
+ ]
+}

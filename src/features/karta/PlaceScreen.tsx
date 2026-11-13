@@ -1,0 +1,602 @@
+// Landssida och stadssida: Översikt, Lista, Guide, Månad, Boka och Köp med hem (som i prototypen).
+// Allt innehåll kommer från databasen. Saknas innehåll visas land.saknar-innehall och status fungerar ändå.
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { BottomSheet } from '../../components/BottomSheet';
+import { useFeedback } from '../../components/Feedback';
+import { Icon } from '../../components/Icon';
+import { Loading } from '../../components/Loading';
+import { Row } from '../../components/Row';
+import { Segment } from '../../components/Segment';
+import {
+  countryOf,
+  descendants,
+  fetchFacts,
+  fetchGifts,
+  fetchItems,
+  fetchPlaces,
+  isEstimate,
+  placeName,
+  type GiftTip,
+  type Place,
+  type PlaceFact,
+  type PlaceItem,
+} from '../../lib/content';
+import { googleMaps } from '../../lib/links';
+import { useSession } from '../../lib/session';
+import { setItemCheck, STATUS_KEY, useMyPlaces } from '../../lib/status';
+import { useT } from '../../lib/useT';
+import { SMART_COLORS } from '../../theme/palettes';
+import { BokaView } from './BokaView';
+import { monthNames } from './months';
+import { StatusPicker } from './StatusPicker';
+import { formatDate, formatSek } from './format';
+
+type View = 'oversikt' | 'lista' | 'guide' | 'manad' | 'boka' | 'kop';
+const TABS: View[] = ['oversikt', 'lista', 'guide', 'manad', 'boka'];
+const VIEW_KEY: Record<View, string> = {
+  oversikt: 'land.vy.oversikt',
+  lista: 'land.vy.lista',
+  guide: 'land.vy.guide',
+  manad: 'land.vy.manad',
+  boka: 'land.vy.boka',
+  kop: 'land.vy.kop',
+};
+const isView = (v: string | null): v is View => Boolean(v && v in VIEW_KEY);
+
+interface Loaded {
+  facts: PlaceFact[];
+  items: PlaceItem[];
+  gifts: GiftTip[];
+}
+
+/** Märkning för fält som är egen bedömning utan källa. */
+function Estimate() {
+  const t = useT();
+  return (
+    <span className="chip soft est">
+      {t('knapp.uppskattning')}
+      <span className="sr-only">. {t('knapp.uppskattning-hjalp')}</span>
+    </span>
+  );
+}
+
+function Source({ url, date }: { url?: string | null; date?: string | null }) {
+  const t = useT();
+  if (!url && !date) return null;
+  return (
+    <span className="src mu">
+      {url && (
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          {t('knapp.kalla')}
+        </a>
+      )}
+      {date && <span>{t('knapp.kontrollerad', { datum: formatDate(date) })}</span>}
+    </span>
+  );
+}
+
+export default function PlaceScreen() {
+  const t = useT();
+  const { id = '' } = useParams();
+  const [params, setParams] = useSearchParams();
+  const { session } = useSession();
+  const mine = useMyPlaces(session?.user.id ?? null);
+  const { party, toast } = useFeedback();
+  const [places, setPlaces] = useState<Place[] | null>(null);
+  const [loaded, setLoaded] = useState<Loaded | null>(null);
+  const [openItem, setOpenItem] = useState<PlaceItem | null>(null);
+  const [openFact, setOpenFact] = useState<PlaceFact | null>(null);
+  const vy = params.get('vy');
+  const view: View = isView(vy) ? vy : 'oversikt';
+  const setView = (v: View) => setParams(v === 'oversikt' ? {} : { vy: v }, { replace: true });
+
+  useEffect(() => {
+    let alive = true;
+    fetchPlaces()
+      .then((p) => alive && setPlaces(p))
+      .catch(() => alive && setPlaces([]));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const place = places?.find((p) => p.id === id) ?? null;
+  const subIds = useMemo(() => (places && place ? [place.id, ...descendants(places, place.id).map((p) => p.id)] : []), [places, place]);
+  const subKey = subIds.join(',');
+
+  useEffect(() => {
+    if (!places) return;
+    if (!subIds.length) {
+      setLoaded({ facts: [], items: [], gifts: [] });
+      return;
+    }
+    let alive = true;
+    setLoaded(null);
+    Promise.all([fetchFacts(subIds), fetchItems(subIds), fetchGifts(subIds)])
+      .then(([facts, items, gifts]) => alive && setLoaded({ facts, items, gifts }))
+      .catch(() => alive && setLoaded({ facts: [], items: [], gifts: [] }));
+    return () => {
+      alive = false;
+    };
+  }, [places, subKey]);
+
+  if (!places || !loaded) return <Loading />;
+
+  const knownCountry = /^[A-Z]{2}$/.test(id);
+  if (!place && !knownCountry) {
+    return (
+      <main className="scr">
+        <BackLink />
+        <div className="card soft">
+          <p>{t('allmant.saknas')}</p>
+        </div>
+      </main>
+    );
+  }
+
+  const name = placeName(places, id);
+  const status = mine.statuses[id];
+  const total = Object.keys(mine.statuses).length;
+  const data = place?.data ?? {};
+  const hasData = Object.keys(data).length > 0;
+  const empty = !place || (!hasData && !loaded.facts.length && !loaded.items.length && !loaded.gifts.length);
+  const parent = place?.parent_id ? places.find((p) => p.id === place.parent_id) : null;
+  const items = loaded.items;
+  const done = items.filter((i) => mine.checks.has(i.id)).length;
+  const pct = items.length ? Math.round((done / items.length) * 100) : 0;
+
+  const toggle = async (item: PlaceItem) => {
+    const now = !mine.checks.has(item.id);
+    try {
+      await setItemCheck(item.id, now);
+      if (now && done + 1 === items.length) party(t('land.lista.klar', { plats: name }));
+    } catch {
+      toast(t('allmant.fel-spara'));
+    }
+  };
+
+  return (
+    <main className="scr">
+      <BackLink />
+      <div className="hero">
+        <div className="row">
+          <div className="col" style={{ gap: 2 }}>
+            <h1>{name}</h1>
+            <span className="hero-sub">
+              {t(STATUS_KEY[status ?? 'ej'])}
+              {parent ? ` · ${parent.name}` : ''}
+            </span>
+          </div>
+          {items.length > 0 && (
+            <div className="ring" style={{ background: `conic-gradient(var(--a) ${pct * 3.6}deg, rgba(255,255,255,.25) 0)` }} aria-hidden="true">
+              <span>{pct} %</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <StatusPicker placeId={id} name={name} current={status} total={total} label={name} />
+
+      {empty ? (
+        <div className="card soft">
+          <p>{t('land.saknar-innehall', { plats: name })}</p>
+        </div>
+      ) : (
+        <>
+          <Segment<View>
+            value={view === 'kop' ? 'oversikt' : view}
+            onChange={setView}
+            options={TABS.map((v) => ({ value: v, label: t(VIEW_KEY[v]) }))}
+          />
+          {view === 'kop' && (
+            <button type="button" className="back" onClick={() => setView('oversikt')}>
+              <Icon name="back" size={20} />
+              {t('land.vy.oversikt')}
+            </button>
+          )}
+          {view === 'oversikt' && (
+            <Oversikt place={place!} places={places} items={items} checks={mine.checks} onItem={setOpenItem} onKop={() => setView('kop')} />
+          )}
+          {view === 'lista' && <Lista name={name} items={items} checks={mine.checks} onToggle={toggle} onItem={setOpenItem} />}
+          {view === 'guide' && <Guide facts={loaded.facts} onFact={setOpenFact} />}
+          {view === 'manad' && <Manad place={place!} />}
+          {view === 'boka' && <BokaView place={place!} country={countryOf(places, place!.id)} />}
+          {view === 'kop' && <Kop name={name} gifts={loaded.gifts} />}
+        </>
+      )}
+
+      <BottomSheet open={Boolean(openItem)} title={openItem?.name ?? ''} onClose={() => setOpenItem(null)}>
+        {openItem && (
+          <>
+            {openItem.summary && <p className="mu">{openItem.summary}</p>}
+            {openItem.body && <p>{openItem.body}</p>}
+            <Source url={openItem.source_url} date={openItem.verified_on} />
+            <button
+              type="button"
+              className={mine.checks.has(openItem.id) ? 'btn ghost' : 'btn'}
+              aria-pressed={mine.checks.has(openItem.id)}
+              onClick={() => toggle(openItem)}
+            >
+              <Icon name="check" size={20} />
+              {t('knapp.klar')}
+            </button>
+            {openItem.lat != null && openItem.lon != null && (
+              <a className="btn ghost" href={googleMaps(openItem.name, openItem.lat, openItem.lon)} target="_blank" rel="noopener noreferrer">
+                <Icon name="pin" size={20} />
+                {t('knapp.oppna-karta')}
+              </a>
+            )}
+          </>
+        )}
+      </BottomSheet>
+
+      <BottomSheet open={Boolean(openFact)} title={openFact?.title ?? ''} onClose={() => setOpenFact(null)}>
+        {openFact && (
+          <>
+            {openFact.summary && <p className="mu">{openFact.summary}</p>}
+            {openFact.body && <p>{openFact.body}</p>}
+            <Source url={openFact.source_url} date={openFact.verified_on} />
+            {openFact.is_rule && <p className="mu">{t('land.regler.ansvar')}</p>}
+          </>
+        )}
+      </BottomSheet>
+    </main>
+  );
+}
+
+function BackLink() {
+  const t = useT();
+  return (
+    <Link className="back" to="/karta">
+      <Icon name="back" size={20} />
+      {t('knapp.tillbaka')}
+    </Link>
+  );
+}
+
+function Oversikt({
+  place,
+  places,
+  items,
+  checks,
+  onItem,
+  onKop,
+}: {
+  place: Place;
+  places: Place[];
+  items: PlaceItem[];
+  checks: Set<string>;
+  onItem: (i: PlaceItem) => void;
+  onKop: () => void;
+}) {
+  const t = useT();
+  const d = place.data;
+  const children = places.filter((p) => p.parent_id === place.id && (p.kind === 'city' || p.kind === 'spot'));
+  // Städer som ligger under regioner (som i Sverige) visas också.
+  const cities = [...children, ...descendants(places, place.id).filter((p) => p.kind === 'city' && !children.includes(p))];
+  const must = items.filter((i) => i.must_rank != null).sort((a, b) => (a.must_rank ?? 0) - (b.must_rank ?? 0));
+  const stayHere = d.areas?.filter((a) => a.stay) ?? [];
+  const avoid = d.areas?.filter((a) => !a.stay) ?? [];
+
+  return (
+    <>
+      {cities.length > 0 && (
+        <section className="col">
+          <h2 className="eb">{t('land.platser')}</h2>
+          {cities.map((c) => (
+            <Row key={c.id} to={`/karta/${c.id}`} icon="pin" title={c.name} />
+          ))}
+        </section>
+      )}
+
+      {must.length > 0 && (
+        <section className="col">
+          <h2 className="eb">{t('land.missa-inte')}</h2>
+          <div className="hs">
+            {must.map((i) => (
+              <button key={i.id} type="button" className={`card${checks.has(i.id) ? ' soft' : ''}`} onClick={() => onItem(i)}>
+                <span className="num">{i.must_rank}</span>
+                <b>{i.name}</b>
+                {i.summary && <span className="mu">{i.summary}</span>}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {d.stay && d.stay.length > 0 && (
+        <section className="col">
+          <div className="row">
+            <h2 className="eb">{t('land.vistelse.rubrik')}</h2>
+            {isEstimate(d, 'stay') && <Estimate />}
+          </div>
+          {d.stay.map((s) => (
+            <div key={s.label} className="li">
+              <span className="badge">{s.days}</span>
+              <span className="t">
+                <b>{s.label}</b>
+                <span className="mu">{s.text}</span>
+              </span>
+              {s.recommended && <span className="chip soft tag">{t('land.vistelse.rekommenderad')}</span>}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {d.day_budget_sek != null && (
+        <div className="card">
+          <div className="row">
+            <b>{t('land.budget.per-dag', { belopp: formatSek(d.day_budget_sek) })}</b>
+            {isEstimate(d, 'day_budget_sek') && <Estimate />}
+          </div>
+          {d.day_budget_note && <span className="mu">{d.day_budget_note}</span>}
+        </div>
+      )}
+
+      {d.best_text && (
+        <div className="card soft">
+          <div className="row">
+            <span>{d.best_text}</span>
+            {isEstimate(d, 'best_text') && <Estimate />}
+          </div>
+        </div>
+      )}
+
+      {stayHere.length > 0 && (
+        <section className="col">
+          <div className="row">
+            <h2 className="eb">{t('land.omraden.bo')}</h2>
+            {isEstimate(d, 'areas') && <Estimate />}
+          </div>
+          {stayHere.map((a) => (
+            <div key={a.name} className="li">
+              <span className="badge ok">
+                <Icon name="check" size={18} stroke={3} />
+              </span>
+              <span className="t">
+                <b>{a.name}</b>
+                <span className="mu">{a.text}</span>
+              </span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {avoid.length > 0 && (
+        <section className="col">
+          <div className="row">
+            <h2 className="eb">{t('land.omraden.undvik')}</h2>
+            {isEstimate(d, 'areas') && <Estimate />}
+          </div>
+          {avoid.map((a) => (
+            <div key={a.name} className="li">
+              <span className="badge no">
+                <Icon name="x" size={18} stroke={3} />
+              </span>
+              <span className="t">
+                <b>{a.name}</b>
+                <span className="mu">{a.text}</span>
+              </span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {d.transport && d.transport.length > 0 && (
+        <section className="col">
+          <div className="row">
+            <h2 className="eb">{t('land.transport.rubrik')}</h2>
+            {isEstimate(d, 'transport') && <Estimate />}
+          </div>
+          {d.transport.map((x) => (
+            <div key={x.mode} className="li">
+              <span className="t">
+                <b>{x.mode}</b>
+                <span className="mu">{x.text}</span>
+              </span>
+              <span className="chip soft tag">{t(`land.transport.${x.rating}`)}</span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {d.flight_tips && d.flight_tips.length > 0 && (
+        <section className="col">
+          <div className="row">
+            <h2 className="eb">{t('land.flygtips.rubrik')}</h2>
+            {isEstimate(d, 'flight_tips') && <Estimate />}
+          </div>
+          {d.flight_tips.map((x) => (
+            <div key={x.title} className="li">
+              <span className="t">
+                <b>{x.title}</b>
+                <span className="mu">{x.text}</span>
+              </span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      <Row icon="heart" title={t('land.vy.kop')} onClick={onKop} />
+
+      {d.sources && d.sources.length > 0 && (
+        <div className="chips">
+          {d.sources.map((u, i) => (
+            <a key={u} className="chip" href={u} target="_blank" rel="noopener noreferrer">
+              {t('knapp.kalla')} {i + 1}
+            </a>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+function Lista({
+  name,
+  items,
+  checks,
+  onToggle,
+  onItem,
+}: {
+  name: string;
+  items: PlaceItem[];
+  checks: Set<string>;
+  onToggle: (i: PlaceItem) => void;
+  onItem: (i: PlaceItem) => void;
+}) {
+  const t = useT();
+  if (!items.length) {
+    return (
+      <div className="card soft">
+        <p>{t('land.lista.tom', { plats: name })}</p>
+      </div>
+    );
+  }
+  const cats = [...new Set(items.map((i) => i.category))];
+  return (
+    <>
+      {cats.map((c) => {
+        const list = items.filter((i) => i.category === c);
+        return (
+          <section key={c} className="col">
+            <div className="row">
+              <h2 className="eb">{t(`lista.kategori.${c}`)}</h2>
+              <span className="mu">
+                {list.filter((i) => checks.has(i.id)).length}/{list.length}
+              </span>
+            </div>
+            {list.map((i) => {
+              const on = checks.has(i.id);
+              return (
+                <div key={i.id} className="li">
+                  <button type="button" className={`box${on ? ' on' : ''}`} aria-pressed={on} aria-label={i.name} onClick={() => onToggle(i)}>
+                    {on && <Icon name="check" size={16} stroke={3} />}
+                  </button>
+                  <button type="button" className="t" onClick={() => onItem(i)}>
+                    <b className={on ? 'done' : ''}>{i.name}</b>
+                    {i.summary && <span className="mu">{i.summary}</span>}
+                  </button>
+                  <span className="chev">
+                    <Icon name="chev" size={18} />
+                  </span>
+                </div>
+              );
+            })}
+          </section>
+        );
+      })}
+    </>
+  );
+}
+
+function Guide({ facts, onFact }: { facts: PlaceFact[]; onFact: (f: PlaceFact) => void }) {
+  const t = useT();
+  const guide = facts.filter((f) => !f.is_rule);
+  const rules = facts.filter((f) => f.is_rule);
+  return (
+    <>
+      {guide.map((f) => (
+        <Row key={f.id} title={f.title} sub={f.summary ?? undefined} onClick={() => onFact(f)} />
+      ))}
+      {rules.length > 0 && (
+        <section className="col">
+          <h2 className="eb">{t('land.regler.rubrik')}</h2>
+          {rules.map((f) => (
+            <div key={f.id} className="card">
+              <div className="row" style={{ justifyContent: 'flex-start' }}>
+                {f.min_age != null && <span className="badge">{f.min_age}</span>}
+                <button type="button" className="t-btn" onClick={() => onFact(f)}>
+                  <b>{f.title}</b>
+                  {f.summary && <span className="mu">{f.summary}</span>}
+                </button>
+              </div>
+              <Source url={f.source_url} date={f.verified_on} />
+            </div>
+          ))}
+          <p className="mu">{t('land.regler.ansvar')}</p>
+        </section>
+      )}
+    </>
+  );
+}
+
+function Manad({ place }: { place: Place }) {
+  const t = useT();
+  const months = useMemo(() => monthNames(), []);
+  const m = place.smart_months;
+  const d = place.data;
+  if (!m && !d.best_text) {
+    return (
+      <div className="card soft">
+        <p>{t('land.saknar-innehall', { plats: place.name })}</p>
+      </div>
+    );
+  }
+  return (
+    <div className="card">
+      <div className="row">
+        <h2 className="h3">{t('karta.lage.smart')}</h2>
+        {isEstimate(d, 'smart_months') && <Estimate />}
+      </div>
+      {m && (
+        <div className="bars" role="list">
+          {m.map((x, i) => (
+            <div key={months[i].long} role="listitem" aria-label={`${months[i].long}: ${x}/5`}>
+              <i style={{ height: `${Math.max(4, x * 20)}px`, background: SMART_COLORS[x] ?? SMART_COLORS[0] }} />
+              <span aria-hidden="true">{months[i].short}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      {d.best_text && (
+        <div className="card soft">
+          <div className="row">
+            <span>{d.best_text}</span>
+            {isEstimate(d, 'best_text') && <Estimate />}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Kop({ name, gifts }: { name: string; gifts: GiftTip[] }) {
+  const t = useT();
+  if (!gifts.length) {
+    return (
+      <div className="card soft">
+        <p>{t('land.kop.tom', { plats: name })}</p>
+      </div>
+    );
+  }
+  return (
+    <>
+      {gifts.map((g) => (
+        <div key={g.id} className="card">
+          <div className="row">
+            <h2 className="h3">{g.name}</h2>
+            {g.min_age != null && <span className="chip soft tag">{g.min_age}+</span>}
+          </div>
+          {g.body && <p>{g.body}</p>}
+          {g.price_sek != null && <b>{formatSek(g.price_sek)}</b>}
+          {g.for_whom.length > 0 && (
+            <div className="chips">
+              {g.for_whom.map((w) => (
+                <span key={w} className="chip soft tag">
+                  {t(`present.for.${w}`)}
+                </span>
+              ))}
+            </div>
+          )}
+          {Object.entries(g.collection_motifs).map(([k, v]) => (
+            <span key={k} className="mu">
+              <b>{k}</b>: {v}
+            </span>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}

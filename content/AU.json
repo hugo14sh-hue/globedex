@@ -1,0 +1,359 @@
+{
+ "places": [
+  {
+   "id": "AU",
+   "kind": "country",
+   "name": "Australien",
+   "iso2": "AU",
+   "lat": -25.3,
+   "lon": 133.8,
+   "airport": "SYD"
+  },
+  {
+   "id": "AU-sydney",
+   "kind": "city",
+   "parent_id": "AU",
+   "name": "Sydney",
+   "lat": -33.8688,
+   "lon": 151.2093,
+   "airport": "SYD",
+   "data": {
+    "transport": [
+     {
+      "mode": "Flygtåget",
+      "rating": "bast",
+      "text": "13 minuter till Central. Blippa betalkortet i spärren. En stationsavgift läggs på biljettpriset."
+     },
+     {
+      "mode": "Färja från Circular Quay",
+      "rating": "bra",
+      "text": "Färjan till Manly tar 30 minuter och går förbi Operahuset."
+     }
+    ],
+    "sources": [
+     "https://transportnsw.info/tickets-fares/getting-to-from-sydney-airport",
+     "https://www.sydneytourism.org/things-to-do-in-sydney/"
+    ],
+    "day_budget_sek": 2200,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Fyra dagar",
+      "days": 4,
+      "text": "Hamnen, Operahuset, Manly och kustvandringen.",
+      "recommended": false
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Hinner en dagstur till Blue Mountains och fler stränder.",
+      "recommended": true
+     },
+     {
+      "label": "Tio dagar",
+      "days": 10,
+      "text": "Lägg till kusten norr eller söder om stan.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "CBD och The Rocks",
+      "stay": true,
+      "text": "Gångavstånd till Circular Quay, färjorna och Operahuset."
+     },
+     {
+      "name": "Surry Hills",
+      "stay": true,
+      "text": "Kaféer och restauranger, nära Central där flygtåget stannar."
+     },
+     {
+      "name": "Bondi",
+      "stay": true,
+      "text": "Strandliv och kustvandringen utanför dörren. Buss och tåg in till stan."
+     },
+     {
+      "name": "Manly",
+      "stay": true,
+      "text": "Strand och småstadskänsla, 30 minuter med färja från stan."
+     },
+     {
+      "name": "Kings Cross",
+      "stay": false,
+      "text": "Stans gamla nöjeskvarter. Billigt, men stökigare på nätterna."
+     }
+    ],
+    "best_text": "Mars till april och oktober till november. Badsäsongen är november till mars.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    4,
+    4,
+    5,
+    5,
+    3,
+    2,
+    2,
+    2,
+    4,
+    5,
+    5,
+    4
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "AU-fakta-betala",
+   "place_id": "AU",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: australiska dollar (AUD)",
+   "summary": "Landet har australiska dollar (AUD)."
+  },
+  {
+   "id": "AU-fakta-mobil",
+   "place_id": "AU",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "EU-roaming gäller inte",
+   "summary": "Australien ligger utanför EU:s roamingregler.",
+   "body": "Operatörerna får ta ut helt andra priser utanför EU. Kolla prislistan eller köp ett lokalt datapaket eller eSIM innan du slår på mobildata.",
+   "source_url": "https://www.mynewsdesk.com/se/telekomradgivarna/news/haall-koll-paa-mobilkostnader-under-semestern-311014",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-fakta-inresa",
+   "place_id": "AU",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Gratis eVisitor krävs före resan",
+   "summary": "Svenska medborgare ansöker om eVisitor (651) på nätet. Det kostar inget.",
+   "body": "Tillståndet gäller i tolv månader och ger rätt att stanna upp till tre månader per besök. Ansökan görs i ImmiAccount i webbläsaren, inte i ETA-appen. Det går inte att förlänga.",
+   "source_url": "https://www.australianvisaonline.com/country-guides/australian-evisitor-visa-for-swedish-citizens",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-fakta-biosakerhet",
+   "place_id": "AU",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Deklarera all mat, växter och djurprodukter",
+   "summary": "Kryssa ja på inresekortet om du har mat, frön, trä eller djurprodukter med dig.",
+   "body": "Böterna för odeklarerade varor låg 2023 på mellan 550 och 5 500 australiska dollar. Svara sanningsenligt på varje fråga. Det du deklarerar får en tjänsteman titta på.",
+   "source_url": "https://www.agriculture.gov.au/about/news/major-fines-for-passengers-caught-smuggling-plant-products",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-fakta-dricks",
+   "place_id": "AU",
+   "topic": "dricks",
+   "is_rule": false,
+   "title": "Dricks behövs inte",
+   "summary": "På restaurang är dricks inte nödvändigt, men det blir vanligare.",
+   "body": "Personalen har lön som inte bygger på dricks.",
+   "source_url": "https://www.bahighlife.com/travel-tips/tipping-in-the-us-your-essential-guide",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-sydney-fakta-ta-sig-dit",
+   "place_id": "AU-sydney",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygtåget tar 13 minuter men har en extra avgift",
+   "summary": "Stationerna på flygplatsen tar 17,92 dollar extra per vuxen utöver tågbiljetten.",
+   "body": "Avgiften dras automatiskt när du blippar ett Opal-kort eller ett vanligt betalkort. Köper du enkelbiljett blir avgiften något högre. Den som fyller på ett Opal-kort på flygplatsen måste ladda minst 35 dollar.",
+   "source_url": "https://transportnsw.info/tickets-fares/getting-to-from-sydney-airport",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-fakta-alkohol",
+   "place_id": "AU",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Alkohol från 18 år",
+   "summary": "Åldersgränsen är 18 år i hela landet, både för att köpa och dricka på krogen.",
+   "body": "Pass godkänns som legitimation. Ta med det om ni ser unga ut.",
+   "min_age": 18,
+   "source_url": "https://en.wikipedia.org/wiki/Alcohol_laws_of_Australia",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "AU-sydney-operahuset",
+   "place_id": "AU-sydney",
+   "category": "byggnad",
+   "name": "Operahuset",
+   "summary": "Världsarv vid hamnen. Guidade turer tar ungefär en timme.",
+   "body": "Huset ligger vid Circular Quay, dit tåg och färjor går.",
+   "lat": -33.8568,
+   "lon": 151.2153,
+   "must_rank": 1,
+   "source_url": "https://www.sydneytourism.org/things-to-do-in-sydney/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-sydney-bondi-coogee",
+   "place_id": "AU-sydney",
+   "category": "natur",
+   "name": "Kustvandringen Bondi–Coogee",
+   "summary": "Sex kilometer längs klipporna förbi fem stränder. Gratis.",
+   "body": "Leden är skyltad hela vägen och tar 2–3 timmar. Den går via Tamarama, Bronte och Clovelly. Det finns trappor, så den fungerar inte med rullstol eller barnvagn. Åk kollektivt till Bondi, det är svårt att parkera på helgerna.",
+   "lat": -33.8915,
+   "lon": 151.2767,
+   "must_rank": 2,
+   "source_url": "https://www.nomadotravel.app/en/guides/sydney-coastal-walks-guide",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "AU-sydney-manlyfarjan",
+   "place_id": "AU-sydney",
+   "category": "upplevelse",
+   "name": "Färjan till Manly",
+   "summary": "30 minuter över hamnen från Circular Quay.",
+   "body": "Du ser Operahuset och bron från vattnet på vägen ut.",
+   "lat": -33.861,
+   "lon": 151.211,
+   "must_rank": 3,
+   "source_url": "https://www.sydneytourism.org/things-to-do-in-sydney/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "daggdjur-kanguru",
+   "category": "daggdjur",
+   "name": "Känguru",
+   "rarity": "ovanlig",
+   "icon": "paw",
+   "hint": "Lättast att se i gryning och skymning utanför städerna.",
+   "place_id": "AU"
+  },
+  {
+   "id": "daggdjur-koala",
+   "category": "daggdjur",
+   "name": "Koala",
+   "rarity": "sallsynt",
+   "icon": "paw",
+   "hint": "Sover i eukalyptusträd större delen av dygnet.",
+   "place_id": "AU"
+  },
+  {
+   "id": "fagel-kookaburra",
+   "category": "fagel",
+   "name": "Kookaburra",
+   "rarity": "ovanlig",
+   "icon": "bird",
+   "hint": "Lätet låter som ett skratt.",
+   "place_id": "AU"
+  },
+  {
+   "id": "fagel-kakadua",
+   "category": "fagel",
+   "name": "Gultofskakadua",
+   "rarity": "vanlig",
+   "icon": "bird",
+   "hint": "Stor vit papegoja som hörs långt innan den syns.",
+   "place_id": "AU"
+  },
+  {
+   "id": "dryck-flat-white",
+   "category": "dryck",
+   "name": "Flat white",
+   "rarity": "vanlig",
+   "icon": "cup",
+   "hint": "Espresso med ångad mjölk och tunt skum.",
+   "place_id": "AU"
+  },
+  {
+   "id": "bakverk-lamington",
+   "category": "bakverk",
+   "name": "Lamington",
+   "rarity": "ovanlig",
+   "icon": "food",
+   "hint": "Sockerkaksbit doppad i choklad och kokos.",
+   "place_id": "AU"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "AU-sydney-ide-kustvandring",
+   "place_id": "AU-sydney",
+   "kind": "ut-en-svang",
+   "title": "Bondi till Coogee med badstopp",
+   "body": "Börja i Bondi på förmiddagen, bada i Bronte halvvägs och ät lunch i Coogee.",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "AU-sydney-ide-manly",
+   "place_id": "AU-sydney",
+   "kind": "i-stan",
+   "title": "Färja till Manly i solnedgången",
+   "body": "Åk ut på eftermiddagen och ta färjan tillbaka när solen går ner bakom bron.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "AU-present-mugg",
+   "place_id": "AU",
+   "name": "Mugg med aboriginsk konst",
+   "body": "Välj en där konstnären står namngiven och får betalt.",
+   "for_whom": [
+    "mig",
+    "mamma"
+   ],
+   "keywords": [
+    "kaffe",
+    "konst",
+    "samlare"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Mugg med licensierat mönster av en namngiven konstnär"
+   }
+  },
+  {
+   "id": "AU-present-kex",
+   "place_id": "AU",
+   "name": "Chokladkex",
+   "body": "Australiens mest kända kex, som säljs i varje mataffär.",
+   "for_whom": [
+    "van",
+    "barn",
+    "pappa"
+   ],
+   "keywords": [
+    "godis",
+    "fika"
+   ]
+  },
+  {
+   "id": "AU-present-koala",
+   "place_id": "AU",
+   "name": "Mjukiskoala",
+   "body": "Klassikern för de minsta.",
+   "for_whom": [
+    "barn"
+   ],
+   "keywords": [
+    "leksak"
+   ]
+  }
+ ]
+}

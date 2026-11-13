@@ -1,0 +1,448 @@
+{
+ "places": [
+  {
+   "id": "TR",
+   "kind": "country",
+   "name": "Turkiet",
+   "iso2": "TR",
+   "lat": 39.0,
+   "lon": 35.0,
+   "airport": "IST"
+  },
+  {
+   "id": "TR-istanbul",
+   "kind": "city",
+   "parent_id": "TR",
+   "name": "Istanbul",
+   "lat": 41.0082,
+   "lon": 28.9784,
+   "airport": "IST",
+   "data": {
+    "transport": [
+     {
+      "mode": "Metro M11 från flygplatsen",
+      "rating": "bast",
+      "text": "Ca 30 minuter till Gayrettepe. Därifrån byter du till M2 mot Taksim."
+     },
+     {
+      "mode": "Spårvagn T1",
+      "rating": "bast",
+      "text": "Går Kabataş–Karaköy–Eminönü–Sultanahmet–Beyazıt och når nästan allt i gamla stan, inklusive Stora basaren."
+     },
+     {
+      "mode": "Färja över Bosporen",
+      "rating": "bra",
+      "text": "Eminönü eller Karaköy till Kadıköy tar 20–25 minuter. Du betalar med Istanbulkart som på metron."
+     }
+    ],
+    "sources": [
+     "https://www.istairport.com/en/airport/airport-transportation?locale=ru",
+     "https://www.inyourpocket.com/81843f"
+    ],
+    "day_budget_sek": 1300,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 3,
+      "text": "Sultanahmet på en dag, Stora basaren och färjan till Kadıköy.",
+      "recommended": false
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Hinner Topkapı med Harem, Galata och en tur upp längs Bosporen.",
+      "recommended": true
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Lägg till Prinsöarna och lugnare dagar på asiatiska sidan.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Karaköy och Galata",
+      "stay": true,
+      "text": "Mellan gamla stan och Taksim, med spårvagn T1 och färjor intill."
+     },
+     {
+      "name": "Sultanahmet",
+      "stay": true,
+      "text": "Gångavstånd till Hagia Sofia, Blå moskén och Topkapı. Tyst på kvällen."
+     },
+     {
+      "name": "Kadıköy",
+      "stay": true,
+      "text": "Asiatiska sidan. Mer lokalt, mycket mat, färja till Europa på 20–25 minuter."
+     },
+     {
+      "name": "Gatorna närmast Taksimtorget",
+      "stay": false,
+      "text": "Högljutt på nätterna. Bo hellre nere mot Galata."
+     }
+    ],
+    "best_text": "April till maj och september till oktober.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    5,
+    5,
+    4,
+    3,
+    3,
+    5,
+    5,
+    3,
+    1
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "TR-fakta-betala",
+   "place_id": "TR",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: turkiska lira (TRY)",
+   "summary": "Landet har turkiska lira (TRY)."
+  },
+  {
+   "id": "TR-fakta-inresa",
+   "place_id": "TR",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass med minst 150 dagars giltighet",
+   "summary": "Pass krävs och ska gälla minst 150 dagar vid inresan. Visumfritt i 90 dagar.",
+   "body": "Svenska medborgare får stanna sammanlagt 90 dagar under en 180-dagarsperiod utan visum. Den som stannar längre riskerar böter och inreseförbud. Provisoriska pass i A4-format gäller inte för inresa, men polisens rosa provisoriska pass gör det.",
+   "source_url": "https://www.swedenabroad.se/sv/om-utlandet-f%C3%B6r-svenska-medborgare/turkiet/reseinformation/reseinformation-om-turkiet/in--och-utresebest%C3%A4mmelser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-fakta-lagar",
+   "place_id": "TR",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Lagar som också gäller besökare",
+   "summary": "Det är straffbart att förolämpa nationen, statschefen eller landets symboler.",
+   "body": "Lagen gäller även den som är i landet tillfälligt, och utländska medborgare har frihetsberövats på de grunderna. UD uppmanar till vaksamhet vid stora turistmål och i kollektivtrafiken.",
+   "source_url": "https://www.swedenabroad.se/sv/om-utlandet-f%C3%B6r-svenska-medborgare/turkiet/reseinformation/reseinformation-om-turkiet/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-fakta-mobil",
+   "place_id": "TR",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "EU-roaming gäller inte",
+   "summary": "Turkiet ligger utanför EU:s roamingregler.",
+   "body": "Operatörerna får ta ut helt andra priser utanför EU. Kolla prislistan eller köp ett lokalt datapaket innan du slår på mobildata.",
+   "source_url": "https://www.mynewsdesk.com/se/telekomradgivarna/news/haall-koll-paa-mobilkostnader-under-semestern-311014",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-fakta-ta-sig-dit",
+   "place_id": "TR-istanbul",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygplatsen till Gayrettepe på 30 minuter",
+   "summary": "Metro M11 går från Istanbuls flygplats in mot stan.",
+   "body": "Metron går ungefär 06.00–00.00. Den når inte gamla stan direkt, så räkna med ett eller två byten till Taksim eller Sultanahmet.",
+   "source_url": "https://www.istairport.com/en/airport/airport-transportation?locale=ru",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-fakta-alkohol",
+   "place_id": "TR",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Alkohol från 18 år",
+   "summary": "Alkohol får inte säljas till den som är under 18.",
+   "body": "Åldersgränsen gäller både butik och servering.",
+   "min_age": 18,
+   "source_url": "https://www.dailysabah.com/turkey/2013/05/24/turkey-adopts-similar-legislation-to-the-us-on-alcohol-sales",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-fakta-alkohol-natt",
+   "place_id": "TR",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Butiker säljer inte alkohol 22–06",
+   "summary": "Butiker får inte sälja alkohol mellan 22.00 och 06.00.",
+   "body": "Regeln har gällt sedan 9 september 2013. Restauranger och barer får servera även under de timmarna. Butiker får inte heller skylta med alkohol.",
+   "source_url": "https://turkeytravelplanner.com/details/Food/alcoholic_beverages.html",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-fakta-istanbulkart",
+   "place_id": "TR-istanbul",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Köp ett Istanbulkart direkt",
+   "summary": "Kontanter gäller inte i kollektivtrafiken. Kortet köps i gula automater.",
+   "body": "Automaterna heter Biletmatik och står på flygplatserna, i metron, vid spårvagnshållplatser och färjelägen. De flesta har engelsk meny. Kortet gäller på metro, spårvagn, buss och färjor.",
+   "source_url": "https://www.inyourpocket.com/81843f",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "TR-istanbul-hagia-sofia",
+   "place_id": "TR-istanbul",
+   "category": "byggnad",
+   "name": "Hagia Sofia",
+   "summary": "Besökare betalar 25 euro för övre galleriet. Bönesalen är gratis för bedjande.",
+   "body": "Mosaikerna finns på övre galleriet, som har egen turistingång på östra sidan vid Topkapıpalatset. Museikortet för Istanbul gäller inte här. Säkerhetskontrollen kan ta upp till en halvtimme i högsäsong.",
+   "lat": 41.0086,
+   "lon": 28.9802,
+   "must_rank": 1,
+   "source_url": "https://istanbul.com/hagia-sophia",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-bla-mosken",
+   "place_id": "TR-istanbul",
+   "category": "byggnad",
+   "name": "Blå moskén",
+   "summary": "Gratis. Stängd för besökare under bönerna och på fredag förmiddag.",
+   "body": "Ingen biljett behövs. Besökare släpps in mellan de fem dagliga bönerna, och på fredagar först runt 14.30. Kvinnor ska täcka håret och män ska inte ha shorts ovanför knäna. Räkna med 30–45 minuter. Närmaste hållplats är Sultanahmet på T1.",
+   "lat": 41.0054,
+   "lon": 28.9768,
+   "must_rank": 2,
+   "source_url": "https://istanbulclues.com/istanbul-blue-mosque-sultanahmet/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-topkapi",
+   "place_id": "TR-istanbul",
+   "category": "museum",
+   "name": "Topkapıpalatset",
+   "summary": "Stängt tisdagar. En kombibiljett täcker palatset, Harem och Hagia Irene.",
+   "body": "Kombibiljetten kostade 2 750 lira för utländska besökare i oktober 2026 och gäller en dag. Det turkiska museikortet gäller inte i Harem eller Hagia Irene. Räkna med en halvdag om du tar med Harem.",
+   "lat": 41.0115,
+   "lon": 28.9834,
+   "must_rank": 3,
+   "source_url": "https://istanbul.com/topkapi-palace",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-stora-basaren",
+   "place_id": "TR-istanbul",
+   "category": "upplevelse",
+   "name": "Stora basaren",
+   "summary": "Gratis inträde. Stängd på söndagar.",
+   "body": "Öppen måndag–lördag ungefär 8.30–19.00, och stängd första dagen på de stora religiösa helgerna. Butikerna har egna tider inom det spannet, så några öppnar senare och börjar plocka ihop före stängning.",
+   "lat": 41.0107,
+   "lon": 28.968,
+   "must_rank": 4,
+   "source_url": "https://thebettervacation.com/istanbul/grand-bazaar/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-basilikacisternen",
+   "place_id": "TR-istanbul",
+   "category": "sevardhet",
+   "name": "Basilikacisternen",
+   "summary": "Underjordisk vattenreservoar från år 532 med 336 kolonner.",
+   "body": "Cisternen byggdes under kejsar Justinianus. Den fick ny statlig driftare 2 juni 2026 och öppnar klockan 9. Biljettpriset för utländska besökare gick inte att bekräfta efter bytet, så kolla priset i kassan samma dag.",
+   "lat": 41.0084,
+   "lon": 28.9779,
+   "must_rank": 5,
+   "source_url": "https://istanbul.com/basilica-cistern",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-istanbul-bosporenfarjan",
+   "place_id": "TR-istanbul",
+   "category": "upplevelse",
+   "name": "Färjan till Kadıköy",
+   "summary": "Från Europa till Asien på 20–25 minuter, till priset av en metroresa.",
+   "body": "Stadens färjor, Şehir Hatları, går från Eminönü till Kadıköy. Du blippar Istanbulkartet i spärren som på metron. Med bil över bron kan samma sträcka ta 45–90 minuter i trafiken.",
+   "lat": 41.0175,
+   "lon": 28.974,
+   "source_url": "https://www.nomadotravel.app/en/guides/getting-around-istanbul",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "TR-kappadokien",
+   "place_id": "TR",
+   "category": "natur",
+   "name": "Kappadokien",
+   "summary": "Världsarv sedan 1985: eroderade klipptorn och underjordiska städer.",
+   "body": "Världsarvet heter Göreme nationalpark och Kappadokiens klippområden och ligger mellan städerna Nevşehir, Ürgüp och Avanos. Klipptornen kallas feskorstenar. De underjordiska städerna Kaymaklı och Derinkuyu ingår.",
+   "lat": 38.667,
+   "lon": 34.85,
+   "must_rank": 1,
+   "source_url": "https://whc.unesco.org/document/216603",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "bakverk-baklava",
+   "category": "bakverk",
+   "name": "Baklava",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Tunna lager filodeg med nötter och sirap.",
+   "place_id": "TR"
+  },
+  {
+   "id": "dryck-turkiskt-te",
+   "category": "dryck",
+   "name": "Turkiskt te i tulpanglas",
+   "rarity": "vanlig",
+   "icon": "cup",
+   "hint": "Serveras utan mjölk i ett litet midjeformat glas.",
+   "place_id": "TR"
+  },
+  {
+   "id": "dryck-turkiskt-kaffe",
+   "category": "dryck",
+   "name": "Turkiskt kaffe",
+   "rarity": "vanlig",
+   "icon": "cup",
+   "hint": "Kokas i en liten kanna och sumpen ligger kvar i koppen.",
+   "place_id": "TR"
+  },
+  {
+   "id": "bakverk-simit",
+   "category": "bakverk",
+   "name": "Simit",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Brödring täckt med sesamfrön som säljs från vagnar.",
+   "place_id": "TR"
+  },
+  {
+   "id": "mat-gozleme",
+   "category": "mat",
+   "name": "Gözleme",
+   "rarity": "ovanlig",
+   "icon": "food",
+   "hint": "Tunt bröd som fylls och gräddas på en rundad plåt.",
+   "place_id": "TR"
+  },
+  {
+   "id": "daggdjur-gatukatt-istanbul",
+   "category": "daggdjur",
+   "name": "Gatukatt i Istanbul",
+   "rarity": "vanlig",
+   "icon": "paw",
+   "hint": "De ligger på trappor, i butiker och på kaféstolar.",
+   "place_id": "TR"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "TR-istanbul-ide-hagia-sofia",
+   "place_id": "TR-istanbul",
+   "kind": "i-stan",
+   "title": "Hagia Sofia på morgonen",
+   "body": "Var där när det öppnar för att slippa den längsta säkerhetskön.",
+   "duration": "ca 2 h",
+   "cost_level": "dyrt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "TR-istanbul-ide-asiatiska-sidan",
+   "place_id": "TR-istanbul",
+   "kind": "i-stan",
+   "title": "Färja till asiatiska sidan",
+   "body": "Ta färjan från Eminönü till Kadıköy, ät lunch där och åk tillbaka i kvällsljuset.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "TR-istanbul-ide-sultanahmet",
+   "place_id": "TR-istanbul",
+   "kind": "i-stan",
+   "title": "Sultanahmet på en dag",
+   "body": "Hagia Sofia vid öppning, cisternen mitt på dagen och Blå moskén på eftermiddagen. Lägg inte dagen på en tisdag om ni vill in i Topkapı.",
+   "duration": "En dag",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "TR-istanbul-ide-basaren",
+   "place_id": "TR-istanbul",
+   "kind": "i-stan",
+   "title": "Stora basaren en vardagsförmiddag",
+   "body": "Gå dit tidigt en vardag. På söndagar är det stängt.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "TR-present-lokum",
+   "place_id": "TR",
+   "name": "Lokum",
+   "body": "Turkisk konfekt som säljs i lösvikt och i presentaskar.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van"
+   ],
+   "keywords": [
+    "godis"
+   ]
+  },
+  {
+   "id": "TR-present-teglas",
+   "place_id": "TR",
+   "name": "Tulpanformade teglas",
+   "body": "Små glas med fat, som teet serveras i överallt.",
+   "for_whom": [
+    "mamma",
+    "mig",
+    "van"
+   ],
+   "keywords": [
+    "te",
+    "inredning"
+   ]
+  },
+  {
+   "id": "TR-present-kaffekopp",
+   "place_id": "TR",
+   "name": "Turkisk kaffekopp",
+   "body": "Liten kopp med fat, ofta handmålad.",
+   "for_whom": [
+    "mig",
+    "mamma"
+   ],
+   "keywords": [
+    "kaffe",
+    "keramik",
+    "samlare"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Handmålad turkisk kaffekopp med fat"
+   }
+  }
+ ]
+}

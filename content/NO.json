@@ -1,0 +1,561 @@
+{
+ "places": [
+  {
+   "id": "NO",
+   "kind": "country",
+   "name": "Norge",
+   "iso2": "NO",
+   "lat": 61.0,
+   "lon": 9.0,
+   "airport": "OSL"
+  },
+  {
+   "id": "NO-oslo",
+   "kind": "city",
+   "parent_id": "NO",
+   "name": "Oslo",
+   "lat": 59.9139,
+   "lon": 10.7522,
+   "airport": "OSL",
+   "data": {
+    "transport": [
+     {
+      "mode": "Flytoget",
+      "rating": "dyrt",
+      "text": "19 minuter till Oslo S, avgång var tionde minut större delen av dagen."
+     },
+     {
+      "mode": "Vy regiontåg",
+      "rating": "bast",
+      "text": "Ca 23 minuter till Oslo S och brukar kosta ungefär hälften av Flytoget."
+     },
+     {
+      "mode": "Flygbuss",
+      "rating": "bra",
+      "text": "Ca 40–50 minuter till Oslo."
+     }
+    ],
+    "sources": [
+     "https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/",
+     "https://www.vy.no/reis-med-vy/til-og-fra-flyplassen/gardermoen",
+     "https://www.visitoslo.com/no/transport/transport-flyplass/oslo-gardermoen"
+    ],
+    "day_budget_sek": 2000,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Operahuset, MUNCH och Vigelandsparken.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 3,
+      "text": "Hinner öhoppning i fjorden och Holmenkollen.",
+      "recommended": true
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Lägg till Bygdøy-museerna och en dag i Nordmarka.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Sentrum",
+      "stay": true,
+      "text": "Nära Oslo S och flygtåget, gångavstånd till Operahuset."
+     },
+     {
+      "name": "Grünerløkka",
+      "stay": true,
+      "text": "Kaféer, barer och second hand. Spårvagn in till centrum."
+     },
+     {
+      "name": "Frogner och Majorstuen",
+      "stay": true,
+      "text": "Lugnt och nära Vigelandsparken. Dyrare."
+     },
+     {
+      "name": "Runt Brugata och nedre Grønland",
+      "stay": false,
+      "text": "Stökigare på kvällarna. Bra för billig mat, sämre att bo i."
+     }
+    ],
+    "best_text": "Juni till augusti för fjorden och öarna, februari till mars för skidåkning vid Holmenkollen.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    2,
+    2,
+    2,
+    2,
+    4,
+    5,
+    5,
+    5,
+    4,
+    2,
+    1,
+    2
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "NO-fakta-inresa",
+   "place_id": "NO",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas normalt inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen, dit också Island och Norge hör. Inom Norden kan svenskt körkort räcka i vissa fall, men pass eller nationellt id-kort rekommenderas.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-fakta-mobil",
+   "place_id": "NO",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "Samma pris som i Sverige för samtal, sms och surf.",
+   "body": "Roaming som hemma gäller även i EES-länderna Island, Liechtenstein och Norge. Kolla om ditt abonnemang har ett tak för surf utomlands.",
+   "source_url": "https://telekomradgivarna.se/globalassets/faq-roamlikeathomesv.pdf",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-fakta-betala",
+   "place_id": "NO",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: norska kronor (NOK)",
+   "summary": "Landet har norska kronor (NOK)."
+  },
+  {
+   "id": "NO-fakta-alkohol-18",
+   "place_id": "NO",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 18,
+   "title": "Öl och vin från 18 år",
+   "summary": "18 år för drycker under 22 procent.",
+   "body": "Åldersgränsen är 18 år för öl, vin och cider. Allt över 4,7 procent säljs bara på Vinmonopolet.",
+   "source_url": "https://vinmonopolet.no/kundeservice/gyldig-legitimasjon",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-fakta-alkohol-20",
+   "place_id": "NO",
+   "topic": "alkohol",
+   "is_rule": true,
+   "min_age": 20,
+   "title": "Sprit från 20 år",
+   "summary": "20 år för drycker på 22 procent eller mer.",
+   "body": "Gränsen gäller både köp och servering. Det är förbjudet att köpa ut åt minderåriga.",
+   "source_url": "https://www.regjeringen.no/no/tema/helse-og-omsorg/psykisk-helse/innsikt/lovgjevinga-pa-rusfeltet/id449058/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-fakta-ta-sig-dit",
+   "place_id": "NO-oslo",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Gardermoen till Oslo S på 19 minuter",
+   "summary": "Flytoget tar 19 min. Vanliga regiontåg tar några minuter till och är billigare.",
+   "body": "Flytoget går var tionde minut. Vy:s regiontåg tar ca 23 minuter och kostar oftast ungefär hälften. Oslo Pass gäller på Vy-tågen men inte på Flytoget.",
+   "source_url": "https://www.visitoslo.com/no/transport/transport-flyplass/oslo-gardermoen",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-fakta-varldsarv",
+   "place_id": "NO",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Bland de första i världen",
+   "summary": "Urnes stavkyrka och Bryggen blev världsarv redan 1979.",
+   "body": "De skrevs in som nummer 58 och 59 på världsarvslistan. Norge har åtta världsarv.",
+   "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-fakta-bygdoybaten",
+   "place_id": "NO-oslo",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Bygdøybåten kräver egen biljett",
+   "summary": "Båt B9 till Bygdøy ingår inte i Ruters biljetter.",
+   "body": "Öbåtarna B1 och B2 går på vanlig Ruter-biljett, men B9 till Bygdøy gör det inte. Med Oslo Pass är B9 gratis.",
+   "source_url": "https://www.visitnorway.no/listings/%C3%98yhopping-i-oslofjorden/15222/",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "NO-bryggen",
+   "place_id": "NO",
+   "category": "sevardhet",
+   "name": "Bryggen i Bergen",
+   "summary": "Hansetidens träkvarter, världsarv sedan 1979.",
+   "body": "En av Nordeuropas äldsta handelshamnar med välbevarad träbebyggelse.",
+   "lat": 60.3975,
+   "lon": 5.324,
+   "must_rank": 1,
+   "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-vestnorsk-fjordlandskap",
+   "place_id": "NO",
+   "category": "natur",
+   "name": "Geirangerfjorden och Nærøyfjorden",
+   "summary": "Norges enda naturarv på listan, sedan 2005.",
+   "body": "Två delområden som tillsammans kallas Vestnorsk fjordlandskap.",
+   "lat": 62.101,
+   "lon": 7.094,
+   "must_rank": 2,
+   "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-urnes-stavkyrka",
+   "place_id": "NO",
+   "category": "byggnad",
+   "name": "Urnes stavkyrka",
+   "summary": "Världsarv sedan 1979, i Luster vid Sognefjorden.",
+   "body": "Kyrkan är öppen för besökare.",
+   "lat": 61.298,
+   "lon": 7.322,
+   "must_rank": 3,
+   "source_url": "https://www.visitnorway.no/reisemal/de-norske-unesco-verdensarvstedene/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-roros",
+   "place_id": "NO",
+   "category": "sevardhet",
+   "name": "Røros bergstad",
+   "summary": "Gruvstad från 1600-talet, världsarv sedan 1980.",
+   "body": "Området utvidgades 2010 med landskapet runt staden, Circumferensen.",
+   "lat": 62.574,
+   "lon": 11.384,
+   "must_rank": 4,
+   "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-alta",
+   "place_id": "NO",
+   "category": "sevardhet",
+   "name": "Hällristningarna i Alta",
+   "summary": "Världsarv sedan 1985.",
+   "body": "Bergkonst långt norrut i Finnmark.",
+   "lat": 69.947,
+   "lon": 23.187,
+   "must_rank": 5,
+   "source_url": "https://en.naroyfjorden.no/norges-verdensarv",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-vegaoyan",
+   "place_id": "NO",
+   "category": "natur",
+   "name": "Vegaøyan",
+   "summary": "Norges första kulturlandskap på listan, 2004.",
+   "body": "Ögrupp där ejderdun har samlats i generationer, ett arbete som främst sköttes av kvinnor.",
+   "lat": 65.67,
+   "lon": 11.95,
+   "must_rank": 6,
+   "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-rjukan-notodden",
+   "place_id": "NO",
+   "category": "byggnad",
+   "name": "Rjukan–Notodden",
+   "summary": "Industriarv, världsarv sedan 2015.",
+   "body": "Norges senaste världsarv.",
+   "lat": 59.878,
+   "lon": 8.594,
+   "must_rank": 7,
+   "source_url": "https://en.naroyfjorden.no/norges-verdensarv",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-vigelandsparken",
+   "place_id": "NO-oslo",
+   "category": "sevardhet",
+   "name": "Vigelandsparken",
+   "summary": "Över 200 skulpturer av Gustav Vigeland. Gratis och öppet dygnet runt.",
+   "body": "Här står Sinnataggen och Monolitten. Parken ligger i Frognerparken och är en av Norges mest besökta sevärdheter.",
+   "lat": 59.927,
+   "lon": 10.7008,
+   "must_rank": 1,
+   "source_url": "https://www.visitnorway.no/listings/vigelandsparken/15591/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-oyhopping",
+   "place_id": "NO-oslo",
+   "category": "upplevelse",
+   "name": "Öhoppning i Oslofjorden",
+   "summary": "Båtarna till öarna går på vanlig Ruter-biljett.",
+   "body": "Linje B1 går året runt till bland annat Hovedøya och Gressholmen. Köp biljett innan, det finns inga automater på öarna, och missa inte sista båten tillbaka.",
+   "lat": 59.91,
+   "lon": 10.729,
+   "must_rank": 2,
+   "source_url": "https://www.visitoslo.com/no/aktivitet/b-t-til-yene-oslo-fergene",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-operahuset",
+   "place_id": "NO-oslo",
+   "category": "byggnad",
+   "name": "Operahuset",
+   "summary": "Gå upp på taket. Det är gratis och byggt för det.",
+   "body": "Huset invigdes 2008 i Bjørvika, och taket reser sig ur fjorden som ett isberg. Fem minuters promenad från Oslo S.",
+   "lat": 59.9074,
+   "lon": 10.7519,
+   "must_rank": 3,
+   "source_url": "https://www.visitnorway.no/reisemal/ostlandet/oslo/oslo-opera-house/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-munch",
+   "place_id": "NO-oslo",
+   "category": "museum",
+   "name": "MUNCH",
+   "summary": "Skriet och resten av Munchs konst i 13 våningar. Boka tid i förväg.",
+   "body": "Museet släpper in besökare i tidsintervall och kan inte garantera plats utan förköpt biljett. Fri entré under 18 år. Med Oslo Pass hämtar du biljett på plats och kan få vänta 15–30 minuter.",
+   "lat": 59.9058,
+   "lon": 10.7553,
+   "must_rank": 4,
+   "source_url": "https://www.visitoslo.com/no/attraksjon/munch",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-holmenkollen",
+   "place_id": "NO-oslo",
+   "category": "upplevelse",
+   "name": "Holmenkollen",
+   "summary": "Skidmuseum och utsikt från toppen av hoppbacken.",
+   "body": "Ta T-bana linje 1 till Holmenkollen och gå ca 10 minuter brant uppför. Museet visar Norges äldsta skida, över 5 000 år gammal, och hissen går upp i hopptornet.",
+   "lat": 59.964,
+   "lon": 10.6677,
+   "must_rank": 5,
+   "source_url": "https://www.visitoslo.com/no/aktivitet/inngangsbillett-til-skimuseet-i-holmenkollen",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "NO-oslo-akershus",
+   "place_id": "NO-oslo",
+   "category": "byggnad",
+   "name": "Akershus fästning",
+   "summary": "Medeltidsborg mitt i stan. Området är gratis.",
+   "body": "Bygget påbörjades 1299 under Håkon V. Museer och evenemang inne på området har egna biljetter.",
+   "lat": 59.9066,
+   "lon": 10.736,
+   "must_rank": 6,
+   "source_url": "https://www.forsvarsbygg.no/en/festningene/akershus-fortress",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-brunost",
+   "category": "mat",
+   "name": "Brunost",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Brun, söt ost som hyvlas tunt.",
+   "place_id": "NO"
+  },
+  {
+   "id": "bakverk-skillingsbolle",
+   "category": "bakverk",
+   "name": "Skillingsbolle",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Stor kanelbulle från Bergen.",
+   "place_id": "NO"
+  },
+  {
+   "id": "mat-norsk-vaffel",
+   "category": "mat",
+   "name": "Norsk våffla",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Mjuk och hjärtformad, gärna med brunost.",
+   "place_id": "NO"
+  },
+  {
+   "id": "naturfenomen-fjord",
+   "category": "naturfenomen",
+   "name": "Fjord",
+   "rarity": "ovanlig",
+   "icon": "sky",
+   "hint": "Smal havsvik med branta bergssidor.",
+   "place_id": "NO"
+  },
+  {
+   "id": "sevardhet-stavkyrka",
+   "category": "sevardhet",
+   "name": "Stavkyrka",
+   "rarity": "sallsynt",
+   "icon": "build",
+   "hint": "Medeltida träkyrka med tak i flera våningar.",
+   "place_id": "NO"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "NO-oslo-ide-helg",
+   "place_id": "NO-oslo",
+   "kind": "helg",
+   "title": "Oslo över helgen",
+   "body": "Ta regiontåget från Gardermoen i stället för Flytoget och lägg pengarna på maten.",
+   "duration": "Helg",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "NO-ide-fjordresa",
+   "place_id": "NO",
+   "kind": "utflykt",
+   "title": "Fjordarna från Bergen",
+   "body": "Börja vid Bryggen och fortsätt mot Nærøyfjorden.",
+   "duration": "En dag",
+   "cost_level": "dyrt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "NO-oslo-ide-vigeland",
+   "place_id": "NO-oslo",
+   "kind": "i-stan",
+   "title": "Skulpturpromenad i Vigelandsparken",
+   "body": "Leta upp Sinnataggen och gå hela vägen upp till Monolitten.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "NO-oslo-ide-oyhopping",
+   "place_id": "NO-oslo",
+   "kind": "utflykt",
+   "title": "Bad och picknick på Hovedøya",
+   "body": "Ta båten från Aker brygge med vanlig biljett. Bäst på sommaren, då båtarna går till sent.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "NO-oslo-ide-bjorvika",
+   "place_id": "NO-oslo",
+   "kind": "i-stan",
+   "title": "Bjørvika: operataket och MUNCH",
+   "body": "Gå upp på operataket först och ta sedan det förbokade museibesöket intill.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "NO-oslo-ide-holmenkollen",
+   "place_id": "NO-oslo",
+   "kind": "utflykt",
+   "title": "T-banan upp till Holmenkollen",
+   "body": "Åk linje 1 upp genom skogen, se museet och utsikten från hopptornet.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "NO-oslo-ide-akershus",
+   "place_id": "NO-oslo",
+   "kind": "i-stan",
+   "title": "Kvällspromenad på Akershus",
+   "body": "Gå runt på fästningsområdet och se ut över fjorden.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "NO-present-brunost",
+   "place_id": "NO",
+   "name": "Brunost",
+   "body": "Söt, brun messmörsost som skivas tunt.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "mig"
+   ],
+   "keywords": [
+    "mat",
+    "ost"
+   ]
+  },
+  {
+   "id": "NO-present-ull",
+   "place_id": "NO",
+   "name": "Stickat i ull",
+   "body": "Vantar eller sockor i norskt mönster tar minst plats.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "klader",
+    "vinter",
+    "friluftsliv"
+   ]
+  },
+  {
+   "id": "NO-present-mugg",
+   "place_id": "NO",
+   "name": "Emaljmugg med fjällmotiv",
+   "body": "Tålig och lätt att packa.",
+   "for_whom": [
+    "mig",
+    "van"
+   ],
+   "keywords": [
+    "kaffe",
+    "friluftsliv"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Emaljmugg med fjord eller fjälltopp"
+   }
+  }
+ ]
+}

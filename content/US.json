@@ -1,0 +1,474 @@
+{
+ "places": [
+  {
+   "id": "US",
+   "kind": "country",
+   "name": "USA",
+   "iso2": "US",
+   "lat": 39.8,
+   "lon": -98.6,
+   "airport": "JFK"
+  },
+  {
+   "id": "US-new-york",
+   "kind": "city",
+   "parent_id": "US",
+   "name": "New York",
+   "lat": 40.7128,
+   "lon": -74.006,
+   "airport": "JFK",
+   "data": {
+    "transport": [
+     {
+      "mode": "Tunnelbana och buss",
+      "rating": "bast",
+      "text": "Blippa ditt betalkort eller mobilen i spärren. En resa kostar 3 dollar och efter tolv betalda resor på en vecka åker du gratis resten av veckan."
+     },
+     {
+      "mode": "AirTrain och tunnelbana från JFK",
+      "rating": "bra",
+      "text": "AirTrain till Jamaica och sedan linje E mot Manhattan. Räkna med 50–65 minuter. AirTrain har egen avgift som inte räknas in i veckotaket."
+     }
+    ],
+    "sources": [
+     "https://thebettervacation.com/new-york/getting-around-new-york/amp/",
+     "https://nycmoov.com/guide/how-to-get-from-manhattan-to-jfk-by-subway-in-2026-full-guide"
+    ],
+    "day_budget_sek": 3200,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Fyra dagar",
+      "days": 4,
+      "text": "Nedre Manhattan, Midtown, ett museum och bron.",
+      "recommended": false
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Hinner Brooklyn, High Line och ett utsiktsdäck utan att stressa.",
+      "recommended": true
+     },
+     {
+      "label": "Tio dagar",
+      "days": 10,
+      "text": "Lägg till fler stadsdelar och en dagstur ut ur stan.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Midtown",
+      "stay": true,
+      "text": "Närmast teatrarna och utsiktsdäcken, och tunnelbana åt alla håll. Dyrt och opersonligt."
+     },
+     {
+      "name": "Lower East Side och East Village",
+      "stay": true,
+      "text": "Mat och barer, mer lokalt."
+     },
+     {
+      "name": "Williamsburg i Brooklyn",
+      "stay": true,
+      "text": "Billigare än Manhattan och en hållplats från ön."
+     },
+     {
+      "name": "Long Island City i Queens",
+      "stay": true,
+      "text": "Ofta billigast med kort tunnelbaneresa till Midtown."
+     },
+     {
+      "name": "Kvarteren närmast Times Square",
+      "stay": false,
+      "text": "Trångt, högljutt och dyrast per kvadratmeter. Besök, men bo några kvarter bort."
+     }
+    ],
+    "best_text": "Maj, september och oktober. December är fint men dyrast.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    1,
+    1,
+    2,
+    4,
+    5,
+    4,
+    3,
+    3,
+    5,
+    5,
+    3,
+    4
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "US-fakta-betala",
+   "place_id": "US",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: amerikanska dollar (USD)",
+   "summary": "Landet har amerikanska dollar (USD)."
+  },
+  {
+   "id": "US-fakta-mobil",
+   "place_id": "US",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "EU-roaming gäller inte",
+   "summary": "USA ligger utanför EU:s roamingregler.",
+   "body": "Operatörerna får ta ut helt andra priser utanför EU. Kolla prislistan eller köp ett lokalt datapaket eller eSIM innan du slår på mobildata.",
+   "source_url": "https://www.mynewsdesk.com/se/telekomradgivarna/news/haall-koll-paa-mobilkostnader-under-semestern-311014",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-fakta-inresa",
+   "place_id": "US",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "ESTA krävs före resan",
+   "summary": "Svenska medborgare behöver ett giltigt ESTA eller visum. Ansök på nätet.",
+   "body": "Med ESTA får du stanna som turist i upp till 90 dagar. Passet behöver bara gälla så länge resan varar. Reglerna kan ändras med kort varsel, och enligt amerikansk lag ska utländska medborgare bära sina immigrationshandlingar på sig.",
+   "source_url": "https://www.swedenabroad.se/sv/om-utlandet-f%C3%B6r-svenska-medborgare/usa/reseinformation/reseinformation/in--och-utresebest%C3%A4mmelser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-fakta-esta-avgift",
+   "place_id": "US",
+   "topic": "inresa",
+   "is_rule": false,
+   "title": "ESTA kostar 40 dollar",
+   "summary": "Avgiften höjdes från 21 till 40 dollar hösten 2025.",
+   "body": "Ansök bara på den amerikanska myndighetens egen sida. Andra sajter tar extra betalt för samma ansökan.",
+   "source_url": "https://www.tv4.se/artikel/16CBq2U7X9On4Hz4zmISHe/inresa-till-usa-blir-naestan-dubbelt-sa-dyrt-kraftig-minskning-av-turister",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-fakta-dricks",
+   "place_id": "US",
+   "topic": "dricks",
+   "is_rule": false,
+   "title": "Dricks på 18–20 procent förväntas",
+   "summary": "På restaurang är 20 % det normala och 18 % det minsta.",
+   "body": "Notan har ofta färdiga förslag, vanligen 18, 20 och 22 procent eller 20, 22 och 25. Taxichaufförer förväntar sig också dricks, och det räcker inte att runda av uppåt.",
+   "source_url": "https://holiday.saga.co.uk/blog/tipping-culture-in-the-usa",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-fakta-alkohol",
+   "place_id": "US",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Alkohol från 21 år",
+   "summary": "Åldersgränsen för alkohol är 21 år i hela landet.",
+   "body": "Ta med pass eller annan legitimation om ni vill beställa alkohol.",
+   "min_age": 21,
+   "source_url": "https://financebuzz.com/american-restaurants-amaze-international-visitors",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-fakta-betala-resor",
+   "place_id": "US-new-york",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Blippa kortet i tunnelbanan",
+   "summary": "MetroCard är avskaffat. Du betalar 3 dollar per resa med kort eller mobil.",
+   "body": "Byte till lokalbuss inom två timmar ingår. Varje person måste blippa sitt eget kort eller sin egen mobil, annars räknas inte veckotaket rätt. Använd samma kort hela veckan.",
+   "source_url": "https://thebettervacation.com/new-york/getting-around-new-york/amp/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-fakta-ta-sig-dit",
+   "place_id": "US-new-york",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "JFK till Manhattan på ungefär en timme",
+   "summary": "Ta AirTrain till Jamaica och byt till tunnelbanans linje E.",
+   "body": "AirTrain går dygnet runt med några minuters mellanrum. Du betalar AirTrain i spärrarna vid Jamaica och tunnelbanan separat, båda genom att blippa kortet.",
+   "source_url": "https://nycmoov.com/guide/how-to-get-from-manhattan-to-jfk-by-subway-in-2026-full-guide",
+   "verified_on": "2026-11-11"
+  }
+ ],
+ "items": [
+  {
+   "id": "US-new-york-frihetsgudinnan",
+   "place_id": "US-new-york",
+   "category": "sevardhet",
+   "name": "Frihetsgudinnan",
+   "summary": "Bara ett rederi får lägga till vid ön. Köp biljetten hos Statue City Cruises.",
+   "body": "Nationalparken tar inget inträde, men färjebiljetten krävs och gäller både Liberty Island och Ellis Island. Tiden på biljetten är när du ska ställa dig i säkerhetskön, inte när båten går. Kön kan ta över en timme. Biljetter som säljs av andra på gatan är för dyra eller falska.",
+   "lat": 40.6892,
+   "lon": -74.0445,
+   "must_rank": 1,
+   "source_url": "https://home.nps.gov/stli/planyourvisit/index.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-kronan",
+   "place_id": "US-new-york",
+   "category": "upplevelse",
+   "name": "Upp i Frihetsgudinnans krona",
+   "summary": "Få platser per dag. Måste bokas på nätet i förväg.",
+   "body": "Det finns ingen hiss upp till kronan. Du går 162 trappsteg från statyns fötter. Biljetterna säljs bara av Statue City Cruises.",
+   "lat": 40.6892,
+   "lon": -74.0445,
+   "source_url": "https://www.nps.gov/stli/planyourvisit/visit-the-crown.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-staten-island-farjan",
+   "place_id": "US-new-york",
+   "category": "upplevelse",
+   "name": "Staten Island-färjan",
+   "summary": "Går dygnet runt och tar 25 minuter. Passerar Frihetsgudinnan.",
+   "body": "Färjan går minst varje halvtimme på vardagar och varje timme på helger, oftare i rusningstid. Den avgår från Whitehall-terminalen längst ner på Manhattan. Räkna med tid för säkerhetskontroll och ombordstigning.",
+   "lat": 40.7013,
+   "lon": -74.0132,
+   "must_rank": 2,
+   "source_url": "https://nyctourism.com/articles/guide-to-the-staten-island-ferry",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-911-minnesplatsen",
+   "place_id": "US-new-york",
+   "category": "sevardhet",
+   "name": "9/11-minnesplatsen",
+   "summary": "Minnesplatsen är gratis och öppen 8–20 varje dag. Museet kräver biljett.",
+   "body": "Museet har öppet onsdag till måndag 9–19, med sista insläpp 17.30. Biljetterna gäller en bestämd tid och ska köpas i förväg.",
+   "lat": 40.7115,
+   "lon": -74.0134,
+   "must_rank": 3,
+   "source_url": "https://911memorial.org/visit",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-high-line",
+   "place_id": "US-new-york",
+   "category": "natur",
+   "name": "High Line",
+   "summary": "Park på en gammal godsbana ovanför gatorna. Gratis.",
+   "body": "Den är drygt 2,3 kilometer lång och går från Meatpacking District till Hudson Yards. Räkna med en till två timmar för hela sträckan.",
+   "lat": 40.748,
+   "lon": -74.0048,
+   "must_rank": 4,
+   "source_url": "https://www.nomadotravel.app/en/attractions/high-line",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-brooklyn-bridge",
+   "place_id": "US-new-york",
+   "category": "sevardhet",
+   "name": "Brooklyn Bridge",
+   "summary": "Gratis att gå över. Gångbanan ligger ovanför biltrafiken.",
+   "body": "Från Brooklyn börjar gångbanan i korsningen Tillary Street och Boerum Place. Det finns också en trappa i underfarten vid Washington Street. Nedanför bron ligger Brooklyn Bridge Park, som har öppet 6–01 och är gratis.",
+   "lat": 40.7061,
+   "lon": -73.9969,
+   "must_rank": 5,
+   "source_url": "https://brooklynbridgepark.org/places-to-see/brooklyn-bridge/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-met",
+   "place_id": "US-new-york",
+   "category": "museum",
+   "name": "Metropolitan Museum of Art",
+   "summary": "30 dollar för vuxna, gratis under 12 år. Stängt onsdagar.",
+   "body": "Betala-vad-du-vill gäller bara boende i delstaten New York och studenter från New York, New Jersey och Connecticut. Öppet 10–17, fredag och lördag till 21. Börja med den egyptiska avdelningen när de öppnar och försök inte se allt.",
+   "lat": 40.7794,
+   "lon": -73.9632,
+   "must_rank": 6,
+   "source_url": "https://www.artvisitguide.com/met-museum-tickets-guide/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-utsiktsdack",
+   "place_id": "US-new-york",
+   "category": "upplevelse",
+   "name": "Utsiktsdäcken",
+   "summary": "Fem torn att välja mellan. Alla säljer biljetter med bestämd tid.",
+   "body": "Priset varierar med dag och klockslag. Top of the Rock ligger på våning 67, 69 och 70 i Rockefeller Center och är det lägsta av de fem, men källan rankar utsikten därifrån som bäst för förstagångsbesökare.",
+   "lat": 40.7593,
+   "lon": -73.9794,
+   "must_rank": 7,
+   "source_url": "https://www.findingtheuniverse.com/best-nyc-observation-deck/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "US-new-york-central-park",
+   "place_id": "US-new-york",
+   "category": "natur",
+   "name": "Central Park",
+   "summary": "Öppen varje dag från 6 på morgonen till 1 på natten.",
+   "body": "Parken har flera besökscenter där ni kan hämta karta och få tips. Conservatory Garden i norra delen har egna tider och öppnar klockan 8.",
+   "lat": 40.7829,
+   "lon": -73.9654,
+   "source_url": "https://www.centralparknyc.org/plan-a-visit",
+   "verified_on": "2026-11-13"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-pizza-slice",
+   "category": "mat",
+   "name": "Pizzaslice",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Köps i bit och viks på mitten.",
+   "place_id": "US"
+  },
+  {
+   "id": "bakverk-bagel",
+   "category": "bakverk",
+   "name": "Bagel med färskost",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Frukostklassikern i New York.",
+   "place_id": "US"
+  },
+  {
+   "id": "bakverk-cheesecake",
+   "category": "bakverk",
+   "name": "New York cheesecake",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Tät och hög, utan krusiduller.",
+   "place_id": "US"
+  },
+  {
+   "id": "mat-korv-gatuvagn",
+   "category": "mat",
+   "name": "Varmkorv från gatuvagn",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Vagnarna står i gathörnen på Manhattan.",
+   "place_id": "US"
+  },
+  {
+   "id": "fardmedel-gul-taxi",
+   "category": "fardmedel",
+   "name": "Gul taxi",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "Stadens officiella taxibilar är gula.",
+   "place_id": "US"
+  },
+  {
+   "id": "daggdjur-gra-ekorre",
+   "category": "daggdjur",
+   "name": "Grå ekorre",
+   "rarity": "vanlig",
+   "icon": "paw",
+   "hint": "Finns i nästan varje park.",
+   "place_id": "US"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "US-new-york-ide-frihetsgudinnan",
+   "place_id": "US-new-york",
+   "kind": "i-stan",
+   "title": "Frihetsgudinnan och Ellis Island",
+   "body": "Ta första färjan på morgonen från Battery Park och lägg halva dagen på båda öarna.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "US-new-york-ide-gratis-hamnen",
+   "place_id": "US-new-york",
+   "kind": "i-stan",
+   "title": "Hamnen utan att betala",
+   "body": "Ta Staten Island-färjan tur och retur i skymningen och gå över Brooklyn Bridge dagen efter.",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "US-new-york-ide-high-line",
+   "place_id": "US-new-york",
+   "kind": "ut-en-svang",
+   "title": "High Line från söder till norr",
+   "body": "Börja i Meatpacking District och gå norrut mot Hudson Yards.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "US-new-york-ide-nedre-manhattan",
+   "place_id": "US-new-york",
+   "kind": "i-stan",
+   "title": "Nedre Manhattan på en dag",
+   "body": "Frihetsgudinnan på morgonen, 9/11-minnesplatsen efter lunch och bron i kvällsljuset.",
+   "duration": "En dag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "US-present-mugg",
+   "place_id": "US",
+   "name": "Mugg från en diner eller ett museum",
+   "body": "Tjocka vita kaffemuggar och museimuggar finns i nästan varje presentbutik.",
+   "for_whom": [
+    "mig",
+    "mamma",
+    "van"
+   ],
+   "keywords": [
+    "kaffe",
+    "samlare"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Klassisk dinermugg eller mugg med stadens skyline"
+   }
+  },
+  {
+   "id": "US-present-godis",
+   "place_id": "US",
+   "name": "Amerikanskt godis",
+   "body": "Smaker och märken som inte säljs hemma.",
+   "for_whom": [
+    "barn",
+    "van"
+   ],
+   "keywords": [
+    "godis"
+   ]
+  },
+  {
+   "id": "US-present-keps",
+   "place_id": "US",
+   "name": "Keps från ett lokalt lag",
+   "body": "Baseball-, basket- eller hockeylagets keps från staden ni besöker.",
+   "for_whom": [
+    "pappa",
+    "van",
+    "barn"
+   ],
+   "keywords": [
+    "sport",
+    "klader"
+   ]
+  }
+ ]
+}
