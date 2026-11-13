@@ -11,6 +11,7 @@ import { Segment } from '../../components/Segment';
 import {
   countryOf,
   descendants,
+  fetchCompendium,
   fetchFacts,
   fetchGifts,
   fetchItems,
@@ -24,6 +25,8 @@ import {
 } from '../../lib/content';
 import { googleMaps } from '../../lib/links';
 import { useSession } from '../../lib/session';
+import { CollectionMotifs } from '../listor/Samlingar';
+import { useFindFeedback } from '../listor/useFindFeedback';
 import { setItemCheck, STATUS_KEY, useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
 import { SMART_COLORS } from '../../theme/palettes';
@@ -83,6 +86,7 @@ export default function PlaceScreen() {
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
   const { party, toast } = useFeedback();
+  const announceFind = useFindFeedback();
   const [places, setPlaces] = useState<Place[] | null>(null);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [openItem, setOpenItem] = useState<PlaceItem | null>(null);
@@ -149,8 +153,13 @@ export default function PlaceScreen() {
   const toggle = async (item: PlaceItem) => {
     const now = !mine.checks.has(item.id);
     try {
-      await setItemCheck(item.id, now);
+      // Har punkten ett compendium_id skapas fyndet i samma steg. Ett fynd som redan finns visas inte igen.
+      const found = await setItemCheck(item, now);
       if (now && done + 1 === items.length) party(t('land.lista.klar', { plats: name }));
+      else if (found) {
+        const c = (await fetchCompendium().catch(() => [])).find((x) => x.id === found);
+        if (c) announceFind(c);
+      }
     } catch {
       toast(t('allmant.fel-spara'));
     }
@@ -203,6 +212,7 @@ export default function PlaceScreen() {
           {view === 'manad' && <Manad place={place!} />}
           {view === 'boka' && <BokaView place={place!} country={countryOf(places, place!.id)} />}
           {view === 'kop' && <Kop name={name} gifts={loaded.gifts} />}
+          {view === 'kop' && <CollectionMotifs placeId={id} gifts={loaded.gifts} />}
         </>
       )}
 
@@ -590,11 +600,6 @@ function Kop({ name, gifts }: { name: string; gifts: GiftTip[] }) {
               ))}
             </div>
           )}
-          {Object.entries(g.collection_motifs).map(([k, v]) => (
-            <span key={k} className="mu">
-              <b>{k}</b>: {v}
-            </span>
-          ))}
         </div>
       ))}
     </>

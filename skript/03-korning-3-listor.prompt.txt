@@ -1,0 +1,22 @@
+Läs CLAUDE.md, docs/schema.sql och delen Listor i docs/prototyp.html innan du gör något. Körning 1 och 2 är klara och innehållet är importerat.
+
+DEL A - efter Körning 2:
+
+1. SQL-blocket från din slutrapport i Körning 2 är kört i Supabase (behörigheter och formatkontroll på place_status.place_id). Dessutom är samma ändring gjord på fyra tabeller till: finds, collection_entries, reviews och trips har inte längre någon främmande nyckel mot places på place_id, utan en check med samma format (ISO-kod eller innehålls-id, null tillåtet). Uppdatera docs/schema.sql så att filen motsvarar databasen: GRANT-blocket sist, och de fem ändrade kolumnerna. Ändra inget annat i schemat.
+
+2. Texterna du listade som saknade finns nu i content/_texter.json. Använd dem. Nya nycklar för punkt 3: karta.visa.min, karta.visa.var, karta.visa.medlem (med {namn}).
+
+3. Kartan: bygg växlingen mellan kartor som i prototypen. I par och grupp går det att välja Min karta, Vår karta (ett land får den högsta statusen någon i gruppen har satt, i ordningen bor, har bott, besökt, planerad, vill åka, mellanlandat) och en enskild medlems karta. Bara den egna statusen går att ändra. I solo visas ingen växling. Kontrollera att RLS tillåter läsning av gruppmedlemmars status och inget annat, och skriv tester för sammanslagningen.
+
+4. Platsnamn för länder utan innehåll: appen behöver svenska namn på alla länder för statuslistan och bottenarket. Använd Intl.DisplayNames med språket sv på ISO-koden. Skriv inga egna landsnamn.
+
+DEL B - Körning 3:
+
+Läs docs/korning-3.md och gör den. Tillägg:
+- När en listpunkt med compendium_id bockas av skapas fyndet i samma steg (det som väntade från Körning 2). Tas avbockningen bort ligger fyndet kvar, men visa det inte dubbelt om punkten bockas av igen.
+- Kategorietiketter: lista.kategori.*, bucket.kategori.*, kostnad.* och sallsynthet.* finns i _texter.json.
+- Bucketkatalogen har 93 punkter i 8 kategorier. place_ids kan vara tom.
+
+Regler: Skriv inga innehållstexter och inga egna gränssnittstexter (använd t() och content/_texter.json, lista nycklar som saknas). Gör inga databasändringar själv: behövs en ändring ger du mig ett färdigt SQL-block och förklarar varför, och nya tabeller eller funktioner får alltid med GRANT-rader. Lägg inte till funktioner utöver det som står här, skriv idéer i docs/fas2.md.
+
+Avsluta med npm run build, npm run typecheck och npm test, gör en git commit med meddelandet "Körning 3: listor", och skriv en slutrapport med rubrikerna: Klart, Inte klart, Saknade textnycklar, Det här behöver Hugo göra.

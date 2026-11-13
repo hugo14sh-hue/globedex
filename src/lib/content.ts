@@ -179,3 +179,78 @@ export function countryName(iso: string): string {
 /** Namn på en plats: innehållets namn, annars landets namn från webbläsaren. */
 export const placeName = (places: Place[], id: string) =>
   places.find((p) => p.id === id)?.name ?? (/^[A-Z]{2}$/.test(id) ? countryName(id) : id);
+
+// ---------- Listor: samlingsbok, bucketkatalog, idéer ----------
+
+export type Rarity = 'vanlig' | 'ovanlig' | 'sallsynt' | 'legendarisk';
+export const RARITIES: Rarity[] = ['vanlig', 'ovanlig', 'sallsynt', 'legendarisk'];
+
+export type CostLevel = 'gratis' | 'billigt' | 'medel' | 'dyrt';
+export const COST_LEVELS: CostLevel[] = ['gratis', 'billigt', 'medel', 'dyrt'];
+
+/** Bucketkatalogens kategorier, i samma ordning som i content/_bucket.json. */
+export const BUCKET_CATEGORIES = ['aventyr', 'natur', 'resa', 'mat', 'kultur', 'tillsammans', 'hemma', 'milstolpe'] as const;
+
+export interface CompendiumItem {
+  id: string;
+  category: string;
+  name: string;
+  rarity: Rarity;
+  icon: string | null;
+  hint: string | null;
+  place_id: string | null;
+  source_url: string | null;
+}
+
+export interface BucketCatalogItem {
+  id: string;
+  name: string;
+  category: string;
+  cost_level: CostLevel | null;
+  season: string | null;
+  where_text: string | null;
+  place_ids: string[];
+}
+
+export interface Idea {
+  id: string;
+  place_id: string | null;
+  kind: string;
+  title: string;
+  body: string | null;
+  duration: string | null;
+  cost_level: CostLevel | null;
+  tags: string[];
+}
+
+/** Hämtar en gång per besök och delar svaret. Misslyckas hämtningen prövas den igen nästa gång. */
+function once<T>(fn: () => Promise<T>): () => Promise<T> {
+  let p: Promise<T> | null = null;
+  return () => {
+    if (!p) {
+      p = fn();
+      p.catch(() => {
+        p = null;
+      });
+    }
+    return p;
+  };
+}
+
+export const fetchCompendium = once(
+  async () => must(await supabase.from('compendium_items').select('*').order('category').order('name')) as CompendiumItem[],
+);
+
+export const fetchBucketCatalog = once(async () => must(await supabase.from('bucket_catalog').select('*').order('id')) as BucketCatalogItem[]);
+
+export const fetchIdeas = once(
+  async () => must(await supabase.from('ideas').select('id, place_id, kind, title, body, duration, cost_level, tags').order('id')) as Idea[],
+);
+
+/** Alla listpunkter (utan långa texter), för kortbunten. */
+export const fetchAllItems = once(
+  async () =>
+    must(
+      await supabase.from('place_items').select('id, place_id, category, name, summary, compendium_id, must_rank').order('id'),
+    ) as Pick<PlaceItem, 'id' | 'place_id' | 'category' | 'name' | 'summary' | 'compendium_id' | 'must_rank'>[],
+);

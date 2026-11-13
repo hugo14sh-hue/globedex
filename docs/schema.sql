@@ -193,7 +193,7 @@ create index on public.gift_tips (place_id);
 -- ========== Användarens data ==========
 create table public.place_status (
   user_id uuid not null references auth.users(id) on delete cascade,
-  place_id text not null references public.places(id) on delete cascade,
+  place_id text not null constraint place_status_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),  -- ISO-kod eller innehålls-id
   status text not null check (status in ('vill','planerad','besokt','bor','bott','mellan')),
   year smallint,
   note text,
@@ -216,7 +216,7 @@ create table public.finds (
   user_id uuid not null references auth.users(id) on delete cascade,
   compendium_id text not null references public.compendium_items(id) on delete cascade,
   found_on date not null default current_date,
-  place_id text references public.places(id) on delete set null,
+  place_id text constraint finds_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),
   note text,
   visibility text not null default 'grupp' check (visibility in ('privat','grupp','offentlig')),
   primary key (user_id, compendium_id)
@@ -252,7 +252,7 @@ create table public.collections (            -- t.ex. kaffemuggar
 );
 create table public.collection_entries (
   collection_id uuid not null references public.collections(id) on delete cascade,
-  place_id text not null references public.places(id) on delete cascade,
+  place_id text not null constraint collection_entries_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),
   got_on date not null default current_date,
   note text,
   primary key (collection_id, place_id)
@@ -278,7 +278,7 @@ create table public.saved_locations (
 create table public.reviews (                -- Vår guide
   id uuid primary key default gen_random_uuid(),
   group_id uuid not null references public.groups(id) on delete cascade,
-  place_id text references public.places(id) on delete set null,
+  place_id text constraint reviews_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),
   name text not null,
   rating smallint check (rating between 1 and 10),
   note text,
@@ -314,7 +314,7 @@ create table public.trips (
   id uuid primary key default gen_random_uuid(),
   group_id uuid not null references public.groups(id) on delete cascade,
   title text not null,
-  place_id text references public.places(id) on delete set null,
+  place_id text constraint trips_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),
   kind text not null default 'resa' check (kind in ('resa','utflykt')),
   status text not null default 'planerad' check (status in ('planerad','pagar','klar')),
   start_date date,
@@ -509,3 +509,23 @@ create policy "pack_all" on public.packing_items for all to authenticated
 create policy "shop_all" on public.shopping_items for all to authenticated
   using (user_id = auth.uid() and public.can_trip(trip_id))
   with check (user_id = auth.uid() and public.can_trip(trip_id));
+
+-- ========== Behörigheter för Data API (RLS avgör fortfarande vilka rader som syns) ==========
+grant usage on schema public to anon, authenticated, service_role;
+
+grant select on public.places, public.place_facts, public.place_items, public.compendium_items,
+  public.bucket_catalog, public.ideas, public.gift_tips to anon, authenticated;
+grant select, insert, update, delete on public.places, public.place_facts, public.place_items,
+  public.compendium_items, public.bucket_catalog, public.ideas, public.gift_tips to service_role;
+
+grant select, insert, update, delete on
+  public.profiles, public.groups, public.group_members, public.group_invites,
+  public.place_status, public.item_checks, public.finds, public.swipe_votes,
+  public.bucket_items, public.collections, public.collection_entries, public.recipients,
+  public.saved_locations, public.reviews, public.saved_ideas, public.vault_items,
+  public.trips, public.trip_legs, public.bookings, public.expenses,
+  public.packing_items, public.pretrip_items, public.shopping_items
+to authenticated, service_role;
+
+grant execute on function public.create_group(text, text), public.join_group(text),
+  public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid) to authenticated;

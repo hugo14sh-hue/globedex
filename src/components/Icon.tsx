@@ -14,6 +14,16 @@ const PATHS = {
   pin: 'M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12zM12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
   sun: 'M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 2v2M12 20v2M2 12h2M20 12h2',
   build: 'M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6',
+  // Samlingsbokens ikoner (compendium_items.icon), från prototypen
+  food: 'M4 11h16M5 11a7 7 0 0 0 14 0M12 4v3M9 5l1 2M15 5l-1 2M8 20h8',
+  cup: 'M5 8h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 9h2a2 2 0 0 1 0 4h-2M8 3v2M11 3v2',
+  paw: 'M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 13c-3 0-5 3-5 5 0 1.5 1.5 2 3 1.5 1.3-.4 2.7-.4 4 0 1.5.5 3 0 3-1.5 0-2-2-5-5-5z',
+  sky: 'M3 16c3-6 6-6 9-2s6 4 9-2M3 20c3-4 6-4 9-1s6 3 9-1M12 3v3',
+  bird: 'M4 14c4 0 6-2 8-6 1.5 3 4 4 8 4-2 4-6 6-10 6l-3 3v-3c-1.5 0-3-1.5-3-4z',
+  ball: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7l4 3-1.5 4.5h-5L8 10z',
+  flower: 'M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 10V5M14 12h5M10 12H5M12 14v7',
+  mush: 'M3 12a9 7 0 0 1 18 0zM9 12v6a3 3 0 0 0 6 0v-6',
+  tram: 'M6 4h12v11a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3zM6 10h12M9 21l1.5-3M15 21l-1.5-3',
   // Egna tillägg i samma stil
   palette: 'M12 3a9 9 0 1 0 0 18c1.1 0 1.5-.8 1.5-1.6 0-1.3-1-1.6-1-2.6 0-.9.7-1.3 1.6-1.3H17a4 4 0 0 0 4-4c0-4.7-4-8.5-9-8.5zM7.5 11.5h.01M10 7.5h.01M15 7.5h.01',
   key: 'M14 10a4 4 0 1 0-3.9 4.9L7 18v3h3v-2h2v-2l2.1-2.1A4 4 0 0 0 14 10zM15.5 8.5h.01',
@@ -25,6 +35,9 @@ const PATHS = {
 } as const;
 
 export type IconName = keyof typeof PATHS;
+
+/** Sant om namnet finns bland ikonerna (till exempel icon från innehållet). */
+export const isIcon = (n: string | null | undefined): n is IconName => Boolean(n && n in PATHS);
 
 export function Icon({ name, size = 22, stroke = 1.9 }: { name: IconName; size?: number; stroke?: number }) {
   return (

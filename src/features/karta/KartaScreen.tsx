@@ -4,7 +4,8 @@ import { BottomSheet } from '../../components/BottomSheet';
 import { Row } from '../../components/Row';
 import { fetchItemMarkers, fetchPlaces, placeName, type Place, type PlaceItem } from '../../lib/content';
 import { useSession, useTravelMode } from '../../lib/session';
-import { groupByStatus, STATUS_KEY, useMyPlaces, type PlaceStatus } from '../../lib/status';
+import { groupByStatus, STATUS_KEY, useMemberStatuses, useMyPlaces, type PlaceStatus } from '../../lib/status';
+import { statusesFor, type MapWho } from '../../lib/statusLogic';
 import { useT } from '../../lib/useT';
 import { onColor } from '../../theme/color';
 import { SMART_COLORS } from '../../theme/palettes';
@@ -29,9 +30,18 @@ export default function KartaScreen() {
   const t = useT();
   const nav = useNavigate();
   const { theme } = useTheme();
-  const { session } = useSession();
+  const { session, members } = useSession();
   const mode = useTravelMode();
-  const mine = useMyPlaces(session?.user.id ?? null);
+  const me = session?.user.id ?? null;
+  const mine = useMyPlaces(me);
+  // Par och grupp: Min karta, Vår karta eller en enskild medlems karta. Solo: bara den egna.
+  const others = useMemo(() => (mode === 'solo' ? [] : members.filter((m) => m.user_id !== me)), [mode, members, me]);
+  const memberStatuses = useMemberStatuses(others.map((m) => m.user_id));
+  const [whoPicked, setWho] = useState<MapWho>('min');
+  const who: MapWho = mode === 'solo' || (whoPicked !== 'min' && whoPicked !== 'var' && !others.some((m) => m.user_id === whoPicked)) ? 'min' : whoPicked;
+  const shown = useMemo(() => statusesFor(who, mine.statuses, memberStatuses.byUser), [who, mine.statuses, memberStatuses.byUser]);
+  const whoLabel = (w: MapWho) =>
+    w === 'min' ? t('karta.visa.min') : w === 'var' ? t('karta.visa.var') : t('karta.visa.medlem', { namn: others.find((m) => m.user_id === w)?.display_name ?? '' });
   const [places, setPlaces] = useState<Place[]>([]);
   const [items, setItems] = useState<PlaceItem[]>([]);
   const [mapMode, setMapMode] = useState<MapMode>('ren');
@@ -74,9 +84,9 @@ export default function KartaScreen() {
       }
       return out;
     }
-    for (const [id, s] of Object.entries(mine.statuses)) if (/^[A-Z]{2}$/.test(id)) out[id] = colors[s];
+    for (const [id, s] of Object.entries(shown)) if (/^[A-Z]{2}$/.test(id)) out[id] = colors[s];
     return out;
-  }, [mapMode, places, month, mine.statuses, colors]);
+  }, [mapMode, places, month, shown, colors]);
 
   const markers = useMemo<MapMarker[]>(() => {
     if (mapMode !== 'upptack') return [];
@@ -92,18 +102,29 @@ export default function KartaScreen() {
   const mineList = useMemo(
     () =>
       groupByStatus(
-        Object.entries(mine.statuses)
+        Object.entries(shown)
           .map(([id, status]) => ({ id, status, name: placeName(places, id) }))
           .sort((a, b) => a.name.localeCompare(b.name, 'sv')),
       ),
-    [mine.statuses, places],
+    [shown, places],
   );
   const total = Object.keys(mine.statuses).length;
+  const shownTotal = Object.keys(shown).length;
   const pickedName = picked ? placeName(places, picked) : '';
 
   return (
     <main className="scr">
       <h1>{t('flik.karta')}</h1>
+
+      {mode !== 'solo' && (
+        <div className="chips" role="group" aria-label={t('flik.karta')}>
+          {(['min', 'var', ...others.map((m) => m.user_id)] as MapWho[]).map((w) => (
+            <button key={w} type="button" className="chip" aria-pressed={who === w} onClick={() => setWho(w)}>
+              {whoLabel(w)}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="map">
         {mapFailed ? (
@@ -181,7 +202,7 @@ export default function KartaScreen() {
       )}
 
       <h2 className="eb">{t(mode === 'solo' ? 'karta.platser.jag' : 'karta.platser.vi')}</h2>
-      {mine.loaded && total === 0 && (
+      {mine.loaded && (who === 'min' || memberStatuses.loaded) && shownTotal === 0 && (
         <div className="card soft">
           <p>{t('karta.tom')}</p>
         </div>
@@ -211,6 +232,13 @@ export default function KartaScreen() {
       <BottomSheet open={Boolean(picked)} title={pickedName} onClose={() => setPicked(null)}>
         {picked && (
           <>
+            {who !== 'min' && (
+              <span className="mu">
+                {whoLabel(who)}: {t(STATUS_KEY[shown[picked] ?? 'ej'])}
+              </span>
+            )}
+            {/* Bara den egna statusen går att ändra. */}
+            {who !== 'min' && <h4 className="eb">{t('karta.visa.min')}</h4>}
             <StatusPicker
               placeId={picked}
               name={pickedName}
