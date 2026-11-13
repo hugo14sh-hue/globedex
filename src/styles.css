@@ -1219,3 +1219,82 @@ button.hero.idea {
   font-size: 0.8rem;
   flex-shrink: 0;
 }
+
+/* ---------- Vi: siffror, märken, Wrapped, export ---------- */
+.card.stat {
+  min-height: 88px;
+  justify-content: center;
+}
+
+.card.mark {
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 12px 6px;
+}
+
+.card.mark b {
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.card.mark .mu {
+  font-size: 0.733rem;
+}
+
+.card.mark:not(.on) {
+  opacity: 0.6;
+}
+
+/* Märkets guld är sällsynthetens legendariska färg (fast färg, som i prototypen). */
+.card.mark.on .badge {
+  background: #e0a21b;
+  color: #1b1b1f;
+}
+
+.badge.no {
+  background: #d64545;
+  color: #fff;
+}
+
+.wr {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0;
+  border-radius: calc(var(--r) + 6px);
+  scrollbar-width: none;
+}
+
+.wr::-webkit-scrollbar {
+  display: none;
+}
+
+.wr-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  min-height: 260px;
+  justify-content: center;
+}
+
+.wr-slide .big {
+  font-size: 2rem;
+}
+
+pre.export {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  font: 0.867rem/1.5 var(--fb);
+  max-height: 50vh;
+  overflow: auto;
+}
+
+fieldset.card {
+  margin: 0;
+}
+
+fieldset.card legend {
+  width: auto;
+  padding: 0 4px;
+}

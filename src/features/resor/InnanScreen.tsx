@@ -2,14 +2,17 @@
 // Punkter som inte är egna (custom = false) döljs i stället (removed) och kan läggas tillbaka.
 // Hämta förslag lägger till färdiga punkter ur content/_innan-avresa.json som saknas (samma titel läggs inte till igen).
 // Listan sorteras på days_before, som slås upp i filen via titeln. Egna punkter hamnar sist.
-// Reglerna för dig (ålder och hälsa ur Valvet) kommer i Körning 6.
+// Är Valvet upplåst och passet går ut för nära resan visas valv.pass-gar-ut överst.
 import { useEffect, useState, type FormEvent } from 'react';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
 import { PRETRIP_SUGGESTIONS } from '../../lib/pretripContent';
-import { daysBeforeFor, daysBeforeLabel, pretripMissing, sortPretrip } from '../../lib/tripLogic';
+import { daysBeforeFor, daysBeforeLabel, pretripMissing, sortPretrip, todayIso } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, updateListRow, type PretripItem, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
+import { useVault } from '../../lib/vault';
+import { passExpiryWarning } from '../../lib/vaultLogic';
+import { formatDate } from '../karta/format';
 import { CheckRow } from './PackScreen';
 import { Bar, saveError, SubHeader, TripGate, useTrip } from './shared';
 
@@ -114,6 +117,7 @@ function Innan({ trip }: { trip: Trip }) {
   return (
     <main className="scr">
       <SubHeader trip={trip} title={t('innan.rubrik')} />
+      <PassWarning trip={trip} />
       {list && rows.length > 0 && (
         <div className="card">
           <b>{t('marke.framsteg', { antal: done, totalt: rows.length })}</b>
@@ -154,5 +158,19 @@ function Innan({ trip }: { trip: Trip }) {
         </div>
       )}
     </main>
+  );
+}
+
+/** Varning om passets giltighet, ur Valvet. Bara när Valvet är upplåst. */
+function PassWarning({ trip }: { trip: Trip }) {
+  const t = useT();
+  const vault = useVault();
+  if (vault.state !== 'oppen') return null;
+  const warn = passExpiryWarning(vault.entries, todayIso(), [trip.end_date ?? trip.start_date]);
+  if (!warn) return null;
+  return (
+    <div className="card soft" role="status">
+      <b>{t('valv.pass-gar-ut', { datum: formatDate(warn) })}</b>
+    </div>
   );
 }

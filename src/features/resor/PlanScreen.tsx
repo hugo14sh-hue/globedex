@@ -9,7 +9,7 @@ import { HOME_AIRPORTS } from '../../config';
 import { countryOf, fetchPlaces, isEstimate, placeName, type Place } from '../../lib/content';
 import { countryPoint } from '../../lib/countries';
 import { airbnb, airbnbFits, booking, googleFlights, skyscanner, validRange, type StayType } from '../../lib/links';
-import { setPlaceStatus, useMyPlaces } from '../../lib/status';
+import { countryIdFor, setPlaceStatus, shouldMarkPlanned, useMyPlaces } from '../../lib/status';
 import { addDays, budgetSuggestion, datesForMonth, nights, todayIso } from '../../lib/tripLogic';
 import { createTrip, fetchHome, type Home, type NewLeg } from '../../lib/trips';
 import { useSession } from '../../lib/session';
@@ -141,9 +141,9 @@ export default function PlanScreen() {
         [leg],
       );
       // Som i prototypen: resmålet blir planerat om det inte redan har en starkare status.
-      const land = country?.id ?? dest.slice(0, 2);
+      const land = country?.id ?? countryIdFor(dest);
       const cur = mine.statuses[land];
-      if (!cur || cur === 'vill') await setPlaceStatus(land, 'planerad').catch(() => undefined);
+      if (shouldMarkPlanned(cur)) await setPlaceStatus(land, 'planerad').catch(() => undefined);
       party(t('resor.skapad'));
       nav(`/resor/${trip.id}`, { replace: true });
     } catch (err) {

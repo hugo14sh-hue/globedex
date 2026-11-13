@@ -1,0 +1,24 @@
+Läs CLAUDE.md, docs/schema.sql och delen Vi i docs/prototyp.html innan du gör något. Körning 1 till 5 är klara.
+
+DEL A - efter Körning 5:
+
+1. SQL-blocket från din slutrapport i Körning 5 är kört i Supabase, oförändrat (saved_ideas.done_at). Uppdatera docs/schema.sql så att filen motsvarar databasen.
+
+2. Gränserna i Nära är godkända: 60, 180, 240 och 480 minuter, och en minut per kilometer fågelvägen när restid saknas. Ändra inget där.
+
+3. Gör om till resa från Idag ska sätta landets status till planerad på samma villkor som planeraren (bara om status är tom eller vill åka).
+
+4. Röktest i webbläsare. Tre körningar i rad är bara byggda och enhetstestade, inget är provat inloggat. Finns raderna TEST_EMAIL och TEST_PASSWORD i .env.local: installera Playwright som dev-beroende och skriv npm run test:e2e som startar appen lokalt, loggar in med testkontot i en 390 px bred mobilvy och går igenom: kartan laddas och status sätts på ett land, landssidan för Nederländerna öppnas och en listpunkt bockas av, fyndet syns i samlingsboken, en punkt läggs till ur bucketkatalogen, en resa skapas i planeraren och en utgift läggs in, Idag slumpar en idé hemma. Testet städar efter sig (tar bort det det skapade). Rätta de fel testet hittar och redovisa dem i slutrapporten. Uppgifterna får aldrig skrivas ut, loggas eller checkas in. Saknas raderna: hoppa över punkten och skriv det överst i slutrapporten.
+
+DEL B - Körning 6:
+
+Läs docs/korning-6.md och gör den. Tillägg:
+- Texter för körningen finns i content/_texter.json: vi.siffror.*, marke.*, wrapped.*, tidslinje.typ.*, valv.*, guide.*, export.*, land.regler-for-dig.*, land.regler.alder. Wrapped-slutet har platshållaren {ar}.
+- Märken: listan marken i _texter.json har 24 märken. Vardagsäventyraren räknar sparade idéer med done_at. Märken som kräver två personer (Samma tanke, Kvitt) döljs i solo.
+- Valvet: typerna är pass, forsakring, nodkontakt, halsa, fodelsedatum och annat, med fälten i valv.falt.*. Allt innehåll, även typen av fält inom en post, ligger i chiffertexten. Kolumnen kind är det enda som står i klartext. Saltet behöver en plats: finns ingen kolumn för det, ge mig ett SQL-block.
+- Guiden: synligheten offentlig finns i tabellen men erbjuds inte i appen. Bara privat och grupp.
+- Regler för dig: räknas ut i webbläsaren från födelsedatum i Valvet och min_age på reglerna. Ålder, födelsedatum och hälsouppgifter får aldrig skickas till Supabase i klartext, läggas i localStorage eller skrivas i loggar.
+
+Regler: Skriv inga innehållstexter och inga egna gränssnittstexter (använd t() och content/_texter.json, lista nycklar som saknas). Gör inga databasändringar själv: behövs en ändring ger du mig ett färdigt SQL-block med GRANT-rader och förklarar varför, och appen ska tåla att blocket inte är kört. Lägg inte till funktioner utöver det som står här, skriv idéer i docs/fas2.md.
+
+Avsluta med npm run build, npm run typecheck och npm test (och npm run test:e2e om testkontot finns), gör en git commit med meddelandet "Körning 6: vi och valvet", och skriv en slutrapport med rubrikerna: Klart, Inte klart, Röktestet, Saknade textnycklar, Det här behöver Hugo göra.

@@ -4,7 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
 import { supabase } from './supabase';
 import { isStatus, type PlaceStatus, type StatusMap } from './statusLogic';
 
-export { groupByStatus, isStatus, STATUS_KEY, STATUSES, type PlaceStatus } from './statusLogic';
+export { countryIdFor, groupByStatus, isStatus, shouldMarkPlanned, STATUS_KEY, STATUSES, type PlaceStatus } from './statusLogic';
 
 export interface Find {
   found_on: string;

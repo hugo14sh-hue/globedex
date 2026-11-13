@@ -17,3 +17,13 @@
 - Idag: namnet på platsen där man är (omvänd geokodning) i stället för "Där jag är nu".
 - Idag: spara platser ur Nära, inte bara idéer.
 - Idag: egen plats som inte finns i innehållet saknar koordinater. En sökning efter orten skulle ge Nära även där.
+
+## Från Körning 6
+- Lås upp Valvet med Face ID eller fingeravtryck (WebAuthn med PRF), som i prototypen. Fas 1 använder bara koden.
+- Packförslag ur allergier och sjukdomar i Valvet (prototypen har allergikort, inhalator och liknande). Kräver innehåll från Hugo: en lista som kopplar hälsouppgifter till packrader. Fas 1 föreslår bara de egna medicinerna.
+- Regler för dig utifrån hälsa (medicin, säkerhetskontroll), inte bara ålder. Kräver innehåll per land.
+- Påminnelse om födelsedag under resan (prototypens "Du fyller år under resan").
+- Resenärsnivå i rubriken på fliken Vi (prototypen visar "Resenärsnivå 7"), uträknad ur märkena.
+- Dela Wrapped som bild.
+- Märkenas datum för länder bygger på place_status.updated_at (senaste ändringen). En egen kolumn för första besöket skulle ge exakta datum.
+- Färdigpackad räknas på packlistans läge nu, eftersom packing_items saknar tidpunkt för avbockning. En kolumn packed_at skulle göra märket exakt.

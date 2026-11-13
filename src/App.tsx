@@ -20,6 +20,9 @@ import BokningarScreen from './features/resor/BokningarScreen';
 import InkopScreen from './features/resor/InkopScreen';
 import ViScreen from './features/vi/ViScreen';
 import AnpassningScreen from './features/vi/AnpassningScreen';
+import ValvetScreen from './features/vi/ValvetScreen';
+import GuideScreen from './features/vi/GuideScreen';
+import ExportScreen from './features/vi/ExportScreen';
 import NotFound from './features/NotFound';
 
 /** Släpper bara in inloggade, och skickar nya användare till starten först. */
@@ -79,6 +82,9 @@ export default function App() {
           <Route path="resor/:id/inkop" element={<InkopScreen />} />
           <Route path="vi" element={<ViScreen />} />
           <Route path="vi/anpassning" element={<AnpassningScreen />} />
+          <Route path="vi/valvet" element={<ValvetScreen />} />
+          <Route path="vi/guide" element={<GuideScreen />} />
+          <Route path="vi/export" element={<ExportScreen />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

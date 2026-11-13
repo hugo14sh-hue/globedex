@@ -31,6 +31,9 @@ import { AddGift, useTripsTo } from '../resor/InkopScreen';
 import { useFindFeedback } from '../listor/useFindFeedback';
 import { setItemCheck, STATUS_KEY, useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
+import { useVault } from '../../lib/vault';
+import { ageOn, birthDate, rulesForAge } from '../../lib/vaultLogic';
+import { todayIso } from '../../lib/tripLogic';
 import { SMART_COLORS } from '../../theme/palettes';
 import { BokaView } from './BokaView';
 import { monthNames } from './months';
@@ -199,7 +202,7 @@ export default function PlaceScreen() {
             <Oversikt place={place!} places={places} items={items} checks={mine.checks} onItem={setOpenItem} onKop={() => setView('kop')} />
           )}
           {view === 'lista' && <Lista name={name} items={items} checks={mine.checks} onToggle={toggle} onItem={setOpenItem} />}
-          {view === 'guide' && <Guide facts={loaded.facts} onFact={setOpenFact} />}
+          {view === 'guide' && <Guide facts={loaded.facts} onFact={setOpenFact} places={places} placeId={id} />}
           {view === 'manad' && <Manad place={place!} />}
           {view === 'boka' && <BokaView place={place!} country={countryOf(places, place!.id)} />}
           {view === 'kop' && <Kop name={name} gifts={loaded.gifts} places={places} placeId={id} />}
@@ -492,7 +495,60 @@ function Lista({
   );
 }
 
-function Guide({ facts, onFact }: { facts: PlaceFact[]; onFact: (f: PlaceFact) => void }) {
+/**
+ * Regler för dig: reglerna med åldersgräns som gäller användarens ålder, räknad i webbläsaren ur
+ * födelsedatumet i Valvet (vid nästa resa hit, annars i dag). Bara när Valvet är upplåst.
+ * Åldern och födelsedatumet skickas aldrig någonstans och sparas inte.
+ */
+function RulesForYou({ facts, places, placeId, onFact }: { facts: PlaceFact[]; places: Place[]; placeId: string; onFact: (f: PlaceFact) => void }) {
+  const t = useT();
+  const vault = useVault();
+  const trips = useTripsTo(places, placeId);
+  if (!facts.some((f) => f.is_rule && f.min_age != null)) return null;
+  const head = <h2 className="eb">{t('land.regler-for-dig')}</h2>;
+  if (vault.state !== 'oppen')
+    return (
+      <section className="col">
+        {head}
+        <Row to="/vi/valvet" icon="lock" title={t('land.regler-for-dig.last')} />
+      </section>
+    );
+  const born = birthDate(vault.entries);
+  const next = trips.map((x) => x.start_date).filter((d): d is string => Boolean(d)).sort()[0];
+  const age = ageOn(born, next && next > todayIso() ? next : todayIso());
+  if (age == null)
+    return (
+      <section className="col">
+        {head}
+        <Row to="/vi/valvet" icon="lock" title={t('valv.ny')} sub={t('valv.typ.fodelsedatum')} />
+      </section>
+    );
+  const mine = rulesForAge(facts, age);
+  return (
+    <section className="col">
+      {head}
+      {mine.length === 0 ? (
+        <p className="mu">{t('land.regler-for-dig.tom')}</p>
+      ) : (
+        mine.map((f) => (
+          <Row
+            key={f.id}
+            lead={
+              <span className="badge no" aria-hidden="true">
+                <Icon name="x" size={18} />
+              </span>
+            }
+            title={f.title}
+            sub={t('land.regler.alder', { antal: f.min_age ?? 0 })}
+            onClick={() => onFact(f)}
+          />
+        ))
+      )}
+    </section>
+  );
+}
+
+function Guide({ facts, onFact, places, placeId }: { facts: PlaceFact[]; onFact: (f: PlaceFact) => void; places: Place[]; placeId: string }) {
   const t = useT();
   const guide = facts.filter((f) => !f.is_rule);
   const rules = facts.filter((f) => f.is_rule);
@@ -519,6 +575,7 @@ function Guide({ facts, onFact }: { facts: PlaceFact[]; onFact: (f: PlaceFact) =
           <p className="mu">{t('land.regler.ansvar')}</p>
         </section>
       )}
+      <RulesForYou facts={facts} places={places} placeId={placeId} onFact={onFact} />
     </>
   );
 }

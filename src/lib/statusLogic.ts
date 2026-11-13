@@ -54,3 +54,12 @@ export function statusesFor(who: MapWho, mine: StatusMap, others: Record<string,
   if (who === 'var') return mergeStatuses([mine, ...Object.values(others)]);
   return others[who] ?? {};
 }
+
+/** Landets id för en plats-id ('SE-vastergotland' ger 'SE'). */
+export const countryIdFor = (placeId: string) => placeId.slice(0, 2);
+
+/**
+ * Ska landet bli planerat när en resa skapas? Bara om status saknas eller är vill åka,
+ * så att besökt, bor och liknande aldrig skrivs över. Gäller planeraren och Gör om till resa i Idag.
+ */
+export const shouldMarkPlanned = (current: PlaceStatus | undefined) => !current || current === 'vill';

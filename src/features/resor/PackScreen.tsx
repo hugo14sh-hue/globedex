@@ -7,6 +7,8 @@ import { PACK_SUGGESTIONS } from '../../lib/packContent';
 import { nights, packFor } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, updateListRow, type PackItem, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
+import { useVault } from '../../lib/vault';
+import { healthEntry, medicineLines } from '../../lib/vaultLogic';
 import { Bar, saveError, SubHeader, TripGate, usePeople, useTrip } from './shared';
 
 export default function PackScreen() {
@@ -123,8 +125,7 @@ function Pack({ trip }: { trip: Trip }) {
         </section>
       ))}
 
-      {/* Körning 6: rader från hälsa och födelsedatum i Valvet läggs till här som privata rader
-          (packing_items.private = true, owner = jag) och räknas med texten pack.fran-valvet. */}
+      <VaultPack tripId={trip.id} />
 
       <form className="card" onSubmit={add}>
         <label>
@@ -158,7 +159,7 @@ function Pack({ trip }: { trip: Trip }) {
 }
 
 /** Rad med kryssruta, titel och ta bort. Delas av packlistan, innan avresa och inköpslistan. */
-export function CheckRow({ title, sub, on, onToggle, onRemove }: { title: string; sub?: string; on: boolean; onToggle: () => void; onRemove: () => void }) {
+export function CheckRow({ title, sub, on, onToggle, onRemove }: { title: string; sub?: string; on: boolean; onToggle: () => void; onRemove?: () => void }) {
   const t = useT();
   return (
     <div className="li">
@@ -169,9 +170,44 @@ export function CheckRow({ title, sub, on, onToggle, onRemove }: { title: string
         <b className={on ? 'done' : ''}>{title}</b>
         {sub && <span className="mu">{sub}</span>}
       </button>
-      <button type="button" className="mini" aria-label={`${t('knapp.ta-bort')}: ${title}`} onClick={onRemove}>
-        <Icon name="x" size={18} />
-      </button>
+      {onRemove && (
+        <button type="button" className="mini" aria-label={`${t('knapp.ta-bort')}: ${title}`} onClick={onRemove}>
+          <Icon name="x" size={18} />
+        </button>
+      )}
     </div>
+  );
+}
+
+/**
+ * Förslag ur Valvet: medicinerna från Hälsa, när användaren har valt det och bara medan Valvet är upplåst.
+ * Raderna sparas aldrig i packing_items (där skulle de ligga i klartext). Avbockningarna sparas krypterade
+ * i hälsoposten i Valvet.
+ */
+function VaultPack({ tripId }: { tripId: string }) {
+  const t = useT();
+  const vault = useVault();
+  const { toast } = useFeedback();
+  if (vault.state !== 'oppen') return null;
+  const lines = medicineLines(vault.entries);
+  const entry = healthEntry(vault.entries);
+  if (!lines.length || !entry) return null;
+  const packed = entry.content.packed?.[tripId] ?? [];
+  const toggle = async (line: string) => {
+    const next = packed.includes(line) ? packed.filter((x) => x !== line) : [...packed, line];
+    try {
+      await vault.save({ id: entry.id, kind: entry.kind, content: { ...entry.content, packed: { ...entry.content.packed, [tripId]: next } } });
+    } catch {
+      toast(t('allmant.fel-spara'));
+    }
+  };
+  return (
+    <section className="col">
+      <h2 className="eb">{t('valv.typ.halsa')}</h2>
+      <span className="mu">{t('pack.fran-valvet', { antal: lines.length })}</span>
+      {lines.map((l) => (
+        <CheckRow key={l} title={l} sub={t('pack.privat')} on={packed.includes(l)} onToggle={() => toggle(l)} />
+      ))}
+    </section>
   );
 }

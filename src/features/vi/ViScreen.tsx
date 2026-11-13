@@ -1,20 +1,32 @@
+// Fliken Jag, Vi eller Gruppen: siffror, märken, tidslinje och Wrapped, och vägar till Valvet,
+// guiden, exporten och Anpassning. Profil och grupp finns längre ned.
 import { useEffect, useState, type FormEvent } from 'react';
 import { LAST_TAB } from '../../components/AppShell';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
+import { Loading } from '../../components/Loading';
 import { Row } from '../../components/Row';
+import { Segment } from '../../components/Segment';
 import { useInstallPrompt } from '../../lib/install';
 import { useSession } from '../../lib/session';
 import { useT } from '../../lib/useT';
+import { useVault } from '../../lib/vault';
 import { GroupPanel } from './GroupPanel';
+import { Siffror } from './Siffror';
+import { useViData } from './useViData';
+import { Wrapped } from './Wrapped';
 
-// Körning 6 bygger siffror, märken, Wrapped och Valvet. Här finns profil, grupp och Anpassning.
+type View = 'siffror' | 'wrapped';
+
 export default function ViScreen() {
   const t = useT();
-  const { profile, updateProfile, signOut } = useSession();
+  const { profile, session, updateProfile, signOut } = useSession();
   const { toast } = useFeedback();
   const { canInstall, install } = useInstallPrompt();
+  const vault = useVault();
   const [name, setName] = useState(profile?.display_name ?? '');
+  const [view, setView] = useState<View>('siffror');
+  const { data } = useViData();
   const mode = profile?.travel_mode ?? 'solo';
 
   useEffect(() => {
@@ -36,8 +48,22 @@ export default function ViScreen() {
   return (
     <main className="scr">
       <h1>{t(LAST_TAB[mode])}</h1>
-      <div className="card soft">
-        <p>{t('vi.siffror.tom')}</p>
+      <Segment<View>
+        value={view}
+        onChange={setView}
+        options={[
+          { value: 'siffror', label: t('vi.del.siffror') },
+          { value: 'wrapped', label: t('vi.del.wrapped') },
+        ]}
+      />
+
+      {!data ? <Loading /> : view === 'siffror' ? <Siffror data={data} userId={session?.user.id ?? ''} /> : <Wrapped data={data} />}
+
+      <div className="col">
+        <Row to="/vi/valvet" icon="lock" title={t('vi.del.valvet')} sub={vault.state === 'oppen' ? undefined : t('marke.last')} />
+        <Row to="/vi/guide" icon="star" title={t(mode === 'solo' ? 'vi.guide.jag' : 'vi.guide.vi')} />
+        <Row to="/vi/export" icon="copy" title={t('vi.del.export')} />
+        <Row to="/vi/anpassning" icon="palette" title={t('vi.del.anpassning')} />
       </div>
 
       <form className="card" onSubmit={saveName}>
@@ -53,8 +79,6 @@ export default function ViScreen() {
       </form>
 
       <GroupPanel />
-
-      <Row to="/vi/anpassning" icon="palette" title={t('vi.del.anpassning')} />
 
       {canInstall && (
         <div className="card">

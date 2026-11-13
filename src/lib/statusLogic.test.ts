@@ -39,3 +39,14 @@ describe('sammanslagning av gruppens kartor', () => {
     expect(statusesFor('borta', mine, others)).toEqual({});
   });
 });
+
+describe('status när en resa skapas', () => {
+  it('sätter planerad bara om status är tom eller vill åka', async () => {
+    const { shouldMarkPlanned, countryIdFor } = await import('./statusLogic');
+    expect(shouldMarkPlanned(undefined)).toBe(true);
+    expect(shouldMarkPlanned('vill')).toBe(true);
+    for (const s of ['bor', 'bott', 'besokt', 'planerad', 'mellan'] as const) expect(shouldMarkPlanned(s)).toBe(false);
+    expect(countryIdFor('SE-vastergotland')).toBe('SE');
+    expect(countryIdFor('NL')).toBe('NL');
+  });
+});

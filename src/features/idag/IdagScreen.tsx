@@ -47,6 +47,7 @@ import {
 import { googleMaps } from '../../lib/links';
 import { useSession } from '../../lib/session';
 import { todayIso } from '../../lib/tripLogic';
+import { countryIdFor, setPlaceStatus, shouldMarkPlanned, useMyPlaces } from '../../lib/status';
 import { createTrip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
@@ -90,6 +91,7 @@ export default function IdagScreen() {
   const { toast, party } = useFeedback();
   const { session, activeGroup } = useSession();
   const me = session?.user.id ?? '';
+  const mine = useMyPlaces(me || null);
 
   const [stored, setStored] = useState<Stored>(readStored);
   const { when, view, range } = stored;
@@ -287,6 +289,9 @@ export default function IdagScreen() {
           },
         ],
       );
+      // Samma regel som planeraren: landet blir planerat om status är tom eller vill åka.
+      const land = countryIdFor(to.placeId);
+      if (shouldMarkPlanned(mine.statuses[land])) await setPlaceStatus(land, 'planerad').catch(() => undefined);
       party(t('resor.skapad'));
       nav(`/resor/${trip.id}`);
     } catch (err) {

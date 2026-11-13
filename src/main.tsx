@@ -5,6 +5,7 @@ import './styles.css';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { SessionProvider } from './lib/session';
 import { FeedbackProvider } from './components/Feedback';
+import { VaultProvider } from './lib/vault';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <FeedbackProvider>
           <SessionProvider>
-            <App />
+            <VaultProvider>
+              <App />
+            </VaultProvider>
           </SessionProvider>
         </FeedbackProvider>
       </BrowserRouter>

@@ -295,6 +295,7 @@ create table public.saved_ideas (
   idea_id text references public.ideas(id) on delete cascade,
   title text,
   done_on date,
+  done_at timestamptz,                       -- när idén markerades som gjord (märket Vardagsäventyraren)
   created_at timestamptz not null default now()
 );
 create index on public.saved_ideas (group_id);
@@ -520,32 +521,12 @@ values ('bokningar', 'bokningar', false, 10485760,
 on conflict (id) do nothing;
 
 create or replace function public.can_trip_file(object_name text) returns boolean
-language sql stable security definer set search_path = '' as $
+language sql stable security definer set search_path = '' as $$
   select case
-    when (storage.foldername(object_name))[1] ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} (RLS avgör fortfarande vilka rader som syns) ==========
-grant usage on schema public to anon, authenticated, service_role;
-
-grant select on public.places, public.place_facts, public.place_items, public.compendium_items,
-  public.bucket_catalog, public.ideas, public.gift_tips to anon, authenticated;
-grant select, insert, update, delete on public.places, public.place_facts, public.place_items,
-  public.compendium_items, public.bucket_catalog, public.ideas, public.gift_tips to service_role;
-
-grant select, insert, update, delete on
-  public.profiles, public.groups, public.group_members, public.group_invites,
-  public.place_status, public.item_checks, public.finds, public.swipe_votes,
-  public.bucket_items, public.collections, public.collection_entries, public.recipients,
-  public.saved_locations, public.reviews, public.saved_ideas, public.vault_items,
-  public.trips, public.trip_legs, public.bookings, public.expenses,
-  public.packing_items, public.pretrip_items, public.shopping_items
-to authenticated, service_role;
-
-grant execute on function public.create_group(text, text), public.join_group(text),
-  public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid) to authenticated;
-grant execute on function public.can_trip_file(text) to authenticated;
-
+    when (storage.foldername(object_name))[1] ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
     then public.can_trip(((storage.foldername(object_name))[1])::uuid)
     else false end;
-$;
+$$;
 
 create policy "bokningar_read" on storage.objects for select to authenticated
   using (bucket_id = 'bokningar' and public.can_trip_file(name));
@@ -576,3 +557,4 @@ to authenticated, service_role;
 
 grant execute on function public.create_group(text, text), public.join_group(text),
   public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid) to authenticated;
+grant execute on function public.can_trip_file(text) to authenticated;
