@@ -1,0 +1,80 @@
+{
+ "items": [
+  {
+   "id": "pass-giltighet",
+   "title": "Kontrollera passets giltighetstid",
+   "hint": "Vissa länder kräver att passet gäller en viss tid efter hemresan. Kolla landets regler i god tid.",
+   "days_before": 60
+  },
+  {
+   "id": "inresekrav",
+   "title": "Kontrollera inresekrav",
+   "hint": "Visum, resetillstånd eller andra krav. Läs på hos landets myndighet eller i UD:s reseinformation.",
+   "days_before": 45
+  },
+  {
+   "id": "forsakring",
+   "title": "Kontrollera reseförsäkringen",
+   "hint": "Se vad hemförsäkringen och betalkortet täcker och om ni behöver något mer.",
+   "days_before": 30
+  },
+  {
+   "id": "eu-kort",
+   "title": "Ta med EU-kortet",
+   "hint": "Det europeiska sjukförsäkringskortet beställs hos Försäkringskassan och gäller vid resor inom EU och EES.",
+   "days_before": 21
+  },
+  {
+   "id": "ledigt",
+   "title": "Ordna ledigt från jobb eller skola",
+   "days_before": 30
+  },
+  {
+   "id": "husdjur-blommor",
+   "title": "Ordna någon som ser till hemmet",
+   "days_before": 14
+  },
+  {
+   "id": "transport-flygplats",
+   "title": "Bestäm hur ni tar er till avresan",
+   "days_before": 7
+  },
+  {
+   "id": "boka-entreer",
+   "title": "Boka entréer som brukar ta slut",
+   "hint": "Kolla listan för resmålet. Populära museer och utsiktsplatser kan behöva bokas i förväg.",
+   "days_before": 14
+  },
+  {
+   "id": "betalning",
+   "title": "Kontrollera att korten fungerar utomlands",
+   "hint": "Se över köpgränser och regionspärrar i bankens app.",
+   "days_before": 7
+  },
+  {
+   "id": "mobil",
+   "title": "Kontrollera vad mobilabonnemanget kostar på resmålet",
+   "days_before": 7
+  },
+  {
+   "id": "offline",
+   "title": "Ladda ner kartor och biljetter offline",
+   "days_before": 2
+  },
+  {
+   "id": "checka-in",
+   "title": "Checka in online",
+   "days_before": 1
+  },
+  {
+   "id": "ladda",
+   "title": "Ladda mobil, powerbank och hörlurar",
+   "days_before": 1
+  },
+  {
+   "id": "sopor",
+   "title": "Töm kylen och gå ut med soporna",
+   "days_before": 0
+  }
+ ]
+}

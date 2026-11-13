@@ -12,3 +12,8 @@
 - Inköpslista: koppla saker till presentmottagare (recipients) och matcha presenttips mot deras intressen.
 - Resor: offline-läsning av resan, bokningar och bokningsfiler (Körning 7).
 - Uppspelning: bågar för flygetapper i stället för raka linjer, och restid per etapp i uppspelningen.
+- Idag: restid med bil från vald plats (en rutttjänst) i stället för avstånd fågelvägen. drive_minutes gäller bara från idéns egen plats.
+- Idag: visa Nära på kartan, med vald plats och avståndsringar.
+- Idag: namnet på platsen där man är (omvänd geokodning) i stället för "Där jag är nu".
+- Idag: spara platser ur Nära, inte bara idéer.
+- Idag: egen plats som inte finns i innehållet saknar koordinater. En sökning efter orten skulle ge Nära även där.

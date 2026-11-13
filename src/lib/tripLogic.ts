@@ -152,3 +152,48 @@ export function packFor(list: PackSuggestion[], nightCount: number | null, month
     return true;
   });
 }
+
+// ---------- Innan avresa ----------
+
+/** En rad i content/_innan-avresa.json (formatet står i docs/FORMAT.md). */
+export interface PretripSuggestion {
+  id: string;
+  title: string;
+  hint?: string;
+  /** Senast så här många dagar före avresan (0 = avresedagen). */
+  days_before: number;
+}
+
+const titleKey = (s: string) => s.trim().toLocaleLowerCase('sv');
+
+/** Färdiga punkter som saknas på listan. Samma titel läggs inte till igen. */
+export function pretripMissing(list: PretripSuggestion[], existing: string[]): PretripSuggestion[] {
+  const have = new Set(existing.map(titleKey));
+  return list.filter((s) => !have.has(titleKey(s.title)));
+}
+
+/** Hur många dagar före avresan en rad senast bör vara gjord, ur innehållet (via titeln). Egna rader: null. */
+export function daysBeforeFor(list: PretripSuggestion[], title: string): number | null {
+  const k = titleKey(title);
+  return list.find((s) => titleKey(s.title) === k)?.days_before ?? null;
+}
+
+/** Sorterar på days_before, det som ska göras tidigast först. Rader utan days_before sist, i sin ordning. */
+export function sortPretrip<T extends { title: string; pos: number }>(rows: T[], list: PretripSuggestion[]): T[] {
+  const d = (r: T) => daysBeforeFor(list, r.title);
+  return [...rows].sort((a, b) => {
+    const da = d(a);
+    const db = d(b);
+    if (da != null && db != null && da !== db) return db - da;
+    if (da == null && db != null) return 1;
+    if (da != null && db == null) return -1;
+    return a.pos - b.pos;
+  });
+}
+
+/** Textnyckel och värden för när en punkt senast bör vara gjord. */
+export function daysBeforeLabel(days: number): { key: 'innan.samma-dag' | 'innan.dagen-fore' | 'innan.dagar-fore'; antal?: number } {
+  if (days <= 0) return { key: 'innan.samma-dag' };
+  if (days === 1) return { key: 'innan.dagen-fore' };
+  return { key: 'innan.dagar-fore', antal: days };
+}

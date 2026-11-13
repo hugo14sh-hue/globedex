@@ -345,3 +345,64 @@ export function toDbRow(part, row) {
 }
 
 export const formatError = (e) => `${e.file} · ${e.id} · ${e.field}: ${e.message}`;
+
+// ---------- Filer som läses in i appen vid bygget (inte till databasen) ----------
+
+const LIST_ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+/** Gemensamt för _packlista.json och _innan-avresa.json: { items: [...] } med unika id och titlar. */
+function checkAppList(name, json, allowed, checkRow) {
+  const errs = [];
+  if (!isObj(json) || !Array.isArray(json.items)) {
+    errs.push({ file: name, id: '-', field: 'items', message: 'filen ska vara { "items": [...] }' });
+    return errs;
+  }
+  for (const k of Object.keys(json)) if (k !== 'items') errs.push({ file: name, id: '-', field: k, message: 'okänd del i filen' });
+  const check = makeChecker(name, errs);
+  const ids = new Set();
+  const titles = new Set();
+  for (const row of json.items) {
+    if (!isObj(row)) {
+      errs.push({ file: name, id: '-', field: '-', message: 'varje rad ska vara ett objekt' });
+      continue;
+    }
+    check(row, 'id', isStr(row.id) && LIST_ID_RE.test(row.id), 'id ska vara små bokstäver, siffror och bindestreck');
+    check(row, 'id', !ids.has(row.id), 'id finns redan i filen');
+    ids.add(row.id);
+    for (const k of Object.keys(row)) check(row, k, allowed.includes(k), 'okänt fält');
+    for (const [k, v] of Object.entries(row)) if (typeof v === 'string') check(row, k, v.trim().length > 0, 'tomt fält, utelämna det i stället');
+    check(row, 'title', isStr(row.title) && row.title.length <= 60, 'krävs, högst 60 tecken');
+    const key = isStr(row.title) ? row.title.trim().toLocaleLowerCase('sv') : '';
+    check(row, 'title', !key || !titles.has(key), 'samma titel finns redan i filen');
+    titles.add(key);
+    checkRow(row, check);
+  }
+  return errs;
+}
+
+/** content/_packlista.json (formatet står i docs/FORMAT.md). */
+export function validatePackList(name, json) {
+  return checkAppList(name, json, ['id', 'group', 'title', 'min_nights', 'max_nights', 'months'], (row, check) => {
+    check(row, 'group', isStr(row.group), 'krävs');
+    for (const k of ['min_nights', 'max_nights']) {
+      if (row[k] !== undefined) check(row, k, isInt(row[k]) && row[k] >= 0, 'ska vara ett heltal, 0 eller mer');
+    }
+    if (isInt(row.min_nights) && isInt(row.max_nights)) check(row, 'max_nights', row.max_nights >= row.min_nights, 'ska vara minst min_nights');
+    if (row.months !== undefined) {
+      check(
+        row,
+        'months',
+        Array.isArray(row.months) && row.months.length > 0 && row.months.every((m) => isInt(m) && m >= 1 && m <= 12) && new Set(row.months).size === row.months.length,
+        'lista med olika heltal 1–12, utelämna för hela året',
+      );
+    }
+  });
+}
+
+/** content/_innan-avresa.json (formatet står i docs/FORMAT.md). */
+export function validatePretripList(name, json) {
+  return checkAppList(name, json, ['id', 'title', 'hint', 'days_before'], (row, check) => {
+    if (isStr(row.hint)) check(row, 'hint', row.hint.length <= 200, 'högst 200 tecken');
+    check(row, 'days_before', isInt(row.days_before) && row.days_before >= 0 && row.days_before <= 365, 'krävs, heltal 0–365 (0 = avresedagen)');
+  });
+}

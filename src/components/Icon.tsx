@@ -35,6 +35,9 @@ const PATHS = {
   share: 'M12 3v12M8 7l4-4 4 4M5 13v6h14v-6',
   plus: 'M12 5v14M5 12h14',
   download: 'M12 4v11M8 11l4 4 4-4M5 20h14',
+  locate: 'M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 2v4M12 18v4M2 12h4M18 12h4',
+  filter: 'M4 6h16M7 12h10M10 18h4',
+  shuffle: 'M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3',
 } as const;
 
 export type IconName = keyof typeof PATHS;

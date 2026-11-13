@@ -1,10 +1,11 @@
 // Läser content/??.json och content/_bucket.json till Supabase (upsert på id).
+// Kontrollerar också content/_packlista.json och content/_innan-avresa.json, som appen läser in vid bygget.
 // Körs lokalt av Hugo: npm run import (skriver) eller npm run import:check (bara validering).
 // Nyckeln SUPABASE_SECRET_KEY läses ur .env.local och skrivs aldrig ut.
 import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { ORDER, TABLES, formatError, toDbRow, validateContent } from './lib/validate-content.mjs';
+import { ORDER, TABLES, formatError, toDbRow, validateContent, validatePackList, validatePretripList } from './lib/validate-content.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
@@ -47,6 +48,15 @@ async function main() {
   const bucket = { name: '_bucket.json', json: await readJson('_bucket.json') };
 
   const { errors, rows } = validateContent(parsed, bucket);
+
+  // Filerna som appen läser in vid bygget. De importeras inte, men kontrolleras här. Saknas en fil hoppas den över.
+  const appLists = [];
+  for (const [name, validate] of [['_packlista.json', validatePackList], ['_innan-avresa.json', validatePretripList]]) {
+    if (!(await readdir(contentDir)).includes(name)) continue;
+    const json = await readJson(name);
+    errors.push(...validate(name, json));
+    appLists.push([name, Array.isArray(json?.items) ? json.items.length : 0]);
+  }
   if (errors.length) {
     console.error(`Valideringen stoppade importen: ${errors.length} fel. Inget har skrivits.`);
     for (const e of errors) console.error(`  ${formatError(e)}`);
@@ -56,6 +66,7 @@ async function main() {
   const counts = [...ORDER.map((p) => [TABLES[p], rows[p].length]), ['bucket_catalog', rows.bucket.length]];
   console.log(`Valideringen gick igenom (${files.length} länder).`);
   for (const [table, n] of counts) console.log(`  ${table}: ${n}`);
+  for (const [name, n] of appLists) console.log(`  ${name}: ${n} (läses in i appen vid bygget)`);
   if (checkOnly) return 0;
 
   const env = await readEnv();

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { sortPlaces, toDbRow, validateContent } from './validate-content.mjs';
+import { sortPlaces, toDbRow, validateContent, validatePackList, validatePretripList } from './validate-content.mjs';
 
 // Testdata med påhittade id:n. Innehållet är bara platshållare för valideringen.
 const base = () => ({
@@ -119,6 +119,31 @@ describe('validering av innehåll', () => {
   });
 });
 
+describe('packlista och innan avresa', () => {
+  const ids = (errs) => errs.map((e) => `${e.id}/${e.field}`).sort();
+
+  it('godkänner korrekta rader', () => {
+    expect(validatePackList('p', { items: [{ id: 'a', group: 'g', title: 't', min_nights: 2, max_nights: 5, months: [1, 12] }] })).toEqual([]);
+    expect(validatePretripList('i', { items: [{ id: 'a', title: 't', hint: 'h', days_before: 0 }] })).toEqual([]);
+  });
+
+  it('stoppar fel i packlistan', () => {
+    const errs = validatePackList('p', {
+      items: [
+        { id: 'a', group: 'g', title: 't', months: [0] },
+        { id: 'a', title: 'T', min_nights: 5, max_nights: 2, okand: 1 },
+      ],
+    });
+    expect(ids(errs)).toEqual(['a/group', 'a/id', 'a/max_nights', 'a/months', 'a/okand', 'a/title'].sort());
+  });
+
+  it('stoppar fel i innan avresa', () => {
+    const errs = validatePretripList('i', { items: [{ id: 'A', title: 't' }, { id: 'b', title: 'u', days_before: -1, hint: '' }] });
+    expect(ids(errs)).toEqual(['A/days_before', 'A/id', 'b/days_before', 'b/hint'].sort());
+    expect(validatePretripList('i', [])).toHaveLength(1);
+  });
+});
+
 describe('innehållet i content/', () => {
   const dir = join(process.cwd(), 'content');
   const files = readdirSync(dir)
@@ -128,6 +153,14 @@ describe('innehållet i content/', () => {
 
   it('går igenom valideringen', () => {
     expect(validateContent(files, bucket).errors).toEqual([]);
+  });
+
+  it('packlistan och innan avresa går igenom valideringen', () => {
+    for (const [name, validate] of [['_packlista.json', validatePackList], ['_innan-avresa.json', validatePretripList]]) {
+      const path = join(dir, name);
+      if (!readdirSync(dir).includes(name)) continue;
+      expect(validate(name, JSON.parse(readFileSync(path, 'utf8')))).toEqual([]);
+    }
   });
 
   it('läses som UTF-8 med å, ä och ö', () => {

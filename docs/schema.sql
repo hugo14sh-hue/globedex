@@ -354,13 +354,14 @@ create index on public.trip_legs (trip_id);
 create table public.bookings (
   id uuid primary key default gen_random_uuid(),
   trip_id uuid not null references public.trips(id) on delete cascade,
-  kind text not null check (kind in ('flyg','boende','tag','hyrbil','biljett','annat')),
+  kind text not null constraint bookings_kind_check check (kind in ('flyg','boende','transport','aktivitet','annat')),
   title text not null,
   reference text,
+  url text constraint bookings_url_format check (url ~* '^https?://'),
   starts_at timestamptz,
   ends_at timestamptz,
   address text,
-  file_path text,                            -- fil i Supabase Storage
+  file_path text,                            -- fil i Supabase Storage, bucketen bokningar: {trip_id}/{filnamn}
   note text
 );
 create index on public.bookings (trip_id);
@@ -510,6 +511,51 @@ create policy "pack_all" on public.packing_items for all to authenticated
 create policy "shop_all" on public.shopping_items for all to authenticated
   using (user_id = auth.uid() and public.can_trip(trip_id))
   with check (user_id = auth.uid() and public.can_trip(trip_id));
+
+-- ========== Bokningsfiler (Supabase Storage) ==========
+-- Privat bucket. Första mappen i sökvägen är resans id, och åtkomsten följer can_trip.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('bokningar', 'bokningar', false, 10485760,
+  array['application/pdf','image/jpeg','image/png','image/webp','image/heic','image/heif'])
+on conflict (id) do nothing;
+
+create or replace function public.can_trip_file(object_name text) returns boolean
+language sql stable security definer set search_path = '' as $
+  select case
+    when (storage.foldername(object_name))[1] ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} (RLS avgör fortfarande vilka rader som syns) ==========
+grant usage on schema public to anon, authenticated, service_role;
+
+grant select on public.places, public.place_facts, public.place_items, public.compendium_items,
+  public.bucket_catalog, public.ideas, public.gift_tips to anon, authenticated;
+grant select, insert, update, delete on public.places, public.place_facts, public.place_items,
+  public.compendium_items, public.bucket_catalog, public.ideas, public.gift_tips to service_role;
+
+grant select, insert, update, delete on
+  public.profiles, public.groups, public.group_members, public.group_invites,
+  public.place_status, public.item_checks, public.finds, public.swipe_votes,
+  public.bucket_items, public.collections, public.collection_entries, public.recipients,
+  public.saved_locations, public.reviews, public.saved_ideas, public.vault_items,
+  public.trips, public.trip_legs, public.bookings, public.expenses,
+  public.packing_items, public.pretrip_items, public.shopping_items
+to authenticated, service_role;
+
+grant execute on function public.create_group(text, text), public.join_group(text),
+  public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid) to authenticated;
+grant execute on function public.can_trip_file(text) to authenticated;
+
+    then public.can_trip(((storage.foldername(object_name))[1])::uuid)
+    else false end;
+$;
+
+create policy "bokningar_read" on storage.objects for select to authenticated
+  using (bucket_id = 'bokningar' and public.can_trip_file(name));
+create policy "bokningar_insert" on storage.objects for insert to authenticated
+  with check (bucket_id = 'bokningar' and public.can_trip_file(name));
+create policy "bokningar_update" on storage.objects for update to authenticated
+  using (bucket_id = 'bokningar' and public.can_trip_file(name))
+  with check (bucket_id = 'bokningar' and public.can_trip_file(name));
+create policy "bokningar_delete" on storage.objects for delete to authenticated
+  using (bucket_id = 'bokningar' and public.can_trip_file(name));
 
 -- ========== Behörigheter för Data API (RLS avgör fortfarande vilka rader som syns) ==========
 grant usage on schema public to anon, authenticated, service_role;

@@ -14,6 +14,11 @@ import {
   sortTrips,
   tripPhase,
   type PackSuggestion,
+  daysBeforeFor,
+  daysBeforeLabel,
+  pretripMissing,
+  sortPretrip,
+  type PretripSuggestion,
 } from './tripLogic';
 
 describe('datum och nedräkning', () => {
@@ -135,5 +140,35 @@ describe('packlistans förslag', () => {
 
   it('hoppar över det som redan finns på listan', () => {
     expect(packFor(list, 4, 4, [' laddare']).map((x) => x.id)).toEqual(['regn']);
+  });
+});
+
+describe('innan avresa', () => {
+  const list: PretripSuggestion[] = [
+    { id: 'a', title: 'Pass', days_before: 60 },
+    { id: 'b', title: 'Laddare', days_before: 0 },
+    { id: 'c', title: 'Valuta', days_before: 7 },
+  ];
+
+  it('lägger bara till punkter som saknas', () => {
+    expect(pretripMissing(list, [' pass ', 'Egen punkt']).map((s) => s.id)).toEqual(['b', 'c']);
+  });
+
+  it('sorterar på dagar före, egna rader sist', () => {
+    const rows = [
+      { title: 'Egen', pos: 0 },
+      { title: 'Laddare', pos: 1 },
+      { title: 'pass', pos: 2 },
+      { title: 'Valuta', pos: 3 },
+      { title: 'Egen två', pos: 4 },
+    ];
+    expect(sortPretrip(rows, list).map((r) => r.title)).toEqual(['pass', 'Valuta', 'Laddare', 'Egen', 'Egen två']);
+    expect(daysBeforeFor(list, 'Okänd')).toBeNull();
+  });
+
+  it('väljer rätt text', () => {
+    expect(daysBeforeLabel(0)).toEqual({ key: 'innan.samma-dag' });
+    expect(daysBeforeLabel(1)).toEqual({ key: 'innan.dagen-fore' });
+    expect(daysBeforeLabel(14)).toEqual({ key: 'innan.dagar-fore', antal: 14 });
   });
 });

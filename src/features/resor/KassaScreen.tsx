@@ -206,9 +206,7 @@ function Kassa({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
             {open.currency !== 'SEK' && (
               <p className="mu">
                 {t('kassa.kurs', { datum: formatDate(open.spent_on) })} 1 {open.currency} = {formatMoney(open.rate_to_sek, 'SEK')} ·{' '}
-                <a href={RATE_SOURCE.url} target="_blank" rel="noopener noreferrer">
-                  {RATE_SOURCE.name}
-                </a>
+                <SourceText text={t('kassa.kalla', { kalla: SLOT })} />
               </p>
             )}
             <button type="button" className="btn ghost" onClick={() => remove(open)}>
@@ -366,5 +364,21 @@ function AddExpense({ open, trip, onClose, onSaved }: { open: boolean; trip: Tri
         </button>
       </form>
     </BottomSheet>
+  );
+}
+
+const SLOT = '';
+
+/** Texten kassa.kalla med källan (ECB) som länk där {kalla} står. */
+function SourceText({ text }: { text: string }) {
+  const [before, after = ''] = text.split(SLOT);
+  return (
+    <>
+      {before}
+      <a href={RATE_SOURCE.url} target="_blank" rel="noopener noreferrer">
+        {RATE_SOURCE.name}
+      </a>
+      {after}
+    </>
   );
 }

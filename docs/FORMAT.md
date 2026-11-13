@@ -134,6 +134,29 @@ Ligger i content/_packlista.json och läses in i appen vid bygget (inte till dat
 
 En rad med min_nights, max_nights eller months föreslås bara när resan har datum. Saker som redan står på listan (samma titel) föreslås inte igen.
 
+## Innan avresa
+Ligger i content/_innan-avresa.json och läses in i appen vid bygget (inte till databasen), som _packlista.json. Knappen Hämta förslag under Innan avresa lägger till de punkter som saknas på resans lista. Saknas filen är knappen avstängd.
+
+```json
+{
+  "items": [
+    { "id": "forsakring", "title": "Kontrollera reseförsäkringen", "hint": "Se vad hemförsäkringen täcker.", "days_before": 30 },
+    { "id": "ladda", "title": "Ladda mobil och powerbank", "days_before": 0 }
+  ]
+}
+```
+
+| Fält | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| id | text | ja | små bokstäver, siffror och bindestreck, unikt i filen |
+| title | text | ja | högst 60 tecken, unik i filen |
+| hint | text | nej | förklaring under punkten, högst 200 tecken |
+| days_before | heltal 0–365 | ja | hur många dagar före avresan punkten senast bör vara gjord. 0 = avresedagen |
+
+En punkt med samma titel som en rad som redan finns på listan (även en dold) läggs inte till igen. Listan sorteras på days_before, det som ska göras tidigast först. Egna punkter hamnar sist. days_before slås upp i filen via titeln, så byter en punkt titel i filen förlorar redan tillagda rader sin dag.
+
+`npm run import:check` validerar både _packlista.json och _innan-avresa.json.
+
 ## Gränssnittets texter
 Ligger i content/_texter.json och läses in i appen vid bygget (inte till databasen). Nycklar under texter, tre språkstilar (neutral, lekfull, romantisk), märken under marken. Reglerna står i filens _om.
 

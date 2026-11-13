@@ -1,0 +1,272 @@
+{
+ "items": [
+  {
+   "id": "pass",
+   "group": "Dokument",
+   "title": "Pass eller nationellt id-kort"
+  },
+  {
+   "id": "biljetter",
+   "group": "Dokument",
+   "title": "Biljetter och bokningar, sparade offline"
+  },
+  {
+   "id": "forsakring",
+   "group": "Dokument",
+   "title": "Försäkringsuppgifter och larmnummer"
+  },
+  {
+   "id": "betalkort",
+   "group": "Dokument",
+   "title": "Betalkort och ett reservkort"
+  },
+  {
+   "id": "korkort",
+   "group": "Dokument",
+   "title": "Körkort"
+  },
+  {
+   "id": "laddare",
+   "group": "Teknik",
+   "title": "Mobilladdare"
+  },
+  {
+   "id": "powerbank",
+   "group": "Teknik",
+   "title": "Powerbank"
+  },
+  {
+   "id": "horlurar",
+   "group": "Teknik",
+   "title": "Hörlurar"
+  },
+  {
+   "id": "adapter",
+   "group": "Teknik",
+   "title": "Reseadapter"
+  },
+  {
+   "id": "kamera",
+   "group": "Teknik",
+   "title": "Kamera och minneskort",
+   "min_nights": 3
+  },
+  {
+   "id": "underklader",
+   "group": "Kläder",
+   "title": "Underkläder och strumpor"
+  },
+  {
+   "id": "sovklader",
+   "group": "Kläder",
+   "title": "Sovkläder"
+  },
+  {
+   "id": "bekvama-skor",
+   "group": "Kläder",
+   "title": "Bekväma skor att gå i"
+  },
+  {
+   "id": "extra-ombyte",
+   "group": "Kläder",
+   "title": "Ett ombyte i handbagaget"
+  },
+  {
+   "id": "regnjacka",
+   "group": "Kläder",
+   "title": "Regnjacka",
+   "months": [
+    3,
+    4,
+    5,
+    9,
+    10,
+    11
+   ]
+  },
+  {
+   "id": "varm-troja",
+   "group": "Kläder",
+   "title": "Varm tröja",
+   "months": [
+    9,
+    10,
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "id": "mossa-vantar",
+   "group": "Kläder",
+   "title": "Mössa och vantar",
+   "months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "vinterjacka",
+   "group": "Kläder",
+   "title": "Vinterjacka",
+   "months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "badklader",
+   "group": "Kläder",
+   "title": "Badkläder",
+   "months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "id": "solglasogon",
+   "group": "Kläder",
+   "title": "Solglasögon",
+   "months": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "id": "keps",
+   "group": "Kläder",
+   "title": "Keps eller solhatt",
+   "months": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "id": "sandaler",
+   "group": "Kläder",
+   "title": "Sandaler",
+   "months": [
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "id": "finare-ombyte",
+   "group": "Kläder",
+   "title": "Ett finare ombyte",
+   "min_nights": 2
+  },
+  {
+   "id": "tandborste",
+   "group": "Hygien",
+   "title": "Tandborste och tandkräm"
+  },
+  {
+   "id": "deodorant",
+   "group": "Hygien",
+   "title": "Deodorant"
+  },
+  {
+   "id": "schampo",
+   "group": "Hygien",
+   "title": "Schampo och tvål i resestorlek"
+  },
+  {
+   "id": "solkram",
+   "group": "Hygien",
+   "title": "Solkräm",
+   "months": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "id": "vatskepase",
+   "group": "Hygien",
+   "title": "Genomskinlig påse för vätskor i handbagaget"
+  },
+  {
+   "id": "rakhyvel",
+   "group": "Hygien",
+   "title": "Rakhyvel",
+   "min_nights": 3
+  },
+  {
+   "id": "vattenflaska",
+   "group": "Övrigt",
+   "title": "Vattenflaska"
+  },
+  {
+   "id": "dagryggsack",
+   "group": "Övrigt",
+   "title": "Liten ryggsäck för dagen"
+  },
+  {
+   "id": "tygpase",
+   "group": "Övrigt",
+   "title": "Tygpåse för smutstvätt",
+   "min_nights": 3
+  },
+  {
+   "id": "tvattmedel",
+   "group": "Övrigt",
+   "title": "Tvättmedel i resestorlek",
+   "min_nights": 7
+  },
+  {
+   "id": "bok",
+   "group": "Övrigt",
+   "title": "Bok eller läsplatta"
+  },
+  {
+   "id": "snacks",
+   "group": "Övrigt",
+   "title": "Något att äta på resan"
+  },
+  {
+   "id": "oronproppar",
+   "group": "Övrigt",
+   "title": "Öronproppar och sovmask"
+  },
+  {
+   "id": "paraply",
+   "group": "Övrigt",
+   "title": "Litet paraply",
+   "months": [
+    9,
+    10,
+    11,
+    3,
+    4
+   ]
+  },
+  {
+   "id": "plats-muggen",
+   "group": "Övrigt",
+   "title": "Plats i väskan för det ni köper med hem"
+  }
+ ]
+}

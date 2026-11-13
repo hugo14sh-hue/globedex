@@ -2415,6 +2415,313 @@
     "inne",
     "gratis"
    ]
+  },
+  {
+   "id": "SE-hemma-filmmaraton",
+   "kind": "hemma",
+   "title": "Filmmaraton med tema",
+   "body": "Välj en regissör, ett land eller ett årtionde och se två filmer i rad. Den som inte valde filmerna väljer snacksen.",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-blindtest",
+   "kind": "hemma",
+   "title": "Blindtest",
+   "body": "Köp tre sorter av samma sak, till exempel choklad eller läsk, och gissa vilken som är vilken. Förloraren diskar.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-ny-ratt",
+   "kind": "hemma",
+   "title": "Laga något ingen av er har lagat",
+   "body": "Välj ett recept som känns lite för svårt och laga det tillsammans från början till slut.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-pizza-fran-grunden",
+   "kind": "hemma",
+   "title": "Pizza från grunden",
+   "body": "Gör degen på förmiddagen och låt den vila. På kvällen gör ni varsin pizza och röstar om vinnaren.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-spelturnering",
+   "kind": "hemma",
+   "title": "Spelturnering",
+   "body": "Tre olika spel, bäst av tre. Bestäm priset innan ni börjar.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-pussel",
+   "kind": "hemma",
+   "title": "Pussel och podd",
+   "body": "Lägg ett stort pussel och lyssna på en podd eller en ljudbok under tiden.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-fotokvall",
+   "kind": "hemma",
+   "title": "Gå igenom årets bilder",
+   "body": "Välj ut de tio bästa bilderna från året och beställ dem som riktiga kort.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-koja",
+   "kind": "hemma",
+   "title": "Bygg en koja",
+   "body": "Filtar, kuddar och en ljusslinga i vardagsrummet. Ät kvällsmaten där inne.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-fragor",
+   "kind": "hemma",
+   "title": "Frågor ni aldrig ställer",
+   "body": "Ställ frågor till varandra som ni aldrig brukar ställa. Telefonerna ligger i ett annat rum.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-spellista",
+   "kind": "hemma",
+   "title": "Gör en spellista åt varandra",
+   "body": "Tio låtar var som den andra inte har hört. Lyssna igenom båda och berätta varför ni valde dem.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-baka",
+   "kind": "hemma",
+   "title": "Baka något nytt",
+   "body": "Välj ett bakverk från ett land ni vill resa till och baka det hemma.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-spakvall",
+   "kind": "hemma",
+   "title": "Spakväll hemma",
+   "body": "Ansiktsmask, fotbad och levande ljus. Stäng av alla skärmar.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-dromresan",
+   "kind": "hemma",
+   "title": "Planera drömresan på riktigt",
+   "body": "Välj ett resmål och räkna på flyg, boende och dagar som om ni skulle boka i morgon.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-brev",
+   "kind": "hemma",
+   "title": "Skriv brev till er själva",
+   "body": "Skriv varsitt brev som öppnas om ett år. Lägg dem i ett kuvert med datum på.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-teckna",
+   "kind": "hemma",
+   "title": "Teckna av varandra",
+   "body": "Fem minuter per porträtt, utan att titta på pappret. Sätt upp resultatet på kylskåpet.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-sprakkvall",
+   "kind": "hemma",
+   "title": "Språkkväll",
+   "body": "Lär varandra tjugo ord på ett språk den andra inte kan. Förhör varandra dagen efter.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-hemma-frukost-middag",
+   "kind": "hemma",
+   "title": "Frukost till middag",
+   "body": "Pannkakor, ägg och nypressad juice klockan sju på kvällen.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "SE-hemma-rensa",
+   "kind": "hemma",
+   "title": "Rensa en garderob tillsammans",
+   "body": "Prova allt, behåll det som används och skänk resten. Avsluta med något gott.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-ut-solnedgang",
+   "kind": "ut-en-svang",
+   "title": "Solnedgång med termos",
+   "body": "Leta upp närmaste höjd eller brygga med utsikt åt väster och ta med något varmt att dricka.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-ut-ny-vag",
+   "kind": "ut-en-svang",
+   "title": "Gå en väg ni aldrig har gått",
+   "body": "Sväng åt andra hållet utanför dörren och fortsätt i en halvtimme. Ta en annan väg hem.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-ut-fika-ute",
+   "kind": "ut-en-svang",
+   "title": "Fika utomhus",
+   "body": "Köp fika och sätt er i en park i stället för på ett kafé. Fungerar året om med rätt kläder.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-ut-fotopromenad",
+   "kind": "ut-en-svang",
+   "title": "Fotopromenad",
+   "body": "Välj ett tema, till exempel dörrar eller skyltar, och ta tio bilder var. Jämför när ni kommer hem.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-ut-loppis",
+   "kind": "ut-en-svang",
+   "title": "Loppisrunda",
+   "body": "Ge varandra femtio kronor och köp en present åt den andra på en loppis eller second hand.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-ut-stjarnor",
+   "kind": "ut-en-svang",
+   "title": "Titta på stjärnor",
+   "body": "Åk en bit ut från stadens ljus en klar kväll. Ta med en filt och något varmt.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "SE-ut-turist-hemma",
+   "kind": "ut-en-svang",
+   "title": "Turista i er egen stad",
+   "body": "Gör det ni skulle tipsa en besökare om, men som ni själva aldrig har gjort.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "nara"
+   ]
+  },
+  {
+   "id": "SE-ut-slumpbuss",
+   "kind": "ut-en-svang",
+   "title": "Ta en buss till ändhållplatsen",
+   "body": "Kliv på en linje ni aldrig åker och se vad som finns längst ut.",
+   "duration": "ca 2 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "nara"
+   ]
   }
  ],
  "gifts": [

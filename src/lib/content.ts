@@ -221,7 +221,15 @@ export interface Idea {
   duration: string | null;
   cost_level: CostLevel | null;
   tags: string[];
+  /** Restid med bil från place_id. Saknas i innehållet än. */
+  drive_minutes: number | null;
+  lat: number | null;
+  lon: number | null;
 }
+
+/** Idéernas typer (ideas.kind) och taggar, i samma ordning som i docs/FORMAT.md. */
+export const IDEA_KINDS = ['hemma', 'i-stan', 'ut-en-svang', 'dagstripp', 'helg', 'utflykt', 'fotboll'] as const;
+export const IDEA_TAGS = ['inne', 'ute', 'gratis', 'nara'] as const;
 
 /** Hämtar en gång per besök och delar svaret. Misslyckas hämtningen prövas den igen nästa gång. */
 function once<T>(fn: () => Promise<T>): () => Promise<T> {
@@ -244,7 +252,7 @@ export const fetchCompendium = once(
 export const fetchBucketCatalog = once(async () => must(await supabase.from('bucket_catalog').select('*').order('id')) as BucketCatalogItem[]);
 
 export const fetchIdeas = once(
-  async () => must(await supabase.from('ideas').select('id, place_id, kind, title, body, duration, cost_level, tags').order('id')) as Idea[],
+  async () => must(await supabase.from('ideas').select('id, place_id, kind, title, body, duration, cost_level, tags, drive_minutes, lat, lon').order('id')) as Idea[],
 );
 
 /** Alla listpunkter (utan långa texter), för kortbunten. */

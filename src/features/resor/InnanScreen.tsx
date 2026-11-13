@@ -1,9 +1,13 @@
 // Innan avresa (pretrip_items): redigerbar checklista. Egna punkter läggs till och tas bort.
 // Punkter som inte är egna (custom = false) döljs i stället (removed) och kan läggas tillbaka.
+// Hämta förslag lägger till färdiga punkter ur content/_innan-avresa.json som saknas (samma titel läggs inte till igen).
+// Listan sorteras på days_before, som slås upp i filen via titeln. Egna punkter hamnar sist.
 // Reglerna för dig (ålder och hälsa ur Valvet) kommer i Körning 6.
 import { useEffect, useState, type FormEvent } from 'react';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
+import { PRETRIP_SUGGESTIONS } from '../../lib/pretripContent';
+import { daysBeforeFor, daysBeforeLabel, pretripMissing, sortPretrip } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, updateListRow, type PretripItem, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
 import { CheckRow } from './PackScreen';
@@ -32,7 +36,39 @@ function Innan({ trip }: { trip: Trip }) {
   }, [trip.id]);
 
   const all = list ?? [];
-  const rows = all.filter((r) => !r.removed);
+  const rows = sortPretrip(
+    all.filter((r) => !r.removed),
+    PRETRIP_SUGGESTIONS,
+  );
+  const missing = pretripMissing(
+    PRETRIP_SUGGESTIONS,
+    all.map((r) => r.title),
+  );
+  const nextPos = () => (all.length ? Math.max(...all.map((r) => r.pos)) + 1 : 0);
+
+  const sub = (r: PretripItem) => {
+    const days = daysBeforeFor(PRETRIP_SUGGESTIONS, r.title);
+    const when = days == null ? null : daysBeforeLabel(days);
+    const label = when ? t(when.key, when.antal != null ? { antal: when.antal } : {}) : null;
+    return [label, r.hint].filter(Boolean).join(' · ') || undefined;
+  };
+
+  const suggest = async () => {
+    if (!list || !missing.length || busy) return;
+    setBusy(true);
+    try {
+      const start = nextPos();
+      const saved = await addListRows<PretripItem>(
+        'pretrip_items',
+        missing.map((s, i) => ({ trip_id: trip.id, title: s.title, hint: s.hint ?? null, custom: false, pos: start + i })),
+      );
+      setList([...all, ...saved]);
+    } catch (err) {
+      toast(saveError(t, err));
+    } finally {
+      setBusy(false);
+    }
+  };
   const hidden = all.filter((r) => r.removed);
   const done = rows.filter((r) => r.done).length;
 
@@ -65,8 +101,7 @@ function Innan({ trip }: { trip: Trip }) {
     if (!name || busy) return;
     setBusy(true);
     try {
-      const pos = all.length ? Math.max(...all.map((r) => r.pos)) + 1 : 0;
-      const [saved] = await addListRows<PretripItem>('pretrip_items', [{ trip_id: trip.id, title: name, custom: true, pos }]);
+      const [saved] = await addListRows<PretripItem>('pretrip_items', [{ trip_id: trip.id, title: name, custom: true, pos: nextPos() }]);
       setList([...all, saved]);
       setTitle('');
     } catch (err) {
@@ -91,7 +126,7 @@ function Innan({ trip }: { trip: Trip }) {
         </div>
       )}
       {rows.map((r) => (
-        <CheckRow key={r.id} title={r.title} sub={r.hint ?? undefined} on={r.done} onToggle={() => patch(r, { done: !r.done })} onRemove={() => remove(r)} />
+        <CheckRow key={r.id} title={r.title} sub={sub(r)} on={r.done} onToggle={() => patch(r, { done: !r.done })} onRemove={() => remove(r)} />
       ))}
 
       <form className="row" onSubmit={add}>
@@ -103,6 +138,10 @@ function Innan({ trip }: { trip: Trip }) {
           <Icon name="plus" size={20} />
         </button>
       </form>
+
+      <button type="button" className="btn ghost" disabled={busy || !list || !missing.length} onClick={suggest}>
+        {t('innan.forslag')}
+      </button>
 
       {hidden.length > 0 && (
         <div className="chips">
