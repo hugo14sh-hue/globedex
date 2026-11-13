@@ -72,18 +72,27 @@ export interface CardRef {
   id: string;
 }
 
-/** Röster per användare: id -> ja (true) eller nej (false). */
-export type Votes = Record<string, Record<string, boolean>>;
+/** En röst: ja (true), nej (false) eller kanske (null). */
+export type Vote = boolean | null;
+
+/** Röster per användare: id -> röst. Saknas id har användaren inte röstat. */
+export type Votes = Record<string, Record<string, Vote>>;
+
+/** Blandar källorna varannan, så att bunten inte börjar med hundra listpunkter i rad. */
+function interleave(sources: CardRef[][]): CardRef[] {
+  const out: CardRef[] = [];
+  for (let i = 0; sources.some((s) => i < s.length); i++) for (const s of sources) if (i < s.length) out.push(s[i]);
+  return out;
+}
 
 /**
  * Kortbunten: kort från listpunkter, bucketkatalogen och idéer som användaren inte har röstat på.
- * Källorna blandas varannan, så att bunten inte börjar med hundra listpunkter i rad.
+ * Kort med kanske (null) kommer sist, först när alla andra kort är slut. Ja och nej kommer inte tillbaka.
  */
-export function buildDeck(sources: CardRef[][], voted: Record<string, boolean>): CardRef[] {
-  const left = sources.map((s) => s.filter((c) => !(c.id in voted)));
-  const out: CardRef[] = [];
-  for (let i = 0; left.some((s) => i < s.length); i++) for (const s of left) if (i < s.length) out.push(s[i]);
-  return out;
+export function buildDeck(sources: CardRef[][], voted: Record<string, Vote>): CardRef[] {
+  const fresh = interleave(sources.map((s) => s.filter((c) => !(c.id in voted))));
+  const maybe = interleave(sources.map((s) => s.filter((c) => c.id in voted && voted[c.id] === null)));
+  return [...fresh, ...maybe];
 }
 
 /** Sant när alla i gruppen har sagt ja. En ensam medlem matchar med sig själv (solo). */
@@ -99,13 +108,14 @@ export function commonYes(votes: Votes, memberIds: string[]): string[] {
 }
 
 /**
- * Vilka medlemmar en punkt väntar på: jag har sagt ja, ingen har sagt nej och någon har inte röstat.
+ * Vilka medlemmar en punkt väntar på: jag har sagt ja, ingen har sagt nej och någon har inte röstat
+ * eller har sagt kanske.
  * Tom lista betyder att punkten inte väntar (match, eller att någon sagt nej, eller att jag inte sagt ja).
  */
 export function waitingFor(id: string, votes: Votes, memberIds: string[], me: string): string[] {
   if (votes[me]?.[id] !== true) return [];
   if (memberIds.some((m) => votes[m]?.[id] === false)) return [];
-  return memberIds.filter((m) => votes[m]?.[id] === undefined);
+  return memberIds.filter((m) => votes[m]?.[id] == null);
 }
 
 // ---------- Samlingar ----------

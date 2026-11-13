@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { Row } from '../../components/Row';
 import { fetchItemMarkers, fetchPlaces, placeName, type Place, type PlaceItem } from '../../lib/content';
@@ -14,6 +14,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import type { MapExtent, MapMarker, MapMode } from './MapView';
 import { StatusPicker } from './StatusPicker';
 import { monthNames } from './months';
+import { usePlayback } from './usePlayback';
 
 // Kartmotorn laddas först när fliken öppnas.
 const MapView = lazy(() => import('./MapView'));
@@ -49,6 +50,10 @@ export default function KartaScreen() {
   const [month, setMonth] = useState(() => new Date().getMonth());
   const [picked, setPicked] = useState<string | null>(null);
   const [mapFailed, setMapFailed] = useState(false);
+  const [params, setParams] = useSearchParams();
+  const playId = params.get('resa');
+  const play = usePlayback(playId);
+  const playLeg = play.legs[play.step];
 
   useEffect(() => {
     let alive = true;
@@ -142,6 +147,8 @@ export default function KartaScreen() {
               fallbackOpacity={mapMode === 'smart' ? 0.35 : 0.85}
               markers={markers}
               markerColor={colors.bor}
+              route={play.route}
+              routeColor={theme.dark ? '#F4B942' : '#E4572E'}
               label={t('flik.karta')}
               onCountry={setPicked}
               onMarker={(m) => nav(`/karta/${m.placeId}${m.kind === 'item' ? '?vy=lista' : ''}`)}
@@ -157,6 +164,35 @@ export default function KartaScreen() {
           ))}
         </div>
       </div>
+
+      {playId && (
+        <div className="card" aria-live="polite">
+          <div className="row">
+            <h2 className="h3">{t('resor.spela-upp')}</h2>
+            {play.legs.length > 0 && <span className="mu">{t('marke.framsteg', { antal: play.step + 1, totalt: play.legs.length })}</span>}
+          </div>
+          {playLeg && (
+            <span>
+              <b>
+                {playLeg.from_text} – {playLeg.to_text}
+              </b>{' '}
+              <span className="mu">{t(`resor.etapp.lage.${playLeg.mode}`)}</span>
+            </span>
+          )}
+          {!play.legs.length && <span className="mu">{t('resor.etapper.tom')}</span>}
+          <div className="g2">
+            <button type="button" className="btn ghost" disabled={!play.done} onClick={play.replay}>
+              {t('resor.spela-upp')}
+            </button>
+            <button type="button" className="btn ghost" onClick={() => nav(`/resor/${playId}`)}>
+              {t('knapp.tillbaka')}
+            </button>
+          </div>
+          <button type="button" className="chip" onClick={() => setParams({}, { replace: true })}>
+            {t('knapp.stang')}
+          </button>
+        </div>
+      )}
 
       <div className="chips" role="group" aria-label={t('flik.karta')}>
         {MODES.map((m) => (

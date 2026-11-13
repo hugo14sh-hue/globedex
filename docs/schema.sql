@@ -224,8 +224,8 @@ create table public.finds (
 
 create table public.swipe_votes (
   user_id uuid not null references auth.users(id) on delete cascade,
-  catalog_id text not null references public.bucket_catalog(id) on delete cascade,
-  wants boolean not null,
+  catalog_id text not null constraint swipe_votes_catalog_id_format check (catalog_id ~ '^[A-Za-z0-9-]+$'),  -- id ur place_items, bucket_catalog eller ideas
+  wants boolean,                             -- null = kanske
   voted_at timestamptz not null default now(),
   primary key (user_id, catalog_id)
 );
@@ -240,7 +240,8 @@ create table public.bucket_items (
   done_on date,
   note text,
   created_by uuid references auth.users(id) on delete set null,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  place_id text constraint bucket_items_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$')  -- plats vid avbockning
 );
 create index on public.bucket_items (group_id);
 

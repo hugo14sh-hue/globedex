@@ -110,6 +110,30 @@ data på en plats:
 ## Bucketlistans katalog
 Ligger i content/_bucket.json som en lista med { "id", "name", "category", "cost_level", "season", "where_text", "place_ids" }. Läses in till bucket_catalog efter places. category är en av aventyr, natur, resa, mat, kultur, tillsammans, hemma, milstolpe. place_ids får vara tom (går att göra var som helst).
 
+## Packlistans förslag
+Ligger i content/_packlista.json och läses in i appen vid bygget (inte till databasen), som _texter.json. Bara allmänna saker som hör till resans längd och månad. Inget om hälsa eller ålder (det kommer från Valvet i Körning 6). Saknas filen är knappen Hämta förslag avstängd.
+
+```json
+{
+  "items": [
+    { "id": "laddare", "group": "Teknik", "title": "Laddare" },
+    { "id": "regnjacka", "group": "Kläder", "title": "Regnjacka", "months": [3, 4, 5, 9, 10, 11] },
+    { "id": "tvattmedel", "group": "Övrigt", "title": "Tvättmedel i resestorlek", "min_nights": 7 }
+  ]
+}
+```
+
+| Fält | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| id | text | ja | små bokstäver, siffror och bindestreck, unikt i filen |
+| group | text | ja | rubriken raden hamnar under i packlistan |
+| title | text | ja | högst 60 tecken |
+| min_nights | heltal | nej | föreslås bara från så här många nätter |
+| max_nights | heltal | nej | föreslås bara upp till så här många nätter |
+| months | lista med heltal 1–12 | nej | föreslås bara när resan börjar i någon av månaderna. Utelämnas för hela året |
+
+En rad med min_nights, max_nights eller months föreslås bara när resan har datum. Saker som redan står på listan (samma titel) föreslås inte igen.
+
 ## Gränssnittets texter
 Ligger i content/_texter.json och läses in i appen vid bygget (inte till databasen). Nycklar under texter, tre språkstilar (neutral, lekfull, romantisk), märken under marken. Reglerna står i filens _om.
 

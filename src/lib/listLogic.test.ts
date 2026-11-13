@@ -97,6 +97,17 @@ describe('swipe', () => {
     expect(buildDeck([[], []], {})).toEqual([]);
   });
 
+  it('lägger kort med kanske sist, efter alla kort man inte röstat på', () => {
+    expect(buildDeck([items, bucket, ideas], { i1: null, b1: true }).map((c) => c.id)).toEqual(['i2', 'd1', 'i3', 'd2', 'i1']);
+    expect(buildDeck([items, bucket, ideas], { i1: null, d1: null, i2: false }).map((c) => c.id)).toEqual(['i3', 'b1', 'd2', 'i1', 'd1']);
+  });
+
+  it('visar kanske-korten igen när alla andra kort är slut', () => {
+    const all = { i1: true, i2: false, i3: null, b1: true, d1: false, d2: null };
+    expect(buildDeck([items, bucket, ideas], all).map((c) => c.id)).toEqual(['i3', 'd2']);
+    expect(buildDeck([items, bucket, ideas], { ...all, i3: true, d2: false })).toEqual([]);
+  });
+
   const votes: Votes = {
     jag: { a: true, b: true, c: true, d: false },
     hon: { a: true, b: false, d: true },
@@ -119,6 +130,31 @@ describe('swipe', () => {
     expect(waitingFor('a', votes, members, 'jag')).toEqual([]);
     expect(waitingFor('d', votes, members, 'jag')).toEqual([]);
     expect(waitingFor('c', votes, [...members, 'tredje'], 'jag')).toEqual(['hon', 'tredje']);
+  });
+});
+
+describe('swipe med kanske', () => {
+  const votes: Votes = {
+    jag: { a: true, b: null, c: true, d: null },
+    hon: { a: null, b: null, c: true, d: true },
+  };
+  const members = ['jag', 'hon'];
+
+  it('räknar inte kanske som ja i en match', () => {
+    expect(isMatch('a', votes, members)).toBe(false);
+    expect(isMatch('b', votes, members)).toBe(false);
+    expect(isMatch('c', votes, members)).toBe(true);
+    expect(isMatch('b', votes, ['jag'])).toBe(false);
+  });
+
+  it('visar inte kanske i listan över gemensamma ja', () => {
+    expect(commonYes(votes, members)).toEqual(['c']);
+    expect(commonYes(votes, ['jag'])).toEqual(['a', 'c']);
+  });
+
+  it('väntar fortfarande på den som sagt kanske', () => {
+    expect(waitingFor('a', votes, members, 'jag')).toEqual(['hon']);
+    expect(waitingFor('d', votes, members, 'jag')).toEqual([]);
   });
 });
 

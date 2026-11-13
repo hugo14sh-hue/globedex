@@ -1122,3 +1122,68 @@ h3.eb {
     transition: none;
   }
 }
+
+/* ---------- Resor ---------- */
+.hero-link {
+  text-decoration: none;
+}
+
+.li.picked {
+  border-color: var(--p);
+  box-shadow: inset 0 0 0 1px var(--p);
+}
+
+.li .moves {
+  display: flex;
+  flex: none;
+}
+
+.mini {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--mu);
+  flex: none;
+}
+
+.mini:disabled {
+  opacity: 0.3;
+}
+
+label.check {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--tx);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+label.check input {
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  flex: none;
+  accent-color: var(--p);
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+fieldset.card {
+  border: 1px solid var(--ln);
+  padding: 14px;
+}
+
+legend {
+  padding: 0;
+}

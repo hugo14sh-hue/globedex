@@ -1,5 +1,5 @@
 // Swipe (Sortera i solo): vyerna Kortbunt och Lista. Korten kommer från place_items, bucket_catalog och ideas
-// som användaren inte har röstat på. Rösterna sparas i swipe_votes. Par och grupp: matchning när alla sagt ja.
+// som användaren inte har röstat på. Kanske sparas som röst med wants null och visas igen sist. Rösterna sparas i swipe_votes. Par och grupp: matchning när alla sagt ja.
 // Solo: ett ja läggs direkt på bucketlistan. Korten går att svepa med finger, med knapparna och med piltangenterna.
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { useFeedback } from '../../components/Feedback';
@@ -135,7 +135,7 @@ export function Swipe({ view, onView }: { view: SwipeView; onView: (v: SwipeView
   const deck = useMemo(() => {
     const ref = (kind: CardKind) => (x: { id: string }) => ({ kind, id: x.id });
     const d = buildDeck([items.map(ref('item')), catalog.map(ref('bucket')), ideas.map(ref('idea'))], myVotes);
-    // Kanske: kortet läggs sist i bunten (sparas inte).
+    // Kanske sparas som röst (null) och kommer sist. Den som säger kanske igen hamnar sist bland kanske-korten.
     return [...d.filter((c) => !later.includes(c.id)), ...later.flatMap((id) => d.filter((c) => c.id === id))];
   }, [items, catalog, ideas, myVotes, later]);
 
@@ -143,13 +143,13 @@ export function Swipe({ view, onView }: { view: SwipeView; onView: (v: SwipeView
   const total = cards.size;
 
   const vote = useCallback(
-    async (card: Card, wants: boolean) => {
+    async (card: Card, wants: boolean | null) => {
       if (busy || !me || !votes) return;
       setBusy(true);
       const before = votes;
       const next: Votes = { ...votes, [me]: { ...(votes[me] ?? {}), [card.id]: wants } };
       setVotes(next);
-      setLater((l) => l.filter((x) => x !== card.id));
+      setLater((l) => [...l.filter((x) => x !== card.id), ...(wants === null ? [card.id] : [])]);
       try {
         await saveVote(me, card.id, wants);
       } catch {
@@ -193,7 +193,7 @@ export function Swipe({ view, onView }: { view: SwipeView; onView: (v: SwipeView
     [busy, me, votes, solo, add, memberIds, toast, party, t],
   );
 
-  const maybe = useCallback((card: Card) => setLater((l) => [...l.filter((x) => x !== card.id), card.id]), []);
+  const maybe = useCallback((card: Card) => vote(card, null), [vote]);
 
   const names = (ids: string[]) =>
     ids
@@ -201,7 +201,7 @@ export function Swipe({ view, onView }: { view: SwipeView; onView: (v: SwipeView
       .filter(Boolean)
       .join(', ');
 
-  const listIds = votes ? (solo ? Object.keys(myVotes).filter((id) => myVotes[id]) : commonYes(votes, memberIds)) : [];
+  const listIds = votes ? (solo ? Object.keys(myVotes).filter((id) => myVotes[id] === true) : commonYes(votes, memberIds)) : [];
   const waiting = votes && !solo ? Object.keys(myVotes).map((id) => ({ id, who: waitingFor(id, votes, memberIds, me) })).filter((w) => w.who.length) : [];
 
   return (

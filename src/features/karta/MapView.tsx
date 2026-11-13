@@ -27,6 +27,19 @@ export interface MapMarker {
   placeId: string;
 }
 
+/** En etapp i uppspelningen, från a till b. */
+export interface RouteLeg {
+  a: { lat: number; lon: number };
+  b: { lat: number; lon: number };
+}
+
+/** Resan som spelas upp: etapperna före step ritas hela, etapp step ritas till andel f (0–1). */
+export interface MapRoute {
+  legs: RouteLeg[];
+  step: number;
+  f: number;
+}
+
 export interface MapViewProps {
   dark: boolean;
   mode: MapMode;
@@ -38,6 +51,9 @@ export interface MapViewProps {
   fallbackOpacity: number;
   markers: MapMarker[];
   markerColor: string;
+  /** Resa som spelas upp etapp för etapp. */
+  route?: MapRoute | null;
+  routeColor?: string;
   label: string;
   onCountry: (iso: string) => void;
   onMarker: (m: MapMarker) => void;
@@ -151,6 +167,28 @@ export default function MapView(props: MapViewProps) {
         },
       });
 
+      m.addSource('rutt', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      m.addLayer({
+        id: 'rutt-linje',
+        type: 'line',
+        source: 'rutt',
+        filter: ['==', ['geometry-type'], 'LineString'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': latest.current.routeColor ?? '#E4572E', 'line-width': 4 },
+      });
+      m.addLayer({
+        id: 'rutt-punkt',
+        type: 'circle',
+        source: 'rutt',
+        filter: ['==', ['geometry-type'], 'Point'],
+        paint: {
+          'circle-radius': ['case', ['get', 'nu'], 8, 5],
+          'circle-color': latest.current.routeColor ?? '#E4572E',
+          'circle-stroke-color': latest.current.dark ? '#172830' : '#FFFFFF',
+          'circle-stroke-width': 2,
+        },
+      });
+
       m.on('click', (e) => {
         const box: [maplibregl.PointLike, maplibregl.PointLike] = [
           [e.point.x - 10, e.point.y - 10],
@@ -217,6 +255,43 @@ export default function MapView(props: MapViewProps) {
     });
     m.setPaintProperty(DOTS, 'circle-color', props.markerColor);
   }, [ready, markerKey, props.markerColor]);
+
+  // Resan: linjer för etapperna så långt uppspelningen har kommit, och en punkt där den är nu.
+  const route = props.route;
+  const routeKey = route ? `${route.legs.length}:${route.step}:${route.f.toFixed(3)}` : '';
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !m.getSource('rutt')) return;
+    const features: { type: 'Feature'; properties: Record<string, boolean>; geometry: { type: 'LineString'; coordinates: number[][] } | { type: 'Point'; coordinates: number[] } }[] = [];
+    if (route) {
+      route.legs.forEach((l, i) => {
+        if (i > route.step) return;
+        const f = i < route.step ? 1 : route.f;
+        const end = { lat: l.a.lat + (l.b.lat - l.a.lat) * f, lon: l.a.lon + (l.b.lon - l.a.lon) * f };
+        features.push({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: [[l.a.lon, l.a.lat], [end.lon, end.lat]] } });
+        features.push({ type: 'Feature', properties: { nu: false }, geometry: { type: 'Point', coordinates: [l.a.lon, l.a.lat] } });
+        if (i === route.step) features.push({ type: 'Feature', properties: { nu: true }, geometry: { type: 'Point', coordinates: [end.lon, end.lat] } });
+      });
+    }
+    (m.getSource('rutt') as GeoJSONSource).setData({ type: 'FeatureCollection', features });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, routeKey]);
+
+  // Visa hela resan när uppspelningen börjar.
+  const routeLegs = route ? route.legs.length : 0;
+  const routeBounds = route ? JSON.stringify(route.legs) : '';
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !route || !routeLegs) return;
+    const b = new maplibregl.LngLatBounds();
+    for (const l of route.legs) {
+      b.extend([l.a.lon, l.a.lat]);
+      b.extend([l.b.lon, l.b.lat]);
+    }
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    m.fitBounds(b, { padding: 48, maxZoom: 7, duration: reduce ? 0 : 800 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, routeBounds]);
 
   // Europa eller världen.
   useEffect(() => {

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
+import { Estimate } from '../../components/Estimate';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
 import { Loading } from '../../components/Loading';
@@ -26,6 +27,7 @@ import {
 import { googleMaps } from '../../lib/links';
 import { useSession } from '../../lib/session';
 import { CollectionMotifs } from '../listor/Samlingar';
+import { AddGift, useTripsTo } from '../resor/InkopScreen';
 import { useFindFeedback } from '../listor/useFindFeedback';
 import { setItemCheck, STATUS_KEY, useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
@@ -51,17 +53,6 @@ interface Loaded {
   facts: PlaceFact[];
   items: PlaceItem[];
   gifts: GiftTip[];
-}
-
-/** Märkning för fält som är egen bedömning utan källa. */
-function Estimate() {
-  const t = useT();
-  return (
-    <span className="chip soft est">
-      {t('knapp.uppskattning')}
-      <span className="sr-only">. {t('knapp.uppskattning-hjalp')}</span>
-    </span>
-  );
 }
 
 function Source({ url, date }: { url?: string | null; date?: string | null }) {
@@ -211,7 +202,7 @@ export default function PlaceScreen() {
           {view === 'guide' && <Guide facts={loaded.facts} onFact={setOpenFact} />}
           {view === 'manad' && <Manad place={place!} />}
           {view === 'boka' && <BokaView place={place!} country={countryOf(places, place!.id)} />}
-          {view === 'kop' && <Kop name={name} gifts={loaded.gifts} />}
+          {view === 'kop' && <Kop name={name} gifts={loaded.gifts} places={places} placeId={id} />}
           {view === 'kop' && <CollectionMotifs placeId={id} gifts={loaded.gifts} />}
         </>
       )}
@@ -572,8 +563,9 @@ function Manad({ place }: { place: Place }) {
   );
 }
 
-function Kop({ name, gifts }: { name: string; gifts: GiftTip[] }) {
+function Kop({ name, gifts, places, placeId }: { name: string; gifts: GiftTip[]; places: Place[]; placeId: string }) {
   const t = useT();
+  const trips = useTripsTo(places, placeId);
   if (!gifts.length) {
     return (
       <div className="card soft">
@@ -591,6 +583,7 @@ function Kop({ name, gifts }: { name: string; gifts: GiftTip[] }) {
           </div>
           {g.body && <p>{g.body}</p>}
           {g.price_sek != null && <b>{formatSek(g.price_sek)}</b>}
+          <AddGift gift={g} trips={trips} />
           {g.for_whom.length > 0 && (
             <div className="chips">
               {g.for_whom.map((w) => (

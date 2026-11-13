@@ -100,13 +100,14 @@ export async function fetchVotes(memberIds: string[]): Promise<Votes> {
   const rows = must(await supabase.from('swipe_votes').select('user_id, catalog_id, wants').in('user_id', memberIds)) as {
     user_id: string;
     catalog_id: string;
-    wants: boolean;
+    wants: boolean | null;
   }[];
   for (const r of rows) if (out[r.user_id]) out[r.user_id][r.catalog_id] = r.wants;
   return out;
 }
 
-export async function saveVote(userId: string, id: string, wants: boolean): Promise<void> {
+/** wants null betyder kanske: kortet kommer tillbaka först när alla andra kort är slut. */
+export async function saveVote(userId: string, id: string, wants: boolean | null): Promise<void> {
   must(
     await supabase
       .from('swipe_votes')

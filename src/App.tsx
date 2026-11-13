@@ -10,6 +10,14 @@ import PlaceScreen from './features/karta/PlaceScreen';
 import IdagScreen from './features/idag/IdagScreen';
 import ListorScreen from './features/listor/ListorScreen';
 import ResorScreen from './features/resor/ResorScreen';
+import PlanScreen from './features/resor/PlanScreen';
+import ImportScreen from './features/resor/ImportScreen';
+import TripScreen from './features/resor/TripScreen';
+import KassaScreen from './features/resor/KassaScreen';
+import PackScreen from './features/resor/PackScreen';
+import InnanScreen from './features/resor/InnanScreen';
+import BokningarScreen from './features/resor/BokningarScreen';
+import InkopScreen from './features/resor/InkopScreen';
 import ViScreen from './features/vi/ViScreen';
 import AnpassningScreen from './features/vi/AnpassningScreen';
 import NotFound from './features/NotFound';
@@ -61,6 +69,14 @@ export default function App() {
           <Route path="idag" element={<IdagScreen />} />
           <Route path="listor" element={<ListorScreen />} />
           <Route path="resor" element={<ResorScreen />} />
+          <Route path="resor/planera" element={<PlanScreen />} />
+          <Route path="resor/importera" element={<ImportScreen />} />
+          <Route path="resor/:id" element={<TripScreen />} />
+          <Route path="resor/:id/kassa" element={<KassaScreen />} />
+          <Route path="resor/:id/pack" element={<PackScreen />} />
+          <Route path="resor/:id/innan" element={<InnanScreen />} />
+          <Route path="resor/:id/bokningar" element={<BokningarScreen />} />
+          <Route path="resor/:id/inkop" element={<InkopScreen />} />
           <Route path="vi" element={<ViScreen />} />
           <Route path="vi/anpassning" element={<AnpassningScreen />} />
         </Route>
