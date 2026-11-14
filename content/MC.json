@@ -54,14 +54,14 @@
       "recommended": true
      },
      {
-      "label": "En natt",
-      "days": 1,
+      "label": "Två nätter",
+      "days": 2,
       "text": "Hinner Oceanografiska museet i lugn och ro och en kväll vid kasinotorget.",
       "recommended": false
      },
      {
-      "label": "Två nätter",
-      "days": 2,
+      "label": "Tre nätter",
+      "days": 3,
       "text": "Lägg till en stranddag vid Larvotto eller en match på Stade Louis II.",
       "recommended": false
      }
