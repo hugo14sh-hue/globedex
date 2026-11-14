@@ -40,6 +40,8 @@ export interface BucketItem {
   place_id?: string | null;
   created_by: string | null;
   created_at: string;
+  /** Delmål som bockas för hand: [{ title, done, done_at }]. Läses med parseParts. */
+  parts?: unknown;
 }
 
 /** Filtrerar katalogen på kategori och kostnad. null betyder alla. */

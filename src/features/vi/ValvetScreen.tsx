@@ -1,7 +1,7 @@
 // Valvet: pass, försäkring, nödkontakt, hälsa, födelsedatum och annat. Krypteras i webbläsaren med
 // användarens kod innan något sparas. Koden och innehållet sparas aldrig lokalt och loggas aldrig.
+import { BackLink } from '../../components/BackLink';
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
@@ -21,10 +21,7 @@ export default function ValvetScreen() {
   const vault = useVault();
   return (
     <main className="scr">
-      <Link className="back" to="/vi">
-        <Icon name="back" size={20} />
-        {t('knapp.tillbaka')}
-      </Link>
+      <BackLink to="/vi" />
       <div className="row">
         <h1>{t('valv.rubrik')}</h1>
         <span className="badge" aria-hidden="true">
@@ -135,7 +132,7 @@ function Unlock() {
       <p>{t('valv.intro')}</p>
       <form className="card" onSubmit={go}>
         <label>
-          {t('valv.lasupp')}
+          {t('valv.kod')}
           <input type="password" value={code} onChange={(e) => setCode(e.target.value)} autoComplete="current-password" required />
         </label>
         {err && (

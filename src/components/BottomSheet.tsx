@@ -58,7 +58,7 @@ export function BottomSheet({
       <div className="sheet-in" role="dialog" aria-modal="true" aria-labelledby={id} ref={panel} tabIndex={-1}>
         <span className="grab" aria-hidden="true" />
         <div className="row">
-          <h3 id={id}>{title}</h3>
+          <h2 id={id} className="h3">{title}</h2>
           <button type="button" className="chip sheet-close" onClick={onClose}>
             {t('knapp.stang')}
           </button>

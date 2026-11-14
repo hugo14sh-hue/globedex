@@ -1,7 +1,7 @@
 // Delat för Resor: hämta en resa, rubrik med tillbakalänk, felbesked och belopp.
+import { BackLink } from '../../components/BackLink';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Icon } from '../../components/Icon';
+import { useParams } from 'react-router-dom';
 import { Loading } from '../../components/Loading';
 import { placeName, type Place } from '../../lib/content';
 import { useSession, useTravelMode } from '../../lib/session';
@@ -102,13 +102,7 @@ export function TripGate({ state, children }: { state: ReturnType<typeof useTrip
 }
 
 export function BackTo({ to }: { to: string }) {
-  const t = useT();
-  return (
-    <Link className="back" to={to}>
-      <Icon name="back" size={20} />
-      {t('knapp.tillbaka')}
-    </Link>
-  );
+  return <BackLink to={to} />;
 }
 
 /** Rubrik på resans undersidor: tillbaka till resan, sidans namn och resans titel. */

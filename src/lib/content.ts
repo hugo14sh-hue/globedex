@@ -210,6 +210,8 @@ export interface BucketCatalogItem {
   season: string | null;
   where_text: string | null;
   place_ids: string[];
+  /** Delmål, se docs/FORMAT.md. Läses med parseChecklist. */
+  checklist?: unknown;
 }
 
 export interface Idea {

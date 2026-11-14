@@ -60,8 +60,10 @@ p {
   margin: 0;
 }
 
+/* Fokusring i textfärgen: minst 4,5:1 mot bakgrund och yta i alla paletter och båda lägena
+   (accentfärgen klarade inte 3:1 överallt). */
 :focus-visible {
-  outline: 2px solid var(--a);
+  outline: 3px solid var(--tx);
   outline-offset: 2px;
 }
 
@@ -660,7 +662,9 @@ h3.eb {
   background: var(--soft);
 }
 
-.map-canvas {
+/* .map före klassen: maplibre-gl.css laddas med kartans chunk efter den här filen och sätter
+   .maplibregl-map { position: relative }, vilket annars gav behållaren höjden 0 och en tom karta. */
+.map .map-canvas {
   position: absolute;
   inset: 0;
 }
@@ -1242,8 +1246,14 @@ button.hero.idea {
   font-size: 0.733rem;
 }
 
+/* Låst märke: ikonen tonas ned och kanten blir streckad. Texten behåller full kontrast (4,5:1). */
 .card.mark:not(.on) {
-  opacity: 0.6;
+  border-style: dashed;
+  background: var(--bg);
+}
+
+.card.mark:not(.on) .badge {
+  opacity: 0.45;
 }
 
 /* Märkets guld är sällsynthetens legendariska färg (fast färg, som i prototypen). */
@@ -1297,4 +1307,88 @@ fieldset.card {
 fieldset.card legend {
   width: auto;
   padding: 0 4px;
+}
+
+/* ---------- Idag: budget under idéns titel ---------- */
+.budget {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  font-size: 0.867rem;
+}
+
+.budget .eb {
+  font-size: 0.733rem;
+}
+
+.hero.idea .budget .eb {
+  color: inherit;
+}
+
+.budget .chip {
+  min-height: 0;
+  padding: 3px 8px;
+  font-size: 0.733rem;
+}
+
+/* ---------- Topplist på Karta ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  height: calc(52px + env(safe-area-inset-top));
+  max-height: calc(52px + env(safe-area-inset-top));
+  margin: calc(-22px - env(safe-area-inset-top)) -16px 0;
+  padding: env(safe-area-inset-top) 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--ln);
+}
+
+.topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.logo-sm {
+  display: block;
+  flex: none;
+}
+
+.topbar .brand-name {
+  font: 700 1.2rem/1 var(--fh);
+}
+
+.topbar .group-link {
+  min-height: 44px;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 26px;
+  text-decoration: none;
+  color: var(--tx);
+}
+
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.li .box[role='img'] {
+  flex: none;
+}
+
+.row-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }

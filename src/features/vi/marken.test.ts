@@ -203,6 +203,15 @@ describe('varje märke', () => {
     expect(s.dates).toEqual([TODAY]);
   });
 
+  it('Färdigpackad: sista raden packad före avresedagen räknas, samma dag eller senare inte', () => {
+    const t = trip({ start_date: '2026-12-01', end_date: '2026-12-03' });
+    const before = st('marke-packad', { trips: [t], packing: { [t.id]: [4, 4, '2026-11-29T12:00:00'] } });
+    expect(before.earned).toBe(true);
+    expect(before.dates).toEqual(['2026-11-29']);
+    expect(st('marke-packad', { trips: [t], packing: { [t.id]: [4, 4, '2026-12-01T08:00:00'] } }).earned).toBe(false);
+    expect(st('marke-packad', { trips: [t], packing: { [t.id]: [3, 4, '2026-11-29T12:00:00'] } }).earned).toBe(false);
+  });
+
   it('Året runt: resor i alla tolv månader, även över månadsskiften', () => {
     const eleven = Array.from({ length: 11 }, (_, i) => trip({ start_date: `2025-${String(i + 1).padStart(2, '0')}-10`, end_date: `2025-${String(i + 1).padStart(2, '0')}-12` }));
     expect(st('marke-manader', { trips: eleven }).value).toBe(11);

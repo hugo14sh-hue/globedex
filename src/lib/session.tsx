@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Session } from '@supabase/supabase-js';
 import { APP_NAME, type TravelMode } from '../config';
 import { supabase, supabaseConfigured } from './supabase';
+import { clearOfflineData } from './offline';
 import type { Group, Invite, Member, Profile, ProfileSettings } from './types';
 import { canInvite, pickActiveGroup } from './groups';
 import { useTheme } from '../theme/ThemeProvider';
@@ -201,6 +202,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     signingOut.current = true;
     await supabase.auth.signOut();
+    await clearOfflineData();
   }, []);
 
   const updateProfile = useCallback<SessionCtx['updateProfile']>(

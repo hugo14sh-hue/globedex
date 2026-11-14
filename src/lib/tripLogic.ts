@@ -197,3 +197,27 @@ export function daysBeforeLabel(days: number): { key: 'innan.samma-dag' | 'innan
   if (days === 1) return { key: 'innan.dagen-fore' };
   return { key: 'innan.dagar-fore', antal: days };
 }
+
+// ---------- Packad ----------
+
+/** Ändringen när en packrad bockas av eller bocken tas bort: packed_at sätts eller nollas. */
+export const packPatch = (packed: boolean, now = new Date()) => ({ packed, packed_at: packed ? now.toISOString() : null });
+
+/**
+ * Packlistan per resa: [packat, totalt, senaste packed_at]. Det tredje värdet är null om någon packad rad
+ * saknar packed_at (bockad innan kolumnen fanns), för då går det inte att veta när listan blev klar.
+ */
+export function packingStats(rows: { trip_id: string; packed: boolean; packed_at?: string | null }[]): Record<string, [number, number, string | null]> {
+  const out: Record<string, [number, number, string | null]> = {};
+  const unknown = new Set<string>();
+  for (const r of rows) {
+    const c = (out[r.trip_id] ??= [0, 0, null]);
+    c[1]++;
+    if (!r.packed) continue;
+    c[0]++;
+    if (!r.packed_at) unknown.add(r.trip_id);
+    else if (!c[2] || r.packed_at > c[2]) c[2] = r.packed_at;
+  }
+  for (const id of unknown) out[id][2] = null;
+  return out;
+}

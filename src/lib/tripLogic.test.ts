@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
   addDays,
+  packPatch,
+  packingStats,
   bestMonths,
   budgetSuggestion,
   changedPos,
@@ -170,5 +172,25 @@ describe('innan avresa', () => {
     expect(daysBeforeLabel(0)).toEqual({ key: 'innan.samma-dag' });
     expect(daysBeforeLabel(1)).toEqual({ key: 'innan.dagen-fore' });
     expect(daysBeforeLabel(14)).toEqual({ key: 'innan.dagar-fore', antal: 14 });
+  });
+});
+
+describe('packed_at', () => {
+  it('sätts när raden bockas av och nollas när bocken tas bort', () => {
+    const now = new Date('2026-11-14T10:00:00Z');
+    expect(packPatch(true, now)).toEqual({ packed: true, packed_at: '2026-11-14T10:00:00.000Z' });
+    expect(packPatch(false, now)).toEqual({ packed: false, packed_at: null });
+  });
+
+  it('packingStats ger senaste tidpunkten, och null om någon packad rad saknar den', () => {
+    const s = packingStats([
+      { trip_id: 'a', packed: true, packed_at: '2026-11-10T10:00:00Z' },
+      { trip_id: 'a', packed: true, packed_at: '2026-11-12T10:00:00Z' },
+      { trip_id: 'a', packed: false, packed_at: null },
+      { trip_id: 'b', packed: true, packed_at: null },
+      { trip_id: 'b', packed: true, packed_at: '2026-11-12T10:00:00Z' },
+    ]);
+    expect(s.a).toEqual([2, 3, '2026-11-12T10:00:00Z']);
+    expect(s.b).toEqual([2, 2, null]);
   });
 });

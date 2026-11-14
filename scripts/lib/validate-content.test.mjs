@@ -108,6 +108,29 @@ describe('validering av innehåll', () => {
     expect(r.errors.map((e) => `${e.file}/${e.field}`)).toEqual(['YY.json/id']);
   });
 
+  it('validerar checklist på bucketpunkter', () => {
+    const b = (checklist) => run(base(), { name: '_bucket.json', json: [{ id: 'bucket-x', name: 'n', category: 'natur', place_ids: [], checklist }] }).errors;
+    expect(b({ type: 'platser', place_ids: ['XX'] })).toEqual([]);
+    expect(b({ type: 'platser', source: 'besokta-lander' })).toEqual([]);
+    expect(b({ type: 'antal', metric: 'countries_visited', target: 10 })).toEqual([]);
+    expect(b({ type: 'delar', items: ['A', 'B'] })).toEqual([]);
+    expect(b({ type: 'platser', place_ids: ['ZZ'] }).map((e) => e.message)).toEqual(['platsen ZZ finns inte']);
+    expect(b({ type: 'platser', parent_id: 'XX', layer: 'landskap' }).map((e) => e.message)).toEqual(['inga platser under XX med layer landskap']);
+    expect(b({ type: 'platser', place_ids: ['XX'], source: 'besokta-lander' })).toHaveLength(1);
+    expect(b({ type: 'platser', source: 'annat' })).toHaveLength(1);
+    expect(b({ type: 'antal', metric: 'okand', target: 0 })).toHaveLength(2);
+    expect(b({ type: 'delar', items: [] })).toHaveLength(1);
+    expect(b({ type: 'delar', items: ['A', 'A'] })).toHaveLength(1);
+    expect(b({ type: 'delar', items: ['A'], extra: 1 })).toHaveLength(1);
+    expect(b({ type: 'okand' })).toHaveLength(1);
+    expect(b('text')).toHaveLength(1);
+  });
+
+  it('toDbRow nollar checklist när fältet saknas', () => {
+    expect(toDbRow('bucket', { id: 'b' }).checklist).toBeNull();
+    expect(toDbRow('bucket', { id: 'b', checklist: { type: 'delar', items: ['A'] } }).checklist).toEqual({ type: 'delar', items: ['A'] });
+  });
+
   it('kontrollerar filnamn och bucketlistan', () => {
     const r = validateContent([{ name: 'xx.json', json: { places: [] } }], { name: '_bucket.json', json: [{ id: 'b', name: 'n', category: 'okand', place_ids: ['ZZ'] }] });
     expect(r.errors.map((e) => e.field).sort()).toEqual(['-', 'category', 'place_ids'].sort());

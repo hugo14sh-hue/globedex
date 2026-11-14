@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b --noEmit",
     "test": "node scripts/test.mjs",
+    "test:e2e": "playwright test",
+    "rls:check": "node scripts/rls-check.mjs",
     "preview": "vite preview",
     "icons": "node scripts/make-icons.mjs",
     "import": "node scripts/import-content.mjs",
@@ -22,6 +24,8 @@
     "react-router-dom": "^7.18.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.1",
     "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",

@@ -1,7 +1,7 @@
 // Min guide eller Vår guide (reviews): egna betyg och anteckningar per ställe, sökbar.
 // Synligheten är privat eller grupp. Offentlig finns i tabellen men erbjuds inte.
+import { BackLink } from '../../components/BackLink';
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
@@ -24,6 +24,7 @@ import { useSession, useTravelMode } from '../../lib/session';
 import { useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
 import { PlaceSelect } from '../listor/PlaceSelect';
+import { useUrlState } from '../../lib/navMemory';
 
 export default function GuideScreen() {
   const t = useT();
@@ -34,7 +35,7 @@ export default function GuideScreen() {
   const [rows, setRows] = useState<Review[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [places, setPlaces] = useState<Place[]>([]);
-  const [q, setQ] = useState('');
+  const [q, setQ] = useUrlState<string>('q', '');
   const [edit, setEdit] = useState<Review | 'ny' | null>(null);
 
   useEffect(() => {
@@ -57,10 +58,7 @@ export default function GuideScreen() {
 
   return (
     <main className="scr">
-      <Link className="back" to="/vi">
-        <Icon name="back" size={20} />
-        {t('knapp.tillbaka')}
-      </Link>
+      <BackLink to="/vi" />
       <h1>{title}</h1>
       <button type="button" className="btn" onClick={() => setEdit('ny')}>
         <Icon name="plus" size={20} />

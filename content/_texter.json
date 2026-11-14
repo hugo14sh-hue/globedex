@@ -786,7 +786,23 @@
   "export.kopiera": "Kopiera texten",
   "land.regler-for-dig.last": "Lås upp Valvet för att se vilka regler som gäller din ålder.",
   "land.regler-for-dig.tom": "Inga åldersregler här gäller dig.",
-  "land.regler.alder": "Åldersgräns: {antal} år"
+  "land.regler.alder": "Åldersgräns: {antal} år",
+  "valv.kod": "Kod",
+  "valv.last": "Låst",
+  "land.regler-for-dig.fodelsedatum": "Lägg in ditt födelsedatum i Valvet för att se regler som gäller din ålder.",
+  "idag.budget.rubrik": "Budget",
+  "idag.budget.gratis": "Kostar inget",
+  "idag.budget.billigt": "Räkna med under 150 kr per person",
+  "idag.budget.medel": "Räkna med 150 till 500 kr per person",
+  "idag.budget.dyrt": "Räkna med över 500 kr per person",
+  "topp.till-gruppen": "Öppna {namn}",
+  "allmant.registrering-stangd": "Det går inte att skapa nya konton just nu.",
+  "bucket.delar.rubrik": "Delmål",
+  "bucket.delar.framsteg": "{antal} av {totalt} klara",
+  "bucket.delar.ny": "Lägg till delmål",
+  "bucket.delar.auto": "Bockas av automatiskt från kartan",
+  "bucket.delar.alla-klara": "Alla delmål är klara. Bocka av punkten?",
+  "bucket.delar.kvar": "{antal} kvar"
  },
  "marken": [
   {

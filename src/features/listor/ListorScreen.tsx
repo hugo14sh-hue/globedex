@@ -21,7 +21,9 @@ export default function ListorScreen() {
   const [params, setParams] = useSearchParams();
   const view = pick(VIEWS, params.get('vy'));
   const del = params.get('del');
-  const go = (vy: View, d?: string) => setParams(d ? { vy, del: d } : { vy }, { replace: true });
+  // Byte av vy nollar vyns filter. extra: filter som ska följa med i samma steg (till exempel kategori).
+  const go = (vy: View, d?: string, extra: Record<string, string> = {}) =>
+    setParams({ vy, ...(d ? { del: d } : {}), ...extra }, { replace: true });
 
   return (
     <main className="scr">
@@ -34,7 +36,7 @@ export default function ListorScreen() {
           label: t(v === 'swipe' && mode === 'solo' ? 'listor.vy.sortera' : `listor.vy.${v}`),
         }))}
       />
-      {view === 'samlingsbok' && <Samlingsbok view={pick(BOK, del)} onView={(d) => go('samlingsbok', d)} />}
+      {view === 'samlingsbok' && <Samlingsbok view={pick(BOK, del)} onView={(d, extra) => go('samlingsbok', d, extra)} />}
       {view === 'bucketlist' && <Bucketlist />}
       {view === 'swipe' && <Swipe view={pick(SWIPE, del)} onView={(d) => go('swipe', d)} />}
     </main>

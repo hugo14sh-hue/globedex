@@ -15,6 +15,7 @@ import { GroupPanel } from './GroupPanel';
 import { Siffror } from './Siffror';
 import { useViData } from './useViData';
 import { Wrapped } from './Wrapped';
+import { useUrlState } from '../../lib/navMemory';
 
 type View = 'siffror' | 'wrapped';
 
@@ -25,7 +26,7 @@ export default function ViScreen() {
   const { canInstall, install } = useInstallPrompt();
   const vault = useVault();
   const [name, setName] = useState(profile?.display_name ?? '');
-  const [view, setView] = useState<View>('siffror');
+  const [view, setView] = useUrlState<View>('vy', 'siffror', ['siffror', 'wrapped']);
   const { data } = useViData();
   const mode = profile?.travel_mode ?? 'solo';
 
@@ -60,7 +61,7 @@ export default function ViScreen() {
       {!data ? <Loading /> : view === 'siffror' ? <Siffror data={data} userId={session?.user.id ?? ''} /> : <Wrapped data={data} />}
 
       <div className="col">
-        <Row to="/vi/valvet" icon="lock" title={t('vi.del.valvet')} sub={vault.state === 'oppen' ? undefined : t('marke.last')} />
+        <Row to="/vi/valvet" icon="lock" title={t('vi.del.valvet')} sub={vault.state === 'oppen' ? undefined : t('valv.last')} />
         <Row to="/vi/guide" icon="star" title={t(mode === 'solo' ? 'vi.guide.jag' : 'vi.guide.vi')} />
         <Row to="/vi/export" icon="copy" title={t('vi.del.export')} />
         <Row to="/vi/anpassning" icon="palette" title={t('vi.del.anpassning')} />

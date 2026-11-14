@@ -13,8 +13,10 @@ import { statusColors } from '../../theme/theme';
 import { useTheme } from '../../theme/ThemeProvider';
 import type { MapExtent, MapMarker, MapMode } from './MapView';
 import { StatusPicker } from './StatusPicker';
+import { TopBar } from './TopBar';
 import { monthNames } from './months';
 import { usePlayback } from './usePlayback';
+import { useUrlState, withParam } from '../../lib/navMemory';
 
 // Kartmotorn laddas först när fliken öppnas.
 const MapView = lazy(() => import('./MapView'));
@@ -45,8 +47,9 @@ export default function KartaScreen() {
     w === 'min' ? t('karta.visa.min') : w === 'var' ? t('karta.visa.var') : t('karta.visa.medlem', { namn: others.find((m) => m.user_id === w)?.display_name ?? '' });
   const [places, setPlaces] = useState<Place[]>([]);
   const [items, setItems] = useState<PlaceItem[]>([]);
-  const [mapMode, setMapMode] = useState<MapMode>('ren');
-  const [extent, setExtent] = useState<MapExtent>('europa');
+  // Kartläge och utsnitt står i adressen, så att de finns kvar när man går tillbaka från en landssida.
+  const [mapMode, setMapMode] = useUrlState<MapMode>('lage', 'ren', MODES);
+  const [extent, setExtent] = useUrlState<MapExtent>('utsnitt', 'europa', ['europa', 'varlden']);
   const [month, setMonth] = useState(() => new Date().getMonth());
   const [picked, setPicked] = useState<string | null>(null);
   const [mapFailed, setMapFailed] = useState(false);
@@ -119,6 +122,7 @@ export default function KartaScreen() {
 
   return (
     <main className="scr">
+      <TopBar />
       <h1>{t('flik.karta')}</h1>
 
       {mode !== 'solo' && (
@@ -188,7 +192,7 @@ export default function KartaScreen() {
               {t('knapp.tillbaka')}
             </button>
           </div>
-          <button type="button" className="chip" onClick={() => setParams({}, { replace: true })}>
+          <button type="button" className="chip" onClick={() => setParams((p) => withParam(p, 'resa', null), { replace: true })}>
             {t('knapp.stang')}
           </button>
         </div>
@@ -274,7 +278,7 @@ export default function KartaScreen() {
               </span>
             )}
             {/* Bara den egna statusen går att ändra. */}
-            {who !== 'min' && <h4 className="eb">{t('karta.visa.min')}</h4>}
+            {who !== 'min' && <h3 className="eb">{t('karta.visa.min')}</h3>}
             <StatusPicker
               placeId={picked}
               name={pickedName}

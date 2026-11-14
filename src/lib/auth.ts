@@ -27,5 +27,7 @@ export function authErrorKey(error: unknown): string {
   if (code === 'invalid_credentials') return 'login.fel-uppgifter';
   if (code === 'user_already_exists' || code === 'email_exists') return 'login.finns-redan';
   if (code === 'weak_password') return 'login.kort-losenord';
+  // Nyregistrering avstängd i Supabase (Authentication, Sign In / Providers, Allow new users to sign up).
+  if (code === 'signup_disabled' || code === 'email_provider_disabled') return 'allmant.registrering-stangd';
   return 'allmant.fel';
 }

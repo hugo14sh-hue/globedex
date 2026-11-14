@@ -1,7 +1,7 @@
 // Exportera till Claude: en text med resor, status, listor och omdömen. Hela texten visas innan
 // den kopieras. Valvet följer aldrig med: det läses inte ens här.
+import { BackLink } from '../../components/BackLink';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
 import { Loading } from '../../components/Loading';
@@ -19,10 +19,7 @@ export default function ExportScreen() {
   const { data } = useViData();
   return (
     <main className="scr">
-      <Link className="back" to="/vi">
-        <Icon name="back" size={20} />
-        {t('knapp.tillbaka')}
-      </Link>
+      <BackLink to="/vi" />
       <h1>{t('vi.del.export')}</h1>
       <p>{t('export.intro')}</p>
       <div className="card soft" role="note">

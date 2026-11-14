@@ -1,6 +1,7 @@
 // Gruppens bucketlist, egna samlingar och swiperöster mot Supabase. RLS avgör vad som syns:
 // bucket_items per grupp, collections bara egna, swipe_votes egna plus gruppmedlemmars.
 import { supabase } from './supabase';
+import type { Part } from './bucketParts';
 import type { BucketItem, Votes } from './listLogic';
 
 function must<T>(res: { data: T | null; error: { message: string } | null }): T {
@@ -33,6 +34,11 @@ export async function setBucketDone(id: string, doneOn: string | null, placeId: 
   const patch: Record<string, string | null> = { done_on: doneOn };
   if (placeId) patch.place_id = placeId;
   must(await supabase.from('bucket_items').update(patch).eq('id', id));
+}
+
+/** Sparar delmålen som bockas för hand. */
+export async function setBucketParts(id: string, parts: Part[]): Promise<void> {
+  must(await supabase.from('bucket_items').update({ parts }).eq('id', id));
 }
 
 export async function deleteBucketItem(id: string): Promise<void> {

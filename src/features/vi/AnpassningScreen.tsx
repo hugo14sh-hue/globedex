@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
+import { BackLink } from '../../components/BackLink';
 import { useFeedback } from '../../components/Feedback';
-import { Icon } from '../../components/Icon';
 import { Segment } from '../../components/Segment';
 import {
   APP_NAME,
@@ -44,10 +43,7 @@ export default function AnpassningScreen() {
 
   return (
     <main className="scr">
-      <Link className="back" to="/vi">
-        <Icon name="back" size={20} />
-        {t('knapp.tillbaka')}
-      </Link>
+      <BackLink to="/vi" />
       <h1>{t('anpassa.rubrik')}</h1>
 
       <Segment<TravelMode>

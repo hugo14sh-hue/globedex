@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
 import { PACK_SUGGESTIONS } from '../../lib/packContent';
-import { nights, packFor } from '../../lib/tripLogic';
+import { nights, packFor, packPatch } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, updateListRow, type PackItem, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
 import { useVault } from '../../lib/vault';
@@ -79,10 +79,11 @@ function Pack({ trip }: { trip: Trip }) {
   };
 
   const toggle = async (r: PackItem) => {
-    const next = rows.map((x) => (x.id === r.id ? { ...x, packed: !x.packed } : x));
+    const patch = packPatch(!r.packed);
+    const next = rows.map((x) => (x.id === r.id ? { ...x, ...patch } : x));
     setList(next);
     try {
-      await updateListRow('packing_items', r.id, { packed: !r.packed });
+      await updateListRow('packing_items', r.id, patch);
       if (!r.packed && next.every((x) => x.packed)) party(t('pack.klar'));
     } catch (err) {
       setList(rows);

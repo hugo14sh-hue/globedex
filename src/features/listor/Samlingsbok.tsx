@@ -15,13 +15,14 @@ import { RARITY_COLORS } from '../../theme/palettes';
 import { formatDate } from '../karta/format';
 import { Samlingar } from './Samlingar';
 import { useFindFeedback } from './useFindFeedback';
+import { useUrlParam } from '../../lib/navMemory';
 
 export type BokView = 'kort' | 'kompendium' | 'samlingar';
 const VIEWS: BokView[] = ['kort', 'kompendium', 'samlingar'];
 
 const catKey = (c: string) => `samling.kategori.${c}`;
 
-export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokView) => void }) {
+export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokView, extra?: Record<string, string>) => void }) {
   const t = useT();
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
@@ -29,8 +30,11 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
   const announce = useFindFeedback();
   const [items, setItems] = useState<CompendiumItem[] | null>(null);
   const [places, setPlaces] = useState<Place[]>([]);
-  const [category, setCategory] = useState<string | null>(null);
-  const [open, setOpen] = useState<CompendiumItem | null>(null);
+  // Vald kategori och öppet kort står i adressen, så att de finns kvar när man går tillbaka hit.
+  const [category, setCategory] = useUrlParam('kat');
+  const [openId, setOpenId] = useUrlParam('fynd');
+  const open = (openId && items?.find((i) => i.id === openId)) || null;
+  const setOpen = (c: CompendiumItem | null) => setOpenId(c?.id ?? null);
 
   useEffect(() => {
     let alive = true;
@@ -73,7 +77,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
         </div>
       </div>
 
-      <Segment<BokView> value={view} onChange={onView} options={VIEWS.map((v) => ({ value: v, label: t(`listor.vy.${v}`) }))} />
+      <Segment<BokView> value={view} onChange={(v) => onView(v)} options={VIEWS.map((v) => ({ value: v, label: t(`listor.vy.${v}`) }))} />
 
       {view !== 'samlingar' && items && all.length === 0 && (
         <div className="card soft">
@@ -111,16 +115,15 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
                     type="button"
                     className={`bc${f ? ' on' : ''}`}
                     style={f ? { borderColor: color } : undefined}
-                    aria-label={`${f ? c.name : t('samling.okant')}, ${t(`sallsynthet.${c.rarity}`)}`}
                     onClick={() => setOpen(c)}
                   >
                     <span className="ic" style={f ? { background: `color-mix(in srgb, ${color} 18%, var(--sf))`, color } : undefined}>
                       <Icon name={isIcon(c.icon) ? c.icon : 'star'} size={28} stroke={1.8} />
                     </span>
-                    <span aria-hidden="true">{f ? c.name : '?'}</span>
-                    <small aria-hidden="true" style={{ color: f ? color : undefined }}>
-                      {t(`sallsynthet.${c.rarity}`)}
-                    </small>
+                    {/* Namnet för skärmläsare är den synliga texten: kortets namn (eller Okänt) och sällsyntheten.
+                        Sällsynthetens färg syns i kanten och ikonen. Texten har textfärg för kontrastens skull. */}
+                    {f ? <span>{c.name}</span> : <><span aria-hidden="true">?</span><span className="sr-only">{t('samling.okant')}</span></>}
+                    <small>{t(`sallsynthet.${c.rarity}`)}</small>
                   </button>
                 </li>
               );
@@ -141,8 +144,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
                 type="button"
                 className="li"
                 onClick={() => {
-                  setCategory(c.category);
-                  onView('kort');
+                  onView('kort', { kat: c.category });
                 }}
               >
                 <span className="badge">
@@ -182,7 +184,9 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
       <BottomSheet open={Boolean(open)} title={open ? (isFound(open.id) ? open.name : t('samling.okant')) : ''} onClose={() => setOpen(null)}>
         {open && (
           <>
-            <span className="eb" style={{ color: RARITY_COLORS[open.rarity] }}>
+            {/* Sällsynthetens färg som prick: texten i färgen klarade inte 4,5:1. */}
+            <span className="eb row-inline">
+              <i className="dot" style={{ background: RARITY_COLORS[open.rarity] }} aria-hidden="true" />
               {t(`sallsynthet.${open.rarity}`)} · {t(catKey(open.category))}
             </span>
             {open.hint && <p>{open.hint}</p>}

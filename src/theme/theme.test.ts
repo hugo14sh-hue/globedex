@@ -45,6 +45,28 @@ describe('kontrast i alla paletter', () => {
     });
   }
 
+  // Körning 7: alla textpar som används i gränssnittet, i alla fem paletter och båda lägena.
+  for (const P of PALETTES) {
+    for (const dark of [false, true]) {
+      it(`${P.name}, ${dark ? 'mörkt' : 'ljust'} läge: dämpad text, länkar och accentknappar klarar 4,5:1`, () => {
+        const v = themeVars({ ...DEFAULT_THEME, palette: P.id, dark });
+        // --soft är 14 % primärfärg i ytan (color-mix i CSS).
+        const soft = mix(v['--sf'], v['--p'], 0.14);
+        expect(contrast(v['--mu'], v['--bg'])).toBeGreaterThanOrEqual(4.5);
+        expect(contrast(v['--mu'], v['--sf'])).toBeGreaterThanOrEqual(4.5);
+        expect(contrast(v['--mu'], soft)).toBeGreaterThanOrEqual(4.5);
+        expect(contrast(v['--tx'], soft)).toBeGreaterThanOrEqual(4.5);
+        // Primärfärgen som text: länkar och vald flik.
+        expect(contrast(v['--p'], v['--bg'])).toBeGreaterThanOrEqual(4.5);
+        expect(contrast(v['--p'], v['--sf'])).toBeGreaterThanOrEqual(4.5);
+        // Text på accentknappar.
+        expect(contrast(v['--ona'], v['--a'])).toBeGreaterThanOrEqual(4.5);
+        // Fokusringen (textfärgen) mot bakgrunden: minst 3:1 för icke-text.
+        expect(contrast(v['--tx'], v['--bg'])).toBeGreaterThanOrEqual(3);
+      });
+    }
+  }
+
   it('mörkt läge får mörk text på den ljusa primärfärgen', () => {
     for (const P of PALETTES) {
       expect(themeVars({ ...DEFAULT_THEME, palette: P.id, dark: true })['--onp']).toBe(TEXT_DARK);

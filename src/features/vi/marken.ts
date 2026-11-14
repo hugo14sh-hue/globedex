@@ -49,8 +49,8 @@ export interface ViInput {
   collectionEntries: { got_on: string }[];
   expensesByTrip: Record<string, ExpenseLike[]>;
   memberIds: string[];
-  /** Packlistan per resa: [packat, totalt]. */
-  packing: Record<string, [number, number]>;
+  /** Packlistan per resa: [packat, totalt, när sista raden packades (null eller saknas: okänt)]. */
+  packing: Record<string, [number, number, (string | null)?]>;
   vault: { updated_at: string | null }[];
   customPalette: boolean;
 }
@@ -80,6 +80,9 @@ export const emptyInput = (mode: TravelMode = 'solo', today = todayIso()): ViInp
 
 /** Ett datum som ÅÅÅÅ-MM-DD, eller null. */
 const day = (s: string | null | undefined) => (s ? s.slice(0, 10) : null);
+
+/** Dagen i lokal tid för en tidpunkt (ÅÅÅÅ-MM-DD). */
+export const localDay = (iso: string) => todayIso(new Date(iso));
 
 /** En händelse: datumet då saken räknades (null om det inte går att veta). */
 export type Events = (string | null)[];
@@ -194,15 +197,17 @@ export const METRICS: Record<string, Metric> = {
         return total > 0 && ex.length > 0 && spent(ex).total <= total * 100;
       })
       .map(tripDate),
-  // Packlistan har ingen tidpunkt för avbockning. Räknas: hela listan packad på en resa som inte har
-  // börjat än, eller som har börjat (då går det inte att veta när, och listan räknas som packad före).
+  // Hela listan packad, och sista raden bockad (packed_at) före avresedagen. Datumet är den dagen.
+  // Rader som bockades innan packed_at fanns ger ingen tidpunkt: då räknas listan som packad före
+  // avresan, med avresedagen (eller i dag för en kommande resa) som datum.
   packing_all_done_before_departure: (x) =>
-    x.trips
-      .filter((t) => {
-        const p = x.packing[t.id];
-        return p && p[1] > 0 && p[0] === p[1];
-      })
-      .map((t) => (t.start_date && t.start_date <= x.today ? t.start_date : x.today)),
+    x.trips.flatMap((t) => {
+      const p = x.packing[t.id];
+      if (!p || p[1] === 0 || p[0] !== p[1]) return [];
+      const last = p[2] ? localDay(p[2]) : null;
+      if (!last) return [t.start_date && t.start_date <= x.today ? t.start_date : x.today];
+      return !t.start_date || last < t.start_date ? [last] : [];
+    }),
   distinct_trip_months: (x) => Object.values(tripMonths(x)),
   vault_items: (x) => x.vault.map((v) => day(v.updated_at)),
   custom_palette: (x) => (x.customPalette ? [null] : []),

@@ -16,7 +16,10 @@ import {
   type Place,
 } from '../../lib/content';
 import { bucketPlaces, filterCatalog, onList, percent, sortBucket, type BucketItem } from '../../lib/listLogic';
-import { addBucketItem, deleteBucketItem, fetchBucketItems, setBucketDone } from '../../lib/listor';
+import { addBucketItem, deleteBucketItem, fetchBucketItems, setBucketDone, setBucketParts } from '../../lib/listor';
+import { addedPart, allPartsDone, bucketParts, parseChecklist, toggledParts, type PartsView } from '../../lib/bucketParts';
+import { useUrlParam } from '../../lib/navMemory';
+import { BucketParts } from './BucketParts';
 import { useSession } from '../../lib/session';
 import { useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
@@ -67,14 +70,16 @@ export function Bucketlist() {
   const { items, reload, add } = useBucket();
   const [catalog, setCatalog] = useState<BucketCatalogItem[]>([]);
   const [places, setPlaces] = useState<Place[]>([]);
-  const [open, setOpen] = useState<BucketItem | null>(null);
+  // Öppen punkt, katalogen och filtren står i adressen, så att de finns kvar när man går tillbaka hit.
+  const [openId, setOpenId] = useUrlParam('punkt');
+  const [catalogParam, setCatalogParam] = useUrlParam('katalog');
+  const [fCatParam, setFCat] = useUrlParam('kat');
+  const [fCostParam, setFCostParam] = useUrlParam('kostnad');
+  const [partsBusy, setPartsBusy] = useState(false);
   const [checking, setChecking] = useState<{ item: BucketItem; date: string; place: string } | null>(null);
   const [remove, setRemove] = useState<BucketItem | null>(null);
-  const [showCatalog, setShowCatalog] = useState(false);
   const [own, setOwn] = useState<string | null>(null);
   const [ownError, setOwnError] = useState('');
-  const [fCat, setFCat] = useState<string | null>(null);
-  const [fCost, setFCost] = useState<CostLevel | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -91,6 +96,34 @@ export function Bucketlist() {
 
   const byId = useMemo(() => new Map(catalog.map((c) => [c.id, c])), [catalog]);
   const list = useMemo(() => sortBucket(items ?? []), [items]);
+  const open = (openId && list.find((i) => i.id === openId)) || null;
+  const setOpen = (b: BucketItem | null) => setOpenId(b?.id ?? null);
+  const showCatalog = catalogParam === '1';
+  const setShowCatalog = (v: boolean) => setCatalogParam(v ? '1' : null);
+  const fCat = fCatParam;
+  const fCost = (COST_LEVELS as string[]).includes(fCostParam ?? '') ? (fCostParam as CostLevel) : null;
+  const setFCost = (c: CostLevel | null) => setFCostParam(c);
+
+  // Delmål per punkt: ur katalogens checklist, kartans status och parts.
+  const partsCtx = useMemo(() => ({ places, statuses: mine.statuses, name: (id: string) => placeName(places, id) }), [places, mine.statuses]);
+  const partsOf = useCallback(
+    (b: BucketItem): PartsView | null => bucketParts(parseChecklist(b.catalog_id ? byId.get(b.catalog_id)?.checklist : null), b.parts, partsCtx),
+    [byId, partsCtx],
+  );
+
+  const saveParts = async (b: BucketItem, next: ReturnType<typeof toggledParts>) => {
+    setPartsBusy(true);
+    try {
+      await setBucketParts(b.id, next);
+      await reload();
+      return true;
+    } catch {
+      toast(t('allmant.fel-spara'));
+      return false;
+    } finally {
+      setPartsBusy(false);
+    }
+  };
   const done = list.filter((i) => i.done_on).length;
   const filtered = useMemo(() => filterCatalog(catalog, fCat, fCost), [catalog, fCat, fCost]);
 
@@ -160,6 +193,7 @@ export function Bucketlist() {
 
   if (!items) return null;
   const openCat = open?.catalog_id ? byId.get(open.catalog_id) : undefined;
+  const openParts = open ? partsOf(open) : null;
 
   return (
     <>
@@ -192,7 +226,14 @@ export function Bucketlist() {
 
       {list.map((b) => {
         const on = Boolean(b.done_on);
-        const sub = [b.category ? t(`bucket.kategori.${b.category}`) : '', b.done_on ? formatDate(b.done_on) : ''].filter(Boolean).join(' · ');
+        const pv = on ? null : partsOf(b);
+        const sub = [
+          b.category ? t(`bucket.kategori.${b.category}`) : '',
+          b.done_on ? formatDate(b.done_on) : '',
+          pv ? t('bucket.delar.framsteg', { antal: pv.done, totalt: pv.total }) : '',
+        ]
+          .filter(Boolean)
+          .join(' · ');
         return (
           <div key={b.id} className="li">
             <button
@@ -236,6 +277,18 @@ export function Bucketlist() {
             {bucketPlaces(open, openCat).map((id) => (
               <Row key={id} to={`/karta/${id}`} icon="pin" title={placeName(places, id)} />
             ))}
+            <BucketParts
+              view={openParts}
+              canAdd={!open.catalog_id && !open.done_on}
+              busy={partsBusy}
+              onToggle={(title) => void saveParts(open, toggledParts(open.parts, title))}
+              onAdd={(title) => saveParts(open, addedPart(open.parts, title))}
+            />
+            {!open.done_on && allPartsDone(openParts) && (
+              <div className="card soft" role="status">
+                <p>{t('bucket.delar.alla-klara')}</p>
+              </div>
+            )}
             {open.done_on ? (
               <button type="button" className="btn ghost" onClick={() => undo(open)}>
                 {t('knapp.angra')}

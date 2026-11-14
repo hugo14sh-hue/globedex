@@ -10,7 +10,7 @@ import { fetchReviews, type Review } from '../../lib/reviews';
 import { useSession, useTravelMode } from '../../lib/session';
 import { isStatus } from '../../lib/statusLogic';
 import { supabase } from '../../lib/supabase';
-import { fetchExpenseRows, fetchLegCounts, fetchListCounts, fetchTrips, type Trip } from '../../lib/trips';
+import { fetchExpenseRows, fetchLegCounts, fetchPackingStats, fetchTrips, type Trip } from '../../lib/trips';
 import { todayIso } from '../../lib/tripLogic';
 import { CHECK_KIND } from '../../lib/vaultCrypto';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -92,7 +92,7 @@ export function useViData() {
       const [legsR, expR, packR] = await Promise.allSettled([
         fetchLegCounts(ids),
         fetchExpenseRows(ids),
-        fetchListCounts('packing_items', ids),
+        fetchPackingStats(ids),
       ]);
       if (!alive) return;
 

@@ -1,4 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { wasBlockedRecently } from '../lib/offline';
+import { t } from '../lib/texter';
 
 // Toast (kort besked längst ned) och konfetti (vid något roligt). En provider för båda.
 
@@ -18,7 +20,9 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   const pt = useRef<number>(0);
 
   const toast = useCallback((text: string) => {
-    setMsg((m) => ({ text, n: (m?.n ?? 0) + 1 }));
+    // En skrivning stoppades nyss för att uppkopplingen saknas: säg det i stället för ett allmänt fel.
+    const shown = wasBlockedRecently() ? t('allmant.offline-skriv') : text;
+    setMsg((m) => ({ text: shown, n: (m?.n ?? 0) + 1 }));
     window.clearTimeout(tt.current);
     tt.current = window.setTimeout(() => setMsg(null), 2600);
   }, []);

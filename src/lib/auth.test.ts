@@ -35,6 +35,10 @@ describe('authErrorKey', () => {
     expect(authErrorKey({ code: 'weak_password', status: 422 })).toBe('login.kort-losenord');
   });
 
+  it('avstängd nyregistrering', () => {
+    expect(authErrorKey({ code: 'signup_disabled', status: 422 })).toBe('allmant.registrering-stangd');
+  });
+
   it('status 429 och gränser för antal försök', () => {
     expect(authErrorKey({ status: 429 })).toBe('login.for-manga');
     expect(authErrorKey({ code: 'over_request_rate_limit' })).toBe('login.for-manga');
@@ -48,7 +52,7 @@ describe('authErrorKey', () => {
   });
 
   it('alla nycklar finns i texterna', () => {
-    const keys = ['login.fel-epost', 'login.kort-losenord', 'login.fel-uppgifter', 'login.finns-redan', 'login.for-manga', 'allmant.fel'];
+    const keys = ['login.fel-epost', 'login.kort-losenord', 'login.fel-uppgifter', 'login.finns-redan', 'login.for-manga', 'allmant.fel', 'allmant.registrering-stangd'];
     for (const k of keys) expect(hasText(k)).toBe(true);
   });
 });

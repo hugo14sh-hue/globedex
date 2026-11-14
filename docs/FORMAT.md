@@ -110,6 +110,30 @@ data på en plats:
 ## Bucketlistans katalog
 Ligger i content/_bucket.json som en lista med { "id", "name", "category", "cost_level", "season", "where_text", "place_ids" }. Läses in till bucket_catalog efter places. category är en av aventyr, natur, resa, mat, kultur, tillsammans, hemma, milstolpe. place_ids får vara tom (går att göra var som helst).
 
+### checklist (valfritt): delmål
+En punkt kan ha delmål i fältet checklist. Det läses in till bucket_catalog.checklist. Avbockningar som görs för hand sparas per grupp i bucket_items.parts som [{ "title", "done", "done_at" }]. Tre former:
+
+| type | Fält | Rader | Bockas av |
+|---|---|---|---|
+| platser | place_ids: lista med plats-id (minst en, inga dubbletter) | en rad per plats | automatiskt när platsen har status besökt, bor eller har bott. Går inte att bocka av för hand |
+| platser | parent_id + layer (båda krävs) | en rad per plats under parent_id med det lagret, i bokstavsordning | automatiskt, som ovan |
+| platser | source: "besokta-lander" | en rad per land med status besökt | för hand |
+| antal | metric: countries_visited eller continents_visited, target: heltal över 0 | en stapel med framsteg, samma uträkning som Siffror | automatiskt |
+| delar | items: lista med titlar (minst en, högst 120 tecken, inga dubbletter) | en rad per titel | för hand |
+
+Platser ska ha precis en av place_ids, parent_id + layer eller source. Andra fält än de som hör till formen stoppas. import:check kontrollerar också att platserna finns, och att det finns platser under parent_id med det lagret. Saknas checklist nollas kolumnen vid importen.
+
+```json
+{ "id": "bucket-alla-landskap", "name": "...", "category": "resa", "place_ids": ["SE"],
+  "checklist": { "type": "platser", "parent_id": "SE", "layer": "landskap" } }
+{ "id": "bucket-tio-lander", "name": "...", "category": "milstolpe", "place_ids": [],
+  "checklist": { "type": "antal", "metric": "countries_visited", "target": 10 } }
+{ "id": "bucket-x", "name": "...", "category": "aventyr", "place_ids": [],
+  "checklist": { "type": "delar", "items": ["Första delen", "Andra delen"] } }
+```
+
+Egna bucketpunkter (utan katalog) kan få egna delmål i appen. De finns bara i bucket_items.parts.
+
 ## Packlistans förslag
 Ligger i content/_packlista.json och läses in i appen vid bygget (inte till databasen), som _texter.json. Bara allmänna saker som hör till resans längd och månad. Inget om hälsa eller ålder (det kommer från Valvet i Körning 6). Saknas filen är knappen Hämta förslag avstängd.
 

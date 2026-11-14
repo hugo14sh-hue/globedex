@@ -159,7 +159,8 @@ create table public.bucket_catalog (
   cost_level text check (cost_level in ('gratis','billigt','medel','dyrt')),
   season text,
   where_text text,
-  place_ids text[] not null default '{}'
+  place_ids text[] not null default '{}',
+  checklist jsonb                           -- delmål: {"type":"platser"|"antal"|"delar", ...}, se docs/FORMAT.md
 );
 
 create table public.ideas (                  -- Idag-fliken
@@ -241,7 +242,8 @@ create table public.bucket_items (
   note text,
   created_by uuid references auth.users(id) on delete set null,
   created_at timestamptz not null default now(),
-  place_id text constraint bucket_items_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$')  -- plats vid avbockning
+  place_id text constraint bucket_items_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),  -- plats vid avbockning
+  parts jsonb                                -- delmål som bockas för hand: [{"title","done","done_at"}]
 );
 create index on public.bucket_items (group_id);
 
@@ -307,8 +309,10 @@ create table public.vault_items (
   kind text not null,                        -- 'pass', 'forsakring', 'nodkontakt', 'halsa', 'fodelsedatum' ...
   ciphertext text not null,
   iv text not null,
+  salt text,                                 -- salt för PBKDF2 (base64), samma på alla rader hos en användare, inte hemligt
   updated_at timestamptz not null default now()
 );
+comment on column public.vault_items.salt is 'Salt för PBKDF2 (base64). Samma på alla rader hos en användare. Inte hemligt.';
 create index on public.vault_items (user_id);
 
 -- ========== Resor ==========
@@ -388,6 +392,7 @@ create table public.packing_items (
   grp text not null default 'Övrigt',
   title text not null,
   packed boolean not null default false,
+  packed_at timestamptz,                                     -- när raden bockades av (märket Färdigpackad)
   owner uuid references auth.users(id) on delete set null,   -- null = delad
   private boolean not null default false,                    -- t.ex. rader från hälsa i Valvet
   pos smallint not null default 0
@@ -491,10 +496,21 @@ create policy "own_all" on public.collection_entries for all to authenticated
 
 -- Gruppens data
 do $$ declare t text; begin
-  foreach t in array array['bucket_items','reviews','saved_ideas','trips'] loop
+  foreach t in array array['bucket_items','saved_ideas','trips'] loop
     execute format('create policy "group_all" on public.%I for all to authenticated using (public.is_member(group_id)) with check (public.is_member(group_id))', t);
   end loop;
 end $$;
+
+-- Vår guide: privata omdömen syns och ändras bara av den som skrev dem
+create policy "review_read" on public.reviews for select to authenticated
+  using (public.is_member(group_id) and (visibility <> 'privat' or created_by = auth.uid()));
+create policy "review_insert" on public.reviews for insert to authenticated
+  with check (public.is_member(group_id) and created_by = auth.uid());
+create policy "review_update" on public.reviews for update to authenticated
+  using (public.is_member(group_id) and (visibility <> 'privat' or created_by = auth.uid()))
+  with check (public.is_member(group_id) and (visibility <> 'privat' or created_by = auth.uid()));
+create policy "review_delete" on public.reviews for delete to authenticated
+  using (public.is_member(group_id) and (visibility <> 'privat' or created_by = auth.uid()));
 
 -- Resans delar
 do $$ declare t text; begin

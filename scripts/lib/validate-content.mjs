@@ -44,8 +44,11 @@ const COLUMNS = {
   compendium: ['id', 'category', 'name', 'rarity', 'icon', 'hint', 'place_id', 'source_url'],
   ideas: ['id', 'place_id', 'kind', 'title', 'body', 'duration', 'cost_level', 'tags', 'drive_minutes', 'lat', 'lon'],
   gifts: ['id', 'place_id', 'name', 'body', 'for_whom', 'keywords', 'price_sek', 'min_age', 'collection_motifs'],
-  bucket: ['id', 'name', 'category', 'cost_level', 'season', 'where_text', 'place_ids'],
+  bucket: ['id', 'name', 'category', 'cost_level', 'season', 'where_text', 'place_ids', 'checklist'],
 };
+
+const CHECKLIST_METRICS = ['countries_visited', 'continents_visited'];
+const CHECKLIST_SOURCES = ['besokta-lander'];
 
 const ID_RE = /^[A-Za-z0-9]+(-[a-z0-9]+)*$/;
 const COUNTRY_RE = /^[A-Z]{2}$/;
@@ -211,6 +214,44 @@ function checkBucket(row, check) {
   check(row, 'category', BUCKET_CATEGORIES.includes(row.category), `ska vara ${BUCKET_CATEGORIES.join(', ')}`);
   if (row.cost_level !== undefined) check(row, 'cost_level', COST_LEVELS.includes(row.cost_level), `ska vara ${COST_LEVELS.join(', ')}`);
   check(row, 'place_ids', listOf(row.place_ids), 'lista (får vara tom)');
+  if (row.checklist !== undefined) checkChecklist(row, check);
+}
+
+/** checklist på en bucketpunkt: platser, antal eller delar (docs/FORMAT.md). Platserna kontrolleras mot innehållet senare. */
+function checkChecklist(row, check) {
+  const c = row.checklist;
+  if (!isObj(c)) return check(row, 'checklist', false, 'ska vara ett objekt med type');
+  const only = (keys) => {
+    for (const k of Object.keys(c)) check(row, 'checklist', keys.includes(k), `fältet ${k} hör inte till type ${c.type}`);
+  };
+  if (c.type === 'platser') {
+    const forms = [c.place_ids !== undefined, c.parent_id !== undefined || c.layer !== undefined, c.source !== undefined].filter(Boolean).length;
+    if (forms !== 1) return check(row, 'checklist', false, 'platser ska ha precis en av place_ids, parent_id + layer eller source');
+    if (c.place_ids !== undefined) {
+      only(['type', 'place_ids']);
+      check(row, 'checklist', listOf(c.place_ids) && c.place_ids.length > 0 && new Set(c.place_ids).size === c.place_ids.length, 'place_ids ska vara en lista med platser utan dubbletter');
+    } else if (c.source !== undefined) {
+      only(['type', 'source']);
+      check(row, 'checklist', CHECKLIST_SOURCES.includes(c.source), `source ska vara ${CHECKLIST_SOURCES.join(', ')}`);
+    } else {
+      only(['type', 'parent_id', 'layer']);
+      check(row, 'checklist', isStr(c.parent_id) && isStr(c.layer), 'parent_id och layer krävs båda');
+    }
+  } else if (c.type === 'antal') {
+    only(['type', 'metric', 'target']);
+    check(row, 'checklist', CHECKLIST_METRICS.includes(c.metric), `metric ska vara ${CHECKLIST_METRICS.join(', ')}`);
+    check(row, 'checklist', isInt(c.target) && c.target > 0, 'target ska vara ett heltal över 0');
+  } else if (c.type === 'delar') {
+    only(['type', 'items']);
+    check(
+      row,
+      'checklist',
+      listOf(c.items) && c.items.length > 0 && c.items.every((x) => x.length <= 120) && new Set(c.items).size === c.items.length,
+      'items ska vara en lista med titlar (högst 120 tecken, inga dubbletter)',
+    );
+  } else {
+    check(row, 'checklist', false, 'type ska vara platser, antal eller delar');
+  }
 }
 
 /**
@@ -313,6 +354,16 @@ export function validateContent(files, bucket) {
   if (bucket && Array.isArray(bucket.json)) {
     const check = makeChecker(bucket.name, errors);
     for (const r of bucket.json) if (isObj(r) && Array.isArray(r.place_ids)) for (const id of r.place_ids) check(r, 'place_ids', placeIds.has(id), `platsen ${id} finns inte`);
+    const allPlaces = files.flatMap((f) => (isObj(f.json) && Array.isArray(f.json.places) ? f.json.places : [])).filter(isObj);
+    for (const r of bucket.json) {
+      const c = isObj(r) && isObj(r.checklist) ? r.checklist : null;
+      if (!c || c.type !== 'platser') continue;
+      if (Array.isArray(c.place_ids)) for (const id of c.place_ids) check(r, 'checklist', placeIds.has(id), `platsen ${id} finns inte`);
+      if (isStr(c.parent_id) && isStr(c.layer)) {
+        check(r, 'checklist', placeIds.has(c.parent_id), `platsen ${c.parent_id} finns inte`);
+        check(r, 'checklist', allPlaces.some((p) => p.parent_id === c.parent_id && p.layer === c.layer), `inga platser under ${c.parent_id} med layer ${c.layer}`);
+      }
+    }
   }
 
   rows.places = sortPlaces(rows.places);
@@ -337,6 +388,8 @@ export function toDbRow(part, row) {
   const r = { ...row };
   if (part === 'places' && r.data === undefined) r.data = {};
   if ((part === 'ideas') && r.tags === undefined) r.tags = [];
+  // Utan checklist nollas kolumnen, så att ett borttaget fält också försvinner i databasen.
+  if (part === 'bucket' && r.checklist === undefined) r.checklist = null;
   if (part === 'gifts') {
     if (r.keywords === undefined) r.keywords = [];
     if (r.collection_motifs === undefined) r.collection_motifs = {};

@@ -26,4 +26,12 @@
 - Resenärsnivå i rubriken på fliken Vi (prototypen visar "Resenärsnivå 7"), uträknad ur märkena.
 - Dela Wrapped som bild.
 - Märkenas datum för länder bygger på place_status.updated_at (senaste ändringen). En egen kolumn för första besöket skulle ge exakta datum.
-- Färdigpackad räknas på packlistans läge nu, eftersom packing_items saknar tidpunkt för avbockning. En kolumn packed_at skulle göra märket exakt.
+- (Klart i Körning 7: Färdigpackad använder packing_items.packed_at.)
+
+## Från Körning 7
+- Bucketlist: ändra eller ta bort ett eget delmål. Fas 1 kan bara lägga till och bocka av.
+- Bucketlist: delmål för platser som bockas av automatiskt skulle kunna visa datumet då platsen fick status.
+- Offline: hämta bokningarnas filer (Storage) i förväg för kommande resor, inte bara raderna.
+- Offline: en kö för skrivningar som skickas när uppkopplingen kommer tillbaka. Fas 1 stoppar skrivningar i stället, med tydligt besked.
+- Säkerhet: ett andra testkonto i en egen grupp med en egen resa, så att npm run rls:check kan prova resans tabeller (bokningar, utgifter, packlista med flera) live och inte bara via reglerna.
+- Röktestet kan byggas ut med par- och gruppläge (två konton som matchar i Swipe och delar utgifter).

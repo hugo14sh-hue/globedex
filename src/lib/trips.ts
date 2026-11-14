@@ -1,6 +1,7 @@
 // Resor mot Supabase: trips, trip_legs, bookings, expenses, packing_items, pretrip_items, shopping_items.
 // Behörigheten avgörs av RLS i databasen: gruppens medlemmar (is_member) och resans delar (can_trip).
 import { supabase } from './supabase';
+import { packingStats } from './tripLogic';
 
 export interface Trip {
   id: string;
@@ -78,6 +79,7 @@ export interface PackItem {
   grp: string;
   title: string;
   packed: boolean;
+  packed_at?: string | null;
   owner: string | null;
   private: boolean;
   pos: number;
@@ -311,6 +313,17 @@ export async function fetchListCounts(table: ListTable, tripIds: string[]): Prom
     out[id] = c;
   }
   return out;
+}
+
+/** Packlistan per resa med tidpunkten då sista raden packades (märket Färdigpackad). */
+export async function fetchPackingStats(tripIds: string[]): Promise<Record<string, [number, number, string | null]>> {
+  if (!tripIds.length) return {};
+  const rows = must(await supabase.from('packing_items').select('trip_id, packed, packed_at').in('trip_id', tripIds)) as {
+    trip_id: string;
+    packed: boolean;
+    packed_at: string | null;
+  }[];
+  return packingStats(rows);
 }
 
 export async function addListRows<T>(table: ListTable, rows: Record<string, unknown>[]): Promise<T[]> {

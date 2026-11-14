@@ -346,14 +346,29 @@
    "DK",
    "FI",
    "IS"
-  ]
+  ],
+  "checklist": {
+   "type": "platser",
+   "place_ids": [
+    "SE",
+    "NO",
+    "DK",
+    "FI",
+    "IS"
+   ]
+  }
  },
  {
   "id": "bucket-tre-kontinenter",
   "name": "Besöka tre kontinenter",
   "category": "resa",
   "cost_level": "dyrt",
-  "place_ids": []
+  "place_ids": [],
+  "checklist": {
+   "type": "antal",
+   "metric": "continents_visited",
+   "target": 3
+  }
  },
  {
   "id": "bucket-ekvatorn",
@@ -414,7 +429,12 @@
   "cost_level": "dyrt",
   "place_ids": [
    "SE"
-  ]
+  ],
+  "checklist": {
+   "type": "platser",
+   "parent_id": "SE",
+   "layer": "landskap"
+  }
  },
  {
   "id": "bucket-stjarnkrog",
@@ -471,7 +491,11 @@
   "name": "Laga en rätt från varje land ni besökt",
   "category": "mat",
   "cost_level": "billigt",
-  "place_ids": []
+  "place_ids": [],
+  "checklist": {
+   "type": "platser",
+   "source": "besokta-lander"
+  }
  },
  {
   "id": "bucket-opera",
@@ -707,7 +731,16 @@
   "cost_level": "dyrt",
   "place_ids": [
    "SE"
-  ]
+  ],
+  "checklist": {
+   "type": "delar",
+   "items": [
+    "Vasaloppet eller Engelbrektsloppet",
+    "Vätternrundan",
+    "Vansbrosimningen",
+    "Lidingöloppet"
+   ]
+  }
  },
  {
   "id": "bucket-mil-sprak",
@@ -763,6 +796,11 @@
   "name": "Besöka tio länder",
   "category": "milstolpe",
   "cost_level": "dyrt",
-  "place_ids": []
+  "place_ids": [],
+  "checklist": {
+   "type": "antal",
+   "metric": "countries_visited",
+   "target": 10
+  }
  }
 ]

@@ -24,7 +24,9 @@ const png = [
   ['globedex-ikon-maskable.svg', 512, 'pwa-maskable-512.png'],
   ['globedex-ikon-maskable.svg', 192, 'pwa-maskable-192.png'],
   ['globedex-ikon-maskable.svg', 180, 'apple-touch-icon.png'],
-  ['globedex-ikon-liten.svg', 32, 'favicon-32.png'],
+  // 16 till 32 px: bara globen (globedex-favicon.svg).
+  ['globedex-favicon.svg', 32, 'favicon-32.png'],
+  ['globedex-favicon.svg', 16, 'favicon-16.png'],
 ];
 for (const [file, size, out] of png) {
   const svg = readFileSync(`${SRC}/${file}`, 'utf8');

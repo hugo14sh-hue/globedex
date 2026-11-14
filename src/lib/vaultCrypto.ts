@@ -7,7 +7,7 @@
 export const PBKDF2_ITERATIONS = 600_000;
 
 /** Kortaste kod (textnyckeln valv.kort-kod). */
-export const MIN_CODE = 6;
+export const MIN_CODE = 8;
 
 /** Raden som bara finns för att kontrollera koden. Innehållet är okänt utan rätt nyckel. */
 export const CHECK_KIND = 'kontroll';

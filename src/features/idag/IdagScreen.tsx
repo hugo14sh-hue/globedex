@@ -52,6 +52,7 @@ import { createTrip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { saveError } from '../resor/shared';
+import { IdeaBudget } from './IdeaBudget';
 import { LocationSheet, spotFromName } from './LocationSheet';
 
 const STORE = `${APP_NAME.toLowerCase()}.idag`;
@@ -423,6 +424,7 @@ export default function IdagScreen() {
               <button type="button" className="hero idea" onClick={() => setOpen({ type: 'idea', idea })}>
                 <span className="eb">{t(`idag.typ.${idea.kind}`)}</span>
                 <span className="ti">{idea.title}</span>
+                <IdeaBudget level={idea.cost_level} />
                 <span className="chips">
                   {ideaChips(idea).map((c) => (
                     <span key={c} className="chip">
@@ -484,6 +486,7 @@ export default function IdagScreen() {
                   </span>
                   <span className="t">
                     <b>{n.idea.title}</b>
+                    <IdeaBudget level={n.idea.cost_level} />
                     <span className="mu">{[t(`idag.typ.${n.idea.kind}`), placeName(places, n.idea.place_id!)].join(' · ')}</span>
                   </span>
                   <span className="chip soft">{away(n)}</span>
@@ -529,6 +532,7 @@ export default function IdagScreen() {
                 </button>
                 <button type="button" className="t" disabled={!i} onClick={() => i && setOpen({ type: 'idea', idea: i })}>
                   <b className={done ? 'done' : ''}>{title}</b>
+                  <IdeaBudget level={i?.cost_level} />
                   <span className="mu">
                     {done ? `${t('idag.gjord')} ${formatDate(row.done_on!)}` : i ? t(`idag.typ.${i.kind}`) : ''}
                   </span>

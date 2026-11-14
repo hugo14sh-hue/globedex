@@ -1,7 +1,8 @@
 // Landssida och stadssida: Översikt, Lista, Guide, Månad, Boka och Köp med hem (som i prototypen).
 // Allt innehåll kommer från databasen. Saknas innehåll visas land.saknar-innehall och status fungerar ändå.
+import { BackLink } from '../../components/BackLink';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { Estimate } from '../../components/Estimate';
 import { useFeedback } from '../../components/Feedback';
@@ -125,7 +126,7 @@ export default function PlaceScreen() {
   if (!place && !knownCountry) {
     return (
       <main className="scr">
-        <BackLink />
+        <BackToMap />
         <div className="card soft">
           <p>{t('allmant.saknas')}</p>
         </div>
@@ -161,7 +162,7 @@ export default function PlaceScreen() {
 
   return (
     <main className="scr">
-      <BackLink />
+      <BackToMap />
       <div className="hero">
         <div className="row">
           <div className="col" style={{ gap: 2 }}>
@@ -249,14 +250,8 @@ export default function PlaceScreen() {
   );
 }
 
-function BackLink() {
-  const t = useT();
-  return (
-    <Link className="back" to="/karta">
-      <Icon name="back" size={20} />
-      {t('knapp.tillbaka')}
-    </Link>
-  );
+function BackToMap() {
+  return <BackLink to="/karta" />;
 }
 
 function Oversikt({
@@ -520,7 +515,7 @@ function RulesForYou({ facts, places, placeId, onFact }: { facts: PlaceFact[]; p
     return (
       <section className="col">
         {head}
-        <Row to="/vi/valvet" icon="lock" title={t('valv.ny')} sub={t('valv.typ.fodelsedatum')} />
+        <Row to="/vi/valvet" icon="lock" title={t('land.regler-for-dig.fodelsedatum')} />
       </section>
     );
   const mine = rulesForAge(facts, age);

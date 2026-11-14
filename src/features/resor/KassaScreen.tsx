@@ -13,6 +13,7 @@ import { addExpense, deleteExpense, fetchExpenses, updateTrip, type Expense, typ
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { Bar, formatMoney, formatOre, saveError, SubHeader, TripGate, usePeople, useTrip } from './shared';
+import { useUrlState } from '../../lib/navMemory';
 
 /** Kategorier för utgifter och budget. Texterna ligger i kassa.kategori.*. */
 const CATEGORIES = ['resa', 'boende', 'mat', 'aktiviteter', 'ovrigt'] as const;
@@ -28,7 +29,7 @@ function Kassa({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const t = useT();
   const { toast } = useFeedback();
   const people = usePeople();
-  const [view, setView] = useState<View>('skulder');
+  const [view, setView] = useUrlState<View>('vy', 'skulder', ['skulder', 'budget']);
   const [list, setList] = useState<Expense[] | null>(null);
   const [adding, setAdding] = useState(false);
   const [open, setOpen] = useState<Expense | null>(null);
