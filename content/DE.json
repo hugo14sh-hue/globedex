@@ -90,7 +90,69 @@
      "day_budget_sek",
      "smart_months",
      "stay"
-    ]
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 3,
+     "checked": "2026-11-14",
+     "summary": "Ungefär som hemma på restaurang, och billigare för öl.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 10.4,
+       "high": 26,
+       "typical": 15.6
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 52,
+       "high": 104,
+       "typical": 73
+      },
+      {
+       "key": "snabbmat",
+       "low": 10.4,
+       "high": 13.5,
+       "typical": 12.5
+      },
+      {
+       "key": "ol",
+       "low": 3.1,
+       "high": 6.25,
+       "typical": 4.7
+      },
+      {
+       "key": "kaffe",
+       "low": 2.8,
+       "high": 3.5,
+       "note": "Enligt Settle in Berlin, inte Numbeo."
+      },
+      {
+       "key": "lask",
+       "low": 2.1,
+       "high": 4.2,
+       "typical": 3.4
+      },
+      {
+       "key": "vatten",
+       "low": 2.1,
+       "high": 3.6,
+       "typical": 2.7
+      }
+     ],
+     "tips": [
+      "Ett dubbelrum kostar i snitt 160–220 euro per natt enligt Kayak, beroende på vilken av Kayaks sidor man läser."
+     ],
+     "sources": [
+      "https://www.expatica.com/de/cost-of-living/berlin/",
+      "https://www.settle-in-berlin.com/cost-of-living-in-berlin/",
+      "https://www.en.kayak.de/Berlin-Hotels.9109.hotel.ksp"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    }
    },
    "smart_months": [
     1,

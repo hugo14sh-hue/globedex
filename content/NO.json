@@ -91,7 +91,56 @@
      "day_budget_sek",
      "smart_months",
      "stay"
-    ]
+    ],
+    "prices": {
+     "currency": "NOK",
+     "level": 4,
+     "checked": "2026-11-14",
+     "summary": "Dyrt att äta ute och dyrast av allt är alkoholen.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 150,
+       "high": 340,
+       "typical": 245
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 788,
+       "high": 1800,
+       "typical": 1200
+      },
+      {
+       "key": "snabbmat",
+       "low": 137,
+       "high": 175,
+       "typical": 150
+      },
+      {
+       "key": "ol",
+       "low": 90,
+       "high": 135,
+       "typical": 120
+      },
+      {
+       "key": "kaffe",
+       "low": 40,
+       "high": 80,
+       "typical": 56
+      }
+     ],
+     "tips": [
+      "Ett dubbelrum kostar i snitt runt 210 dollar per natt enligt Kayak. Källan anger ingen uppdelning per hotellklass."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Oslo",
+      "https://www.kayak.com/Oslo-Hotels.29309.hotel.ksp"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    }
    },
    "smart_months": [
     2,

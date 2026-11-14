@@ -80,7 +80,56 @@
      "day_budget_sek",
      "smart_months",
      "stay"
-    ]
+    ],
+    "prices": {
+     "currency": "DKK",
+     "level": 4,
+     "checked": "2026-11-14",
+     "summary": "Dyrare än hemma, framför allt på restaurang och för öl och kaffe.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 90,
+       "high": 300,
+       "typical": 150
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 600,
+       "high": 1500,
+       "typical": 800
+      },
+      {
+       "key": "snabbmat",
+       "low": 85,
+       "high": 120,
+       "typical": 90
+      },
+      {
+       "key": "ol",
+       "low": 45,
+       "high": 75,
+       "typical": 60
+      },
+      {
+       "key": "kaffe",
+       "low": 30,
+       "high": 60,
+       "typical": 46
+      }
+     ],
+     "tips": [
+      "Ett dubbelrum kostar i snitt runt 320 dollar per natt enligt Kayak. Källan anger ingen uppdelning per hotellklass."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Copenhagen",
+      "https://www.kayak.com/Copenhagen-Hotels.8533.hotel.ksp"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    }
    },
    "smart_months": [
     1,

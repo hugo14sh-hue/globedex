@@ -330,7 +330,42 @@
      "day_budget_sek",
      "smart_months",
      "stay"
-    ]
+    ],
+    "prices": {
+     "currency": "SEK",
+     "level": 3,
+     "checked": "2026-11-14",
+     "summary": "Sveriges dyraste stad, men prisnivån känner du igen.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "typical": 175
+      },
+      {
+       "key": "middag-for-tva",
+       "typical": 1025
+      },
+      {
+       "key": "ol",
+       "typical": 75
+      },
+      {
+       "key": "kaffe",
+       "typical": 51
+      }
+     ],
+     "tips": [
+      "Ett dubbelrum kostar i snitt runt 195 euro per natt enligt Kayak, ungefär 2 150 kronor."
+     ],
+     "sources": [
+      "https://getcostidea.com/?p=5669",
+      "https://www.kayak.ie/Stockholm-Hotels.9880.hotel.ksp"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    }
    },
    "smart_months": [
     1,
