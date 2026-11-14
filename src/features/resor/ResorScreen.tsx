@@ -1,6 +1,7 @@
 // Resor: översikt med nästa resa och nedräkning, övriga planerade resor, tidigare resor och import.
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Flag } from '../../components/Flag';
 import { Icon } from '../../components/Icon';
 import { Loading } from '../../components/Loading';
 import { Row } from '../../components/Row';
@@ -105,7 +106,15 @@ function TripRow({ trip, places }: { trip: Trip; places: Place[] }) {
       to={`/resor/${trip.id}`}
       title={trip.title}
       sub={[tripPlace(places, trip), formatRange(trip.start_date, trip.end_date)].filter(Boolean).join(' · ')}
-      lead={<span className="badge">{id.slice(0, 2) || <Icon name="plane" size={20} />}</span>}
+      lead={
+        id ? (
+          <Flag placeId={id} />
+        ) : (
+          <span className="badge">
+            <Icon name="plane" size={20} />
+          </span>
+        )
+      }
     />
   );
 }

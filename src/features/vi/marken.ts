@@ -36,7 +36,7 @@ export interface ViInput {
   /** Gruppens resor. */
   trips: TripLike[];
   legCounts: Record<string, number>;
-  finds: { compendium_id: string; found_on: string; place_id: string | null }[];
+  finds: { compendium_id: string; found_on: string | null; place_id: string | null }[];
   rarity: Record<string, Rarity>;
   /** Listpunkter per plats (place_items). */
   itemsByPlace: Record<string, string[]>;

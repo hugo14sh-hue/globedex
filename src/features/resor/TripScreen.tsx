@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
+import { Flag } from '../../components/Flag';
 import { Row } from '../../components/Row';
 import { fetchPlaces, type Place } from '../../lib/content';
 import { spent } from '../../lib/kassa';
@@ -27,6 +28,7 @@ import {
 import { useT } from '../../lib/useT';
 import { emptyLeg, LegFields, toLeg, useNamedPoints, type LegDraft } from './LegFields';
 import { BackTo, formatOre, formatRange, saveError, TripGate, tripPlace, usePeople, useTrip } from './shared';
+import { currencySymbol } from '../karta/format';
 
 export default function TripScreen() {
   const state = useTrip();
@@ -225,7 +227,7 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
       <section className="col">
         <Row
           to={`/resor/${trip.id}/kassa`}
-          lead={<span className="badge">kr</span>}
+          lead={<span className="badge">{currencySymbol('SEK')}</span>}
           title={t('kassa.rubrik')}
           sub={counts ? (budgetTotal ? `${formatOre(counts.spentOre)} / ${formatOre(budgetTotal * 100)}` : formatOre(counts.spentOre)) : undefined}
         />
@@ -235,7 +237,7 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
         <Row to={`/resor/${trip.id}/inkop`} icon="heart" title={t('inkop.rubrik')} sub={counts ? progress(counts.shop) : undefined} />
         {trip.place_id && (
           <>
-            <Row to={`/karta/${trip.place_id}`} icon="map" title={placeLabel} sub={t('land.vy.guide')} />
+            <Row to={`/karta/${trip.place_id}`} lead={<Flag placeId={trip.place_id} />} title={placeLabel} sub={t('land.vy.guide')} />
             <Row to={`/karta/${trip.place_id}?vy=boka`} icon="build" title={t('land.vy.boka')} />
           </>
         )}

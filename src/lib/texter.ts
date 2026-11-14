@@ -1,7 +1,7 @@
 // Gränssnittets texter. Allt läses från content/_texter.json i vald språkstil.
 // Skriv inga egna texter här. Saknas en nyckel visas nyckeln själv, och den listas i slutrapporten.
 import data from '../../content/_texter.json';
-import { APP_NAME, type Tone } from '../config';
+import { APP_LOCALE, APP_NAME, type Tone } from '../config';
 
 type Entry = string | Partial<Record<Tone, string>>;
 const TEXTER = data.texter as Record<string, Entry>;
@@ -10,11 +10,15 @@ export type Values = Record<string, string | number>;
 
 const warned = new Set<string>();
 
+/** Tal i texterna formateras efter appens språk. Heltal under 10 000 (till exempel årtal) grupperas inte. */
+const num = new Intl.NumberFormat(APP_LOCALE, { maximumFractionDigits: 2 });
+const formatNum = (v: number) => (Number.isInteger(v) && Math.abs(v) < 10_000 ? String(v) : num.format(v));
+
 function fill(s: string, values: Values): string {
   return s.replace(/\{(\w+)\}/g, (m, k: string) => {
     if (k === 'app' && values.app === undefined) return APP_NAME;
     const v = values[k];
-    return v === undefined ? m : String(v);
+    return v === undefined ? m : typeof v === 'number' ? formatNum(v) : v;
   });
 }
 

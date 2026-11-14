@@ -8,6 +8,7 @@ import { useSession, useTravelMode } from '../../lib/session';
 import { hasText } from '../../lib/texter';
 import { fetchTrip, isOldSchema, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
+import { LOCALE } from '../../lib/locale';
 
 type T = ReturnType<typeof useT>;
 
@@ -20,8 +21,8 @@ export function saveError(t: T, e: unknown): string {
   return t('allmant.fel-spara');
 }
 
-const kr0 = new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK', maximumFractionDigits: 0 });
-const kr2 = new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const kr0 = new Intl.NumberFormat(LOCALE, { style: 'currency', currency: 'SEK', maximumFractionDigits: 0 });
+const kr2 = new Intl.NumberFormat(LOCALE, { style: 'currency', currency: 'SEK', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 /** Ören som kronor: hela kronor när det går jämnt ut, annars med ören. */
 export const formatOre = (ore: number) => (ore % 100 === 0 ? kr0.format(ore / 100) : kr2.format(ore / 100));
@@ -29,14 +30,14 @@ export const formatOre = (ore: number) => (ore % 100 === 0 ? kr0.format(ore / 10
 /** Belopp i en annan valuta, med webbläsarens format. */
 export function formatMoney(amount: number, currency: string): string {
   try {
-    return new Intl.NumberFormat('sv-SE', { style: 'currency', currency, maximumFractionDigits: 2 }).format(amount);
+    return new Intl.NumberFormat(LOCALE, { style: 'currency', currency, maximumFractionDigits: 2 }).format(amount);
   } catch {
     return `${amount} ${currency}`;
   }
 }
 
-const dayFmt = new Intl.DateTimeFormat('sv-SE', { day: 'numeric', month: 'short', timeZone: 'UTC' });
-const dayYearFmt = new Intl.DateTimeFormat('sv-SE', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const dayFmt = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const dayYearFmt = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 const d = (iso: string) => new Date(`${iso.slice(0, 10)}T00:00:00Z`);
 
 /** Datumintervall som 13 maj – 17 maj 2027. */

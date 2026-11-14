@@ -11,6 +11,7 @@ import { todayIso, tripPhase } from '../../lib/tripLogic';
 import { useT } from '../../lib/useT';
 import { useViData, type ViData } from './useViData';
 import { EXPORT_PARTS, exportText, type ExportData, type ExportPart } from './viLogic';
+import { LOCALE } from '../../lib/locale';
 
 const PHASE_KEY = { kommande: 'resor.kommande', pagar: 'resor.pagar', avslutad: 'resor.tidigare' } as const;
 
@@ -56,7 +57,7 @@ function Builder({ data }: { data: ViData }) {
         places: x.statuses
           .filter((r) => r.status === s)
           .map((r) => name(r.place_id))
-          .sort((a, b) => a.localeCompare(b, 'sv')),
+          .sort((a, b) => a.localeCompare(b, LOCALE)),
       })),
       lists: [
         { label: t('listor.vy.bucketlist'), items: data.bucket.filter((b) => !b.done_on).map((b) => b.title) },

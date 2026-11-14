@@ -6,11 +6,14 @@ import { useT } from '../lib/useT';
 export function BottomSheet({
   open,
   title,
+  lead,
   onClose,
   children,
 }: {
   open: boolean;
   title: string;
+  /** Dekor före rubriken, till exempel landets flagga. */
+  lead?: ReactNode;
   onClose: () => void;
   children: ReactNode;
 }) {
@@ -58,7 +61,18 @@ export function BottomSheet({
       <div className="sheet-in" role="dialog" aria-modal="true" aria-labelledby={id} ref={panel} tabIndex={-1}>
         <span className="grab" aria-hidden="true" />
         <div className="row">
-          <h2 id={id} className="h3">{title}</h2>
+          {lead ? (
+            <span className="sheet-title">
+              {lead}
+              <h2 id={id} className="h3">
+                {title}
+              </h2>
+            </span>
+          ) : (
+            <h2 id={id} className="h3">
+              {title}
+            </h2>
+          )}
           <button type="button" className="chip sheet-close" onClick={onClose}>
             {t('knapp.stang')}
           </button>

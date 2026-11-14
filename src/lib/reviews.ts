@@ -1,6 +1,7 @@
 // Vår guide (reviews): gruppens egna betyg och anteckningar per ställe.
 // Synligheten offentlig finns i tabellen men erbjuds inte i appen, bara privat och grupp.
 import { supabase } from './supabase';
+import { LOCALE } from './locale';
 
 export type ReviewVisibility = 'privat' | 'grupp';
 export const REVIEW_VISIBILITY: ReviewVisibility[] = ['privat', 'grupp'];
@@ -50,9 +51,9 @@ export async function deleteReview(id: string): Promise<void> {
 
 /** Sökning på ställe, plats och anteckning, utan hänsyn till stora och små bokstäver. */
 export function searchReviews<T extends Pick<Review, 'name' | 'note' | 'place_id'>>(rows: T[], q: string, placeName: (id: string) => string): T[] {
-  const s = q.trim().toLocaleLowerCase('sv');
+  const s = q.trim().toLocaleLowerCase(LOCALE);
   if (!s) return rows;
   return rows.filter((r) =>
-    [r.name, r.note ?? '', r.place_id ? placeName(r.place_id) : ''].some((x) => x.toLocaleLowerCase('sv').includes(s)),
+    [r.name, r.note ?? '', r.place_id ? placeName(r.place_id) : ''].some((x) => x.toLocaleLowerCase(LOCALE).includes(s)),
   );
 }

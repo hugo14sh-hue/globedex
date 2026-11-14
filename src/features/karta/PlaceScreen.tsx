@@ -6,6 +6,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { Estimate } from '../../components/Estimate';
 import { useFeedback } from '../../components/Feedback';
+import { Flag } from '../../components/Flag';
 import { Icon } from '../../components/Icon';
 import { Loading } from '../../components/Loading';
 import { Row } from '../../components/Row';
@@ -36,10 +37,12 @@ import { useVault } from '../../lib/vault';
 import { ageOn, birthDate, rulesForAge } from '../../lib/vaultLogic';
 import { todayIso } from '../../lib/tripLogic';
 import { SMART_COLORS } from '../../theme/palettes';
+import { statusColors } from '../../theme/theme';
+import { useTheme } from '../../theme/ThemeProvider';
 import { BokaView } from './BokaView';
 import { monthNames } from './months';
 import { StatusPicker } from './StatusPicker';
-import { formatDate, formatSek } from './format';
+import { formatDate, formatPercent, formatSek } from './format';
 
 type View = 'oversikt' | 'lista' | 'guide' | 'manad' | 'boka' | 'kop';
 const TABS: View[] = ['oversikt', 'lista', 'guide', 'manad', 'boka'];
@@ -80,6 +83,7 @@ export default function PlaceScreen() {
   const [params, setParams] = useSearchParams();
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
+  const { theme } = useTheme();
   const { party, toast } = useFeedback();
   const announceFind = useFindFeedback();
   const [places, setPlaces] = useState<Place[] | null>(null);
@@ -166,7 +170,10 @@ export default function PlaceScreen() {
       <div className="hero">
         <div className="row">
           <div className="col" style={{ gap: 2 }}>
-            <h1>{name}</h1>
+            <span className="sheet-title">
+              <Flag placeId={id} ring={status ? statusColors(theme)[status] : undefined} />
+              <h1>{name}</h1>
+            </span>
             <span className="hero-sub">
               {t(STATUS_KEY[status ?? 'ej'])}
               {parent ? ` · ${parent.name}` : ''}
@@ -174,7 +181,7 @@ export default function PlaceScreen() {
           </div>
           {items.length > 0 && (
             <div className="ring" style={{ background: `conic-gradient(var(--a) ${pct * 3.6}deg, rgba(255,255,255,.25) 0)` }} aria-hidden="true">
-              <span>{pct} %</span>
+              <span>{formatPercent(pct)}</span>
             </div>
           )}
         </div>

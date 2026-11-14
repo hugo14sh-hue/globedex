@@ -13,6 +13,7 @@ import { useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
+import { LOCALE } from '../../lib/locale';
 
 const today = () => new Date().toISOString().slice(0, 10);
 const VISITED = new Set(['bor', 'bott', 'besokt']);
@@ -62,7 +63,7 @@ export function Samlingar() {
   const create = async (ev: FormEvent) => {
     ev.preventDefault();
     const n = name.trim();
-    if (!n) return setError(t('allmant.obligatoriskt', { falt: t('samlingar.ny').toLocaleLowerCase('sv') }));
+    if (!n) return setError(t('allmant.obligatoriskt', { falt: t('samlingar.ny').toLocaleLowerCase(LOCALE) }));
     if (!userId) return;
     try {
       await addCollection(userId, n);

@@ -3,6 +3,7 @@
 import type { BadgeState, TripLike, ViInput } from './marken';
 import { doneTrips, tripDays, visitedContinents, visitedCountries, visitedRegions } from './marken';
 import { countryIdFor } from '../../lib/statusLogic';
+import { LOCALE } from '../../lib/locale';
 
 // ---------- Siffror ----------
 
@@ -37,7 +38,7 @@ export function numbers(x: ViInput, compendiumTotal: number): Numbers {
 const M49: Record<string, string> = { EU: '150', AS: '142', AF: '002', NA: '003', SA: '005', OC: '009', AN: 'AQ' };
 export function continentName(code: string): string {
   try {
-    return new Intl.DisplayNames(['sv'], { type: 'region' }).of(M49[code] ?? code) ?? code;
+    return new Intl.DisplayNames([LOCALE], { type: 'region' }).of(M49[code] ?? code) ?? code;
   } catch {
     return code;
   }
@@ -82,7 +83,7 @@ export function wrapped(x: ViInput, year: number): WrappedYear | null {
     trips: trips.length,
     countries,
     days: trips.reduce((s, t) => s + tripDays(t), 0),
-    finds: x.finds.filter((f) => f.found_on.startsWith(y)).length,
+    finds: x.finds.filter((f) => f.found_on?.startsWith(y)).length,
     bucket: x.bucket.filter((b) => b.done_on?.startsWith(y)).length,
     longest,
   };
@@ -109,14 +110,15 @@ export interface TimelineEvent {
 export function timeline(x: ViInput, badges: BadgeState[], findName: (id: string) => string): TimelineEvent[] {
   const out: TimelineEvent[] = [];
   for (const t of x.trips) if (t.start_date && t.start_date <= x.today) out.push({ date: t.start_date, type: 'resa', title: t.title, tripId: t.id });
-  for (const f of x.finds) out.push({ date: f.found_on, type: 'fynd', title: findName(f.compendium_id) });
+  // Fynd utan datum (samling.vet-inte-nar) hör inte hemma på tidslinjen.
+  for (const f of x.finds) if (f.found_on) out.push({ date: f.found_on, type: 'fynd', title: findName(f.compendium_id) });
   for (const b of x.bucket) if (b.done_on) out.push({ date: b.done_on, type: 'bucket', title: b.title });
   for (const s of badges)
     s.dates.forEach((d, i) => {
       if (d) out.push({ date: d, type: 'marke', title: s.badge.name, level: s.levels.length > 1 ? i + 1 : undefined });
     });
   const rank: Record<TimelineType, number> = { resa: 0, marke: 1, bucket: 2, fynd: 3 };
-  return out.sort((a, b) => b.date.localeCompare(a.date) || rank[a.type] - rank[b.type] || a.title.localeCompare(b.title, 'sv'));
+  return out.sort((a, b) => b.date.localeCompare(a.date) || rank[a.type] - rank[b.type] || a.title.localeCompare(b.title, LOCALE));
 }
 
 // ---------- Exportera till Claude ----------

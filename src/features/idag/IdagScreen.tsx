@@ -54,6 +54,7 @@ import { formatDate } from '../karta/format';
 import { saveError } from '../resor/shared';
 import { IdeaBudget } from './IdeaBudget';
 import { LocationSheet, spotFromName } from './LocationSheet';
+import { LOCALE } from '../../lib/locale';
 
 const STORE = `${APP_NAME.toLowerCase()}.idag`;
 const NEAR_MAX = 40;
@@ -343,7 +344,7 @@ export default function IdagScreen() {
   };
 
   const rangeLabel = (r: Range) => t(`idag.nara.${r}`);
-  const lowerFirst = (s: string) => s.charAt(0).toLocaleLowerCase('sv') + s.slice(1);
+  const lowerFirst = (s: string) => s.charAt(0).toLocaleLowerCase(LOCALE) + s.slice(1);
   const away = (n: { km: number; minutes: number | null }) =>
     n.minutes != null ? t('idag.restid', { tid: formatMinutes(n.minutes) }) : t('idag.avstand', { km: formatKm(n.km) });
 

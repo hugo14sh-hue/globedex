@@ -72,7 +72,7 @@ export function useViData() {
         rows<{ place_id: string; status: string; updated_at: string | null }>(
           supabase.from('place_status').select('place_id, status, updated_at').eq('user_id', me),
         ),
-        rows<{ compendium_id: string; found_on: string; place_id: string | null }>(
+        rows<{ compendium_id: string; found_on: string | null; place_id: string | null }>(
           supabase.from('finds').select('compendium_id, found_on, place_id').eq('user_id', me),
         ),
         rows<{ item_id: string; done_on: string }>(supabase.from('item_checks').select('item_id, done_on').eq('user_id', me)),

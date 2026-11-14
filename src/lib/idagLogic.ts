@@ -1,6 +1,7 @@
 // Ren logik för Idag: vald plats, vilka idéer som gäller, filter, slumpning och Nära. Testas i idagLogic.test.ts.
 import type { Idea, Place } from './content';
 import { addDays } from './tripLogic';
+import { LOCALE } from './locale';
 
 export type When = 'idag' | 'helg';
 export type IdagView = 'slumpa' | 'nara' | 'sparade';
@@ -54,7 +55,7 @@ export function distanceKm(a: Point, b: Point): number {
 const has = (p: { lat: number | null; lon: number | null } | null | undefined): p is { lat: number; lon: number } =>
   Boolean(p && p.lat != null && p.lon != null);
 
-const norm = (s: string) => s.trim().toLocaleLowerCase('sv');
+const norm = (s: string) => s.trim().toLocaleLowerCase(LOCALE);
 
 /**
  * Platsen i innehållet som den valda platsen motsvarar: samma namn, annars närmaste stad eller plats
@@ -202,14 +203,14 @@ export function nearby(origin: Point, originPlaceId: string | null, ideas: Idea[
 
 // ---------- Format ----------
 
-const km1 = new Intl.NumberFormat('sv-SE', { maximumFractionDigits: 1 });
-const km0 = new Intl.NumberFormat('sv-SE', { maximumFractionDigits: 0 });
+const km1 = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 1 });
+const km0 = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 0 });
 
 /** Kilometer som text: en decimal under 10 km. */
 export const formatKm = (km: number) => (km < 10 ? km1 : km0).format(km);
 
-const hourFmt = new Intl.NumberFormat('sv-SE', { style: 'unit', unit: 'hour', unitDisplay: 'short' });
-const minFmt = new Intl.NumberFormat('sv-SE', { style: 'unit', unit: 'minute', unitDisplay: 'short' });
+const hourFmt = new Intl.NumberFormat(LOCALE, { style: 'unit', unit: 'hour', unitDisplay: 'short' });
+const minFmt = new Intl.NumberFormat(LOCALE, { style: 'unit', unit: 'minute', unitDisplay: 'short' });
 
 /** Minuter som restid i webbläsarens svenska format, till exempel "1 tim 15 min". */
 export function formatMinutes(m: number): string {

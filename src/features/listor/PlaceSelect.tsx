@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { placeName, type Place } from '../../lib/content';
+import { LOCALE } from '../../lib/locale';
 
 /**
  * Väljer en plats: länder och städer ur innehållet plus platser som användaren har satt status på
@@ -26,7 +27,7 @@ export function PlaceSelect({
     const ids = new Set<string>();
     for (const p of places) if (p.kind === 'country' || p.kind === 'city') ids.add(p.id);
     for (const id of extra) ids.add(id);
-    return [...ids].map((id) => ({ id, name: placeName(places, id) })).sort((a, b) => a.name.localeCompare(b.name, 'sv'));
+    return [...ids].map((id) => ({ id, name: placeName(places, id) })).sort((a, b) => a.name.localeCompare(b.name, LOCALE));
   }, [places, extra]);
   return (
     <label>

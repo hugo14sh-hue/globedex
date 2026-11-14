@@ -1,6 +1,12 @@
 // Grundinställningar för appen. Namnet används överallt via APP_NAME, aldrig hårdkodat.
 export const APP_NAME = 'Globedex';
 
+/**
+ * Appens språk (BCP 47). Datum, tal, valuta, restid, sortering och gemener formateras efter det
+ * via src/lib/locale.ts, aldrig med ett fast sv-SE. Byts när fler språk läggs till (inget språkval i fas 1).
+ */
+export const APP_LOCALE = 'sv-SE';
+
 export type PaletteId = 'djuphav' | 'medelhav' | 'terrakotta' | 'skog' | 'nattflyg' | 'egen';
 export type HeadingFont =
   | 'Fraunces'

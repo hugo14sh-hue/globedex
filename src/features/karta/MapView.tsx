@@ -55,9 +55,25 @@ export interface MapViewProps {
   route?: MapRoute | null;
   routeColor?: string;
   label: string;
+  /** Namn på i-knappen som fäller ut kartans källor. */
+  attribLabel: string;
   onCountry: (iso: string) => void;
   onMarker: (m: MapMarker) => void;
   onError: () => void;
+}
+
+/** Landsfälten tonas ned mellan zoom 4 och 7, så att baskartan syns igenom på nära håll. */
+const FADE_FROM = 4;
+const FADE_TO = 7;
+/** Andel av täckningen som är kvar efter nedtoningen: en svag ton. */
+const FADE_KEEP = 0.15;
+/** OSM:s riktlinjer: källorna visas först och får fällas ihop vid interaktion eller efter fem sekunder. */
+const ATTRIB_MS = 5000;
+
+/** Täckning för landsfälten: full ut till zoom 4, en svag ton från zoom 7. */
+function fillOpacity(fallback: number): maplibregl.ExpressionSpecification {
+  const base: maplibregl.ExpressionSpecification = ['coalesce', ['feature-state', 'opacity'], fallback];
+  return ['interpolate', ['linear'], ['zoom'], FADE_FROM, base, FADE_TO, ['*', base, FADE_KEEP]];
 }
 
 const FILL = 'lander-fill';
@@ -85,14 +101,26 @@ export default function MapView(props: MapViewProps) {
       bounds: MAP_BOUNDS[p.extent],
       fitBoundsOptions: { padding: 8 },
       renderWorldCopies: false,
-      attributionControl: { compact: true, customAttribution: ATTRIBUTION },
+      attributionControl: false,
+      locale: { 'AttributionControl.ToggleAttribution': p.attribLabel },
       dragRotate: false,
       pitchWithRotate: false,
       touchPitch: false,
       maxPitch: 60,
     });
     m.touchZoomRotate.disableRotation();
+    m.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: ATTRIBUTION }));
     map.current = m;
+    // Källraden syns när kartan startar och fälls ihop bakom i-knappen vid första
+    // interaktionen eller efter fem sekunder. Ett tryck på i-knappen fäller ut den igen.
+    const collapse = () => el.current?.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+    const timer = window.setTimeout(collapse, ATTRIB_MS);
+    const onUser = (e: { originalEvent?: unknown }) => {
+      if (!e.originalEvent) return;
+      collapse();
+      for (const ev of ['movestart', 'click'] as const) m.off(ev, onUser);
+    };
+    for (const ev of ['movestart', 'click'] as const) m.on(ev, onUser);
     let failed = false;
 
     m.on('error', (e) => {
@@ -114,7 +142,7 @@ export default function MapView(props: MapViewProps) {
           source: 'lander',
           paint: {
             'fill-color': ['coalesce', ['feature-state', 'color'], latest.current.fallback],
-            'fill-opacity': ['coalesce', ['feature-state', 'opacity'], latest.current.fallbackOpacity],
+            'fill-opacity': fillOpacity(latest.current.fallbackOpacity),
           },
         },
         firstSymbol,
@@ -124,7 +152,11 @@ export default function MapView(props: MapViewProps) {
           id: LINE,
           type: 'line',
           source: 'lander',
-          paint: { 'line-color': latest.current.dark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.18)', 'line-width': 0.6 },
+          paint: {
+            'line-color': latest.current.dark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.18)',
+            // En tunn kant är kvar när fälten har tonats ned.
+            'line-width': ['interpolate', ['linear'], ['zoom'], FADE_FROM, 0.6, FADE_TO, 1],
+          },
         },
         firstSymbol,
       );
@@ -211,6 +243,7 @@ export default function MapView(props: MapViewProps) {
     });
 
     return () => {
+      window.clearTimeout(timer);
       map.current = null;
       m.remove();
     };
@@ -224,7 +257,7 @@ export default function MapView(props: MapViewProps) {
     m.removeFeatureState({ source: 'lander' });
     for (const [iso, color] of Object.entries(props.fills)) m.setFeatureState({ source: 'lander', id: iso }, { color, opacity: 0.85 });
     m.setPaintProperty(FILL, 'fill-color', ['coalesce', ['feature-state', 'color'], props.fallback]);
-    m.setPaintProperty(FILL, 'fill-opacity', ['coalesce', ['feature-state', 'opacity'], props.fallbackOpacity]);
+    m.setPaintProperty(FILL, 'fill-opacity', fillOpacity(props.fallbackOpacity));
   }, [ready, fillsKey, props.fallback, props.fallbackOpacity]);
 
   // Läge: höjdskuggning och lutning i Terräng 3D, markörer i Upptäck.

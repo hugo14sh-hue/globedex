@@ -25,6 +25,7 @@ import { useMyPlaces } from '../../lib/status';
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
+import { LOCALE } from '../../lib/locale';
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -180,7 +181,7 @@ export function Bucketlist() {
   const addOwn = async (e: FormEvent) => {
     e.preventDefault();
     const title = (own ?? '').trim();
-    if (!title) return setOwnError(t('allmant.obligatoriskt', { falt: t('bucket.ny').toLocaleLowerCase('sv') }));
+    if (!title) return setOwnError(t('allmant.obligatoriskt', { falt: t('bucket.ny').toLocaleLowerCase(LOCALE) }));
     try {
       await add({ title });
       setOwn(null);

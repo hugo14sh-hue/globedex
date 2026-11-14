@@ -802,7 +802,19 @@
   "bucket.delar.ny": "Lägg till delmål",
   "bucket.delar.auto": "Bockas av automatiskt från kartan",
   "bucket.delar.alla-klara": "Alla delmål är klara. Bocka av punkten?",
-  "bucket.delar.kvar": "{antal} kvar"
+  "bucket.delar.kvar": "{antal} kvar",
+  "samling.hittad-knapp": "Jag har hittat den",
+  "samling.markera-flera": "Markera flera",
+  "samling.valda": "{antal} valda",
+  "samling.lagg-till-valda": "Lägg till som hittade",
+  "samling.ta-bort-fynd": "Ta bort fyndet",
+  "samling.nar": "När hittade du den?",
+  "samling.vet-inte-nar": "Vet inte när",
+  "samling.var": "Var?",
+  "samling.flera-klart": "{antal} fynd tillagda.",
+  "karta.kallor": "Kartans källor",
+  "karta.zooma-in": "Zooma in",
+  "karta.zooma-ut": "Zooma ut"
  },
  "marken": [
   {

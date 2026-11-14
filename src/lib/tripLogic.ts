@@ -1,4 +1,5 @@
 // Ren logik för Resor: datum, nedräkning, fas, förslag och ordning på etapper. Testas i tripLogic.test.ts.
+import { LOCALE } from './locale';
 
 const DAY = 86_400_000;
 
@@ -111,9 +112,9 @@ export const along = (a: Point, b: Point, f: number): Point => ({ lat: a.lat + (
 
 /** Finns platsen bland namnen (utan hänsyn till stora och små bokstäver)? Ger koordinaterna. */
 export function findPoint(name: string, places: { name: string; lat: number | null; lon: number | null }[]): Point | null {
-  const n = name.trim().toLocaleLowerCase('sv');
+  const n = name.trim().toLocaleLowerCase(LOCALE);
   if (!n) return null;
-  const p = places.find((x) => x.name.toLocaleLowerCase('sv') === n && x.lat != null && x.lon != null);
+  const p = places.find((x) => x.name.toLocaleLowerCase(LOCALE) === n && x.lat != null && x.lon != null);
   return p ? { lat: p.lat!, lon: p.lon! } : null;
 }
 
@@ -137,9 +138,9 @@ export interface PackSuggestion {
  * Utan datum används bara förslag som gäller hela året och alla längder.
  */
 export function packFor(list: PackSuggestion[], nightCount: number | null, month: number | null, existing: string[]): PackSuggestion[] {
-  const have = new Set(existing.map((x) => x.trim().toLocaleLowerCase('sv')));
+  const have = new Set(existing.map((x) => x.trim().toLocaleLowerCase(LOCALE)));
   return list.filter((s) => {
-    if (have.has(s.title.trim().toLocaleLowerCase('sv'))) return false;
+    if (have.has(s.title.trim().toLocaleLowerCase(LOCALE))) return false;
     if (s.min_nights != null || s.max_nights != null) {
       if (nightCount == null) return false;
       if (s.min_nights != null && nightCount < s.min_nights) return false;
@@ -164,7 +165,7 @@ export interface PretripSuggestion {
   days_before: number;
 }
 
-const titleKey = (s: string) => s.trim().toLocaleLowerCase('sv');
+const titleKey = (s: string) => s.trim().toLocaleLowerCase(LOCALE);
 
 /** Färdiga punkter som saknas på listan. Samma titel läggs inte till igen. */
 export function pretripMissing(list: PretripSuggestion[], existing: string[]): PretripSuggestion[] {

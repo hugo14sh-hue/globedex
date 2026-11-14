@@ -1,5 +1,6 @@
 // Ren logik för Listor (samlingsbok, bucketlist, swipe och samlingar), utan databas. Testas i listLogic.test.ts.
 import type { BucketCatalogItem, CompendiumItem, CostLevel } from './content';
+import { LOCALE } from './locale';
 
 // ---------- Samlingsbok ----------
 
@@ -127,7 +128,7 @@ export interface Motif {
   text: string;
 }
 
-const norm = (s: string) => s.trim().toLocaleLowerCase('sv');
+const norm = (s: string) => s.trim().toLocaleLowerCase(LOCALE);
 
 /**
  * Motivförslag ur gift_tips.collection_motifs för användarens samlingar.

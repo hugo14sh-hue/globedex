@@ -1,13 +1,13 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
+import { Flag } from '../../components/Flag';
 import { Row } from '../../components/Row';
 import { fetchItemMarkers, fetchPlaces, placeName, type Place, type PlaceItem } from '../../lib/content';
 import { useSession, useTravelMode } from '../../lib/session';
 import { groupByStatus, STATUS_KEY, useMemberStatuses, useMyPlaces, type PlaceStatus } from '../../lib/status';
 import { statusesFor, type MapWho } from '../../lib/statusLogic';
 import { useT } from '../../lib/useT';
-import { onColor } from '../../theme/color';
 import { SMART_COLORS } from '../../theme/palettes';
 import { statusColors } from '../../theme/theme';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -17,6 +17,7 @@ import { TopBar } from './TopBar';
 import { monthNames } from './months';
 import { usePlayback } from './usePlayback';
 import { useUrlState, withParam } from '../../lib/navMemory';
+import { LOCALE } from '../../lib/locale';
 
 // Kartmotorn laddas först när fliken öppnas.
 const MapView = lazy(() => import('./MapView'));
@@ -112,7 +113,7 @@ export default function KartaScreen() {
       groupByStatus(
         Object.entries(shown)
           .map(([id, status]) => ({ id, status, name: placeName(places, id) }))
-          .sort((a, b) => a.name.localeCompare(b.name, 'sv')),
+          .sort((a, b) => a.name.localeCompare(b.name, LOCALE)),
       ),
     [shown, places],
   );
@@ -121,175 +122,178 @@ export default function KartaScreen() {
   const pickedName = picked ? placeName(places, picked) : '';
 
   return (
-    <main className="scr">
+    <>
       <TopBar />
-      <h1>{t('flik.karta')}</h1>
+      <main className="scr under-topbar">
+        <h1>{t('flik.karta')}</h1>
 
-      {mode !== 'solo' && (
-        <div className="chips" role="group" aria-label={t('flik.karta')}>
-          {(['min', 'var', ...others.map((m) => m.user_id)] as MapWho[]).map((w) => (
-            <button key={w} type="button" className="chip" aria-pressed={who === w} onClick={() => setWho(w)}>
-              {whoLabel(w)}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div className="map">
-        {mapFailed ? (
-          <div className="map-fail card soft" role="alert">
-            <p>{t('karta.laddar-fel')}</p>
-          </div>
-        ) : (
-          <Suspense fallback={<div className="map-canvas map-wait" aria-busy="true" />}>
-            <MapView
-              dark={theme.dark}
-              mode={mapMode}
-              extent={extent}
-              fills={fills}
-              fallback={colors.ej}
-              fallbackOpacity={mapMode === 'smart' ? 0.35 : 0.85}
-              markers={markers}
-              markerColor={colors.bor}
-              route={play.route}
-              routeColor={theme.dark ? '#F4B942' : '#E4572E'}
-              label={t('flik.karta')}
-              onCountry={setPicked}
-              onMarker={(m) => nav(`/karta/${m.placeId}${m.kind === 'item' ? '?vy=lista' : ''}`)}
-              onError={() => setMapFailed(true)}
-            />
-          </Suspense>
-        )}
-        <div className="zoom">
-          {(['europa', 'varlden'] as const).map((x) => (
-            <button key={x} type="button" className="chip" aria-pressed={extent === x} onClick={() => setExtent(x)}>
-              {t(`karta.lage.${x}`)}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {playId && (
-        <div className="card" aria-live="polite">
-          <div className="row">
-            <h2 className="h3">{t('resor.spela-upp')}</h2>
-            {play.legs.length > 0 && <span className="mu">{t('marke.framsteg', { antal: play.step + 1, totalt: play.legs.length })}</span>}
-          </div>
-          {playLeg && (
-            <span>
-              <b>
-                {playLeg.from_text} – {playLeg.to_text}
-              </b>{' '}
-              <span className="mu">{t(`resor.etapp.lage.${playLeg.mode}`)}</span>
-            </span>
-          )}
-          {!play.legs.length && <span className="mu">{t('resor.etapper.tom')}</span>}
-          <div className="g2">
-            <button type="button" className="btn ghost" disabled={!play.done} onClick={play.replay}>
-              {t('resor.spela-upp')}
-            </button>
-            <button type="button" className="btn ghost" onClick={() => nav(`/resor/${playId}`)}>
-              {t('knapp.tillbaka')}
-            </button>
-          </div>
-          <button type="button" className="chip" onClick={() => setParams((p) => withParam(p, 'resa', null), { replace: true })}>
-            {t('knapp.stang')}
-          </button>
-        </div>
-      )}
-
-      <div className="chips" role="group" aria-label={t('flik.karta')}>
-        {MODES.map((m) => (
-          <button key={m} type="button" className="chip" aria-pressed={mapMode === m} onClick={() => setMapMode(m)}>
-            {t(MODE_KEY[m])}
-          </button>
-        ))}
-      </div>
-
-      {mapMode === 'smart' ? (
-        <>
-          <div className="months" role="group" aria-label={t('karta.lage.smart')}>
-            {months.map((m, i) => (
-              <button key={m.long} type="button" aria-pressed={month === i} aria-label={m.long} onClick={() => setMonth(i)}>
-                {m.short}
+        {mode !== 'solo' && (
+          <div className="chips" role="group" aria-label={t('flik.karta')}>
+            {(['min', 'var', ...others.map((m) => m.user_id)] as MapWho[]).map((w) => (
+              <button key={w} type="button" className="chip" aria-pressed={who === w} onClick={() => setWho(w)}>
+                {whoLabel(w)}
               </button>
             ))}
           </div>
-          <div className="lg">
-            <span>
-              <i style={{ background: SMART_COLORS[5] }} />
-              {t('karta.smart.bra')}
-            </span>
-            <span>
-              <i style={{ background: SMART_COLORS[3] }} />
-              {t('karta.smart.okej')}
-            </span>
-            <span>
-              <i style={{ background: SMART_COLORS[0] }} />
-              {t('karta.smart.undvik')}
-            </span>
-          </div>
-        </>
-      ) : (
-        <div className="lg">
-          {(['bor', 'bott', 'besokt', 'planerad', 'vill', 'mellan'] as PlaceStatus[]).map((s) => (
-            <span key={s}>
-              <i style={{ background: colors[s] }} />
-              {t(STATUS_KEY[s])}
-            </span>
-          ))}
-        </div>
-      )}
+        )}
 
-      <h2 className="eb">{t(mode === 'solo' ? 'karta.platser.jag' : 'karta.platser.vi')}</h2>
-      {mine.loaded && (who === 'min' || memberStatuses.loaded) && shownTotal === 0 && (
-        <div className="card soft">
-          <p>{t('karta.tom')}</p>
-        </div>
-      )}
-      {mineList.map((g) => (
-        <section key={g.status} className="col" aria-label={t(STATUS_KEY[g.status])}>
-          <div className="row">
-            <h3 className="eb">{t(STATUS_KEY[g.status])}</h3>
-            <span className="mu">{g.rows.length}</span>
+        <div className="map">
+          {mapFailed ? (
+            <div className="map-fail card soft" role="alert">
+              <p>{t('karta.laddar-fel')}</p>
+            </div>
+          ) : (
+            <Suspense fallback={<div className="map-canvas map-wait" aria-busy="true" />}>
+              <MapView
+                dark={theme.dark}
+                mode={mapMode}
+                extent={extent}
+                fills={fills}
+                fallback={colors.ej}
+                fallbackOpacity={mapMode === 'smart' ? 0.35 : 0.85}
+                markers={markers}
+                markerColor={colors.bor}
+                route={play.route}
+                routeColor={theme.dark ? '#F4B942' : '#E4572E'}
+                label={t('flik.karta')}
+                attribLabel={t('karta.kallor')}
+                onCountry={setPicked}
+                onMarker={(m) => nav(`/karta/${m.placeId}${m.kind === 'item' ? '?vy=lista' : ''}`)}
+                onError={() => setMapFailed(true)}
+              />
+            </Suspense>
+          )}
+          <div className="zoom">
+            {(['europa', 'varlden'] as const).map((x) => (
+              <button key={x} type="button" className="chip" aria-pressed={extent === x} onClick={() => setExtent(x)}>
+                {t(`karta.lage.${x}`)}
+              </button>
+            ))}
           </div>
-          {g.rows.map((r) => (
-            <Row
-              key={r.id}
-              to={`/karta/${r.id}`}
-              title={r.name}
-              sub={t(STATUS_KEY[r.status])}
-              lead={
-                <span className="badge" style={{ background: colors[r.status], color: onColor(colors[r.status]) }}>
-                  {r.id.slice(0, 2)}
-                </span>
-              }
-            />
-          ))}
-        </section>
-      ))}
+        </div>
 
-      <BottomSheet open={Boolean(picked)} title={pickedName} onClose={() => setPicked(null)}>
-        {picked && (
-          <>
-            {who !== 'min' && (
-              <span className="mu">
-                {whoLabel(who)}: {t(STATUS_KEY[shown[picked] ?? 'ej'])}
+        {playId && (
+          <div className="card" aria-live="polite">
+            <div className="row">
+              <h2 className="h3">{t('resor.spela-upp')}</h2>
+              {play.legs.length > 0 && <span className="mu">{t('marke.framsteg', { antal: play.step + 1, totalt: play.legs.length })}</span>}
+            </div>
+            {playLeg && (
+              <span>
+                <b>
+                  {playLeg.from_text} – {playLeg.to_text}
+                </b>{' '}
+                <span className="mu">{t(`resor.etapp.lage.${playLeg.mode}`)}</span>
               </span>
             )}
-            {/* Bara den egna statusen går att ändra. */}
-            {who !== 'min' && <h3 className="eb">{t('karta.visa.min')}</h3>}
-            <StatusPicker
-              placeId={picked}
-              name={pickedName}
-              current={mine.statuses[picked]}
-              total={total}
-              label={pickedName}
-            />
-            <Row to={`/karta/${picked}`} icon="map" title={t('land.vy.oversikt')} />
-          </>
+            {!play.legs.length && <span className="mu">{t('resor.etapper.tom')}</span>}
+            <div className="g2">
+              <button type="button" className="btn ghost" disabled={!play.done} onClick={play.replay}>
+                {t('resor.spela-upp')}
+              </button>
+              <button type="button" className="btn ghost" onClick={() => nav(`/resor/${playId}`)}>
+                {t('knapp.tillbaka')}
+              </button>
+            </div>
+            <button type="button" className="chip" onClick={() => setParams((p) => withParam(p, 'resa', null), { replace: true })}>
+              {t('knapp.stang')}
+            </button>
+          </div>
         )}
-      </BottomSheet>
-    </main>
+
+        <div className="chips" role="group" aria-label={t('flik.karta')}>
+          {MODES.map((m) => (
+            <button key={m} type="button" className="chip" aria-pressed={mapMode === m} onClick={() => setMapMode(m)}>
+              {t(MODE_KEY[m])}
+            </button>
+          ))}
+        </div>
+
+        {mapMode === 'smart' ? (
+          <>
+            <div className="months" role="group" aria-label={t('karta.lage.smart')}>
+              {months.map((m, i) => (
+                <button key={m.long} type="button" aria-pressed={month === i} aria-label={m.long} onClick={() => setMonth(i)}>
+                  {m.short}
+                </button>
+              ))}
+            </div>
+            <div className="lg">
+              <span>
+                <i style={{ background: SMART_COLORS[5] }} />
+                {t('karta.smart.bra')}
+              </span>
+              <span>
+                <i style={{ background: SMART_COLORS[3] }} />
+                {t('karta.smart.okej')}
+              </span>
+              <span>
+                <i style={{ background: SMART_COLORS[0] }} />
+                {t('karta.smart.undvik')}
+              </span>
+            </div>
+          </>
+        ) : (
+          <div className="lg">
+            {(['bor', 'bott', 'besokt', 'planerad', 'vill', 'mellan'] as PlaceStatus[]).map((s) => (
+              <span key={s}>
+                <i style={{ background: colors[s] }} />
+                {t(STATUS_KEY[s])}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <h2 className="eb">{t(mode === 'solo' ? 'karta.platser.jag' : 'karta.platser.vi')}</h2>
+        {mine.loaded && (who === 'min' || memberStatuses.loaded) && shownTotal === 0 && (
+          <div className="card soft">
+            <p>{t('karta.tom')}</p>
+          </div>
+        )}
+        {mineList.map((g) => (
+          <section key={g.status} className="col" aria-label={t(STATUS_KEY[g.status])}>
+            <div className="row">
+              <h3 className="eb">{t(STATUS_KEY[g.status])}</h3>
+              <span className="mu">{g.rows.length}</span>
+            </div>
+            {g.rows.map((r) => (
+              <Row
+                key={r.id}
+                to={`/karta/${r.id}`}
+                title={r.name}
+                sub={t(STATUS_KEY[r.status])}
+                lead={<Flag placeId={r.id} ring={colors[r.status]} />}
+              />
+            ))}
+          </section>
+        ))}
+
+        <BottomSheet
+          open={Boolean(picked)}
+          title={pickedName}
+          lead={picked ? <Flag placeId={picked} ring={shown[picked] ? colors[shown[picked]] : undefined} /> : undefined}
+          onClose={() => setPicked(null)}>
+          {picked && (
+            <>
+              {who !== 'min' && (
+                <span className="mu">
+                  {whoLabel(who)}: {t(STATUS_KEY[shown[picked] ?? 'ej'])}
+                </span>
+              )}
+              {/* Bara den egna statusen går att ändra. */}
+              {who !== 'min' && <h3 className="eb">{t('karta.visa.min')}</h3>}
+              <StatusPicker
+                placeId={picked}
+                name={pickedName}
+                current={mine.statuses[picked]}
+                total={total}
+                label={pickedName}
+              />
+              <Row to={`/karta/${picked}`} icon="map" title={t('land.vy.oversikt')} />
+            </>
+          )}
+        </BottomSheet>
+      </main>
+    </>
   );
 }

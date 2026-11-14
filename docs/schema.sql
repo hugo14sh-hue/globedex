@@ -446,8 +446,10 @@ end $$;
 -- Profil: egen, plus läsa gruppmedlemmars
 create policy "profile_read" on public.profiles for select to authenticated
   using (id = auth.uid() or public.shares_group(id));
+-- Aktiv grupp får bara vara en grupp man är med i
 create policy "profile_update" on public.profiles for update to authenticated
-  using (id = auth.uid()) with check (id = auth.uid());
+  using (id = auth.uid())
+  with check (id = auth.uid() and (active_group_id is null or public.is_member(active_group_id)));
 
 -- Grupper
 create policy "group_read" on public.groups for select to authenticated
@@ -499,7 +501,12 @@ do $$ declare t text; begin
   foreach t in array array['bucket_items','saved_ideas','trips'] loop
     execute format('create policy "group_all" on public.%I for all to authenticated using (public.is_member(group_id)) with check (public.is_member(group_id))', t);
   end loop;
-end $$;
+end $;
+-- Skaparen måste vara den inloggade (eller tom)
+create policy "trips_created_by" on public.trips as restrictive for insert to authenticated
+  with check (created_by is null or created_by = auth.uid());
+create policy "bucket_created_by" on public.bucket_items as restrictive for insert to authenticated
+  with check (created_by is null or created_by = auth.uid());
 
 -- Vår guide: privata omdömen syns och ändras bara av den som skrev dem
 create policy "review_read" on public.reviews for select to authenticated
@@ -571,6 +578,10 @@ grant select, insert, update, delete on
   public.packing_items, public.pretrip_items, public.shopping_items
 to authenticated, service_role;
 
+-- Funktionerna får bara anropas av inloggade (Postgres ger annars PUBLIC rätt som standard)
+revoke execute on function public.create_group(text, text), public.join_group(text),
+  public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid), public.can_trip_file(text)
+  from public, anon;
 grant execute on function public.create_group(text, text), public.join_group(text),
-  public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid) to authenticated;
-grant execute on function public.can_trip_file(text) to authenticated;
+  public.is_member(uuid), public.shares_group(uuid), public.can_trip(uuid), public.can_trip_file(text)
+  to authenticated;

@@ -1,5 +1,6 @@
 // Innehållet från content/ (via Supabase). Bara läsning. Texterna kommer från Hugo, inget skrivs här.
 import { supabase } from './supabase';
+import { LOCALE } from './locale';
 
 export type PlaceKind = 'country' | 'region' | 'city' | 'spot';
 
@@ -110,7 +111,7 @@ export async function fetchHomeSuggestions(): Promise<HomeSuggestion[]> {
   return places
     .filter((p) => p.kind === 'city' && (p.iso2 === 'SE' || p.id.startsWith('SE-')))
     .map((p) => ({ id: p.id, name: p.name, lat: p.lat ?? undefined, lon: p.lon ?? undefined }))
-    .sort((a, b) => a.name.localeCompare(b.name, 'sv'));
+    .sort((a, b) => a.name.localeCompare(b.name, LOCALE));
 }
 
 /** Platsen och alla platser under den (regioner, städer, platser). */
@@ -170,7 +171,7 @@ export const isEstimate = (data: PlaceData | null | undefined, field: string) =>
 /** Svenskt namn på ett land från webbläsaren, för länder som saknar innehåll. */
 export function countryName(iso: string): string {
   try {
-    return new Intl.DisplayNames(['sv'], { type: 'region' }).of(iso) ?? iso;
+    return new Intl.DisplayNames([LOCALE], { type: 'region' }).of(iso) ?? iso;
   } catch {
     return iso;
   }

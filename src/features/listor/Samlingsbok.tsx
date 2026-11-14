@@ -9,10 +9,12 @@ import { Segment } from '../../components/Segment';
 import { fetchCompendium, fetchPlaces, placeName, RARITIES, type CompendiumItem, type Place } from '../../lib/content';
 import { countByCategory, percent } from '../../lib/listLogic';
 import { useSession } from '../../lib/session';
-import { addFind, removeFind, useMyPlaces } from '../../lib/status';
+import { addFind, addFinds, removeFind, useMyPlaces } from '../../lib/status';
+import { todayIso } from '../../lib/tripLogic';
 import { useT } from '../../lib/useT';
 import { RARITY_COLORS } from '../../theme/palettes';
 import { formatDate } from '../karta/format';
+import { PlaceSelect } from './PlaceSelect';
 import { Samlingar } from './Samlingar';
 import { useFindFeedback } from './useFindFeedback';
 import { useUrlParam } from '../../lib/navMemory';
@@ -35,6 +37,10 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
   const [openId, setOpenId] = useUrlParam('fynd');
   const open = (openId && items?.find((i) => i.id === openId)) || null;
   const setOpen = (c: CompendiumItem | null) => setOpenId(c?.id ?? null);
+  // Markera flera: tryck på flera kort och lägg till alla som hittade i ett anrop.
+  const [picking, setPicking] = useState(false);
+  const [picked, setPicked] = useState<string[]>([]);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -56,14 +62,46 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
   const found = all.filter((i) => finds[i.id]).length;
   const shown = category ? all.filter((i) => i.category === category) : all;
 
-  const toggle = async (c: CompendiumItem) => {
+  /** Ett kort från bottenarket: med datum, eller utan (samling.vet-inte-nar). */
+  const markFound = async (c: CompendiumItem, foundOn: string | null, placeId: string | null) => {
     try {
-      if (isFound(c.id)) {
-        await removeFind(c.id);
-        toast(t('allmant.borttaget'));
-      } else if (await addFind(c.id, c.place_id)) announce(c);
+      if (await addFind(c.id, placeId, foundOn)) announce(c);
+      setOpen(null);
     } catch {
       toast(t('allmant.fel-spara'));
+    }
+  };
+
+  const unmark = async (c: CompendiumItem) => {
+    try {
+      await removeFind(c.id);
+      toast(t('allmant.borttaget'));
+    } catch {
+      toast(t('allmant.fel-spara'));
+    }
+  };
+
+  const stopPicking = () => {
+    setPicking(false);
+    setPicked([]);
+  };
+
+  const togglePick = (c: CompendiumItem) =>
+    setPicked((p) => (p.includes(c.id) ? p.filter((x) => x !== c.id) : [...p, c.id]));
+
+  /** Alla valda kort sparas utan datum i ett enda anrop, med ett samlat besked (ingen konfetti per kort). */
+  const addPicked = async () => {
+    const list = all.filter((i) => picked.includes(i.id) && !finds[i.id]).map((i) => ({ compendiumId: i.id, placeId: i.place_id }));
+    if (!list.length) return stopPicking();
+    setSaving(true);
+    try {
+      const added = await addFinds(list, null);
+      toast(t('samling.flera-klart', { antal: added.length }));
+      stopPicking();
+    } catch {
+      toast(t('allmant.fel-spara'));
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -97,9 +135,14 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
               </button>
             ))}
           </div>
-          <span className="mu" aria-live="polite">
-            {t('samling.raknare', { antal: shown.filter((i) => finds[i.id]).length, totalt: shown.length })}
-          </span>
+          <div className="row">
+            <span className="mu" aria-live="polite">
+              {t('samling.raknare', { antal: shown.filter((i) => finds[i.id]).length, totalt: shown.length })}
+            </span>
+            <button type="button" className="chip" aria-pressed={picking} onClick={() => (picking ? stopPicking() : setPicking(true))}>
+              {t('samling.markera-flera')}
+            </button>
+          </div>
           {found === 0 && (
             <div className="card soft">
               <p>{t('samling.tom')}</p>
@@ -109,14 +152,23 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
             {shown.map((c) => {
               const f = isFound(c.id);
               const color = RARITY_COLORS[c.rarity];
+              const sel = picking && picked.includes(c.id);
               return (
                 <li key={c.id}>
                   <button
                     type="button"
-                    className={`bc${f ? ' on' : ''}`}
+                    className={`bc${f ? ' on' : ''}${sel ? ' sel' : ''}`}
                     style={f ? { borderColor: color } : undefined}
-                    onClick={() => setOpen(c)}
+                    // I läget Markera flera går bara kort som inte är hittade att välja.
+                    aria-pressed={picking ? sel : undefined}
+                    disabled={picking && f}
+                    onClick={() => (picking ? togglePick(c) : setOpen(c))}
                   >
+                    {sel && (
+                      <span className="bc-tick" aria-hidden="true">
+                        <Icon name="check" size={14} stroke={3} />
+                      </span>
+                    )}
                     <span className="ic" style={f ? { background: `color-mix(in srgb, ${color} 18%, var(--sf))`, color } : undefined}>
                       <Icon name={isIcon(c.icon) ? c.icon : 'star'} size={28} stroke={1.8} />
                     </span>
@@ -130,6 +182,17 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
             })}
           </ul>
           <RarityLegend />
+          {/* Luft under korten, så att raden längst ned inte täcker de sista korten. */}
+          {picking && <div style={{ height: 84 }} aria-hidden="true" />}
+          {picking && (
+            <div className="pickbar card" role="region" aria-label={t('samling.markera-flera')}>
+              <span aria-live="polite">{t('samling.valda', { antal: picked.length })}</span>
+              <button type="button" className="btn" disabled={!picked.length || saving} onClick={addPicked}>
+                <Icon name="check" size={20} />
+                {t('samling.lagg-till-valda')}
+              </button>
+            </div>
+          )}
         </>
       )}
 
@@ -190,10 +253,11 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
               {t(`sallsynthet.${open.rarity}`)} · {t(catKey(open.category))}
             </span>
             {open.hint && <p>{open.hint}</p>}
-            {finds[open.id] && (
+            {finds[open.id] && (finds[open.id].found_on || finds[open.id].place_id) && (
               <span className="mu">
-                {formatDate(finds[open.id].found_on)}
-                {finds[open.id].place_id ? ` · ${placeName(places, finds[open.id].place_id!)}` : ''}
+                {[finds[open.id].found_on ? formatDate(finds[open.id].found_on!) : '', finds[open.id].place_id ? placeName(places, finds[open.id].place_id!) : '']
+                  .filter(Boolean)
+                  .join(' · ')}
               </span>
             )}
             {open.place_id && <Row to={`/karta/${open.place_id}`} icon="pin" title={placeName(places, open.place_id)} />}
@@ -202,17 +266,57 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
                 {t('knapp.kalla')}
               </a>
             )}
-            <button
-              type="button"
-              className={isFound(open.id) ? 'btn ghost' : 'btn'}
-              onClick={() => toggle(open)}
-            >
-              <Icon name={isFound(open.id) ? 'x' : 'check'} size={20} />
-              {t(isFound(open.id) ? 'knapp.ta-bort' : 'knapp.klar')}
-            </button>
+            {isFound(open.id) ? (
+              <button type="button" className="btn ghost" onClick={() => unmark(open)}>
+                <Icon name="x" size={20} />
+                {t('samling.ta-bort-fynd')}
+              </button>
+            ) : (
+              <FindForm key={open.id} item={open} places={places} extra={Object.keys(mine.statuses)} onSave={(d, p) => markFound(open, d, p)} />
+            )}
           </>
         )}
       </BottomSheet>
+    </>
+  );
+}
+
+/** Bocka av ett kort: när (eller vet inte när) och var (valfri, förvald till kortets plats). */
+function FindForm({
+  item,
+  places,
+  extra,
+  onSave,
+}: {
+  item: CompendiumItem;
+  places: Place[];
+  extra: string[];
+  onSave: (foundOn: string | null, placeId: string | null) => Promise<void>;
+}) {
+  const t = useT();
+  const today = todayIso();
+  const [date, setDate] = useState(today);
+  const [place, setPlace] = useState(item.place_id ?? '');
+  const [busy, setBusy] = useState(false);
+  const save = async (d: string | null) => {
+    setBusy(true);
+    await onSave(d, place || null);
+    setBusy(false);
+  };
+  return (
+    <>
+      <label>
+        {t('samling.nar')}
+        <input type="date" value={date} max={today} onChange={(e) => setDate(e.target.value)} />
+      </label>
+      <PlaceSelect label={t('samling.var')} places={places} extra={item.place_id ? [...extra, item.place_id] : extra} value={place} onChange={setPlace} optional />
+      <button type="button" className="btn" disabled={busy || !date} onClick={() => save(date)}>
+        <Icon name="check" size={20} />
+        {t('samling.hittad-knapp')}
+      </button>
+      <button type="button" className="btn ghost" disabled={busy} onClick={() => save(null)}>
+        {t('samling.vet-inte-nar')}
+      </button>
     </>
   );
 }

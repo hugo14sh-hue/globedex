@@ -128,6 +128,37 @@ test('röktest', async ({ page }) => {
     await expect(page.getByRole('button', { name: new RegExp(`^${esc(card.name)} `) })).toBeVisible({ timeout: 20_000 });
   });
 
+  await test.step('samlingsboken: markera flera kort och bocka av och ta bort ett kort i bottenarket', async () => {
+    await page.goto('/listor?vy=samlingsbok&del=kort');
+    await page.getByRole('button', { name: tx('samling.markera-flera') }).click();
+    // Två kort som inte är hittade (de har aria-pressed i läget Markera flera och är inte avstängda).
+    const unfound = page.locator('.bok button[aria-pressed]:not([disabled])');
+    await expect(unfound.first()).toBeVisible();
+    await unfound.nth(0).click();
+    await unfound.nth(1).click();
+    await expect(page.locator('.pickbar')).toContainText(anyTone('samling.valda'));
+    // Utan SQL-blocket för fynd utan datum stoppas första anropet, och appen sparar då med dagens datum.
+    // Testet väntar därför på det anrop som lyckas.
+    const saved = page.waitForResponse((r) => r.url().includes('/rest/v1/finds') && r.request().method() === 'POST' && r.ok());
+    await page.getByRole('button', { name: tx('samling.lagg-till-valda') }).click();
+    await saved;
+    await expect(page.getByText(anyTone('samling.flera-klart'))).toBeVisible();
+    await expect(page.locator('.pickbar')).toBeHidden();
+
+    // Ett kort till bockas av i bottenarket, och tas sedan bort igen.
+    const next = page.locator('.bok button:not(.on)').first();
+    await next.click();
+    const sheet = page.getByRole('dialog');
+    await expect(sheet.getByLabel(tx('samling.nar'))).toBeVisible();
+    await expect(sheet.getByLabel(tx('samling.var'))).toBeVisible();
+    await sheet.getByRole('button', { name: tx('samling.hittad-knapp') }).click();
+    await expect(sheet).toBeHidden();
+    await page.locator('.bok button.on').first().click();
+    await page.getByRole('dialog').getByRole('button', { name: tx('samling.ta-bort-fynd') }).click();
+    await expect(page.getByRole('dialog').getByRole('button', { name: tx('samling.hittad-knapp') })).toBeVisible();
+    await page.getByRole('dialog').getByRole('button', { name: tx('knapp.stang') }).click();
+  });
+
   await test.step('en punkt läggs till ur bucketkatalogen', async () => {
     await page.goto('/listor?vy=bucketlist');
     await page.getByRole('button', { name: tx('bucket.katalog') }).click();

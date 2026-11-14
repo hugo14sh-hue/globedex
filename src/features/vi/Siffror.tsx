@@ -12,8 +12,9 @@ import { formatDate } from '../karta/format';
 import { badgeStates, tripDays, type BadgeState } from './marken';
 import type { ViData } from './useViData';
 import { continentName, numbers, timeline, type TimelineType } from './viLogic';
+import { LOCALE } from '../../lib/locale';
 
-const nf = new Intl.NumberFormat('sv-SE');
+const nf = new Intl.NumberFormat(LOCALE);
 
 type StatId = 'lander' | 'kontinenter' | 'landskap' | 'resor' | 'resdagar' | 'fynd' | 'bucket';
 
@@ -80,11 +81,11 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
   const detail = (): { title: string; rows: { key: string; title: string; sub?: string; right?: string; to?: string }[] } => {
     switch (stat) {
       case 'lander':
-        return { title: t('vi.siffror.lander'), rows: nums.lander.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, 'sv')) };
+        return { title: t('vi.siffror.lander'), rows: nums.lander.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, LOCALE)) };
       case 'kontinenter':
         return { title: t('vi.siffror.kontinenter'), rows: nums.kontinenter.map((c) => ({ key: c, title: continentName(c) })) };
       case 'landskap':
-        return { title: t('vi.siffror.landskap'), rows: nums.landskap.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, 'sv')) };
+        return { title: t('vi.siffror.landskap'), rows: nums.landskap.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, LOCALE)) };
       case 'resor':
       case 'resdagar':
         return {
@@ -103,8 +104,12 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
         return {
           title: t('vi.siffror.fynd'),
           rows: [...x.finds]
-            .sort((a, b) => b.found_on.localeCompare(a.found_on))
-            .map((f) => ({ key: f.compendium_id, title: findName(f.compendium_id), sub: [f.place_id ? name(f.place_id) : '', formatDate(f.found_on)].filter(Boolean).join(' · ') })),
+            .sort((a, b) => (b.found_on ?? '').localeCompare(a.found_on ?? ''))
+            .map((f) => ({
+              key: f.compendium_id,
+              title: findName(f.compendium_id),
+              sub: [f.place_id ? name(f.place_id) : '', f.found_on ? formatDate(f.found_on) : ''].filter(Boolean).join(' · '),
+            })),
         };
       case 'bucket':
         return {

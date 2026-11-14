@@ -7,7 +7,8 @@ import { isStatus, type PlaceStatus, type StatusMap } from './statusLogic';
 export { countryIdFor, groupByStatus, isStatus, shouldMarkPlanned, STATUS_KEY, STATUSES, type PlaceStatus } from './statusLogic';
 
 export interface Find {
-  found_on: string;
+  /** Tomt när man inte vet när kortet hittades (samling.vet-inte-nar). */
+  found_on: string | null;
   place_id: string | null;
 }
 
@@ -88,24 +89,52 @@ const today = () => new Date().toISOString().slice(0, 10);
 
 /**
  * Sparar ett fynd i samlingsboken. Finns det redan händer ingenting (inget dubbelt fynd).
- * Svarar sant om fyndet är nytt.
+ * Svarar sant om fyndet är nytt. foundOn null betyder att man inte vet när.
  */
-export async function addFind(compendiumId: string, placeId: string | null): Promise<boolean> {
+export async function addFind(compendiumId: string, placeId: string | null, foundOn: string | null = today()): Promise<boolean> {
+  return (await addFinds([{ compendiumId, placeId }], foundOn)).length > 0;
+}
+
+/** Postgres felkod för not null: finds.found_on får inte vara tomt förrän SQL-blocket i Körning 8 är kört. */
+const NOT_NULL = '23502';
+
+/**
+ * Sparar flera fynd i ett enda anrop. Kort som redan är hittade hoppas över, och databasens
+ * primärnyckel (user_id, compendium_id) stoppar dubbletter även om två anrop krockar.
+ * Svarar med id för de fynd som är nya.
+ */
+export async function addFinds(list: { compendiumId: string; placeId: string | null }[], foundOn: string | null = today()): Promise<string[]> {
   const userId = state.userId;
   if (!userId) throw new Error('Inte inloggad');
-  if (state.finds[compendiumId]) return false;
-  const find: Find = { found_on: today(), place_id: placeId };
-  emit({ ...state, finds: { ...state.finds, [compendiumId]: find } });
-  const res = await supabase
-    .from('finds')
-    .upsert({ user_id: userId, compendium_id: compendiumId, ...find }, { onConflict: 'user_id,compendium_id', ignoreDuplicates: true });
+  const fresh = list.filter((x, i) => !state.finds[x.compendiumId] && list.findIndex((y) => y.compendiumId === x.compendiumId) === i);
+  if (!fresh.length) return [];
+  const ids = fresh.map((x) => x.compendiumId);
+  const added: Record<string, Find> = {};
+  for (const x of fresh) added[x.compendiumId] = { found_on: foundOn, place_id: x.placeId };
+  emit({ ...state, finds: { ...state.finds, ...added } });
+  const save = (date: string | null) =>
+    supabase.from('finds').upsert(
+      fresh.map((x) => ({ user_id: userId, compendium_id: x.compendiumId, found_on: date, place_id: x.placeId })),
+      { onConflict: 'user_id,compendium_id', ignoreDuplicates: true },
+    );
+  let res = await save(foundOn);
+  // Utan SQL-blocket går ett fynd utan datum inte att spara: då sparas dagens datum i stället.
+  if (res.error?.code === NOT_NULL && foundOn === null) {
+    const d = today();
+    res = await save(d);
+    if (!res.error) {
+      const finds = { ...state.finds };
+      for (const id of ids) if (finds[id]) finds[id] = { ...finds[id], found_on: d };
+      emit({ ...state, finds });
+    }
+  }
   if (res.error) {
     const finds = { ...state.finds };
-    delete finds[compendiumId];
+    for (const id of ids) delete finds[id];
     emit({ ...state, finds });
     throw new Error(res.error.message);
   }
-  return true;
+  return ids;
 }
 
 /** Tar bort ett fynd ur samlingsboken. */

@@ -1,6 +1,7 @@
 // Ren logik för Valvet: posttyper och fält, ålder, passets giltighet, packförslag ur hälsa och
 // regler för en viss ålder. Allt räknas ut i webbläsaren och bara när Valvet är upplåst.
 // Ingenting här skickas till Supabase, sparas i localStorage eller loggas. Testas i vaultLogic.test.ts.
+import { LOCALE } from './locale';
 
 export const VAULT_KINDS = ['pass', 'forsakring', 'nodkontakt', 'halsa', 'fodelsedatum', 'annat'] as const;
 export type VaultKind = (typeof VAULT_KINDS)[number];
@@ -101,7 +102,7 @@ export function medicineLines(entries: VaultEntry[]): string[] {
     if (e.kind !== 'halsa' || !e.content.pack) continue;
     for (const x of (e.content.f.mediciner ?? '').split(/[\n,;]+/)) {
       const s = x.trim();
-      if (s && !out.some((o) => o.toLocaleLowerCase('sv') === s.toLocaleLowerCase('sv'))) out.push(s);
+      if (s && !out.some((o) => o.toLocaleLowerCase(LOCALE) === s.toLocaleLowerCase(LOCALE))) out.push(s);
     }
   }
   return out;

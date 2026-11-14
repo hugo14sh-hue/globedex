@@ -7,11 +7,12 @@ import type { Place } from '../../lib/content';
 import type { SavedLocation } from '../../lib/idag';
 import type { Spot } from '../../lib/idagLogic';
 import { useT } from '../../lib/useT';
+import { LOCALE } from '../../lib/locale';
 
 /** Egen plats ur ett namn: känns namnet igen i innehållet följer koordinaterna med. */
 export function spotFromName(name: string, places: Place[]): Pick<Spot, 'name' | 'lat' | 'lon'> {
-  const n = name.trim().toLocaleLowerCase('sv');
-  const p = places.find((x) => x.name.toLocaleLowerCase('sv') === n && x.lat != null && x.lon != null);
+  const n = name.trim().toLocaleLowerCase(LOCALE);
+  const p = places.find((x) => x.name.toLocaleLowerCase(LOCALE) === n && x.lat != null && x.lon != null);
   return { name: name.trim(), lat: p?.lat ?? null, lon: p?.lon ?? null };
 }
 

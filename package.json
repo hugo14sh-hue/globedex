@@ -14,7 +14,8 @@
     "icons": "node scripts/make-icons.mjs",
     "import": "node scripts/import-content.mjs",
     "import:check": "node scripts/import-content.mjs --check",
-    "countries": "node scripts/make-countries.mjs"
+    "countries": "node scripts/make-countries.mjs",
+    "flags": "node scripts/make-flags.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",
@@ -31,6 +32,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
+    "flag-icons": "^7.6.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vite-plugin-pwa": "^2.0.0",

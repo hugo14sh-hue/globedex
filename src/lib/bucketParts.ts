@@ -9,6 +9,7 @@
 // Egna punkter (utan katalog) kan ha egna delmål, som bara finns i parts. Testas i bucketParts.test.ts.
 import { emptyInput, VISITED, visitedContinents, visitedCountries } from '../features/vi/marken';
 import type { PlaceStatus } from './statusLogic';
+import { LOCALE } from './locale';
 
 export type CountMetric = 'countries_visited' | 'continents_visited';
 
@@ -156,7 +157,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
     return rows(
       ctx.places
         .filter((p) => p.parent_id === parent_id && p.layer === layer)
-        .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
+        .sort((a, b) => a.name.localeCompare(b.name, LOCALE))
         .map((p) => auto(p.id)),
     );
   }
@@ -164,7 +165,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
   const countries = Object.entries(ctx.statuses)
     .filter(([id, s]) => /^[A-Z]{2}$/.test(id) && s === 'besokt')
     .map(([id]) => ({ id, name: ctx.name(id) }))
-    .sort((a, b) => a.name.localeCompare(b.name, 'sv'));
+    .sort((a, b) => a.name.localeCompare(b.name, LOCALE));
   return rows(countries.map((c) => ({ ...manual(c.name, parts), placeId: c.id })));
 }
 

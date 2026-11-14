@@ -35,3 +35,10 @@
 - Offline: en kö för skrivningar som skickas när uppkopplingen kommer tillbaka. Fas 1 stoppar skrivningar i stället, med tydligt besked.
 - Säkerhet: ett andra testkonto i en egen grupp med en egen resa, så att npm run rls:check kan prova resans tabeller (bokningar, utgifter, packlista med flera) live och inte bara via reglerna.
 - Röktestet kan byggas ut med par- och gruppläge (två konton som matchar i Swipe och delar utgifter).
+
+## Från Körning 8
+- Finare landsgränser på nära håll: Natural Earth 1:10 m blir 2,6 MB komprimerad som en fil (3 decimaler). Den kan delas upp per land och laddas bara för länderna i bild när man zoomar in förbi zoom 5.
+- Gemensam samlingsbok för par och grupp: i dag är fynden per person (finds har ingen group_id). En delad bok skulle kräva group_id på finds och en unik regel på (group_id, compendium_id).
+- Markera flera även i vyn Kompendium (i dag leder kategorierna till Kort, där läget finns).
+- Språkval när fler språk finns: APP_LOCALE i src/config.ts styr redan all formatering. Innehåll ur databasen behöver översättas per språk (se slutrapporten för Körning 8).
+- Licenssida i appen som visar MIT-texten för flag-icons (finns i dag som public/flags/LICENSE.txt).

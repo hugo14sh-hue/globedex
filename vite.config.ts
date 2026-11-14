@@ -2,7 +2,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
-import { APP_NAME, DEFAULT_THEME_COLOR, DEFAULT_BACKGROUND } from './src/config.ts';
+import { APP_LOCALE, APP_NAME, DEFAULT_THEME_COLOR, DEFAULT_BACKGROUND } from './src/config.ts';
 
 export default defineConfig({
   plugins: [
@@ -17,7 +17,7 @@ export default defineConfig({
       manifest: {
         name: APP_NAME,
         short_name: APP_NAME,
-        lang: 'sv',
+        lang: APP_LOCALE.split('-')[0],
         start_url: '/',
         scope: '/',
         display: 'standalone',
@@ -33,6 +33,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        // Flaggorna (cirka 250 filer) läggs inte i installationen. De hämtas när de visas och sparas då.
+        globIgnores: ['flags/**'],
         navigateFallback: '/index.html',
         // Offline: senast hämtade data går att läsa utan uppkoppling. Skrivningar cachas och köas aldrig
         // (bara GET matchas här, och appen stoppar skrivningar utan uppkoppling i src/lib/offline.ts).
@@ -80,6 +82,16 @@ export default defineConfig({
             urlPattern: ({ url }) => url.pathname.startsWith('/geo/'),
             handler: 'StaleWhileRevalidate',
             options: { cacheName: 'geodata', expiration: { maxEntries: 5 } },
+          },
+          {
+            // Landsflaggor (public/flags), bara de som har visats.
+            urlPattern: ({ url }) => url.pathname.startsWith('/flags/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'flaggor',
+              expiration: { maxEntries: 120, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [200] },
+            },
           },
           {
             urlPattern: ({ url }) => url.origin === 'https://fonts.googleapis.com',

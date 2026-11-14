@@ -44,6 +44,7 @@ Kräver Node 20 eller senare.
 | `npm run import` | Läser in innehållet i `content/` till Supabase |
 | `npm run rls:check` | Provar databasens regler som testkontot mot en annan grupps data |
 | `npm run icons` | Skapar appikonerna i `public/` från `docs/logo/` |
+| `npm run flags` | Kopierar landsflaggorna (flag-icons, MIT) till `public/flags/` |
 
 Första gången du kör röktestet: `npx playwright install chromium`.
 

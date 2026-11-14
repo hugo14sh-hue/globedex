@@ -89,7 +89,7 @@ p {
 }
 
 .scr {
-  padding: calc(22px + env(safe-area-inset-top)) 16px calc(100px + env(safe-area-inset-bottom));
+  padding: calc(22px + var(--safe-top, env(safe-area-inset-top))) 16px calc(100px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -693,8 +693,19 @@ h3.eb {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 }
 
+/* Kartans källor: liten stil. Syns när kartan startar och fälls ihop bakom i-knappen vid första
+   interaktionen eller efter fem sekunder (OSM:s riktlinjer för attribution), se MapView. */
 .map .maplibregl-ctrl-attrib {
-  font-size: 11px;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.map .maplibregl-ctrl-attrib.maplibregl-compact-show {
+  max-width: calc(100% - 20px);
+}
+
+.map .maplibregl-ctrl-attrib-inner {
+  padding: 1px 2px;
 }
 
 .dot {
@@ -1333,21 +1344,26 @@ fieldset.card legend {
 }
 
 /* ---------- Topplist på Karta ---------- */
+/* Listen ligger före <main> och har en egen rad överst, så att innehållet alltid börjar nedanför den.
+   Ingen fast höjd och inga negativa marginaler: den växer med safe-area och textstorlek.
+   --safe-top kan sättas i röktestet för att simulera en telefon med notch. */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 3;
-  box-sizing: border-box;
-  height: calc(52px + env(safe-area-inset-top));
-  max-height: calc(52px + env(safe-area-inset-top));
-  margin: calc(-22px - env(safe-area-inset-top)) -16px 0;
-  padding: env(safe-area-inset-top) 16px 0;
+  min-height: calc(52px + var(--safe-top, env(safe-area-inset-top)));
+  padding: var(--safe-top, env(safe-area-inset-top)) 16px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   background: var(--bg);
   border-bottom: 1px solid var(--ln);
+}
+
+/* Skärmen under listen: safe-area är redan tagen av listen. */
+.scr.under-topbar {
+  padding-top: 14px;
 }
 
 .topbar .brand {
@@ -1391,4 +1407,105 @@ fieldset.card legend {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+/* ---------- Flaggor ---------- */
+.flag {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.flag img {
+  display: block;
+  width: 34px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px var(--ln);
+}
+
+/* Statusfärgen som ring runt flaggan, med en smal glipa i bakgrundens färg. */
+.flag.ringed img {
+  box-shadow:
+    0 0 0 1.5px var(--bg),
+    0 0 0 4px var(--ring);
+}
+
+.flag-pin {
+  position: absolute;
+  right: -2px;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: var(--sf);
+  color: var(--tx);
+  box-shadow: 0 0 0 1px var(--ln);
+}
+
+.sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.hero .flag img {
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.6);
+}
+
+.hero .flag.ringed img {
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.9),
+    0 0 0 4px var(--ring);
+}
+
+/* ---------- Markera flera i samlingsboken ---------- */
+.bc {
+  position: relative;
+}
+
+.bc.sel {
+  border-color: var(--p);
+  background: var(--soft);
+}
+
+.bc-tick {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: var(--p);
+  color: var(--onp);
+}
+
+/* Raden längst ned ligger ovanför flikraden. Listan får plats under den tack vare skärmens nedre luft. */
+.pickbar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 488px;
+  z-index: 5;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.pickbar .btn {
+  width: auto;
+  flex: none;
 }
