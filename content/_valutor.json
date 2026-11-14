@@ -1,0 +1,8 @@
+{
+ "_om": "Ungefärliga kurser för att visa priser i kronor. Uppdateras för hand.",
+ "checked": "2026-11-01",
+ "source": "https://exchangerate.guru/eur/sek/",
+ "sek_per": {
+  "EUR": 11.0
+ }
+}

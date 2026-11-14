@@ -1609,3 +1609,100 @@ fieldset.card legend {
   opacity: 1;
   cursor: default;
 }
+
+/* Prisnivå (places.data.prices): fem markeringar, rader med belopp och kronor till höger. */
+.plevel {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  flex: none;
+}
+.plevel i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--p);
+  background: transparent;
+}
+.plevel i.on {
+  background: var(--p);
+}
+.plevel.small {
+  gap: 3px;
+}
+.plevel.small i {
+  width: 8px;
+  height: 8px;
+  border-width: 1.5px;
+}
+.plevel-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.price-row {
+  align-items: flex-start;
+}
+.price-row .t {
+  gap: 2px;
+}
+.price-sek {
+  flex: none;
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: right;
+}
+.fine {
+  font-size: 0.82rem;
+}
+.price-tips {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.price-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.price-foot p {
+  margin: 0;
+}
+.price-src {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.prices {
+  scroll-margin-top: 16px;
+}
+
+/* Små länder som punkt med flagga på kartan (från zoomnivå 4). Tryckytan är 44 px. */
+.map-flag {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  place-items: center;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--tx);
+}
+.show-points .map-flag {
+  display: grid;
+}
+.map-flag img {
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--ring, #e8e2d6), 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.map-flag:focus-visible {
+  outline: 3px solid var(--a);
+  outline-offset: 2px;
+  border-radius: 8px;
+}

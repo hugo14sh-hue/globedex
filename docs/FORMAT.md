@@ -46,6 +46,45 @@ data på en plats:
 - sources: lista med URL:er som stödjer data
 - day_budget_note: text som förklarar vad dagsbudgeten räknar in
 - own_judgment: lista med fältnamn på platsen som är Claudes egen bedömning och saknar källa (t.ex. "stay", "areas", "day_budget_sek", "best_text", "smart_months"). Visa dem gärna som "uppskattning" i appen.
+- prices: prisnivå och exempelpriser i lokal valuta, se nedan. Kräver ingen databasändring (ligger i data).
+
+#### data.prices
+Visas som sektionen Prisnivå på stadssidan, direkt efter dagsbudgeten. Har ett land egna prices visas de på landssidan. Annars visar landssidan en rad per stad som har prices, med nivån. Städer med prices får nivån som fem små markeringar på sina rader i listorna.
+
+```json
+"prices": {
+  "currency": "EUR", "level": 4, "checked": "2026-11-14", "summary": "En mening om nivån.",
+  "rows": [
+    { "key": "kaffe", "low": 2.5, "high": 5, "typical": 3.5 },
+    { "key": "lokalresa", "typical": 2, "note": "Enkelbiljett med buss." }
+  ],
+  "tips": ["Ett tips."], "sources": ["https://..."], "own_judgment": ["level"]
+}
+```
+
+| Fält | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| currency | text | ja | valutakod med tre versaler (ISO 4217), "EUR" |
+| level | heltal 1–5 | ja | 1 billigt, 3 som hemma, 5 mycket dyrt. Texten kommer från pris.niva.<level> |
+| checked | datum | ja | när priserna kontrollerades (ÅÅÅÅ-MM-DD) |
+| summary | text | nej | visas under nivån |
+| rows | lista | ja | rader i den ordning de ska visas, se nedan. En key får bara finnas en gång |
+| tips | lista med text | nej | punktlista under pris.tips.rubrik |
+| sources | lista med URL:er | ja, minst en | visas som länkar med domännamnet |
+| own_judgment | lista med text | nej | det som är egen bedömning. Innehåller den "level" visas texten pris.egen-bedomning. Andra värden (t.ex. "hotell-3.low") sparas men visas inte än |
+
+En rad i rows:
+
+| Fält | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| key | text | ja | enkel-maltid, middag-for-tva, snabbmat, ol, kaffe, lask, vatten, lokalresa, hotell-3 eller hotell-4. Radens namn kommer från texten pris.rad.<key> |
+| low, high | tal ≥ 0 | nej | spannet i lokal valuta. Anges båda eller ingen, high minst low |
+| typical | tal ≥ 0 | nej | det vanligaste priset |
+| note | text | nej | visas i mindre text under raden |
+
+Varje rad har typical eller både low och high. Beloppet i kronor räknas på typical, eller på mitten av spannet när typical saknas, med kursen i content/_valutor.json. Det avrundas till jämna tiotal över 100 kr och till hela kronor under. Finns ingen kurs för valutan visas bara beloppet i lokal valuta.
+
+`npm run import:check` stoppar okänd key, level utanför 1–5, rad utan belopp, saknade sources eller checked och okända fält.
 
 ### facts (tabell place_facts): guide och regler
 | Fält | Typ | Krav | Beskrivning |
@@ -180,6 +219,22 @@ Ligger i content/_innan-avresa.json och läses in i appen vid bygget (inte till 
 En punkt med samma titel som en rad som redan finns på listan (även en dold) läggs inte till igen. Listan sorteras på days_before, det som ska göras tidigast först. Egna punkter hamnar sist. days_before slås upp i filen via titeln, så byter en punkt titel i filen förlorar redan tillagda rader sin dag.
 
 `npm run import:check` validerar både _packlista.json och _innan-avresa.json.
+
+## Valutakurser
+Ligger i content/_valutor.json och läses in i appen vid bygget (inte till databasen). Används för att visa priserna i data.prices i kronor. Uppdateras för hand.
+
+```json
+{ "checked": "2026-11-01", "source": "https://...", "sek_per": { "EUR": 11.0 } }
+```
+
+| Fält | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| checked | datum | ja | när kurserna kontrollerades, visas i texten pris.kurs |
+| source | URL | ja | var kurserna kommer ifrån |
+| sek_per | objekt | ja | valutakod (tre versaler) till kronor per en enhet, över 0 |
+| _om | text | nej | kommentar, används inte |
+
+En valuta som saknas i sek_per visas bara i lokal valuta. `npm run import:check` validerar filen.
 
 ## Gränssnittets texter
 Ligger i content/_texter.json och läses in i appen vid bygget (inte till databasen). Nycklar under texter, tre språkstilar (neutral, lekfull, romantisk), märken under marken. Reglerna står i filens _om.

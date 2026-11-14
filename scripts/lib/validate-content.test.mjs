@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { sortPlaces, toDbRow, validateContent, validatePackList, validatePretripList } from './validate-content.mjs';
+import { sortPlaces, toDbRow, validateContent, validatePackList, validatePretripList, validateRates } from './validate-content.mjs';
 
 // Testdata med påhittade id:n. Innehållet är bara platshållare för valideringen.
 const base = () => ({
@@ -199,5 +199,55 @@ describe('hemliga nyckeln', () => {
     const hits = walk(join(process.cwd(), 'src')).filter((f) => /SUPABASE_SECRET|sb_secret_|import-content/.test(readFileSync(f, 'utf8')));
     // Testfilen själv ligger i scripts/, inte i src/.
     expect(hits).toEqual([]);
+  });
+});
+
+describe('prisnivå i data.prices', () => {
+  const withPrices = (prices) => {
+    const j = base();
+    j.places[1].data = { prices };
+    return j;
+  };
+  const ok = () => ({
+    currency: 'EUR',
+    level: 3,
+    checked: '2026-01-02',
+    rows: [{ key: 'kaffe', typical: 3 }, { key: 'ol', low: 4, high: 8, note: 'n' }],
+    sources: ['https://example.org'],
+  });
+
+  it('godkänner korrekta priser', () => {
+    expect(run(withPrices(ok())).errors).toEqual([]);
+  });
+
+  it('stoppar okänd key, nivå utanför 1–5 och saknat belopp', () => {
+    const p = ok();
+    p.level = 6;
+    p.rows.push({ key: 'glass', typical: 1 }, { key: 'vatten', low: 1 });
+    expect(fields(run(withPrices(p))).sort()).toEqual(
+      ['XX-stad/data.prices.level', 'XX-stad/data.prices.rows[2].key', 'XX-stad/data.prices.rows[3]', 'XX-stad/data.prices.rows[3]'].sort(),
+    );
+  });
+
+  it('kräver sources och checked', () => {
+    const p = ok();
+    delete p.sources;
+    p.checked = '2026-13-01';
+    expect(fields(run(withPrices(p))).sort()).toEqual(['XX-stad/data.prices.checked', 'XX-stad/data.prices.sources']);
+  });
+
+  it('stoppar okända fält', () => {
+    const p = ok();
+    p.extra = 1;
+    p.rows[0].pris = 2;
+    expect(fields(run(withPrices(p))).sort()).toEqual(['XX-stad/data.prices.extra', 'XX-stad/data.prices.rows[0].pris']);
+  });
+});
+
+describe('_valutor.json', () => {
+  it('godkänner en korrekt fil och stoppar fel', () => {
+    expect(validateRates('_valutor.json', { checked: '2026-11-01', source: 'https://example.org', sek_per: { EUR: 11 } })).toEqual([]);
+    const errs = validateRates('_valutor.json', { checked: 'nu', sek_per: { eur: 0 } });
+    expect(errs.map((e) => e.field).sort()).toEqual(['checked', 'sek_per', 'source']);
   });
 });

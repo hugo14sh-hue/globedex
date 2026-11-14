@@ -1,0 +1,108 @@
+﻿# Globedex - promptskript for Claude Code. UTF-8 MED BOM, CRLF.
+# Ett skript per prompt. Kor:
+#   powershell -ExecutionPolicy Bypass -File "C:\Users\Hugo\globedex\skript\<NN-namn>.ps1"
+
+# ===================== INSTÄLLNINGAR =====================
+$steg     = '10 - Körning 10: prisnivå och Monaco'
+$session  = 'NY'                 # 'NY' eller 'SAMMA'
+$varfor   = 'Ny körning. Körning 9 är avslutad och incheckad.'
+$kravEnv  = @('VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY')                    # rader som måste vara ifyllda i .env.local
+$kontroll = @(
+  'Kör npm run import efter körningen så att Monaco hamnar i databasen'
+  'Öppna Monaco: sektionen Prisnivå med belopp i euro och kronor'
+  'Kartan: Monaco går att trycka på och har flagga'
+  'import:check, build, typecheck, test och test:e2e är gröna'
+)
+# ===================== PROMPT ============================
+$prompt = @'
+Läs CLAUDE.md, FORMAT.md för innehållet och docs/schema.sql innan du gör något. Körning 1 till 9 är klara.
+
+Körning 10: prisnivå och Monaco
+
+1. Nytt innehåll finns i content/: MC.json (Monaco: land + stad, 7 fakta, 9 listpunkter, 6 kompendiekort, 7 idéer, 3 presenttips) och _valutor.json. content/_texter.json och content/_texter.en.json har 26 nya nycklar som börjar med pris. (554 nycklar per språk). Kör npm run import:check och rätta importen om något i de nya filerna inte går igenom. Ändra inte i innehållsfilerna: stämmer något inte, skriv det i slutrapporten.
+
+2. Nytt fält i places.data: prices. Det kräver ingen databasändring. Form:
+   { "currency": "EUR", "level": 1-5, "checked": "ÅÅÅÅ-MM-DD", "summary": "text",
+     "rows": [ { "key": "...", "low": tal, "high": tal, "typical": tal, "note": "text" } ],
+     "tips": ["text"], "sources": ["url"], "own_judgment": ["..."] }
+   Tillåtna key: enkel-maltid, middag-for-tva, snabbmat, ol, kaffe, lask, vatten, lokalresa, hotell-3, hotell-4. Varje rad har minst typical eller både low och high. low, high, note, tips och own_judgment får saknas. Radens namn kommer från texten pris.rad.<key>. Lägg kontrollen i import:check (okänd key, level utanför 1-5, saknat belopp, saknad sources eller checked ger fel) och beskriv fältet i FORMAT.md.
+
+3. content/_valutor.json: { "checked": datum, "source": url, "sek_per": { "EUR": 11.0 } }. Den läses in vid bygget, inte från databasen. Finns ingen kurs för en valuta visas bara beloppet i den lokala valutan.
+
+4. Ny sektion på stadssidan, direkt efter dagsbudgeten, med rubriken pris.rubrik. Den visas bara när platsen har prices.
+   - Överst nivån: fem markeringar där level stycken är fyllda, texten pris.niva.<level> bredvid och pris.niva.aria som aria-label. Under den summary.
+   - En rad per post i rows, i filens ordning: namnet, spannet (pris.spann, med valuta) när low och high finns, och typical under etiketten pris.vanligast. Finns bara typical visas bara det. Till höger beloppet i kronor (pris.i-kronor) räknat på typical, eller på mitten av spannet när typical saknas, avrundat till jämna tiotal kronor över 100 kr och till hela kronor under. Finns note visas den i mindre text under raden.
+   - tips som punktlista under rubriken pris.tips.rubrik.
+   - Sist, i liten text: pris.kontrollerat, pris.kurs, pris.egen-bedomning när own_judgment innehåller level, och källorna som länkar under pris.kallor (visa domännamnet).
+   - Belopp formateras med Intl efter APP_LOCALE, som resten av appen.
+
+5. På landssidan: har landet egna prices visas samma sektion. Annars visas under pris.stader.rubrik en rad per stad i landet som har prices, med stadens namn och nivåmarkeringen, som länk till stadens sektion. Har ingen stad prices visas ingenting.
+
+6. På stadskortet i sökresultat och listor visas nivån som fem små markeringar med aria-label, när platsen har prices. Inga belopp där.
+
+7. Monaco på kartan: kontrollera att landet MC går att öppna. Är landytan för liten för att träffa, eller saknas den i kartdatat, visas landet som en punkt med flagga som går att trycka på från zoomnivå 4. Samma lösning ska gälla andra länder som saknar yta i kartdatat. Kontrollera att flaggan för MC visas och att Monaco räknas med i besökta länder.
+
+8. Enhetstester: omräkning och avrundning till kronor, rad med bara typical, rad med bara spann, plats utan prices (ingen sektion), valuta utan kurs. Röktestet: öppna Monaco, kontrollera att rubriken Prisnivå och raden för trestjärnigt hotell visas, byt till engelska och kontrollera Price level.
+
+Regler: Skriv inga egna texter och översätt ingenting själv. Saknas en text på något av språken: lista nyckeln i slutrapporten. Gör inga databasändringar själv: behövs en, ge mig ett SQL-block. Lägg inte till funktioner utöver det som står här, skriv idéer i docs/fas2.md. Kör inte npm run import mot databasen, det gör Hugo.
+
+Avsluta med npm run import:check, npm run build, npm run typecheck, npm test och npm run test:e2e, kontrollera exitkoderna, gör en git commit med meddelandet "Körning 10: prisnivå och Monaco" och skriv slutrapporten innan du avslutar turen. Vänta inte på bakgrundsjobb. Rubriker: Klart, Inte klart, Röktestet, Saknade textnycklar per språk, Det här behöver Hugo göra.
+'@
+# =========================================================
+
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$proj = Split-Path -Parent $here
+if (-not (Test-Path (Join-Path $proj 'CLAUDE.md'))) { Write-Host "Hittar inte projektet (CLAUDE.md saknas i $proj)." -ForegroundColor Red; return }
+
+Write-Host ""
+Write-Host "=== $steg ===" -ForegroundColor Cyan
+
+# .env.local: kontrollera att raderna finns och är ifyllda (värdena visas aldrig)
+$envFil = Join-Path $proj '.env.local'
+$fel = 0
+if (-not (Test-Path $envFil)) { Write-Host "  .env.local saknas." -ForegroundColor Red; $fel++ }
+else {
+  $rader = Get-Content $envFil -Encoding UTF8
+  foreach ($k in $kravEnv) {
+    $rad = $rader | Where-Object { $_ -match "^\s*$k\s*=" } | Select-Object -First 1
+    $v = if ($rad) { ($rad -split '=', 2)[1].Trim().Trim('"').Trim("'") } else { '' }
+    if (-not $v -or $v -match '\.\.\.$' -or $v -match 'xxxx') { Write-Host "  .env.local: $k saknas eller är inte ifylld." -ForegroundColor Red; $fel++ }
+    else { Write-Host "  .env.local: $k finns." -ForegroundColor DarkGray }
+  }
+}
+if ($fel -gt 0) { Write-Host "Fyll i .env.local (docs\supabase-lathund.md) och kör skriptet igen." -ForegroundColor Red; return }
+
+# Testkonto för röktestet (frivilligt men starkt rekommenderat)
+$harTest = ($rader | Where-Object { $_ -match '^\s*TEST_EMAIL\s*=\s*\S' }) -and ($rader | Where-Object { $_ -match '^\s*TEST_PASSWORD\s*=\s*\S' })
+if ($harTest) { Write-Host "  .env.local: testkonto finns, röktestet körs." -ForegroundColor DarkGray }
+else { Write-Host "  .env.local: TEST_EMAIL och TEST_PASSWORD saknas. Röktestet hoppas över." -ForegroundColor Yellow }
+
+# Git: visa om något är ocommittat
+if (Get-Command git -ErrorAction SilentlyContinue) {
+  $andrat = (git -C $proj status --porcelain 2>$null | Measure-Object).Count
+  if ($andrat -gt 0) { Write-Host "  Git: $andrat ändrade filer som inte är committade (Claude Code committar i slutet av körningen)." -ForegroundColor DarkGray }
+}
+
+# Spara prompten bredvid skriptet och lägg den på urklipp
+$promptFil = [IO.Path]::ChangeExtension($MyInvocation.MyCommand.Path, '.prompt.txt')
+[IO.File]::WriteAllText($promptFil, $prompt, (New-Object System.Text.UTF8Encoding $false))
+$prompt | Set-Clipboard
+
+Write-Host ""
+if ($session -eq 'NY') {
+  Write-Host "  >>> NY SESSION <<<" -ForegroundColor Black -BackgroundColor Yellow
+  Write-Host "  Claude Code: plusikonen (ny session, Local) i mappen globedex." -ForegroundColor Yellow
+} else {
+  Write-Host "  >>> SAMMA SESSION <<<" -ForegroundColor Black -BackgroundColor Green
+  Write-Host "  Fortsätt i sessionen som körde förra steget." -ForegroundColor Green
+}
+Write-Host "  Varför: $varfor" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  1. Ctrl+V, Enter. Bifoga inga filer." -ForegroundColor White
+Write-Host "  2. Svara Ja på kommandotillstånd. Rör inget under körningen." -ForegroundColor White
+Write-Host "  3. När den är klar - kontrollera:" -ForegroundColor White
+foreach ($r in $kontroll) { Write-Host "     - $r" -ForegroundColor White }
+Write-Host "  4. Klistra in slutrapporten i Claude-chatten." -ForegroundColor White
+Write-Host ""
+Write-Host "Prompten ligger på urklipp (och i $(Split-Path -Leaf $promptFil))." -ForegroundColor Green
+if (Get-Command code -ErrorAction SilentlyContinue) { code $proj }

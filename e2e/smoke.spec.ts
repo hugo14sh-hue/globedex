@@ -44,10 +44,18 @@ test.describe.configure({ mode: 'serial' });
 test.skip(!hasTestAccount, 'TEST_EMAIL och TEST_PASSWORD saknas i .env.local');
 
 let snap: Snapshot | null = null;
+/** Monaco (content/MC.json) finns i databasen först när Hugo har kört npm run import. */
+let hasMonaco = false;
 
 test.beforeAll(async () => {
   const { db, userId } = await testClient();
   snap = await snapshot(db, userId);
+  const { data } = await db.from('places').select('id, data').eq('id', 'MC-monaco').maybeSingle();
+  hasMonaco = Boolean((data as { data?: { prices?: unknown } } | null)?.data?.prices);
+  // Röktestet går på svenska. Står testkontot på ett annat språk byts det här, och afterAll återställer det.
+  const settings = (snap.settings ?? {}) as { theme?: Record<string, unknown> };
+  if (settings.theme?.lang && settings.theme.lang !== 'sv')
+    await db.from('profiles').update({ settings: { ...settings, theme: { ...settings.theme, lang: 'sv' } } }).eq('id', userId);
   await db.auth.signOut();
 });
 
@@ -115,7 +123,27 @@ test('röktest', async ({ page }) => {
     await expect(sheet).toBeHidden();
   });
 
-  const item = NL.items.find((i) => i.compendium_id && !snap!.checks.includes(i.id) && !snap!.finds.includes(i.compendium_id))!;
+  await test.step('Monaco syns som flagga från zoomnivå 4 och öppnar landet', async () => {
+    const flag = page.locator('button.map-flag[data-iso="MC"]');
+    await expect(flag).toHaveCount(1, { timeout: 30_000 });
+    await expect(flag.locator('img')).toHaveAttribute('src', '/flags/mc.svg');
+    // Zooma in med tangentbordet tills punkterna visas.
+    await page.locator('.map canvas').focus();
+    for (let i = 0; i < 3 && !(await flag.isVisible()); i++) {
+      await page.keyboard.press('+');
+      await page.waitForTimeout(700);
+    }
+    await expect(flag).toBeVisible();
+    // Punkten kan ligga utanför utsnittet, så klicket skickas direkt till knappen.
+    await flag.dispatchEvent('click');
+    const sheet = page.getByRole('dialog');
+    await expect(sheet).toBeVisible();
+    await expect(sheet.getByRole('link', { name: tx('land.vy.oversikt') })).toHaveAttribute('href', '/karta/MC');
+    await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+    await expect(sheet).toBeHidden();
+  });
+
+  const item =NL.items.find((i) => i.compendium_id && !snap!.checks.includes(i.id) && !snap!.finds.includes(i.compendium_id))!;
   const card = NL.compendium.find((c) => c.id === item.compendium_id)!;
 
   await test.step('landssidan för Nederländerna öppnas och en listpunkt bockas av', async () => {
@@ -362,6 +390,18 @@ test('röktest', async ({ page }) => {
     await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeGreaterThan(before - 40);
   });
 
+  await test.step('Monaco: landssidan öppnas och stadssidan visar prisnivån', async () => {
+    if (!hasMonaco) {
+      test.info().annotations.push({ type: 'hoppat över', description: 'MC-monaco med prices saknas i databasen (kör npm run import)' });
+      return;
+    }
+    await page.goto('/karta/MC');
+    await expect(page.getByRole('heading', { level: 1, name: 'Monaco' })).toBeVisible();
+    await page.goto('/karta/MC-monaco');
+    await expect(page.getByRole('heading', { name: tx('pris.rubrik'), exact: true })).toBeVisible();
+    await expect(page.getByText(tx('pris.rad.hotell-3'), { exact: true })).toBeVisible();
+  });
+
   await test.step('engelska: flikarna och inloggningssidan byter språk, och sedan tillbaka till svenska', async () => {
     await page.goto('/vi/anpassning');
     const saved = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
@@ -373,6 +413,12 @@ test('röktest', async ({ page }) => {
     await expect(page.getByText(txEn('sprak.innehall-svenska'))).toBeVisible();
     // Valet sparas i profilen.
     await saved;
+    // Prisnivån på engelska.
+    if (hasMonaco) {
+      await page.goto('/karta/MC-monaco');
+      await expect(page.getByRole('heading', { name: txEn('pris.rubrik'), exact: true })).toBeVisible();
+      await expect(page.getByText(txEn('pris.rad.hotell-3'), { exact: true })).toBeVisible();
+    }
 
     // Utloggad: inloggningssidan följer valt språk.
     await page.goto('/vi');

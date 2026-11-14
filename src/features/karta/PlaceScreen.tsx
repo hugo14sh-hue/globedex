@@ -9,6 +9,7 @@ import { useFeedback } from '../../components/Feedback';
 import { Flag } from '../../components/Flag';
 import { Icon } from '../../components/Icon';
 import { Loading } from '../../components/Loading';
+import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
 import { Segment } from '../../components/Segment';
 import {
@@ -27,6 +28,7 @@ import {
   type PlaceItem,
 } from '../../lib/content';
 import { googleMaps } from '../../lib/links';
+import { pricesOf } from '../../lib/prices';
 import { useSession } from '../../lib/session';
 import { CollectionMotifs } from '../listor/Samlingar';
 import { AddGift, useTripsTo } from '../resor/InkopScreen';
@@ -40,6 +42,7 @@ import { SMART_COLORS } from '../../theme/palettes';
 import { statusColors } from '../../theme/theme';
 import { useTheme } from '../../theme/ThemeProvider';
 import { BokaView } from './BokaView';
+import { PlacePrices } from './PriceSection';
 import { monthNames } from './months';
 import { StatusPicker } from './StatusPicker';
 import { formatDate, formatPercent, formatSek } from './format';
@@ -290,9 +293,10 @@ function Oversikt({
       {cities.length > 0 && (
         <section className="col">
           <h2 className="eb">{t('land.platser')}</h2>
-          {cities.map((c) => (
-            <Row key={c.id} to={`/karta/${c.id}`} icon="pin" title={c.name} />
-          ))}
+          {cities.map((c) => {
+            const p = pricesOf(c.data);
+            return <Row key={c.id} to={`/karta/${c.id}`} icon="pin" title={c.name} meta={p ? <PriceLevel level={p.level} small /> : undefined} />;
+          })}
         </section>
       )}
 
@@ -339,6 +343,9 @@ function Oversikt({
           {d.day_budget_note && <span className="mu">{d.day_budget_note}</span>}
         </div>
       )}
+
+      {/* Prisnivå direkt efter dagsbudgeten. Landet visar sina egna priser, annars städernas nivå. */}
+      <PlacePrices place={place} cities={cities} />
 
       {d.best_text && (
         <div className="card soft">

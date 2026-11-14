@@ -1,11 +1,11 @@
 // Läser content/??.json och content/_bucket.json till Supabase (upsert på id).
-// Kontrollerar också content/_packlista.json och content/_innan-avresa.json, som appen läser in vid bygget.
+// Kontrollerar också content/_packlista.json, content/_innan-avresa.json och content/_valutor.json, som appen läser in vid bygget.
 // Körs lokalt av Hugo: npm run import (skriver) eller npm run import:check (bara validering).
 // Nyckeln SUPABASE_SECRET_KEY läses ur .env.local och skrivs aldrig ut.
 import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { ORDER, TABLES, formatError, toDbRow, validateContent, validatePackList, validatePretripList } from './lib/validate-content.mjs';
+import { ORDER, TABLES, formatError, toDbRow, validateContent, validatePackList, validatePretripList, validateRates } from './lib/validate-content.mjs';
 import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -57,6 +57,12 @@ async function main() {
     const json = await readJson(name);
     errors.push(...validate(name, json));
     appLists.push([name, Array.isArray(json?.items) ? json.items.length : 0]);
+  }
+  // Valutakurserna för priser i kronor. Läses in i appen vid bygget.
+  if ((await readdir(contentDir)).includes('_valutor.json')) {
+    const json = await readJson('_valutor.json');
+    errors.push(...validateRates('_valutor.json', json));
+    appLists.push(['_valutor.json', json?.sek_per && typeof json.sek_per === 'object' ? Object.keys(json.sek_per).length : 0]);
   }
   // Gränssnittets texter på svenska och engelska: samma nycklar, form, platshållare och märken.
   const textErrors = compareTexts(await readJson('_texter.json'), await readJson('_texter.en.json'));

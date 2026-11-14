@@ -50,3 +50,5 @@
 - Installationens manifest (PWA) på engelska: i dag har det lang sv.
 - Språkval även på inloggningssidan (i dag följer den det sparade valet eller webbläsarens språk).
 - Markera flera även i vyn Kompendium (där finns nu en ruta per kort i den utfällda kategorin).
+- Prisnivå: märk enskilda belopp som uppskattning när prices.own_judgment pekar ut dem (t.ex. "hotell-3.low"). I dag visas bara märkningen för level.
+- Prisnivå: visa dagsbudgeten i lokal valuta med samma kurser som content/_valutor.json.

@@ -1,6 +1,7 @@
 // Innehållet från content/ (via Supabase). Bara läsning. Texterna kommer från Hugo, inget skrivs här.
 import { supabase } from './supabase';
 import { displayNames, LOCALE } from './locale';
+import type { Prices } from './prices';
 
 export type PlaceKind = 'country' | 'region' | 'city' | 'spot';
 
@@ -22,6 +23,8 @@ export interface PlaceData {
   sources?: string[];
   /** Fält som är egen bedömning utan källa. Visas märkta som uppskattning. */
   own_judgment?: string[];
+  /** Prisnivå och exempelpriser i lokal valuta. Läses med pricesOf i src/lib/prices.ts. */
+  prices?: Prices;
 }
 
 export interface Place {

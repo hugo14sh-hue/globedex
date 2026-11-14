@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { Flag } from '../../components/Flag';
+import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
 import { fetchItemMarkers, fetchPlaces, placeName, type Place, type PlaceItem } from '../../lib/content';
 import { useSession, useTravelMode } from '../../lib/session';
@@ -18,6 +19,9 @@ import { monthNames } from './months';
 import { usePlayback } from './usePlayback';
 import { useUrlState, withParam } from '../../lib/navMemory';
 import { LOCALE } from '../../lib/locale';
+import { pricesOf } from '../../lib/prices';
+import { COUNTRIES } from '../../lib/countries';
+import type { CountryPoint } from '../../lib/mapPoints';
 
 // Kartmotorn laddas först när fliken öppnas.
 const MapView = lazy(() => import('./MapView'));
@@ -108,6 +112,15 @@ export default function KartaScreen() {
     return out;
   }, [mapMode, places, items]);
 
+  // Mittpunkter för länder som visas som punkt: innehållets länder först, sedan alla länder i kartdatat.
+  const pointCandidates = useMemo<CountryPoint[]>(
+    () => [
+      ...places.filter((p) => p.kind === 'country' && p.iso2 && p.lat != null && p.lon != null).map((p) => ({ iso: p.iso2!, lat: p.lat!, lon: p.lon! })),
+      ...COUNTRIES.map(([iso, lat, lon]) => ({ iso, lat, lon })),
+    ],
+    [places],
+  );
+
   const mineList = useMemo(
     () =>
       groupByStatus(
@@ -157,6 +170,8 @@ export default function KartaScreen() {
                 routeColor={theme.dark ? '#F4B942' : '#E4572E'}
                 label={t('flik.karta')}
                 attribLabel={t('karta.kallor')}
+                pointCandidates={pointCandidates}
+                countryLabel={(iso) => placeName(places, iso)}
                 onCountry={setPicked}
                 onMarker={(m) => nav(`/karta/${m.placeId}${m.kind === 'item' ? '?vy=lista' : ''}`)}
                 onError={() => setMapFailed(true)}
@@ -256,15 +271,19 @@ export default function KartaScreen() {
               <h3 className="eb">{t(STATUS_KEY[g.status])}</h3>
               <span className="mu">{g.rows.length}</span>
             </div>
-            {g.rows.map((r) => (
-              <Row
-                key={r.id}
-                to={`/karta/${r.id}`}
-                title={r.name}
-                sub={t(STATUS_KEY[r.status])}
-                lead={<Flag placeId={r.id} ring={colors[r.status]} />}
-              />
-            ))}
+            {g.rows.map((r) => {
+              const p = r.id.length > 2 ? pricesOf(places.find((x) => x.id === r.id)?.data) : null;
+              return (
+                <Row
+                  key={r.id}
+                  to={`/karta/${r.id}`}
+                  title={r.name}
+                  sub={t(STATUS_KEY[r.status])}
+                  lead={<Flag placeId={r.id} ring={colors[r.status]} />}
+                  meta={p ? <PriceLevel level={p.level} small /> : undefined}
+                />
+              );
+            })}
           </section>
         ))}
 

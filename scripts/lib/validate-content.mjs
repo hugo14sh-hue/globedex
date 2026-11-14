@@ -33,8 +33,15 @@ const FOR_WHOM = ['mamma', 'pappa', 'barn', 'van', 'mig'];
 const BUCKET_CATEGORIES = ['aventyr', 'natur', 'resa', 'mat', 'kultur', 'tillsammans', 'hemma', 'milstolpe'];
 const TRANSPORT_RATINGS = ['bast', 'bra', 'dyrt'];
 const DATA_FIELDS = [
-  'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment',
+  'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment', 'prices',
 ];
+/** Raderna i data.prices. Namnet på raden kommer från texten pris.rad.<key>. */
+export const PRICE_KEYS = [
+  'enkel-maltid', 'middag-for-tva', 'snabbmat', 'ol', 'kaffe', 'lask', 'vatten', 'lokalresa', 'hotell-3', 'hotell-4',
+];
+const PRICE_FIELDS = ['currency', 'level', 'checked', 'summary', 'rows', 'tips', 'sources', 'own_judgment'];
+const PRICE_ROW_FIELDS = ['key', 'low', 'high', 'typical', 'note'];
+const CURRENCY_RE = /^[A-Z]{3}$/;
 
 /** Kolumner per del. Andra fält stoppas, eftersom de inte finns i tabellen. */
 const COLUMNS = {
@@ -133,6 +140,53 @@ function checkPlaceData(row, check) {
   if (d.day_budget_note !== undefined) check(row, 'data.day_budget_note', isStr(d.day_budget_note), 'text');
   if (d.sources !== undefined) check(row, 'data.sources', listOf(d.sources) && d.sources.every((u) => URL_RE.test(u)), 'lista med http-adresser');
   if (d.own_judgment !== undefined) check(row, 'data.own_judgment', listOf(d.own_judgment), 'lista med fältnamn');
+  if (d.prices !== undefined) checkPrices(row, d.prices, check);
+}
+
+/** data.prices: prisnivå och exempelpriser i lokal valuta (docs/FORMAT.md). */
+function checkPrices(row, p, check) {
+  const f = 'data.prices';
+  if (!isObj(p)) return check(row, f, false, 'ska vara ett objekt');
+  for (const k of Object.keys(p)) check(row, `${f}.${k}`, PRICE_FIELDS.includes(k), 'okänt fält i prices');
+  check(row, `${f}.currency`, typeof p.currency === 'string' && CURRENCY_RE.test(p.currency), 'krävs, valutakod med tre versaler (EUR)');
+  check(row, `${f}.level`, isInt(p.level) && p.level >= 1 && p.level <= 5, 'krävs, heltal 1–5');
+  check(row, `${f}.checked`, validDate(p.checked), 'kontrolldatum krävs (ÅÅÅÅ-MM-DD)');
+  if (p.summary !== undefined) check(row, `${f}.summary`, isStr(p.summary), 'text');
+  check(row, `${f}.sources`, listOf(p.sources) && p.sources.length > 0 && p.sources.every((u) => URL_RE.test(u)), 'källa krävs, lista med http-adresser');
+  if (p.tips !== undefined) check(row, `${f}.tips`, listOf(p.tips) && p.tips.every(isStr), 'lista med text');
+  if (p.own_judgment !== undefined) check(row, `${f}.own_judgment`, listOf(p.own_judgment) && p.own_judgment.every(isStr), 'lista med fältnamn');
+  if (!Array.isArray(p.rows)) return check(row, `${f}.rows`, false, 'krävs, lista med rader');
+  const keys = new Set();
+  p.rows.forEach((r, i) => {
+    const rf = `${f}.rows[${i}]`;
+    if (!isObj(r)) return check(row, rf, false, 'raden ska vara ett objekt');
+    for (const k of Object.keys(r)) check(row, `${rf}.${k}`, PRICE_ROW_FIELDS.includes(k), 'okänt fält i raden');
+    check(row, `${rf}.key`, PRICE_KEYS.includes(r.key), `okänd key, ska vara ${PRICE_KEYS.join(', ')}`);
+    check(row, `${rf}.key`, !keys.has(r.key), 'samma key finns redan');
+    keys.add(r.key);
+    for (const k of ['low', 'high', 'typical']) {
+      if (r[k] !== undefined) check(row, `${rf}.${k}`, isNum(r[k]) && r[k] >= 0, 'ska vara ett tal, 0 eller mer');
+    }
+    const hasRange = r.low !== undefined && r.high !== undefined;
+    check(row, rf, r.typical !== undefined || hasRange, 'belopp saknas: ange typical eller både low och high');
+    check(row, rf, (r.low === undefined) === (r.high === undefined) || r.typical !== undefined, 'low och high anges tillsammans');
+    if (hasRange && isNum(r.low) && isNum(r.high)) check(row, `${rf}.high`, r.high >= r.low, 'ska vara minst low');
+    if (r.note !== undefined) check(row, `${rf}.note`, isStr(r.note), 'text');
+  });
+}
+
+/** content/_valutor.json: { checked, source, sek_per: { "EUR": 11.0 } }. Läses in i appen vid bygget. */
+export function validateRates(name, json) {
+  const errs = [];
+  const check = makeChecker(name, errs);
+  const row = { id: '-' };
+  if (!isObj(json)) return [{ file: name, id: '-', field: '-', message: 'filen ska vara ett JSON-objekt' }];
+  for (const k of Object.keys(json)) check(row, k, ['_om', 'checked', 'source', 'sek_per'].includes(k), 'okänt fält');
+  check(row, 'checked', validDate(json.checked), 'kontrolldatum krävs (ÅÅÅÅ-MM-DD)');
+  check(row, 'source', isStr(json.source) && URL_RE.test(json.source), 'källa krävs (http-adress)');
+  const ok = isObj(json.sek_per) && Object.entries(json.sek_per).every(([c, v]) => CURRENCY_RE.test(c) && isNum(v) && v > 0);
+  check(row, 'sek_per', ok, 'objekt med valutakod och kurs i kronor över 0, t.ex. { "EUR": 11.0 }');
+  return errs;
 }
 
 const VALIDATORS = {

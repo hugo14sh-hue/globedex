@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import maplibregl, { type GeoJSONSource, type MapGeoJSONFeature } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { MAP_BOUNDS } from '../../config';
+import { countryBounds, pointCountries, POINT_MIN_ZOOM, type CountryPoint } from '../../lib/mapPoints';
 
 /** OpenFreeMap: kontrollerad 2026-11-13 på openfreemap.org (fri, ingen nyckel, attribution visas av stilen). */
 const STYLE = { light: 'https://tiles.openfreemap.org/styles/positron', dark: 'https://tiles.openfreemap.org/styles/dark' };
@@ -57,6 +58,10 @@ export interface MapViewProps {
   label: string;
   /** Namn på i-knappen som fäller ut kartans källor. */
   attribLabel: string;
+  /** Länder med mittpunkt. De som är för små att träffa, eller saknar yta, visas som punkt med flagga. */
+  pointCandidates: CountryPoint[];
+  /** Landets namn för punktens aria-label. */
+  countryLabel: (iso: string) => string;
   onCountry: (iso: string) => void;
   onMarker: (m: MapMarker) => void;
   onError: () => void;
@@ -86,6 +91,9 @@ export default function MapView(props: MapViewProps) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const [ready, setReady] = useState(0);
+  // Kartdatat för länderna: hämtas en gång, ger både ytorna och vilka länder som är för små att träffa.
+  const [bounds, setBounds] = useState<ReturnType<typeof countryBounds> | null>(null);
+  const [geoLoaded, setGeoLoaded] = useState(0);
   const latest = useRef(props);
   useEffect(() => {
     latest.current = props;
@@ -134,7 +142,16 @@ export default function MapView(props: MapViewProps) {
 
     m.on('load', () => {
       const firstSymbol = m.getStyle().layers.find((l) => l.type === 'symbol')?.id;
-      m.addSource('lander', { type: 'geojson', data: '/geo/lander.json', promoteId: 'iso' });
+      m.addSource('lander', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, promoteId: 'iso' });
+      fetch('/geo/lander.json')
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((fc) => {
+          if (map.current !== m) return;
+          (m.getSource('lander') as GeoJSONSource | undefined)?.setData(fc);
+          setBounds(countryBounds(fc));
+          setGeoLoaded((n) => n + 1);
+        })
+        .catch(() => undefined);
       m.addLayer(
         {
           id: FILL,
@@ -258,7 +275,53 @@ export default function MapView(props: MapViewProps) {
     for (const [iso, color] of Object.entries(props.fills)) m.setFeatureState({ source: 'lander', id: iso }, { color, opacity: 0.85 });
     m.setPaintProperty(FILL, 'fill-color', ['coalesce', ['feature-state', 'color'], props.fallback]);
     m.setPaintProperty(FILL, 'fill-opacity', fillOpacity(props.fallbackOpacity));
-  }, [ready, fillsKey, props.fallback, props.fallbackOpacity]);
+  }, [ready, geoLoaded, fillsKey, props.fallback, props.fallbackOpacity]);
+
+  // Små länder som punkt med flagga, från zoomnivå 4. Ringen har landets färg på kartan.
+  const pointKey = props.pointCandidates.map((c) => c.iso).join(',');
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !bounds) return;
+    const show = () => el.current?.classList.toggle('show-points', m.getZoom() >= POINT_MIN_ZOOM);
+    const list = pointCountries(bounds, latest.current.pointCandidates);
+    const made = list.map((c) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'map-flag';
+      b.dataset.iso = c.iso;
+      b.setAttribute('aria-label', latest.current.countryLabel(c.iso));
+      const img = document.createElement('img');
+      img.src = `/flags/${c.iso.toLowerCase()}.svg`;
+      img.alt = '';
+      img.width = 26;
+      img.height = 20;
+      img.onerror = () => {
+        img.remove();
+        b.textContent = c.iso;
+      };
+      b.appendChild(img);
+      b.addEventListener('click', (e) => {
+        e.stopPropagation();
+        latest.current.onCountry(c.iso);
+      });
+      return new maplibregl.Marker({ element: b }).setLngLat([c.lon, c.lat]).addTo(m);
+    });
+    show();
+    m.on('zoom', show);
+    return () => {
+      m.off('zoom', show);
+      for (const x of made) x.remove();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, bounds, pointKey]);
+
+  // Punkternas ring följer landets färg.
+  useEffect(() => {
+    const root = el.current;
+    if (!root) return;
+    for (const b of root.querySelectorAll<HTMLElement>('.map-flag')) b.style.setProperty('--ring', props.fills[b.dataset.iso ?? ''] ?? props.fallback);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, bounds, pointKey, fillsKey, props.fallback]);
 
   // Läge: höjdskuggning och lutning i Terräng 3D, markörer i Upptäck.
   useEffect(() => {

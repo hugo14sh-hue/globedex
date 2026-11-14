@@ -1,0 +1,580 @@
+{
+ "places": [
+  {
+   "id": "MC",
+   "kind": "country",
+   "name": "Monaco",
+   "iso2": "MC",
+   "lat": 43.7384,
+   "lon": 7.4246,
+   "airport": "NCE"
+  },
+  {
+   "id": "MC-monaco",
+   "kind": "city",
+   "parent_id": "MC",
+   "name": "Monaco",
+   "lat": 43.7384,
+   "lon": 7.4246,
+   "airport": "NCE",
+   "data": {
+    "transport": [
+     {
+      "mode": "Tåg från Nice",
+      "rating": "bast",
+      "text": "Ca 20–25 minuter från Nice-Ville till Monaco-Monte-Carlo. Ungefär 4–7 euro enkel väg."
+     },
+     {
+      "mode": "Buss 600 från Nice",
+      "rating": "bra",
+      "text": "2,50 euro, men räkna med minst 55 minuter längs kusten."
+     },
+     {
+      "mode": "Flygbuss 80",
+      "rating": "dyrt",
+      "text": "Direkt från Nice flygplats på ungefär en timme. Ca 19–20,50 euro."
+     },
+     {
+      "mode": "Stadsbuss",
+      "rating": "bra",
+      "text": "2 euro för en enkelbiljett. Det mesta nås ändå till fots."
+     }
+    ],
+    "sources": [
+     "https://www.thetripverdict.com/monaco-travel-costs",
+     "https://www.visitmonaco.com"
+    ],
+    "day_budget_sek": 3200,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum på trestjärnigt hotell i Monaco, mat, lokaltrafik och en sevärdhet. Grov uppskattning. Som dagstur från Nice blir det betydligt billigare.",
+    "stay": [
+     {
+      "label": "Dagstur",
+      "days": 1,
+      "text": "Vaktavlösningen, klippan, hamnen och kasinot hinner du på en dag från Nice.",
+      "recommended": true
+     },
+     {
+      "label": "En natt",
+      "days": 1,
+      "text": "Hinner Oceanografiska museet i lugn och ro och en kväll vid kasinotorget.",
+      "recommended": false
+     },
+     {
+      "label": "Två nätter",
+      "days": 2,
+      "text": "Lägg till en stranddag vid Larvotto eller en match på Stade Louis II.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Monte-Carlo",
+      "stay": true,
+      "text": "Kasinot och de stora hotellen. Dyrast."
+     },
+     {
+      "name": "La Condamine",
+      "stay": true,
+      "text": "Vid hamnen och saluhallen. Här äter du billigast."
+     },
+     {
+      "name": "Fontvieille",
+      "stay": true,
+      "text": "Lugnt, nära Stade Louis II."
+     },
+     {
+      "name": "Beausoleil eller Nice",
+      "stay": true,
+      "text": "På den franska sidan. Beausoleil gränsar direkt till Monte-Carlo, Nice ligger 20–25 minuter bort med tåg. Klart billigare."
+     },
+     {
+      "name": "Monaco-Ville (klippan)",
+      "stay": false,
+      "text": "Palatset, katedralen och museet. Bra att besöka, få ställen att bo på."
+     }
+    ],
+    "best_text": "April till juni och september till oktober. Hotellen är billigast i februari och dyrast i maj.",
+    "prices": {
+     "currency": "EUR",
+     "level": 5,
+     "checked": "2026-11-14",
+     "summary": "Bland Europas dyraste ställen att bo på. Mat och dryck går att hålla nere, hotellet gör det inte.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 13.5,
+       "high": 50,
+       "typical": 17.5
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 120,
+       "high": 200,
+       "typical": 150
+      },
+      {
+       "key": "snabbmat",
+       "typical": 11
+      },
+      {
+       "key": "ol",
+       "low": 4.5,
+       "high": 12,
+       "typical": 9
+      },
+      {
+       "key": "kaffe",
+       "low": 2.2,
+       "high": 8,
+       "typical": 3.3
+      },
+      {
+       "key": "lask",
+       "typical": 5.4
+      },
+      {
+       "key": "vatten",
+       "typical": 4
+      },
+      {
+       "key": "lokalresa",
+       "typical": 2,
+       "note": "Enkelbiljett med stadsbussen."
+      },
+      {
+       "key": "hotell-3",
+       "low": 200,
+       "high": 450,
+       "typical": 375,
+       "note": "Snittet är Booking.coms. Lägsta nivån är vår egen sammanvägning."
+      },
+      {
+       "key": "hotell-4",
+       "low": 300,
+       "high": 900,
+       "typical": 495,
+       "note": "Källorna går isär: snitt mellan 495 och 890 euro."
+      }
+     ],
+     "tips": [
+      "Bo i Nice och ta tåget in. Ett trestjärnigt hotell nära stationen där kostar ungefär 100–160 euro per natt.",
+      "Ät lunch i saluhallen i La Condamine i stället för vid kasinot.",
+      "Hotellen är billigast i februari och dyrast i maj."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Monaco",
+      "https://www.booking.com/city/mc/monte-carlo.html",
+      "https://www.kayak.ie/Monaco-Hotels.5310.hotel.ksp",
+      "https://www.thetripverdict.com/monaco-travel-costs"
+     ],
+     "own_judgment": [
+      "level",
+      "summary",
+      "hotell-3.low",
+      "hotell-3.high",
+      "hotell-4.low",
+      "hotell-4.high"
+     ]
+    },
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "smart_months",
+     "stay"
+    ]
+   },
+   "smart_months": [
+    2,
+    2,
+    3,
+    4,
+    3,
+    4,
+    3,
+    3,
+    5,
+    4,
+    2,
+    2
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "MC-fakta-betala",
+   "place_id": "MC",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: euro (EUR)",
+   "summary": "Landet har euro (EUR)."
+  },
+  {
+   "id": "MC-fakta-inresa",
+   "place_id": "MC",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas inte som resehandling.",
+   "body": "Du reser in via Frankrike och det finns ingen gränskontroll mellan länderna. Kasinot släpper bara in den som visar pass eller id-kort.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-fakta-mobil",
+   "place_id": "MC",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "EU-roaming gäller inte här",
+   "summary": "Monaco är inte med i EU. Surf och samtal kan kosta extra.",
+   "body": "Kopplar mobilen upp sig mot Monaco Telecom gäller operatörens prislista för länder utanför EU. Kolla priset före resan eller stäng av dataroaming när du går över gränsen.",
+   "source_url": "https://www.netzwelt.de/roaming/monaco.html",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-fakta-dricks",
+   "place_id": "MC",
+   "topic": "dricks",
+   "is_rule": false,
+   "title": "Serveringsavgiften ingår",
+   "summary": "Dricks väntas inte. Runda upp eller lämna 5–10 % om du är nöjd.",
+   "body": "Notan innehåller redan en serveringsavgift, på samma sätt som i Frankrike.",
+   "source_url": "https://www.smartertravel.com/?p=168786",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-fakta-fun-fact",
+   "place_id": "MC",
+   "topic": "fun-fact",
+   "is_rule": false,
+   "title": "Nationaldag den 19 november",
+   "summary": "Då äter man barbagiuan, friterade knyten som räknas som nationalrätt.",
+   "source_url": "https://hellomonaco.com/leisure-entertainment/restaurants-bars-cafes/fine-dining-the-delights-of-monegasque-cuisine",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-fakta-ta-sig-dit",
+   "place_id": "MC-monaco",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Tåg från Nice på 20–25 minuter",
+   "summary": "Närmaste flygplats är Nice. Tåget är snabbast och billigast in.",
+   "body": "Regionaltåget går längs kusten från Nice-Ville till Monaco-Monte-Carlo och kostar ungefär 4–7 euro enkel väg. Buss 600 kostar 2,50 euro men tar minst 55 minuter. Flygbuss 80 går direkt från flygplatsen för ca 19–20,50 euro.",
+   "source_url": "https://www.thetripverdict.com/monaco-travel-costs",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-fakta-boende",
+   "place_id": "MC-monaco",
+   "topic": "boende",
+   "is_rule": false,
+   "title": "Bo i Nice och åk in över dagen",
+   "summary": "Hotell i Monaco kostar flera gånger mer än i Nice.",
+   "body": "Ett trestjärnigt hotell i Monaco ligger i snitt kring 375 euro per natt. Nära stationen Nice-Ville kostar samma klass ungefär 100–160 euro.",
+   "source_url": "https://www.thetripverdict.com/monaco-travel-costs",
+   "verified_on": "2026-11-14"
+  }
+ ],
+ "items": [
+  {
+   "id": "MC-monaco-kasinot",
+   "place_id": "MC-monaco",
+   "category": "byggnad",
+   "name": "Casino de Monte-Carlo",
+   "summary": "Titta in på förmiddagen. Spelet börjar klockan 14.",
+   "body": "Besök utan spel 10–13, sista insläpp 12.15. Från 14 gäller 18 år, klädkod och pass eller id-kort. Körkort godtas inte. Uppgifterna om entréavgift går isär, mellan 10 och 20 euro, så kolla priset i kassan.",
+   "lat": 43.7392,
+   "lon": 7.4282,
+   "source_url": "https://www.montecarlosbm.com",
+   "verified_on": "2026-11-14",
+   "must_rank": 1
+  },
+  {
+   "id": "MC-monaco-oceanografiska",
+   "place_id": "MC-monaco",
+   "category": "museum",
+   "name": "Oceanografiska museet",
+   "summary": "Akvarium och museum på klippkanten. Räkna med två timmar.",
+   "body": "Vuxen 22,50 euro, 20,50 på nätet. Barn 4–17 år och studenter 14 euro. Sista insläpp 30 minuter före stängning.",
+   "lat": 43.7306,
+   "lon": 7.4254,
+   "source_url": "https://musee.oceano.org",
+   "verified_on": "2026-11-14",
+   "must_rank": 2
+  },
+  {
+   "id": "MC-monaco-furstepalatset",
+   "place_id": "MC-monaco",
+   "category": "sevardhet",
+   "name": "Furstepalatset och vaktavlösningen",
+   "summary": "Vakten byts varje dag klockan 11.55 på torget framför palatset.",
+   "body": "Var där i god tid, torget fylls. Salarna inne i palatset är bara öppna en del av året, 2026 från 30 mars till 15 oktober. Biljetten kostar 10 eller 13 euro beroende på källa.",
+   "lat": 43.7312,
+   "lon": 7.4203,
+   "source_url": "https://www.visitmonaco.com",
+   "verified_on": "2026-11-14",
+   "must_rank": 3
+  },
+  {
+   "id": "MC-monaco-condamine",
+   "place_id": "MC-monaco",
+   "category": "mat",
+   "name": "Marché de la Condamine",
+   "summary": "Saluhallen vid Place d'Armes. Öppen varje dag sedan 1880.",
+   "body": "Här äter du billigast i Monaco: barbagiuan, socca och dagens rätt vid stånden. Marknaden håller öppet ungefär 6–14.",
+   "lat": 43.7335,
+   "lon": 7.4198,
+   "source_url": "https://www.thetripverdict.com/monaco-local-food",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-stade-louis-ii",
+   "place_id": "MC-monaco",
+   "category": "fotboll",
+   "name": "Stade Louis II",
+   "summary": "AS Monacos hemmaarena i Fontvieille. Laget spelar i franska Ligue 1.",
+   "body": "Köp biljetter direkt hos klubben. Andrahandssajter tar ofta mer än ordinarie pris.",
+   "lat": 43.7276,
+   "lon": 7.4156,
+   "source_url": "https://www.asmonaco.com",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-port-hercule",
+   "place_id": "MC-monaco",
+   "category": "sevardhet",
+   "name": "Port Hercule",
+   "summary": "Hamnen med de stora yachterna, mitt i stan.",
+   "body": "Grand Prix-banans start och mål går längs kajen. Fint i skymningen.",
+   "lat": 43.7347,
+   "lon": 7.4247,
+   "source_url": "https://www.visitmonaco.com",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-grand-prix-banan",
+   "place_id": "MC-monaco",
+   "category": "upplevelse",
+   "name": "Gå Grand Prix-banan",
+   "summary": "Banan är vanliga gator. Du kan gå hela varvet.",
+   "body": "Från kasinotorget ner genom hårnålskurvan vid Fairmont, genom tunneln och ut vid hamnen.",
+   "lat": 43.7405,
+   "lon": 7.4302,
+   "source_url": "https://www.visitmonaco.com",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-katedralen",
+   "place_id": "MC-monaco",
+   "category": "byggnad",
+   "name": "Monacos katedral",
+   "summary": "Här ligger furst Rainier III och Grace Kelly begravda.",
+   "body": "Ligger på klippan, mellan palatset och Oceanografiska museet.",
+   "lat": 43.7302,
+   "lon": 7.4226,
+   "source_url": "https://www.visitmonaco.com",
+   "verified_on": "2026-11-14"
+  },
+  {
+   "id": "MC-monaco-larvotto",
+   "place_id": "MC-monaco",
+   "category": "strand",
+   "name": "Larvotto",
+   "summary": "Monacos stadsstrand, öster om Monte-Carlo.",
+   "body": "Ta med eget om du vill slippa strandklubbarnas priser.",
+   "lat": 43.7448,
+   "lon": 7.4345,
+   "source_url": "https://www.visitmonaco.com",
+   "verified_on": "2026-11-14"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-barbagiuan",
+   "category": "mat",
+   "name": "Barbagiuan",
+   "rarity": "ovanlig",
+   "icon": "food",
+   "hint": "Friterat knyte fyllt med mangold och ricotta.",
+   "place_id": "MC"
+  },
+  {
+   "id": "mat-socca",
+   "category": "mat",
+   "name": "Socca",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Tunn pannkaka av kikärtsmjöl, äts stående.",
+   "place_id": "MC"
+  },
+  {
+   "id": "sevardhet-kasinot-monte-carlo",
+   "category": "sevardhet",
+   "name": "Kasinot i Monte-Carlo",
+   "rarity": "vanlig",
+   "icon": "build",
+   "hint": "Går att besöka utan att spela, på förmiddagen.",
+   "place_id": "MC"
+  },
+  {
+   "id": "sevardhet-vaktavlosning-monaco",
+   "category": "sevardhet",
+   "name": "Vaktavlösningen i Monaco",
+   "rarity": "ovanlig",
+   "icon": "pin",
+   "hint": "Varje dag klockan 11.55 framför palatset.",
+   "place_id": "MC"
+  },
+  {
+   "id": "sevardhet-harnalskurvan",
+   "category": "sevardhet",
+   "name": "Hårnålskurvan",
+   "rarity": "vanlig",
+   "icon": "pin",
+   "hint": "Grand Prix-banans långsammaste kurva, vid Fairmont.",
+   "place_id": "MC"
+  },
+  {
+   "id": "arena-stade-louis-ii",
+   "category": "arena",
+   "name": "Stade Louis II",
+   "rarity": "ovanlig",
+   "icon": "ball",
+   "hint": "AS Monacos hemmaarena i Fontvieille.",
+   "place_id": "MC"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "MC-monaco-ide-vaktavlosning",
+   "place_id": "MC-monaco",
+   "kind": "i-stan",
+   "title": "Vaktavlösningen och klippan",
+   "body": "Var på palatstorget före 11.55 och gå sedan gränderna bort till katedralen.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "MC-monaco-ide-banan",
+   "place_id": "MC-monaco",
+   "kind": "i-stan",
+   "title": "Gå Grand Prix-banan",
+   "body": "Börja vid kasinotorget och följ gatorna ner till hamnen, genom hårnålskurvan och tunneln.",
+   "duration": "ca 1,5 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "MC-monaco-ide-kasinot",
+   "place_id": "MC-monaco",
+   "kind": "i-stan",
+   "title": "Kasinot på förmiddagen",
+   "body": "Gå in mellan 10 och 12.15 och se salarna innan spelet börjar. Ta med pass eller id-kort.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "MC-monaco-ide-saluhallen",
+   "place_id": "MC-monaco",
+   "kind": "i-stan",
+   "title": "Lunch i saluhallen",
+   "body": "Dela på barbagiuan och socca i Marché de la Condamine. Kom före 14.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "MC-monaco-ide-museet",
+   "place_id": "MC-monaco",
+   "kind": "i-stan",
+   "title": "Oceanografiska museet",
+   "body": "Köp biljetten på nätet, den är två euro billigare, och avsluta på takterrassen.",
+   "duration": "ca 2 h",
+   "cost_level": "medel",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "MC-monaco-ide-hamnen",
+   "place_id": "MC-monaco",
+   "kind": "i-stan",
+   "title": "Skymning vid Port Hercule",
+   "body": "Gå kajen runt när lamporna tänds på båtarna.",
+   "duration": "ca 1 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  },
+  {
+   "id": "MC-monaco-ide-match",
+   "place_id": "MC-monaco",
+   "kind": "fotboll",
+   "title": "Match på Stade Louis II",
+   "body": "Se AS Monaco i Ligue 1. Köp biljetterna hos klubben.",
+   "duration": "ca 3 h",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "MC-present-f1",
+   "place_id": "MC",
+   "name": "Grand Prix-souvenir",
+   "body": "Keps eller modellbil från banans stad.",
+   "for_whom": [
+    "pappa",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "sport",
+    "bil"
+   ]
+  },
+  {
+   "id": "MC-present-frimarken",
+   "place_id": "MC",
+   "name": "Frimärken från Monaco",
+   "body": "Landet ger ut egna frimärken, som samlare letar efter.",
+   "for_whom": [
+    "pappa",
+    "van"
+   ],
+   "keywords": [
+    "samla",
+    "papper"
+   ]
+  },
+  {
+   "id": "MC-present-spelkort",
+   "place_id": "MC",
+   "name": "Kortlek från kasinot",
+   "body": "Liten, lätt att packa och går att använda hemma.",
+   "for_whom": [
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "spel"
+   ]
+  }
+ ]
+}
