@@ -42,3 +42,11 @@
 - Markera flera även i vyn Kompendium (i dag leder kategorierna till Kort, där läget finns).
 - Språkval när fler språk finns: APP_LOCALE i src/config.ts styr redan all formatering. Innehåll ur databasen behöver översättas per språk (se slutrapporten för Körning 8).
 - Licenssida i appen som visar MIT-texten för flag-icons (finns i dag som public/flags/LICENSE.txt).
+
+## Från Körning 9
+- Innehållet ur databasen på engelska (platser, fakta, listpunkter, kompendium, bucketkatalog, idéer, presenttips), till exempel ett fält per språk eller en egen tabell för översättningar. I dag visas sprak.innehall-svenska en gång under språkvalet.
+- Packlistans och Innan avresas förslag (content/_packlista.json och _innan-avresa.json) på engelska.
+- Kartans etiketter på valt språk (OpenFreeMap har name:en och name:sv i rutorna).
+- Installationens manifest (PWA) på engelska: i dag har det lang sv.
+- Språkval även på inloggningssidan (i dag följer den det sparade valet eller webbläsarens språk).
+- Markera flera även i vyn Kompendium (där finns nu en ruta per kort i den utfällda kategorin).

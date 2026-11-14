@@ -6,6 +6,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ORDER, TABLES, formatError, toDbRow, validateContent, validatePackList, validatePretripList } from './lib/validate-content.mjs';
+import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
@@ -57,9 +58,12 @@ async function main() {
     errors.push(...validate(name, json));
     appLists.push([name, Array.isArray(json?.items) ? json.items.length : 0]);
   }
-  if (errors.length) {
-    console.error(`Valideringen stoppade importen: ${errors.length} fel. Inget har skrivits.`);
+  // Gränssnittets texter på svenska och engelska: samma nycklar, form, platshållare och märken.
+  const textErrors = compareTexts(await readJson('_texter.json'), await readJson('_texter.en.json'));
+  if (errors.length || textErrors.length) {
+    console.error(`Valideringen stoppade importen: ${errors.length + textErrors.length} fel. Inget har skrivits.`);
     for (const e of errors) console.error(`  ${formatError(e)}`);
+    for (const e of textErrors) console.error(`  ${formatTextError(e)}`);
     return 1;
   }
 
@@ -67,6 +71,7 @@ async function main() {
   console.log(`Valideringen gick igenom (${files.length} länder).`);
   for (const [table, n] of counts) console.log(`  ${table}: ${n}`);
   for (const [name, n] of appLists) console.log(`  ${name}: ${n} (läses in i appen vid bygget)`);
+  console.log('  _texter.json och _texter.en.json: samma nycklar, form, platshållare och märken');
   if (checkOnly) return 0;
 
   const env = await readEnv();

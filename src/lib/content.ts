@@ -1,6 +1,6 @@
 // Innehållet från content/ (via Supabase). Bara läsning. Texterna kommer från Hugo, inget skrivs här.
 import { supabase } from './supabase';
-import { LOCALE } from './locale';
+import { displayNames, LOCALE } from './locale';
 
 export type PlaceKind = 'country' | 'region' | 'city' | 'spot';
 
@@ -168,10 +168,10 @@ export async function fetchGifts(placeIds: string[]): Promise<GiftTip[]> {
 /** Sant om fältet är egen bedömning utan källa. */
 export const isEstimate = (data: PlaceData | null | undefined, field: string) => Boolean(data?.own_judgment?.includes(field));
 
-/** Svenskt namn på ett land från webbläsaren, för länder som saknar innehåll. */
+/** Landets namn på valt språk från webbläsaren, för länder som saknar innehåll. */
 export function countryName(iso: string): string {
   try {
-    return new Intl.DisplayNames([LOCALE], { type: 'region' }).of(iso) ?? iso;
+    return displayNames('region').of(iso) ?? iso;
   } catch {
     return iso;
   }

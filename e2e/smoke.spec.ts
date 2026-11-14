@@ -17,6 +17,15 @@ const tx = (key: string): string => {
   if (e === undefined) throw new Error(`Text saknas: ${key}`);
   return typeof e === 'string' ? e : e.neutral;
 };
+// Engelska texterna (content/_texter.en.json), för steget som byter språk.
+const TEXTER_EN = (
+  JSON.parse(readFileSync(join(process.cwd(), 'content/_texter.en.json'), 'utf8').replace(/^\uFEFF/, '')) as { texter: Record<string, Entry> }
+).texter;
+const txEn = (key: string): string => {
+  const e = TEXTER_EN[key];
+  if (e === undefined) throw new Error(`Text saknas på engelska: ${key}`);
+  return typeof e === 'string' ? e : e.neutral;
+};
 const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /** Alla språkstilar för en nyckel, med {värden} som jokertecken. */
 const anyTone = (key: string): RegExp => {
@@ -51,9 +60,9 @@ test.afterAll(async () => {
 });
 
 /** Fyller e-post och lösenord utan att värdena hamnar i testets steg eller loggar. */
-async function login(page: Page) {
+async function login(page: Page, button = tx('login.knapp-logga-in')) {
   await page.goto('/login');
-  await expect(page.getByRole('button', { name: tx('login.knapp-logga-in') })).toBeVisible();
+  await expect(page.getByRole('button', { name: button })).toBeVisible();
   await page.evaluate(({ email, password }) => {
     const set = (el: HTMLInputElement | null, v: string) => {
       if (!el) throw new Error('Fältet saknas');
@@ -63,7 +72,7 @@ async function login(page: Page) {
     set(document.querySelector('input[name=email]'), email);
     set(document.querySelector('input[name=password]'), password);
   }, credentials());
-  await page.getByRole('button', { name: tx('login.knapp-logga-in') }).click();
+  await page.getByRole('button', { name: button }).click();
   await expect(page).toHaveURL(/\/karta/);
 }
 
@@ -126,6 +135,16 @@ test('röktest', async ({ page }) => {
   await test.step('fyndet syns i samlingsboken', async () => {
     await page.goto('/listor?vy=samlingsbok&del=kort');
     await expect(page.getByRole('button', { name: new RegExp(`^${esc(card.name)} `) })).toBeVisible({ timeout: 20_000 });
+    // Par och grupp: Vår bok visar också det egna fyndet, med vem som hittade det. Solo har ingen växling.
+    const ours = page.getByRole('button', { name: tx('samling.visa.var'), exact: true });
+    if (await ours.count()) {
+      await ours.click();
+      await expect(page).toHaveURL(/bok=var/);
+      const found = page.locator('.bok button.on', { has: page.locator('.bc-name', { hasText: new RegExp(`^${esc(card.name)}$`) }) });
+      await expect(found.locator('.bc-by')).toBeVisible();
+      await page.getByRole('button', { name: tx('samling.visa.min'), exact: true }).click();
+      await expect(page).not.toHaveURL(/bok=/);
+    }
   });
 
   await test.step('samlingsboken: markera flera kort och bocka av och ta bort ett kort i bottenarket', async () => {
@@ -145,18 +164,71 @@ test('röktest', async ({ page }) => {
     await expect(page.getByText(anyTone('samling.flera-klart'))).toBeVisible();
     await expect(page.locator('.pickbar')).toBeHidden();
 
-    // Ett kort till bockas av i bottenarket, och tas sedan bort igen.
+    // Kort som inte är hittade visar ändå namn, sällsynthet och ledtråd, men ingen bock.
     const next = page.locator('.bok button:not(.on)').first();
+    const nextName = (await next.locator('.bc-name').innerText()).trim();
+    expect(nextName.length).toBeGreaterThan(1);
+    expect(nextName).not.toBe('?');
+    await expect(next.locator('.bc-found')).toHaveCount(0);
+    await expect(next).toContainText(anyTone('samling.okant'));
+
+    // Kortet bockas av i bottenarket, och tas sedan bort igen (samma kort, så att inget äldre fynd rörs).
     await next.click();
     const sheet = page.getByRole('dialog');
     await expect(sheet.getByLabel(tx('samling.nar'))).toBeVisible();
     await expect(sheet.getByLabel(tx('samling.var'))).toBeVisible();
+    await expect(sheet.getByRole('heading', { name: nextName })).toBeVisible();
     await sheet.getByRole('button', { name: tx('samling.hittad-knapp') }).click();
     await expect(sheet).toBeHidden();
-    await page.locator('.bok button.on').first().click();
+    const same = page.locator('.bok button.on', { has: page.locator('.bc-name', { hasText: new RegExp(`^${esc(nextName)}$`) }) });
+    await expect(same.locator('.bc-found')).toHaveCount(1);
+    await same.click();
     await page.getByRole('dialog').getByRole('button', { name: tx('samling.ta-bort-fynd') }).click();
     await expect(page.getByRole('dialog').getByRole('button', { name: tx('samling.hittad-knapp') })).toBeVisible();
     await page.getByRole('dialog').getByRole('button', { name: tx('knapp.stang') }).click();
+  });
+
+  await test.step('kompendium: en kategori fälls ut i listan, ett kort bockas av och tas bort, och ett kort öppnar bottenarket', async () => {
+    await page.goto('/listor?vy=samlingsbok&del=kompendium');
+    // En kategori där inte alla kort är hittade (räknaren visar 0 av något).
+    const cats = page.locator('.komp > button[aria-expanded]');
+    await expect(cats.first()).toBeVisible({ timeout: 20_000 });
+    // Räknaren står i .cnt .mu: "{antal} av {totalt} hittade".
+    const counter = new RegExp(`^${esc(tx('samling.raknare')).replace(/\\\{antal\\\}/, '(\\d+)').replace(/\\\{totalt\\\}/, '(\\d+)')}$`);
+    let idx = -1;
+    for (let i = 0; i < (await cats.count()) && idx < 0; i++) {
+      const m = (await cats.nth(i).locator('.cnt .mu').innerText()).trim().match(counter);
+      if (m && Number(m[1]) < Number(m[2])) idx = i;
+    }
+    expect(idx).toBeGreaterThanOrEqual(0);
+    const cat = cats.nth(idx);
+    await expect(cat).toHaveAttribute('aria-expanded', 'false');
+    await cat.click();
+    // Kategorin fälls ut på plats, utan att hoppa till Kort.
+    await expect(cat).toHaveAttribute('aria-expanded', 'true');
+    await expect(page).toHaveURL(/del=kompendium/);
+    const list = page.locator('.komp-list');
+    await expect(list).toBeVisible();
+    const box = list.locator('button.box[aria-pressed=false]').first();
+    const name = (await box.getAttribute('aria-label'))!;
+    expect(name.length).toBeGreaterThan(1);
+    const row = list.getByRole('button', { name, exact: true });
+    const saved = page.waitForResponse((r) => r.url().includes('/rest/v1/finds') && r.request().method() === 'POST' && r.ok());
+    await row.click();
+    await saved;
+    await expect(row).toHaveAttribute('aria-pressed', 'true');
+    const removed = page.waitForResponse((r) => r.url().includes('/rest/v1/finds') && r.request().method() === 'DELETE' && r.ok());
+    await row.click();
+    await removed;
+    await expect(row).toHaveAttribute('aria-pressed', 'false');
+    // Ett tryck på kortets namn öppnar samma bottenark som i Kort.
+    const first = list.locator('button.t').first();
+    const firstName = (await first.locator('b').innerText()).trim();
+    await first.click();
+    const sheet = page.getByRole('dialog');
+    await expect(sheet.getByRole('heading', { name: firstName })).toBeVisible();
+    await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+    await expect(sheet).toBeHidden();
   });
 
   await test.step('en punkt läggs till ur bucketkatalogen', async () => {
@@ -288,6 +360,37 @@ test('röktest', async ({ page }) => {
     await page.locator('a.back').first().click();
     await expect(page).toHaveURL(listUrl);
     await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeGreaterThan(before - 40);
+  });
+
+  await test.step('engelska: flikarna och inloggningssidan byter språk, och sedan tillbaka till svenska', async () => {
+    await page.goto('/vi/anpassning');
+    const saved = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
+    await page.getByRole('button', { name: tx('sprak.en'), exact: true }).click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    const nav = page.locator('nav.nav');
+    for (const name of ['Map', 'Today', 'Lists', 'Trips']) await expect(nav.getByRole('link', { name, exact: true })).toBeVisible();
+    // Innehållet ur databasen finns bara på svenska: sägs en gång under språkvalet.
+    await expect(page.getByText(txEn('sprak.innehall-svenska'))).toBeVisible();
+    // Valet sparas i profilen.
+    await saved;
+
+    // Utloggad: inloggningssidan följer valt språk.
+    await page.goto('/vi');
+    await page.getByRole('button', { name: txEn('knapp.logga-ut') }).click();
+    await expect(page).toHaveURL(/\/login/);
+    await expect(page.getByRole('button', { name: txEn('login.knapp-logga-in') })).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    // In igen och tillbaka till svenska.
+    await login(page, txEn('login.knapp-logga-in'));
+    await page.goto('/vi/anpassning');
+    const back = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
+    await page.getByRole('button', { name: tx('sprak.sv'), exact: true }).click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'sv');
+    for (const k of ['flik.karta', 'flik.idag', 'flik.listor', 'flik.resor'])
+      await expect(nav.getByRole('link', { name: tx(k), exact: true })).toBeVisible();
+    await expect(page.getByText(txEn('sprak.innehall-svenska'))).toHaveCount(0);
+    await back;
   });
 
   expect(errors, 'Fel i sidan').toEqual([]);

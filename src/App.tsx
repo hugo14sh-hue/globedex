@@ -5,6 +5,7 @@ import { Loading } from './components/Loading';
 import { UpdateBanner } from './components/UpdateBanner';
 import { useScrollMemory } from './lib/navMemory';
 import { useSession } from './lib/session';
+import { useTheme } from './theme/ThemeProvider';
 import LoginScreen from './features/login/LoginScreen';
 import StartScreen from './features/start/StartScreen';
 import KartaScreen from './features/karta/KartaScreen';
@@ -52,10 +53,12 @@ function LoginRoute() {
 export default function App() {
   // Tillbaka till samma ställe: scrollpositionen sparas per historikpost.
   useScrollMemory();
+  // Byts språket ritas skärmarna om från början, så att datum, tal och namn som räknats ut i förväg följer med.
+  const { lang } = useTheme();
   return (
     <>
       <UpdateBanner />
-      <Suspense fallback={<Loading />}>
+      <Suspense key={lang} fallback={<Loading />}>
         <Routes>
           <Route path="/login" element={<LoginRoute />} />
           <Route

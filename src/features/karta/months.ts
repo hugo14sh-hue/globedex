@@ -1,9 +1,9 @@
-import { LOCALE } from '../../lib/locale';
+import { dateFormat } from '../../lib/locale';
 
-/** Månadernas namn från webbläsaren (svenska), januari först. Ingen egen text. */
+/** Månadernas namn från webbläsaren på valt språk, januari först. Ingen egen text. */
 export function monthNames(): { short: string; long: string }[] {
-  const long = new Intl.DateTimeFormat(LOCALE, { month: 'long', timeZone: 'UTC' });
-  const short = new Intl.DateTimeFormat(LOCALE, { month: 'narrow', timeZone: 'UTC' });
+  const long = dateFormat({ month: 'long', timeZone: 'UTC' });
+  const short = dateFormat({ month: 'narrow', timeZone: 'UTC' });
   return Array.from({ length: 12 }, (_, i) => {
     const d = new Date(Date.UTC(2026, i, 15));
     return { short: short.format(d).toUpperCase(), long: long.format(d) };

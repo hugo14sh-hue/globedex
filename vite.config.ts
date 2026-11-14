@@ -2,7 +2,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
-import { APP_LOCALE, APP_NAME, DEFAULT_THEME_COLOR, DEFAULT_BACKGROUND } from './src/config.ts';
+import { APP_NAME, DEFAULT_THEME_COLOR, DEFAULT_BACKGROUND } from './src/config.ts';
 
 export default defineConfig({
   plugins: [
@@ -17,7 +17,8 @@ export default defineConfig({
       manifest: {
         name: APP_NAME,
         short_name: APP_NAME,
-        lang: APP_LOCALE.split('-')[0],
+        // Installationens språk är svenska (grunden). Appen byter själv språk efter valet i Anpassning.
+        lang: 'sv',
         start_url: '/',
         scope: '/',
         display: 'standalone',

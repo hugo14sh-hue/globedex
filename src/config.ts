@@ -1,11 +1,15 @@
 // Grundinställningar för appen. Namnet används överallt via APP_NAME, aldrig hårdkodat.
 export const APP_NAME = 'Globedex';
 
+/** Gränssnittets språk. Svenska är grunden: saknas en text på engelska används den svenska. */
+export type Lang = 'sv' | 'en';
+export const LANGS: Lang[] = ['sv', 'en'];
+
 /**
- * Appens språk (BCP 47). Datum, tal, valuta, restid, sortering och gemener formateras efter det
- * via src/lib/locale.ts, aldrig med ett fast sv-SE. Byts när fler språk läggs till (inget språkval i fas 1).
+ * Språkkod (BCP 47) per språk. APP_LOCALE i src/lib/locale.ts följer valt språk, och datum, tal,
+ * valuta, restid, sortering, gemener och landsnamn formateras efter den, aldrig med ett fast sv-SE.
  */
-export const APP_LOCALE = 'sv-SE';
+export const LOCALES: Record<Lang, string> = { sv: 'sv-SE', en: 'en-GB' };
 
 export type PaletteId = 'djuphav' | 'medelhav' | 'terrakotta' | 'skog' | 'nattflyg' | 'egen';
 export type HeadingFont =
@@ -30,6 +34,8 @@ export interface ThemeSettings {
   dark: boolean;
   radius: number;
   tone: Tone;
+  /** Valt språk. Tomt = inget val gjort: svenska om webbläsarens språk börjar med sv, annars engelska. */
+  lang: Lang | null;
 }
 
 /** Startläge: Djuphav, Fraunces + DM Sans, ljust, 16 px rundning. */
@@ -42,6 +48,7 @@ export const DEFAULT_THEME: ThemeSettings = {
   dark: false,
   radius: 16,
   tone: 'neutral',
+  lang: null,
 };
 
 export const DEFAULT_THEME_COLOR = '#0F4C5C';

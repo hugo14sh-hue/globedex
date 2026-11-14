@@ -5,7 +5,7 @@
 // - ECB: fri att använda om ECB anges som källa och siffrorna återges korrekt. Kurserna är
 //   referenskurser "for information purposes only", inte kurser för transaktioner.
 // Kursen hämtas en gång när utgiften sparas och lagras på raden (expenses.rate_to_sek). Den ändras aldrig i efterhand.
-import { LOCALE } from './locale';
+import { displayNames } from './locale';
 
 export const RATE_SOURCE = { name: 'ECB', via: 'Frankfurter', url: 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html' };
 
@@ -18,10 +18,10 @@ export const CURRENCIES = [
   'ILS', 'MXN', 'BRL', 'ZAR',
 ] as const;
 
-/** Valutans namn på svenska från webbläsaren. */
+/** Valutans namn på valt språk från webbläsaren. */
 export function currencyName(code: string): string {
   try {
-    return new Intl.DisplayNames([LOCALE], { type: 'currency' }).of(code) ?? code;
+    return displayNames('currency').of(code) ?? code;
   } catch {
     return code;
   }

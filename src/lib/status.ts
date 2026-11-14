@@ -95,9 +95,6 @@ export async function addFind(compendiumId: string, placeId: string | null, foun
   return (await addFinds([{ compendiumId, placeId }], foundOn)).length > 0;
 }
 
-/** Postgres felkod för not null: finds.found_on får inte vara tomt förrän SQL-blocket i Körning 8 är kört. */
-const NOT_NULL = '23502';
-
 /**
  * Sparar flera fynd i ett enda anrop. Kort som redan är hittade hoppas över, och databasens
  * primärnyckel (user_id, compendium_id) stoppar dubbletter även om två anrop krockar.
@@ -112,22 +109,11 @@ export async function addFinds(list: { compendiumId: string; placeId: string | n
   const added: Record<string, Find> = {};
   for (const x of fresh) added[x.compendiumId] = { found_on: foundOn, place_id: x.placeId };
   emit({ ...state, finds: { ...state.finds, ...added } });
-  const save = (date: string | null) =>
-    supabase.from('finds').upsert(
-      fresh.map((x) => ({ user_id: userId, compendium_id: x.compendiumId, found_on: date, place_id: x.placeId })),
-      { onConflict: 'user_id,compendium_id', ignoreDuplicates: true },
-    );
-  let res = await save(foundOn);
-  // Utan SQL-blocket går ett fynd utan datum inte att spara: då sparas dagens datum i stället.
-  if (res.error?.code === NOT_NULL && foundOn === null) {
-    const d = today();
-    res = await save(d);
-    if (!res.error) {
-      const finds = { ...state.finds };
-      for (const id of ids) if (finds[id]) finds[id] = { ...finds[id], found_on: d };
-      emit({ ...state, finds });
-    }
-  }
+  // finds.found_on får vara tomt (vet inte när), sedan SQL-blocket i Körning 8.
+  const res = await supabase.from('finds').upsert(
+    fresh.map((x) => ({ user_id: userId, compendium_id: x.compendiumId, found_on: foundOn, place_id: x.placeId })),
+    { onConflict: 'user_id,compendium_id', ignoreDuplicates: true },
+  );
   if (res.error) {
     const finds = { ...state.finds };
     for (const id of ids) delete finds[id];
@@ -203,6 +189,40 @@ export function useMemberStatuses(memberIds: string[]): { loaded: boolean; byUse
         if (!error)
           for (const r of data as { user_id: string; place_id: string; status: string }[])
             if (isStatus(r.status) && byUser[r.user_id]) byUser[r.user_id][r.place_id] = r.status;
+        setRes({ key, byUser });
+      });
+    return () => {
+      alive = false;
+    };
+  }, [key]);
+  return { loaded: res.key === key, byUser: res.byUser };
+}
+
+/**
+ * Gruppmedlemmarnas fynd (inte de egna), per user_id och kort. Bara läsning: RLS (finds.group_read)
+ * släpper igenom fynd som inte är privata och bara för personer man delar grupp med.
+ */
+export function useMemberFinds(memberIds: string[]): { loaded: boolean; byUser: Record<string, Record<string, Find>> } {
+  const key = [...memberIds].sort().join(',');
+  const [res, setRes] = useState<{ key: string; byUser: Record<string, Record<string, Find>> }>({ key: '', byUser: {} });
+  useEffect(() => {
+    const ids = key ? key.split(',') : [];
+    if (!ids.length) {
+      setRes({ key, byUser: {} });
+      return;
+    }
+    let alive = true;
+    supabase
+      .from('finds')
+      .select('user_id, compendium_id, found_on, place_id')
+      .in('user_id', ids)
+      .then(({ data, error }) => {
+        if (!alive) return;
+        const byUser: Record<string, Record<string, Find>> = {};
+        for (const id of ids) byUser[id] = {};
+        if (!error)
+          for (const r of data as ({ user_id: string; compendium_id: string } & Find)[])
+            if (byUser[r.user_id]) byUser[r.user_id][r.compendium_id] = { found_on: r.found_on, place_id: r.place_id };
         setRes({ key, byUser });
       });
     return () => {

@@ -1,5 +1,7 @@
 // Samlingsbok: vyerna Kort, Kompendium och Samlingar (som i prototypen).
-// Korten och kompendiet kommer från compendium_items. Fynd sparas i finds.
+// Korten och kompendiet kommer från compendium_items. Fynd sparas i finds, ett per person och kort.
+// Par och grupp: Min bok, Vår bok (hittat av någon i den aktiva gruppen) eller en medlems bok.
+// Bara egna fynd går att lägga till och ta bort, i alla lägen.
 import { useEffect, useMemo, useState } from 'react';
 import { BottomSheet } from '../../components/BottomSheet';
 import { useFeedback } from '../../components/Feedback';
@@ -8,8 +10,8 @@ import { Row } from '../../components/Row';
 import { Segment } from '../../components/Segment';
 import { fetchCompendium, fetchPlaces, placeName, RARITIES, type CompendiumItem, type Place } from '../../lib/content';
 import { countByCategory, percent } from '../../lib/listLogic';
-import { useSession } from '../../lib/session';
-import { addFind, addFinds, removeFind, useMyPlaces } from '../../lib/status';
+import { useSession, useTravelMode } from '../../lib/session';
+import { addFind, addFinds, removeFind, useMemberFinds, useMyPlaces, type Find } from '../../lib/status';
 import { todayIso } from '../../lib/tripLogic';
 import { useT } from '../../lib/useT';
 import { RARITY_COLORS } from '../../theme/palettes';
@@ -26,14 +28,27 @@ const catKey = (c: string) => `samling.kategori.${c}`;
 
 export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokView, extra?: Record<string, string>) => void }) {
   const t = useT();
-  const { session } = useSession();
-  const mine = useMyPlaces(session?.user.id ?? null);
+  const { session, members } = useSession();
+  const travelMode = useTravelMode();
+  const me = session?.user.id ?? null;
+  const mine = useMyPlaces(me);
+  // Min bok, Vår bok eller en medlems bok. Valet står i adressen (?bok=). Solo: bara den egna.
+  const others = useMemo(() => (travelMode === 'solo' ? [] : members.filter((m) => m.user_id !== me)), [travelMode, members, me]);
+  const memberFinds = useMemberFinds(others.map((m) => m.user_id));
+  const [bokParam, setBok] = useUrlParam('bok');
+  const who: string =
+    travelMode === 'solo' || !bokParam || (bokParam !== 'var' && !others.some((m) => m.user_id === bokParam)) ? 'min' : bokParam;
+  const nameOf = (uid: string) => members.find((m) => m.user_id === uid)?.display_name ?? '';
+  const whoLabel = (w: string) =>
+    w === 'min' ? t('samling.visa.min') : w === 'var' ? t('samling.visa.var') : t('samling.visa.medlem', { namn: nameOf(w) });
   const { toast } = useFeedback();
   const announce = useFindFeedback();
   const [items, setItems] = useState<CompendiumItem[] | null>(null);
   const [places, setPlaces] = useState<Place[]>([]);
   // Vald kategori och öppet kort står i adressen, så att de finns kvar när man går tillbaka hit.
   const [category, setCategory] = useUrlParam('kat');
+  // Utfälld kategori i Kompendium.
+  const [expanded, setExpanded] = useUrlParam('oppen');
   const [openId, setOpenId] = useUrlParam('fynd');
   const open = (openId && items?.find((i) => i.id === openId)) || null;
   const setOpen = (c: CompendiumItem | null) => setOpenId(c?.id ?? null);
@@ -55,11 +70,27 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
     };
   }, []);
 
+  // Egna fynd: det som går att lägga till och ta bort.
   const finds = mine.finds;
-  const isFound = (id: string) => Boolean(finds[id]);
+  const isMine = (id: string) => Boolean(finds[id]);
+  // Vem som har hittat ett kort i vald bok (user_id). Min bok: bara jag.
+  const finders = useMemo(() => {
+    const out: Record<string, string[]> = {};
+    const add = (uid: string, list: Record<string, Find>) => {
+      for (const id of Object.keys(list)) (out[id] ??= []).push(uid);
+    };
+    if ((who === 'min' || who === 'var') && me) add(me, finds);
+    if (who === 'var') for (const m of others) add(m.user_id, memberFinds.byUser[m.user_id] ?? {});
+    if (who !== 'min' && who !== 'var') add(who, memberFinds.byUser[who] ?? {});
+    return out;
+  }, [who, me, finds, others, memberFinds.byUser]);
+  const isFound = (id: string) => Boolean(finders[id]?.length);
+  /** Hittad av, i Vår bok. */
+  const foundBy = (id: string) =>
+    who === 'var' && finders[id]?.length ? t('samling.hittad-av', { namn: finders[id].map(nameOf).filter(Boolean).join(', ') }) : '';
   const all = useMemo(() => items ?? [], [items]);
-  const cats = useMemo(() => countByCategory(all, (id) => Boolean(finds[id])), [all, finds]);
-  const found = all.filter((i) => finds[i.id]).length;
+  const cats = useMemo(() => countByCategory(all, (id) => Boolean(finders[id]?.length)), [all, finders]);
+  const found = all.filter((i) => isFound(i.id)).length;
   const shown = category ? all.filter((i) => i.category === category) : all;
 
   /** Ett kort från bottenarket: med datum, eller utan (samling.vet-inte-nar). */
@@ -86,6 +117,16 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
     setPicked([]);
   };
 
+  /** Rutan i Kompendium: lägger till eller tar bort det egna fyndet (utan datum, som Markera flera). */
+  const toggleMine = async (c: CompendiumItem) => {
+    if (isMine(c.id)) return unmark(c);
+    try {
+      if (await addFind(c.id, c.place_id, null)) announce(c);
+    } catch {
+      toast(t('allmant.fel-spara'));
+    }
+  };
+
   const togglePick = (c: CompendiumItem) =>
     setPicked((p) => (p.includes(c.id) ? p.filter((x) => x !== c.id) : [...p, c.id]));
 
@@ -107,6 +148,16 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
 
   return (
     <>
+      {travelMode !== 'solo' && (
+        <div className="chips" role="group" aria-label={t('listor.vy.samlingsbok')}>
+          {['min', 'var', ...others.map((m) => m.user_id)].map((w) => (
+            <button key={w} type="button" className="chip" aria-pressed={who === w} onClick={() => setBok(w === 'min' ? null : w)}>
+              {whoLabel(w)}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="hero">
         <span className="eb on-hero">{t('listor.vy.samlingsbok')}</span>
         <span className="big">{t('samling.raknare', { antal: found, totalt: all.length })}</span>
@@ -115,7 +166,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
         </div>
       </div>
 
-      <Segment<BokView> value={view} onChange={(v) => onView(v)} options={VIEWS.map((v) => ({ value: v, label: t(`listor.vy.${v}`) }))} />
+      <Segment<BokView> value={view} onChange={(v) => onView(v, who === 'min' ? undefined : { bok: who })} options={VIEWS.map((v) => ({ value: v, label: t(`listor.vy.${v}`) }))} />
 
       {view !== 'samlingar' && items && all.length === 0 && (
         <div className="card soft">
@@ -137,7 +188,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
           </div>
           <div className="row">
             <span className="mu" aria-live="polite">
-              {t('samling.raknare', { antal: shown.filter((i) => finds[i.id]).length, totalt: shown.length })}
+              {t('samling.raknare', { antal: shown.filter((i) => isFound(i.id)).length, totalt: shown.length })}
             </span>
             <button type="button" className="chip" aria-pressed={picking} onClick={() => (picking ? stopPicking() : setPicking(true))}>
               {t('samling.markera-flera')}
@@ -153,15 +204,16 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
               const f = isFound(c.id);
               const color = RARITY_COLORS[c.rarity];
               const sel = picking && picked.includes(c.id);
+              const by = foundBy(c.id);
               return (
                 <li key={c.id}>
                   <button
                     type="button"
                     className={`bc${f ? ' on' : ''}${sel ? ' sel' : ''}`}
                     style={f ? { borderColor: color } : undefined}
-                    // I läget Markera flera går bara kort som inte är hittade att välja.
+                    // I läget Markera flera går bara kort som jag inte har hittat att välja.
                     aria-pressed={picking ? sel : undefined}
-                    disabled={picking && f}
+                    disabled={picking && isMine(c.id)}
                     onClick={() => (picking ? togglePick(c) : setOpen(c))}
                   >
                     {sel && (
@@ -169,13 +221,22 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
                         <Icon name="check" size={14} stroke={3} />
                       </span>
                     )}
+                    {/* Hittat kort: bock i hörnet. Inte hittat: dämpad färg och ingen bock. Namnet visas alltid. */}
+                    {f && !sel && (
+                      <span className="bc-found" aria-hidden="true">
+                        <Icon name="check" size={14} stroke={3} />
+                      </span>
+                    )}
                     <span className="ic" style={f ? { background: `color-mix(in srgb, ${color} 18%, var(--sf))`, color } : undefined}>
                       <Icon name={isIcon(c.icon) ? c.icon : 'star'} size={28} stroke={1.8} />
                     </span>
-                    {/* Namnet för skärmläsare är den synliga texten: kortets namn (eller Okänt) och sällsyntheten.
-                        Sällsynthetens färg syns i kanten och ikonen. Texten har textfärg för kontrastens skull. */}
-                    {f ? <span>{c.name}</span> : <><span aria-hidden="true">?</span><span className="sr-only">{t('samling.okant')}</span></>}
+                    {/* Namnet för skärmläsare är den synliga texten: namn, sällsynthet, ledtråd och (inte hittat) samling.okant.
+                        Sällsynthetens färg syns i kanten och ikonen. Texten har textfärg eller dämpad textfärg för kontrastens skull. */}
+                    <span className="bc-name">{c.name}</span>
                     <small>{t(`sallsynthet.${c.rarity}`)}</small>
+                    {c.hint && <small className="bc-hint">{c.hint}</small>}
+                    {by && <small className="bc-by">{by}</small>}
+                    {!f && <span className="sr-only">{t('samling.okant')}</span>}
                   </button>
                 </li>
               );
@@ -201,41 +262,73 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
           {cats.map((c) => {
             const list = all.filter((i) => i.category === c.category);
             const first = list.find((i) => isIcon(i.icon));
+            const isOpen = expanded === c.category;
+            const listId = `komp-${c.category}`;
             return (
-              <button
-                key={c.category}
-                type="button"
-                className="li"
-                onClick={() => {
-                  onView('kort', { kat: c.category });
-                }}
-              >
-                <span className="badge">
-                  <Icon name={first && isIcon(first.icon) ? first.icon : 'star'} size={20} />
-                </span>
-                <span className="t">
-                  <b>{t(catKey(c.category))}</b>
-                  <span className="rar">
-                    {RARITIES.map((r) => {
-                      const of = list.filter((i) => i.rarity === r);
-                      if (!of.length) return null;
+              <section key={c.category} className="komp">
+                {/* Ett tryck fäller ut kategorins kort direkt i listan. */}
+                <button
+                  type="button"
+                  className="li"
+                  aria-expanded={isOpen}
+                  aria-controls={isOpen ? listId : undefined}
+                  onClick={() => setExpanded(isOpen ? null : c.category)}
+                >
+                  <span className="badge">
+                    <Icon name={first && isIcon(first.icon) ? first.icon : 'star'} size={20} />
+                  </span>
+                  <span className="t">
+                    <b>{t(catKey(c.category))}</b>
+                    <span className="rar">
+                      {RARITIES.map((r) => {
+                        const of = list.filter((i) => i.rarity === r);
+                        if (!of.length) return null;
+                        return (
+                          <span key={r}>
+                            <i style={{ background: RARITY_COLORS[r] }} aria-hidden="true" />
+                            <span className="sr-only">{t(`sallsynthet.${r}`)}: </span>
+                            {of.filter((i) => isFound(i.id)).length}/{of.length}
+                          </span>
+                        );
+                      })}
+                    </span>
+                  </span>
+                  <span className="cnt">
+                    <span className="mu">{t('samling.raknare', { antal: c.found, totalt: c.total })}</span>
+                    <span className="bar" aria-hidden="true">
+                      <i style={{ width: `${percent(c.found, c.total)}%` }} />
+                    </span>
+                  </span>
+                  <span className={`chev${isOpen ? ' open' : ''}`} aria-hidden="true">
+                    <Icon name="chev" size={18} />
+                  </span>
+                </button>
+                {isOpen && (
+                  <ul id={listId} className="komp-list" role="list">
+                    {list.map((i) => {
+                      const own = isMine(i.id);
+                      const f = isFound(i.id);
+                      const by = foundBy(i.id);
                       return (
-                        <span key={r}>
-                          <i style={{ background: RARITY_COLORS[r] }} aria-hidden="true" />
-                          <span className="sr-only">{t(`sallsynthet.${r}`)}: </span>
-                          {of.filter((i) => finds[i.id]).length}/{of.length}
-                        </span>
+                        <li key={i.id} className={`li${f ? '' : ' unfound'}`}>
+                          {/* Rutan gäller det egna fyndet, i alla böcker. */}
+                          <button type="button" className={`box${own ? ' on' : ''}`} aria-pressed={own} aria-label={i.name} onClick={() => toggleMine(i)}>
+                            {own && <Icon name="check" size={18} stroke={3} />}
+                          </button>
+                          <button type="button" className="t" onClick={() => setOpen(i)}>
+                            <b>{i.name}</b>
+                            <span className="row-inline mu">
+                              <i className="dot" style={{ background: RARITY_COLORS[i.rarity] }} aria-hidden="true" />
+                              {t(`sallsynthet.${i.rarity}`)}
+                              {by ? ` · ${by}` : ''}
+                            </span>
+                          </button>
+                        </li>
                       );
                     })}
-                  </span>
-                </span>
-                <span className="cnt">
-                  <span className="mu">{t('samling.raknare', { antal: c.found, totalt: c.total })}</span>
-                  <span className="bar" aria-hidden="true">
-                    <i style={{ width: `${percent(c.found, c.total)}%` }} />
-                  </span>
-                </span>
-              </button>
+                  </ul>
+                )}
+              </section>
             );
           })}
           <RarityLegend />
@@ -244,7 +337,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
 
       {view === 'samlingar' && <Samlingar />}
 
-      <BottomSheet open={Boolean(open)} title={open ? (isFound(open.id) ? open.name : t('samling.okant')) : ''} onClose={() => setOpen(null)}>
+      <BottomSheet open={Boolean(open)} title={open ? open.name : ''} onClose={() => setOpen(null)}>
         {open && (
           <>
             {/* Sällsynthetens färg som prick: texten i färgen klarade inte 4,5:1. */}
@@ -253,6 +346,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
               {t(`sallsynthet.${open.rarity}`)} · {t(catKey(open.category))}
             </span>
             {open.hint && <p>{open.hint}</p>}
+            {foundBy(open.id) && <span className="mu">{foundBy(open.id)}</span>}
             {finds[open.id] && (finds[open.id].found_on || finds[open.id].place_id) && (
               <span className="mu">
                 {[finds[open.id].found_on ? formatDate(finds[open.id].found_on!) : '', finds[open.id].place_id ? placeName(places, finds[open.id].place_id!) : '']
@@ -266,7 +360,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
                 {t('knapp.kalla')}
               </a>
             )}
-            {isFound(open.id) ? (
+            {isMine(open.id) ? (
               <button type="button" className="btn ghost" onClick={() => unmark(open)}>
                 <Icon name="x" size={20} />
                 {t('samling.ta-bort-fynd')}

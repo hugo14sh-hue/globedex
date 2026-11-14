@@ -4,6 +4,8 @@ export interface SegmentOption<T extends string> {
   value: T;
   label: string;
   disabled?: boolean;
+  /** Språket i etiketten, när det skiljer sig från sidans (till exempel språkvalet). */
+  lang?: string;
 }
 
 /** Segmentväljare, ett val i taget. Knapparna har aria-pressed som i prototypen. */
@@ -34,6 +36,7 @@ export function Segment<T extends string>({
             type="button"
             aria-pressed={o.value === value}
             disabled={o.disabled}
+            lang={o.lang}
             onClick={() => onChange(o.value)}
           >
             {o.label}

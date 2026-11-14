@@ -8,11 +8,14 @@ import {
   RADIUS_MIN,
   type BodyFont,
   type HeadingFont,
+  type Lang,
+  LANGS,
   type TextSize,
   type Tone,
   type TravelMode,
 } from '../../config';
 import { useSession } from '../../lib/session';
+import { text } from '../../lib/texter';
 import { useT } from '../../lib/useT';
 import { isHex } from '../../theme/color';
 import { BODY_FONTS, HEADING_FONTS } from '../../theme/fonts';
@@ -22,7 +25,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 
 export default function AnpassningScreen() {
   const t = useT();
-  const { theme, update, setTheme } = useTheme();
+  const { theme, lang, update, setTheme } = useTheme();
   const { profile, setTravelMode } = useSession();
   const { toast } = useFeedback();
   const mode = profile?.travel_mode ?? 'solo';
@@ -172,7 +175,18 @@ export default function AnpassningScreen() {
         }))}
       />
 
-      <button type="button" className="btn ghost" onClick={() => setTheme({ ...DEFAULT_THEME })}>
+      {/* Språkets namn visas alltid på sitt eget språk. Valet sparas lokalt och i profilen som temat. */}
+      <Segment<Lang>
+        label={t('sprak.rubrik')}
+        value={lang}
+        onChange={(v) => update({ lang: v })}
+        options={LANGS.map((l) => ({ value: l, label: text(`sprak.${l}`, theme.tone, {}, l), lang: l }))}
+      />
+      {/* Innehållet ur databasen finns bara på svenska ännu: sägs en gång här, inte på varje sida. */}
+      {lang !== 'sv' && <p className="mu">{t('sprak.innehall-svenska')}</p>}
+
+      {/* Återställ gäller utseendet. Språkvalet ligger kvar. */}
+      <button type="button" className="btn ghost" onClick={() => setTheme({ ...DEFAULT_THEME, lang: theme.lang })}>
         {t('anpassa.aterstall')}
       </button>
     </main>

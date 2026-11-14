@@ -216,7 +216,7 @@ create table public.item_checks (
 create table public.finds (
   user_id uuid not null references auth.users(id) on delete cascade,
   compendium_id text not null references public.compendium_items(id) on delete cascade,
-  found_on date not null default current_date,
+  found_on date default current_date,        -- tomt = vet inte när (samling.vet-inte-nar)
   place_id text constraint finds_place_id_format check (place_id ~ '^[A-Z]{2}(-[a-z0-9]+)*$'),
   note text,
   visibility text not null default 'grupp' check (visibility in ('privat','grupp','offentlig')),
@@ -501,7 +501,7 @@ do $$ declare t text; begin
   foreach t in array array['bucket_items','saved_ideas','trips'] loop
     execute format('create policy "group_all" on public.%I for all to authenticated using (public.is_member(group_id)) with check (public.is_member(group_id))', t);
   end loop;
-end $;
+end $$;
 -- Skaparen måste vara den inloggade (eller tom)
 create policy "trips_created_by" on public.trips as restrictive for insert to authenticated
   with check (created_by is null or created_by = auth.uid());

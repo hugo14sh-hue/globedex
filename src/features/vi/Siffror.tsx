@@ -6,15 +6,15 @@ import { Icon, type IconName } from '../../components/Icon';
 import { Row } from '../../components/Row';
 import { APP_NAME } from '../../config';
 import { placeName } from '../../lib/content';
-import { BADGES } from '../../lib/texter';
+import { badges } from '../../lib/texter';
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { badgeStates, tripDays, type BadgeState } from './marken';
 import type { ViData } from './useViData';
 import { continentName, numbers, timeline, type TimelineType } from './viLogic';
-import { LOCALE } from '../../lib/locale';
+import { LOCALE, numberFormat } from '../../lib/locale';
 
-const nf = new Intl.NumberFormat(LOCALE);
+const nf = { format: (n: number) => numberFormat().format(n) };
 
 type StatId = 'lander' | 'kontinenter' | 'landskap' | 'resor' | 'resdagar' | 'fynd' | 'bucket';
 
@@ -50,7 +50,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
   const [allTl, setAllTl] = useState(false);
   const x = data.input;
   const nums = useMemo(() => numbers(x, data.compendium.length), [x, data.compendium.length]);
-  const states = useMemo(() => badgeStates(BADGES, x), [x]);
+  const states = useMemo(() => badgeStates(badges(), x), [x]);
   useNewBadgeToast(states, userId);
   const findName = useMemo(() => {
     const m = new Map(data.compendium.map((c) => [c.id, c.name]));

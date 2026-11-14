@@ -1,6 +1,7 @@
 import {
   APP_NAME,
   DEFAULT_THEME,
+  LANGS,
   RADIUS_MAX,
   RADIUS_MIN,
   type BodyFont,
@@ -140,6 +141,7 @@ export function sanitizeTheme(raw: unknown): ThemeSettings {
     dark: typeof r.dark === 'boolean' ? r.dark : DEFAULT_THEME.dark,
     radius: Math.min(RADIUS_MAX, Math.max(RADIUS_MIN, radius)),
     tone: pick(r.tone, TONES, DEFAULT_THEME.tone),
+    lang: LANGS.includes(r.lang as never) ? (r.lang as ThemeSettings['lang']) : null,
   };
 }
 

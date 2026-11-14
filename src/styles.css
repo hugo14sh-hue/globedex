@@ -1509,3 +1509,103 @@ fieldset.card legend {
   width: auto;
   flex: none;
 }
+
+/* ---------- Samlingsboken: korten visas alltid ---------- */
+/* Inte hittat: dämpad färg, streckad kant och ingen bock. Namnet visas ändå, i dämpad textfärg (minst 4,5:1). */
+.bc:not(.on) {
+  background: transparent;
+  border-style: dashed;
+  color: var(--mu);
+}
+
+.bc-name {
+  overflow-wrap: anywhere;
+}
+
+/* Ledtråden: högst tre rader på kortet, hela texten finns i bottenarket. */
+.bc-hint {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.bc-by {
+  font-weight: 500;
+}
+
+/* Bocken på ett hittat kort. Valda kort i Markera flera har en fylld bock (bc-tick) i stället. */
+.bc-found {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: var(--sf);
+  color: var(--p);
+  box-shadow: inset 0 0 0 2px var(--p);
+}
+
+/* Kompendium: kategorin fälls ut med sina kort direkt i listan. */
+.komp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.komp > .li {
+  text-align: left;
+}
+
+.chev.open {
+  transform: rotate(90deg);
+}
+
+.komp-list {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 0 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.komp-list .li {
+  padding: 6px 12px 6px 6px;
+  min-height: 56px;
+}
+
+.komp-list .li.unfound {
+  background: transparent;
+  border-style: dashed;
+}
+
+.komp-list .li.unfound b {
+  color: var(--mu);
+}
+
+.komp-list .li .t {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .chev {
+    transition: transform 0.15s ease;
+  }
+}
+
+/* Markera flera: kort som redan är mina går inte att välja, men behåller full kontrast (bocken visar varför). */
+.bc:disabled {
+  opacity: 1;
+  cursor: default;
+}

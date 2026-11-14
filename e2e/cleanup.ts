@@ -4,6 +4,8 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 export interface Snapshot {
   groupId: string;
+  /** Profilens inställningar (tema och språk), som röktestet ändrar. */
+  settings: unknown;
   statuses: Record<string, unknown>[];
   checks: string[];
   finds: string[];
@@ -20,10 +22,13 @@ async function rows<T>(q: PromiseLike<{ data: T[] | null; error: { message: stri
 }
 
 export async function snapshot(db: SupabaseClient, userId: string): Promise<Snapshot> {
-  const [profile] = await rows<{ active_group_id: string }>(db.from('profiles').select('active_group_id').eq('id', userId));
+  const [profile] = await rows<{ active_group_id: string; settings: unknown }>(
+    db.from('profiles').select('active_group_id, settings').eq('id', userId),
+  );
   const groupId = profile.active_group_id;
   return {
     groupId,
+    settings: profile.settings,
     statuses: await rows(db.from('place_status').select('*').eq('user_id', userId)),
     checks: (await rows<{ item_id: string }>(db.from('item_checks').select('item_id').eq('user_id', userId))).map((r) => r.item_id),
     finds: (await rows<{ compendium_id: string }>(db.from('finds').select('compendium_id').eq('user_id', userId))).map(
@@ -64,5 +69,10 @@ export async function restore(db: SupabaseClient, userId: string, s: Snapshot): 
     if (error) throw new Error(`place_status: ${error.message}`);
   }
   if (s.vaultEmpty) await del('vault_items', 'id', [], ['user_id', userId]);
+  {
+    const { error } = await db.from('profiles').update({ settings: s.settings }).eq('id', userId);
+    if (error) throw new Error(`profiles: ${error.message}`);
+    done.push('profilens inställningar');
+  }
   return done;
 }

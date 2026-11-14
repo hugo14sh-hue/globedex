@@ -814,7 +814,15 @@
   "samling.flera-klart": "{antal} fynd tillagda.",
   "karta.kallor": "Kartans källor",
   "karta.zooma-in": "Zooma in",
-  "karta.zooma-ut": "Zooma ut"
+  "karta.zooma-ut": "Zooma ut",
+  "sprak.rubrik": "Språk",
+  "sprak.sv": "Svenska",
+  "sprak.en": "English",
+  "sprak.innehall-svenska": "Guider, tips och idéer finns än så länge bara på svenska.",
+  "samling.visa.min": "Min bok",
+  "samling.visa.var": "Vår bok",
+  "samling.visa.medlem": "{namn}s bok",
+  "samling.hittad-av": "Hittad av {namn}"
  },
  "marken": [
   {

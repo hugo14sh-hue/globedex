@@ -6,7 +6,7 @@ import { canInvite } from '../../lib/groups';
 import { airbnb, airbnbFits, booking, googleFlights, googleMaps, skyscanner, validRange, type StayType } from '../../lib/links';
 import { useSession } from '../../lib/session';
 import { useT } from '../../lib/useT';
-import { LOCALE } from '../../lib/locale';
+import { formatSek } from './format';
 
 const STAY_TYPES: StayType[] = ['hotell', 'hostel', 'lagenhet', 'alla'];
 const MAX_PRICES = [500, 800, 1000, 1500, 2000, 3000];
@@ -97,7 +97,7 @@ export function BokaView({ place, country }: { place: Place; country: Place | nu
             <select value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))}>
               {MAX_PRICES.map((v) => (
                 <option key={v} value={v}>
-                  {new Intl.NumberFormat(LOCALE, { style: 'currency', currency: 'SEK', maximumFractionDigits: 0 }).format(v)}
+                  {formatSek(v)}
                 </option>
               ))}
             </select>

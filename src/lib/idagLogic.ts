@@ -1,7 +1,7 @@
 // Ren logik för Idag: vald plats, vilka idéer som gäller, filter, slumpning och Nära. Testas i idagLogic.test.ts.
 import type { Idea, Place } from './content';
 import { addDays } from './tripLogic';
-import { LOCALE } from './locale';
+import { LOCALE, numberFormat } from './locale';
 
 export type When = 'idag' | 'helg';
 export type IdagView = 'slumpa' | 'nara' | 'sparade';
@@ -203,21 +203,21 @@ export function nearby(origin: Point, originPlaceId: string | null, ideas: Idea[
 
 // ---------- Format ----------
 
-const km1 = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 1 });
-const km0 = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 0 });
+const km1 = () => numberFormat({ maximumFractionDigits: 1 });
+const km0 = () => numberFormat({ maximumFractionDigits: 0 });
 
 /** Kilometer som text: en decimal under 10 km. */
-export const formatKm = (km: number) => (km < 10 ? km1 : km0).format(km);
+export const formatKm = (km: number) => (km < 10 ? km1() : km0()).format(km);
 
-const hourFmt = new Intl.NumberFormat(LOCALE, { style: 'unit', unit: 'hour', unitDisplay: 'short' });
-const minFmt = new Intl.NumberFormat(LOCALE, { style: 'unit', unit: 'minute', unitDisplay: 'short' });
+const hourFmt = () => numberFormat({ style: 'unit', unit: 'hour', unitDisplay: 'short' });
+const minFmt = () => numberFormat({ style: 'unit', unit: 'minute', unitDisplay: 'short' });
 
-/** Minuter som restid i webbläsarens svenska format, till exempel "1 tim 15 min". */
+/** Minuter som restid i webbläsarens format för valt språk, till exempel "1 tim 15 min". */
 export function formatMinutes(m: number): string {
   const h = Math.floor(m / 60);
   const rest = Math.round(m % 60);
-  if (!h) return minFmt.format(rest);
-  return rest ? `${hourFmt.format(h)} ${minFmt.format(rest)}` : hourFmt.format(h);
+  if (!h) return minFmt().format(rest);
+  return rest ? `${hourFmt().format(h)} ${minFmt().format(rest)}` : hourFmt().format(h);
 }
 
 // ---------- Gör om till resa ----------
