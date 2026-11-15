@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { LAST_TAB } from '../../components/AppShell';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
+import { Ingress, useLastTabIngress } from '../../components/Ingress';
 import { Loading } from '../../components/Loading';
 import { Row } from '../../components/Row';
 import { Segment } from '../../components/Segment';
@@ -29,6 +30,7 @@ export default function ViScreen() {
   const [view, setView] = useUrlState<View>('vy', 'siffror', ['siffror', 'wrapped']);
   const { data } = useViData();
   const mode = profile?.travel_mode ?? 'solo';
+  const ingress = useLastTabIngress();
 
   useEffect(() => {
     if (profile) setName(profile.display_name);
@@ -49,6 +51,7 @@ export default function ViScreen() {
   return (
     <main className="scr">
       <h1>{t(LAST_TAB[mode])}</h1>
+      <Ingress k={ingress} />
       <Segment<View>
         value={view}
         onChange={setView}

@@ -135,7 +135,12 @@ create table public.place_items (            -- checklistan per plats
   lon double precision,
   compendium_id text,
   source_url text,
-  verified_on date
+  verified_on date,
+  wiki text,                                 -- Wikipediasida, "en:Sidans titel" (från content/, npm run import)
+  image_url text,                            -- de fyra bildfälten skrivs bara av npm run import:images
+  image_credit text,                         -- upphovsperson, utan html
+  image_license text,                        -- CC0, Public domain, CC BY eller CC BY-SA
+  image_page text                            -- filsidan på Wikimedia Commons
 );
 create index on public.place_items (place_id);
 

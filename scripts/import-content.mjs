@@ -2,20 +2,18 @@
 // Kontrollerar också content/_packlista.json, content/_innan-avresa.json och content/_valutor.json, som appen läser in vid bygget.
 // Körs lokalt av Hugo: npm run import (skriver) eller npm run import:check (bara validering).
 // Nyckeln SUPABASE_SECRET_KEY läses ur .env.local och skrivs aldrig ut.
-import { readFile, readdir } from 'node:fs/promises';
+// Bildfälten i place_items (image_url, image_credit, image_license, image_page) skrivs aldrig här,
+// bara av npm run import:images (toDbRow tar bort dem).
+import { readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { secretClient, readUtf8 } from './lib/env.mjs';
 import { ORDER, TABLES, formatError, toDbRow, validateContent, validatePackList, validatePretripList, validateRates } from './lib/validate-content.mjs';
 import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
 const checkOnly = process.argv.includes('--check');
-
-/** Läser en fil som UTF-8 och tar bort ett eventuellt BOM-tecken. */
-async function readUtf8(path) {
-  return (await readFile(path, 'utf8')).replace(/^﻿/, '');
-}
 
 async function readJson(name) {
   const text = await readUtf8(join(contentDir, name));
@@ -24,22 +22,6 @@ async function readJson(name) {
   } catch (e) {
     throw new Error(`${name}: ogiltig JSON (${e.message})`);
   }
-}
-
-/** Läser .env.local utan att skriva ut något av innehållet. */
-async function readEnv() {
-  let text = '';
-  try {
-    text = await readUtf8(join(root, '.env.local'));
-  } catch {
-    throw new Error('.env.local saknas');
-  }
-  const env = {};
-  for (const line of text.split(/\r?\n/)) {
-    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
-    if (m) env[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
-  }
-  return env;
 }
 
 async function main() {
@@ -80,20 +62,11 @@ async function main() {
   console.log('  _texter.json och _texter.en.json: samma nycklar, form, platshållare och märken');
   if (checkOnly) return 0;
 
-  const env = await readEnv();
-  const url = env.VITE_SUPABASE_URL;
-  const key = env.SUPABASE_SECRET_KEY;
-  if (!url || !key) {
-    console.error('VITE_SUPABASE_URL eller SUPABASE_SECRET_KEY saknas i .env.local.');
+  const { db, error: envError } = await secretClient(root);
+  if (!db) {
+    console.error(envError);
     return 1;
   }
-  if (!key.startsWith('sb_secret_')) {
-    console.error('SUPABASE_SECRET_KEY ska vara en ny hemlig nyckel (sb_secret_...).');
-    return 1;
-  }
-
-  const { createClient } = await import('@supabase/supabase-js');
-  const db = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 
   async function upsert(table, list) {
     // Små omgångar så att ett fel pekar ut ungefär var det sitter.

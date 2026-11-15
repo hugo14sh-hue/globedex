@@ -1,5 +1,6 @@
 // Idag: välj plats och tid, slumpa en idé, se vad som finns nära, och sparade idéer.
 // Idéerna kommer ur ideas (innehållet). Sparade idéer ligger i saved_ideas och delas med gruppen.
+import { Ingress } from '../../components/Ingress';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
@@ -360,6 +361,7 @@ export default function IdagScreen() {
     return (
       <main className="scr">
         <h1>{t(when === 'helg' ? 'idag.rubrik.helg' : 'idag.rubrik.idag')}</h1>
+      <Ingress k="ingress.idag" />
         <div className="card soft">
           <p>{t('allmant.fel')}</p>
           <button type="button" className="btn ghost" onClick={load}>
@@ -375,6 +377,7 @@ export default function IdagScreen() {
   return (
     <main className="scr">
       <h1>{t(when === 'helg' ? 'idag.rubrik.helg' : 'idag.rubrik.idag')}</h1>
+        <Ingress k="ingress.idag" />
 
       <div className="chips">
         <button type="button" className="chip primary" aria-haspopup="dialog" onClick={() => setLocOpen(true)}>

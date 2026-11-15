@@ -1,0 +1,33 @@
+Läs CLAUDE.md, FORMAT.md för innehållet och docs/schema.sql innan du gör något. Körning 1 till 10 är klara och appen ligger på Vercel.
+
+Körning 11: Hugos synpunkter efter test i skarp miljö
+
+Nytt innehåll finns i content/: MC.json och IS.json är uppdaterade, och content/_texter.json och content/_texter.en.json har 20 nya nycklar (574 per språk). Ändra inte i innehållsfilerna: stämmer något inte, skriv det i slutrapporten.
+
+1. SQL-blocket nedan är kört i Supabase. Uppdatera docs/schema.sql.
+   alter table public.place_items add column if not exists wiki text, add column if not exists image_url text, add column if not exists image_credit text, add column if not exists image_license text, add column if not exists image_page text;
+
+2. Smart månad ska förklara sig. Två nya fält i places.data, båda får saknas:
+   - month_notes: lista med exakt 12 texter, januari först.
+   - events: lista med { name, start, end, text, source }, datum som ÅÅÅÅ-MM-DD.
+   Lägg kontrollen i import:check och beskriv fälten i FORMAT.md. I rutan Smart månad: har platsen month_notes visas texten smart.tryck under staplarna. Ett tryck på en månad markerar stapeln och visar under diagrammet månadens namn med betyget (smart.manad.betyg), månadens text och, under rubriken smart.handelser.rubrik, de händelser som börjar eller slutar i den månaden och inte har passerat: namn, datum som intervall, text och källan som länk (smart.handelser.kalla, visa domännamnet). Innevarande månad är förvald. Staplarna ska gå att nå med tangentbord och ha aria-label från smart.manad.betyg. Utan month_notes ser rutan ut som i dag.
+
+3. Planera nästa resa, fältet Vart?: byt rullistan mot ett sökfält med förslag (combobox enligt WAI-ARIA). Platshållare resa.vart.sok. Förslagen visas i två grupper, resa.vart.lander och resa.vart.stader, och sökningen matchar början av varje ord, utan hänsyn till versaler och accenter (å, ä och ö ska ändå skilja sig från a och o). Landets flagga visas framför länder, och efter en stad står landets namn. Inga träffar: resa.vart.inga. Använd samma komponent överallt där man i dag väljer land eller plats i en rullista.
+
+4. Planera nästa resa, fältet Hur länge?: i dag syns bara en siffra. Ta reda på i koden om värdet räknas som nätter eller dagar, i budget, packlista och datum. Visa enheten som fältets etikett: resa.langd.natter eller resa.langd.dagar. Skriv i slutrapporten vilken det blev och var värdet används.
+
+5. Bilder på listpunkter. place_items har fått fälten wiki, image_url, image_credit, image_license och image_page. wiki kommer från innehållsfilerna i formen "en:Sidans titel". Lägg wiki i importen och i FORMAT.md, och se till att npm run import aldrig skriver över de fyra bildfälten.
+   Nytt skript npm run import:images (körs med SUPABASE_SECRET_KEY, som import): för varje listpunkt med wiki och utan image_url hämtas sidans huvudbild från Wikipedias API (pageimages, 800 px bred), och från Commons API (imageinfo, extmetadata) upphovsperson, licens och filsidans adress. Spara bara bilder med licens CC0, Public domain, CC BY eller CC BY-SA. Rensa html ur upphovsnamnet. Skriv ut en lista över punkter som saknar sida, saknar bild eller har annan licens. Flaggan --force hämtar om alla. Skriptet får inte köras i den här körningen mot databasen, det gör Hugo.
+   I appen: när en listpunkt har image_url visas bilden överst på punktens sida, 16:9, object-fit cover, loading lazy, med alt från bild.alt. Under bilden i liten text bild.kalla (eller bild.kalla.okand när upphov saknas) som länk till image_page. I listan visas en liten rund miniatyr till vänster om titeln när bild finns, annars som i dag. Bilderna laddas direkt från upload.wikimedia.org: uppdatera CSP om appen har en, och låt service workern cacha dem med en gräns på 60 bilder. Bygg ingen uppladdning av egna bilder, skriv den idén i docs/fas2.md.
+
+6. Vita ytor på kartan. Somaliland visas som en egen vit yta som inte går att trycka på. Gå igenom kartdatat och lista i slutrapporten alla ytor som saknar matchande land i appen. Ytor som saknar egen ISO-kod ska räknas till det land de hör till enligt ISO 3166: Somaliland till SO och Nordcypern till CY. De färgas och öppnas som det landet. Lägg kopplingen i en liten tabell i koden med en kommentar, och skriv ett enhetstest.
+
+7. Ingress under sidrubrikerna. Under rubriken på varje flik visas en kort text i dämpad färg: ingress.karta, ingress.idag, ingress.listor, ingress.resor, ingress.jag och ingress.vi (ingress.gruppen när gruppen har fler än två medlemmar). Den ska inte ta mer än två rader på 390 px. Har en flik ingen synlig rubrik i dag läggs texten överst i innehållet.
+
+8. Röktestet: Monaco: tryck på juni i Smart månad och kontrollera att Formel 1 står under Händer då. Planera resa: skriv "mon" i sökfältet och välj Monaco. Kontrollera att ingressen syns på Idag. Enhetstester för sökningens matchning, month_notes och events i import:check och kopplingen av ytor till land.
+
+Det här ingår INTE i körningen, skriv ingenting om det i koden: regioner och delstater som kartlager, och val mellan FN:s lista och hela landslistan. Det kommer i Körning 12.
+
+Regler: Skriv inga egna texter och översätt ingenting själv. Saknas en text på något av språken: lista nyckeln i slutrapporten. Gör inga databasändringar själv: behövs en, ge mig ett SQL-block. Lägg inte till funktioner utöver det som står här, skriv idéer i docs/fas2.md. Kör inte npm run import eller import:images mot databasen.
+
+Avsluta med npm run import:check, npm run build, npm run typecheck, npm test och npm run test:e2e, kontrollera exitkoderna, gör en git commit med meddelandet "Körning 11: smart månad, sök, bilder, ingresser" och skriv slutrapporten innan du avslutar turen. Vänta inte på bakgrundsjobb. Rubriker: Klart, Inte klart, Röktestet, Saknade textnycklar per språk, Det här behöver Hugo göra.

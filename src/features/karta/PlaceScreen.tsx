@@ -8,6 +8,7 @@ import { Estimate } from '../../components/Estimate';
 import { useFeedback } from '../../components/Feedback';
 import { Flag } from '../../components/Flag';
 import { Icon } from '../../components/Icon';
+import { ItemImage, ItemThumb } from '../../components/ItemImage';
 import { Loading } from '../../components/Loading';
 import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
@@ -45,7 +46,12 @@ import { BokaView } from './BokaView';
 import { PlacePrices } from './PriceSection';
 import { monthNames } from './months';
 import { StatusPicker } from './StatusPicker';
-import { formatDate, formatPercent, formatSek } from './format';
+import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
+import { domainOf } from '../../lib/prices';
+import { currentMonth, eventsInMonth, hasMonthNotes } from '../../lib/smartMonth';
+
+/** Första bokstaven versal (månadens namn från webbläsaren börjar med gemen på svenska). */
+const capital = (s: string) => s.charAt(0).toLocaleUpperCase() + s.slice(1);
 
 type View = 'oversikt' | 'lista' | 'guide' | 'manad' | 'boka' | 'kop';
 const TABS: View[] = ['oversikt', 'lista', 'guide', 'manad', 'boka'];
@@ -224,6 +230,7 @@ export default function PlaceScreen() {
       <BottomSheet open={Boolean(openItem)} title={openItem?.name ?? ''} onClose={() => setOpenItem(null)}>
         {openItem && (
           <>
+            <ItemImage item={openItem} />
             {openItem.summary && <p className="mu">{openItem.summary}</p>}
             {openItem.body && <p>{openItem.body}</p>}
             <Source url={openItem.source_url} date={openItem.verified_on} />
@@ -487,9 +494,12 @@ function Lista({
                   <button type="button" className={`box${on ? ' on' : ''}`} aria-pressed={on} aria-label={i.name} onClick={() => onToggle(i)}>
                     {on && <Icon name="check" size={16} stroke={3} />}
                   </button>
-                  <button type="button" className="t" onClick={() => onItem(i)}>
-                    <b className={on ? 'done' : ''}>{i.name}</b>
-                    {i.summary && <span className="mu">{i.summary}</span>}
+                  <button type="button" className={i.image_url ? 't with-thumb' : 't'} onClick={() => onItem(i)}>
+                    <ItemThumb url={i.image_url} />
+                    <span className="t-text">
+                      <b className={on ? 'done' : ''}>{i.name}</b>
+                      {i.summary && <span className="mu">{i.summary}</span>}
+                    </span>
                   </button>
                   <span className="chev">
                     <Icon name="chev" size={18} />
@@ -594,6 +604,11 @@ function Manad({ place }: { place: Place }) {
   const months = useMemo(() => monthNames(), []);
   const m = place.smart_months;
   const d = place.data;
+  const today = todayIso();
+  // Månadens text och händelser visas bara när platsen har en text för varje månad.
+  const notes = hasMonthNotes(d.month_notes) ? d.month_notes : null;
+  const [picked, setPicked] = useState(() => currentMonth(today));
+  const events = eventsInMonth(d.events, picked, today);
   if (!m && !d.best_text) {
     return (
       <div className="card soft">
@@ -607,15 +622,59 @@ function Manad({ place }: { place: Place }) {
         <h2 className="h3">{t('karta.lage.smart')}</h2>
         {isEstimate(d, 'smart_months') && <Estimate />}
       </div>
-      {m && (
-        <div className="bars" role="list">
-          {m.map((x, i) => (
-            <div key={months[i].long} role="listitem" aria-label={`${months[i].long}: ${x}/5`}>
-              <i style={{ height: `${Math.max(4, x * 20)}px`, background: SMART_COLORS[x] ?? SMART_COLORS[0] }} />
-              <span aria-hidden="true">{months[i].short}</span>
-            </div>
-          ))}
-        </div>
+      {m && notes ? (
+        <>
+          <div className="bars pick" role="group" aria-label={t('karta.lage.smart')}>
+            {m.map((x, i) => (
+              <button
+                key={months[i].long}
+                type="button"
+                aria-pressed={picked === i}
+                aria-label={t('smart.manad.betyg', { manad: capital(months[i].long), betyg: x })}
+                onClick={() => setPicked(i)}
+              >
+                <i style={{ height: `${Math.max(4, x * 20)}px`, background: SMART_COLORS[x] ?? SMART_COLORS[0] }} />
+                <span aria-hidden="true">{months[i].short}</span>
+              </button>
+            ))}
+          </div>
+          <p className="mu">{t('smart.tryck')}</p>
+          <div className="smart-month" aria-live="polite">
+            <h3 className="h3">{t('smart.manad.betyg', { manad: capital(months[picked].long), betyg: m[picked] })}</h3>
+            <p>{notes[picked]}</p>
+            {events.length > 0 && (
+              <>
+                <h4 className="eb">{t('smart.handelser.rubrik')}</h4>
+                <ul className="smart-events">
+                  {events.map((e) => (
+                    <li key={`${e.name}-${e.start}`}>
+                      <b>{e.name}</b>
+                      <span className="mu">{formatDateRange(e.start, e.end)}</span>
+                      <span>{e.text}</span>
+                      <span className="src mu">
+                        {t('smart.handelser.kalla')}:{' '}
+                        <a href={e.source} target="_blank" rel="noopener noreferrer">
+                          {domainOf(e.source)}
+                        </a>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        </>
+      ) : (
+        m && (
+          <div className="bars" role="list">
+            {m.map((x, i) => (
+              <div key={months[i].long} role="listitem" aria-label={`${months[i].long}: ${x}/5`}>
+                <i style={{ height: `${Math.max(4, x * 20)}px`, background: SMART_COLORS[x] ?? SMART_COLORS[0] }} />
+                <span aria-hidden="true">{months[i].short}</span>
+              </div>
+            ))}
+          </div>
+        )
       )}
       {d.best_text && (
         <div className="card soft">

@@ -1,31 +1,33 @@
 import { useMemo } from 'react';
-import { countryName, type Place } from '../../lib/content';
+import { PlaceCombobox, type PlaceOption } from '../../components/PlaceCombobox';
+import { countryName, countryOf, type Place } from '../../lib/content';
 import { COUNTRIES } from '../../lib/countries';
 import { LOCALE } from '../../lib/locale';
 
-/** Alla resmål: länder och städer ur innehållet plus alla länder i världen (även utan innehåll). */
+/** Förslag för sökfältet: länder med namn, städer och regioner med landets namn. Sorterade efter namn. */
+export function placeOptions(places: Place[], ids: Iterable<string>): PlaceOption[] {
+  const out: PlaceOption[] = [];
+  for (const id of new Set(ids)) {
+    const p = places.find((x) => x.id === id);
+    const isCountry = p ? p.kind === 'country' : /^[A-Z]{2}$/.test(id);
+    const name = p?.name ?? (isCountry ? countryName(id) : id);
+    const land = isCountry ? null : (countryOf(places, id)?.name ?? (/^[A-Z]{2}-/.test(id) ? countryName(id.slice(0, 2)) : undefined));
+    out.push({ id, name, country: isCountry, countryName: land ?? undefined });
+  }
+  return out.sort((a, b) => a.name.localeCompare(b.name, LOCALE));
+}
+
+/** Alla resmål: länder, regioner och städer ur innehållet plus alla länder i världen (även utan innehåll). */
 export function useDestinations(places: Place[]) {
   return useMemo(() => {
-    const out = new Map<string, string>();
-    for (const p of places) if (p.kind === 'country' || p.kind === 'city' || p.kind === 'region') out.set(p.id, p.name);
-    for (const [iso] of COUNTRIES) if (!out.has(iso)) out.set(iso, countryName(iso));
-    return [...out].map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name, LOCALE));
+    const ids: string[] = [];
+    for (const p of places) if (p.kind === 'country' || p.kind === 'city' || p.kind === 'region') ids.push(p.id);
+    for (const [iso] of COUNTRIES) ids.push(iso);
+    return placeOptions(places, ids);
   }, [places]);
 }
 
 export function DestSelect({ label, places, value, onChange }: { label: string; places: Place[]; value: string; onChange: (id: string) => void }) {
   const list = useDestinations(places);
-  return (
-    <label>
-      {label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} required>
-        {!value && <option value="" />}
-        {list.map((o) => (
-          <option key={o.id} value={o.id}>
-            {o.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
+  return <PlaceCombobox label={label} options={list} value={value} onChange={onChange} />;
 }

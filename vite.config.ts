@@ -95,6 +95,17 @@ export default defineConfig({
             },
           },
           {
+            // Bilder på listpunkter från Wikimedia Commons (place_items.image_url): högst 60 bilder.
+            // Bilderna hämtas utan CORS, så svaret är ogenomskinligt (status 0) och måste tillåtas.
+            urlPattern: ({ url }) => url.origin === 'https://upload.wikimedia.org',
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'bilder',
+              expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 90, purgeOnQuotaError: true },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
             urlPattern: ({ url }) => url.origin === 'https://fonts.googleapis.com',
             handler: 'StaleWhileRevalidate',
             options: { cacheName: 'google-fonts-css' },

@@ -33,8 +33,13 @@ const FOR_WHOM = ['mamma', 'pappa', 'barn', 'van', 'mig'];
 const BUCKET_CATEGORIES = ['aventyr', 'natur', 'resa', 'mat', 'kultur', 'tillsammans', 'hemma', 'milstolpe'];
 const TRANSPORT_RATINGS = ['bast', 'bra', 'dyrt'];
 const DATA_FIELDS = [
-  'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment', 'prices',
+  'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment', 'prices', 'month_notes', 'events',
 ];
+const EVENT_FIELDS = ['name', 'start', 'end', 'text', 'source'];
+/** Bildfälten i place_items skrivs bara av npm run import:images, aldrig av importen av innehållet. */
+export const IMAGE_FIELDS = ['image_url', 'image_credit', 'image_license', 'image_page'];
+/** wiki på en listpunkt: språkkod, kolon och sidans titel ("en:Sidans titel"). */
+export const WIKI_RE = /^[a-z]{2,3}:\S.*$/;
 /** Raderna i data.prices. Namnet på raden kommer från texten pris.rad.<key>. */
 export const PRICE_KEYS = [
   'enkel-maltid', 'middag-for-tva', 'snabbmat', 'ol', 'kaffe', 'lask', 'vatten', 'lokalresa', 'hotell-3', 'hotell-4',
@@ -47,7 +52,7 @@ const CURRENCY_RE = /^[A-Z]{3}$/;
 const COLUMNS = {
   places: ['id', 'kind', 'parent_id', 'layer', 'name', 'iso2', 'lat', 'lon', 'airport', 'smart_months', 'data'],
   facts: ['id', 'place_id', 'topic', 'is_rule', 'min_age', 'title', 'summary', 'body', 'source_url', 'verified_on'],
-  items: ['id', 'place_id', 'category', 'name', 'summary', 'body', 'must_rank', 'lat', 'lon', 'compendium_id', 'source_url', 'verified_on'],
+  items: ['id', 'place_id', 'category', 'name', 'summary', 'body', 'must_rank', 'lat', 'lon', 'compendium_id', 'source_url', 'verified_on', 'wiki'],
   compendium: ['id', 'category', 'name', 'rarity', 'icon', 'hint', 'place_id', 'source_url'],
   ideas: ['id', 'place_id', 'kind', 'title', 'body', 'duration', 'cost_level', 'tags', 'drive_minutes', 'lat', 'lon'],
   gifts: ['id', 'place_id', 'name', 'body', 'for_whom', 'keywords', 'price_sek', 'min_age', 'collection_motifs'],
@@ -141,6 +146,26 @@ function checkPlaceData(row, check) {
   if (d.sources !== undefined) check(row, 'data.sources', listOf(d.sources) && d.sources.every((u) => URL_RE.test(u)), 'lista med http-adresser');
   if (d.own_judgment !== undefined) check(row, 'data.own_judgment', listOf(d.own_judgment), 'lista med fältnamn');
   if (d.prices !== undefined) checkPrices(row, d.prices, check);
+  if (d.month_notes !== undefined)
+    check(row, 'data.month_notes', Array.isArray(d.month_notes) && d.month_notes.length === 12 && d.month_notes.every(isStr), 'lista med exakt 12 texter, januari först');
+  if (d.events !== undefined) checkEvents(row, d.events, check);
+}
+
+/** data.events: händelser med { name, start, end, text, source }, datum ÅÅÅÅ-MM-DD (docs/FORMAT.md). */
+function checkEvents(row, list, check) {
+  const f = 'data.events';
+  if (!Array.isArray(list)) return check(row, f, false, 'lista med { name, start, end, text, source }');
+  list.forEach((e, i) => {
+    const ef = `${f}[${i}]`;
+    if (!isObj(e)) return check(row, ef, false, 'händelsen ska vara ett objekt');
+    for (const k of Object.keys(e)) check(row, `${ef}.${k}`, EVENT_FIELDS.includes(k), 'okänt fält i händelsen');
+    check(row, `${ef}.name`, isStr(e.name), 'krävs');
+    check(row, `${ef}.start`, validDate(e.start), 'krävs, datum ÅÅÅÅ-MM-DD');
+    check(row, `${ef}.end`, validDate(e.end), 'krävs, datum ÅÅÅÅ-MM-DD');
+    if (validDate(e.start) && validDate(e.end)) check(row, `${ef}.end`, e.end >= e.start, 'får inte vara före start');
+    check(row, `${ef}.text`, isStr(e.text), 'krävs');
+    check(row, `${ef}.source`, isStr(e.source) && URL_RE.test(e.source), 'källa krävs (http-adress)');
+  });
 }
 
 /** data.prices: prisnivå och exempelpriser i lokal valuta (docs/FORMAT.md). */
@@ -229,6 +254,7 @@ const VALIDATORS = {
     checkCoords(row, check, false);
     checkLengths(row, check);
     checkSource(row, check, true);
+    if (row.wiki !== undefined) check(row, 'wiki', typeof row.wiki === 'string' && WIKI_RE.test(row.wiki), 'språkkod och sidans titel, "en:Sidans titel"');
   },
   compendium(row, check) {
     checkCommon('compendium', row, check, null);
@@ -441,6 +467,12 @@ export function sortPlaces(places) {
 export function toDbRow(part, row) {
   const r = { ...row };
   if (part === 'places' && r.data === undefined) r.data = {};
+  if (part === 'items') {
+    // Bildfälten tas aldrig med: de skrivs av npm run import:images och ska ligga kvar vid nästa import.
+    for (const k of IMAGE_FIELDS) delete r[k];
+    // Utan wiki nollas kolumnen, så att ett borttaget fält också försvinner i databasen.
+    if (r.wiki === undefined) r.wiki = null;
+  }
   if ((part === 'ideas') && r.tags === undefined) r.tags = [];
   // Utan checklist nollas kolumnen, så att ett borttaget fält också försvinner i databasen.
   if (part === 'bucket' && r.checklist === undefined) r.checklist = null;

@@ -52,3 +52,8 @@
 - Markera flera även i vyn Kompendium (där finns nu en ruta per kort i den utfällda kategorin).
 - Prisnivå: märk enskilda belopp som uppskattning när prices.own_judgment pekar ut dem (t.ex. "hotell-3.low"). I dag visas bara märkningen för level.
 - Prisnivå: visa dagsbudgeten i lokal valuta med samma kurser som content/_valutor.json.
+
+## Från Körning 11
+- Egna bilder på listpunkter: ladda upp ett eget foto (till exempel från resan) när punkten saknar bild från Wikimedia Commons, eller i stället för den. Kräver lagring (Supabase Storage), regler för vem som ser bilden och en gräns för storleken.
+- Bilder även på punkterna i Missa inte och i kortbunten (i dag bara i punktens bottenark och som miniatyr i Lista).
+- Content-Security-Policy för hela appen. Appen har ingen i dag. Den behöver tillåta Supabase, OpenFreeMap, höjddata på s3.amazonaws.com, Google Fonts och upload.wikimedia.org.

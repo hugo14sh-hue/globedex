@@ -165,7 +165,8 @@
    "lon": -21.1299,
    "must_rank": 1,
    "source_url": "https://www.government.is/topics/environment-climate-and-nature-protection/national-parks-and-protected-areas/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Þingvellir"
   },
   {
    "id": "IS-vatnajokull",
@@ -178,7 +179,8 @@
    "lon": -16.8,
    "must_rank": 2,
    "source_url": "https://www.government.is/topics/environment-climate-and-nature-protection/national-parks-and-protected-areas/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Vatnajökull National Park"
   },
   {
    "id": "IS-reykjavik-hallgrimskirkja",
@@ -191,7 +193,8 @@
    "lon": -21.9266,
    "must_rank": 1,
    "source_url": "https://visitreykjavik.is/service/hallgrimskirkja-church",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Hallgrímskirkja"
   },
   {
    "id": "IS-bla-lagunen",
@@ -204,7 +207,8 @@
    "lon": -22.4495,
    "must_rank": 3,
    "source_url": "https://bluelagoon.com/support/blue-lagoon/before-you-visit",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Blue Lagoon (geothermal spa)"
   },
   {
    "id": "IS-reykjavik-harpa",
@@ -217,7 +221,8 @@
    "lon": -21.9326,
    "must_rank": 2,
    "source_url": "https://www.centerhotels.com/en/blog/post/visiting-harpa-concert-hall-reykjavik-iceland",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Harpa (concert hall)"
   },
   {
    "id": "IS-strokkur",
@@ -230,7 +235,8 @@
    "lon": -20.3007,
    "must_rank": 4,
    "source_url": "https://www.icelandtours.is/attractions/geysir-strokkur/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Strokkur"
   },
   {
    "id": "IS-gullfoss",
@@ -243,7 +249,8 @@
    "lon": -20.1199,
    "must_rank": 5,
    "source_url": "https://www.icelandtours.is/attractions/geysir-strokkur/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Gullfoss"
   }
  ],
  "compendium": [

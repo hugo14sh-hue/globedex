@@ -184,8 +184,10 @@ export default function PlanScreen() {
                 ))}
               </div>
             )}
+            {/* Värdet är dagar, inte nätter: slutdatum = start + dagar - 1, budget = dagsbudget × dagar × personer,
+                och months-knapparna ger dagar - 1 nätter. Packlistan räknar nätter ur resans datum. */}
             <label>
-              {t('resor.steg.lange')}
+              {t('resa.langd.dagar')}
               <input type="number" inputMode="numeric" min={1} max={365} value={days || ''} onChange={(e) => pickDays(Math.max(0, Math.round(Number(e.target.value))))} />
             </label>
 

@@ -25,6 +25,19 @@ export interface PlaceData {
   own_judgment?: string[];
   /** Prisnivå och exempelpriser i lokal valuta. Läses med pricesOf i src/lib/prices.ts. */
   prices?: Prices;
+  /** En text per månad, januari först. Förklarar betyget i smart_months. */
+  month_notes?: string[];
+  /** Händelser som påverkar när man bör åka. */
+  events?: PlaceEvent[];
+}
+
+/** En händelse i data.events. Datum som ÅÅÅÅ-MM-DD. */
+export interface PlaceEvent {
+  name: string;
+  start: string;
+  end: string;
+  text: string;
+  source: string;
 }
 
 export interface Place {
@@ -67,6 +80,13 @@ export interface PlaceItem {
   compendium_id: string | null;
   source_url: string | null;
   verified_on: string | null;
+  /** Wikipediasidan bilden kommer från ("en:Sidans titel"). */
+  wiki?: string | null;
+  /** Bilden från Wikimedia Commons (npm run import:images). Saknas tills skriptet har körts. */
+  image_url?: string | null;
+  image_credit?: string | null;
+  image_license?: string | null;
+  image_page?: string | null;
 }
 
 export interface GiftTip {

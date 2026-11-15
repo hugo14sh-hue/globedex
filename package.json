@@ -15,7 +15,8 @@
     "import": "node scripts/import-content.mjs",
     "import:check": "node scripts/import-content.mjs --check",
     "countries": "node scripts/make-countries.mjs",
-    "flags": "node scripts/make-flags.mjs"
+    "flags": "node scripts/make-flags.mjs",
+    "import:images": "node scripts/import-images.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",

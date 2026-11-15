@@ -12,6 +12,14 @@ export const formatPercent = (n: number) => pct().format(n / 100);
 export const currencySymbol = (code: string) =>
   numberFormat({ style: 'currency', currency: code }).formatToParts(0).find((x) => x.type === 'currency')?.value ?? code;
 
+/** Datumintervall efter appens språk, till exempel 4–6 juni 2027. Samma dag visas som ett datum. */
+export function formatDateRange(start: string, end: string): string {
+  const a = new Date(`${start.slice(0, 10)}T00:00:00Z`);
+  const b = new Date(`${end.slice(0, 10)}T00:00:00Z`);
+  if (Number.isNaN(a.getTime()) || Number.isNaN(b.getTime())) return `${start} – ${end}`;
+  return start === end ? date().format(a) : date().formatRange(a, b);
+}
+
 export function formatDate(iso: string): string {
   const d = new Date(`${iso.slice(0, 10)}T00:00:00Z`);
   return Number.isNaN(d.getTime()) ? iso : date().format(d);

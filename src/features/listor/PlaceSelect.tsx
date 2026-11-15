@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { placeName, type Place } from '../../lib/content';
-import { LOCALE } from '../../lib/locale';
+import { PlaceCombobox } from '../../components/PlaceCombobox';
+import { type Place } from '../../lib/content';
+import { placeOptions } from '../resor/DestSelect';
 
 /**
  * Väljer en plats: länder och städer ur innehållet plus platser som användaren har satt status på
- * (även länder utan innehåll, med namn från webbläsaren).
+ * (även länder utan innehåll, med namn från webbläsaren). Sökfält med förslag.
  */
 export function PlaceSelect({
   label,
@@ -20,26 +21,14 @@ export function PlaceSelect({
   extra?: string[];
   value: string;
   onChange: (id: string) => void;
-  /** Tillåt inget val (tom rad först). */
+  /** Tillåt inget val (ett tömt fält tar bort valet). */
   optional?: boolean;
 }) {
   const options = useMemo(() => {
-    const ids = new Set<string>();
-    for (const p of places) if (p.kind === 'country' || p.kind === 'city') ids.add(p.id);
-    for (const id of extra) ids.add(id);
-    return [...ids].map((id) => ({ id, name: placeName(places, id) })).sort((a, b) => a.name.localeCompare(b.name, LOCALE));
+    const ids: string[] = [];
+    for (const p of places) if (p.kind === 'country' || p.kind === 'city') ids.push(p.id);
+    ids.push(...extra);
+    return placeOptions(places, ids);
   }, [places, extra]);
-  return (
-    <label>
-      {label}
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
-        {(optional || !value) && <option value="" />}
-        {options.map((o) => (
-          <option key={o.id} value={o.id}>
-            {o.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
+  return <PlaceCombobox label={label} options={options} value={value} onChange={onChange} optional={optional} />;
 }

@@ -93,7 +93,58 @@
       "text": "Palatset, katedralen och museet. Bra att besöka, få ställen att bo på."
      }
     ],
-    "best_text": "April till juni och september till oktober. Hotellen är billigast i februari och dyrast i maj.",
+    "best_text": "April och september till oktober. Hotellen är billigast i februari och dyrast i maj, och första helgen i juni 2027 körs Formel 1.",
+    "month_notes": [
+     "Lugnt och svalt. Hotellen hör till årets billigaste.",
+     "Billigaste månaden för hotell. För kallt för strand.",
+     "Mildare och fortfarande lågsäsong. Furstepalatsets salar öppnar i slutet av månaden.",
+     "Skönt promenadväder. Tennisturneringen Monte-Carlo Masters höjer hotellpriserna i början av månaden.",
+     "Varmt, men årets dyraste månad för hotell. Formel E körs på gatorna.",
+     "Formel 1 körs första helgen 2027. Då är allt fullt och som dyrast. Resten av månaden är badväder.",
+     "Högsommar: hett, mycket folk och höga priser.",
+     "Högsommar: hett, mycket folk och höga priser.",
+     "Varmt i havet och färre turister. Undvik dagarna kring Monaco Yacht Show.",
+     "Fortfarande milt, lugnare och billigare.",
+     "Lågsäsong. Nationaldagen firas den 19 november.",
+     "Lågsäsong och korta dagar."
+    ],
+    "events": [
+     {
+      "name": "Monte-Carlo Masters (tennis)",
+      "start": "2027-04-03",
+      "end": "2027-04-11",
+      "text": "Spelas på Monte-Carlo Country Club, precis över gränsen i Frankrike.",
+      "source": "https://montecarlotennismasters.com/en/?p=97547"
+     },
+     {
+      "name": "Monaco E-Prix (Formel E)",
+      "start": "2027-05-15",
+      "end": "2027-05-16",
+      "text": "En källa anger datumen som preliminära.",
+      "source": "https://www.yachtcharterfleet.com/events/monaco-e-prix-2027-2373.htm"
+     },
+     {
+      "name": "Monacos Grand Prix (Formel 1)",
+      "start": "2027-06-04",
+      "end": "2027-06-06",
+      "text": "Loppet körs söndag 6 juni. För första gången körs också ett sprintlopp under helgen.",
+      "source": "https://www.autosport.com/f1/news/f1-reveals-2027-calendar-as-monaco-joins-expanded-sprint-schedule/10856277/"
+     },
+     {
+      "name": "Monaco Yacht Show",
+      "start": "2027-09-22",
+      "end": "2027-09-25",
+      "text": "Båtmässa i Port Hercule. Andra källor anger att datumen inte är bekräftade.",
+      "source": "https://www.worthavenueyachts.com/event/monaco-yacht-show-2027/"
+     },
+     {
+      "name": "Nationaldagen",
+      "start": "2027-11-19",
+      "end": "2027-11-19",
+      "text": "Firas varje år den 19 november.",
+      "source": "https://hellomonaco.com/leisure-entertainment/restaurants-bars-cafes/fine-dining-the-delights-of-monegasque-cuisine"
+     }
+    ],
     "prices": {
      "currency": "EUR",
      "level": 5,
@@ -180,6 +231,7 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
     ]
@@ -190,7 +242,7 @@
     3,
     4,
     3,
-    4,
+    3,
     3,
     3,
     5,
@@ -287,7 +339,8 @@
    "lon": 7.4282,
    "source_url": "https://www.montecarlosbm.com",
    "verified_on": "2026-11-14",
-   "must_rank": 1
+   "must_rank": 1,
+   "wiki": "en:Monte Carlo Casino"
   },
   {
    "id": "MC-monaco-oceanografiska",
@@ -300,7 +353,8 @@
    "lon": 7.4254,
    "source_url": "https://musee.oceano.org",
    "verified_on": "2026-11-14",
-   "must_rank": 2
+   "must_rank": 2,
+   "wiki": "en:Oceanographic Museum of Monaco"
   },
   {
    "id": "MC-monaco-furstepalatset",
@@ -313,7 +367,8 @@
    "lon": 7.4203,
    "source_url": "https://www.visitmonaco.com",
    "verified_on": "2026-11-14",
-   "must_rank": 3
+   "must_rank": 3,
+   "wiki": "en:Prince's Palace of Monaco"
   },
   {
    "id": "MC-monaco-condamine",
@@ -325,7 +380,8 @@
    "lat": 43.7335,
    "lon": 7.4198,
    "source_url": "https://www.thetripverdict.com/monaco-local-food",
-   "verified_on": "2026-11-14"
+   "verified_on": "2026-11-14",
+   "wiki": "en:La Condamine"
   },
   {
    "id": "MC-monaco-stade-louis-ii",
@@ -337,7 +393,8 @@
    "lat": 43.7276,
    "lon": 7.4156,
    "source_url": "https://www.asmonaco.com",
-   "verified_on": "2026-11-14"
+   "verified_on": "2026-11-14",
+   "wiki": "en:Stade Louis II"
   },
   {
    "id": "MC-monaco-port-hercule",
@@ -349,7 +406,8 @@
    "lat": 43.7347,
    "lon": 7.4247,
    "source_url": "https://www.visitmonaco.com",
-   "verified_on": "2026-11-14"
+   "verified_on": "2026-11-14",
+   "wiki": "en:Port Hercules"
   },
   {
    "id": "MC-monaco-grand-prix-banan",
@@ -361,7 +419,8 @@
    "lat": 43.7405,
    "lon": 7.4302,
    "source_url": "https://www.visitmonaco.com",
-   "verified_on": "2026-11-14"
+   "verified_on": "2026-11-14",
+   "wiki": "en:Circuit de Monaco"
   },
   {
    "id": "MC-monaco-katedralen",
@@ -373,7 +432,8 @@
    "lat": 43.7302,
    "lon": 7.4226,
    "source_url": "https://www.visitmonaco.com",
-   "verified_on": "2026-11-14"
+   "verified_on": "2026-11-14",
+   "wiki": "en:Saint Nicholas Cathedral, Monaco"
   },
   {
    "id": "MC-monaco-larvotto",
@@ -385,7 +445,8 @@
    "lat": 43.7448,
    "lon": 7.4345,
    "source_url": "https://www.visitmonaco.com",
-   "verified_on": "2026-11-14"
+   "verified_on": "2026-11-14",
+   "wiki": "en:Larvotto"
   }
  ],
  "compendium": [

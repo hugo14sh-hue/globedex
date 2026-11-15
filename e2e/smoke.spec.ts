@@ -40,6 +40,12 @@ const NL = JSON.parse(readFileSync(join(process.cwd(), 'content/NL.json'), 'utf8
   compendium: { id: string; name: string }[];
 };
 
+// Monaco (content/MC.json): månadens texter och händelser för Smart månad.
+const MC = JSON.parse(readFileSync(join(process.cwd(), 'content/MC.json'), 'utf8').replace(/^﻿/, '')) as {
+  places: { id: string; smart_months?: number[]; data: { month_notes?: string[]; events?: unknown[] } }[];
+};
+const mc_june = () => MC.places.find((p) => p.id === 'MC-monaco')!.data.month_notes![5];
+
 test.describe.configure({ mode: 'serial' });
 test.skip(!hasTestAccount, 'TEST_EMAIL och TEST_PASSWORD saknas i .env.local');
 
@@ -278,7 +284,25 @@ test('röktest', async ({ page }) => {
   let tripUrl = '';
   await test.step('en resa skapas i planeraren och en utgift läggs in', async () => {
     await page.goto('/resor/planera');
-    await page.getByLabel(tx('resor.steg.vart')).selectOption('NL');
+    // Sökfältet med förslag: "mon" ger Monaco bland länderna (med flagga) och väljs.
+    const vart = page.getByRole('combobox', { name: tx('resor.steg.vart') });
+    await expect(vart).toHaveAttribute('placeholder', tx('resa.vart.sok'));
+    await vart.fill('mon');
+    const list = page.getByRole('listbox');
+    await expect(list.getByRole('group', { name: tx('resa.vart.lander') })).toBeVisible();
+    const monaco = list.getByRole('group', { name: tx('resa.vart.lander') }).getByRole('option', { name: 'Monaco', exact: true });
+    await expect(monaco.locator('img[src="/flags/mc.svg"]')).toHaveCount(1);
+    await monaco.click();
+    await expect(vart).toHaveValue('Monaco');
+    await expect(list).toBeHidden();
+    // Inga träffar.
+    await vart.fill('qqzz');
+    await expect(page.getByText(tx('resa.vart.inga'))).toBeVisible();
+    await vart.press('Escape');
+    await vart.press('Escape');
+    await expect(vart).toHaveValue('Monaco');
+    // Längden räknas i dagar.
+    await expect(page.getByLabel(tx('resa.langd.dagar'))).toBeVisible();
     await page.getByLabel(tx('falt.titel')).fill('Röktest');
     await page.getByRole('button', { name: tx('knapp.spara'), exact: true }).click();
     await expect(page).toHaveURL(/\/resor\/[0-9a-f-]{36}$/, {
@@ -304,6 +328,15 @@ test('röktest', async ({ page }) => {
     await expect(page.locator('.chip.primary')).toBeVisible({
       timeout: 20_000,
     });
+    // Ingressen under rubriken, högst två rader och inte avklippt.
+    const ingress = page.locator('p.ingress');
+    await expect(ingress).toHaveText(anyTone('ingress.idag'));
+    const fit = await ingress.evaluate((el) => {
+      const lh = parseFloat(getComputedStyle(el).lineHeight);
+      return { lines: Math.round(el.clientHeight / lh), clipped: el.scrollHeight > el.clientHeight + 1 };
+    });
+    expect(fit.lines).toBeLessThanOrEqual(2);
+    expect(fit.clipped).toBe(false);
     await page.getByRole('button', { name: tx('idag.vy.slumpa'), exact: true }).click();
     const hero = page.locator('button.hero.idea');
     await expect(hero).toBeVisible();
@@ -400,6 +433,43 @@ test('röktest', async ({ page }) => {
     await page.goto('/karta/MC-monaco');
     await expect(page.getByRole('heading', { name: tx('pris.rubrik'), exact: true })).toBeVisible();
     await expect(page.getByText(tx('pris.rad.hotell-3'), { exact: true })).toBeVisible();
+  });
+
+  await test.step('Monaco: Smart månad visar juni med Formel 1 under Händer då', async () => {
+    // Har Hugo inte kört npm run import än saknas month_notes och events i databasen. Då läggs de
+    // in från content/MC.json i svaret, så att rutan går att prova ändå.
+    if (!hasMonaco) {
+      test.info().annotations.push({ type: 'hoppat över', description: 'MC-monaco saknas i databasen (kör npm run import)' });
+      return;
+    }
+    await page.route('**/rest/v1/places?*', async (route) => {
+      const res = await route.fetch();
+      const rows = (await res.json()) as { id: string; data: Record<string, unknown> }[];
+      const mc = MC.places.find((p) => p.id === 'MC-monaco')!;
+      const out = Array.isArray(rows)
+        ? rows.map((r) =>
+            r.id === 'MC-monaco' && !r.data?.month_notes
+              ? { ...r, smart_months: mc.smart_months, data: { ...r.data, month_notes: mc.data.month_notes, events: mc.data.events } }
+              : r,
+          )
+        : rows;
+      await route.fulfill({ response: res, json: out });
+    });
+    await page.goto('/karta/MC-monaco?vy=manad');
+    await expect(page.getByText(tx('smart.tryck'))).toBeVisible({ timeout: 20_000 });
+    // Innevarande månad är förvald.
+    await expect(page.locator('.bars.pick button[aria-pressed=true]')).toHaveCount(1);
+    const juni = page.getByRole('button', { name: new RegExp(`^${esc(tx('smart.manad.betyg')).replace('\\{manad\\}', 'Juni').replace('\\{betyg\\}', '\\d')}$`) });
+    await juni.focus();
+    await page.keyboard.press('Enter');
+    await expect(juni).toHaveAttribute('aria-pressed', 'true');
+    const box = page.locator('.smart-month');
+    await expect(box.getByRole('heading', { name: new RegExp(`^Juni`) })).toBeVisible();
+    await expect(box.getByText(mc_june())).toBeVisible();
+    await expect(box.getByRole('heading', { name: tx('smart.handelser.rubrik') })).toBeVisible();
+    await expect(box.locator('.smart-events').getByText(/Formel 1/)).toBeVisible();
+    await expect(box.getByRole('link', { name: 'autosport.com' })).toHaveAttribute('href', /autosport\.com/);
+    await page.unroute('**/rest/v1/places?*');
   });
 
   await test.step('engelska: flikarna och inloggningssidan byter språk, och sedan tillbaka till svenska', async () => {

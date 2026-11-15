@@ -844,7 +844,27 @@
   "pris.kallor": "Sources",
   "pris.kontrollerat": "Prices checked {datum}.",
   "pris.egen-bedomning": "The level is our own assessment.",
-  "pris.stader.rubrik": "Price level in the cities"
+  "pris.stader.rubrik": "Price level in the cities",
+  "smart.tryck": "Tap a month to see why.",
+  "smart.manad.betyg": "{manad}: {betyg} out of 5",
+  "smart.handelser.rubrik": "Happening then",
+  "smart.handelser.kalla": "Source",
+  "resa.vart.sok": "Search country or city",
+  "resa.vart.inga": "No matches",
+  "resa.vart.lander": "Countries",
+  "resa.vart.stader": "Cities and regions",
+  "resa.langd.natter": "Number of nights",
+  "resa.langd.dagar": "Number of days",
+  "bild.alt": "Photo of {namn}",
+  "bild.kalla": "Photo: {upphov}, {licens}",
+  "bild.kalla.okand": "Photo: Wikimedia Commons, {licens}",
+  "ingress.karta": "The countries and places you have visited, and everything worth knowing about the next destination.",
+  "ingress.idag": "Ideas for what to do today or this weekend, from a night in and date ideas to a day trip.",
+  "ingress.listor": "The bucket list, sights to tick off and the collection book with everything you have found along the way.",
+  "ingress.resor": "Plan the next trip and keep bookings, the packing list and everything to do before departure in one place.",
+  "ingress.jag": "Your account, your badges and how the app should look and sound.",
+  "ingress.vi": "What you do together: shared lists, ratings and what the other one wants to do.",
+  "ingress.gruppen": "What you do together: shared lists, ratings and what the others want to do."
  },
  "marken": [
   {

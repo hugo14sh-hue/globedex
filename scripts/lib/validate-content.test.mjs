@@ -140,6 +140,45 @@ describe('validering av innehåll', () => {
     expect(toDbRow('places', { id: 'XX' }).data).toEqual({});
     expect(toDbRow('gifts', { id: 'XX-g' })).toMatchObject({ keywords: [], collection_motifs: {} });
   });
+
+  it('godkänner month_notes och events, och stoppar fel', () => {
+    const notes = Array.from({ length: 12 }, (_, i) => `m${i}`);
+    const ev = { name: 'n', start: '2027-06-04', end: '2027-06-06', text: 't', source: 'https://example.org' };
+    const withData = (data) => {
+      const j = base();
+      j.places[1].data = data;
+      return fields(run(j));
+    };
+    expect(withData({ month_notes: notes, events: [ev] })).toEqual([]);
+    expect(withData({ month_notes: notes.slice(1) })).toEqual(['XX-stad/data.month_notes']);
+    expect(withData({ month_notes: [...notes.slice(1), ''] })).toEqual(['XX-stad/data.month_notes']);
+    expect(withData({ events: 'x' })).toEqual(['XX-stad/data.events']);
+    expect(withData({ events: [{ ...ev, start: '2027-6-4' }] })).toEqual(['XX-stad/data.events[0].start']);
+    expect(withData({ events: [{ ...ev, end: '2027-06-03' }] })).toEqual(['XX-stad/data.events[0].end']);
+    expect(withData({ events: [{ ...ev, source: undefined }] })).toEqual(['XX-stad/data.events[0].source']);
+    expect(withData({ events: [{ ...ev, extra: 1 }] })).toEqual(['XX-stad/data.events[0].extra']);
+    expect(withData({ events: [{ start: '2027-06-04', end: '2027-06-04', source: 'https://example.org' }] }).sort()).toEqual(
+      ['XX-stad/data.events[0].name', 'XX-stad/data.events[0].text'].sort(),
+    );
+  });
+
+  it('godkänner wiki på en listpunkt och stoppar fel form', () => {
+    const j = base();
+    j.items[0].wiki = 'en:Monte Carlo Casino';
+    expect(run(j).errors).toEqual([]);
+    j.items[0].wiki = 'Monte Carlo Casino';
+    expect(fields(run(j))).toEqual(['XX-stad-sak/wiki']);
+  });
+
+  it('importen skriver wiki men aldrig bildfälten', () => {
+    const row = toDbRow('items', { id: 'XX-a', wiki: 'en:A', image_url: 'https://x', image_credit: 'c', image_license: 'CC0', image_page: 'https://y' });
+    expect(row).toEqual({ id: 'XX-a', wiki: 'en:A' });
+    expect(toDbRow('items', { id: 'XX-a' })).toEqual({ id: 'XX-a', wiki: null });
+    // Bildfälten finns inte i innehållsfilerna: de stoppas av valideringen.
+    const j = base();
+    j.items[0].image_url = 'https://upload.wikimedia.org/a.jpg';
+    expect(fields(run(j))).toEqual(['XX-stad-sak/image_url']);
+  });
 });
 
 describe('packlista och innan avresa', () => {

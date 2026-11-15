@@ -848,7 +848,27 @@
   "pris.kallor": "Källor",
   "pris.kontrollerat": "Priserna kontrollerades {datum}.",
   "pris.egen-bedomning": "Nivån är vår egen bedömning.",
-  "pris.stader.rubrik": "Prisnivå i städerna"
+  "pris.stader.rubrik": "Prisnivå i städerna",
+  "smart.tryck": "Tryck på en månad för att se varför.",
+  "smart.manad.betyg": "{manad}: {betyg} av 5",
+  "smart.handelser.rubrik": "Händer då",
+  "smart.handelser.kalla": "Källa",
+  "resa.vart.sok": "Sök land eller stad",
+  "resa.vart.inga": "Inga träffar",
+  "resa.vart.lander": "Länder",
+  "resa.vart.stader": "Städer och regioner",
+  "resa.langd.natter": "Antal nätter",
+  "resa.langd.dagar": "Antal dagar",
+  "bild.alt": "Bild på {namn}",
+  "bild.kalla": "Bild: {upphov}, {licens}",
+  "bild.kalla.okand": "Bild: Wikimedia Commons, {licens}",
+  "ingress.karta": "Era besökta länder och platser, och allt som är värt att veta om nästa resmål.",
+  "ingress.idag": "Förslag på vad ni kan hitta på i dag eller i helgen, från hemmakväll och dejt till dagsutflykt.",
+  "ingress.listor": "Bucketlistan, sevärdheter att bocka av och samlingsboken med allt ni har hittat på vägen.",
+  "ingress.resor": "Planera nästa resa och samla bokningar, packlista och allt som ska göras innan avresa.",
+  "ingress.jag": "Ditt konto, dina märken och hur appen ska se ut och låta.",
+  "ingress.vi": "Det ni gör tillsammans: gemensamma listor, betyg och vad den andra vill göra.",
+  "ingress.gruppen": "Det ni gör tillsammans: gemensamma listor, betyg och vad de andra vill göra."
  },
  "marken": [
   {

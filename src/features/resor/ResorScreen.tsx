@@ -1,4 +1,5 @@
 // Resor: översikt med nästa resa och nedräkning, övriga planerade resor, tidigare resor och import.
+import { Ingress } from '../../components/Ingress';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Flag } from '../../components/Flag';
@@ -50,6 +51,7 @@ export default function ResorScreen() {
   return (
     <main className="scr">
       <h1>{t('flik.resor')}</h1>
+      <Ingress k="ingress.resor" />
       <Link className="btn" to="/resor/planera">
         <Icon name="plus" size={20} />
         {t('resor.planera')}

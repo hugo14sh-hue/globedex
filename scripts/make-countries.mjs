@@ -2,6 +2,7 @@
 // Källa: Natural Earth admin 0 countries 1:50m (public domain), https://www.naturalearthdata.com
 // Körs sällan, resultatet ligger i git. Användning: node scripts/make-countries.mjs [lokal geojson]
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { isoForArea } from '../src/lib/geoAreas.ts';
 
 const URL_50M = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson';
 
@@ -29,10 +30,12 @@ function clean(geom) {
 
 const features = [];
 for (const f of src.features) {
-  const p = f.properties;
-  // ISO_A2_EH har koder även där ISO_A2 är -99 (t.ex. Frankrike och Norge).
-  const iso = [p.ISO_A2_EH, p.ISO_A2].find((x) => typeof x === 'string' && /^[A-Z]{2}$/.test(x));
-  if (!iso) continue;
+  // Landets kod, eller landet som ytan hör till enligt ISO 3166 (Somaliland till SO, Nordcypern till CY).
+  const iso = isoForArea(f.properties);
+  if (!iso) {
+    console.log(`Hoppar över ${f.properties.ADMIN} (${f.properties.ADM0_A3}): inget land i ISO 3166`);
+    continue;
+  }
   features.push({ type: 'Feature', id: features.length + 1, properties: { iso }, geometry: clean(f.geometry) });
 }
 

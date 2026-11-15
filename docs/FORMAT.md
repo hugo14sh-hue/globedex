@@ -47,6 +47,28 @@ data på en plats:
 - day_budget_note: text som förklarar vad dagsbudgeten räknar in
 - own_judgment: lista med fältnamn på platsen som är Claudes egen bedömning och saknar källa (t.ex. "stay", "areas", "day_budget_sek", "best_text", "smart_months"). Visa dem gärna som "uppskattning" i appen.
 - prices: prisnivå och exempelpriser i lokal valuta, se nedan. Kräver ingen databasändring (ligger i data).
+- month_notes: lista med exakt 12 texter, januari först. Förklarar betyget i smart_months för varje månad. Får saknas.
+- events: lista med händelser som påverkar när man bör åka, se nedan. Får saknas.
+
+#### data.month_notes och data.events
+Visas i rutan Smart månad på platsens sida (vyn Månad). Har platsen month_notes står texten smart.tryck under staplarna, och ett tryck på en månad visar månadens namn och betyg, månadens text och under smart.handelser.rubrik de händelser som börjar eller slutar i den månaden och inte har passerat. Utan month_notes ser rutan ut som förut. Läggs month_notes till och är egen bedömning: skriv "month_notes" i own_judgment.
+
+```json
+"month_notes": ["Januari ...", "Februari ...", "...", "December ..."],
+"events": [
+  { "name": "Monacos Grand Prix (Formel 1)", "start": "2027-06-04", "end": "2027-06-06", "text": "En mening.", "source": "https://..." }
+]
+```
+
+| Fält i en händelse | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| name | text | ja | händelsens namn |
+| start | datum | ja | första dagen, ÅÅÅÅ-MM-DD |
+| end | datum | ja | sista dagen, ÅÅÅÅ-MM-DD, samma som start för en dag. Får inte vara före start |
+| text | text | ja | en kort förklaring |
+| source | URL | ja | visas som länk med domännamnet (smart.handelser.kalla) |
+
+Händelser vars sista dag har passerat visas inte. `npm run import:check` stoppar month_notes som inte är 12 texter, ogiltiga datum, end före start, saknad källa och okända fält i en händelse.
 
 #### data.prices
 Visas som sektionen Prisnivå på stadssidan, direkt efter dagsbudgeten. Har ett land egna prices visas de på landssidan. Annars visar landssidan en rad per stad som har prices, med nivån. Städer med prices får nivån som fem små markeringar på sina rader i listorna.
@@ -108,6 +130,17 @@ Varje rad har typical eller både low och high. Beloppet i kronor räknas på ty
 | lat, lon | tal | nej | |
 | compendium_id | text | nej | kopplar avbockningen till samlingsboken |
 | source_url, verified_on | text | ja | |
+| wiki | text | nej | Wikipediasidan som bilden hämtas från: språkkod, kolon och sidans titel, "en:Monte Carlo Casino" |
+
+#### Bilder på listpunkter
+place_items har också fälten image_url, image_credit, image_license och image_page. De står inte i innehållsfilerna (import:check stoppar dem) och skrivs aldrig av `npm run import`, så de ligger kvar när innehållet läses in igen. De fylls av `npm run import:images`, som körs lokalt av Hugo med SUPABASE_SECRET_KEY:
+
+- För varje listpunkt med wiki och utan image_url hämtas sidans huvudbild (800 px bred) från Wikipedias API (pageimages), och från Wikimedia Commons API (imageinfo, extmetadata) upphovsperson, licens och filsidans adress.
+- Bara bilder med licensen CC0, Public domain, CC BY eller CC BY-SA sparas. Upphovsnamnet rensas från html.
+- Skriptet skriver ut en lista över punkter som saknar sida, saknar bild eller har en annan licens.
+- `npm run import:images -- --force` hämtar om bilderna för alla punkter med wiki.
+
+I appen visas bilden överst på punktens sida (16:9) med upphovsperson och licens som länk till filsidan, och som en liten rund miniatyr i listan.
 
 ### compendium (tabell compendium_items)
 | Fält | Typ | Krav | Beskrivning |
@@ -244,3 +277,4 @@ Ligger i content/_texter.json och läses in i appen vid bygget (inte till databa
 2. Vägra regler (is_rule) utan source_url och verified_on.
 3. Skriva i ordningen places, compendium, facts, items, ideas, gifts.
 4. Köras lokalt av Hugo med SUPABASE_SECRET_KEY från .env.local. Nyckeln får aldrig användas i appen.
+5. Aldrig skriva place_items bildfält (image_url, image_credit, image_license, image_page). De skrivs bara av `npm run import:images`.

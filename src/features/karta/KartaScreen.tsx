@@ -15,6 +15,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import type { MapExtent, MapMarker, MapMode } from './MapView';
 import { StatusPicker } from './StatusPicker';
 import { TopBar } from './TopBar';
+import { Ingress } from '../../components/Ingress';
 import { monthNames } from './months';
 import { usePlayback } from './usePlayback';
 import { useUrlState, withParam } from '../../lib/navMemory';
@@ -139,6 +140,7 @@ export default function KartaScreen() {
       <TopBar />
       <main className="scr under-topbar">
         <h1>{t('flik.karta')}</h1>
+        <Ingress k="ingress.karta" />
 
         {mode !== 'solo' && (
           <div className="chips" role="group" aria-label={t('flik.karta')}>

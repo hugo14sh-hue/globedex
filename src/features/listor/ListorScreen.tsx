@@ -1,5 +1,6 @@
 // Listor: Samlingsbok (Kort, Kompendium, Samlingar), Bucketlist och Swipe (Sortera i solo). Som i prototypen.
 // Vald vy står i adressen (?vy= och ?del=), så att tillbaka-knappen och länkar hamnar rätt.
+import { Ingress } from '../../components/Ingress';
 import { useSearchParams } from 'react-router-dom';
 import { Segment } from '../../components/Segment';
 import { useTravelMode } from '../../lib/session';
@@ -28,6 +29,7 @@ export default function ListorScreen() {
   return (
     <main className="scr">
       <h1>{t('flik.listor')}</h1>
+      <Ingress k="ingress.listor" />
       <Segment<View>
         value={view}
         onChange={(v) => go(v)}
