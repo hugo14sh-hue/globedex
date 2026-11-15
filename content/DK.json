@@ -237,7 +237,8 @@
    "lon": 12.621,
    "must_rank": 1,
    "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Kronborg"
   },
   {
    "id": "DK-roskilde-domkyrka",
@@ -250,7 +251,8 @@
    "lon": 12.0804,
    "must_rank": 2,
    "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Roskilde Cathedral"
   },
   {
    "id": "DK-jelling",
@@ -263,7 +265,8 @@
    "lon": 9.419,
    "must_rank": 3,
    "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Jelling stones"
   },
   {
    "id": "DK-stevns-klint",
@@ -276,7 +279,8 @@
    "lon": 12.447,
    "must_rank": 4,
    "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Stevns Klint"
   },
   {
    "id": "DK-vadehavet",
@@ -289,7 +293,8 @@
    "lon": 8.55,
    "must_rank": 5,
    "source_url": "https://lex.dk/UNESCO%27s_Verdensarvsliste",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Wadden Sea"
   },
   {
    "id": "DK-kopenhamn-nyhavn",
@@ -302,7 +307,8 @@
    "lon": 12.591,
    "must_rank": 1,
    "source_url": "https://www.holidayextras.com/da/metro-koebenhavns-lufthavn.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Nyhavn"
   },
   {
    "id": "DK-kopenhamn-tivoli",
@@ -315,7 +321,8 @@
    "lon": 12.5681,
    "must_rank": 2,
    "source_url": "https://www.stromma.com/da-dk/kobenhavn/attraktioner/attraktioner/tivoli/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Tivoli Gardens"
   },
   {
    "id": "DK-kopenhamn-christiansborg-tornet",
@@ -328,7 +335,8 @@
    "lon": 12.5805,
    "must_rank": 3,
    "source_url": "https://www.afar.com/places/christiansborg-palace-tower-kobenhavn",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Christiansborg Palace"
   },
   {
    "id": "DK-kopenhamn-rundetarn",
@@ -341,7 +349,8 @@
    "lon": 12.5757,
    "must_rank": 4,
    "source_url": "https://www.routesnorth.com/denmark/copenhagen/copenhagens-best-viewpoints-and-lookouts/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Rundetaarn"
   }
  ],
  "compendium": [

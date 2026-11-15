@@ -293,7 +293,8 @@
    "lon": 13.3762,
    "must_rank": 1,
    "source_url": "https://www.bundestag.de/besuche/kuppel-dachterrasseunddachgartenrestaurant/kuppel/244990",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Reichstag dome"
   },
   {
    "id": "DE-berlin-murmuseet-bernauer",
@@ -306,7 +307,8 @@
    "lon": 13.3903,
    "must_rank": 2,
    "source_url": "https://www.berlin.de/museum/3109351-2926344-gedenkstaette-berliner-mauer.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Berlin Wall Memorial"
   },
   {
    "id": "DE-berlin-east-side-gallery",
@@ -319,7 +321,8 @@
    "lon": 13.4397,
    "must_rank": 3,
    "source_url": "https://www.visitberlin.de/en/node/14832",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:East Side Gallery"
   },
   {
    "id": "DE-berlin-museumsinsel",
@@ -332,7 +335,8 @@
    "lon": 13.4019,
    "must_rank": 4,
    "source_url": "https://www.visitberlin.de/de/node/15051",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Museum Island"
   },
   {
    "id": "DE-berlin-forintelsemonumentet",
@@ -345,7 +349,8 @@
    "lon": 13.3787,
    "must_rank": 5,
    "source_url": "https://www.berlin.de/museum/3128015-2926344-denkmal-fuer-die-ermordeten-juden-europa.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Memorial to the Murdered Jews of Europe"
   },
   {
    "id": "DE-berlin-tv-tornet",
@@ -358,7 +363,8 @@
    "lon": 13.4094,
    "must_rank": 6,
    "source_url": "https://visitberlin.de/en/node/1476567",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Fernsehturm Berlin"
   }
  ],
  "compendium": [

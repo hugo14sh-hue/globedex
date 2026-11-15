@@ -499,7 +499,8 @@
    "lon": 12.942,
    "compendium_id": "sevardhet-pinocchio-boras",
    "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Walking to Borås"
   },
   {
    "id": "SE-boras-gatukonsten",
@@ -510,7 +511,8 @@
    "body": "Festivalen startade 2014 och har gått ihop med skulpturbiennalen till Borås Art Biennial. Verken står ute och är gratis att se.",
    "must_rank": 2,
    "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:No Limit Street Art Borås"
   },
   {
    "id": "SE-boras-textilmuseet",
@@ -523,7 +525,8 @@
    "lat": 57.7272,
    "lon": 12.9365,
    "source_url": "https://www.textilmuseet.se/en/visit/plan-your-visit",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Textilmuseet"
   },
   {
    "id": "SE-boras-djurparken",
@@ -536,7 +539,8 @@
    "lat": 57.7414,
    "lon": 12.9492,
    "source_url": "https://www.vastsverige.com/foretag/boras/boras-djurpark/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Borås djurpark"
   },
   {
    "id": "SE-boras-abecita",
@@ -547,7 +551,8 @@
    "body": "Ligger norr om Textile Fashion Center, mot Knalleland och djurparken.",
    "must_rank": 5,
    "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Abecita Konstmuseum"
   },
   {
    "id": "SE-boras-konstmuseet",
@@ -558,7 +563,8 @@
    "body": "Museet leder arbetet med stadens nya muralmålningar och arrangerar Borås Art Biennial tillsammans med Textilmuseet.",
    "must_rank": 6,
    "source_url": "https://via.tt.se/pressmeddelande/4372495/boras-art-biennial-2026?publisherId=3237378",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Borås konstmuseum"
   },
   {
    "id": "SE-boras-arena",
@@ -572,7 +578,8 @@
    "lon": 12.935,
    "compendium_id": "arena-boras-arena",
    "source_url": "https://en.wikipedia.org/wiki/IF_Elfsborg",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Borås Arena"
   },
   {
    "id": "SE-stockholm-vasamuseet",
@@ -586,7 +593,8 @@
    "lon": 18.0914,
    "compendium_id": "sevardhet-skeppet-vasa",
    "source_url": "https://vasamuseet.se/globalassets/vasamuseet/dokument/bransch/2025/uppdaterade-2025/t_vasa-museum_2025_swedish_2.pdf",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Vasamuseet"
   },
   {
    "id": "SE-stockholm-skansen",
@@ -599,7 +607,8 @@
    "lat": 59.3261,
    "lon": 18.1036,
    "source_url": "https://museums.eu/museum/details/722",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Skansen"
   },
   {
    "id": "SE-stockholm-djurgardsfarjan",
@@ -613,7 +622,8 @@
    "lon": 18.0745,
    "compendium_id": "fardmedel-djurgardsfarjan",
    "source_url": "https://www.visitstockholm.com/o/djurgardsfarjan",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Djurgårdsfärjan"
   },
   {
    "id": "SE-stockholm-tunnelbanekonsten",
@@ -624,7 +634,8 @@
    "body": "Över 150 konstnärer har bidragit. Tekniska högskolans station fick ett nationellt arkitekturpris 1973.",
    "must_rank": 4,
    "source_url": "https://www.kth.se/blogs/studentblog/2022/02/tunnelbana-the-worlds-longest-art-gallery",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Konsten i Stockholms tunnelbana"
   },
   {
    "id": "SE-stockholm-drottningholm",
@@ -637,7 +648,8 @@
    "lat": 59.3217,
    "lon": 17.8862,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Drottningholms slott"
   },
   {
    "id": "SE-stockholm-skogskyrkogarden",
@@ -650,7 +662,8 @@
    "lat": 59.275,
    "lon": 18.099,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Skogskyrkogården"
   },
   {
    "id": "SE-uppland-birka",
@@ -663,7 +676,8 @@
    "lat": 59.3353,
    "lon": 17.544,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Birka"
   },
   {
    "id": "SE-sodermanland-tyresta",
@@ -676,7 +690,8 @@
    "lat": 59.175,
    "lon": 18.29,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Tyresta nationalpark"
   },
   {
    "id": "SE-lappland-laponia",
@@ -689,7 +704,8 @@
    "lat": 67.3,
    "lon": 17.7,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Laponia"
   },
   {
    "id": "SE-lappland-abisko",
@@ -702,7 +718,8 @@
    "lat": 68.32,
    "lon": 18.7,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Abisko nationalpark"
   },
   {
    "id": "SE-lappland-sarek",
@@ -715,7 +732,8 @@
    "lat": 67.28,
    "lon": 17.7,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Sareks nationalpark"
   },
   {
    "id": "SE-norrbotten-gammelstad",
@@ -728,7 +746,8 @@
    "lat": 65.646,
    "lon": 22.028,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Gammelstads kyrkstad"
   },
   {
    "id": "SE-norrbotten-haparanda-skargard",
@@ -741,7 +760,8 @@
    "lat": 65.57,
    "lon": 23.75,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Haparanda skärgårds nationalpark"
   },
   {
    "id": "SE-angermanland-hoga-kusten",
@@ -754,7 +774,8 @@
    "lat": 63.0,
    "lon": 18.4,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Höga kusten"
   },
   {
    "id": "SE-angermanland-skuleskogen",
@@ -767,7 +788,8 @@
    "lat": 63.11,
    "lon": 18.5,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Skuleskogens nationalpark"
   },
   {
    "id": "SE-halsingland-halsingegardar",
@@ -778,7 +800,8 @@
    "body": "Gårdarnas festrum är höjdpunkten på en lång byggtradition bland bönderna.",
    "must_rank": 1,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Hälsingegård"
   },
   {
    "id": "SE-dalarna-falu-gruva",
@@ -791,7 +814,8 @@
    "lat": 60.599,
    "lon": 15.613,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Falu koppargruva"
   },
   {
    "id": "SE-dalarna-fulufjallet",
@@ -804,7 +828,8 @@
    "lat": 61.57,
    "lon": 12.68,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Fulufjällets nationalpark"
   },
   {
    "id": "SE-vastmanland-engelsberg",
@@ -817,7 +842,8 @@
    "lat": 59.967,
    "lon": 16.008,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Engelsbergs bruk"
   },
   {
    "id": "SE-gastrikland-farnebofjarden",
@@ -830,7 +856,8 @@
    "lat": 60.2,
    "lon": 16.78,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Färnebofjärdens nationalpark"
   },
   {
    "id": "SE-bohuslan-tanum",
@@ -843,7 +870,8 @@
    "lat": 58.701,
    "lon": 11.341,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Hällristningsområdet i Tanum"
   },
   {
    "id": "SE-bohuslan-kosterhavet",
@@ -856,7 +884,8 @@
    "lat": 58.87,
    "lon": 11.02,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Kosterhavets nationalpark"
   },
   {
    "id": "SE-gotland-visby",
@@ -869,7 +898,8 @@
    "lat": 57.639,
    "lon": 18.294,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Visby ringmur"
   },
   {
    "id": "SE-gotland-gotska-sandon",
@@ -882,7 +912,8 @@
    "lat": 58.37,
    "lon": 19.25,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Gotska Sandön"
   },
   {
    "id": "SE-halland-grimeton",
@@ -895,7 +926,8 @@
    "lat": 57.113,
    "lon": 12.39,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Radiostationen i Grimeton"
   },
   {
    "id": "SE-oland-sodra-oland",
@@ -908,7 +940,8 @@
    "lat": 56.35,
    "lon": 16.48,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Södra Ölands odlingslandskap"
   },
   {
    "id": "SE-blekinge-karlskrona",
@@ -921,7 +954,8 @@
    "lat": 56.161,
    "lon": 15.586,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Örlogsstaden Karlskrona"
   },
   {
    "id": "SE-skane-soderasen",
@@ -934,7 +968,8 @@
    "lat": 56.03,
    "lon": 13.23,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Söderåsens nationalpark"
   },
   {
    "id": "SE-skane-stenshuvud",
@@ -947,7 +982,8 @@
    "lat": 55.66,
    "lon": 14.27,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Stenshuvuds nationalpark"
   },
   {
    "id": "SE-smaland-store-mosse",
@@ -960,7 +996,8 @@
    "lat": 57.27,
    "lon": 13.92,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Store Mosse nationalpark"
   },
   {
    "id": "SE-smaland-asnen",
@@ -973,7 +1010,8 @@
    "lat": 56.62,
    "lon": 14.72,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Åsnens nationalpark"
   },
   {
    "id": "SE-vastergotland-tiveden",
@@ -986,7 +1024,8 @@
    "lat": 58.72,
    "lon": 14.6,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Tivedens nationalpark"
   },
   {
    "id": "SE-narke-garphyttan",
@@ -999,7 +1038,8 @@
    "lat": 59.28,
    "lon": 14.88,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Garphyttans nationalpark"
   },
   {
    "id": "SE-dalsland-tresticklan",
@@ -1012,7 +1052,8 @@
    "lat": 59.03,
    "lon": 11.75,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Tresticklans nationalpark"
   },
   {
    "id": "SE-harjedalen-sonfjallet",
@@ -1025,7 +1066,8 @@
    "lat": 62.28,
    "lon": 13.55,
    "source_url": "https://www.naturvardsverket.se/innehall/pagaende/nationalparker/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Sonfjällets nationalpark"
   },
   {
    "id": "SE-blekinge-landskapsdjur",
@@ -1035,7 +1077,8 @@
    "summary": "Ekoxe är Blekinges landskapsdjur.",
    "body": "Bocka av när ni har sett djuret i Blekinge.",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Ekoxe"
   },
   {
    "id": "SE-blekinge-landskapsblomma",
@@ -1046,7 +1089,8 @@
    "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Blekinge.",
    "compendium_id": "trad-ek",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Kungsljus"
   },
   {
    "id": "SE-bohuslan-landskapsdjur",
@@ -1057,7 +1101,8 @@
    "body": "Bocka av när ni har sett djuret i Bohuslän.",
    "compendium_id": "daggdjur-knubbsal",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Knubbsäl"
   },
   {
    "id": "SE-bohuslan-landskapsblomma",
@@ -1068,7 +1113,8 @@
    "body": "Bocka av när ni har hittat den i Bohuslän.",
    "compendium_id": "blomma-vildkaprifol",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Vildkaprifol"
   },
   {
    "id": "SE-dalarna-landskapsdjur",
@@ -1079,7 +1125,8 @@
    "body": "Bocka av när ni har sett djuret i Dalarna.",
    "compendium_id": "fagel-berguv",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Berguv"
   },
   {
    "id": "SE-dalarna-landskapsblomma",
@@ -1090,7 +1137,8 @@
    "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Dalarna.",
    "compendium_id": "blomma-blaklocka",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Liten blåklocka"
   },
   {
    "id": "SE-dalsland-landskapsdjur",
@@ -1101,7 +1149,8 @@
    "body": "Bocka av när ni har sett djuret i Dalsland.",
    "compendium_id": "fagel-korp",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Korp"
   },
   {
    "id": "SE-dalsland-landskapsblomma",
@@ -1112,7 +1161,8 @@
    "body": "Bocka av när ni har hittat den i Dalsland.",
    "compendium_id": "blomma-forgatmigej",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Äkta förgätmigej"
   },
   {
    "id": "SE-gotland-landskapsdjur",
@@ -1123,7 +1173,8 @@
    "body": "Bocka av när ni har sett djuret på Gotland.",
    "compendium_id": "daggdjur-igelkott",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Igelkott"
   },
   {
    "id": "SE-gotland-landskapsblomma",
@@ -1134,7 +1185,8 @@
    "body": "Bocka av när ni har hittat den på Gotland.",
    "compendium_id": "blomma-murgrona",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Murgröna"
   },
   {
    "id": "SE-gastrikland-landskapsdjur",
@@ -1145,7 +1197,8 @@
    "body": "Bocka av när ni har sett djuret i Gästrikland.",
    "compendium_id": "fagel-tjader",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Tjäder"
   },
   {
    "id": "SE-gastrikland-landskapsblomma",
@@ -1156,7 +1209,8 @@
    "body": "Bocka av när ni har hittat den i Gästrikland.",
    "compendium_id": "blomma-liljekonvalj",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Liljekonvalj"
   },
   {
    "id": "SE-halland-landskapsdjur",
@@ -1167,7 +1221,8 @@
    "body": "Bocka av när ni har sett djuret i Halland.",
    "compendium_id": "havsdjur-lax",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Lax"
   },
   {
    "id": "SE-halland-landskapsblomma",
@@ -1178,7 +1233,8 @@
    "body": "Bocka av när ni har hittat den i Halland.",
    "compendium_id": "blomma-harginst",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Hårginst"
   },
   {
    "id": "SE-halsingland-landskapsdjur",
@@ -1189,7 +1245,8 @@
    "body": "Bocka av när ni har sett djuret i Hälsingland.",
    "compendium_id": "daggdjur-lodjur",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Lodjur"
   },
   {
    "id": "SE-halsingland-landskapsblomma",
@@ -1200,7 +1257,8 @@
    "body": "Bocka av när ni har hittat den i Hälsingland.",
    "compendium_id": "blomma-lin",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Lin (växt)"
   },
   {
    "id": "SE-harjedalen-landskapsdjur",
@@ -1211,7 +1269,8 @@
    "body": "Bocka av när ni har sett djuret i Härjedalen.",
    "compendium_id": "daggdjur-brunbjorn",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Brunbjörn"
   },
   {
    "id": "SE-harjedalen-landskapsblomma",
@@ -1222,7 +1281,8 @@
    "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Härjedalen.",
    "compendium_id": "blomma-mosippa",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Mosippa"
   },
   {
    "id": "SE-jamtland-landskapsdjur",
@@ -1233,7 +1293,8 @@
    "body": "Bocka av när ni har sett djuret i Jämtland.",
    "compendium_id": "daggdjur-alg",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Älg"
   },
   {
    "id": "SE-jamtland-landskapsblomma",
@@ -1244,7 +1305,8 @@
    "body": "Bocka av när ni har hittat den i Jämtland.",
    "compendium_id": "blomma-brunkulla",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Brunkulla"
   },
   {
    "id": "SE-lappland-landskapsdjur",
@@ -1255,7 +1317,8 @@
    "body": "Bocka av när ni har sett djuret i Lappland.",
    "compendium_id": "daggdjur-fjallrav",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Fjällräv"
   },
   {
    "id": "SE-lappland-landskapsblomma",
@@ -1266,7 +1329,8 @@
    "body": "Bocka av när ni har hittat den i Lappland.",
    "compendium_id": "blomma-fjallsippa",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Fjällsippa"
   },
   {
    "id": "SE-medelpad-landskapsdjur",
@@ -1277,7 +1341,8 @@
    "body": "Bocka av när ni har sett djuret i Medelpad.",
    "compendium_id": "daggdjur-skogshare",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Skogshare"
   },
   {
    "id": "SE-medelpad-landskapsblomma",
@@ -1288,7 +1353,8 @@
    "body": "Landskapet har två landskapsblommor. Bocka av när ni har hittat någon av dem i Medelpad.",
    "compendium_id": "trad-gran",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Smörbollar"
   },
   {
    "id": "SE-norrbotten-landskapsdjur",
@@ -1299,7 +1365,8 @@
    "body": "Bocka av när ni har sett djuret i Norrbotten.",
    "compendium_id": "fagel-lavskrika",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Lavskrika"
   },
   {
    "id": "SE-norrbotten-landskapsblomma",
@@ -1310,7 +1377,8 @@
    "body": "Bocka av när ni har hittat den i Norrbotten.",
    "compendium_id": "blomma-akerbar",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Åkerbär"
   },
   {
    "id": "SE-narke-landskapsdjur",
@@ -1321,7 +1389,8 @@
    "body": "Bocka av när ni har sett djuret i Närke.",
    "compendium_id": "daggdjur-hasselmus",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Hasselmus"
   },
   {
    "id": "SE-narke-landskapsblomma",
@@ -1332,7 +1401,8 @@
    "body": "Bocka av när ni har hittat den i Närke.",
    "compendium_id": "blomma-gullviva",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Gullviva"
   },
   {
    "id": "SE-skane-landskapsdjur",
@@ -1343,7 +1413,8 @@
    "body": "Bocka av när ni har sett djuret i Skåne.",
    "compendium_id": "daggdjur-kronhjort",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Kronhjort"
   },
   {
    "id": "SE-skane-landskapsblomma",
@@ -1354,7 +1425,8 @@
    "body": "Bocka av när ni har hittat den i Skåne.",
    "compendium_id": "blomma-prastkrage",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Prästkrage"
   },
   {
    "id": "SE-smaland-landskapsdjur",
@@ -1365,7 +1437,8 @@
    "body": "Bocka av när ni har sett djuret i Småland.",
    "compendium_id": "daggdjur-utter",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Utter"
   },
   {
    "id": "SE-smaland-landskapsblomma",
@@ -1376,7 +1449,8 @@
    "body": "Bocka av när ni har hittat den i Småland.",
    "compendium_id": "blomma-linnea",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Linnea"
   },
   {
    "id": "SE-sodermanland-landskapsdjur",
@@ -1387,7 +1461,8 @@
    "body": "Bocka av när ni har sett djuret i Södermanland.",
    "compendium_id": "fagel-fiskgjuse",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Fiskgjuse"
   },
   {
    "id": "SE-sodermanland-landskapsblomma",
@@ -1398,7 +1473,8 @@
    "body": "Bocka av när ni har hittat den i Södermanland.",
    "compendium_id": "blomma-vit-nackros",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Vit näckros"
   },
   {
    "id": "SE-uppland-landskapsdjur",
@@ -1409,7 +1485,8 @@
    "body": "Bocka av när ni har sett djuret i Uppland.",
    "compendium_id": "fagel-havsorn",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Havsörn"
   },
   {
    "id": "SE-uppland-landskapsblomma",
@@ -1420,7 +1497,8 @@
    "body": "Bocka av när ni har hittat den i Uppland.",
    "compendium_id": "blomma-kungsangslilja",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Kungsängslilja"
   },
   {
    "id": "SE-varmland-landskapsdjur",
@@ -1431,7 +1509,8 @@
    "body": "Bocka av när ni har sett djuret i Värmland.",
    "compendium_id": "daggdjur-varg",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Varg"
   },
   {
    "id": "SE-varmland-landskapsblomma",
@@ -1442,7 +1521,8 @@
    "body": "Bocka av när ni har hittat den i Värmland.",
    "compendium_id": "blomma-skogsstjarna",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Skogsstjärna"
   },
   {
    "id": "SE-vasterbotten-landskapsdjur",
@@ -1453,7 +1533,8 @@
    "body": "Bocka av när ni har sett djuret i Västerbotten.",
    "compendium_id": "fagel-storspov",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Storspov"
   },
   {
    "id": "SE-vasterbotten-landskapsblomma",
@@ -1464,7 +1545,8 @@
    "body": "Bocka av när ni har hittat den i Västerbotten.",
    "compendium_id": "blomma-kung-karls-spira",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Kung Karls spira"
   },
   {
    "id": "SE-vastergotland-landskapsdjur",
@@ -1475,7 +1557,8 @@
    "body": "Bocka av när ni har sett djuret i Västergötland.",
    "compendium_id": "fagel-trana",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Trana"
   },
   {
    "id": "SE-vastergotland-landskapsblomma",
@@ -1486,7 +1569,8 @@
    "body": "Bocka av när ni har hittat den i Västergötland.",
    "compendium_id": "blomma-ljung",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Ljung"
   },
   {
    "id": "SE-vastmanland-landskapsdjur",
@@ -1497,7 +1581,8 @@
    "body": "Bocka av när ni har sett djuret i Västmanland.",
    "compendium_id": "daggdjur-radjur",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Rådjur"
   },
   {
    "id": "SE-vastmanland-landskapsblomma",
@@ -1508,7 +1593,8 @@
    "body": "Bocka av när ni har hittat den i Västmanland.",
    "compendium_id": "blomma-mistel",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Mistel"
   },
   {
    "id": "SE-angermanland-landskapsdjur",
@@ -1519,7 +1605,8 @@
    "body": "Bocka av när ni har sett djuret i Ångermanland.",
    "compendium_id": "daggdjur-baver",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Europeisk bäver"
   },
   {
    "id": "SE-angermanland-landskapsblomma",
@@ -1530,7 +1617,8 @@
    "body": "Bocka av när ni har hittat den i Ångermanland.",
    "compendium_id": "blomma-styvmorsviol",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Styvmorsviol"
   },
   {
    "id": "SE-oland-landskapsdjur",
@@ -1541,7 +1629,8 @@
    "body": "Bocka av när ni har sett djuret på Öland.",
    "compendium_id": "fagel-naktergal",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Näktergal"
   },
   {
    "id": "SE-oland-landskapsblomma",
@@ -1552,7 +1641,8 @@
    "body": "Bocka av när ni har hittat den på Öland.",
    "compendium_id": "blomma-olandssolvanda",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Ölandssolvända"
   },
   {
    "id": "SE-ostergotland-landskapsdjur",
@@ -1563,7 +1653,8 @@
    "body": "Bocka av när ni har sett djuret i Östergötland.",
    "compendium_id": "fagel-knolsvan",
    "source_url": "https://nordicperspective.com/nature/national-provincial-animals-sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Knölsvan"
   },
   {
    "id": "SE-ostergotland-landskapsblomma",
@@ -1574,7 +1665,8 @@
    "body": "Bocka av när ni har hittat den i Östergötland.",
    "compendium_id": "blomma-blaklint",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Blåklint"
   },
   {
    "id": "SE-ostergotland-bergs-slussar",
@@ -1587,7 +1679,8 @@
    "lat": 58.4855,
    "lon": 15.529,
    "source_url": "https://www.gotakanal.se/sv/media/258",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Bergs slussar"
   },
   {
    "id": "SE-varmland-marbacka",
@@ -1600,7 +1693,8 @@
    "lat": 59.779,
    "lon": 13.233,
    "source_url": "https://en.wikipedia.org/wiki/M%C3%A5rbacka",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Mårbacka"
   },
   {
    "id": "SE-medelpad-stenstaden",
@@ -1613,7 +1707,8 @@
    "lat": 62.3908,
    "lon": 17.3069,
    "source_url": "https://catalog.lansstyrelsen.se/store/21/resource/2010__8",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Stenstaden"
   },
   {
    "id": "SE-jamtland-tannforsen",
@@ -1626,7 +1721,8 @@
    "lat": 63.444,
    "lon": 12.739,
    "source_url": "https://skyddadnatur.naturvardsverket.se/handlingar/rest/dokument/286231",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Tännforsen"
   },
   {
    "id": "SE-vasterbotten-vasterbottensost",
@@ -1639,7 +1735,8 @@
    "lat": 64.518,
    "lon": 20.655,
    "source_url": "https://www.mynewsdesk.com/se/norrmejerier_ek/pressreleases/vaesterbottensost-r-besoekscenter-omtyckt-resmaal-med-utoekade-oeppettider-i-sommar-2882068",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "sv:Västerbottensost"
   }
  ],
  "compendium": [

@@ -193,7 +193,8 @@
    "lon": 24.9881,
    "must_rank": 1,
    "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Suomenlinna"
   },
   {
    "id": "FI-helsingfors-finlandiahuset",
@@ -206,7 +207,8 @@
    "lon": 24.933,
    "must_rank": 2,
    "source_url": "https://www.hel.fi/sv/nyheter/alvar-aaltos-arkitektoniska-verk-godkandes-till-unescos-varldsarvslista-fem-av-verken-finns-i",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Finlandia Hall"
   },
   {
    "id": "FI-gamla-raumo",
@@ -219,7 +221,8 @@
    "lon": 21.511,
    "must_rank": 1,
    "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Old Rauma"
   },
   {
    "id": "FI-petajavesi",
@@ -232,7 +235,8 @@
    "lon": 25.183,
    "must_rank": 2,
    "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Petäjävesi Old Church"
   },
   {
    "id": "FI-verla",
@@ -245,7 +249,8 @@
    "lon": 26.64,
    "must_rank": 3,
    "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Verla"
   },
   {
    "id": "FI-sammallahdenmaki",
@@ -258,7 +263,8 @@
    "lon": 21.77,
    "must_rank": 4,
    "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Sammallahdenmäki"
   },
   {
    "id": "FI-kvarken",
@@ -271,7 +277,8 @@
    "lon": 21.3,
    "must_rank": 5,
    "source_url": "https://www.helsinkitimes.fi/finland/finland-news/domestic/29094-aalto-works-join-unesco-world-heritage-list.html",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Kvarken"
   },
   {
    "id": "FI-helsingfors-oodi",
@@ -284,7 +291,8 @@
    "lon": 24.9381,
    "must_rank": 3,
    "source_url": "https://oodihelsinki.fi/en/arrival",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Helsinki Central Library Oodi"
   }
  ],
  "compendium": [

@@ -383,7 +383,8 @@
    "summary": "Biljetter säljs bara på nätet och släpps tisdagar kl. 10.",
    "body": "Det går inte att köpa biljett i dörren. Varje tisdag kl. 10.00 släpps biljetter för besök sex veckor senare, bara på annefrank.org. Det finns ingen väntelista, så sätt en påminnelse.",
    "source_url": "https://www.annefrank.org/en/museum/tickets/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Anne Frank House"
   },
   {
    "id": "NL-amsterdam-rijksmuseum",
@@ -397,7 +398,8 @@
    "body": "Besöket börjar med en bokad starttid. Fri entré till och med 18 år, men starttid krävs ändå. Rembrandts Nattvakten och Vermeers Mjölkpigan hänger i Hedersgalleriet.",
    "compendium_id": "sevardhet-nattvakten",
    "source_url": "https://www.rijksmuseum.nl/visit-museum",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Rijksmuseum"
   },
   {
    "id": "NL-amsterdam-van-gogh-museet",
@@ -410,7 +412,8 @@
    "summary": "Biljetter finns bara på nätet.",
    "body": "Biljetter säljs bara online. Biljetten gäller både den fasta samlingen och aktuella utställningar. Köp via museets egen sida eller de återförsäljare museet listar.",
    "source_url": "https://www.vangoghmuseum.nl/en/visit/tickets",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Van Gogh Museum"
   },
   {
    "id": "NL-amsterdam-kanalringen",
@@ -423,7 +426,8 @@
    "summary": "1600-talskanalerna innanför Singelgracht, världsarv sedan 2010.",
    "body": "Gå längs Herengracht, Keizersgracht och Prinsengracht. Gratis och bäst tidigt på morgonen eller i skymningen.",
    "source_url": "https://whc.unesco.org/en/list/1349/documents",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Canals of Amsterdam"
   },
   {
    "id": "NL-amsterdam-farjan-till-noord",
@@ -437,7 +441,8 @@
    "body": "Färjorna går ofta från baksidan av Centraalstationen över IJ till Noord och NDSM. Linjen till Buiksloterweg tar er till Eye Filmmuseum. Kliv på, ingen biljett.",
    "compendium_id": "fardmedel-ij-farjan",
    "source_url": "https://iamsterdam.com/en/travel-stay/getting-around/public-transport/ferry",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Amsterdam-Noord"
   },
   {
    "id": "NL-amsterdam-stroopwafel-albert-cuyp",
@@ -451,7 +456,8 @@
    "body": "På Albert Cuyp-marknaden gräddas stroopwafels medan du väntar. Våfflan kommer ursprungligen från Gouda.",
    "compendium_id": "bakverk-stroopwafel",
    "source_url": "https://www.theculturetrip.com/europe/the-netherlands/amsterdam/articles/where-to-eat-stroopwafels-in-amsterdam",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Stroopwafel"
   },
   {
    "id": "NL-amsterdam-johan-cruijff-arena",
@@ -465,7 +471,8 @@
    "body": "Guidade turer på engelska och nederländska tar ca 60–75 minuter och går genom pressrum, mixad zon och omklädningsrum. Arenan ligger ca 10 km sydost om centrum.",
    "compendium_id": "arena-johan-cruijff-arena",
    "source_url": "https://www.stadiumguide.com/arena/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Johan Cruyff Arena"
   },
   {
    "id": "NL-keukenhof",
@@ -479,7 +486,8 @@
    "body": "Parken är bara öppen på våren: 18 mars till 9 maj 2027, kl. 08.00–19.00, sista insläpp 18.15. Biljetter säljs på keukenhof.nl.",
    "compendium_id": "blomma-tulpan",
    "source_url": "https://keukenhof.nl/en/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Keukenhof"
   },
   {
    "id": "NL-zaanse-schans",
@@ -493,7 +501,8 @@
    "body": "Tåget till Zaandijk Zaanse Schans tar ca 17 minuter, sedan 15 minuters promenad. Enligt områdets egen sida är det gratis att gå runt i byn, medan kvarnar och vissa museer tar entré.",
    "compendium_id": "sevardhet-vaderkvarn",
    "source_url": "https://www.zaanseschans.com/en/contact/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Zaanse Schans"
   },
   {
    "id": "NL-kinderdijk",
@@ -507,7 +516,8 @@
    "body": "Landets mest kända kvarnlandskap, med 17 kvarnar byggda 1738–1740 och två ännu äldre. Ligger i Zuid-Holland öster om Rotterdam.",
    "compendium_id": "sevardhet-vaderkvarn",
    "source_url": "https://werelderfgoed.nl/en/world-heritage/mill-network-kinderdijk-elshout",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Kinderdijk"
   }
  ],
  "compendium": [

@@ -373,7 +373,8 @@
    "lon": 18.107,
    "must_rank": 1,
    "source_url": "https://www.kompas.hr/dubrovnik/attractions/city-walls/tickets",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Walls of Dubrovnik"
   },
   {
    "id": "HR-plitvice",
@@ -386,7 +387,8 @@
    "lon": 15.582,
    "must_rank": 1,
    "source_url": "https://np-plitvicka-jezera.hr/en/faq/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Plitvice Lakes National Park"
   },
   {
    "id": "HR-split-diocletianus-palats",
@@ -399,7 +401,8 @@
    "lon": 16.4402,
    "must_rank": 1,
    "source_url": "https://www.visit-croatia.co.uk/blog/spotlight-on-diocletians-palace-split/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Diocletian's Palace"
   },
   {
    "id": "HR-split-marjan",
@@ -412,7 +415,8 @@
    "lon": 16.4108,
    "must_rank": 2,
    "source_url": "https://www.nomadotravel.app/en/guides/free-things-to-do-in-split",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Marjan, Split"
   },
   {
    "id": "HR-krka",
@@ -425,7 +429,8 @@
    "lon": 15.9631,
    "must_rank": 2,
    "source_url": "https://www.npkrka.hr/en_US/?p=4284",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Krka National Park"
   },
   {
    "id": "HR-zagreb-lotrscak",
@@ -438,7 +443,8 @@
    "lon": 15.9732,
    "must_rank": 1,
    "source_url": "https://www.inyourpocket.com/zagreb/sightseeing-culture/Sightseeing-Tour",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Lotrščak Tower"
   },
   {
    "id": "HR-zagreb-markuskyrkan",
@@ -451,7 +457,8 @@
    "lon": 15.9736,
    "must_rank": 2,
    "source_url": "https://www.lonelyplanet.com/articles/weekend-itinerary-zagreb-croatia",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:St. Mark's Church, Zagreb"
   },
   {
    "id": "HR-zagreb-brustna-relationer",
@@ -464,7 +471,8 @@
    "lon": 15.9735,
    "must_rank": 3,
    "source_url": "https://www.lonelyplanet.com/articles/top-things-to-do-in-zagreb",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Museum of Broken Relationships"
   },
   {
    "id": "HR-zagreb-uspinjaca",
@@ -476,7 +484,8 @@
    "lat": 45.8142,
    "lon": 15.9731,
    "source_url": "https://appsavvytraveller.com/things-to-do-in-zagreb/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Zagreb Funicular"
   }
  ],
  "compendium": [

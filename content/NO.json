@@ -259,7 +259,8 @@
    "lon": 5.324,
    "must_rank": 1,
    "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Bryggen"
   },
   {
    "id": "NO-vestnorsk-fjordlandskap",
@@ -272,7 +273,8 @@
    "lon": 7.094,
    "must_rank": 2,
    "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Geirangerfjord"
   },
   {
    "id": "NO-urnes-stavkyrka",
@@ -285,7 +287,8 @@
    "lon": 7.322,
    "must_rank": 3,
    "source_url": "https://www.visitnorway.no/reisemal/de-norske-unesco-verdensarvstedene/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Urnes Stave Church"
   },
   {
    "id": "NO-roros",
@@ -298,7 +301,8 @@
    "lon": 11.384,
    "must_rank": 4,
    "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Røros"
   },
   {
    "id": "NO-alta",
@@ -311,7 +315,8 @@
    "lon": 23.187,
    "must_rank": 5,
    "source_url": "https://en.naroyfjorden.no/norges-verdensarv",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Rock carvings at Alta"
   },
   {
    "id": "NO-vegaoyan",
@@ -324,7 +329,8 @@
    "lon": 11.95,
    "must_rank": 6,
    "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Vegaøyan"
   },
   {
    "id": "NO-rjukan-notodden",
@@ -337,7 +343,8 @@
    "lon": 8.594,
    "must_rank": 7,
    "source_url": "https://en.naroyfjorden.no/norges-verdensarv",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Rjukan–Notodden Industrial Heritage Site"
   },
   {
    "id": "NO-oslo-vigelandsparken",
@@ -350,7 +357,8 @@
    "lon": 10.7008,
    "must_rank": 1,
    "source_url": "https://www.visitnorway.no/listings/vigelandsparken/15591/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Vigeland sculpture park"
   },
   {
    "id": "NO-oslo-oyhopping",
@@ -363,7 +371,8 @@
    "lon": 10.729,
    "must_rank": 2,
    "source_url": "https://www.visitoslo.com/no/aktivitet/b-t-til-yene-oslo-fergene",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Hovedøya"
   },
   {
    "id": "NO-oslo-operahuset",
@@ -376,7 +385,8 @@
    "lon": 10.7519,
    "must_rank": 3,
    "source_url": "https://www.visitnorway.no/reisemal/ostlandet/oslo/oslo-opera-house/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Oslo Opera House"
   },
   {
    "id": "NO-oslo-munch",
@@ -389,7 +399,8 @@
    "lon": 10.7553,
    "must_rank": 4,
    "source_url": "https://www.visitoslo.com/no/attraksjon/munch",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Munch Museum"
   },
   {
    "id": "NO-oslo-holmenkollen",
@@ -402,7 +413,8 @@
    "lon": 10.6677,
    "must_rank": 5,
    "source_url": "https://www.visitoslo.com/no/aktivitet/inngangsbillett-til-skimuseet-i-holmenkollen",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Holmenkollbakken"
   },
   {
    "id": "NO-oslo-akershus",
@@ -415,7 +427,8 @@
    "lon": 10.736,
    "must_rank": 6,
    "source_url": "https://www.forsvarsbygg.no/en/festningene/akershus-fortress",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Akershus Fortress"
   }
  ],
  "compendium": [

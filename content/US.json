@@ -820,7 +820,8 @@
    "lon": -74.0445,
    "must_rank": 1,
    "source_url": "https://home.nps.gov/stli/planyourvisit/index.htm",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Statue of Liberty"
   },
   {
    "id": "US-new-york-kronan",
@@ -832,7 +833,8 @@
    "lat": 40.6892,
    "lon": -74.0445,
    "source_url": "https://www.nps.gov/stli/planyourvisit/visit-the-crown.htm",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Statue of Liberty National Monument"
   },
   {
    "id": "US-new-york-staten-island-farjan",
@@ -845,7 +847,8 @@
    "lon": -74.0132,
    "must_rank": 2,
    "source_url": "https://nyctourism.com/articles/guide-to-the-staten-island-ferry",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Staten Island Ferry"
   },
   {
    "id": "US-new-york-911-minnesplatsen",
@@ -858,7 +861,8 @@
    "lon": -74.0134,
    "must_rank": 3,
    "source_url": "https://911memorial.org/visit",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:National September 11 Memorial & Museum"
   },
   {
    "id": "US-new-york-high-line",
@@ -871,7 +875,8 @@
    "lon": -74.0048,
    "must_rank": 4,
    "source_url": "https://www.nomadotravel.app/en/attractions/high-line",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:High Line"
   },
   {
    "id": "US-new-york-brooklyn-bridge",
@@ -884,7 +889,8 @@
    "lon": -73.9969,
    "must_rank": 5,
    "source_url": "https://brooklynbridgepark.org/places-to-see/brooklyn-bridge/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Brooklyn Bridge"
   },
   {
    "id": "US-new-york-met",
@@ -897,7 +903,8 @@
    "lon": -73.9632,
    "must_rank": 6,
    "source_url": "https://www.artvisitguide.com/met-museum-tickets-guide/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Metropolitan Museum of Art"
   },
   {
    "id": "US-new-york-utsiktsdack",
@@ -910,7 +917,8 @@
    "lon": -73.9794,
    "must_rank": 7,
    "source_url": "https://www.findingtheuniverse.com/best-nyc-observation-deck/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Top of the Rock"
   },
   {
    "id": "US-new-york-central-park",
@@ -922,7 +930,8 @@
    "lat": 40.7829,
    "lon": -73.9654,
    "source_url": "https://www.centralparknyc.org/plan-a-visit",
-   "verified_on": "2026-11-13"
+   "verified_on": "2026-11-13",
+   "wiki": "en:Central Park"
   }
  ],
  "compendium": [

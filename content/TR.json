@@ -208,7 +208,8 @@
    "lon": 28.9802,
    "must_rank": 1,
    "source_url": "https://istanbul.com/hagia-sophia",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Hagia Sophia"
   },
   {
    "id": "TR-istanbul-bla-mosken",
@@ -221,7 +222,8 @@
    "lon": 28.9768,
    "must_rank": 2,
    "source_url": "https://istanbulclues.com/istanbul-blue-mosque-sultanahmet/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Blue Mosque, Istanbul"
   },
   {
    "id": "TR-istanbul-topkapi",
@@ -234,7 +236,8 @@
    "lon": 28.9834,
    "must_rank": 3,
    "source_url": "https://istanbul.com/topkapi-palace",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Topkapı Palace"
   },
   {
    "id": "TR-istanbul-stora-basaren",
@@ -247,7 +250,8 @@
    "lon": 28.968,
    "must_rank": 4,
    "source_url": "https://thebettervacation.com/istanbul/grand-bazaar/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Grand Bazaar, Istanbul"
   },
   {
    "id": "TR-istanbul-basilikacisternen",
@@ -260,7 +264,8 @@
    "lon": 28.9779,
    "must_rank": 5,
    "source_url": "https://istanbul.com/basilica-cistern",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Basilica Cistern"
   },
   {
    "id": "TR-istanbul-bosporenfarjan",
@@ -272,7 +277,8 @@
    "lat": 41.0175,
    "lon": 28.974,
    "source_url": "https://www.nomadotravel.app/en/guides/getting-around-istanbul",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Kadıköy"
   },
   {
    "id": "TR-kappadokien",
@@ -285,7 +291,8 @@
    "lon": 34.85,
    "must_rank": 1,
    "source_url": "https://whc.unesco.org/document/216603",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Cappadocia"
   }
  ],
  "compendium": [

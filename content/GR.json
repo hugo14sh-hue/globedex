@@ -399,7 +399,8 @@
    "lon": 23.7257,
    "must_rank": 1,
    "source_url": "https://www.artvisitguide.com/acropolis-of-athens-tickets-guide/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Acropolis of Athens"
   },
   {
    "id": "GR-aten-akropolismuseet",
@@ -412,7 +413,8 @@
    "lon": 23.7285,
    "must_rank": 2,
    "source_url": "https://grandpl.com/en/poland/article/how-and-where-to-buy-official-acropolis-museum-tickets/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Acropolis Museum"
   },
   {
    "id": "GR-aten-agora",
@@ -425,7 +427,8 @@
    "lon": 23.722,
    "must_rank": 3,
    "source_url": "https://departly.pages.dev/to/greece/ancient-agora/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Ancient Agora of Athens"
   },
   {
    "id": "GR-meteora",
@@ -438,7 +441,8 @@
    "lon": 21.6306,
    "must_rank": 2,
    "source_url": "https://www.visitmeteora.travel/meteora-monasteries",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Meteora"
   },
   {
    "id": "GR-delfi",
@@ -451,7 +455,8 @@
    "lon": 22.501,
    "must_rank": 3,
    "source_url": "https://www.discovergreece.com/experiences/feel-aura-delphis-world-famous-archaeological-site",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Delphi"
   },
   {
    "id": "GR-santorini-akrotiri",
@@ -464,7 +469,8 @@
    "lon": 25.3961,
    "must_rank": 1,
    "source_url": "https://www.santorinisecrets.com/places/akrotiri/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Akrotiri (prehistoric city)"
   },
   {
    "id": "GR-kreta-knossos",
@@ -477,7 +483,8 @@
    "lon": 25.1632,
    "must_rank": 1,
    "source_url": "https://visitcrete.com/info/museums-sites-guide/category/archaeological-sites/archaeological-site-of-knossos-palace/?lang=gr",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Knossos"
   },
   {
    "id": "GR-kreta-samaria",
@@ -490,7 +497,8 @@
    "lon": 23.9614,
    "must_rank": 2,
    "source_url": "https://www.samaria.gr/?p=949",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Samaria Gorge"
   }
  ],
  "compendium": [

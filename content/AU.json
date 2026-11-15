@@ -197,7 +197,8 @@
    "lon": 151.2153,
    "must_rank": 1,
    "source_url": "https://www.sydneytourism.org/things-to-do-in-sydney/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Sydney Opera House"
   },
   {
    "id": "AU-sydney-bondi-coogee",
@@ -210,7 +211,8 @@
    "lon": 151.2767,
    "must_rank": 2,
    "source_url": "https://www.nomadotravel.app/en/guides/sydney-coastal-walks-guide",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Bondi Beach"
   },
   {
    "id": "AU-sydney-manlyfarjan",
@@ -223,7 +225,8 @@
    "lon": 151.211,
    "must_rank": 3,
    "source_url": "https://www.sydneytourism.org/things-to-do-in-sydney/",
-   "verified_on": "2026-11-11"
+   "verified_on": "2026-11-11",
+   "wiki": "en:Manly ferry services"
   }
  ],
  "compendium": [
