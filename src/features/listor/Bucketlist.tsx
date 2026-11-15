@@ -26,6 +26,7 @@ import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
 import { LOCALE } from '../../lib/locale';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -65,6 +66,7 @@ export function useBucket() {
 
 export function Bucketlist() {
   const t = useT();
+  const { theme } = useTheme();
   const { toast, party } = useFeedback();
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
@@ -106,7 +108,10 @@ export function Bucketlist() {
   const setFCost = (c: CostLevel | null) => setFCostParam(c);
 
   // Delmål per punkt: ur katalogens checklist, kartans status och parts.
-  const partsCtx = useMemo(() => ({ places, statuses: mine.statuses, name: (id: string) => placeName(places, id) }), [places, mine.statuses]);
+  const partsCtx = useMemo(
+    () => ({ places, statuses: mine.statuses, name: (id: string) => placeName(places, id), countryList: theme.countryList }),
+    [places, mine.statuses, theme.countryList],
+  );
   const partsOf = useCallback(
     (b: BucketItem): PartsView | null => bucketParts(parseChecklist(b.catalog_id ? byId.get(b.catalog_id)?.checklist : null), b.parts, partsCtx),
     [byId, partsCtx],

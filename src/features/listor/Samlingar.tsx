@@ -14,6 +14,8 @@ import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
 import { LOCALE } from '../../lib/locale';
+import { countsAsCountry } from '../../lib/landlistor';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const today = () => new Date().toISOString().slice(0, 10);
 const VISITED = new Set(['bor', 'bott', 'besokt']);
@@ -54,10 +56,11 @@ export function Samlingar() {
       .catch(() => undefined);
   }, []);
 
-  // Länder man har varit i, för räknaren per samling.
+  // Länder man har varit i (i vald landlista), för räknaren per samling.
+  const { theme } = useTheme();
   const visited = useMemo(
-    () => Object.entries(mine.statuses).filter(([id, s]) => /^[A-Z]{2}$/.test(id) && VISITED.has(s)).length,
-    [mine.statuses],
+    () => Object.entries(mine.statuses).filter(([id, s]) => countsAsCountry(id, theme.countryList) && VISITED.has(s)).length,
+    [mine.statuses, theme.countryList],
   );
 
   const create = async (ev: FormEvent) => {

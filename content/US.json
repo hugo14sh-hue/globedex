@@ -106,6 +106,618 @@
     3,
     4
    ]
+  },
+  {
+   "id": "US-al",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Alabama",
+   "lat": 32.8,
+   "lon": -86.8,
+   "data": {
+    "iso_3166_2": "US-AL"
+   }
+  },
+  {
+   "id": "US-ak",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Alaska",
+   "lat": 64.2,
+   "lon": -152.5,
+   "data": {
+    "iso_3166_2": "US-AK"
+   }
+  },
+  {
+   "id": "US-az",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Arizona",
+   "lat": 34.2,
+   "lon": -111.7,
+   "data": {
+    "iso_3166_2": "US-AZ"
+   }
+  },
+  {
+   "id": "US-ar",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Arkansas",
+   "lat": 34.9,
+   "lon": -92.4,
+   "data": {
+    "iso_3166_2": "US-AR"
+   }
+  },
+  {
+   "id": "US-ca",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Kalifornien",
+   "lat": 37.2,
+   "lon": -119.4,
+   "data": {
+    "iso_3166_2": "US-CA"
+   }
+  },
+  {
+   "id": "US-co",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Colorado",
+   "lat": 39.0,
+   "lon": -105.5,
+   "data": {
+    "iso_3166_2": "US-CO"
+   }
+  },
+  {
+   "id": "US-ct",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Connecticut",
+   "lat": 41.6,
+   "lon": -72.7,
+   "data": {
+    "iso_3166_2": "US-CT"
+   }
+  },
+  {
+   "id": "US-de",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Delaware",
+   "lat": 39.0,
+   "lon": -75.5,
+   "data": {
+    "iso_3166_2": "US-DE"
+   }
+  },
+  {
+   "id": "US-fl",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Florida",
+   "lat": 28.6,
+   "lon": -82.4,
+   "data": {
+    "iso_3166_2": "US-FL"
+   }
+  },
+  {
+   "id": "US-ga",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Georgia",
+   "lat": 32.7,
+   "lon": -83.4,
+   "data": {
+    "iso_3166_2": "US-GA"
+   }
+  },
+  {
+   "id": "US-hi",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Hawaii",
+   "lat": 20.3,
+   "lon": -156.4,
+   "data": {
+    "iso_3166_2": "US-HI"
+   }
+  },
+  {
+   "id": "US-id",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Idaho",
+   "lat": 44.4,
+   "lon": -114.6,
+   "data": {
+    "iso_3166_2": "US-ID"
+   }
+  },
+  {
+   "id": "US-il",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Illinois",
+   "lat": 40.0,
+   "lon": -89.2,
+   "data": {
+    "iso_3166_2": "US-IL"
+   }
+  },
+  {
+   "id": "US-in",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Indiana",
+   "lat": 39.9,
+   "lon": -86.3,
+   "data": {
+    "iso_3166_2": "US-IN"
+   }
+  },
+  {
+   "id": "US-ia",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Iowa",
+   "lat": 42.1,
+   "lon": -93.5,
+   "data": {
+    "iso_3166_2": "US-IA"
+   }
+  },
+  {
+   "id": "US-ks",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Kansas",
+   "lat": 38.5,
+   "lon": -98.4,
+   "data": {
+    "iso_3166_2": "US-KS"
+   }
+  },
+  {
+   "id": "US-ky",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Kentucky",
+   "lat": 37.5,
+   "lon": -85.3,
+   "data": {
+    "iso_3166_2": "US-KY"
+   }
+  },
+  {
+   "id": "US-la",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Louisiana",
+   "lat": 31.1,
+   "lon": -92.0,
+   "data": {
+    "iso_3166_2": "US-LA"
+   }
+  },
+  {
+   "id": "US-me",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Maine",
+   "lat": 45.4,
+   "lon": -69.2,
+   "data": {
+    "iso_3166_2": "US-ME"
+   }
+  },
+  {
+   "id": "US-md",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Maryland",
+   "lat": 39.0,
+   "lon": -76.8,
+   "data": {
+    "iso_3166_2": "US-MD"
+   }
+  },
+  {
+   "id": "US-ma",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Massachusetts",
+   "lat": 42.3,
+   "lon": -71.8,
+   "data": {
+    "iso_3166_2": "US-MA"
+   }
+  },
+  {
+   "id": "US-mi",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Michigan",
+   "lat": 44.3,
+   "lon": -85.4,
+   "data": {
+    "iso_3166_2": "US-MI"
+   }
+  },
+  {
+   "id": "US-mn",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Minnesota",
+   "lat": 46.3,
+   "lon": -94.3,
+   "data": {
+    "iso_3166_2": "US-MN"
+   }
+  },
+  {
+   "id": "US-ms",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Mississippi",
+   "lat": 32.7,
+   "lon": -89.7,
+   "data": {
+    "iso_3166_2": "US-MS"
+   }
+  },
+  {
+   "id": "US-mo",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Missouri",
+   "lat": 38.4,
+   "lon": -92.5,
+   "data": {
+    "iso_3166_2": "US-MO"
+   }
+  },
+  {
+   "id": "US-mt",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Montana",
+   "lat": 47.0,
+   "lon": -109.6,
+   "data": {
+    "iso_3166_2": "US-MT"
+   }
+  },
+  {
+   "id": "US-ne",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Nebraska",
+   "lat": 41.5,
+   "lon": -99.8,
+   "data": {
+    "iso_3166_2": "US-NE"
+   }
+  },
+  {
+   "id": "US-nv",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Nevada",
+   "lat": 39.3,
+   "lon": -116.6,
+   "data": {
+    "iso_3166_2": "US-NV"
+   }
+  },
+  {
+   "id": "US-nh",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "New Hampshire",
+   "lat": 43.7,
+   "lon": -71.6,
+   "data": {
+    "iso_3166_2": "US-NH"
+   }
+  },
+  {
+   "id": "US-nj",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "New Jersey",
+   "lat": 40.2,
+   "lon": -74.7,
+   "data": {
+    "iso_3166_2": "US-NJ"
+   }
+  },
+  {
+   "id": "US-nm",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "New Mexico",
+   "lat": 34.4,
+   "lon": -106.1,
+   "data": {
+    "iso_3166_2": "US-NM"
+   }
+  },
+  {
+   "id": "US-ny",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "New York",
+   "lat": 42.9,
+   "lon": -75.5,
+   "data": {
+    "iso_3166_2": "US-NY"
+   }
+  },
+  {
+   "id": "US-nc",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "North Carolina",
+   "lat": 35.6,
+   "lon": -79.4,
+   "data": {
+    "iso_3166_2": "US-NC"
+   }
+  },
+  {
+   "id": "US-nd",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "North Dakota",
+   "lat": 47.5,
+   "lon": -100.5,
+   "data": {
+    "iso_3166_2": "US-ND"
+   }
+  },
+  {
+   "id": "US-oh",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Ohio",
+   "lat": 40.3,
+   "lon": -82.8,
+   "data": {
+    "iso_3166_2": "US-OH"
+   }
+  },
+  {
+   "id": "US-ok",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Oklahoma",
+   "lat": 35.6,
+   "lon": -97.5,
+   "data": {
+    "iso_3166_2": "US-OK"
+   }
+  },
+  {
+   "id": "US-or",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Oregon",
+   "lat": 43.9,
+   "lon": -120.6,
+   "data": {
+    "iso_3166_2": "US-OR"
+   }
+  },
+  {
+   "id": "US-pa",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Pennsylvania",
+   "lat": 40.9,
+   "lon": -77.8,
+   "data": {
+    "iso_3166_2": "US-PA"
+   }
+  },
+  {
+   "id": "US-ri",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Rhode Island",
+   "lat": 41.7,
+   "lon": -71.5,
+   "data": {
+    "iso_3166_2": "US-RI"
+   }
+  },
+  {
+   "id": "US-sc",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "South Carolina",
+   "lat": 33.9,
+   "lon": -80.9,
+   "data": {
+    "iso_3166_2": "US-SC"
+   }
+  },
+  {
+   "id": "US-sd",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "South Dakota",
+   "lat": 44.4,
+   "lon": -100.2,
+   "data": {
+    "iso_3166_2": "US-SD"
+   }
+  },
+  {
+   "id": "US-tn",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Tennessee",
+   "lat": 35.9,
+   "lon": -86.4,
+   "data": {
+    "iso_3166_2": "US-TN"
+   }
+  },
+  {
+   "id": "US-tx",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Texas",
+   "lat": 31.5,
+   "lon": -99.3,
+   "data": {
+    "iso_3166_2": "US-TX"
+   }
+  },
+  {
+   "id": "US-ut",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Utah",
+   "lat": 39.3,
+   "lon": -111.7,
+   "data": {
+    "iso_3166_2": "US-UT"
+   }
+  },
+  {
+   "id": "US-vt",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Vermont",
+   "lat": 44.0,
+   "lon": -72.7,
+   "data": {
+    "iso_3166_2": "US-VT"
+   }
+  },
+  {
+   "id": "US-va",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Virginia",
+   "lat": 37.5,
+   "lon": -78.8,
+   "data": {
+    "iso_3166_2": "US-VA"
+   }
+  },
+  {
+   "id": "US-wa",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Washington",
+   "lat": 47.4,
+   "lon": -120.5,
+   "data": {
+    "iso_3166_2": "US-WA"
+   }
+  },
+  {
+   "id": "US-wv",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "West Virginia",
+   "lat": 38.6,
+   "lon": -80.6,
+   "data": {
+    "iso_3166_2": "US-WV"
+   }
+  },
+  {
+   "id": "US-wi",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Wisconsin",
+   "lat": 44.6,
+   "lon": -89.9,
+   "data": {
+    "iso_3166_2": "US-WI"
+   }
+  },
+  {
+   "id": "US-wy",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Wyoming",
+   "lat": 43.0,
+   "lon": -107.5,
+   "data": {
+    "iso_3166_2": "US-WY"
+   }
+  },
+  {
+   "id": "US-dc",
+   "kind": "region",
+   "parent_id": "US",
+   "layer": "delstat",
+   "name": "Washington D.C.",
+   "lat": 38.9,
+   "lon": -77.0,
+   "data": {
+    "iso_3166_2": "US-DC"
+   }
   }
  ],
  "facts": [

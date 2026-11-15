@@ -23,16 +23,18 @@ import { LOCALE } from '../../lib/locale';
 import { pricesOf } from '../../lib/prices';
 import { COUNTRIES } from '../../lib/countries';
 import type { CountryPoint } from '../../lib/mapPoints';
+import { mapRegions } from '../../lib/mapRegions';
 
 // Kartmotorn laddas först när fliken öppnas.
 const MapView = lazy(() => import('./MapView'));
 
-const MODES: MapMode[] = ['ren', 'upptack', 'terrang', 'smart'];
+const MODES: MapMode[] = ['ren', 'upptack', 'terrang', 'smart', 'regioner'];
 const MODE_KEY: Record<MapMode, string> = {
   ren: 'karta.lage.ren',
   upptack: 'karta.lage.upptack',
   terrang: 'karta.lage.terrang',
   smart: 'karta.lage.smart',
+  regioner: 'karta.lage.regioner',
 };
 
 export default function KartaScreen() {
@@ -59,6 +61,8 @@ export default function KartaScreen() {
   const [month, setMonth] = useState(() => new Date().getMonth());
   const [picked, setPicked] = useState<string | null>(null);
   const [mapFailed, setMapFailed] = useState(false);
+  // Läget Regioner: syns någon region i utsnittet? Annars visas karta.regioner.tom.
+  const [regionsVisible, setRegionsVisible] = useState(true);
   const [params, setParams] = useSearchParams();
   const playId = params.get('resa');
   const play = usePlayback(playId);
@@ -101,6 +105,18 @@ export default function KartaScreen() {
     for (const [id, s] of Object.entries(shown)) if (/^[A-Z]{2}$/.test(id)) out[id] = colors[s];
     return out;
   }, [mapMode, places, month, shown, colors]);
+
+  // Regionerna (platser med lager, i dag landskap och delstater). Färgas efter status precis som länder.
+  const regions = useMemo(() => mapRegions(places, LOCALE), [places]);
+  const regionFills = useMemo(() => {
+    const out: Record<string, string> = {};
+    if (mapMode !== 'regioner') return out;
+    for (const r of regions) {
+      const s = shown[r.id];
+      if (s) out[r.id] = colors[s];
+    }
+    return out;
+  }, [mapMode, regions, shown, colors]);
 
   const markers = useMemo<MapMarker[]>(() => {
     if (mapMode !== 'upptack') return [];
@@ -175,10 +191,19 @@ export default function KartaScreen() {
                 pointCandidates={pointCandidates}
                 countryLabel={(iso) => placeName(places, iso)}
                 onCountry={setPicked}
+                regions={mapMode === 'regioner' ? regions : []}
+                regionFills={regionFills}
+                onRegion={setPicked}
+                onRegionsVisible={setRegionsVisible}
                 onMarker={(m) => nav(`/karta/${m.placeId}${m.kind === 'item' ? '?vy=lista' : ''}`)}
                 onError={() => setMapFailed(true)}
               />
             </Suspense>
+          )}
+          {mapMode === 'regioner' && !regionsVisible && !mapFailed && (
+            <p className="map-hint" role="status">
+              {t('karta.regioner.tom')}
+            </p>
           )}
           <div className="zoom">
             {(['europa', 'varlden'] as const).map((x) => (

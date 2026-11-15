@@ -20,3 +20,15 @@ export const hasMonthNotes = (notes: unknown): notes is string[] =>
 
 /** Månaden som är vald från början: innevarande månad. */
 export const currentMonth = (today: string) => monthOf(today);
+
+/** Minsta sträcka i pixlar för att ett svep över diagrammet ska byta månad. */
+export const SWIPE_MIN = 40;
+
+/**
+ * Månaden efter ett svep över diagrammet: åt vänster nästa månad, åt höger föregående.
+ * Svepet måste vara mer vågrätt än lodrätt och minst SWIPE_MIN långt. Stannar vid januari och december.
+ */
+export function swipedMonth(month: number, dx: number, dy: number): number {
+  if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) <= Math.abs(dy)) return month;
+  return Math.min(11, Math.max(0, month + (dx < 0 ? 1 : -1)));
+}

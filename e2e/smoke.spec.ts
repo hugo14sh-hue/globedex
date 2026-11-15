@@ -46,18 +46,40 @@ const MC = JSON.parse(readFileSync(join(process.cwd(), 'content/MC.json'), 'utf8
 };
 const mc_june = () => MC.places.find((p) => p.id === 'MC-monaco')!.data.month_notes![5];
 
+// USA:s delstater (content/US.json). Läggs in i svaret från places när Hugo inte har kört npm run import än.
+const US_STATES = (
+  JSON.parse(readFileSync(join(process.cwd(), 'content/US.json'), 'utf8').replace(/^\uFEFF/, '')) as {
+    places: { id: string; layer?: string; name: string }[];
+  }
+).places.filter((p) => p.layer === 'delstat');
+
+/** Lägger till delstaterna i svaret från places om de saknas i databasen. */
+async function injectStates(page: Page) {
+  await page.route('**/rest/v1/places?*', async (route) => {
+    const res = await route.fetch();
+    const rows = (await res.json()) as { id: string }[];
+    if (!Array.isArray(rows)) return route.fulfill({ response: res });
+    const have = new Set(rows.map((r) => r.id));
+    const add = US_STATES.filter((p) => !have.has(p.id)).map((p) => ({ iso2: null, airport: null, smart_months: null, data: {}, ...p }));
+    await route.fulfill({ response: res, json: [...rows, ...add] });
+  });
+}
+
 test.describe.configure({ mode: 'serial' });
 test.skip(!hasTestAccount, 'TEST_EMAIL och TEST_PASSWORD saknas i .env.local');
 
 let snap: Snapshot | null = null;
 /** Monaco (content/MC.json) finns i databasen först när Hugo har kört npm run import. */
 let hasMonaco = false;
+/** USA:s delstater (content/US.json) finns i databasen först när Hugo har kört npm run import. */
+let hasStates = false;
 
 test.beforeAll(async () => {
   const { db, userId } = await testClient();
   snap = await snapshot(db, userId);
   const { data } = await db.from('places').select('id, data').eq('id', 'MC-monaco').maybeSingle();
   hasMonaco = Boolean((data as { data?: { prices?: unknown } } | null)?.data?.prices);
+  hasStates = Boolean((await db.from('places').select('id').eq('id', 'US-ca').maybeSingle()).data);
   // Röktestet går på svenska. Står testkontot på ett annat språk byts det här, och afterAll återställer det.
   const settings = (snap.settings ?? {}) as { theme?: Record<string, unknown> };
   if (settings.theme?.lang && settings.theme.lang !== 'sv')
@@ -470,6 +492,114 @@ test('röktest', async ({ page }) => {
     await expect(box.locator('.smart-events').getByText(/Formel 1/)).toBeVisible();
     await expect(box.getByRole('link', { name: 'autosport.com' })).toHaveAttribute('href', /autosport\.com/);
     await page.unroute('**/rest/v1/places?*');
+  });
+
+  await test.step('Regioner: läget visar tomt läge utzoomat och landskapen som punkter inzoomat', async () => {
+    await page.goto('/karta?lage=regioner');
+    await expect(page.getByRole('button', { name: tx('karta.lage.regioner'), exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('.map canvas')).toBeVisible({ timeout: 30_000 });
+    // Europa från start: för långt ut för regionerna.
+    await expect(page.getByText(tx('karta.regioner.tom'))).toBeVisible({ timeout: 20_000 });
+    const point = page.locator('button.map-region').first();
+    await expect(point).toHaveCount(1, { timeout: 30_000 });
+    await page.locator('.map canvas').focus();
+    for (let i = 0; i < 4 && !(await point.isVisible()); i++) {
+      await page.keyboard.press('+');
+      await page.waitForTimeout(700);
+    }
+    await expect(point).toBeVisible();
+    await expect(page.getByText(tx('karta.regioner.tom'))).toHaveCount(0);
+    // Punkten är 44 px och öppnar samma bottenark som ett land.
+    const size = (await point.boundingBox())!;
+    expect(Math.round(size.width)).toBeGreaterThanOrEqual(44);
+    const name = (await point.getAttribute('aria-label'))!;
+    await point.click();
+    const sheet = page.getByRole('dialog');
+    await expect(sheet.getByRole('heading', { name, exact: true })).toBeVisible();
+    await expect(sheet.getByRole('button', { name: tx('karta.status.besokt'), exact: true })).toBeVisible();
+    await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+    await expect(sheet).toBeHidden();
+  });
+
+  await test.step('Regioner: en delstat i USA går att trycka på i kartan och får status Besökt', async () => {
+    if (!hasStates) await injectStates(page);
+    await page.goto('/karta?lage=regioner&utsnitt=varlden');
+    const canvas = page.locator('.map canvas');
+    await expect(canvas).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText(tx('karta.regioner.tom'))).toBeVisible({ timeout: 20_000 });
+    await page.waitForTimeout(1500);
+    // Zooma med hjulet över västra USA (världen ryms på bredden, kartan är 358 × 340 px).
+    const box = (await canvas.boundingBox())!;
+    // Punkten ungefär över mitten av USA: världen fyller bredden (8 px marginal).
+    const at = { x: box.x + 8 + (box.width - 16) * ((-100 + 170) / 360), y: box.y + box.height * 0.42 };
+    await page.mouse.move(at.x, at.y);
+    for (let i = 0; i < 30 && (await page.getByText(tx('karta.regioner.tom')).count()); i++) {
+      await page.mouse.wheel(0, -400);
+      await page.waitForTimeout(300);
+    }
+    await page.waitForTimeout(1200);
+    await expect(page.getByText(tx('karta.regioner.tom'))).toHaveCount(0);
+    const sheet = page.getByRole('dialog');
+    const names = new Set(US_STATES.map((p) => p.name));
+    let picked = '';
+    for (const [dx, dy] of [[0, 0], [0, -40], [0, -80], [0, -120], [-40, -60], [40, -60], [0, 40], [0, -160]]) {
+      await page.mouse.click(at.x + dx, at.y + dy);
+      if (await sheet.isVisible().catch(() => false)) {
+        picked = (await sheet.getByRole('heading').first().textContent()) ?? '';
+        if (names.has(picked)) break;
+        await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+      }
+      await page.waitForTimeout(300);
+    }
+    expect(names.has(picked), `Ingen delstat träffades (${picked})`).toBe(true);
+    const besokt = sheet.getByRole('button', { name: tx('karta.status.besokt'), exact: true });
+    if ((await besokt.getAttribute('aria-pressed')) !== 'true') await besokt.click();
+    await expect(besokt).toHaveAttribute('aria-pressed', 'true');
+    await expect(sheet.getByRole('link', { name: tx('land.vy.oversikt') })).toHaveAttribute('href', /^\/karta\/US-[a-z]+$/);
+    await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+    await expect(sheet).toBeHidden();
+  });
+
+  await test.step('Regioner: Kalifornien bockas av på USA:s sida och räknaren ändras, landet ändras inte', async () => {
+    await page.goto('/karta/US');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 20_000 });
+    const usStatus = await page.locator('.hero-sub').first().textContent();
+    await expect(page.getByRole('heading', { name: tx('karta.regioner.i-landet').replace('{plats}', 'USA') })).toBeVisible();
+    const row = page.getByRole('button', { name: new RegExp(`^${esc(tx('karta.regioner.delstat'))}`) });
+    await row.click();
+    const sheet = page.getByRole('dialog');
+    const ca = sheet.getByRole('button', { name: 'Kalifornien', exact: true });
+    const counter = sheet.locator('p.mu').first();
+    const count = async () => Number(/^(\d+)/.exec((await counter.textContent()) ?? '')?.[1] ?? NaN);
+    const before = await count();
+    const wasOn = (await ca.getAttribute('aria-pressed')) === 'true';
+    await ca.click();
+    await expect(ca).toHaveAttribute('aria-pressed', wasOn ? 'false' : 'true');
+    await expect.poll(count).toBe(wasOn ? before - 1 : before + 1);
+    expect(await counter.textContent()).toMatch(/av 51 /);
+    if (wasOn) await ca.click();
+    await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+    // En besökt delstat gör inte landet besökt.
+    await expect(page.locator('.hero-sub').first()).toHaveText(usStatus ?? '');
+    if (!hasStates) await page.unroute('**/rest/v1/places?*');
+  });
+
+  await test.step('Landlista: FN:s medlemsländer ger nämnaren 193 på Jag, och sedan tillbaka till alla', async () => {
+    await page.goto('/vi/anpassning');
+    await expect(page.getByText(tx('landlista.rubrik'))).toBeVisible();
+    const alla = page.getByRole('radio', { name: new RegExp(`^${esc(tx('landlista.alla')).replace('\\{totalt\\}', '\\d+')}$`) });
+    const fn = page.getByRole('radio', { name: tx('landlista.fn').replace('{totalt}', '193'), exact: true });
+    let saved = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
+    await fn.check();
+    await saved;
+    await page.goto('/vi');
+    const tile = page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first();
+    await expect(tile.locator('.num')).toHaveText(/^\d+ av 193$/, { timeout: 20_000 });
+    await page.goto('/vi/anpassning');
+    saved = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
+    await alla.check();
+    await saved;
+    await expect(alla).toBeChecked();
   });
 
   await test.step('engelska: flikarna och inloggningssidan byter språk, och sedan tillbaka till svenska', async () => {

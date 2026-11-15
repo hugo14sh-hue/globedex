@@ -57,3 +57,9 @@
 - Egna bilder på listpunkter: ladda upp ett eget foto (till exempel från resan) när punkten saknar bild från Wikimedia Commons, eller i stället för den. Kräver lagring (Supabase Storage), regler för vem som ser bilden och en gräns för storleken.
 - Bilder även på punkterna i Missa inte och i kortbunten (i dag bara i punktens bottenark och som miniatyr i Lista).
 - Content-Security-Policy för hela appen. Appen har ingen i dag. Den behöver tillåta Supabase, OpenFreeMap, höjddata på s3.amazonaws.com, Google Fonts och upload.wikimedia.org.
+
+## Från Körning 12
+- Ytor för Sveriges landskap. Natural Earth har län, inte landskap, så de visas i dag som punkter. En öppen källa med landskapsgränser (med licens som tillåter användning) behövs först.
+- Procent av världen (som i prototypen, "av världen") på Jag/Vi. Logiken finns redan (antal och nämnare per landlista i src/lib/landlistor.ts), men texten saknas.
+- Regionlager för fler länder (till exempel Kanadas provinser eller Australiens delstater) när innehållet har platser med layer och data.iso_3166_2. make-regions.mjs behöver då ta med fler länder.
+- Visa en gemensam räknare för gruppens regioner (i dag räknar landssidan den som tittar).

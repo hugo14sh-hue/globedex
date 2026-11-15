@@ -877,7 +877,20 @@
   "ingress.resor": "Planera nästa resa och samla bokningar, packlista och allt som ska göras innan avresa.",
   "ingress.jag": "Ditt konto, dina märken och hur appen ska se ut och låta.",
   "ingress.vi": "Det ni gör tillsammans: gemensamma listor, betyg och vad den andra vill göra.",
-  "ingress.gruppen": "Det ni gör tillsammans: gemensamma listor, betyg och vad de andra vill göra."
+  "ingress.gruppen": "Det ni gör tillsammans: gemensamma listor, betyg och vad de andra vill göra.",
+  "karta.lage.regioner": "Regioner",
+  "karta.regioner.landskap": "Landskap",
+  "karta.regioner.delstat": "Delstater",
+  "karta.regioner.tom": "Zooma in på ett land som har regioner, till exempel Sverige eller USA.",
+  "karta.regioner.antal": "{antal} av {totalt} besökta",
+  "karta.regioner.i-landet": "Regioner i {plats}",
+  "vi.siffror.delstater": "Delstater i USA",
+  "landlista.rubrik": "Vilka länder räknas?",
+  "landlista.hjalp": "Styr hur många länder som finns att bocka av i statistik, mål och märken. Kartan visar alltid alla.",
+  "landlista.fn": "FN:s medlemsländer ({totalt})",
+  "landlista.fn-plus": "FN:s medlemsländer och observatörer ({totalt})",
+  "landlista.alla": "Alla länder och territorier ({totalt})",
+  "landlista.utanfor": "Räknas inte i din lista"
  },
  "marken": [
   {

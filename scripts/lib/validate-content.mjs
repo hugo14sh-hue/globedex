@@ -34,6 +34,7 @@ const BUCKET_CATEGORIES = ['aventyr', 'natur', 'resa', 'mat', 'kultur', 'tillsam
 const TRANSPORT_RATINGS = ['bast', 'bra', 'dyrt'];
 const DATA_FIELDS = [
   'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment', 'prices', 'month_notes', 'events',
+  'iso_3166_2',
 ];
 const EVENT_FIELDS = ['name', 'start', 'end', 'text', 'source'];
 /** Bildfälten i place_items skrivs bara av npm run import:images, aldrig av importen av innehållet. */
@@ -122,6 +123,13 @@ function checkPlaceData(row, check) {
   if (d === undefined) return;
   if (!isObj(d)) return check(row, 'data', false, 'ska vara ett objekt');
   for (const k of Object.keys(d)) check(row, `data.${k}`, DATA_FIELDS.includes(k), 'okänt fält i data');
+  // Regionens kod i ISO 3166-2 (US-CA). Kopplar regionen till sin yta i kartläget Regioner.
+  if (d.iso_3166_2 !== undefined) {
+    check(row, 'data.iso_3166_2', row.kind === 'region', 'bara för regioner');
+    const okCode = typeof d.iso_3166_2 === 'string' && /^[A-Z]{2}-[A-Z0-9]{1,3}$/.test(d.iso_3166_2);
+    check(row, 'data.iso_3166_2', okCode, 'kod i ISO 3166-2, t.ex. US-CA');
+    if (okCode && isStr(row.id)) check(row, 'data.iso_3166_2', d.iso_3166_2.startsWith(`${row.id.slice(0, 2)}-`), 'börjar med landets kod');
+  }
   if (d.stay !== undefined) {
     const ok =
       Array.isArray(d.stay) &&
@@ -544,4 +552,40 @@ export function validatePretripList(name, json) {
     if (isStr(row.hint)) check(row, 'hint', row.hint.length <= 200, 'högst 200 tecken');
     check(row, 'days_before', isInt(row.days_before) && row.days_before >= 0 && row.days_before <= 365, 'krävs, heltal 0–365 (0 = avresedagen)');
   });
+}
+
+/**
+ * content/_landlistor.json: { fn: [193 landskoder], fn_observatorer: [...] }. Läses in i appen vid bygget.
+ * Varje kod ska finnas bland appens länder (src/lib/countries.ts), fn ska ha 193 unika koder och
+ * listorna får inte överlappa.
+ */
+export const UN_MEMBERS = 193;
+export function validateCountryLists(name, json, appCountries) {
+  const errs = [];
+  const check = makeChecker(name, errs);
+  const row = { id: '-' };
+  if (!isObj(json)) return [{ file: name, id: '-', field: '-', message: 'filen ska vara ett JSON-objekt' }];
+  for (const k of Object.keys(json)) check(row, k, ['_om', 'fn', 'fn_observatorer'].includes(k), 'okänt fält');
+  const known = new Set(appCountries);
+  const lists = {};
+  for (const key of ['fn', 'fn_observatorer']) {
+    const list = json[key];
+    const ok = Array.isArray(list) && list.every((c) => typeof c === 'string');
+    check(row, key, ok, 'lista med landskoder krävs');
+    if (!ok) continue;
+    lists[key] = list;
+    const seen = new Set();
+    for (const c of list) {
+      check({ id: c }, key, COUNTRY_RE.test(c), 'landskod med två versaler');
+      check({ id: c }, key, known.has(c), 'finns inte bland appens länder (src/lib/countries.ts)');
+      check({ id: c }, key, !seen.has(c), 'finns två gånger');
+      seen.add(c);
+    }
+  }
+  if (lists.fn) check(row, 'fn', new Set(lists.fn).size === UN_MEMBERS, `ska ha ${UN_MEMBERS} unika koder, har ${new Set(lists.fn).size}`);
+  if (lists.fn && lists.fn_observatorer) {
+    const fn = new Set(lists.fn);
+    for (const c of lists.fn_observatorer) check({ id: c }, 'fn_observatorer', !fn.has(c), 'finns också i fn');
+  }
+  return errs;
 }

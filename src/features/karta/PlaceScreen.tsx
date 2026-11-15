@@ -1,7 +1,7 @@
 // Landssida och stadssida: Översikt, Lista, Guide, Månad, Boka och Köp med hem (som i prototypen).
 // Allt innehåll kommer från databasen. Saknas innehåll visas land.saknar-innehall och status fungerar ändå.
 import { BackLink } from '../../components/BackLink';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { BottomSheet } from '../../components/BottomSheet';
 import { Estimate } from '../../components/Estimate';
@@ -46,9 +46,12 @@ import { BokaView } from './BokaView';
 import { PlacePrices } from './PriceSection';
 import { monthNames } from './months';
 import { StatusPicker } from './StatusPicker';
+import { RegionSection } from './RegionSection';
+import { outsideCountryList } from '../../lib/landlistor';
+import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
-import { currentMonth, eventsInMonth, hasMonthNotes } from '../../lib/smartMonth';
+import { currentMonth, eventsInMonth, hasMonthNotes, SWIPE_MIN, swipedMonth } from '../../lib/smartMonth';
 
 /** Första bokstaven versal (månadens namn från webbläsaren börjar med gemen på svenska). */
 const capital = (s: string) => s.charAt(0).toLocaleUpperCase() + s.slice(1);
@@ -187,6 +190,10 @@ export default function PlaceScreen() {
               {t(STATUS_KEY[status ?? 'ej'])}
               {parent ? ` · ${parent.name}` : ''}
             </span>
+            {/* Besökt land utanför vald landlista: räknas inte i siffror, mål och märken. */}
+            {status && VISITED.includes(status) && outsideCountryList(id, theme.countryList) && (
+              <span className="chip soft tag">{t('landlista.utanfor')}</span>
+            )}
           </div>
           {items.length > 0 && (
             <div className="ring" style={{ background: `conic-gradient(var(--a) ${pct * 3.6}deg, rgba(255,255,255,.25) 0)` }} aria-hidden="true">
@@ -197,6 +204,9 @@ export default function PlaceScreen() {
       </div>
 
       <StatusPicker placeId={id} name={name} current={status} total={total} label={name} />
+
+      {/* Landskap och delstater: räknare och lista att bocka av. Visas på översikten. */}
+      {view === 'oversikt' && knownCountry && <RegionSection countryId={id} countryName={name} places={places} statuses={mine.statuses} />}
 
       {empty ? (
         <div className="card soft">
@@ -609,6 +619,28 @@ function Manad({ place }: { place: Place }) {
   const notes = hasMonthNotes(d.month_notes) ? d.month_notes : null;
   const [picked, setPicked] = useState(() => currentMonth(today));
   const events = eventsInMonth(d.events, picked, today);
+  // Svep åt vänster eller höger över diagrammet byter månad. Ett svep räknas inte som tryck på en stapel.
+  const swipe = useRef<{ x: number; y: number } | null>(null);
+  const swiped = useRef(false);
+  const onDown = (e: PointerEvent) => {
+    swipe.current = { x: e.clientX, y: e.clientY };
+    swiped.current = false;
+  };
+  const onUp = (e: PointerEvent) => {
+    const s = swipe.current;
+    swipe.current = null;
+    if (!s) return;
+    const next = swipedMonth(picked, e.clientX - s.x, e.clientY - s.y);
+    if (next !== picked || Math.abs(e.clientX - s.x) >= SWIPE_MIN) swiped.current = true;
+    if (next !== picked) setPicked(next);
+  };
+  const pick = (i: number) => {
+    if (swiped.current) {
+      swiped.current = false;
+      return;
+    }
+    setPicked(i);
+  };
   if (!m && !d.best_text) {
     return (
       <div className="card soft">
@@ -624,14 +656,21 @@ function Manad({ place }: { place: Place }) {
       </div>
       {m && notes ? (
         <>
-          <div className="bars pick" role="group" aria-label={t('karta.lage.smart')}>
+          <div
+            className="bars pick"
+            role="group"
+            aria-label={t('karta.lage.smart')}
+            onPointerDown={onDown}
+            onPointerUp={onUp}
+            onPointerCancel={() => (swipe.current = null)}
+          >
             {m.map((x, i) => (
               <button
                 key={months[i].long}
                 type="button"
                 aria-pressed={picked === i}
                 aria-label={t('smart.manad.betyg', { manad: capital(months[i].long), betyg: x })}
-                onClick={() => setPicked(i)}
+                onClick={() => pick(i)}
               >
                 <i style={{ height: `${Math.max(4, x * 20)}px`, background: SMART_COLORS[x] ?? SMART_COLORS[0] }} />
                 <span aria-hidden="true">{months[i].short}</span>

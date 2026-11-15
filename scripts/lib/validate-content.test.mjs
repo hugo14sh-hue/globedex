@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { sortPlaces, toDbRow, validateContent, validatePackList, validatePretripList, validateRates } from './validate-content.mjs';
+import { sortPlaces, toDbRow, validateContent, validateCountryLists, validatePackList, validatePretripList, validateRates } from './validate-content.mjs';
 
 // Testdata med påhittade id:n. Innehållet är bara platshållare för valideringen.
 const base = () => ({
@@ -288,5 +288,55 @@ describe('_valutor.json', () => {
     expect(validateRates('_valutor.json', { checked: '2026-11-01', source: 'https://example.org', sek_per: { EUR: 11 } })).toEqual([]);
     const errs = validateRates('_valutor.json', { checked: 'nu', sek_per: { eur: 0 } });
     expect(errs.map((e) => e.field).sort()).toEqual(['checked', 'sek_per', 'source']);
+  });
+});
+
+describe('_landlistor.json', () => {
+  const app = ['AA', 'BB', 'CC', 'DD'];
+  const fn = Array.from({ length: 193 }, (_, i) => `${String.fromCharCode(65 + Math.floor(i / 26))}${String.fromCharCode(65 + (i % 26))}`);
+  const all = [...fn, 'ZY', 'ZZ'];
+
+  it('godkänner 193 kända unika koder och observatörer utan överlapp', () => {
+    expect(validateCountryLists('_landlistor.json', { _om: 'x', fn, fn_observatorer: ['ZY', 'ZZ'] }, all)).toEqual([]);
+  });
+
+  it('stoppar okända koder, dubbletter, fel antal och överlapp', () => {
+    const msg = (json) => validateCountryLists('_landlistor.json', json, app).map((e) => `${e.id} ${e.field}: ${e.message}`);
+    expect(msg({ fn: ['AA', 'XX'], fn_observatorer: [] })).toEqual([
+      'XX fn: finns inte bland appens länder (src/lib/countries.ts)',
+      '- fn: ska ha 193 unika koder, har 2',
+    ]);
+    expect(msg({ fn: ['AA', 'AA'], fn_observatorer: ['AA'] })).toEqual([
+      'AA fn: finns två gånger',
+      '- fn: ska ha 193 unika koder, har 1',
+      'AA fn_observatorer: finns också i fn',
+    ]);
+    expect(msg({ fn: 'AA', annat: 1 })).toEqual([
+      '- annat: okänt fält',
+      '- fn: lista med landskoder krävs',
+      '- fn_observatorer: lista med landskoder krävs',
+    ]);
+  });
+
+  it('den riktiga filen går igenom mot appens länder', async () => {
+    const { COUNTRIES } = await import('../../src/lib/countries');
+    const json = JSON.parse(readFileSync(join(process.cwd(), 'content/_landlistor.json'), 'utf8'));
+    expect(validateCountryLists('_landlistor.json', json, COUNTRIES.map(([iso]) => iso))).toEqual([]);
+  });
+});
+
+describe('data.iso_3166_2', () => {
+  const withCode = (i, code) => {
+    const j = base();
+    j.places[i] = { ...j.places[i], data: { iso_3166_2: code } };
+    return run(j).errors.map((e) => `${e.id} ${e.field}: ${e.message}`);
+  };
+  it('godkänner en kod på en region', () => {
+    expect(withCode(2, 'XX-AB')).toEqual([]);
+  });
+  it('stoppar fel form, fel land och koder på annat än regioner', () => {
+    expect(withCode(2, 'xx-ab')).toEqual(['XX-region data.iso_3166_2: kod i ISO 3166-2, t.ex. US-CA']);
+    expect(withCode(2, 'YY-AB')).toEqual(['XX-region data.iso_3166_2: börjar med landets kod']);
+    expect(withCode(0, 'XX-AB')).toEqual(['XX data.iso_3166_2: bara för regioner']);
   });
 });

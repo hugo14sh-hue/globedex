@@ -9,6 +9,8 @@
 // Egna punkter (utan katalog) kan ha egna delmål, som bara finns i parts. Testas i bucketParts.test.ts.
 import { emptyInput, VISITED, visitedContinents, visitedCountries } from '../features/vi/marken';
 import type { PlaceStatus } from './statusLogic';
+import type { CountryList } from '../config';
+import { countsAsCountry, DEFAULT_COUNTRY_LIST } from './landlistor';
 import { LOCALE } from './locale';
 
 export type CountMetric = 'countries_visited' | 'continents_visited';
@@ -59,6 +61,8 @@ export interface PartsContext {
   }[];
   statuses: Record<string, PlaceStatus>;
   name: (id: string) => string;
+  /** Vilka länder som räknas (Anpassning). Saknas: alla. */
+  countryList?: CountryList;
 }
 
 const isObj = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -104,9 +108,9 @@ const statusList = (statuses: Record<string, PlaceStatus>) =>
     updated_at: null,
   }));
 
-/** Samma uträkning som Siffror: antal besökta länder eller kontinenter. */
-export function visitedCount(metric: CountMetric, statuses: Record<string, PlaceStatus>): number {
-  const x = { ...emptyInput(), statuses: statusList(statuses) };
+/** Samma uträkning som Siffror: antal besökta länder eller kontinenter i vald landlista. */
+export function visitedCount(metric: CountMetric, statuses: Record<string, PlaceStatus>, countryList: CountryList = DEFAULT_COUNTRY_LIST): number {
+  const x = { ...emptyInput(), statuses: statusList(statuses), countryList };
   return Object.keys(metric === 'countries_visited' ? visitedCountries(x) : visitedContinents(x)).length;
 }
 
@@ -141,7 +145,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
         )
       : null;
   if (checklist.type === 'antal') {
-    const value = visitedCount(checklist.metric, ctx.statuses);
+    const value = visitedCount(checklist.metric, ctx.statuses, ctx.countryList);
     return {
       kind: 'antal',
       metric: checklist.metric,
@@ -161,9 +165,9 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
         .map((p) => auto(p.id)),
     );
   }
-  // Länder med status besökt. Man bockar av själv, och titeln är landets namn.
+  // Länder i vald landlista med status besökt. Man bockar av själv, och titeln är landets namn.
   const countries = Object.entries(ctx.statuses)
-    .filter(([id, s]) => /^[A-Z]{2}$/.test(id) && s === 'besokt')
+    .filter(([id, s]) => countsAsCountry(id, ctx.countryList ?? DEFAULT_COUNTRY_LIST) && s === 'besokt')
     .map(([id]) => ({ id, name: ctx.name(id) }))
     .sort((a, b) => a.name.localeCompare(b.name, LOCALE));
   return rows(countries.map((c) => ({ ...manual(c.name, parts), placeId: c.id })));

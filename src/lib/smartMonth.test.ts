@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { currentMonth, eventsInMonth, hasMonthNotes } from './smartMonth';
+import { currentMonth, eventsInMonth, hasMonthNotes, swipedMonth } from './smartMonth';
 
 // Påhittade händelser för logiken, inget innehåll.
 const ev = (name: string, start: string, end: string) => ({ name, start, end, text: 't', source: 'https://example.org' });
@@ -33,5 +33,20 @@ describe('Smart månad', () => {
   it('väljer innevarande månad', () => {
     expect(currentMonth('2026-11-15')).toBe(10);
     expect(currentMonth('2027-01-01')).toBe(0);
+  });
+});
+
+describe('Smart månad: svep', () => {
+  it('svep åt vänster ger nästa månad, åt höger föregående', () => {
+    expect(swipedMonth(5, -60, 5)).toBe(6);
+    expect(swipedMonth(5, 60, -5)).toBe(4);
+  });
+  it('korta och lodräta svep byter inte månad', () => {
+    expect(swipedMonth(5, -20, 0)).toBe(5);
+    expect(swipedMonth(5, -60, 80)).toBe(5);
+  });
+  it('stannar vid januari och december', () => {
+    expect(swipedMonth(0, 80, 0)).toBe(0);
+    expect(swipedMonth(11, -80, 0)).toBe(11);
   });
 });

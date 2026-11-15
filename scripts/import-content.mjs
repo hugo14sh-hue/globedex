@@ -1,5 +1,6 @@
 // Läser content/??.json och content/_bucket.json till Supabase (upsert på id).
-// Kontrollerar också content/_packlista.json, content/_innan-avresa.json och content/_valutor.json, som appen läser in vid bygget.
+// Kontrollerar också content/_packlista.json, content/_innan-avresa.json, content/_valutor.json och
+// content/_landlistor.json, som appen läser in vid bygget.
 // Körs lokalt av Hugo: npm run import (skriver) eller npm run import:check (bara validering).
 // Nyckeln SUPABASE_SECRET_KEY läses ur .env.local och skrivs aldrig ut.
 // Bildfälten i place_items (image_url, image_credit, image_license, image_page) skrivs aldrig här,
@@ -8,7 +9,8 @@ import { readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { secretClient, readUtf8 } from './lib/env.mjs';
-import { ORDER, TABLES, formatError, toDbRow, validateContent, validatePackList, validatePretripList, validateRates } from './lib/validate-content.mjs';
+import { ORDER, TABLES, formatError, toDbRow, validateContent, validateCountryLists, validatePackList, validatePretripList, validateRates } from './lib/validate-content.mjs';
+import { COUNTRIES } from '../src/lib/countries.ts';
 import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -45,6 +47,13 @@ async function main() {
     const json = await readJson('_valutor.json');
     errors.push(...validateRates('_valutor.json', json));
     appLists.push(['_valutor.json', json?.sek_per && typeof json.sek_per === 'object' ? Object.keys(json.sek_per).length : 0]);
+  }
+  // Vilka länder som räknas (FN:s medlemsländer och observatörer). Läses in i appen vid bygget.
+  {
+    const json = await readJson('_landlistor.json');
+    errors.push(...validateCountryLists('_landlistor.json', json, COUNTRIES.map(([iso]) => iso)));
+    const n = (k) => (Array.isArray(json?.[k]) ? json[k].length : 0);
+    appLists.push(['_landlistor.json', `fn ${n('fn')}, fn_observatorer ${n('fn_observatorer')}`]);
   }
   // Gränssnittets texter på svenska och engelska: samma nycklar, form, platshållare och märken.
   const textErrors = compareTexts(await readJson('_texter.json'), await readJson('_texter.en.json'));

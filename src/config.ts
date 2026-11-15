@@ -24,6 +24,9 @@ export type BodyFont = 'DM Sans' | 'Inter' | 'Manrope' | 'Nunito' | 'Work Sans' 
 export type TextSize = 'liten' | 'normal' | 'stor';
 export type Tone = 'neutral' | 'lekfull' | 'romantisk';
 export type TravelMode = 'solo' | 'par' | 'grupp';
+/** Vilka länder som räknas i statistik, mål och märken (content/_landlistor.json). Se src/lib/landlistor.ts. */
+export type CountryList = 'fn' | 'fn-plus' | 'alla';
+export const COUNTRY_LISTS: CountryList[] = ['fn', 'fn-plus', 'alla'];
 
 export interface ThemeSettings {
   palette: PaletteId;
@@ -36,6 +39,8 @@ export interface ThemeSettings {
   tone: Tone;
   /** Valt språk. Tomt = inget val gjort: svenska om webbläsarens språk börjar med sv, annars engelska. */
   lang: Lang | null;
+  /** Vilka länder som räknas. Sparas lokalt och i profilen som språkvalet. */
+  countryList: CountryList;
 }
 
 /** Startläge: Djuphav, Fraunces + DM Sans, ljust, 16 px rundning. */
@@ -49,6 +54,7 @@ export const DEFAULT_THEME: ThemeSettings = {
   radius: 16,
   tone: 'neutral',
   lang: null,
+  countryList: 'alla',
 };
 
 export const DEFAULT_THEME_COLOR = '#0F4C5C';

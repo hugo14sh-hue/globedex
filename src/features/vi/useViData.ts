@@ -58,6 +58,8 @@ export function useViData() {
   const [n, setN] = useState(0);
   const reload = useCallback(() => setN((x) => x + 1), []);
   const customPalette = theme.palette === 'egen';
+  // Den som tittar räknar med sitt eget val, även i par och grupp.
+  const countryList = theme.countryList;
 
   useEffect(() => {
     if (!me || !gid) return;
@@ -111,7 +113,9 @@ export function useViData() {
         statuses: ok(statusR, [])
           .filter((s) => isStatus(s.status))
           .map((s) => ({ place_id: s.place_id, status: s.status as ViInput['statuses'][number]['status'], updated_at: s.updated_at })),
+        countryList,
         seRegions: places.filter((p) => p.parent_id === 'SE' && p.layer === 'landskap').map((p) => p.id),
+        usStates: places.filter((p) => p.parent_id === 'US' && p.layer === 'delstat').map((p) => p.id),
         trips,
         legCounts: ok(legsR, {}),
         finds: ok(findsR, []),
@@ -134,7 +138,7 @@ export function useViData() {
     return () => {
       alive = false;
     };
-  }, [me, gid, mode, memberKey, customPalette, n]);
+  }, [me, gid, mode, memberKey, customPalette, countryList, n]);
 
   return { data, reload };
 }

@@ -5,6 +5,7 @@ import maplibregl, { type GeoJSONSource, type MapGeoJSONFeature } from 'maplibre
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { MAP_BOUNDS } from '../../config';
 import { countryBounds, pointCountries, POINT_MIN_ZOOM, type CountryPoint } from '../../lib/mapPoints';
+import { REGION_MIN_ZOOM, regionGeoIndex, regionsInView, type MapRegion, type RegionGeoIndex } from '../../lib/mapRegions';
 
 /** OpenFreeMap: kontrollerad 2026-11-13 på openfreemap.org (fri, ingen nyckel, attribution visas av stilen). */
 const STYLE = { light: 'https://tiles.openfreemap.org/styles/positron', dark: 'https://tiles.openfreemap.org/styles/dark' };
@@ -12,10 +13,13 @@ const STYLE = { light: 'https://tiles.openfreemap.org/styles/positron', dark: 'h
 const DEM_TILES = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
 const ATTRIBUTION = [
   '<a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a>',
+  // USA:s delstater i läget Regioner (public/geo/delstater.json, byggd av scripts/make-regions.mjs).
+  '<a href="https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-1-states-provinces/" target="_blank" rel="noopener">Natural Earth admin 1</a>',
   '<a href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noopener">Terrain Tiles</a>',
 ];
 
-export type MapMode = 'ren' | 'upptack' | 'terrang' | 'smart';
+export type MapMode = 'ren' | 'upptack' | 'terrang' | 'smart' | 'regioner';
+export type { MapRegion };
 export type MapExtent = 'europa' | 'varlden';
 
 export interface MapMarker {
@@ -63,6 +67,13 @@ export interface MapViewProps {
   /** Landets namn för punktens aria-label. */
   countryLabel: (iso: string) => string;
   onCountry: (iso: string) => void;
+  /** Regioner (landskap, delstater) i läget Regioner. Med ytan när den finns, annars som punkt. */
+  regions: MapRegion[];
+  /** Färg per region (platsens id). Regioner utan färg får fallback. */
+  regionFills: Record<string, string>;
+  onRegion: (placeId: string) => void;
+  /** Syns någon region i kartans utsnitt? Anropas i läget Regioner när kartan har flyttats. */
+  onRegionsVisible: (visible: boolean) => void;
   onMarker: (m: MapMarker) => void;
   onError: () => void;
 }
@@ -85,6 +96,11 @@ const FILL = 'lander-fill';
 const LINE = 'lander-line';
 const HILL = 'terrang';
 const DOTS = 'platser-punkt';
+const REG_FILL = 'regioner-fill';
+const REG_LINE = 'regioner-line';
+const REG_NAMES = 'regioner-namn';
+/** Delstaternas ytor. Laddas först när läget Regioner väljs. */
+const REGION_GEO = '/geo/delstater.json';
 const NAMES = 'platser-namn';
 
 export default function MapView(props: MapViewProps) {
@@ -94,6 +110,9 @@ export default function MapView(props: MapViewProps) {
   // Kartdatat för länderna: hämtas en gång, ger både ytorna och vilka länder som är för små att träffa.
   const [bounds, setBounds] = useState<ReturnType<typeof countryBounds> | null>(null);
   const [geoLoaded, setGeoLoaded] = useState(0);
+  // Regionernas ytor: hämtas första gången läget Regioner väljs.
+  const [regionGeo, setRegionGeo] = useState<RegionGeoIndex | null>(null);
+  const regionGeoAsked = useRef(false);
   const latest = useRef(props);
   useEffect(() => {
     latest.current = props;
@@ -177,6 +196,33 @@ export default function MapView(props: MapViewProps) {
         },
         firstSymbol,
       );
+      // Regionerna ovanpå länderna, under baskartans namn. Dolda utom i läget Regioner.
+      m.addSource('regioner', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, promoteId: 'code' });
+      m.addLayer(
+        {
+          id: REG_FILL,
+          type: 'fill',
+          source: 'regioner',
+          minzoom: REGION_MIN_ZOOM,
+          layout: { visibility: 'none' },
+          paint: {
+            'fill-color': ['coalesce', ['feature-state', 'color'], latest.current.fallback],
+            'fill-opacity': fillOpacity(0.85),
+          },
+        },
+        firstSymbol,
+      );
+      m.addLayer(
+        {
+          id: REG_LINE,
+          type: 'line',
+          source: 'regioner',
+          minzoom: REGION_MIN_ZOOM,
+          layout: { visibility: 'none' },
+          paint: { 'line-color': latest.current.dark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)', 'line-width': 0.8 },
+        },
+        firstSymbol,
+      );
       m.addSource('dem', { type: 'raster-dem', tiles: [DEM_TILES], tileSize: 256, encoding: 'terrarium', maxzoom: 12 });
       m.addLayer(
         { id: HILL, type: 'hillshade', source: 'dem', layout: { visibility: 'none' }, paint: { 'hillshade-exaggeration': 0.6 } },
@@ -207,6 +253,28 @@ export default function MapView(props: MapViewProps) {
           'text-size': 12,
           'text-offset': [0.9, 0],
           'text-anchor': 'left',
+          'text-optional': true,
+        },
+        paint: {
+          'text-color': latest.current.dark ? '#F2EFE9' : '#1B1B1F',
+          'text-halo-color': latest.current.dark ? '#0E1A20' : '#FFFFFF',
+          'text-halo-width': 1.4,
+        },
+      });
+
+      // Regionernas namn: vid ytans etikettpunkt, eller under punkten när ytan saknas.
+      m.addSource('regioner-namn', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      m.addLayer({
+        id: REG_NAMES,
+        type: 'symbol',
+        source: 'regioner-namn',
+        minzoom: REGION_MIN_ZOOM + 1,
+        layout: {
+          visibility: 'none',
+          'text-field': ['get', 'name'],
+          'text-font': ['Noto Sans Bold'],
+          'text-size': 11,
+          'text-offset': ['case', ['get', 'pt'], ['literal', [0, 1.7]], ['literal', [0, 0]]],
           'text-optional': true,
         },
         paint: {
@@ -249,10 +317,16 @@ export default function MapView(props: MapViewProps) {
           const mk = latest.current.markers.find((x) => x.id === id);
           if (mk) return latest.current.onMarker(mk);
         }
+        // Läget Regioner: en region går före landet under den.
+        if (latest.current.mode === 'regioner' && m.getLayoutProperty(REG_FILL, 'visibility') === 'visible') {
+          const reg: MapGeoJSONFeature | undefined = m.queryRenderedFeatures(e.point, { layers: [REG_FILL] })[0];
+          const r = reg && latest.current.regions.find((x) => x.code === String(reg.properties.code));
+          if (r) return regionTap.current(r);
+        }
         const land: MapGeoJSONFeature | undefined = m.queryRenderedFeatures(e.point, { layers: [FILL] })[0];
         if (land?.properties?.iso) latest.current.onCountry(String(land.properties.iso));
       });
-      for (const layer of [FILL, DOTS]) {
+      for (const layer of [FILL, DOTS, REG_FILL]) {
         m.on('mouseenter', layer, () => (m.getCanvas().style.cursor = 'pointer'));
         m.on('mouseleave', layer, () => (m.getCanvas().style.cursor = ''));
       }
@@ -265,6 +339,130 @@ export default function MapView(props: MapViewProps) {
       m.remove();
     };
   }, [props.dark]);
+
+  // Ett tryck på en region: zooma in på ytan (eller punkten när ytan saknas) och öppna bottenarket.
+  const regionTap = useRef<(r: MapRegion) => void>(() => undefined);
+  useEffect(() => {
+    regionTap.current = (r: MapRegion) => {
+      const m = map.current;
+      if (m) {
+        const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        const box = r.code ? regionGeo?.boxes[r.code] : undefined;
+        if (box) m.fitBounds(box, { padding: 40, maxZoom: Math.max(m.getZoom(), 6), duration: reduce ? 0 : 600 });
+        else m.easeTo({ center: [r.lon, r.lat], zoom: Math.max(m.getZoom(), 5), duration: reduce ? 0 : 600 });
+      }
+      latest.current.onRegion(r.id);
+    };
+  }, [regionGeo]);
+
+  // Läget Regioner: hämta ytorna första gången och visa lagren.
+  const regionMode = props.mode === 'regioner';
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !m.getLayer(REG_FILL)) return;
+    for (const layer of [REG_FILL, REG_LINE, REG_NAMES]) m.setLayoutProperty(layer, 'visibility', regionMode ? 'visible' : 'none');
+    if (!regionMode || regionGeoAsked.current) return;
+    regionGeoAsked.current = true;
+    fetch(REGION_GEO)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((fc) => setRegionGeo(regionGeoIndex(fc)))
+      .catch(() => {
+        // Utan ytor visas delstaterna som punkter. Nästa gång läget väljs försöker kartan igen.
+        regionGeoAsked.current = false;
+      });
+  }, [ready, regionMode]);
+
+  // Ytorna in i kartan (också när kartan har skapats om för mörkt läge).
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !regionGeo) return;
+    (m.getSource('regioner') as GeoJSONSource | undefined)?.setData(regionGeo.fc);
+  }, [ready, regionGeo]);
+
+  // Regionernas färger och namn.
+  const regionKey = props.regions.map((r) => `${r.id}:${r.code ?? ''}`).join(',');
+  const regionFillsKey = JSON.stringify(props.regionFills);
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !m.getLayer(REG_FILL)) return;
+    const p = latest.current;
+    m.removeFeatureState({ source: 'regioner' });
+    for (const r of p.regions) {
+      const color = p.regionFills[r.id];
+      if (r.code && color && regionGeo?.boxes[r.code]) m.setFeatureState({ source: 'regioner', id: r.code }, { color, opacity: 0.85 });
+    }
+    m.setPaintProperty(REG_FILL, 'fill-color', ['coalesce', ['feature-state', 'color'], p.fallback]);
+    const names = p.regions.map((r) => {
+      const lp = r.code ? regionGeo?.labels[r.code] : undefined;
+      return {
+        type: 'Feature' as const,
+        properties: { name: r.name, pt: !lp },
+        geometry: { type: 'Point' as const, coordinates: lp ?? [r.lon, r.lat] },
+      };
+    });
+    (m.getSource('regioner-namn') as GeoJSONSource | undefined)?.setData({ type: 'FeatureCollection', features: names });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, regionGeo, regionKey, regionFillsKey, props.fallback]);
+
+  // Regioner utan yta (i dag Sveriges landskap): tryckbara punkter på 44 px på platsens koordinater.
+  useEffect(() => {
+    const m = map.current;
+    const root = el.current;
+    if (!m || !root || !ready || !regionMode) return;
+    const p = latest.current;
+    const show = () => root.classList.toggle('show-regions', m.getZoom() >= REGION_MIN_ZOOM);
+    const made = p.regions
+      .filter((r) => !r.code || !regionGeo?.boxes[r.code])
+      .map((r) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'map-region';
+        b.dataset.id = r.id;
+        b.setAttribute('aria-label', r.name);
+        b.style.setProperty('--ring', p.regionFills[r.id] ?? p.fallback);
+        b.appendChild(document.createElement('i'));
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          regionTap.current(r);
+        });
+        return new maplibregl.Marker({ element: b }).setLngLat([r.lon, r.lat]).addTo(m);
+      });
+    show();
+    m.on('zoom', show);
+    return () => {
+      m.off('zoom', show);
+      for (const x of made) x.remove();
+      root.classList.remove('show-regions');
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, regionMode, regionGeo, regionKey]);
+
+  // Punkternas färg följer regionens status.
+  useEffect(() => {
+    const root = el.current;
+    if (!root) return;
+    for (const b of root.querySelectorAll<HTMLElement>('.map-region'))
+      b.style.setProperty('--ring', props.regionFills[b.dataset.id ?? ''] ?? props.fallback);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, regionMode, regionGeo, regionKey, regionFillsKey, props.fallback]);
+
+  // Syns någon region? Annars visar kartskärmen karta.regioner.tom.
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !regionMode) return;
+    const check = () => {
+      const b = m.getBounds();
+      latest.current.onRegionsVisible(
+        regionsInView(latest.current.regions, regionGeo, m.getZoom(), [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()]),
+      );
+    };
+    check();
+    m.on('moveend', check);
+    return () => {
+      m.off('moveend', check);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, regionMode, regionGeo, regionKey]);
 
   // Landsfärger via feature-state, så att geometrin bara laddas en gång.
   const fillsKey = JSON.stringify(props.fills);

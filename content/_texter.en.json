@@ -873,7 +873,20 @@
   "ingress.resor": "Plan the next trip and keep bookings, the packing list and everything to do before departure in one place.",
   "ingress.jag": "Your account, your badges and how the app should look and sound.",
   "ingress.vi": "What you do together: shared lists, ratings and what the other one wants to do.",
-  "ingress.gruppen": "What you do together: shared lists, ratings and what the others want to do."
+  "ingress.gruppen": "What you do together: shared lists, ratings and what the others want to do.",
+  "karta.lage.regioner": "Regions",
+  "karta.regioner.landskap": "Provinces",
+  "karta.regioner.delstat": "States",
+  "karta.regioner.tom": "Zoom in on a country that has regions, such as Sweden or the USA.",
+  "karta.regioner.antal": "{antal} of {totalt} visited",
+  "karta.regioner.i-landet": "Regions in {plats}",
+  "vi.siffror.delstater": "US states",
+  "landlista.rubrik": "Which countries count?",
+  "landlista.hjalp": "Controls how many countries there are to tick off in stats, goals and badges. The map always shows all of them.",
+  "landlista.fn": "UN member states ({totalt})",
+  "landlista.fn-plus": "UN member states and observers ({totalt})",
+  "landlista.alla": "All countries and territories ({totalt})",
+  "landlista.utanfor": "Not counted in your list"
  },
  "marken": [
   {

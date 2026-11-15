@@ -16,7 +16,7 @@ import { LOCALE, numberFormat } from '../../lib/locale';
 
 const nf = { format: (n: number) => numberFormat().format(n) };
 
-type StatId = 'lander' | 'kontinenter' | 'landskap' | 'resor' | 'resdagar' | 'fynd' | 'bucket';
+type StatId = 'lander' | 'kontinenter' | 'landskap' | 'delstater' | 'resor' | 'resdagar' | 'fynd' | 'bucket';
 
 const TL_ICON: Record<TimelineType, IconName> = { resa: 'plane', fynd: 'book', marke: 'star', bucket: 'check' };
 const TL_FIRST = 8;
@@ -60,13 +60,24 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
   const name = (id: string) => placeName(data.places, id);
 
   const tiles: { id: StatId; value: string; label: string }[] = [
-    { id: 'lander', value: nf.format(nums.lander.length), label: t('vi.siffror.lander') },
+    // Nämnaren är antalet länder i vald landlista (Anpassning).
+    { id: 'lander', value: t('vi.siffror.av', { antal: nums.lander.length, totalt: nums.landerTotalt }), label: t('vi.siffror.lander') },
     { id: 'kontinenter', value: nf.format(nums.kontinenter.length), label: t('vi.siffror.kontinenter') },
     {
       id: 'landskap',
       value: nums.landskapTotalt ? t('vi.siffror.av', { antal: nums.landskap.length, totalt: nums.landskapTotalt }) : nf.format(nums.landskap.length),
       label: t('vi.siffror.landskap'),
     },
+    // Delstaterna visas bredvid landskapen, bara när minst en är besökt.
+    ...(nums.delstater.length
+      ? [
+          {
+            id: 'delstater' as const,
+            value: t('vi.siffror.av', { antal: nums.delstater.length, totalt: nums.delstaterTotalt }),
+            label: t('vi.siffror.delstater'),
+          },
+        ]
+      : []),
     { id: 'resor', value: nf.format(nums.resor.length), label: t('vi.siffror.resor') },
     { id: 'resdagar', value: nf.format(nums.resdagar), label: t('vi.siffror.resdagar') },
     {
@@ -86,6 +97,11 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
         return { title: t('vi.siffror.kontinenter'), rows: nums.kontinenter.map((c) => ({ key: c, title: continentName(c) })) };
       case 'landskap':
         return { title: t('vi.siffror.landskap'), rows: nums.landskap.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, LOCALE)) };
+      case 'delstater':
+        return {
+          title: t('vi.siffror.delstater'),
+          rows: nums.delstater.map((c) => ({ key: c, title: name(c), to: `/karta/${c}` })).sort((a, b) => a.title.localeCompare(b.title, LOCALE)),
+        };
       case 'resor':
       case 'resdagar':
         return {
@@ -187,9 +203,11 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
       )}
 
       <BottomSheet open={stat !== null} title={d.title} onClose={() => setStat(null)}>
+        {stat === 'lander' && <p className="mu">{t('vi.siffror.av', { antal: nums.lander.length, totalt: nums.landerTotalt })}</p>}
         {stat === 'landskap' && nums.landskapTotalt > 0 && (
           <p className="mu">{t('vi.siffror.av', { antal: nums.landskap.length, totalt: nums.landskapTotalt })}</p>
         )}
+        {stat === 'delstater' && <p className="mu">{t('vi.siffror.av', { antal: nums.delstater.length, totalt: nums.delstaterTotalt })}</p>}
         {stat === 'fynd' && nums.fyndTotalt > 0 && <p className="mu">{t('samling.raknare', { antal: nums.fynd, totalt: nums.fyndTotalt })}</p>}
         {d.rows.length === 0 ? (
           <p className="mu">{t('vi.siffror.tom')}</p>

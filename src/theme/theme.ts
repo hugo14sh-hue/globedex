@@ -1,5 +1,6 @@
 import {
   APP_NAME,
+  COUNTRY_LISTS,
   DEFAULT_THEME,
   LANGS,
   RADIUS_MAX,
@@ -142,6 +143,7 @@ export function sanitizeTheme(raw: unknown): ThemeSettings {
     radius: Math.min(RADIUS_MAX, Math.max(RADIUS_MIN, radius)),
     tone: pick(r.tone, TONES, DEFAULT_THEME.tone),
     lang: LANGS.includes(r.lang as never) ? (r.lang as ThemeSettings['lang']) : null,
+    countryList: pick(r.countryList, COUNTRY_LISTS, DEFAULT_THEME.countryList),
   };
 }
 

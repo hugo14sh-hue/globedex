@@ -3,6 +3,7 @@
 import type { BadgeState, TripLike, ViInput } from './marken';
 import { doneTrips, tripDays, visitedContinents, visitedCountries, visitedRegions } from './marken';
 import { countryIdFor } from '../../lib/statusLogic';
+import { countryListTotal, countsAsCountry } from '../../lib/landlistor';
 import { displayNames, LOCALE } from '../../lib/locale';
 
 // ---------- Siffror ----------
@@ -12,6 +13,10 @@ export interface Numbers {
   kontinenter: string[];
   landskap: string[];
   landskapTotalt: number;
+  delstater: string[];
+  delstaterTotalt: number;
+  /** Antal länder i vald landlista (nämnaren för länder). */
+  landerTotalt: number;
   resor: TripLike[];
   resdagar: number;
   fynd: number;
@@ -26,6 +31,9 @@ export function numbers(x: ViInput, compendiumTotal: number): Numbers {
     kontinenter: Object.keys(visitedContinents(x)).sort(),
     landskap: Object.keys(visitedRegions(x)),
     landskapTotalt: x.seRegions.length,
+    delstater: Object.keys(visitedRegions(x, x.usStates)),
+    delstaterTotalt: x.usStates.length,
+    landerTotalt: countryListTotal(x.countryList),
     resor,
     resdagar: resor.reduce((s, t) => s + tripDays(t), 0),
     fynd: x.finds.length,
@@ -72,7 +80,8 @@ export function wrapped(x: ViInput, year: number): WrappedYear | null {
   const trips = tripsInYear(x, year);
   if (!trips.length) return null;
   const y = String(year);
-  const countries = [...new Set(trips.filter((t) => t.place_id).map((t) => countryIdFor(t.place_id!)))].sort();
+  // Bara länder i vald landlista räknas.
+  const countries = [...new Set(trips.filter((t) => t.place_id).map((t) => countryIdFor(t.place_id!)))].filter((c) => countsAsCountry(c, x.countryList)).sort();
   let longest: WrappedYear['longest'] = null;
   for (const t of trips) {
     const d = tripDays(t);

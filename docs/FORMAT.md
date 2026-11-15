@@ -49,6 +49,7 @@ data på en plats:
 - prices: prisnivå och exempelpriser i lokal valuta, se nedan. Kräver ingen databasändring (ligger i data).
 - month_notes: lista med exakt 12 texter, januari först. Förklarar betyget i smart_months för varje månad. Får saknas.
 - events: lista med händelser som påverkar när man bör åka, se nedan. Får saknas.
+- iso_3166_2: regionens kod i ISO 3166-2, till exempel "US-CA". Bara på regioner (kind region), och koden börjar med landets kod. Kopplar regionen till sin yta i kartläget Regioner (public/geo/delstater.json, byggd av `node scripts/make-regions.mjs` ur Natural Earth admin 1). Regioner utan yta visas som punkter på lat och lon.
 
 #### data.month_notes och data.events
 Visas i rutan Smart månad på platsens sida (vyn Månad). Har platsen month_notes står texten smart.tryck under staplarna, och ett tryck på en månad visar månadens namn och betyg, månadens text och under smart.handelser.rubrik de händelser som börjar eller slutar i den månaden och inte har passerat. Utan month_notes ser rutan ut som förut. Läggs month_notes till och är egen bedömning: skriv "month_notes" i own_judgment.
@@ -268,6 +269,15 @@ Ligger i content/_valutor.json och läses in i appen vid bygget (inte till datab
 | _om | text | nej | kommentar, används inte |
 
 En valuta som saknas i sek_per visas bara i lokal valuta. `npm run import:check` validerar filen.
+
+## Vilka länder som räknas
+Ligger i content/_landlistor.json och läses in i appen vid bygget (inte till databasen). Styr nämnaren och vad som räknas i statistik, mål och märken, efter valet under Anpassning (FN:s medlemsländer, med observatörer, eller alla länder i appen). Kartan visar alltid alla länder.
+
+```json
+{ "_om": "...", "fn": ["AD", "AE", "..."], "fn_observatorer": ["PS", "VA"] }
+```
+
+`npm run import:check` stoppar okända fält, koder som inte finns bland appens länder (src/lib/countries.ts), dubbletter, en fn-lista som inte har 193 unika koder och koder som finns i båda listorna.
 
 ## Gränssnittets texter
 Ligger i content/_texter.json och läses in i appen vid bygget (inte till databasen). Nycklar under texter, tre språkstilar (neutral, lekfull, romantisk), märken under marken. Reglerna står i filens _om.
