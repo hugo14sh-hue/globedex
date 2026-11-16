@@ -51,7 +51,7 @@ import { outsideCountryList } from '../../lib/landlistor';
 import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
-import { currentMonth, eventsInMonth, hasMonthNotes, hasSeasons, seasonsInMonth, SWIPE_MIN, swipedMonth } from '../../lib/smartMonth';
+import { currentMonth, eventsInMonth, hasMonthNotes, hasSeasons, seasonAriaKey, seasonsInMonth, SWIPE_MIN, swipedMonth } from '../../lib/smartMonth';
 
 /** Första bokstaven versal (månadens namn från webbläsaren börjar med gemen på svenska). */
 const capital = (s: string) => s.charAt(0).toLocaleUpperCase() + s.slice(1);
@@ -676,7 +676,7 @@ function Manad({ place }: { place: Place }) {
                 aria-pressed={picked === i}
                 aria-label={[
                   t('smart.manad.betyg', { manad: capital(months[i].long), betyg: x }),
-                  seasonCount(i) > 0 ? t('smart.sasong.aria', { antal: seasonCount(i) }) : '',
+                  seasonCount(i) > 0 ? t(seasonAriaKey(seasonCount(i)), { antal: seasonCount(i) }) : '',
                 ]
                   .filter(Boolean)
                   .join(', ')}

@@ -9,7 +9,7 @@ import { Flag } from '../../components/Flag';
 import { Row } from '../../components/Row';
 import { fetchPlaces, type Place } from '../../lib/content';
 import { spent } from '../../lib/kassa';
-import { monthsBetween, seasonsInMonths } from '../../lib/smartMonth';
+import { monthsBetween, tripSeasons as seasonsForTrip } from '../../lib/smartMonth';
 import { changedPos, countdown, move, todayIso, tripPhase } from '../../lib/tripLogic';
 import {
   addLeg,
@@ -102,10 +102,9 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const cd = phase === 'kommande' ? countdown(trip.start_date, today) : null;
   const budgetTotal = Number(trip.budget?.total ?? 0);
   const placeLabel = tripPlace(places, trip);
-  // Säsonger på resans plats som pågår under resans månader (data.seasons).
-  const tripSeasons = trip.start_date
-    ? seasonsInMonths(places.find((p) => p.id === trip.place_id)?.data.seasons, monthsBetween(trip.start_date, trip.end_date))
-    : [];
+  // Säsonger på resans plats som pågår under resans månader (data.seasons). Ett land utan egna säsonger
+  // visar säsongerna från sina städer.
+  const tripSeasons = trip.start_date ? seasonsForTrip(places, trip.place_id, monthsBetween(trip.start_date, trip.end_date)) : [];
   const playable = (legs ?? []).some((l) => l.from_lat != null && l.to_lat != null);
 
   const saveLeg = async (e: FormEvent) => {
@@ -185,9 +184,9 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
           <div className="hero-seasons">
             <h2 className="eb">{t('smart.sasonger.rubrik')}</h2>
             <ul>
-              {tripSeasons.map((x) => (
-                <li key={`${x.name}-${x.from}-${x.to}`} className="hero-sub">
-                  <b>{x.name}</b> · {seasonPeriod(x, t, shortMonthNames())}
+              {tripSeasons.map(({ season: x, city }) => (
+                <li key={`${city ?? ''}-${x.name}-${x.from}-${x.to}`} className="hero-sub">
+                  <b>{city ? `${city}: ${x.name}` : x.name}</b> · {seasonPeriod(x, t, shortMonthNames())}
                 </li>
               ))}
             </ul>

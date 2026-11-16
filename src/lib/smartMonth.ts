@@ -1,5 +1,5 @@
 // Smart månad: månadens text (data.month_notes), händelser (data.events) och säsonger (data.seasons). Ren logik, testas i smartMonth.test.ts.
-import type { PlaceEvent, PlaceSeason } from './content';
+import type { Place, PlaceEvent, PlaceSeason } from './content';
 
 /** Månaden (0–11) i ett datum ÅÅÅÅ-MM-DD. */
 const monthOf = (iso: string) => Number(iso.slice(5, 7)) - 1;
@@ -60,4 +60,37 @@ export function monthsBetween(start: string, end?: string | null): number[] {
   const out: number[] = [];
   for (let i = a; i <= Math.min(b, a + 11); i++) out.push(i % 12);
   return out;
+}
+
+/** Textnyckeln för stapelns tillägg: singular när exakt en säsong pågår. */
+export const seasonAriaKey = (count: number) => (count === 1 ? 'smart.sasong.aria.en' : 'smart.sasong.aria');
+
+/** En säsong på resans sida. city är stadens namn när säsongen kommer från en av landets städer. */
+export interface TripSeason {
+  season: PlaceSeason;
+  city?: string;
+}
+
+type SeasonPlace = Pick<Place, 'id' | 'kind' | 'parent_id' | 'name'> & { data: { seasons?: PlaceSeason[] } };
+
+/** Landet som platsen ligger i (platsen själv om den är ett land). */
+function countryIdOf(places: SeasonPlace[], id: string): string | null {
+  let p = places.find((x) => x.id === id);
+  for (let i = 0; p && p.kind !== 'country' && i < 10; i++) p = places.find((x) => x.id === p!.parent_id);
+  return p?.id ?? null;
+}
+
+/**
+ * Säsonger på resans plats som pågår under månaderna (0–11). Har platsen inga egna säsonger och är
+ * den ett land: säsongerna från landets städer, med stadens namn. Samma säsong i flera städer visas
+ * en gång per stad.
+ */
+export function tripSeasons(places: SeasonPlace[], placeId: string | null | undefined, months: number[]): TripSeason[] {
+  const place = placeId ? places.find((p) => p.id === placeId) : undefined;
+  if (!place) return [];
+  if (hasSeasons(place.data.seasons)) return seasonsInMonths(place.data.seasons, months).map((season) => ({ season }));
+  if (place.kind !== 'country') return [];
+  return places
+    .filter((p) => p.kind === 'city' && hasSeasons(p.data.seasons) && countryIdOf(places, p.id) === place.id)
+    .flatMap((c) => seasonsInMonths(c.data.seasons, months).map((season) => ({ season, city: c.name })));
 }

@@ -494,8 +494,10 @@ test('röktest', async ({ page }) => {
     await expect(box.getByRole('heading', { name: new RegExp(`^Juni`) })).toBeVisible();
     await expect(box.getByText(mc_june())).toBeVisible();
     await expect(box.getByRole('heading', { name: tx('smart.handelser.rubrik') })).toBeVisible();
-    await expect(box.locator('.smart-events').getByText(/Formel 1/)).toBeVisible();
-    await expect(box.getByRole('link', { name: 'autosport.com' })).toHaveAttribute('href', /autosport\.com/);
+    // Listan med händelser, inte säsongerna (MC-monaco har Formel 1 som säsong också).
+    const events = box.locator('.smart-events:not(.smart-seasons)');
+    await expect(events.getByText(/Formel 1/)).toBeVisible();
+    await expect(events.getByRole('link', { name: 'autosport.com' })).toHaveAttribute('href', /autosport\.com/);
     await page.unroute('**/rest/v1/places?*');
   });
 

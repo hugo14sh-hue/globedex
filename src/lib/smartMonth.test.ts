@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { currentMonth, eventsInMonth, hasMonthNotes, hasSeasons, monthsBetween, seasonCovers, seasonsInMonth, seasonsInMonths, swipedMonth } from './smartMonth';
+import { currentMonth, eventsInMonth, hasMonthNotes, hasSeasons, monthsBetween, seasonAriaKey, tripSeasons, seasonCovers, seasonsInMonth, seasonsInMonths, swipedMonth } from './smartMonth';
 
 // Påhittade händelser för logiken, inget innehåll.
 const ev = (name: string, start: string, end: string) => ({ name, start, end, text: 't', source: 'https://example.org' });
@@ -86,5 +86,51 @@ describe('Säsonger', () => {
     expect(monthsBetween('2027-01-01', '2029-01-01')).toHaveLength(12);
     expect(seasonsInMonths(list, monthsBetween('2027-08-25', '2027-09-03')).map((s) => s.name)).toEqual(['sommar']);
     expect(seasonsInMonths(list, [9])).toEqual([]);
+  });
+});
+
+describe('Säsonger: singular och resans plats', () => {
+  it('stapelns tillägg är singular vid exakt en säsong', () => {
+    expect(seasonAriaKey(1)).toBe('smart.sasong.aria.en');
+    expect(seasonAriaKey(2)).toBe('smart.sasong.aria');
+    expect(seasonAriaKey(6)).toBe('smart.sasong.aria');
+  });
+
+  // Påhittade platser för logiken, inget innehåll.
+  const sa = (name: string, from: number, to: number) => ({ name, from, to });
+  const pl = (id: string, kind: 'country' | 'region' | 'city', parent_id: string | null, seasons?: ReturnType<typeof sa>[]) => ({
+    id,
+    kind,
+    parent_id,
+    name: `Namn ${id}`,
+    data: seasons ? { seasons } : {},
+  });
+  const places = [
+    pl('XX', 'country', null),
+    pl('XX-a', 'city', 'XX', [sa('sommar', 6, 8), sa('vinter', 12, 2)]),
+    pl('XX-r', 'region', 'XX'),
+    pl('XX-b', 'city', 'XX-r', [sa('sommar', 6, 8)]),
+    pl('XX-c', 'city', 'XX'),
+    pl('YY', 'country', null, [sa('egen', 7, 7)]),
+    pl('YY-a', 'city', 'YY', [sa('stad', 7, 7)]),
+    pl('ZZ-a', 'city', 'ZZ', [sa('annat land', 7, 7)]),
+  ];
+  const show = (r: { season: { name: string }; city?: string }[]) => r.map((x) => (x.city ? `${x.city}: ${x.season.name}` : x.season.name));
+
+  it('ett land utan egna säsonger visar städernas, en gång per stad', () => {
+    expect(show(tripSeasons(places, 'XX', [6]))).toEqual(['Namn XX-a: sommar', 'Namn XX-b: sommar']);
+    expect(show(tripSeasons(places, 'XX', [0]))).toEqual(['Namn XX-a: vinter']);
+    expect(tripSeasons(places, 'XX', [3])).toEqual([]);
+  });
+
+  it('en plats med egna säsonger visar bara dem, utan stadens namn', () => {
+    expect(show(tripSeasons(places, 'YY', [6]))).toEqual(['egen']);
+    expect(show(tripSeasons(places, 'XX-a', [6]))).toEqual(['sommar']);
+  });
+
+  it('en stad utan säsonger och en okänd plats ger inget', () => {
+    expect(tripSeasons(places, 'XX-c', [6])).toEqual([]);
+    expect(tripSeasons(places, 'QQ', [6])).toEqual([]);
+    expect(tripSeasons(places, null, [6])).toEqual([]);
   });
 });
