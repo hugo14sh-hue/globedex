@@ -889,7 +889,8 @@
   "landlista.utanfor": "Not counted in your list",
   "smart.sasonger.rubrik": "In season",
   "smart.sasong.period": "{fran}–{till}",
-  "smart.sasong.aria": "{antal} seasons in progress"
+  "smart.sasong.aria": "{antal} seasons in progress",
+  "smart.sasong.aria.en": "1 season in progress"
  },
  "marken": [
   {

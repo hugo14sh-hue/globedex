@@ -893,7 +893,8 @@
   "landlista.utanfor": "Räknas inte i din lista",
   "smart.sasonger.rubrik": "I säsong",
   "smart.sasong.period": "{fran}–{till}",
-  "smart.sasong.aria": "{antal} säsonger pågår"
+  "smart.sasong.aria": "{antal} säsonger pågår",
+  "smart.sasong.aria.en": "1 säsong pågår"
  },
  "marken": [
   {
