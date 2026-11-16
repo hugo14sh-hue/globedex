@@ -223,6 +223,43 @@
      "Höst och regn.",
      "Grått och blött.",
      "Ljusfestival längs kanalerna. Kallt och mörkt tidigt."
+    ],
+    "events": [
+     {
+      "name": "Amsterdam Light Festival",
+      "start": "2026-11-26",
+      "end": "2027-01-17",
+      "text": "Ljuskonst längs kanalerna.",
+      "source": "https://www.amsterdamtourism.org/?p=1434"
+     },
+     {
+      "name": "Keukenhof öppnar",
+      "start": "2027-03-18",
+      "end": "2027-03-21",
+      "text": "Tulpanparken i Lisse öppnar för säsongen och håller öppet till början av maj.",
+      "source": "https://www.amsterdamtips.com/?p=2837"
+     },
+     {
+      "name": "Kungadagen",
+      "start": "2027-04-27",
+      "end": "2027-04-27",
+      "text": "Hela stan klär sig i orange. Gatufest och loppmarknad, och hotellen tar slut tidigt.",
+      "source": "https://www.amsterdamtips.com/?p=2840"
+     },
+     {
+      "name": "Rolling Kitchens",
+      "start": "2027-05-13",
+      "end": "2027-05-17",
+      "text": "Matvagnsfestival i Westerpark.",
+      "source": "https://www.amsterdamtips.com/?p=2842"
+     },
+     {
+      "name": "Grachtenfestival",
+      "start": "2027-08-13",
+      "end": "2027-08-22",
+      "text": "Klassisk musik och jazz på scener vid och på kanalerna.",
+      "source": "https://www.amsterdamtips.com/?p=2860"
+     }
     ]
    }
   }

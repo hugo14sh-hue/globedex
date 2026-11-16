@@ -1,9 +1,14 @@
 {
- "_om": "Ungefärliga kurser för att visa priser i kronor. Uppdateras för hand. DKK är räknad från eurokursen och kronens fasta kurs mot euron (7,46).",
+ "_om": "Ungefärliga kurser för att visa priser i kronor. Uppdateras för hand. EUR är Riksbankens kurs. Övriga är härledda och avrundade: DKK från den fasta kursen mot euron, USD och AUD från eurons kurs mot dem i september 2026, TRY från dollarkursen 6 november 2026, ISK från Visas kurs i juli 2026. NOK är osäkrast: källorna anger mellan 0,93 och 1,04.",
  "checked": "2026-11-01",
  "source": "https://exchangerate.guru/eur/sek/",
  "sek_per": {
   "EUR": 11.0,
-  "DKK": 1.47
+  "DKK": 1.47,
+  "USD": 9.6,
+  "AUD": 6.8,
+  "NOK": 1.0,
+  "ISK": 0.077,
+  "TRY": 0.19
  }
 }

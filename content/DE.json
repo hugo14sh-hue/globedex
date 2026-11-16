@@ -167,6 +167,50 @@
      "Höst. Svalare och fina färger i parkerna.",
      "Grått och kallt innan julmarknaderna öppnar.",
      "Julmarknader över hela stan. Kallt och mörkt tidigt."
+    ],
+    "events": [
+     {
+      "name": "Berlinale",
+      "start": "2027-02-10",
+      "end": "2027-02-21",
+      "text": "Filmfestivalen. Biljetter till visningarna säljs till allmänheten.",
+      "source": "https://www.visitberlin.de/en/node/74919"
+     },
+     {
+      "name": "Berlins halvmaraton",
+      "start": "2027-04-04",
+      "end": "2027-04-04",
+      "text": "Gator i centrum är avstängda under loppet.",
+      "source": "https://www.berlin.de/en/events/march/"
+     },
+     {
+      "name": "Karneval der Kulturen",
+      "start": "2027-05-22",
+      "end": "2027-05-25",
+      "text": "Gatufest och parad i Kreuzberg. Datumen är förväntade, inte bekräftade.",
+      "source": "https://thedeanhotels.com/locations/berlin/whats-on/cultural-festivals-in-berlin"
+     },
+     {
+      "name": "Pergamonmuseet öppnar igen",
+      "start": "2027-06-04",
+      "end": "2027-06-04",
+      "text": "Museet på Museumsinsel öppnar efter renoveringen.",
+      "source": "https://www.visitberlin.de/en/node/2251763"
+     },
+     {
+      "name": "Berlin Art Week",
+      "start": "2027-09-08",
+      "end": "2027-09-12",
+      "text": "Utställningar i gallerier över hela stan.",
+      "source": "https://www.berlin.de/en/events/september/"
+     },
+     {
+      "name": "Berlin Marathon",
+      "start": "2027-09-26",
+      "end": "2027-09-26",
+      "text": "Ett av världens största lopp. Hotellen är dyra den helgen och centrum är avstängt.",
+      "source": "https://www.visitberlin.de/en/node/2262876"
+     }
     ]
    },
    "smart_months": [

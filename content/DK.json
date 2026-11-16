@@ -144,6 +144,22 @@
      "Höst. Svalare och blåsigare.",
      "Mörkt och rått före julsäsongen.",
      "Julmarknader och jul på Tivoli. Mörkt tidigt."
+    ],
+    "events": [
+     {
+      "name": "Distortion",
+      "start": "2027-06-02",
+      "end": "2027-06-06",
+      "text": "Gatufester i en ny stadsdel varje dag, och två dagars festival vid hamnen på slutet.",
+      "source": "https://www.visitdenmark.com/denmark/plan-your-trip/distortion-gdk759015"
+     },
+     {
+      "name": "Copenhagen Jazz Festival",
+      "start": "2027-07-02",
+      "end": "2027-07-11",
+      "text": "Konserter på torg, i parker och på klubbar över hela stan. Datumen kommer från en reseguide, inte från festivalen själv.",
+      "source": "https://www.copenhagentourism.org/?p=2119"
+     }
     ]
    },
    "smart_months": [
