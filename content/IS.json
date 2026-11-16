@@ -124,6 +124,22 @@
      "Vinter och korta dagar. Norrsken och isgrottor.",
      "Mörkast på året. Julbelysning, norrsken och isgrottor."
     ],
+    "events": [
+     {
+      "name": "Dark Music Days",
+      "start": "2027-01-28",
+      "end": "2027-01-31",
+      "text": "Festival för nyskriven och experimentell musik.",
+      "source": "https://reykjavik.is/en/borgin-okkar/festivals-reykjavik"
+     },
+     {
+      "name": "Vinterljusfestivalen",
+      "start": "2027-02-04",
+      "end": "2027-02-07",
+      "text": "Ljusslinga, museinatt och badhusnatt i hela huvudstadsområdet. Gratis.",
+      "source": "https://reykjavik.is/pl/node/40345"
+     }
+    ],
     "seasons": [
      {
       "name": "Lunnefåglar",

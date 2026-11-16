@@ -156,6 +156,36 @@
      "Badsäsongen börjar och priserna är ännu rimliga.",
      "Sommar, jul och nyårsfyrverkeri. Dyrt och fullbokat mot slutet."
     ],
+    "events": [
+     {
+      "name": "Nyårsfyrverkeriet",
+      "start": "2026-12-31",
+      "end": "2026-12-31",
+      "text": "Fyrverkeri över hamnen och bron. Bra platser fylls tidigt på dagen.",
+      "source": "https://www.perthairport.com.au/flights/travel-within-australia/events-in-sydney"
+     },
+     {
+      "name": "Sydney Festival",
+      "start": "2027-01-08",
+      "end": "2027-01-25",
+      "text": "Tre veckor med teater, musik och gratis evenemang utomhus.",
+      "source": "https://www.perthairport.com.au/flights/travel-within-australia/events-in-sydney"
+     },
+     {
+      "name": "Sydney Mardi Gras",
+      "start": "2027-02-21",
+      "end": "2027-03-07",
+      "text": "Pridefestival som avslutas med paraden på Oxford Street.",
+      "source": "https://expatliving.net/australia/festivals-in-australia-sporting-events/"
+     },
+     {
+      "name": "Vivid Sydney",
+      "start": "2027-05-28",
+      "end": "2027-06-19",
+      "text": "Ljusfestival vid hamnen och operahuset, 23 kvällar. Gratis.",
+      "source": "https://www.sydney.com/uk/destinations/sydney/sydney-city/sydney-harbour/events/vivid-sydney-2027"
+     }
+    ],
     "seasons": [
      {
       "name": "Badsäsong",

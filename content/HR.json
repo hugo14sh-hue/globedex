@@ -128,6 +128,15 @@
      "Regnigast på året. Mycket stänger.",
      "Lågsäsong. Mycket är stängt."
     ],
+    "events": [
+     {
+      "name": "Dubrovniks sommarfestival",
+      "start": "2027-07-10",
+      "end": "2027-08-25",
+      "text": "Teater, konserter och dans på scener i gamla stan. Datumen är festivalens vanliga, hämtade från en evenemangskalender.",
+      "source": "https://www.carnifest.com/dubrovniks-summer-festival-2027/"
+     }
+    ],
     "seasons": [
      {
       "name": "Badsäsong",
@@ -270,6 +279,15 @@
      "Fortfarande milt. Färjorna glesnar.",
      "Regnigt, och mycket stänger.",
      "Lågsäsong."
+    ],
+    "events": [
+     {
+      "name": "Ultra Europe",
+      "start": "2027-07-09",
+      "end": "2027-07-11",
+      "text": "Stor dansmusikfestival på Park Mladeži. Staden är full och boendet dyrt de dagarna.",
+      "source": "https://www.technoairlines.com/festival/ultra-europe-split-croatia-2027"
+     }
     ],
     "seasons": [
      {

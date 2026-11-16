@@ -152,6 +152,29 @@
      "Svalare. Thanksgiving i slutet av månaden.",
      "Julskyltning och isbanor. Fint men dyrast på året."
     ],
+    "events": [
+     {
+      "name": "Macy's Thanksgiving Day Parade",
+      "start": "2026-11-26",
+      "end": "2026-11-26",
+      "text": "Paraden genom Manhattan, i år för hundrade gången.",
+      "source": "https://resident.com/new-york/2026/10/28/nycs-holiday-season-begins-with-these-15-things-to-do-in-november-2026"
+     },
+     {
+      "name": "Granen vid Rockefeller Center tänds",
+      "start": "2026-12-02",
+      "end": "2026-12-02",
+      "text": "Därefter lyser granen varje kväll över jul.",
+      "source": "https://www.6sqft.com/category/art-nerd-ny/"
+     },
+     {
+      "name": "New York City Marathon",
+      "start": "2027-11-07",
+      "end": "2027-11-07",
+      "text": "Går genom alla fem stadsdelar. Många gator är avstängda och hotellen dyra den helgen.",
+      "source": "https://www.fultoncountyny.gov/node/647"
+     }
+    ],
     "seasons": [
      {
       "name": "Höstfärger i parkerna",
