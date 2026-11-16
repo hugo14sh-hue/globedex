@@ -92,6 +92,44 @@
      "smart_months",
      "stay"
     ],
+    "prices": {
+     "currency": "TRY",
+     "level": 2,
+     "checked": "2026-11-16",
+     "summary": "Billigt att äta ute med svenska mått. Alkohol är dyrare än maten antyder.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "typical": 500
+      },
+      {
+       "key": "middag-for-tva",
+       "typical": 2400
+      },
+      {
+       "key": "snabbmat",
+       "typical": 430
+      },
+      {
+       "key": "ol",
+       "typical": 200
+      },
+      {
+       "key": "kaffe",
+       "typical": 189
+      }
+     ],
+     "tips": [
+      "Liran tappar snabbt i värde, så priserna i lira stiger under året. Räkna om med dagens kurs."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/city-basket-analysis/in/Istanbul"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
     "month_notes": [
      "Kallt och regnigt. Korta köer.",
      "Kallt och regnigt.",

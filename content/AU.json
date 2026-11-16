@@ -92,6 +92,55 @@
      "smart_months",
      "stay"
     ],
+    "prices": {
+     "currency": "AUD",
+     "level": 4,
+     "checked": "2026-11-16",
+     "summary": "Dyrare än hemma, framför allt öl och middag på restaurang.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 12,
+       "high": 38,
+       "typical": 18
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 75,
+       "high": 150,
+       "typical": 100
+      },
+      {
+       "key": "snabbmat",
+       "low": 10,
+       "high": 15,
+       "typical": 12
+      },
+      {
+       "key": "ol",
+       "low": 5,
+       "high": 10,
+       "typical": 8
+      },
+      {
+       "key": "kaffe",
+       "low": 3,
+       "high": 5,
+       "typical": 4.1
+      }
+     ],
+     "tips": [
+      "En annan källa anger högre priser: 135 dollar för trerätters för två, 11 för en öl och 5,60 för en cappuccino."
+     ],
+     "sources": [
+      "https://www.sydneymovingguide.com/money/cost-of-living-sydney/",
+      "https://k2.expatarrivals.com/node/25481"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
     "month_notes": [
      "Högsommar och badväder, men skollov och höga priser.",
      "Varmt i havet och lite färre turister än i januari.",

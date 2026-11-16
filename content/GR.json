@@ -245,7 +245,41 @@
      "day_budget_sek",
      "smart_months",
      "stay"
-    ]
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 4,
+     "checked": "2026-11-16",
+     "summary": "Greklands dyraste ö. Maten kostar 25–45 procent mer än i Aten, och mest med utsikt över kalderan.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "typical": 24
+      },
+      {
+       "key": "ol",
+       "typical": 5
+      },
+      {
+       "key": "kaffe",
+       "low": 3,
+       "high": 6
+      }
+     ],
+     "tips": [
+      "Ät dagens stora mål till lunch. Restaurangerna med utsikt har ofta lunchmenyer som är 25–35 procent billigare än middagen.",
+      "Oia är dyrast. Samma rätt kan kosta två till tre gånger mer där än i Kamari eller Pyrgos."
+     ],
+     "sources": [
+      "https://gotripzi.com/destinations/santorini-gr/cost",
+      "https://www.theworldwasherefirst.com/?p=16027246",
+      "https://discovercyclades.gr/blog/santorini-cost-guide",
+      "https://www.nomadotravel.app/en/guides/santorini-on-a-budget"
+     ],
+     "own_judgment": [
+      "level"
+     ]
+    }
    },
    "smart_months": [
     0,
@@ -327,7 +361,45 @@
      "day_budget_sek",
      "smart_months",
      "stay"
-    ]
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 2,
+     "checked": "2026-11-16",
+     "summary": "Billigare än hemma på lokala tavernor. Vid hamnarna i turistorterna kostar det klart mer.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "typical": 13
+      },
+      {
+       "key": "middag-for-tva",
+       "typical": 50
+      },
+      {
+       "key": "ol",
+       "low": 3,
+       "high": 5
+      },
+      {
+       "key": "kaffe",
+       "typical": 3.5
+      }
+     ],
+     "tips": [
+      "En hel tavernamåltid med husets vin kostar 15–22 euro per person på ett lokalt ställe, och 35–45 euro vid hamnen i Chania."
+     ],
+     "sources": [
+      "https://gotripzi.com/destinations/heraklion-gr/cost",
+      "https://www.wandernundmehr.at/faq/ist-heraklion-teuer",
+      "https://crete.direct/articles/crete-budget-travel-2025-costs",
+      "https://crete.direct/articles/best-tavernas-chania"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    }
    },
    "smart_months": [
     1,

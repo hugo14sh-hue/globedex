@@ -92,6 +92,51 @@
      "smart_months",
      "stay"
     ],
+    "prices": {
+     "currency": "USD",
+     "level": 5,
+     "checked": "2026-11-16",
+     "summary": "Dyrt. Dricks och skatt läggs dessutom ovanpå priset på menyn.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 15,
+       "high": 45,
+       "typical": 25
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 80,
+       "high": 228,
+       "typical": 145
+      },
+      {
+       "key": "snabbmat",
+       "low": 12,
+       "high": 15,
+       "typical": 13.5
+      },
+      {
+       "key": "ol",
+       "low": 6,
+       "high": 12,
+       "typical": 8
+      },
+      {
+       "key": "kaffe",
+       "typical": 5.75,
+       "note": "Enligt Expat Arrivals, inte Numbeo."
+      }
+     ],
+     "sources": [
+      "https://www.expatica.com/us/cost-of-living/new-york-ny/",
+      "https://k2.expatarrivals.com/node/1757"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
     "month_notes": [
      "Kallast på året. Billigast att bo.",
      "Kallt, ofta snö.",
