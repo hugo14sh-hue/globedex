@@ -88,6 +88,7 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
     ],
@@ -152,7 +153,21 @@
       "level",
       "summary"
      ]
-    }
+    },
+    "month_notes": [
+     "Kallt, grått och korta dagar. Billigt att bo.",
+     "Fortfarande vinter. Bra museumsväder.",
+     "Våren dröjer, men dagarna blir längre.",
+     "Uteserveringarna öppnar. Vädret kan slå om.",
+     "Varmt och grönt. Ölträdgårdarna är öppna.",
+     "Långa ljusa kvällar och mycket uteliv.",
+     "Högsommar. Kan bli hett, och många berlinare är bortresta.",
+     "Högsommar och badsjöar. Mycket turister.",
+     "Varmt men inte hett, och färre turister.",
+     "Höst. Svalare och fina färger i parkerna.",
+     "Grått och kallt innan julmarknaderna öppnar.",
+     "Julmarknader över hela stan. Kallt och mörkt tidigt."
+    ]
    },
    "smart_months": [
     1,
@@ -294,7 +309,7 @@
    "must_rank": 1,
    "source_url": "https://www.bundestag.de/besuche/kuppel-dachterrasseunddachgartenrestaurant/kuppel/244990",
    "verified_on": "2026-11-11",
-   "wiki": "en:Reichstag dome"
+   "wiki": "en:Reichstag building"
   },
   {
    "id": "DE-berlin-murmuseet-bernauer",

@@ -83,8 +83,49 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 3,
+     "checked": "2026-11-16",
+     "summary": "Kroatiens dyraste stad. Priserna i gamla stan ligger nära svenska.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 7,
+       "high": 30,
+       "typical": 13
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 51,
+       "high": 120
+      }
+     ],
+     "sources": [
+      "https://www.chasingthedonkey.com/is-dubrovnik-expensive-cost-guide/"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Lågsäsong. Mycket är stängt.",
+     "Lågsäsong. Mycket är stängt.",
+     "Lugnt och svalt. En del öppnar mot slutet.",
+     "Våren kommer, men havet är kallt.",
+     "Varmt, och muren går att gå utan trängsel.",
+     "Badväder före högsäsongens priser.",
+     "Hett och fullt. Kryssningsfartygen fyller gamla stan.",
+     "Hetast, dyrast och mest folk.",
+     "Varmt i havet och färre kryssningsgäster.",
+     "Fortfarande milt. Säsongen tar slut mot slutet.",
+     "Regnigast på året. Mycket stänger.",
+     "Lågsäsong. Mycket är stängt."
     ]
    },
    "smart_months": [
@@ -165,8 +206,55 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 3,
+     "checked": "2026-11-16",
+     "summary": "Ungefär som hemma på restaurang, billigare för kaffe.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 15,
+       "high": 25
+      },
+      {
+       "key": "kaffe",
+       "low": 2,
+       "high": 3
+      },
+      {
+       "key": "lokalresa",
+       "typical": 2.5
+      }
+     ],
+     "tips": [
+      "Ett mellanklasshotell kostar ungefär 90–120 euro per natt enligt Radical Storage."
+     ],
+     "sources": [
+      "https://radicalstorage.com/travel/is-split-croatia-expensive/"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Lågsäsong. Få färjor till öarna.",
+     "Lågsäsong. Få färjor till öarna.",
+     "Lugnt och svalt.",
+     "Våren kommer, men havet är kallt.",
+     "Varmt, och färjorna går tätare.",
+     "Badväder före högsäsongens priser.",
+     "Hett och mycket folk. Bra färjeförbindelser.",
+     "Hetast och dyrast.",
+     "Varmt i havet och lugnare.",
+     "Fortfarande milt. Färjorna glesnar.",
+     "Regnigt, och mycket stänger.",
+     "Lågsäsong."
     ]
    },
    "smart_months": [
@@ -242,8 +330,80 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 2,
+     "checked": "2026-11-16",
+     "summary": "Billigare än hemma, särskilt öl och kaffe.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 10,
+       "high": 16.8,
+       "typical": 12
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 50,
+       "high": 100,
+       "typical": 60
+      },
+      {
+       "key": "snabbmat",
+       "low": 7,
+       "high": 12,
+       "typical": 8.4
+      },
+      {
+       "key": "ol",
+       "low": 3,
+       "high": 4,
+       "typical": 3
+      },
+      {
+       "key": "kaffe",
+       "low": 1.7,
+       "high": 3,
+       "typical": 2.2
+      },
+      {
+       "key": "lask",
+       "low": 2,
+       "high": 3.5,
+       "typical": 2.6
+      },
+      {
+       "key": "vatten",
+       "low": 1.5,
+       "high": 3,
+       "typical": 2.2
+      }
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Zagreb"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Kallt och grått.",
+     "Kallt och grått.",
+     "Våren börjar.",
+     "Milt, och uteserveringarna öppnar.",
+     "Varmt och grönt i parkerna.",
+     "Varmt och långa kvällar.",
+     "Hett, och många är vid kusten.",
+     "Hett, och många är vid kusten.",
+     "Varmt och lagom mycket folk.",
+     "Höst och klara dagar.",
+     "Grått före julmarknaden.",
+     "Julmarknad över hela centrum."
     ]
    },
    "smart_months": [

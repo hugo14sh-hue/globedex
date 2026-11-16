@@ -89,6 +89,7 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
     ],
@@ -140,7 +141,21 @@
       "level",
       "summary"
      ]
-    }
+    },
+    "month_notes": [
+     "Kallt och snö. Skidspåren i Nordmarka är öppna.",
+     "Bästa skidmånaden. Kallt men ljusare.",
+     "Skidsäsong med vårsol.",
+     "Snön smälter. Grått innan det grönskar.",
+     "Grönt och ljust. Den 17 maj firas nationaldagen.",
+     "Ljusa kvällar. Båtarna går till öarna i fjorden.",
+     "Varmast. Bad i fjorden, men många i Oslo är bortresta.",
+     "Fortfarande sommar och badväder.",
+     "Höstfärger i skogen och färre turister.",
+     "Rått och mörkare.",
+     "Mörkt och blött innan snön kommer.",
+     "Julmarknader och mörkt tidigt."
+    ]
    },
    "smart_months": [
     2,
@@ -302,7 +317,7 @@
    "must_rank": 4,
    "source_url": "https://www.bergen.kommune.no/hvaskjer/tema/bryggenverdensarv-i-bergen/unesco/verdensarv-i-norge",
    "verified_on": "2026-11-11",
-   "wiki": "en:Røros"
+   "wiki": "en:Røros Mining Town and the Circumference"
   },
   {
    "id": "NO-alta",
@@ -358,7 +373,7 @@
    "must_rank": 1,
    "source_url": "https://www.visitnorway.no/listings/vigelandsparken/15591/",
    "verified_on": "2026-11-11",
-   "wiki": "en:Vigeland sculpture park"
+   "wiki": "en:Frogner Park"
   },
   {
    "id": "NO-oslo-oyhopping",
@@ -428,7 +443,7 @@
    "must_rank": 6,
    "source_url": "https://www.forsvarsbygg.no/en/festningene/akershus-fortress",
    "verified_on": "2026-11-11",
-   "wiki": "en:Akershus Fortress"
+   "wiki": "sv:Akershus fästning"
   }
  ],
  "compendium": [

@@ -88,8 +88,23 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "month_notes": [
+     "Högsommar och badväder, men skollov och höga priser.",
+     "Varmt i havet och lite färre turister än i januari.",
+     "Sensommar: fortfarande badväder och lugnare.",
+     "Milt och klart. Bra för kustvandringen.",
+     "Höst. Svalare kvällar och mer regn.",
+     "Vinter på södra halvklotet: svalt och för kallt för bad.",
+     "Årets kallaste månad, men sällan under tio grader.",
+     "Fortfarande vinter. Billigast att bo.",
+     "Vår. Varmare dagar och få turister.",
+     "Varmt utan sommarens trängsel.",
+     "Badsäsongen börjar och priserna är ännu rimliga.",
+     "Sommar, jul och nyårsfyrverkeri. Dyrt och fullbokat mot slutet."
     ]
    },
    "smart_months": [

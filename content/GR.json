@@ -88,8 +88,65 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 2,
+     "checked": "2026-11-16",
+     "summary": "Billigare än hemma på restaurang och kafé.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "typical": 15
+      },
+      {
+       "key": "middag-for-tva",
+       "typical": 50
+      },
+      {
+       "key": "snabbmat",
+       "typical": 10
+      },
+      {
+       "key": "ol",
+       "typical": 5
+      },
+      {
+       "key": "kaffe",
+       "typical": 3.5
+      },
+      {
+       "key": "lokalresa",
+       "typical": 1.2
+      }
+     ],
+     "tips": [
+      "Siffrorna är Numbeos snitt för hela Grekland från oktober 2026, inte för Aten ensamt."
+     ],
+     "sources": [
+      "https://wagecentre.com/immigration/life/prices-in-greece?tmpl=component"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Milt men regnigt. Få turister och korta köer.",
+     "Milt och lugnt. Billigt att bo.",
+     "Våren börjar. Bra väder för ruinerna.",
+     "Varmt utan hetta. Bäst för Akropolis.",
+     "Varmt och torrt, före högsommarens trängsel.",
+     "Hett mitt på dagen. Gå till Akropolis tidigt.",
+     "För hett för ruinerna mitt på dagen.",
+     "Hetast på året, och många atenare är bortresta.",
+     "Värmen släpper och havet är varmt.",
+     "Varmt, klart och lugnare.",
+     "Milt. Mer regn mot slutet.",
+     "Svalt och regnigt, men lugnt."
     ]
    },
    "smart_months": [

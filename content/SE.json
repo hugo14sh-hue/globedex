@@ -328,6 +328,7 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
     ],
@@ -365,7 +366,21 @@
       "level",
       "summary"
      ]
-    }
+    },
+    "month_notes": [
+     "Kallt och mörkt. Billigt att bo.",
+     "Vinter. Ibland is att gå på.",
+     "Fortfarande kallt, men ljusare.",
+     "Våren kommer och körsbärsträden blommar i Kungsträdgården.",
+     "Grönt och ljust. Skärgårdsbåtarna börjar gå oftare.",
+     "Ljusa nätter och midsommar. Många lämnar stan över helgen.",
+     "Varmast. Bad och skärgård, men en del krogar har semesterstängt.",
+     "Sensommar och kräftskivor. Fortfarande badväder.",
+     "Klar höstluft och färre turister.",
+     "Höst. Svalare och mörkare.",
+     "Mörkast och gråast före advent.",
+     "Julmarknader och julbord. Mörkt tidigt."
+    ]
    },
    "smart_months": [
     1,
@@ -512,7 +527,7 @@
    "must_rank": 2,
    "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
    "verified_on": "2026-11-11",
-   "wiki": "sv:No Limit Street Art Borås"
+   "wiki": "sv:No Limit Borås"
   },
   {
    "id": "SE-boras-textilmuseet",
@@ -526,7 +541,7 @@
    "lon": 12.9365,
    "source_url": "https://www.textilmuseet.se/en/visit/plan-your-visit",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Textilmuseet"
+   "wiki": "sv:Textile Fashion Center"
   },
   {
    "id": "SE-boras-djurparken",
@@ -552,7 +567,7 @@
    "must_rank": 5,
    "source_url": "https://www.vastsverige.com/kulturupplevelser/boras--varldsledande-inom-innovativ-design-och-street-art/",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Abecita Konstmuseum"
+   "wiki": "sv:Abecita Popkonst & Foto"
   },
   {
    "id": "SE-boras-konstmuseet",
@@ -635,7 +650,7 @@
    "must_rank": 4,
    "source_url": "https://www.kth.se/blogs/studentblog/2022/02/tunnelbana-the-worlds-longest-art-gallery",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Konsten i Stockholms tunnelbana"
+   "wiki": "sv:Kungsträdgården (tunnelbanestation)"
   },
   {
    "id": "SE-stockholm-drottningholm",
@@ -775,7 +790,7 @@
    "lon": 18.4,
    "source_url": "https://www.bibliotekgavleborg.lg.se/en/Halsingegardar/World-heritage/world-heritage-sites-in-sweden",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Höga kusten"
+   "wiki": "en:High Coast"
   },
   {
    "id": "SE-angermanland-skuleskogen",
@@ -1162,7 +1177,7 @@
    "compendium_id": "blomma-forgatmigej",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Äkta förgätmigej"
+   "wiki": "sv:Förgätmigejer"
   },
   {
    "id": "SE-gotland-landskapsdjur",
@@ -1426,7 +1441,7 @@
    "compendium_id": "blomma-prastkrage",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Prästkrage"
+   "wiki": "en:Leucanthemum vulgare"
   },
   {
    "id": "SE-smaland-landskapsdjur",
@@ -1450,7 +1465,7 @@
    "compendium_id": "blomma-linnea",
    "source_url": "https://en.wikipedia.org/wiki/Province_flowers_of_Sweden",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Linnea"
+   "wiki": "en:Linnaea borealis"
   },
   {
    "id": "SE-sodermanland-landskapsdjur",
@@ -1708,7 +1723,7 @@
    "lon": 17.3069,
    "source_url": "https://catalog.lansstyrelsen.se/store/21/resource/2010__8",
    "verified_on": "2026-11-11",
-   "wiki": "sv:Stenstaden"
+   "wiki": "sv:Sundsvall"
   },
   {
    "id": "SE-jamtland-tannforsen",

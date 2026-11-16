@@ -67,8 +67,59 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "prices": {
+     "currency": "ISK",
+     "level": 5,
+     "checked": "2026-11-16",
+     "summary": "Bland Europas dyraste städer, framför allt för mat och alkohol.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 2500,
+       "high": 3400,
+       "note": "Med dryck. Källans egna sidor anger olika belopp, därför bara ett spann."
+      },
+      {
+       "key": "snabbmat",
+       "low": 2200,
+       "high": 2800
+      },
+      {
+       "key": "ol",
+       "low": 1300,
+       "high": 1600
+      },
+      {
+       "key": "kaffe",
+       "low": 650,
+       "high": 760
+      }
+     ],
+     "sources": [
+      "https://www.mylifeelsewhere.com/cost-of-living/reykjavik-c6024"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Mörkt och kallt. Chans till norrsken.",
+     "Vinter med lite mer ljus. Chans till norrsken.",
+     "Fortfarande vinter. Sista bra månaden för norrsken.",
+     "Mellan säsongerna: för ljust för norrsken, och höglandet är stängt.",
+     "Ljust och grönare, men svalt.",
+     "Ljusa nätter. Vägarna i inlandet börjar öppna.",
+     "Varmast och mest turister. Boka boende tidigt.",
+     "Fortfarande sommar. Mörkret kommer tillbaka mot slutet.",
+     "Höstfärger, färre turister och norrskenet är tillbaka.",
+     "Mörkare och blötare. Norrskenssäsong.",
+     "Vinter och korta dagar.",
+     "Mörkast på året. Julbelysning och chans till norrsken."
     ]
    },
    "smart_months": [

@@ -148,6 +148,7 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
     ],
@@ -208,7 +209,21 @@
       "level",
       "summary"
      ]
-    }
+    },
+    "month_notes": [
+     "Kallt, blött och grått. Korta köer till museerna.",
+     "Kallt och grått. Billigast att bo.",
+     "Våren börjar. Keukenhof öppnar mot slutet.",
+     "Tulpanerna blommar. Mycket folk kring Kungadagen i slutet av månaden.",
+     "Varmt och grönt. Tulpansäsongen tar slut i mitten.",
+     "Långa kvällar på uteserveringarna vid kanalerna.",
+     "Högsommar, mycket turister och höga priser.",
+     "Högsommar och mycket turister.",
+     "Fortfarande milt, med kortare köer.",
+     "Höst och regn.",
+     "Grått och blött.",
+     "Ljusfestival längs kanalerna. Kallt och mörkt tidigt."
+    ]
    }
   }
  ],

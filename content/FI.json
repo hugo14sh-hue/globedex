@@ -72,8 +72,72 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 4,
+     "checked": "2026-11-16",
+     "summary": "Restaurang kostar ungefär som hemma, men ölen är dyrare.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 13,
+       "high": 25,
+       "typical": 15
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 50,
+       "high": 110,
+       "typical": 90
+      },
+      {
+       "key": "snabbmat",
+       "low": 11,
+       "high": 14,
+       "typical": 13
+      },
+      {
+       "key": "ol",
+       "low": 4,
+       "high": 10,
+       "typical": 8
+      },
+      {
+       "key": "kaffe",
+       "low": 3,
+       "high": 5.5,
+       "typical": 4.7
+      }
+     ],
+     "tips": [
+      "Ät lunch på vardagar. En lunchmeny kostar ungefär 12–17 euro."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Helsinki",
+      "https://freenance-landing.pages.dev/cities/helsinki-cost-of-living-2026-finland-tax-rent-food-startup-relocation-expat/"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Kallt, mörkt och ofta snö.",
+     "Vinter. Havet kan vara fruset.",
+     "Fortfarande vinter, men ljusare.",
+     "Snön smälter. Grått innan det grönskar.",
+     "Våren kommer snabbt och uteserveringarna öppnar.",
+     "Ljusa nätter. Bäst för Sveaborg.",
+     "Varmast och mest liv på torgen och i skärgården.",
+     "Fortfarande sommar, med mörkare kvällar.",
+     "Höst. Svalare och färre turister.",
+     "Rått och blåsigt.",
+     "Mörkt och blött innan snön kommer.",
+     "Mörkast på året. Julmarknad på Senatstorget."
     ]
    },
    "smart_months": [

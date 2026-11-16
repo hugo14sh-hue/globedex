@@ -88,8 +88,23 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "month_notes": [
+     "Kallt och regnigt. Korta köer.",
+     "Kallt och regnigt.",
+     "Våren börjar.",
+     "Milt, och tulpanerna blommar i parkerna.",
+     "Varmt utan hetta. Bäst för att gå i stan.",
+     "Varmt. Mer folk vid sevärdheterna.",
+     "Hett och fuktigt.",
+     "Hetast och fuktigast.",
+     "Värmen släpper. Fortfarande sommarkänsla.",
+     "Milt och klart.",
+     "Svalare och mer regn.",
+     "Kallt och regnigt."
     ]
    },
    "smart_months": [
@@ -251,7 +266,7 @@
    "must_rank": 4,
    "source_url": "https://thebettervacation.com/istanbul/grand-bazaar/",
    "verified_on": "2026-11-11",
-   "wiki": "en:Grand Bazaar, Istanbul"
+   "wiki": "de:Großer Basar (Istanbul)"
   },
   {
    "id": "TR-istanbul-basilikacisternen",

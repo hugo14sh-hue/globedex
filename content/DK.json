@@ -78,6 +78,7 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
     ],
@@ -129,7 +130,21 @@
       "level",
       "summary"
      ]
-    }
+    },
+    "month_notes": [
+     "Kallt, blåsigt och mörkt. Tivoli har stängt.",
+     "Fortfarande vinter. Billigast att bo.",
+     "Våren börjar, men det blåser kallt.",
+     "Tivoli öppnar för säsongen. Vädret kan slå om.",
+     "Ljust och grönt. Uteserveringarna vid Nyhavn fylls.",
+     "Långa kvällar och bad i hamnen.",
+     "Högsommar. Varmast i vattnet och mest turister.",
+     "Fortfarande sommar och långa kvällar.",
+     "Sensommar med färre turister.",
+     "Höst. Svalare och blåsigare.",
+     "Mörkt och rått före julsäsongen.",
+     "Julmarknader och jul på Tivoli. Mörkt tidigt."
+    ]
    },
    "smart_months": [
     1,

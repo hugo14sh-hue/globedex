@@ -88,8 +88,23 @@
      "areas",
      "best_text",
      "day_budget_sek",
+     "month_notes",
      "smart_months",
      "stay"
+    ],
+    "month_notes": [
+     "Kallast på året. Billigast att bo.",
+     "Kallt, ofta snö.",
+     "Vintern släpper långsamt.",
+     "Våren kommer och det blommar i Central Park.",
+     "Varmt utan sommarens fukt.",
+     "Varmt. Mycket gratis konserter utomhus.",
+     "Hett och fuktigt.",
+     "Hett och fuktigt. Många New York-bor är bortresta.",
+     "Varmt, klart och lagom.",
+     "Höstfärger i parkerna.",
+     "Svalare. Thanksgiving i slutet av månaden.",
+     "Julskyltning och isbanor. Fint men dyrast på året."
     ]
    },
    "smart_months": [
