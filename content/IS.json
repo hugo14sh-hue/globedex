@@ -26,7 +26,10 @@
      }
     ],
     "sources": [
-     "https://www.re.is/flybus"
+     "https://www.re.is/flybus",
+     "https://icelandia.com/inspiration/where-to-see-puffins-in-iceland",
+     "https://reykjavikattractions.is/best-time-to-visit-iceland/",
+     "https://www.gocampers.is/iceland-tips/best-time-to-go-to-iceland"
     ],
     "day_budget_sek": 2500,
     "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
@@ -108,18 +111,18 @@
      ]
     },
     "month_notes": [
-     "Mörkt och kallt. Chans till norrsken.",
-     "Vinter med lite mer ljus. Chans till norrsken.",
-     "Fortfarande vinter. Sista bra månaden för norrsken.",
-     "Mellan säsongerna: för ljust för norrsken, och höglandet är stängt.",
-     "Ljust och grönare, men svalt.",
-     "Ljusa nätter. Vägarna i inlandet börjar öppna.",
-     "Varmast och mest turister. Boka boende tidigt.",
-     "Fortfarande sommar. Mörkret kommer tillbaka mot slutet.",
-     "Höstfärger, färre turister och norrskenet är tillbaka.",
-     "Mörkare och blötare. Norrskenssäsong.",
-     "Vinter och korta dagar.",
-     "Mörkast på året. Julbelysning och chans till norrsken."
+     "Mörkt och kallt. Säsong för norrsken och isgrottor.",
+     "Vinter med lite mer ljus. Norrsken och isgrottor.",
+     "Sista bra månaden för norrsken och isgrottor.",
+     "Mellan säsongerna. De första lunnefåglarna kommer i mitten av månaden.",
+     "Lunnefåglarna är på plats och midnattssolen börjar. Svalt, och höglandet är stängt.",
+     "Midnattssol, lunnefåglar och bästa tiden för valsafari. Höglandsvägarna öppnar i mitten av månaden.",
+     "Varmast och mest turister. Lunnefåglar och öppet högland. Boka boende tidigt.",
+     "Lunnefåglarna lämnar i mitten av månaden. Fortfarande sommar, och mörkret kommer tillbaka.",
+     "Höstfärger, färre turister och norrskenet är tillbaka. Höglandsvägarna stänger i början av månaden.",
+     "Mörkare och blötare. Norrsken, och isgrottorna börjar öppna.",
+     "Vinter och korta dagar. Norrsken och isgrottor.",
+     "Mörkast på året. Julbelysning, norrsken och isgrottor."
     ]
    },
    "smart_months": [
