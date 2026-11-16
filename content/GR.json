@@ -89,6 +89,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -147,6 +148,19 @@
      "Varmt, klart och lugnare.",
      "Milt. Mer regn mot slutet.",
      "Svalt och regnigt, men lugnt."
+    ],
+    "seasons": [
+     {
+      "name": "Badsäsong",
+      "from": 5,
+      "to": 10
+     },
+     {
+      "name": "Hetta mitt på dagen",
+      "from": 7,
+      "to": 8,
+      "text": "Gå till Akropolis tidigt på morgonen eller sent på eftermiddagen."
+     }
     ]
    },
    "smart_months": [

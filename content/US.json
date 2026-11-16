@@ -89,6 +89,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -150,6 +151,18 @@
      "Höstfärger i parkerna.",
      "Svalare. Thanksgiving i slutet av månaden.",
      "Julskyltning och isbanor. Fint men dyrast på året."
+    ],
+    "seasons": [
+     {
+      "name": "Höstfärger i parkerna",
+      "from": 10,
+      "to": 11
+     },
+     {
+      "name": "Julskyltning och isbanor",
+      "from": 11,
+      "to": 1
+     }
     ]
    },
    "smart_months": [

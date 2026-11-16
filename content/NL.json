@@ -149,6 +149,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -259,6 +260,22 @@
       "end": "2027-08-22",
       "text": "Klassisk musik och jazz på scener vid och på kanalerna.",
       "source": "https://www.amsterdamtips.com/?p=2860"
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Tulpaner och Keukenhof",
+      "from": 3,
+      "to": 5,
+      "text": "Keukenhof öppnar 18 mars 2027 och stänger i början av maj. Mest blom i mitten av april.",
+      "source": "https://www.amsterdamtips.com/?p=2837"
+     },
+     {
+      "name": "Amsterdam Light Festival",
+      "from": 11,
+      "to": 1,
+      "text": "Ljuskonst längs kanalerna, från slutet av november till mitten av januari.",
+      "source": "https://www.amsterdamtourism.org/?p=1434"
      }
     ]
    }

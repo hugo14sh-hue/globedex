@@ -73,6 +73,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -138,6 +139,23 @@
      "Rått och blåsigt.",
      "Mörkt och blött innan snön kommer.",
      "Mörkast på året. Julmarknad på Senatstorget."
+    ],
+    "seasons": [
+     {
+      "name": "Ljusa nätter",
+      "from": 6,
+      "to": 7
+     },
+     {
+      "name": "Uteserveringar och Sveaborg",
+      "from": 5,
+      "to": 9
+     },
+     {
+      "name": "Julmarknad på Senatstorget",
+      "from": 12,
+      "to": 12
+     }
     ]
    },
    "smart_months": [

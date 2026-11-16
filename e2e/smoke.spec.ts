@@ -44,6 +44,11 @@ const NL = JSON.parse(readFileSync(join(process.cwd(), 'content/NL.json'), 'utf8
 const MC = JSON.parse(readFileSync(join(process.cwd(), 'content/MC.json'), 'utf8').replace(/^﻿/, '')) as {
   places: { id: string; smart_months?: number[]; data: { month_notes?: string[]; events?: unknown[] } }[];
 };
+// Reykjavik (content/IS.json): säsonger i Smart månad.
+const IS = JSON.parse(readFileSync(join(process.cwd(), 'content/IS.json'), 'utf8').replace(/^﻿/, '')) as {
+  places: { id: string; data: { seasons?: unknown[] } }[];
+};
+
 const mc_june = () => MC.places.find((p) => p.id === 'MC-monaco')!.data.month_notes![5];
 
 // USA:s delstater (content/US.json). Läggs in i svaret från places när Hugo inte har kört npm run import än.
@@ -481,7 +486,7 @@ test('röktest', async ({ page }) => {
     await expect(page.getByText(tx('smart.tryck'))).toBeVisible({ timeout: 20_000 });
     // Innevarande månad är förvald.
     await expect(page.locator('.bars.pick button[aria-pressed=true]')).toHaveCount(1);
-    const juni = page.getByRole('button', { name: new RegExp(`^${esc(tx('smart.manad.betyg')).replace('\\{manad\\}', 'Juni').replace('\\{betyg\\}', '\\d')}$`) });
+    const juni = page.getByRole('button', { name: new RegExp(`^${esc(tx('smart.manad.betyg')).replace('\\{manad\\}', 'Juni').replace('\\{betyg\\}', '\\d')}(, .*)?$`) });
     await juni.focus();
     await page.keyboard.press('Enter');
     await expect(juni).toHaveAttribute('aria-pressed', 'true');
@@ -491,6 +496,37 @@ test('röktest', async ({ page }) => {
     await expect(box.getByRole('heading', { name: tx('smart.handelser.rubrik') })).toBeVisible();
     await expect(box.locator('.smart-events').getByText(/Formel 1/)).toBeVisible();
     await expect(box.getByRole('link', { name: 'autosport.com' })).toHaveAttribute('href', /autosport\.com/);
+    await page.unroute('**/rest/v1/places?*');
+  });
+
+  await test.step('Island: Smart månad visar Lunnefåglar i juli och Norrsken men inte Lunnefåglar i december', async () => {
+    // Har Hugo inte kört npm run import än saknas seasons i databasen. Då läggs de in från content/IS.json
+    // i svaret (och hela platsen om den saknas), så att rutan går att prova ändå.
+    const rey = IS.places.find((p) => p.id === 'IS-reykjavik')!;
+    await page.route('**/rest/v1/places?*', async (route) => {
+      const res = await route.fetch();
+      const rows = (await res.json()) as { id: string; data: Record<string, unknown> }[];
+      if (!Array.isArray(rows)) return route.fulfill({ response: res });
+      const has = rows.some((r) => r.id === rey.id);
+      const out = rows.map((r) => (r.id === rey.id && !r.data?.seasons ? { ...r, data: { ...r.data, seasons: rey.data.seasons } } : r));
+      await route.fulfill({ response: res, json: has ? out : [...out, { iso2: null, airport: null, layer: null, smart_months: null, ...rey }] });
+    });
+    await page.goto('/karta/IS-reykjavik?vy=manad');
+    await expect(page.locator('.bars.pick')).toBeVisible({ timeout: 20_000 });
+    const month = (name: string) =>
+      page.getByRole('button', { name: new RegExp(`^${esc(tx('smart.manad.betyg')).replace('\\{manad\\}', name).replace('\\{betyg\\}', '\\d')}`) });
+    const box = page.locator('.smart-month');
+    const seasons = box.locator('.smart-seasons');
+    await month('Juli').click();
+    await expect(month('Juli')).toHaveAttribute('aria-pressed', 'true');
+    await expect(month('Juli')).toHaveAttribute('aria-label', new RegExp(esc(tx('smart.sasong.aria')).replace('\\{antal\\}', '\\d+')));
+    await expect(box.getByRole('heading', { name: tx('smart.sasonger.rubrik') })).toBeVisible();
+    await expect(seasons.getByText('Lunnefåglar', { exact: true })).toBeVisible();
+    await expect(page.locator('.bars.pick .sdot.on')).toHaveCount(12);
+    await month('December').click();
+    await expect(month('December')).toHaveAttribute('aria-pressed', 'true');
+    await expect(seasons.getByText('Norrsken', { exact: true })).toBeVisible();
+    await expect(seasons.getByText('Lunnefåglar', { exact: true })).toHaveCount(0);
     await page.unroute('**/rest/v1/places?*');
   });
 

@@ -890,7 +890,10 @@
   "landlista.fn": "FN:s medlemsländer ({totalt})",
   "landlista.fn-plus": "FN:s medlemsländer och observatörer ({totalt})",
   "landlista.alla": "Alla länder och territorier ({totalt})",
-  "landlista.utanfor": "Räknas inte i din lista"
+  "landlista.utanfor": "Räknas inte i din lista",
+  "smart.sasonger.rubrik": "I säsong",
+  "smart.sasong.period": "{fran}–{till}",
+  "smart.sasong.aria": "{antal} säsonger pågår"
  },
  "marken": [
   {

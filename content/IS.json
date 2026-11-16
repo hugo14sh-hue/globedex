@@ -123,6 +123,50 @@
      "Mörkare och blötare. Norrsken, och isgrottorna börjar öppna.",
      "Vinter och korta dagar. Norrsken och isgrottor.",
      "Mörkast på året. Julbelysning, norrsken och isgrottor."
+    ],
+    "seasons": [
+     {
+      "name": "Lunnefåglar",
+      "from": 4,
+      "to": 8,
+      "text": "Kommer i mitten av april och lämnar i mitten av augusti. Bäst i maj till juli.",
+      "source": "https://icelandia.com/inspiration/where-to-see-puffins-in-iceland"
+     },
+     {
+      "name": "Midnattssol",
+      "from": 5,
+      "to": 7,
+      "text": "Från mitten av maj till slutet av juli.",
+      "source": "https://reykjavikattractions.is/best-time-to-visit-iceland/"
+     },
+     {
+      "name": "Valsafari",
+      "from": 4,
+      "to": 10,
+      "text": "Går året om, men chansen är störst nu. Bäst i juni.",
+      "source": "https://reykjavikattractions.is/best-time-to-visit-iceland/"
+     },
+     {
+      "name": "Höglandsvägarna öppna",
+      "from": 6,
+      "to": 9,
+      "text": "Från mitten av juni till början av september. Kräver fyrhjulsdrift.",
+      "source": "https://www.gocampers.is/iceland-tips/best-time-to-go-to-iceland"
+     },
+     {
+      "name": "Isgrottor",
+      "from": 11,
+      "to": 3,
+      "text": "Källorna anger olika start, från oktober eller november.",
+      "source": "https://reykjavikattractions.is/best-time-to-visit-iceland/"
+     },
+     {
+      "name": "Norrsken",
+      "from": 9,
+      "to": 3,
+      "text": "Kräver mörker och klar himmel.",
+      "source": "https://reykjavikattractions.is/best-time-to-visit-iceland/"
+     }
     ]
    },
    "smart_months": [

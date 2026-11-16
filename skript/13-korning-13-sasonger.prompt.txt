@@ -1,0 +1,21 @@
+Läs CLAUDE.md, FORMAT.md för innehållet och docs/schema.sql innan du gör något. Körning 1 till 12 är klara.
+
+Körning 13: säsonger i Smart månad
+
+Nytt innehåll finns i content/: 13 landsfiler har fått ett nytt fält, och textfilerna har 3 nya nycklar (590 per språk). Ändra inte i innehållsfilerna: stämmer något inte, skriv det i slutrapporten.
+
+1. Nytt fält i places.data: seasons. Det kräver ingen databasändring. Form:
+   [ { "name": "text", "from": 1-12, "to": 1-12, "text": "text", "source": "url" } ]
+   from och to är månadsnummer. Är from större än to går säsongen över årsskiftet (11 till 3 betyder november till mars). from lika med to betyder en enda månad. text och source får saknas. Lägg kontrollen i import:check (name, from och to krävs, heltal 1-12, source måste vara en http-adress när den finns) och beskriv fältet i FORMAT.md. Fältet får stå i own_judgment.
+
+2. I rutan Smart månad, när en månad är vald: mellan månadens text och rubriken smart.handelser.rubrik visas rubriken smart.sasonger.rubrik med de säsonger som pågår den månaden, i filens ordning. Varje rad: namnet i fetstil, perioden med korta månadsnamn från Intl efter APP_LOCALE via smart.sasong.period (bara månadens namn när from är lika med to), texten under när den finns, och källan som länk med domännamnet (smart.handelser.kalla) när den finns. Pågår ingen säsong den månaden visas inte rubriken. Har platsen seasons men inga month_notes ska staplarna ändå gå att trycka på och rutan visa säsongerna.
+
+3. Under varje stapel som har minst en pågående säsong visas en liten prick, 6 px, i dämpad färg, mellan stapeln och månadens bokstav. Pricken är dekor (aria-hidden). Stapelns aria-label får tillägget smart.sasong.aria med antalet, efter texten från smart.manad.betyg.
+
+4. Samma säsonger visas på resans sida i Planera, när resan har en plats med seasons och ett datum: under platsens namn en rad per säsong som pågår under resans månader, med namn och period. Ingen ny rubrik behövs där, använd smart.sasonger.rubrik.
+
+5. Enhetstester: säsong över årsskiftet, säsong på en månad, månad utan säsong, plats utan month_notes men med seasons, och valideringen. Röktestet: öppna Island, välj juli i Smart månad och kontrollera att Lunnefåglar står under I säsong, välj december och kontrollera att Lunnefåglar inte står där men Norrsken gör det.
+
+Regler: Skriv inga egna texter och översätt ingenting själv. Saknas en text på något av språken: lista nyckeln i slutrapporten. Gör inga databasändringar själv: behövs en, ge mig ett SQL-block. Lägg inte till funktioner utöver det som står här, skriv idéer i docs/fas2.md. Kör inte npm run import eller import:images mot databasen.
+
+Avsluta med npm run import:check, npm run build, npm run typecheck, npm test och npm run test:e2e, kontrollera exitkoderna, gör en git commit med meddelandet "Körning 13: säsonger" och skriv slutrapporten innan du avslutar turen. Vänta inte på bakgrundsjobb. Rubriker: Klart, Inte klart, Röktestet, Saknade textnycklar per språk, Det här behöver Hugo göra.

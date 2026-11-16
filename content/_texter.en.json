@@ -886,7 +886,10 @@
   "landlista.fn": "UN member states ({totalt})",
   "landlista.fn-plus": "UN member states and observers ({totalt})",
   "landlista.alla": "All countries and territories ({totalt})",
-  "landlista.utanfor": "Not counted in your list"
+  "landlista.utanfor": "Not counted in your list",
+  "smart.sasonger.rubrik": "In season",
+  "smart.sasong.period": "{fran}–{till}",
+  "smart.sasong.aria": "{antal} seasons in progress"
  },
  "marken": [
   {

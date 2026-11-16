@@ -905,6 +905,15 @@ h4.eb {
   opacity: 0.85;
 }
 
+.hero-seasons ul {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .ring {
   width: 76px;
   height: 76px;
@@ -1091,6 +1100,18 @@ h4.eb {
 
 .bars.pick button[aria-pressed='true'] span {
   font-weight: 800;
+}
+
+/* Prick under en stapel när minst en säsong pågår den månaden. Platsen finns alltid, så att staplarna står i linje. */
+.bars .sdot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.bars .sdot.on {
+  background: var(--mu);
 }
 
 .smart-month {

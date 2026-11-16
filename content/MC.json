@@ -232,8 +232,30 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
+    ],
+    "seasons": [
+     {
+      "name": "Monacos Grand Prix (Formel 1)",
+      "from": 5,
+      "to": 6,
+      "text": "Körs en helg i maj eller juni varje år. 2027 är det 4–6 juni. Då är hotellen som dyrast och gator avstängda.",
+      "source": "https://www.autosport.com/f1/news/f1-reveals-2027-calendar-as-monaco-joins-expanded-sprint-schedule/10856277/"
+     },
+     {
+      "name": "Furstepalatsets salar öppna",
+      "from": 4,
+      "to": 10,
+      "text": "2026 var de öppna 30 mars till 15 oktober.",
+      "source": "https://www.visitmonaco.com"
+     },
+     {
+      "name": "Badsäsong",
+      "from": 6,
+      "to": 9
+     }
     ]
    },
    "smart_months": [

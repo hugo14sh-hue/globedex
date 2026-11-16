@@ -162,6 +162,25 @@ describe('validering av innehåll', () => {
     );
   });
 
+  it('godkänner seasons och stoppar fel', () => {
+    const se = { name: 'n', from: 11, to: 3, text: 't', source: 'https://example.org' };
+    const withData = (data) => {
+      const j = base();
+      j.places[1].data = data;
+      return fields(run(j));
+    };
+    expect(withData({ seasons: [se, { name: 'en', from: 4, to: 4 }], own_judgment: ['seasons'] })).toEqual([]);
+    expect(withData({ seasons: 'x' })).toEqual(['XX-stad/data.seasons']);
+    expect(withData({ seasons: [{ ...se, name: '' }] })).toEqual(['XX-stad/data.seasons[0].name']);
+    expect(withData({ seasons: [{ ...se, from: 0 }] })).toEqual(['XX-stad/data.seasons[0].from']);
+    expect(withData({ seasons: [{ ...se, to: 13 }] })).toEqual(['XX-stad/data.seasons[0].to']);
+    expect(withData({ seasons: [{ ...se, from: 2.5 }] })).toEqual(['XX-stad/data.seasons[0].from']);
+    expect(withData({ seasons: [{ ...se, from: '4' }] })).toEqual(['XX-stad/data.seasons[0].from']);
+    expect(withData({ seasons: [{ ...se, to: undefined }] })).toEqual(['XX-stad/data.seasons[0].to']);
+    expect(withData({ seasons: [{ ...se, source: 'example.org' }] })).toEqual(['XX-stad/data.seasons[0].source']);
+    expect(withData({ seasons: [{ ...se, extra: 1 }] })).toEqual(['XX-stad/data.seasons[0].extra']);
+  });
+
   it('godkänner wiki på en listpunkt och stoppar fel form', () => {
     const j = base();
     j.items[0].wiki = 'en:Monte Carlo Casino';

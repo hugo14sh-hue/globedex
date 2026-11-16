@@ -44,14 +44,14 @@ import { statusColors } from '../../theme/theme';
 import { useTheme } from '../../theme/ThemeProvider';
 import { BokaView } from './BokaView';
 import { PlacePrices } from './PriceSection';
-import { monthNames } from './months';
+import { monthNames, seasonPeriod, shortMonthNames } from './months';
 import { StatusPicker } from './StatusPicker';
 import { RegionSection } from './RegionSection';
 import { outsideCountryList } from '../../lib/landlistor';
 import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
-import { currentMonth, eventsInMonth, hasMonthNotes, SWIPE_MIN, swipedMonth } from '../../lib/smartMonth';
+import { currentMonth, eventsInMonth, hasMonthNotes, hasSeasons, seasonsInMonth, SWIPE_MIN, swipedMonth } from '../../lib/smartMonth';
 
 /** Första bokstaven versal (månadens namn från webbläsaren börjar med gemen på svenska). */
 const capital = (s: string) => s.charAt(0).toLocaleUpperCase() + s.slice(1);
@@ -617,8 +617,13 @@ function Manad({ place }: { place: Place }) {
   const today = todayIso();
   // Månadens text och händelser visas bara när platsen har en text för varje månad.
   const notes = hasMonthNotes(d.month_notes) ? d.month_notes : null;
+  // Säsonger gör också staplarna tryckbara, även utan månadens text.
+  const seasons = hasSeasons(d.seasons) ? d.seasons : null;
+  const shortNames = useMemo(() => shortMonthNames(), []);
   const [picked, setPicked] = useState(() => currentMonth(today));
   const events = eventsInMonth(d.events, picked, today);
+  const nowSeasons = seasonsInMonth(seasons, picked);
+  const seasonCount = (i: number) => seasonsInMonth(seasons, i).length;
   // Svep åt vänster eller höger över diagrammet byter månad. Ett svep räknas inte som tryck på en stapel.
   const swipe = useRef<{ x: number; y: number } | null>(null);
   const swiped = useRef(false);
@@ -654,7 +659,7 @@ function Manad({ place }: { place: Place }) {
         <h2 className="h3">{t('karta.lage.smart')}</h2>
         {isEstimate(d, 'smart_months') && <Estimate />}
       </div>
-      {m && notes ? (
+      {m && (notes || seasons) ? (
         <>
           <div
             className="bars pick"
@@ -669,10 +674,16 @@ function Manad({ place }: { place: Place }) {
                 key={months[i].long}
                 type="button"
                 aria-pressed={picked === i}
-                aria-label={t('smart.manad.betyg', { manad: capital(months[i].long), betyg: x })}
+                aria-label={[
+                  t('smart.manad.betyg', { manad: capital(months[i].long), betyg: x }),
+                  seasonCount(i) > 0 ? t('smart.sasong.aria', { antal: seasonCount(i) }) : '',
+                ]
+                  .filter(Boolean)
+                  .join(', ')}
                 onClick={() => pick(i)}
               >
                 <i style={{ height: `${Math.max(4, x * 20)}px`, background: SMART_COLORS[x] ?? SMART_COLORS[0] }} />
+                {seasons && <b className={`sdot${seasonCount(i) > 0 ? ' on' : ''}`} aria-hidden="true" />}
                 <span aria-hidden="true">{months[i].short}</span>
               </button>
             ))}
@@ -680,7 +691,29 @@ function Manad({ place }: { place: Place }) {
           <p className="mu">{t('smart.tryck')}</p>
           <div className="smart-month" aria-live="polite">
             <h3 className="h3">{t('smart.manad.betyg', { manad: capital(months[picked].long), betyg: m[picked] })}</h3>
-            <p>{notes[picked]}</p>
+            {notes && <p>{notes[picked]}</p>}
+            {nowSeasons.length > 0 && (
+              <>
+                <h4 className="eb">{t('smart.sasonger.rubrik')}</h4>
+                <ul className="smart-events smart-seasons">
+                  {nowSeasons.map((x) => (
+                    <li key={`${x.name}-${x.from}-${x.to}`}>
+                      <b>{x.name}</b>
+                      <span className="mu">{seasonPeriod(x, t, shortNames)}</span>
+                      {x.text && <span>{x.text}</span>}
+                      {x.source && (
+                        <span className="src mu">
+                          {t('smart.handelser.kalla')}:{' '}
+                          <a href={x.source} target="_blank" rel="noopener noreferrer">
+                            {domainOf(x.source)}
+                          </a>
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             {events.length > 0 && (
               <>
                 <h4 className="eb">{t('smart.handelser.rubrik')}</h4>

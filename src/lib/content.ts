@@ -29,6 +29,17 @@ export interface PlaceData {
   month_notes?: string[];
   /** Händelser som påverkar när man bör åka. */
   events?: PlaceEvent[];
+  /** Säsonger som återkommer varje år (månad from till to). */
+  seasons?: PlaceSeason[];
+}
+
+/** En säsong i data.seasons. from och to är månadsnummer 1–12. from större än to går över årsskiftet. */
+export interface PlaceSeason {
+  name: string;
+  from: number;
+  to: number;
+  text?: string;
+  source?: string;
 }
 
 /** En händelse i data.events. Datum som ÅÅÅÅ-MM-DD. */

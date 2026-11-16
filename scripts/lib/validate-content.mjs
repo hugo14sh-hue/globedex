@@ -33,10 +33,11 @@ const FOR_WHOM = ['mamma', 'pappa', 'barn', 'van', 'mig'];
 const BUCKET_CATEGORIES = ['aventyr', 'natur', 'resa', 'mat', 'kultur', 'tillsammans', 'hemma', 'milstolpe'];
 const TRANSPORT_RATINGS = ['bast', 'bra', 'dyrt'];
 const DATA_FIELDS = [
-  'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment', 'prices', 'month_notes', 'events',
+  'stay', 'day_budget_sek', 'areas', 'transport', 'flight_tips', 'best_text', 'sources', 'day_budget_note', 'own_judgment', 'prices', 'month_notes', 'events', 'seasons',
   'iso_3166_2',
 ];
 const EVENT_FIELDS = ['name', 'start', 'end', 'text', 'source'];
+const SEASON_FIELDS = ['name', 'from', 'to', 'text', 'source'];
 /** Bildfälten i place_items skrivs bara av npm run import:images, aldrig av importen av innehållet. */
 export const IMAGE_FIELDS = ['image_url', 'image_credit', 'image_license', 'image_page'];
 /** wiki på en listpunkt: språkkod, kolon och sidans titel ("en:Sidans titel"). */
@@ -157,6 +158,24 @@ function checkPlaceData(row, check) {
   if (d.month_notes !== undefined)
     check(row, 'data.month_notes', Array.isArray(d.month_notes) && d.month_notes.length === 12 && d.month_notes.every(isStr), 'lista med exakt 12 texter, januari först');
   if (d.events !== undefined) checkEvents(row, d.events, check);
+  if (d.seasons !== undefined) checkSeasons(row, d.seasons, check);
+}
+
+/** data.seasons: säsonger med { name, from, to, text?, source? }, månader 1–12 (docs/FORMAT.md). */
+function checkSeasons(row, list, check) {
+  const f = 'data.seasons';
+  if (!Array.isArray(list)) return check(row, f, false, 'lista med { name, from, to, text, source }');
+  const month = (v) => isInt(v) && v >= 1 && v <= 12;
+  list.forEach((x, i) => {
+    const sf = `${f}[${i}]`;
+    if (!isObj(x)) return check(row, sf, false, 'säsongen ska vara ett objekt');
+    for (const k of Object.keys(x)) check(row, `${sf}.${k}`, SEASON_FIELDS.includes(k), 'okänt fält i säsongen');
+    check(row, `${sf}.name`, isStr(x.name), 'krävs');
+    check(row, `${sf}.from`, month(x.from), 'krävs, heltal 1–12');
+    check(row, `${sf}.to`, month(x.to), 'krävs, heltal 1–12');
+    if (x.text !== undefined) check(row, `${sf}.text`, isStr(x.text), 'text');
+    if (x.source !== undefined) check(row, `${sf}.source`, isStr(x.source) && URL_RE.test(x.source), 'http-adress');
+  });
 }
 
 /** data.events: händelser med { name, start, end, text, source }, datum ÅÅÅÅ-MM-DD (docs/FORMAT.md). */

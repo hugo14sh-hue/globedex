@@ -329,6 +329,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -380,6 +381,23 @@
      "Höst. Svalare och mörkare.",
      "Mörkast och gråast före advent.",
      "Julmarknader och julbord. Mörkt tidigt."
+    ],
+    "seasons": [
+     {
+      "name": "Körsbärsblom i Kungsträdgården",
+      "from": 4,
+      "to": 4
+     },
+     {
+      "name": "Skärgårdsbåtar och bad",
+      "from": 6,
+      "to": 8
+     },
+     {
+      "name": "Julmarknader",
+      "from": 11,
+      "to": 12
+     }
     ]
    },
    "smart_months": [

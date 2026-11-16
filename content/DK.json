@@ -79,6 +79,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -159,6 +160,27 @@
       "end": "2027-07-11",
       "text": "Konserter på torg, i parker och på klubbar över hela stan. Datumen kommer från en reseguide, inte från festivalen själv.",
       "source": "https://www.copenhagentourism.org/?p=2119"
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Tivoli, sommarsäsong",
+      "from": 4,
+      "to": 9,
+      "text": "2026 var parken öppen 7 april till 20 september.",
+      "source": "https://www.visitdenmark.com/denmark/events/event-calendar/events-april-may-june"
+     },
+     {
+      "name": "Bad i hamnen",
+      "from": 6,
+      "to": 8,
+      "text": "Hamnbaden öppnar 1 juni.",
+      "source": "https://www.copenhagentourism.org/copenhagen-in-june/"
+     },
+     {
+      "name": "Jul i Tivoli och julmarknader",
+      "from": 11,
+      "to": 12
      }
     ]
    },

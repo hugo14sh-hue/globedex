@@ -84,6 +84,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -126,6 +127,19 @@
      "Fortfarande milt. Säsongen tar slut mot slutet.",
      "Regnigast på året. Mycket stänger.",
      "Lågsäsong. Mycket är stängt."
+    ],
+    "seasons": [
+     {
+      "name": "Badsäsong",
+      "from": 6,
+      "to": 9
+     },
+     {
+      "name": "Kryssningsfartygen",
+      "from": 7,
+      "to": 8,
+      "text": "Gamla stan är som fullast mitt på dagen."
+     }
     ]
    },
    "smart_months": [
@@ -207,6 +221,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -255,6 +270,18 @@
      "Fortfarande milt. Färjorna glesnar.",
      "Regnigt, och mycket stänger.",
      "Lågsäsong."
+    ],
+    "seasons": [
+     {
+      "name": "Badsäsong",
+      "from": 6,
+      "to": 9
+     },
+     {
+      "name": "Tät färjetrafik till öarna",
+      "from": 6,
+      "to": 9
+     }
     ]
    },
    "smart_months": [
@@ -331,6 +358,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -404,6 +432,13 @@
      "Höst och klara dagar.",
      "Grått före julmarknaden.",
      "Julmarknad över hela centrum."
+    ],
+    "seasons": [
+     {
+      "name": "Julmarknaden Advent",
+      "from": 12,
+      "to": 12
+     }
     ]
    },
    "smart_months": [

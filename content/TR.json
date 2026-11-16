@@ -89,6 +89,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -143,6 +144,13 @@
      "Milt och klart.",
      "Svalare och mer regn.",
      "Kallt och regnigt."
+    ],
+    "seasons": [
+     {
+      "name": "Tulpaner i parkerna",
+      "from": 4,
+      "to": 4
+     }
     ]
    },
    "smart_months": [

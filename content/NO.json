@@ -90,6 +90,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -155,6 +156,24 @@
      "Rått och mörkare.",
      "Mörkt och blött innan snön kommer.",
      "Julmarknader och mörkt tidigt."
+    ],
+    "seasons": [
+     {
+      "name": "Skidsäsong",
+      "from": 12,
+      "to": 3,
+      "text": "Längdspår i Nordmarka och backar vid Holmenkollen."
+     },
+     {
+      "name": "Bad och båtar till öarna",
+      "from": 6,
+      "to": 8
+     },
+     {
+      "name": "Julmarknader",
+      "from": 11,
+      "to": 12
+     }
     ]
    },
    "smart_months": [

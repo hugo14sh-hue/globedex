@@ -89,6 +89,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -154,6 +155,19 @@
      "Varmt utan sommarens trängsel.",
      "Badsäsongen börjar och priserna är ännu rimliga.",
      "Sommar, jul och nyårsfyrverkeri. Dyrt och fullbokat mot slutet."
+    ],
+    "seasons": [
+     {
+      "name": "Badsäsong",
+      "from": 11,
+      "to": 3
+     },
+     {
+      "name": "Valar längs kusten",
+      "from": 5,
+      "to": 11,
+      "text": "Knölvalar passerar på sin vandring."
+     }
     ]
    },
    "smart_months": [

@@ -9,6 +9,7 @@ import { Flag } from '../../components/Flag';
 import { Row } from '../../components/Row';
 import { fetchPlaces, type Place } from '../../lib/content';
 import { spent } from '../../lib/kassa';
+import { monthsBetween, seasonsInMonths } from '../../lib/smartMonth';
 import { changedPos, countdown, move, todayIso, tripPhase } from '../../lib/tripLogic';
 import {
   addLeg,
@@ -29,6 +30,7 @@ import { useT } from '../../lib/useT';
 import { emptyLeg, LegFields, toLeg, useNamedPoints, type LegDraft } from './LegFields';
 import { BackTo, formatOre, formatRange, saveError, TripGate, tripPlace, usePeople, useTrip } from './shared';
 import { currencySymbol } from '../karta/format';
+import { seasonPeriod, shortMonthNames } from '../karta/months';
 
 export default function TripScreen() {
   const state = useTrip();
@@ -100,6 +102,10 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const cd = phase === 'kommande' ? countdown(trip.start_date, today) : null;
   const budgetTotal = Number(trip.budget?.total ?? 0);
   const placeLabel = tripPlace(places, trip);
+  // Säsonger på resans plats som pågår under resans månader (data.seasons).
+  const tripSeasons = trip.start_date
+    ? seasonsInMonths(places.find((p) => p.id === trip.place_id)?.data.seasons, monthsBetween(trip.start_date, trip.end_date))
+    : [];
   const playable = (legs ?? []).some((l) => l.from_lat != null && l.to_lat != null);
 
   const saveLeg = async (e: FormEvent) => {
@@ -175,6 +181,18 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
         <h1>{trip.title}</h1>
         {cd && <span className="big">{cd.key === 'resor.nedrakning' ? t(cd.key, { dagar: cd.dagar }) : t(cd.key)}</span>}
         <span className="hero-sub">{[placeLabel, formatRange(trip.start_date, trip.end_date)].filter(Boolean).join(' · ')}</span>
+        {tripSeasons.length > 0 && (
+          <div className="hero-seasons">
+            <h2 className="eb">{t('smart.sasonger.rubrik')}</h2>
+            <ul>
+              {tripSeasons.map((x) => (
+                <li key={`${x.name}-${x.from}-${x.to}`} className="hero-sub">
+                  <b>{x.name}</b> · {seasonPeriod(x, t, shortMonthNames())}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {playable && (

@@ -89,6 +89,7 @@
      "best_text",
      "day_budget_sek",
      "month_notes",
+     "seasons",
      "smart_months",
      "stay"
     ],
@@ -210,6 +211,20 @@
       "end": "2027-09-26",
       "text": "Ett av världens största lopp. Hotellen är dyra den helgen och centrum är avstängt.",
       "source": "https://www.visitberlin.de/en/node/2262876"
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Ölträdgårdar och badsjöar",
+      "from": 5,
+      "to": 9
+     },
+     {
+      "name": "Julmarknader",
+      "from": 11,
+      "to": 12,
+      "text": "De första öppnar 23 november.",
+      "source": "https://www.visitberlin.de/en/node/2251763"
      }
     ]
    },

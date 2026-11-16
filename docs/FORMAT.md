@@ -49,6 +49,7 @@ data på en plats:
 - prices: prisnivå och exempelpriser i lokal valuta, se nedan. Kräver ingen databasändring (ligger i data).
 - month_notes: lista med exakt 12 texter, januari först. Förklarar betyget i smart_months för varje månad. Får saknas.
 - events: lista med händelser som påverkar när man bör åka, se nedan. Får saknas.
+- seasons: lista med säsonger som återkommer varje år, se nedan. Får saknas. Kräver ingen databasändring (ligger i data).
 - iso_3166_2: regionens kod i ISO 3166-2, till exempel "US-CA". Bara på regioner (kind region), och koden börjar med landets kod. Kopplar regionen till sin yta i kartläget Regioner (public/geo/delstater.json, byggd av `node scripts/make-regions.mjs` ur Natural Earth admin 1). Regioner utan yta visas som punkter på lat och lon.
 
 #### data.month_notes och data.events
@@ -70,6 +71,26 @@ Visas i rutan Smart månad på platsens sida (vyn Månad). Har platsen month_not
 | source | URL | ja | visas som länk med domännamnet (smart.handelser.kalla) |
 
 Händelser vars sista dag har passerat visas inte. `npm run import:check` stoppar month_notes som inte är 12 texter, ogiltiga datum, end före start, saknad källa och okända fält i en händelse.
+
+#### data.seasons
+Säsonger som återkommer varje år (lunnefåglar, norrsken, badsäsong). Visas i rutan Smart månad under smart.sasonger.rubrik, mellan månadens text och smart.handelser.rubrik, för den valda månaden och i filens ordning. Varje rad har namnet i fetstil, perioden med korta månadsnamn (smart.sasong.period, bara månadens namn när from är lika med to), texten och källan som länk med domännamnet (smart.handelser.kalla). Under varje stapel med minst en pågående säsong står en liten prick. Har platsen seasons men inga month_notes går staplarna ändå att trycka på. Säsongerna visas också på resans sida, under platsens namn, för de månader resan pågår. Är säsongerna egen bedömning: skriv "seasons" i own_judgment.
+
+```json
+"seasons": [
+  { "name": "Norrsken", "from": 9, "to": 3, "text": "En kort förklaring.", "source": "https://..." },
+  { "name": "Tulpaner i parkerna", "from": 4, "to": 4 }
+]
+```
+
+| Fält i en säsong | Typ | Krav | Beskrivning |
+|---|---|---|---|
+| name | text | ja | säsongens namn |
+| from | heltal 1–12 | ja | första månaden, 1 är januari |
+| to | heltal 1–12 | ja | sista månaden. Är from större än to går säsongen över årsskiftet (11 till 3 är november till mars). Lika med from betyder en enda månad |
+| text | text | nej | en kort förklaring, visas under namnet |
+| source | URL | nej | http-adress, visas som länk med domännamnet |
+
+`npm run import:check` stoppar seasons som inte är en lista, saknat namn, from eller to som inte är heltal 1–12, source som inte är en http-adress och okända fält i en säsong.
 
 #### data.prices
 Visas som sektionen Prisnivå på stadssidan, direkt efter dagsbudgeten. Har ett land egna prices visas de på landssidan. Annars visar landssidan en rad per stad som har prices, med nivån. Städer med prices får nivån som fem små markeringar på sina rader i listorna.
