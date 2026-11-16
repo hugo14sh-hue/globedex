@@ -382,6 +382,43 @@
      "Mörkast och gråast före advent.",
      "Julmarknader och julbord. Mörkt tidigt."
     ],
+    "events": [
+     {
+      "name": "Stockholms filmfestival",
+      "start": "2026-11-11",
+      "end": "2026-11-22",
+      "text": "Visningar på biografer i hela stan.",
+      "source": "https://www.stockholmtourism.org/?p=1418"
+     },
+     {
+      "name": "Nobel Week Lights",
+      "start": "2026-12-05",
+      "end": "2026-12-13",
+      "text": "Ljusinstallationer i stan under Nobelveckan. Gratis.",
+      "source": "https://www.stockholmtourism.org/?p=1418"
+     },
+     {
+      "name": "Lucia",
+      "start": "2026-12-13",
+      "end": "2026-12-13",
+      "text": "Luciatåg i kyrkor och på Skansen.",
+      "source": "https://www.stockholmtourism.org/?p=1418"
+     },
+     {
+      "name": "Stockholm Design Week",
+      "start": "2027-02-08",
+      "end": "2027-02-14",
+      "text": "Utställningar och öppna showroom i hela stan.",
+      "source": "https://stockholmsmassan.se/en/kalender"
+     },
+     {
+      "name": "Stockholm Marathon",
+      "start": "2027-05-29",
+      "end": "2027-05-29",
+      "text": "Start och mål vid Stadion. Hotellen är dyrare den helgen och gator avstängda.",
+      "source": "https://running.life/sv/event/stockholm-marathon"
+     }
+    ],
     "seasons": [
      {
       "name": "Körsbärsblom i Kungsträdgården",

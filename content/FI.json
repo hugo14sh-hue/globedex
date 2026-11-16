@@ -140,6 +140,29 @@
      "Mörkt och blött innan snön kommer.",
      "Mörkast på året. Julmarknad på Senatstorget."
     ],
+    "events": [
+     {
+      "name": "Lux Helsinki",
+      "start": "2026-12-30",
+      "end": "2027-01-06",
+      "text": "Ljuskonst på byggnader och i parker. Gratis.",
+      "source": "https://festivals.fi/en/festivals/lux-helsinki/"
+     },
+     {
+      "name": "Vappu (valborg och första maj)",
+      "start": "2027-04-30",
+      "end": "2027-05-01",
+      "text": "Studentmössor, picknick i parkerna och karnevalsstämning i centrum.",
+      "source": "https://www.tallink.com/destinations/finland/helsinki/events-in-helsinki"
+     },
+     {
+      "name": "Flow Festival",
+      "start": "2027-08-13",
+      "end": "2027-08-15",
+      "text": "Musikfestival i Södervik, på det gamla kraftverksområdet.",
+      "source": "https://www.myhelsinki.fi/events/flow-festival-2027/"
+     }
+    ],
     "seasons": [
      {
       "name": "Ljusa nätter",

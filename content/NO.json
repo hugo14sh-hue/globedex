@@ -157,6 +157,36 @@
      "Mörkt och blött innan snön kommer.",
      "Julmarknader och mörkt tidigt."
     ],
+    "events": [
+     {
+      "name": "Holmenkollens skidfestival",
+      "start": "2027-03-12",
+      "end": "2027-03-14",
+      "text": "Världscup i längd, backhoppning och nordisk kombination.",
+      "source": "https://www.visitoslo.com/whats-on/holmenkollen-ski-festival"
+     },
+     {
+      "name": "Världscupen i skidskytte",
+      "start": "2027-03-16",
+      "end": "2027-03-21",
+      "text": "Tävlingar på Holmenkollen.",
+      "source": "https://www.visitoslo.com/whats-on/biathlon-world-cup"
+     },
+     {
+      "name": "Holmenkollstafetten",
+      "start": "2027-05-08",
+      "end": "2027-05-08",
+      "text": "Stort stafettlopp genom stan. Gator längs banan är avstängda.",
+      "source": "https://running.life/en/event/holmenkollstafetten"
+     },
+     {
+      "name": "Nationaldagen 17 maj",
+      "start": "2027-05-17",
+      "end": "2027-05-17",
+      "text": "Barntåget går förbi slottet och hela stan är ute. Mycket är stängt.",
+      "source": "https://www.visitoslo.com/whats-on/yearly-highlights"
+     }
+    ],
     "seasons": [
      {
       "name": "Skidsäsong",
