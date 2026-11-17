@@ -5,6 +5,7 @@ import { Flag } from '../../components/Flag';
 import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
 import { fetchItemMarkers, fetchPlaces, placeName, type Place, type PlaceItem } from '../../lib/content';
+import { isLight } from '../../lib/upptack';
 import { useSession, useTravelMode } from '../../lib/session';
 import { groupByStatus, STATUS_KEY, useMemberStatuses, useMyPlaces, type PlaceStatus } from '../../lib/status';
 import { statusesFor, type MapWho } from '../../lib/statusLogic';
@@ -183,13 +184,14 @@ export default function KartaScreen() {
   const markers = useMemo<MapMarker[]>(() => {
     if (mapMode !== 'upptack') return [];
     const out: MapMarker[] = [];
+    // Lätta platser (Upptäck) visas som stadsprickar först när de har en status i vald karta.
     for (const p of places)
-      if ((p.kind === 'city' || p.kind === 'spot') && p.lat != null && p.lon != null)
+      if ((p.kind === 'city' || p.kind === 'spot') && p.lat != null && p.lon != null && (!isLight(p) || shown[p.id]))
         out.push({ id: p.id, name: p.name, lat: p.lat, lon: p.lon, kind: 'place', placeId: p.id });
     for (const i of items)
       if (i.lat != null && i.lon != null) out.push({ id: i.id, name: i.name, lat: i.lat, lon: i.lon, kind: 'item', placeId: i.place_id });
     return out;
-  }, [mapMode, places, items]);
+  }, [mapMode, places, items, shown]);
 
   // Mittpunkter för länder som visas som punkt: innehållets länder först, sedan alla länder i kartdatat.
   const pointCandidates = useMemo<CountryPoint[]>(

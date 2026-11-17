@@ -76,11 +76,18 @@ describe('färgerna för besökt i sällskap', () => {
       for (const x of pairs(true, p.id)) expect(x.de, `${x.a} mot ${x.b}`).toBeGreaterThanOrEqual(MIN_DE);
     });
 
-  // Ljust läge: bara jag har samma färg som besökt, som redan låg nära vill åka i Terrakotta (före Körning 14).
-  // Det är det enda kända paret under gränsen. Testet stoppar nya par.
-  const KNOWN_LIGHT = ['terrakotta bara-jag vill'];
-  it('ljust läge: inga andra par än de kända ligger för nära', () => {
+  // Ljust läge: inga kända par under gränsen. Terrakottas vill åka byttes i Körning 15 (låg 5,4 från besökt).
+  const KNOWN_LIGHT: string[] = [];
+  it('ljust läge: inga par ligger för nära', () => {
     const low = PALETTES.flatMap((p) => pairs(false, p.id).filter((x) => x.de < MIN_DE).map((x) => `${p.id} ${x.a} ${x.b}`));
     expect(low).toEqual(KNOWN_LIGHT);
+  });
+
+  it('Terrakotta: vill åka skiljer sig från besökt och planerad i båda lägena', () => {
+    for (const dark of [false, true]) {
+      const c = statusColors({ ...DEFAULT_THEME, dark, palette: 'terrakotta' });
+      expect(deltaE(c.vill, c.besokt)).toBeGreaterThanOrEqual(MIN_DE);
+      expect(deltaE(c.vill, c.planerad)).toBeGreaterThanOrEqual(MIN_DE);
+    }
   });
 });

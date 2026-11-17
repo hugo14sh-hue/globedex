@@ -25,8 +25,8 @@ export type TextSize = 'liten' | 'normal' | 'stor';
 export type Tone = 'neutral' | 'lekfull' | 'romantisk';
 export type TravelMode = 'solo' | 'par' | 'grupp';
 /** Vilka länder som räknas i statistik, mål och märken (content/_landlistor.json). Se src/lib/landlistor.ts. */
-export type CountryList = 'fn' | 'fn-plus' | 'alla';
-export const COUNTRY_LISTS: CountryList[] = ['fn', 'fn-plus', 'alla'];
+export type CountryList = 'fn' | 'fn-plus' | 'fn-tw-xk' | 'alla';
+export const COUNTRY_LISTS: CountryList[] = ['fn', 'fn-plus', 'fn-tw-xk', 'alla'];
 
 export interface ThemeSettings {
   palette: PaletteId;

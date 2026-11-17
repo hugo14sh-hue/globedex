@@ -31,6 +31,22 @@ export interface PlaceData {
   events?: PlaceEvent[];
   /** Säsonger som återkommer varje år (månad from till to). */
   seasons?: PlaceSeason[];
+  // Upptäck (content/_upptack.json, se src/lib/upptack.ts). Befintliga städer har climate, tags och
+  // alternatives. Lätta platser (light) har resten och saknar kompendium, saker och priser.
+  light?: boolean;
+  level?: number;
+  level_rule?: number;
+  level_note?: string;
+  climate?: string;
+  best_months?: number[];
+  tags?: string[];
+  gem?: boolean;
+  why?: string;
+  citybreak_gbp?: number;
+  /** Landets index för restauranger och hotell (EU = 100) och året, för källraden upptack.index. */
+  pli?: number;
+  pli_year?: number;
+  alternatives?: { place: string; why: string; cheaper: boolean }[];
 }
 
 /** En säsong i data.seasons. from och to är månadsnummer 1–12. from större än to går över årsskiftet. */
@@ -143,7 +159,8 @@ export function fetchPlaces(): Promise<Place[]> {
 export async function fetchHomeSuggestions(): Promise<HomeSuggestion[]> {
   const places = await fetchPlaces();
   return places
-    .filter((p) => p.kind === 'city' && (p.iso2 === 'SE' || p.id.startsWith('SE-')))
+    // Lätta platser (Upptäck) har inga idéer och föreslås inte som hemort.
+    .filter((p) => p.kind === 'city' && !p.data?.light && (p.iso2 === 'SE' || p.id.startsWith('SE-')))
     .map((p) => ({ id: p.id, name: p.name, lat: p.lat ?? undefined, lon: p.lon ?? undefined }))
     .sort((a, b) => a.name.localeCompare(b.name, LOCALE));
 }
@@ -211,9 +228,15 @@ export function countryName(iso: string): string {
   }
 }
 
-/** Namn på en plats: innehållets namn, annars landets namn från webbläsaren. */
-export const placeName = (places: Place[], id: string) =>
-  places.find((p) => p.id === id)?.name ?? (/^[A-Z]{2}$/.test(id) ? countryName(id) : id);
+/**
+ * Namn på en plats: innehållets namn, annars landets namn från webbläsaren. Lätta länder (bara med i
+ * places för att Upptäcks platser ska ha ett land) får webbläsarens namn på valt språk.
+ */
+export const placeName = (places: Place[], id: string) => {
+  const p = places.find((x) => x.id === id);
+  if (p && !(p.kind === 'country' && p.data?.light)) return p.name;
+  return /^[A-Z]{2}$/.test(id) ? countryName(id) : (p?.name ?? id);
+};
 
 // ---------- Listor: samlingsbok, bucketkatalog, idéer ----------
 

@@ -1,4 +1,6 @@
-// Läser content/??.json och content/_bucket.json till Supabase (upsert på id).
+// Läser content/??.json, content/_upptack.json och content/_bucket.json till Supabase (upsert på id).
+// _upptack.json: de lätta platserna blir städer under sitt land (data.light = true), befintliga städer får
+// climate och tags i data och alternativen hamnar i data.alternatives på den dyrare platsen (scripts/lib/upptack.mjs).
 // Kontrollerar också content/_packlista.json, content/_innan-avresa.json, content/_valutor.json och
 // content/_landlistor.json, som appen läser in vid bygget.
 // Körs lokalt av Hugo: npm run import (skriver) eller npm run import:check (bara validering).
@@ -12,6 +14,8 @@ import { secretClient, readUtf8 } from './lib/env.mjs';
 import { ORDER, TABLES, formatError, toDbRow, validateContent, validateCountryLists, validatePackList, validatePretripList, validateRates } from './lib/validate-content.mjs';
 import { COUNTRIES } from '../src/lib/countries.ts';
 import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
+import { applyPatches, discoverRows, validateDiscover } from './lib/upptack.mjs';
+import { sortPlaces } from './lib/validate-content.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
@@ -34,6 +38,24 @@ async function main() {
 
   const { errors, rows } = validateContent(parsed, bucket);
 
+  // Upptäck: lätta platser, klimat och taggar och alternativ. Saknas filen hoppas den över.
+  let discover = null;
+  if ((await readdir(contentDir)).includes('_upptack.json')) {
+    const json = await readJson('_upptack.json');
+    const contentPlaces = parsed.flatMap(({ json: j }) => (Array.isArray(j?.places) ? j.places : [])).filter((p) => p && typeof p.id === 'string');
+    const before = errors.length;
+    errors.push(...validateDiscover(json, COUNTRIES.map(([iso]) => iso), contentPlaces));
+    if (errors.length === before) {
+      const names = new Intl.DisplayNames('sv-SE', { type: 'region' });
+      const coords = (iso) => {
+        const c = COUNTRIES.find(([x]) => x === iso);
+        return c ? [c[1], c[2]] : null;
+      };
+      discover = discoverRows(json, contentPlaces, (iso) => names.of(iso) ?? iso, coords);
+      rows.places = sortPlaces([...applyPatches(rows.places, discover.patches), ...discover.countries, ...discover.cities]);
+    }
+  }
+
   // Filerna som appen läser in vid bygget. De importeras inte, men kontrolleras här. Saknas en fil hoppas den över.
   const appLists = [];
   for (const [name, validate] of [['_packlista.json', validatePackList], ['_innan-avresa.json', validatePretripList]]) {
@@ -53,7 +75,7 @@ async function main() {
     const json = await readJson('_landlistor.json');
     errors.push(...validateCountryLists('_landlistor.json', json, COUNTRIES.map(([iso]) => iso)));
     const n = (k) => (Array.isArray(json?.[k]) ? json[k].length : 0);
-    appLists.push(['_landlistor.json', `fn ${n('fn')}, fn_observatorer ${n('fn_observatorer')}`]);
+    appLists.push(['_landlistor.json', `fn ${n('fn')}, fn_observatorer ${n('fn_observatorer')}, fn_plus_tw_xk ${n('fn_plus_tw_xk')}`]);
   }
   // Gränssnittets texter på svenska och engelska: samma nycklar, form, platshållare och märken.
   const textErrors = compareTexts(await readJson('_texter.json'), await readJson('_texter.en.json'));
@@ -67,6 +89,10 @@ async function main() {
   const counts = [...ORDER.map((p) => [TABLES[p], rows[p].length]), ['bucket_catalog', rows.bucket.length]];
   console.log(`Valideringen gick igenom (${files.length} länder).`);
   for (const [table, n] of counts) console.log(`  ${table}: ${n}`);
+  if (discover)
+    console.log(
+      `  _upptack.json: ${discover.cities.length} lätta platser, ${discover.countries.length} länder utan landsfil, ${discover.patches.size} befintliga platser får klimat, taggar eller alternativ`,
+    );
   for (const [name, n] of appLists) console.log(`  ${name}: ${n} (läses in i appen vid bygget)`);
   console.log('  _texter.json och _texter.en.json: samma nycklar, form, platshållare och märken');
   if (checkOnly) return 0;

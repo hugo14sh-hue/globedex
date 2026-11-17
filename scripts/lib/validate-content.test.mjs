@@ -337,6 +337,18 @@ describe('_landlistor.json', () => {
     ]);
   });
 
+  it('fn_plus_tw_xk: kända koder som inte redan finns i fn eller fn_observatorer', () => {
+    const msg = (extra) =>
+      validateCountryLists('_landlistor.json', { fn, fn_observatorer: ['ZY', 'ZZ'], fn_plus_tw_xk: extra }, [...all, 'TW', 'XK']).map(
+        (e) => `${e.id} ${e.field}: ${e.message}`,
+      );
+    expect(msg(['TW', 'XK'])).toEqual([]);
+    expect(msg(['TW', 'ZY', 'QQ'])).toEqual([
+      'QQ fn_plus_tw_xk: finns inte bland appens länder (src/lib/countries.ts)',
+      'ZY fn_plus_tw_xk: finns redan i fn eller fn_observatorer',
+    ]);
+  });
+
   it('den riktiga filen går igenom mot appens länder', async () => {
     const { COUNTRIES } = await import('../../src/lib/countries');
     const json = JSON.parse(readFileSync(join(process.cwd(), 'content/_landlistor.json'), 'utf8'));

@@ -11,7 +11,8 @@ import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { badgeStates, tripDays, type BadgeState } from './marken';
 import type { ViData } from './useViData';
-import { continentName, numbers, timeline, type TimelineType } from './viLogic';
+import { numbers, timeline, type TimelineType } from './viLogic';
+import { continentLabel } from '../../lib/continentNames';
 import { LOCALE, numberFormat } from '../../lib/locale';
 import { Segment } from '../../components/Segment';
 import { useSession } from '../../lib/session';
@@ -115,7 +116,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
       case 'lander':
         return { title: t('vi.siffror.lander'), rows: nums.lander.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, LOCALE)) };
       case 'kontinenter':
-        return { title: t('vi.siffror.kontinenter'), rows: nums.kontinenter.map((c) => ({ key: c, title: continentName(c) })) };
+        return { title: t('vi.siffror.kontinenter'), rows: nums.kontinenter.map((c) => ({ key: c, title: continentLabel(c, t) })) };
       case 'landskap':
         return { title: t('vi.siffror.landskap'), rows: nums.landskap.map((c) => ({ key: c, title: name(c) })).sort((a, b) => a.title.localeCompare(b.title, LOCALE)) };
       case 'delstater':

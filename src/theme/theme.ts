@@ -67,7 +67,7 @@ export function themeVars(s: ThemeSettings): Record<string, string> {
     '--st-bott': `color-mix(in srgb, ${p} 55%, ${base})`,
     '--st-besokt': STATUS_FIXED.besokt,
     '--st-planerad': STATUS_FIXED.planerad,
-    '--st-vill': `color-mix(in srgb, ${P.a} 62%, ${base})`,
+    '--st-vill': P.vill ?? `color-mix(in srgb, ${P.a} 62%, ${base})`,
     '--st-mellan': STATUS_FIXED.mellan,
     '--st-ej': d ? STATUS_FIXED.ejMork : STATUS_FIXED.ejLjus,
     '--st-tillsammans': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).tillsammans,
@@ -96,7 +96,7 @@ export function statusColors(s: ThemeSettings): Record<MapKey | 'ej', string> {
     bott: mix(base, p, 0.55),
     besokt: STATUS_FIXED.besokt,
     planerad: STATUS_FIXED.planerad,
-    vill: mix(base, P.a, 0.62),
+    vill: P.vill ?? mix(base, P.a, 0.62),
     mellan: STATUS_FIXED.mellan,
     ej: s.dark ? STATUS_FIXED.ejMork : STATUS_FIXED.ejLjus,
   };

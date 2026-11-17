@@ -574,7 +574,7 @@ export function validatePretripList(name, json) {
 }
 
 /**
- * content/_landlistor.json: { fn: [193 landskoder], fn_observatorer: [...] }. Läses in i appen vid bygget.
+ * content/_landlistor.json: { fn: [193 landskoder], fn_observatorer: [...], fn_plus_tw_xk: [...] }. Läses in i appen vid bygget.
  * Varje kod ska finnas bland appens länder (src/lib/countries.ts), fn ska ha 193 unika koder och
  * listorna får inte överlappa.
  */
@@ -584,11 +584,13 @@ export function validateCountryLists(name, json, appCountries) {
   const check = makeChecker(name, errs);
   const row = { id: '-' };
   if (!isObj(json)) return [{ file: name, id: '-', field: '-', message: 'filen ska vara ett JSON-objekt' }];
-  for (const k of Object.keys(json)) check(row, k, ['_om', 'fn', 'fn_observatorer'].includes(k), 'okänt fält');
+  for (const k of Object.keys(json)) check(row, k, ['_om', 'fn', 'fn_observatorer', 'fn_plus_tw_xk'].includes(k), 'okänt fält');
   const known = new Set(appCountries);
   const lists = {};
-  for (const key of ['fn', 'fn_observatorer']) {
+  for (const key of ['fn', 'fn_observatorer', 'fn_plus_tw_xk']) {
     const list = json[key];
+    // fn_plus_tw_xk kom i Körning 15. Saknas den räknas listan 197 inte.
+    if (key === 'fn_plus_tw_xk' && list === undefined) continue;
     const ok = Array.isArray(list) && list.every((c) => typeof c === 'string');
     check(row, key, ok, 'lista med landskoder krävs');
     if (!ok) continue;
@@ -605,6 +607,10 @@ export function validateCountryLists(name, json, appCountries) {
   if (lists.fn && lists.fn_observatorer) {
     const fn = new Set(lists.fn);
     for (const c of lists.fn_observatorer) check({ id: c }, 'fn_observatorer', !fn.has(c), 'finns också i fn');
+  }
+  if (lists.fn_plus_tw_xk) {
+    const before = new Set([...(lists.fn ?? []), ...(lists.fn_observatorer ?? [])]);
+    for (const c of lists.fn_plus_tw_xk) check({ id: c }, 'fn_plus_tw_xk', !before.has(c), 'finns redan i fn eller fn_observatorer');
   }
   return errs;
 }

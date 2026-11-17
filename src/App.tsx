@@ -10,6 +10,7 @@ import LoginScreen from './features/login/LoginScreen';
 import StartScreen from './features/start/StartScreen';
 import KartaScreen from './features/karta/KartaScreen';
 const PlaceScreen = lazy(() => import('./features/karta/PlaceScreen'));
+const UpptackScreen = lazy(() => import('./features/upptack/UpptackScreen'));
 const IdagScreen = lazy(() => import('./features/idag/IdagScreen'));
 const ListorScreen = lazy(() => import('./features/listor/ListorScreen'));
 const ResorScreen = lazy(() => import('./features/resor/ResorScreen'));
@@ -81,6 +82,7 @@ export default function App() {
             <Route index element={<Navigate to="/karta" replace />} />
             <Route path="karta" element={<KartaScreen />} />
             <Route path="karta/:id" element={<PlaceScreen />} />
+            <Route path="upptack" element={<UpptackScreen />} />
             <Route path="idag" element={<IdagScreen />} />
             <Route path="listor" element={<ListorScreen />} />
             <Route path="resor" element={<ResorScreen />} />

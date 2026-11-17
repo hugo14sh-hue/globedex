@@ -27,6 +27,15 @@ describe('landlistor', () => {
     expect(countryListCodes('fn-plus')).toEqual([...new Set([...lists.fn, ...lists.fn_observatorer])].sort());
   });
 
+  it('FN, observatörer, Taiwan och Kosovo: 197 länder', () => {
+    expect(countryListTotal('fn-tw-xk')).toBe(197);
+    expect(countryListCodes('fn-tw-xk')).toHaveLength(197);
+    expect(countryListCodes('fn-tw-xk')).toEqual([...new Set([...lists.fn, ...lists.fn_observatorer, ...lists.fn_plus_tw_xk])].sort());
+    expect(['SE', 'VA', 'TW', 'XK', 'GL'].map((c) => countsAsCountry(c, 'fn-tw-xk'))).toEqual([true, true, true, true, false]);
+    expect(Object.keys(visitedCountries(input('fn-tw-xk'))).sort()).toEqual(['SE', 'TW', 'VA']);
+    expect(sanitizeTheme({ countryList: 'fn-tw-xk' }).countryList).toBe('fn-tw-xk');
+  });
+
   it('förvalet är alla, så att inget ändras för den som inte väljer', () => {
     expect(DEFAULT_COUNTRY_LIST).toBe('alla');
     expect(sanitizeTheme({}).countryList).toBe('alla');
@@ -39,7 +48,7 @@ describe('landlistor', () => {
     expect(['SE', 'VA', 'TW', 'GL'].map((c) => countsAsCountry(c, 'fn-plus'))).toEqual([true, true, false, false]);
     expect(['SE', 'VA', 'TW', 'GL'].map((c) => countsAsCountry(c, 'alla'))).toEqual([true, true, true, true]);
     // Regioner räknas aldrig som länder.
-    for (const l of ['fn', 'fn-plus', 'alla'] as const) expect(countsAsCountry('US-ca', l)).toBe(false);
+    for (const l of ['fn', 'fn-plus', 'fn-tw-xk', 'alla'] as const) expect(countsAsCountry('US-ca', l)).toBe(false);
   });
 
   it('märkningen utanför listan gäller bara länder', () => {

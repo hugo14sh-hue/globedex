@@ -14,19 +14,21 @@ export const APP_COUNTRIES: readonly string[] = [...new Set(COUNTRIES.map(([iso]
 
 const FN = new Set<string>(raw.fn);
 const FN_PLUS = new Set<string>([...raw.fn, ...raw.fn_observatorer]);
+/** FN:s medlemmar, observatörerna, Taiwan och Kosovo (fn_plus_tw_xk), 197 länder. */
+const FN_TW_XK = new Set<string>([...FN_PLUS, ...raw.fn_plus_tw_xk]);
+const SETS: Record<Exclude<CountryList, 'alla'>, Set<string>> = { fn: FN, 'fn-plus': FN_PLUS, 'fn-tw-xk': FN_TW_XK };
 
 /** Förvalet: alla länder, så att inget ändras för den som inte väljer. */
 export const DEFAULT_COUNTRY_LIST: CountryList = DEFAULT_THEME.countryList;
 
 /** Länderna i en lista. */
 export function countryListCodes(list: CountryList): string[] {
-  if (list === 'fn') return [...FN].sort();
-  if (list === 'fn-plus') return [...FN_PLUS].sort();
-  return [...APP_COUNTRIES];
+  if (list === 'alla') return [...APP_COUNTRIES];
+  return [...SETS[list]].sort();
 }
 
 /** Nämnaren: antalet länder i listan. */
-export const countryListTotal = (list: CountryList) => (list === 'fn' ? FN.size : list === 'fn-plus' ? FN_PLUS.size : APP_COUNTRIES.length);
+export const countryListTotal = (list: CountryList) => (list === 'alla' ? APP_COUNTRIES.length : SETS[list].size);
 
 /**
  * Räknas platsen som ett land i listan? Bara landskoder (två versaler) räknas, aldrig regioner.
@@ -34,9 +36,7 @@ export const countryListTotal = (list: CountryList) => (list === 'fn' ? FN.size 
  */
 export function countsAsCountry(id: string, list: CountryList = DEFAULT_COUNTRY_LIST): boolean {
   if (!ISO_RE.test(id)) return false;
-  if (list === 'fn') return FN.has(id);
-  if (list === 'fn-plus') return FN_PLUS.has(id);
-  return true;
+  return list === 'alla' || SETS[list].has(id);
 }
 
 /** Är landet utanför vald lista? Då visas märkningen landlista.utanfor på landets sida. */

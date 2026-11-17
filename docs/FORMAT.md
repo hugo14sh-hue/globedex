@@ -295,10 +295,23 @@ En valuta som saknas i sek_per visas bara i lokal valuta. `npm run import:check`
 Ligger i content/_landlistor.json och läses in i appen vid bygget (inte till databasen). Styr nämnaren och vad som räknas i statistik, mål och märken, efter valet under Anpassning (FN:s medlemsländer, med observatörer, eller alla länder i appen). Kartan visar alltid alla länder.
 
 ```json
-{ "_om": "...", "fn": ["AD", "AE", "..."], "fn_observatorer": ["PS", "VA"] }
+{ "_om": "...", "fn": ["AD", "AE", "..."], "fn_observatorer": ["PS", "VA"], "fn_plus_tw_xk": ["TW", "XK"] }
 ```
 
+fn_plus_tw_xk ger valet landlista.fn-tw-xk: fn, fn_observatorer och de här koderna (197). Koderna får inte redan finnas i fn eller fn_observatorer.
+
 `npm run import:check` stoppar okända fält, koder som inte finns bland appens länder (src/lib/countries.ts), dubbletter, en fn-lista som inte har 193 unika koder och koder som finns i båda listorna.
+
+## Upptäck
+Ligger i content/_upptack.json och läses in till places av `npm run import` (scripts/lib/upptack.mjs). Formatet står i filens _om.
+- places: lätta platser. Blir städer (kind city) under sitt land, med fälten level, level_rule, level_note, climate, best_months, tags, gem, why och citybreak_gbp i data, och data.light = true. De får också data.pli och data.pli_year (landets värde i pli_restaurants_hotels och året) för källraden upptack.index, och data.own_judgment med de fält ur _om.own_judgment som platsen har.
+- Länder utan landsfil som har lätta platser läggs till som länder med data.light = true (places.parent_id kräver landet). Namnet tas från Intl.DisplayNames på svenska, och appen visar webbläsarens namn på valt språk.
+- existing: befintliga städer i landsfilerna får climate och tags i data. Prisnivån kommer från data.prices.level och bästa månader är månaderna där smart_months är 4 eller 5.
+- alternatives: läggs i data.alternatives ({ place, why, cheaper }) på platsen i for.
+
+`npm run import:check` stoppar: okända delar och fält, id som inte är landskod, bindestreck och små bokstäver eller som krockar med en landsfil, länder som inte finns i src/lib/countries.ts, level och level_rule utanför 1–5, level_note som saknas när level avviker från level_rule (eller finns när de är lika), climate och tags som inte finns i listorna, månader utanför 1–12, existing som inte är en stad i landsfilerna, for och place som inte finns bland places eller existing, alternativ med högre prisnivå än platsen de hör till, och cheaper som inte stämmer med nivåerna.
+
+En lätt plats har ingen kompendium, inga saker och inga priser. Den räknas inte bland städer med innehåll (hemort i Idag) och visas som stadsprick på kartan först när den har en status.
 
 ## Gränssnittets texter
 Ligger i content/_texter.json och läses in i appen vid bygget (inte till databasen). Nycklar under texter, tre språkstilar (neutral, lekfull, romantisk), märken under marken. Reglerna står i filens _om.

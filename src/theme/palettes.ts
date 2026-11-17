@@ -10,12 +10,17 @@ export interface Palette {
   bg: string; // bakgrund
   bgd: string; // bakgrund i mörkt läge
   sd: string; // yta i mörkt läge
+  /** Egen färg för vill åka (ljust och mörkt läge) när accent 62 % ligger för nära kartans andra färger. */
+  vill?: string;
 }
 
+// Terrakotta: vill åka är #7C2D12 (samma orange familj som primären) i stället för accent 62 %, som låg
+// 5,4 från besökt. Minst 13 (CIEDE2000) mot besökt, planerad, de fyra sällskapsfärgerna, bor, har bott och
+// ej satt i båda lägena (companyColors.test.ts).
 export const PALETTES: Palette[] = [
   { id: 'djuphav', name: 'Djuphav', p: '#0F4C5C', pd: '#5FB0C2', a: '#FF6B4A', bg: '#FBF7F0', bgd: '#0E1A20', sd: '#172830' },
   { id: 'medelhav', name: 'Medelhav', p: '#1D4ED8', pd: '#7B9BFF', a: '#F59E0B', bg: '#F8FAFC', bgd: '#0B1220', sd: '#141E33' },
-  { id: 'terrakotta', name: 'Terrakotta', p: '#C2410C', pd: '#F08A5D', a: '#0D9488', bg: '#FFF7ED', bgd: '#1C1210', sd: '#2A1C18' },
+  { id: 'terrakotta', name: 'Terrakotta', p: '#C2410C', pd: '#F08A5D', a: '#0D9488', bg: '#FFF7ED', bgd: '#1C1210', sd: '#2A1C18', vill: '#7C2D12' },
   { id: 'skog', name: 'Skog och fjäll', p: '#166534', pd: '#5CCB84', a: '#EAB308', bg: '#F7F7F2', bgd: '#0F1A14', sd: '#18261D' },
   { id: 'nattflyg', name: 'Nattflyg', p: '#6D28D9', pd: '#AE8BFA', a: '#22D3EE', bg: '#FAF5FF', bgd: '#120B1F', sd: '#1E1530' },
 ];

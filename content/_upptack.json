@@ -1,0 +1,2106 @@
+{
+ "_om": {
+  "vad": "Lätta platser för fliken Upptäck: prisnivå, klimat, bästa månader, taggar och alternativ. Befintliga städer med fullt innehåll ligger kvar i landsfilerna och får här bara klimat och taggar.",
+  "checked": "2026-11-17",
+  "niva": "level 1-5 följer Eurostats prisnivåindex för restauranger och hotell 2025 (landets snitt, EU-27 = 100): under 65 = 1, 65-89 = 2, 90-114 = 3, 115-149 = 4, 150 och över = 5. level_rule är regelns värde. Avviker level från regeln finns skälet i level_note, och det är vår bedömning.",
+  "own_judgment": [
+   "best_months",
+   "tags",
+   "gem",
+   "climate",
+   "why",
+   "alternatives",
+   "level_note",
+   "lat och lon (ungefärliga)"
+  ],
+  "sources": [
+   "https://ec.europa.eu/eurostat/statistics-explained/index.php/comparative_price_levels_of_consumer_goods_and_services",
+   "https://monstat.org/uploads/files/cijene/Komparativne/2025/Comparative%20price%20levels%20in%202025.pdf",
+   "https://post-office.mynewsdesk.com/pressreleases/emerging-city-break-destinations-rate-as-best-value-in-latest-post-office-report-while-lille-tops-the-list-of-train-travel-cities-3450320"
+  ],
+  "citybreak_gbp": "Post Office City Costs Barometer 2026: tolv turistutgifter för två personer, bland annat två nätter på trestjärnigt hotell, i brittiska pund."
+ },
+ "tags": [
+  "storstad",
+  "gamla-stan",
+  "strand",
+  "kust",
+  "natur",
+  "berg",
+  "vandring",
+  "mat",
+  "vin",
+  "nattliv",
+  "konst",
+  "musik",
+  "arkitektur",
+  "historia",
+  "romantik",
+  "glamour",
+  "bad",
+  "jul",
+  "utsikt",
+  "bilsport"
+ ],
+ "climates": [
+  "medelhav",
+  "kontinentalt",
+  "kust",
+  "nordiskt",
+  "alpint"
+ ],
+ "pli_year": 2025,
+ "pli_restaurants_hotels": {
+  "PT": 74,
+  "ES": 85,
+  "FR": 116,
+  "IT": 111,
+  "BE": 117,
+  "NL": 120,
+  "DE": 108,
+  "AT": 117,
+  "CH": 163,
+  "CZ": 70,
+  "PL": 81,
+  "HU": 82,
+  "SK": 85,
+  "SI": 87,
+  "HR": 90,
+  "EE": 88,
+  "LV": 87,
+  "LT": 83,
+  "BA": 59,
+  "RS": 66,
+  "AL": 53,
+  "ME": 67,
+  "MK": 48,
+  "BG": 56,
+  "RO": 59,
+  "GR": 86,
+  "MT": 91,
+  "IE": 118,
+  "SE": 123,
+  "NO": 140,
+  "DK": 142,
+  "FI": 122,
+  "IS": 173,
+  "TR": 78
+ },
+ "existing": {
+  "MC-monaco": {
+   "climate": "medelhav",
+   "tags": [
+    "glamour",
+    "kust",
+    "bilsport"
+   ]
+  },
+  "DK-kopenhamn": {
+   "climate": "kust",
+   "tags": [
+    "storstad",
+    "mat",
+    "arkitektur"
+   ]
+  },
+  "NO-oslo": {
+   "climate": "nordiskt",
+   "tags": [
+    "storstad",
+    "natur",
+    "konst"
+   ]
+  },
+  "NL-amsterdam": {
+   "climate": "kust",
+   "tags": [
+    "storstad",
+    "konst",
+    "nattliv"
+   ]
+  },
+  "DE-berlin": {
+   "climate": "kontinentalt",
+   "tags": [
+    "storstad",
+    "historia",
+    "nattliv",
+    "konst"
+   ]
+  },
+  "SE-stockholm": {
+   "climate": "nordiskt",
+   "tags": [
+    "storstad",
+    "kust",
+    "gamla-stan"
+   ]
+  },
+  "FI-helsingfors": {
+   "climate": "nordiskt",
+   "tags": [
+    "storstad",
+    "arkitektur",
+    "bad"
+   ]
+  },
+  "IS-reykjavik": {
+   "climate": "nordiskt",
+   "tags": [
+    "natur",
+    "bad",
+    "vandring"
+   ]
+  },
+  "GR-aten": {
+   "climate": "medelhav",
+   "tags": [
+    "storstad",
+    "historia",
+    "mat"
+   ]
+  },
+  "HR-dubrovnik": {
+   "climate": "medelhav",
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "strand"
+   ]
+  },
+  "HR-split": {
+   "climate": "medelhav",
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "strand",
+    "historia"
+   ]
+  },
+  "HR-zagreb": {
+   "climate": "kontinentalt",
+   "tags": [
+    "gamla-stan",
+    "jul",
+    "mat"
+   ]
+  },
+  "TR-istanbul": {
+   "climate": "medelhav",
+   "tags": [
+    "storstad",
+    "historia",
+    "mat"
+   ]
+  }
+ },
+ "places": [
+  {
+   "id": "PT-lissabon",
+   "name": "Lissabon",
+   "country": "PT",
+   "lat": 38.72,
+   "lon": -9.14,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "utsikt",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Kullar, kakel och spårvagnar vid Tejos mynning, med Atlantkusten en kort tågresa bort.",
+   "citybreak_gbp": 358
+  },
+  {
+   "id": "PT-porto",
+   "name": "Porto",
+   "country": "PT",
+   "lat": 41.15,
+   "lon": -8.61,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "gamla-stan",
+    "vin",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Portvinskällare längs Douro och en gammal stadskärna som klättrar upp från floden."
+  },
+  {
+   "id": "ES-barcelona",
+   "name": "Barcelona",
+   "country": "ES",
+   "lat": 41.39,
+   "lon": 2.17,
+   "level": 3,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "strand",
+    "arkitektur",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Gaudís hus, stadsstrand och sena kvällar i samma stad.",
+   "level_note": "Dyrare än Spanien i snitt, särskilt boendet."
+  },
+  {
+   "id": "ES-madrid",
+   "name": "Madrid",
+   "country": "ES",
+   "lat": 40.42,
+   "lon": -3.7,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "konst",
+    "mat",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Prado, tapasbarer och ett stadsliv som börjar sent."
+  },
+  {
+   "id": "ES-sevilla",
+   "name": "Sevilla",
+   "country": "ES",
+   "lat": 37.39,
+   "lon": -5.98,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    3,
+    4,
+    5,
+    10,
+    11
+   ],
+   "tags": [
+    "gamla-stan",
+    "arkitektur",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Alcázar, apelsinträd och flamenco. Sommaren är mycket het, så vår och höst är tiden."
+  },
+  {
+   "id": "ES-valencia",
+   "name": "Valencia",
+   "country": "ES",
+   "lat": 39.47,
+   "lon": -0.38,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "storstad",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": true,
+   "why": "Paellans hemstad med stadsstrand, en park i en gammal flodfåra och färre turister än Barcelona."
+  },
+  {
+   "id": "ES-malaga",
+   "name": "Málaga",
+   "country": "ES",
+   "lat": 36.72,
+   "lon": -4.42,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10,
+    11
+   ],
+   "tags": [
+    "strand",
+    "konst",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Picassos födelsestad med strand, museer och milda vintrar."
+  },
+  {
+   "id": "ES-san-sebastian",
+   "name": "San Sebastián",
+   "country": "ES",
+   "lat": 43.32,
+   "lon": -1.98,
+   "level": 3,
+   "level_rule": 2,
+   "climate": "kust",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "strand",
+    "mat"
+   ],
+   "gem": false,
+   "why": "En snäckformad stadsstrand och barer fulla av pintxos i Baskien.",
+   "level_note": "Dyrare än Spanien i snitt, särskilt mat och boende."
+  },
+  {
+   "id": "ES-granada",
+   "name": "Granada",
+   "country": "ES",
+   "lat": 37.18,
+   "lon": -3.6,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "gamla-stan",
+    "arkitektur",
+    "berg"
+   ],
+   "gem": true,
+   "why": "Alhambra ovanför staden och Sierra Nevada i bakgrunden."
+  },
+  {
+   "id": "FR-paris",
+   "name": "Paris",
+   "country": "FR",
+   "lat": 48.86,
+   "lon": 2.35,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "konst",
+    "mat",
+    "romantik"
+   ],
+   "gem": false,
+   "why": "Museer, kaféer och boulevarder: storstaden som de flesta andra jämförs med.",
+   "citybreak_gbp": 575
+  },
+  {
+   "id": "FR-nice",
+   "name": "Nice",
+   "country": "FR",
+   "lat": 43.7,
+   "lon": 7.27,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "kust",
+    "gamla-stan",
+    "glamour"
+   ],
+   "gem": false,
+   "why": "Rivierans största stad, med strandpromenad, gammal stadskärna och tåg längs kusten till Monaco."
+  },
+  {
+   "id": "FR-menton",
+   "name": "Menton",
+   "country": "FR",
+   "lat": 43.77,
+   "lon": 7.5,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "kust",
+    "gamla-stan",
+    "romantik"
+   ],
+   "gem": true,
+   "why": "Pastellfärgad gammal stad vid italienska gränsen, på samma kuststräcka som Monaco men i lugnare tempo."
+  },
+  {
+   "id": "FR-lyon",
+   "name": "Lyon",
+   "country": "FR",
+   "lat": 45.76,
+   "lon": 4.84,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "mat",
+    "gamla-stan",
+    "storstad"
+   ],
+   "gem": true,
+   "why": "Frankrikes matstad, med bouchons och en gammal stadsdel mellan två floder.",
+   "level_note": "Vår bedömning: billigare än Paris och Rivieran, som drar upp Frankrikes snitt."
+  },
+  {
+   "id": "FR-bordeaux",
+   "name": "Bordeaux",
+   "country": "FR",
+   "lat": 44.84,
+   "lon": -0.58,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "vin",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Vinstad med 1700-talskajer längs Garonne och vingårdar runt hörnet.",
+   "level_note": "Vår bedömning: billigare än Paris och Rivieran, som drar upp Frankrikes snitt."
+  },
+  {
+   "id": "FR-strasbourg",
+   "name": "Strasbourg",
+   "country": "FR",
+   "lat": 48.57,
+   "lon": 7.75,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "jul",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Korsvirkeshus och kanaler i Alsace, och en av Europas äldsta julmarknader.",
+   "level_note": "Vår bedömning. Post Office rankar staden som en av Västeuropas billigaste weekendstäder 2026.",
+   "citybreak_gbp": 319
+  },
+  {
+   "id": "FR-lille",
+   "name": "Lille",
+   "country": "FR",
+   "lat": 50.63,
+   "lon": 3.06,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat",
+    "konst"
+   ],
+   "gem": true,
+   "why": "Flamländska fasader och ett stort konstmuseum, nära gränsen till Belgien.",
+   "level_note": "Vår bedömning. Post Office rankar staden som en av Västeuropas billigaste weekendstäder 2026.",
+   "citybreak_gbp": 289
+  },
+  {
+   "id": "IT-rom",
+   "name": "Rom",
+   "country": "IT",
+   "lat": 41.9,
+   "lon": 12.5,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "historia",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Colosseum, Pantheon och Vatikanen på gångavstånd från varandra."
+  },
+  {
+   "id": "IT-florens",
+   "name": "Florens",
+   "country": "IT",
+   "lat": 43.77,
+   "lon": 11.26,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "konst",
+    "arkitektur",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Renässansens stad, med Uffizierna och domen mitt i Toscana."
+  },
+  {
+   "id": "IT-venedig",
+   "name": "Venedig",
+   "country": "IT",
+   "lat": 45.44,
+   "lon": 12.33,
+   "level": 4,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "romantik",
+    "arkitektur",
+    "kust"
+   ],
+   "gem": false,
+   "why": "En stad utan bilar, byggd på öar i en lagun.",
+   "level_note": "Dyrare än Italien i snitt, särskilt boende och mat nära kanalerna."
+  },
+  {
+   "id": "IT-neapel",
+   "name": "Neapel",
+   "country": "IT",
+   "lat": 40.85,
+   "lon": 14.27,
+   "level": 2,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "mat",
+    "historia",
+    "kust"
+   ],
+   "gem": false,
+   "why": "Pizzans hemstad, med Pompeji och Vesuvius inom räckhåll.",
+   "level_note": "Vår bedömning: södra Italien är billigare än landets snitt."
+  },
+  {
+   "id": "IT-bologna",
+   "name": "Bologna",
+   "country": "IT",
+   "lat": 44.49,
+   "lon": 11.34,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "mat",
+    "gamla-stan"
+   ],
+   "gem": true,
+   "why": "Arkader, torn och ett kök som resten av Italien ser upp till."
+  },
+  {
+   "id": "IT-palermo",
+   "name": "Palermo",
+   "country": "IT",
+   "lat": 38.12,
+   "lon": 13.36,
+   "level": 2,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "mat",
+    "historia",
+    "kust"
+   ],
+   "gem": true,
+   "why": "Marknader, gatumat och arabisk-normandiska kyrkor på Sicilien.",
+   "level_note": "Vår bedömning: södra Italien är billigare än landets snitt."
+  },
+  {
+   "id": "IT-sanremo",
+   "name": "Sanremo",
+   "country": "IT",
+   "lat": 43.82,
+   "lon": 7.78,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "kust",
+    "strand",
+    "glamour"
+   ],
+   "gem": true,
+   "why": "Italienska Rivierans blomsterstad, med kasino, palmer och en gammal stadsdel på höjden."
+  },
+  {
+   "id": "IT-trieste",
+   "name": "Trieste",
+   "country": "IT",
+   "lat": 45.65,
+   "lon": 13.78,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "kust",
+    "arkitektur",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Hamnstad med habsburgska palats och gamla kaffehus, i hörnet mot Slovenien."
+  },
+  {
+   "id": "IT-lecce",
+   "name": "Lecce",
+   "country": "IT",
+   "lat": 40.35,
+   "lon": 18.17,
+   "level": 2,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "arkitektur",
+    "mat",
+    "strand"
+   ],
+   "gem": true,
+   "why": "Barockstad i sandsten längst ner i Apulien, med stränder åt två hav.",
+   "level_note": "Vår bedömning: södra Italien är billigare än landets snitt."
+  },
+  {
+   "id": "BE-bryssel",
+   "name": "Bryssel",
+   "country": "BE",
+   "lat": 50.85,
+   "lon": 4.35,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Grand-Place, art nouveau, våfflor och öl."
+  },
+  {
+   "id": "BE-gent",
+   "name": "Gent",
+   "country": "BE",
+   "lat": 51.05,
+   "lon": 3.72,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": true,
+   "why": "Medeltida kajer och en borg mitt i en livlig studentstad."
+  },
+  {
+   "id": "NL-rotterdam",
+   "name": "Rotterdam",
+   "country": "NL",
+   "lat": 51.92,
+   "lon": 4.48,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "arkitektur",
+    "storstad",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Modern arkitektur, saluhall och Europas största hamn."
+  },
+  {
+   "id": "NL-utrecht",
+   "name": "Utrecht",
+   "country": "NL",
+   "lat": 52.09,
+   "lon": 5.12,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Kanaler med kajer i två våningar och kaféer nere vid vattnet."
+  },
+  {
+   "id": "DE-munchen",
+   "name": "München",
+   "country": "DE",
+   "lat": 48.14,
+   "lon": 11.58,
+   "level": 4,
+   "level_rule": 3,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    7,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "berg"
+   ],
+   "gem": false,
+   "why": "Ölhallar, parker och Alperna inom en dagsutflykt.",
+   "level_note": "Vår bedömning: en av Tysklands dyraste städer."
+  },
+  {
+   "id": "DE-hamburg",
+   "name": "Hamburg",
+   "country": "DE",
+   "lat": 53.55,
+   "lon": 9.99,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "nattliv",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Hamnstad med magasinskvarter i tegel och konserthuset Elbphilharmonie."
+  },
+  {
+   "id": "DE-leipzig",
+   "name": "Leipzig",
+   "country": "DE",
+   "lat": 51.34,
+   "lon": 12.37,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    7,
+    9
+   ],
+   "tags": [
+    "musik",
+    "konst",
+    "nattliv"
+   ],
+   "gem": true,
+   "why": "Bachs stad, med ett stort kulturliv i gamla industrikvarter."
+  },
+  {
+   "id": "AT-wien",
+   "name": "Wien",
+   "country": "AT",
+   "lat": 48.21,
+   "lon": 16.37,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    12
+   ],
+   "tags": [
+    "storstad",
+    "musik",
+    "konst",
+    "jul"
+   ],
+   "gem": false,
+   "why": "Kejsarpalats, konserthus och kaffehus med tidningar på pinne."
+  },
+  {
+   "id": "AT-salzburg",
+   "name": "Salzburg",
+   "country": "AT",
+   "lat": 47.8,
+   "lon": 13.04,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "alpint",
+   "best_months": [
+    5,
+    6,
+    9,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "musik",
+    "berg",
+    "jul"
+   ],
+   "gem": false,
+   "why": "Mozarts födelsestad, med barock stadskärna under en fästning."
+  },
+  {
+   "id": "AT-graz",
+   "name": "Graz",
+   "country": "AT",
+   "lat": 47.07,
+   "lon": 15.44,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Österrikes näst största stad, med röda tak, ett klocktorn på berget och vingårdar söderut.",
+   "level_note": "Vår bedömning: billigare än Wien och Salzburg."
+  },
+  {
+   "id": "CH-zurich",
+   "name": "Zürich",
+   "country": "CH",
+   "lat": 47.37,
+   "lon": 8.54,
+   "level": 5,
+   "level_rule": 5,
+   "climate": "kontinentalt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "natur",
+    "konst"
+   ],
+   "gem": false,
+   "why": "Gammal stad vid en sjö där man badar på sommaren, med Alperna i fonden."
+  },
+  {
+   "id": "CH-geneve",
+   "name": "Genève",
+   "country": "CH",
+   "lat": 46.2,
+   "lon": 6.14,
+   "level": 5,
+   "level_rule": 5,
+   "climate": "kontinentalt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "natur",
+    "glamour",
+    "storstad"
+   ],
+   "gem": false,
+   "why": "Sjöstad med fontän och utsikt mot Mont Blanc."
+  },
+  {
+   "id": "CZ-prag",
+   "name": "Prag",
+   "country": "CZ",
+   "lat": 50.08,
+   "lon": 14.44,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "arkitektur",
+    "nattliv",
+    "jul"
+   ],
+   "gem": false,
+   "why": "Karlsbron, borgen och en gammal stad som klarade sig genom kriget."
+  },
+  {
+   "id": "CZ-brno",
+   "name": "Brno",
+   "country": "CZ",
+   "lat": 49.2,
+   "lon": 16.61,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": true,
+   "why": "Tjeckiens andra stad, med funkisvillor, vinbarer och få turister."
+  },
+  {
+   "id": "PL-krakow",
+   "name": "Kraków",
+   "country": "PL",
+   "lat": 50.06,
+   "lon": 19.94,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "jul"
+   ],
+   "gem": false,
+   "why": "Ett av Europas största medeltida torg och kungaborgen Wawel."
+  },
+  {
+   "id": "PL-gdansk",
+   "name": "Gdańsk",
+   "country": "PL",
+   "lat": 54.35,
+   "lon": 18.65,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "kust",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Hansastad vid Östersjön, med gavelhus, bärnsten och sandstränder en bit bort."
+  },
+  {
+   "id": "PL-wroclaw",
+   "name": "Wrocław",
+   "country": "PL",
+   "lat": 51.11,
+   "lon": 17.03,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "arkitektur"
+   ],
+   "gem": true,
+   "why": "Färgglatt torg, öar i floden Oder och små bronsdvärgar över hela staden."
+  },
+  {
+   "id": "HU-budapest",
+   "name": "Budapest",
+   "country": "HU",
+   "lat": 47.5,
+   "lon": 19.04,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "bad",
+    "nattliv",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Termalbad, ruinbarer och parlamentet vid Donau."
+  },
+  {
+   "id": "SK-bratislava",
+   "name": "Bratislava",
+   "country": "SK",
+   "lat": 48.15,
+   "lon": 17.11,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Liten huvudstad vid Donau med borg på kullen, en timme från Wien."
+  },
+  {
+   "id": "SI-ljubljana",
+   "name": "Ljubljana",
+   "country": "SI",
+   "lat": 46.05,
+   "lon": 14.51,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "natur",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Bilfri stadskärna längs en flod, med borg på kullen och bergen nära."
+  },
+  {
+   "id": "SI-piran",
+   "name": "Piran",
+   "country": "SI",
+   "lat": 45.53,
+   "lon": 13.57,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "romantik"
+   ],
+   "gem": true,
+   "why": "Venetiansk småstad på en udde i Adriatiska havet."
+  },
+  {
+   "id": "HR-rovinj",
+   "name": "Rovinj",
+   "country": "HR",
+   "lat": 45.08,
+   "lon": 13.64,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "romantik"
+   ],
+   "gem": true,
+   "why": "Fiskestad på en halvö i Istrien, med gränder upp mot kyrkan."
+  },
+  {
+   "id": "HR-zadar",
+   "name": "Zadar",
+   "country": "HR",
+   "lat": 44.12,
+   "lon": 15.23,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Romerska ruiner, en havsorgel som spelar med vågorna och öar utanför."
+  },
+  {
+   "id": "EE-tallinn",
+   "name": "Tallinn",
+   "country": "EE",
+   "lat": 59.44,
+   "lon": 24.75,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "nordiskt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "jul"
+   ],
+   "gem": false,
+   "why": "Medeltida stad med mur och torn, en färjetur från Helsingfors."
+  },
+  {
+   "id": "LV-riga",
+   "name": "Riga",
+   "country": "LV",
+   "lat": 56.95,
+   "lon": 24.11,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "nordiskt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "tags": [
+    "arkitektur",
+    "gamla-stan",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Jugendfasader, saluhallar i gamla zeppelinhangarer och en gammal stadskärna.",
+   "citybreak_gbp": 278
+  },
+  {
+   "id": "LT-vilnius",
+   "name": "Vilnius",
+   "country": "LT",
+   "lat": 54.69,
+   "lon": 25.28,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "arkitektur"
+   ],
+   "gem": true,
+   "why": "Barock gammal stad och konstnärskvarteret Užupis.",
+   "citybreak_gbp": 289
+  },
+  {
+   "id": "BA-sarajevo",
+   "name": "Sarajevo",
+   "country": "BA",
+   "lat": 43.86,
+   "lon": 18.41,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "historia",
+    "gamla-stan",
+    "mat",
+    "berg"
+   ],
+   "gem": true,
+   "why": "Osmansk basar och österrikisk-ungerska kvarter sida vid sida, omgivna av berg.",
+   "citybreak_gbp": 248
+  },
+  {
+   "id": "BA-mostar",
+   "name": "Mostar",
+   "country": "BA",
+   "lat": 43.34,
+   "lon": 17.81,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Stenbron Stari Most över en smaragdgrön flod."
+  },
+  {
+   "id": "RS-belgrad",
+   "name": "Belgrad",
+   "country": "RS",
+   "lat": 44.79,
+   "lon": 20.45,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "nattliv",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Fästning där Sava möter Donau, och ett nattliv på båtar längs floden.",
+   "citybreak_gbp": 265
+  },
+  {
+   "id": "AL-tirana",
+   "name": "Tirana",
+   "country": "AL",
+   "lat": 41.33,
+   "lon": 19.82,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Färgglad huvudstad med kafékultur, bunkrar som blivit museer och berg med linbana.",
+   "citybreak_gbp": 263
+  },
+  {
+   "id": "ME-kotor",
+   "name": "Kotor",
+   "country": "ME",
+   "lat": 42.42,
+   "lon": 18.77,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "berg",
+    "vandring"
+   ],
+   "gem": true,
+   "why": "Muromgärdad stad längst in i en vik som liknar en fjord, med branta berg rakt upp."
+  },
+  {
+   "id": "MK-ohrid",
+   "name": "Ohrid",
+   "country": "MK",
+   "lat": 41.12,
+   "lon": 20.8,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "natur",
+    "gamla-stan",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Gammal stad med bysantinska kyrkor vid en av Europas äldsta sjöar."
+  },
+  {
+   "id": "BG-sofia",
+   "name": "Sofia",
+   "country": "BG",
+   "lat": 42.7,
+   "lon": 23.32,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "historia",
+    "berg"
+   ],
+   "gem": true,
+   "why": "Katedraler, romerska ruiner i tunnelbanan och berget Vitosja vid stadsgränsen."
+  },
+  {
+   "id": "BG-plovdiv",
+   "name": "Plovdiv",
+   "country": "BG",
+   "lat": 42.14,
+   "lon": 24.75,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "konst"
+   ],
+   "gem": true,
+   "why": "En av Europas äldsta städer, med romersk teater och målade trähus."
+  },
+  {
+   "id": "RO-bukarest",
+   "name": "Bukarest",
+   "country": "RO",
+   "lat": 44.43,
+   "lon": 26.1,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "arkitektur",
+    "nattliv"
+   ],
+   "gem": true,
+   "why": "Breda boulevarder, ett enormt parlamentspalats och en gammal stadsdel full av barer.",
+   "citybreak_gbp": 258
+  },
+  {
+   "id": "RO-brasov",
+   "name": "Brașov",
+   "country": "RO",
+   "lat": 45.65,
+   "lon": 25.61,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "alpint",
+   "best_months": [
+    5,
+    6,
+    9,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "berg",
+    "vandring"
+   ],
+   "gem": true,
+   "why": "Sachsisk stad i Karpaterna, med borgar och bergsleder runt omkring."
+  },
+  {
+   "id": "GR-thessaloniki",
+   "name": "Thessaloniki",
+   "country": "GR",
+   "lat": 40.64,
+   "lon": 22.94,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "mat",
+    "historia",
+    "kust",
+    "nattliv"
+   ],
+   "gem": true,
+   "why": "Greklands andra stad, med strandpromenad, bysantinska kyrkor och ett rykte om landets bästa mat."
+  },
+  {
+   "id": "GR-nafplio",
+   "name": "Nafplio",
+   "country": "GR",
+   "lat": 37.57,
+   "lon": 22.8,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "romantik",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Hamnstad med venetianska fästningar på Peloponnesos, nära Mykene och Epidauros."
+  },
+  {
+   "id": "GR-rhodos",
+   "name": "Rhodos stad",
+   "country": "GR",
+   "lat": 36.43,
+   "lon": 28.22,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "gamla-stan",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Riddarnas medeltida stad innanför murarna, med stränder utanför."
+  },
+  {
+   "id": "MT-valletta",
+   "name": "Valletta",
+   "country": "MT",
+   "lat": 35.9,
+   "lon": 14.51,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    6,
+    10,
+    11
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "kust"
+   ],
+   "gem": false,
+   "why": "Befäst huvudstad i honungsfärgad sten, omgiven av hav på tre sidor."
+  },
+  {
+   "id": "IE-dublin",
+   "name": "Dublin",
+   "country": "IE",
+   "lat": 53.35,
+   "lon": -6.26,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "storstad",
+    "musik",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Pubar med levande musik, georgianska kvarter och Trinity College."
+  },
+  {
+   "id": "SE-goteborg",
+   "name": "Göteborg",
+   "country": "SE",
+   "lat": 57.71,
+   "lon": 11.97,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "kust"
+   ],
+   "gem": false,
+   "why": "Kanaler, skaldjur och skärgården med spårvagn och färja.",
+   "level_note": "Vår bedömning, samma nivå som vi satt på Stockholm."
+  },
+  {
+   "id": "NO-bergen",
+   "name": "Bergen",
+   "country": "NO",
+   "lat": 60.39,
+   "lon": 5.32,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "tags": [
+    "natur",
+    "kust",
+    "gamla-stan",
+    "vandring"
+   ],
+   "gem": false,
+   "why": "Hansakajen Bryggen mellan sju fjäll, och porten till fjordarna."
+  },
+  {
+   "id": "DK-arhus",
+   "name": "Århus",
+   "country": "DK",
+   "lat": 56.16,
+   "lon": 10.2,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "tags": [
+    "konst",
+    "mat",
+    "kust"
+   ],
+   "gem": true,
+   "why": "Danmarks andra stad, med konstmuseet ARoS, friluftsmuseet Den Gamle By och hamnbad."
+  }
+ ],
+ "alternatives": [
+  {
+   "for": "MC-monaco",
+   "place": "FR-menton",
+   "why": "Samma kuststräcka och samma klimat, i lugnare tempo.",
+   "cheaper": true
+  },
+  {
+   "for": "MC-monaco",
+   "place": "FR-nice",
+   "why": "Rivieran med stadsliv och strand, och Monaco som dagsutflykt med tåg.",
+   "cheaper": true
+  },
+  {
+   "for": "MC-monaco",
+   "place": "IT-sanremo",
+   "why": "Kasino och palmer på italienska sidan av Rivieran.",
+   "cheaper": true
+  },
+  {
+   "for": "MC-monaco",
+   "place": "ME-kotor",
+   "why": "Hamn, berg och gammal stad vid Adriatiska havet.",
+   "cheaper": true
+  },
+  {
+   "for": "HR-dubrovnik",
+   "place": "ME-kotor",
+   "why": "Muromgärdad stad vid Adriatiska havet, i grannlandet Montenegro.",
+   "cheaper": true
+  },
+  {
+   "for": "HR-dubrovnik",
+   "place": "HR-zadar",
+   "why": "Gammal stad vid havet i samma land.",
+   "cheaper": false
+  },
+  {
+   "for": "HR-dubrovnik",
+   "place": "SI-piran",
+   "why": "Venetiansk gammal stad vid Adriatiska havet.",
+   "cheaper": true
+  },
+  {
+   "for": "DK-kopenhamn",
+   "place": "SE-goteborg",
+   "why": "Hamnstad med kanaler och bra mat, närmare hemifrån.",
+   "cheaper": true
+  },
+  {
+   "for": "DK-kopenhamn",
+   "place": "DK-arhus",
+   "why": "Dansk stad med konst och mat i mindre format.",
+   "cheaper": false
+  },
+  {
+   "for": "NL-amsterdam",
+   "place": "NL-utrecht",
+   "why": "Kanaler och kaféer, en kort tågresa från Amsterdam.",
+   "cheaper": false
+  },
+  {
+   "for": "NL-amsterdam",
+   "place": "BE-gent",
+   "why": "Kanaler och medeltida hus i en studentstad.",
+   "cheaper": false
+  },
+  {
+   "for": "NL-amsterdam",
+   "place": "NL-rotterdam",
+   "why": "Holländsk storstad med modern arkitektur.",
+   "cheaper": false
+  },
+  {
+   "for": "IT-venedig",
+   "place": "IT-trieste",
+   "why": "Hamnstad vid samma hav, med palats och kaffehus.",
+   "cheaper": true
+  },
+  {
+   "for": "IT-venedig",
+   "place": "SI-piran",
+   "why": "Venetiansk arkitektur i småstadsformat.",
+   "cheaper": true
+  },
+  {
+   "for": "IT-venedig",
+   "place": "HR-rovinj",
+   "why": "Venetianskt arv på en halvö i Istrien.",
+   "cheaper": true
+  },
+  {
+   "for": "FR-paris",
+   "place": "FR-lyon",
+   "why": "Fransk storstad med ännu större fokus på maten.",
+   "cheaper": true
+  },
+  {
+   "for": "FR-paris",
+   "place": "FR-lille",
+   "why": "Fransk stad med konst och gamla kvarter.",
+   "cheaper": true
+  },
+  {
+   "for": "FR-paris",
+   "place": "BE-bryssel",
+   "why": "Fransktalande huvudstad med art nouveau.",
+   "cheaper": false
+  },
+  {
+   "for": "CH-zurich",
+   "place": "SI-ljubljana",
+   "why": "Liten stad vid vatten med bergen nära.",
+   "cheaper": true
+  },
+  {
+   "for": "CH-zurich",
+   "place": "AT-graz",
+   "why": "Gammal stad i alplandet.",
+   "cheaper": true
+  },
+  {
+   "for": "CH-geneve",
+   "place": "SI-ljubljana",
+   "why": "Liten stad vid vatten med bergen nära.",
+   "cheaper": true
+  },
+  {
+   "for": "CH-geneve",
+   "place": "MK-ohrid",
+   "why": "Gammal stad vid en stor sjö.",
+   "cheaper": true
+  },
+  {
+   "for": "AT-wien",
+   "place": "AT-graz",
+   "why": "Österrikisk stad med gammal kärna.",
+   "cheaper": true
+  },
+  {
+   "for": "AT-wien",
+   "place": "SK-bratislava",
+   "why": "Huvudstad vid Donau, en timme bort.",
+   "cheaper": true
+  },
+  {
+   "for": "AT-wien",
+   "place": "HU-budapest",
+   "why": "Storstad vid Donau med kaffehus och bad.",
+   "cheaper": true
+  },
+  {
+   "for": "AT-salzburg",
+   "place": "RO-brasov",
+   "why": "Gammal stad omgiven av berg.",
+   "cheaper": true
+  },
+  {
+   "for": "AT-salzburg",
+   "place": "SI-ljubljana",
+   "why": "Gammal stad med borg och bergen nära.",
+   "cheaper": true
+  },
+  {
+   "for": "DE-munchen",
+   "place": "DE-leipzig",
+   "why": "Tysk storstad med stort kulturliv.",
+   "cheaper": true
+  },
+  {
+   "for": "DE-munchen",
+   "place": "CZ-brno",
+   "why": "Ölkultur och gammal stad i Mähren.",
+   "cheaper": true
+  },
+  {
+   "for": "CZ-prag",
+   "place": "CZ-brno",
+   "why": "Samma land, färre turister.",
+   "cheaper": false
+  },
+  {
+   "for": "CZ-prag",
+   "place": "PL-wroclaw",
+   "why": "Färgglad gammal stad vid en flod.",
+   "cheaper": false
+  },
+  {
+   "for": "ES-barcelona",
+   "place": "ES-valencia",
+   "why": "Spansk storstad med stadsstrand.",
+   "cheaper": true
+  },
+  {
+   "for": "ES-barcelona",
+   "place": "ES-malaga",
+   "why": "Strand och museer vid Medelhavet.",
+   "cheaper": true
+  },
+  {
+   "for": "IT-florens",
+   "place": "IT-bologna",
+   "why": "Gammal universitetsstad med Italiens kanske bästa mat, en kort tågresa bort.",
+   "cheaper": false
+  },
+  {
+   "for": "IT-florens",
+   "place": "IT-lecce",
+   "why": "Stad där arkitekturen är huvudsaken, i söder.",
+   "cheaper": true
+  },
+  {
+   "for": "IE-dublin",
+   "place": "PL-gdansk",
+   "why": "Hamnstad med pubar och gammal stad.",
+   "cheaper": true
+  },
+  {
+   "for": "IE-dublin",
+   "place": "PT-porto",
+   "why": "Atlantstad med vinkällare och levande kvällar.",
+   "cheaper": true
+  },
+  {
+   "for": "NO-bergen",
+   "place": "ME-kotor",
+   "why": "Gammal stad i en vik mellan branta berg.",
+   "cheaper": true
+  },
+  {
+   "for": "NO-oslo",
+   "place": "SE-goteborg",
+   "why": "Nordisk hamnstad med mat och skärgård.",
+   "cheaper": true
+  },
+  {
+   "for": "NO-oslo",
+   "place": "EE-tallinn",
+   "why": "Nordisk huvudstad med medeltida kärna.",
+   "cheaper": true
+  },
+  {
+   "for": "FI-helsingfors",
+   "place": "EE-tallinn",
+   "why": "På andra sidan Finska viken, med färja.",
+   "cheaper": true
+  },
+  {
+   "for": "FI-helsingfors",
+   "place": "LV-riga",
+   "why": "Jugendstad vid Östersjön.",
+   "cheaper": true
+  },
+  {
+   "for": "IS-reykjavik",
+   "place": "NO-bergen",
+   "why": "Nordisk natur med fjäll och hav.",
+   "cheaper": true
+  },
+  {
+   "for": "SE-stockholm",
+   "place": "EE-tallinn",
+   "why": "Östersjöstad med gammal stad.",
+   "cheaper": true
+  },
+  {
+   "for": "SE-stockholm",
+   "place": "LV-riga",
+   "why": "Östersjöstad med jugend och saluhallar.",
+   "cheaper": true
+  },
+  {
+   "for": "FR-nice",
+   "place": "IT-sanremo",
+   "why": "Italienska Rivieran, en bit österut.",
+   "cheaper": true
+  },
+  {
+   "for": "FR-nice",
+   "place": "ES-malaga",
+   "why": "Strandstad vid Medelhavet med museer.",
+   "cheaper": true
+  }
+ ]
+}

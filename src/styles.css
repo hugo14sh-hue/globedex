@@ -150,6 +150,19 @@ p {
   color: var(--p);
 }
 
+/* Sex flikar: varje flik får en lika stor del av bredden och etiketten kortas med ellips i stället för att
+   trycka ut raden (stor text, långa språk). */
+.nav a {
+  min-width: 0;
+}
+
+.nav-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ---------- Byggstenar ---------- */
 .mu {
   color: var(--mu);
@@ -2000,4 +2013,165 @@ fieldset.card legend {
   overflow-x: auto;
   flex-wrap: nowrap;
   padding-bottom: 2px;
+}
+
+/* ---------- Upptäck ---------- */
+.disc-filter .row {
+  justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.disc-cnt {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--p);
+  color: var(--onp);
+  font-size: 0.733rem;
+}
+
+.chip[aria-pressed='true'] .disc-cnt,
+.chip[aria-expanded='true'] .disc-cnt {
+  background: var(--onp);
+  color: var(--p);
+}
+
+.disc-panel {
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid var(--ln);
+  border-radius: var(--r);
+  background: var(--sf);
+}
+
+.disc-panel[hidden],
+.disc-card [hidden] {
+  display: none;
+}
+
+.disc-count {
+  margin: 0;
+}
+
+.disc-list,
+.alt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alt-list {
+  gap: 6px;
+}
+
+/* Hela kortet öppnar platsen: länken i rubriken täcker kortet. Knapparna ligger ovanpå. */
+.disc-card {
+  position: relative;
+}
+
+.disc-open {
+  color: inherit;
+  text-decoration: none;
+}
+
+.disc-open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r);
+}
+
+.disc-open:focus-visible {
+  outline: none;
+}
+
+.disc-open:focus-visible::after {
+  outline: 3px solid var(--p);
+  outline-offset: 2px;
+}
+
+.disc-card button,
+.disc-card .alt-list,
+.disc-card .alt-row {
+  position: relative;
+  z-index: 1;
+}
+
+.disc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disc-head .t {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.disc-head .h3 {
+  margin: 0;
+}
+
+.disc-card p {
+  margin: 0;
+}
+
+.disc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 0 4px;
+  color: var(--p);
+  font-weight: 700;
+  font-size: 0.867rem;
+  text-align: left;
+}
+
+.link-btn[aria-expanded='true'] svg {
+  transform: rotate(90deg);
+}
+
+[data-theme='dark'] .link-btn {
+  color: var(--tx);
+}
+
+.alt-row {
+  align-items: flex-start;
+}
+
+.alt-row .t {
+  min-width: 0;
+}
+
+.alt-level {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: none;
+}
+
+.light-facts {
+  gap: 10px;
+}
+
+.light-src p {
+  margin: 0;
 }

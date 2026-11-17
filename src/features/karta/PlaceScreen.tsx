@@ -51,6 +51,9 @@ import { outsideCountryList } from '../../lib/landlistor';
 import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
+import { isLight } from '../../lib/upptack';
+import { AltBox } from '../upptack/Alternativ';
+import { LightCities, LightPlace } from '../upptack/LightPlace';
 import { currentMonth, eventsInMonth, hasMonthNotes, hasSeasons, seasonAriaKey, seasonsInMonth, SWIPE_MIN, swipedMonth } from '../../lib/smartMonth';
 
 /** Första bokstaven versal (månadens namn från webbläsaren börjar med gemen på svenska). */
@@ -155,7 +158,10 @@ export default function PlaceScreen() {
   const total = Object.keys(mine.statuses).length;
   const data = place?.data ?? {};
   const hasData = Object.keys(data).length > 0;
-  const empty = !place || (!hasData && !loaded.facts.length && !loaded.items.length && !loaded.gifts.length);
+  // Lätta platser (Upptäck) har en egen, kortare sida. Ett lätt land visas som ett land utan innehåll.
+  const light = isLight(place);
+  const lightCity = light && place?.kind === 'city';
+  const empty = !place || light || (!hasData && !loaded.facts.length && !loaded.items.length && !loaded.gifts.length);
   const parent = place?.parent_id ? places.find((p) => p.id === place.parent_id) : null;
   const items = loaded.items;
   const done = items.filter((i) => mine.checks.has(i.id)).length;
@@ -188,7 +194,7 @@ export default function PlaceScreen() {
             </span>
             <span className="hero-sub">
               {t(STATUS_KEY[status ?? 'ej'])}
-              {parent ? ` · ${parent.name}` : ''}
+              {parent ? ` · ${placeName(places, parent.id)}` : ''}
             </span>
             {/* Besökt land utanför vald landlista: räknas inte i siffror, mål och märken. */}
             {status && VISITED.includes(status) && outsideCountryList(id, theme.countryList) && (
@@ -208,10 +214,15 @@ export default function PlaceScreen() {
       {/* Landskap och delstater: räknare och lista att bocka av. Visas på översikten. */}
       {view === 'oversikt' && knownCountry && <RegionSection countryId={id} countryName={name} places={places} statuses={mine.statuses} />}
 
-      {empty ? (
-        <div className="card soft">
-          <p>{t('land.saknar-innehall', { plats: name })}</p>
-        </div>
+      {lightCity ? (
+        <LightPlace place={place!} places={places} />
+      ) : empty ? (
+        <>
+          <div className="card soft">
+            <p>{t('land.saknar-innehall', { plats: name })}</p>
+          </div>
+          {light && <LightCities countryId={id} places={places} />}
+        </>
       ) : (
         <>
           <Segment<View>
@@ -363,6 +374,9 @@ function Oversikt({
 
       {/* Prisnivå direkt efter dagsbudgeten. Landet visar sina egna priser, annars städernas nivå. */}
       <PlacePrices place={place} cities={cities} />
+
+      {/* Liknande eller billigare platser (content/_upptack.json). */}
+      <AltBox place={place} places={places} />
 
       {d.best_text && (
         <div className="card soft">

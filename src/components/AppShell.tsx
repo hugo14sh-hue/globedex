@@ -9,7 +9,11 @@ import { Loading } from './Loading';
 
 const LAST_TAB = { solo: 'flik.jag', par: 'flik.vi', grupp: 'flik.gruppen' } as const;
 
-/** Fem flikar längst ned. Sista fliken heter Jag, Vi eller Gruppen efter reseläget. */
+/**
+ * Sex flikar längst ned. Sista fliken heter Jag, Vi eller Gruppen efter reseläget.
+ * Upptäck (Körning 15) står direkt efter Karta. Flikarna delar bredden lika (63 px var på 390 px) och
+ * etiketten bryts inte: får den inte plats krymper den med ellips, så att raden aldrig blir bredare än skärmen.
+ */
 export function AppShell() {
   const t = useT();
   const mode = useTravelMode();
@@ -32,6 +36,7 @@ export function AppShell() {
 
   const tabs: [string, string, IconName][] = [
     ['/karta', t('flik.karta'), 'map'],
+    ['/upptack', t('flik.upptack'), 'compass'],
     ['/idag', t('flik.idag'), 'star'],
     ['/listor', t('flik.listor'), 'book'],
     ['/resor', t('flik.resor'), 'plane'],
@@ -48,7 +53,7 @@ export function AppShell() {
         {tabs.map(([to, label, icon]) => (
           <NavLink key={to} to={to}>
             <Icon name={icon} size={24} />
-            {label}
+            <span className="nav-label">{label}</span>
           </NavLink>
         ))}
       </nav>

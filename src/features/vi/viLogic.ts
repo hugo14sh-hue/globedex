@@ -4,7 +4,7 @@ import type { BadgeState, TripLike, ViInput } from './marken';
 import { doneTrips, tripDays, visitedContinents, visitedCountries, visitedRegions } from './marken';
 import { countryIdFor } from '../../lib/statusLogic';
 import { countryListTotal, countsAsCountry } from '../../lib/landlistor';
-import { displayNames, LOCALE } from '../../lib/locale';
+import { LOCALE } from '../../lib/locale';
 
 // ---------- Siffror ----------
 
@@ -40,16 +40,6 @@ export function numbers(x: ViInput, compendiumTotal: number): Numbers {
     fyndTotalt: compendiumTotal,
     bucket: x.bucket.filter((b) => b.done_on).length,
   };
-}
-
-/** Kontinentens namn från webbläsaren (UN M49-koder), ingen egen text. */
-const M49: Record<string, string> = { EU: '150', AS: '142', AF: '002', NA: '003', SA: '005', OC: '009', AN: 'AQ' };
-export function continentName(code: string): string {
-  try {
-    return displayNames('region').of(M49[code] ?? code) ?? code;
-  } catch {
-    return code;
-  }
 }
 
 // ---------- Wrapped ----------

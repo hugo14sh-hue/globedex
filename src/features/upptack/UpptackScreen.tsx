@@ -1,0 +1,308 @@
+// Upptäck: platser att filtrera på prisnivå, månad, klimat, typ, världsdel och land, och spara som Vill åka.
+// Platserna är lätta platser och befintliga städer med klimat och taggar (src/lib/upptack.ts).
+// Valda filter och sorteringen står i adressen (query-parametrar), så att en filtrering går att dela
+// och ligger kvar när man backar från en plats.
+import { useEffect, useId, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { climates as CLIMATES, tags as TAGS } from '../../../content/_upptack.json';
+import { useFeedback } from '../../components/Feedback';
+import { Flag } from '../../components/Flag';
+import { Icon } from '../../components/Icon';
+import { Ingress } from '../../components/Ingress';
+import { Loading } from '../../components/Loading';
+import { PriceLevel } from '../../components/PriceLevel';
+import { Segment } from '../../components/Segment';
+import { fetchPlaces, placeName, type Place } from '../../lib/content';
+import { continentLabel } from '../../lib/continentNames';
+import { LOCALE } from '../../lib/locale';
+import { useSession } from '../../lib/session';
+import { setPlaceStatus, STATUS_KEY, useMyPlaces, type PlaceStatus } from '../../lib/status';
+import {
+  alternativeRows,
+  applyFilter,
+  discoverEntries,
+  filterCount,
+  filterOptions,
+  fromParams,
+  NO_FILTER,
+  showsAltLink,
+  sortEntries,
+  SORTS,
+  toggleIn,
+  toParams,
+  type DiscoverEntry,
+  type DiscoverFilter,
+  type DiscoverSort,
+} from '../../lib/upptack';
+import { useT } from '../../lib/useT';
+import { monthNames, shortMonthNames } from '../karta/months';
+import { AltRows } from './Alternativ';
+
+const ALLOWED = { tags: TAGS, climates: CLIMATES };
+const capital = (s: string) => s.charAt(0).toLocaleUpperCase() + s.slice(1);
+
+export default function UpptackScreen() {
+  const t = useT();
+  const [params, setParams] = useSearchParams();
+  const { session } = useSession();
+  const mine = useMyPlaces(session?.user.id ?? null);
+  const [places, setPlaces] = useState<Place[] | null>(null);
+  const [failed, setFailed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+
+  useEffect(() => {
+    let alive = true;
+    fetchPlaces()
+      .then((p) => alive && setPlaces(p))
+      .catch(() => {
+        if (!alive) return;
+        setPlaces([]);
+        setFailed(true);
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const { filter, sort } = useMemo(() => fromParams(params, ALLOWED), [params]);
+  // Filtren byts med replace: varje tryck blir inte ett eget steg bakåt, men filtreringen står kvar i adressen.
+  const update = (f: DiscoverFilter, s: DiscoverSort = sort) => setParams(toParams(f, s), { replace: true });
+  const set = (patch: Partial<DiscoverFilter>) => update({ ...filter, ...patch });
+
+  const entries = useMemo(() => (places ? discoverEntries(places) : []), [places]);
+  const options = useMemo(() => filterOptions(entries), [entries]);
+  const shown = useMemo(
+    () => sortEntries(applyFilter(entries, filter, mine.statuses), sort, LOCALE),
+    [entries, filter, mine.statuses, sort],
+  );
+  const months = useMemo(() => monthNames(), []);
+  const short = useMemo(() => shortMonthNames(), []);
+  const active = filterCount(filter);
+
+  if (!places) return <Loading />;
+
+  const countries = [...options.countries].sort((a, b) => placeName(places, a).localeCompare(placeName(places, b), LOCALE));
+
+  return (
+    <main className="scr">
+      <h1>{t('flik.upptack')}</h1>
+      <Ingress k="ingress.upptack" />
+
+      <section className="col disc-filter">
+        <div className="row">
+          <button type="button" className="chip" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((o) => !o)}>
+            <Icon name="filter" size={18} />
+            {t('upptack.filter.rubrik')}
+            {active > 0 && <span className="disc-cnt">{active}</span>}
+          </button>
+          {active > 0 && (
+            <button type="button" className="chip" onClick={() => update(NO_FILTER)}>
+              {t('upptack.filter.rensa')}
+            </button>
+          )}
+        </div>
+
+        <div id={panelId} className="col disc-panel" hidden={!open}>
+          <ChipGroup legend={t('upptack.filter.pris')}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button key={n} type="button" className="chip" aria-pressed={filter.prices.includes(n)} onClick={() => set({ prices: toggleIn(filter.prices, n) })}>
+                {t(`upptack.pris.${n}`)}
+              </button>
+            ))}
+          </ChipGroup>
+
+          <ChipGroup legend={t('upptack.filter.manad')}>
+            <button type="button" className="chip" aria-pressed={!filter.month} onClick={() => set({ month: null })}>
+              {t('upptack.filter.manad.alla')}
+            </button>
+            {months.map((m, i) => (
+              <button key={i} type="button" className="chip" aria-pressed={filter.month === i + 1} onClick={() => set({ month: filter.month === i + 1 ? null : i + 1 })}>
+                {capital(m.long)}
+              </button>
+            ))}
+          </ChipGroup>
+
+          <ChipGroup legend={t('upptack.filter.klimat')}>
+            {CLIMATES.map((c) => (
+              <button key={c} type="button" className="chip" aria-pressed={filter.climates.includes(c)} onClick={() => set({ climates: toggleIn(filter.climates, c) })}>
+                {t(`upptack.klimat.${c}`)}
+              </button>
+            ))}
+          </ChipGroup>
+
+          <ChipGroup legend={t('upptack.filter.typ')}>
+            {TAGS.map((c) => (
+              <button key={c} type="button" className="chip" aria-pressed={filter.tags.includes(c)} onClick={() => set({ tags: toggleIn(filter.tags, c) })}>
+                {t(`upptack.tagg.${c}`)}
+              </button>
+            ))}
+          </ChipGroup>
+
+          {options.continents.length > 0 && (
+            <ChipGroup legend={t('upptack.filter.kontinent')}>
+              {options.continents.map((c) => (
+                <button key={c} type="button" className="chip" aria-pressed={filter.continent === c} onClick={() => set({ continent: filter.continent === c ? null : c })}>
+                  {continentLabel(c, t)}
+                </button>
+              ))}
+            </ChipGroup>
+          )}
+
+          {countries.length > 0 && (
+            <ChipGroup legend={t('upptack.filter.land')}>
+              {countries.map((c) => (
+                <button key={c} type="button" className="chip" aria-pressed={filter.country === c} onClick={() => set({ country: filter.country === c ? null : c })}>
+                  {placeName(places, c)}
+                </button>
+              ))}
+            </ChipGroup>
+          )}
+
+          <label className="check">
+            <input type="checkbox" checked={filter.gem} onChange={(e) => set({ gem: e.target.checked })} />
+            {t('upptack.filter.smultron')}
+          </label>
+          <label className="check">
+            <input type="checkbox" checked={filter.unvisited} onChange={(e) => set({ unvisited: e.target.checked })} />
+            {t('upptack.filter.obesokt')}
+          </label>
+
+          <button type="button" className="btn ghost" disabled={active === 0} onClick={() => update(NO_FILTER)}>
+            {t('upptack.filter.rensa')}
+          </button>
+        </div>
+      </section>
+
+      <Segment<DiscoverSort>
+        label={t('upptack.sortera')}
+        value={sort}
+        onChange={(s) => update(filter, s)}
+        options={SORTS.map((s) => ({ value: s, label: t(`upptack.sortera.${s}`) }))}
+      />
+
+      <p className="mu disc-count" role="status" aria-live="polite">
+        {shown.length === 1 ? t('upptack.antal.en') : t('upptack.antal', { antal: shown.length })}
+      </p>
+
+      {failed && (
+        <div className="card soft" role="alert">
+          <p>{t('allmant.fel')}</p>
+        </div>
+      )}
+
+      {shown.length === 0 ? (
+        <div className="card soft">
+          <p>{t('upptack.tom')}</p>
+        </div>
+      ) : (
+        <ul className="disc-list">
+          {shown.map((e) => (
+            <li key={e.id}>
+              <DiscoverCard entry={e} places={places} status={mine.statuses[e.id]} short={short} />
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <p className="mu fine">{t('upptack.kalla')}</p>
+    </main>
+  );
+}
+
+function ChipGroup({ legend, children }: { legend: string; children: React.ReactNode }) {
+  return (
+    <fieldset className="col">
+      <legend className="eb">{legend}</legend>
+      <div className="chips">{children}</div>
+    </fieldset>
+  );
+}
+
+function DiscoverCard({
+  entry: e,
+  places,
+  status,
+  short,
+}: {
+  entry: DiscoverEntry;
+  places: Place[];
+  status: PlaceStatus | undefined;
+  short: string[];
+}) {
+  const t = useT();
+  const { toast } = useFeedback();
+  const [altOpen, setAltOpen] = useState(false);
+  const altId = useId();
+  const country = placeName(places, e.country);
+  const alts = showsAltLink(e) ? alternativeRows(places.find((p) => p.id === e.id)!, places) : [];
+
+  const save = async () => {
+    try {
+      await setPlaceStatus(e.id, 'vill');
+      toast(t('karta.status-satt', { plats: e.name, status: t(STATUS_KEY.vill) }));
+    } catch {
+      toast(t('allmant.fel-spara'));
+    }
+  };
+
+  return (
+    <article className="card disc-card">
+      <div className="disc-head">
+        <Flag placeId={e.country} />
+        <span className="t">
+          <h2 className="h3">
+            <Link className="disc-open" to={`/karta/${e.id}`} aria-label={t('upptack.kort.oppna', { plats: e.name })}>
+              {e.name}
+            </Link>
+          </h2>
+          <span className="mu">{country}</span>
+        </span>
+        {e.gem && <span className="chip soft tag">{t('upptack.kort.smultron')}</span>}
+      </div>
+
+      {e.level != null && (
+        <div className="plevel-row">
+          <PriceLevel level={e.level} ariaKey="upptack.kort.pris.aria" />
+          <b>{t(`upptack.pris.${e.level}`)}</b>
+        </div>
+      )}
+      {e.why && <p>{e.why}</p>}
+      {e.months.length > 0 && <p className="mu">{t('upptack.kort.basta', { manad: e.months.map((m) => short[m - 1]).join(', ') })}</p>}
+      {e.tags.length > 0 && (
+        <div className="chips">
+          {e.tags.map((x) => (
+            <span key={x} className="chip soft tag">
+              {t(`upptack.tagg.${x}`)}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="disc-actions">
+        {!status ? (
+          <button type="button" className="chip" onClick={save}>
+            <i className="dot" style={{ background: 'var(--st-vill)' }} aria-hidden="true" />
+            {t('upptack.kort.vill')}
+          </button>
+        ) : (
+          <span className="chip soft tag">
+            <i className="dot" style={{ background: `var(--st-${status})` }} aria-hidden="true" />
+            {status === 'vill' ? t('upptack.kort.sparad') : t(STATUS_KEY[status])}
+          </span>
+        )}
+        {alts.length > 0 && (
+          <button type="button" className="link-btn" aria-expanded={altOpen} aria-controls={altId} onClick={() => setAltOpen((o) => !o)}>
+            {t('upptack.alt.till', { plats: e.name })}
+            <Icon name="chev" size={16} />
+          </button>
+        )}
+      </div>
+      {alts.length > 0 && (
+        <div id={altId} hidden={!altOpen}>
+          <AltRows rows={alts} places={places} />
+        </div>
+      )}
+    </article>
+  );
+}

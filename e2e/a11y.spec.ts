@@ -56,6 +56,8 @@ test('axe på alla flikar och undersidor', async ({ page }) => {
     '/karta/NL?vy=manad',
     '/karta/NL?vy=boka',
     '/karta/MC-monaco?vy=manad',
+    '/upptack',
+    '/upptack?pris=4,5',
     '/idag',
     '/listor?vy=samlingsbok',
     '/listor?vy=samlingsbok&del=kompendium',

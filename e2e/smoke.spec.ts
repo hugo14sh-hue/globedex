@@ -1,10 +1,12 @@
 // Röktest: loggar in med testkontot i en 390 px bred mobilvy och går igenom appens viktigaste flöden.
 // Hoppas över om TEST_EMAIL och TEST_PASSWORD saknas i .env.local. Städar efter sig (e2e/cleanup.ts).
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test, type Page } from '@playwright/test';
 import { restore, snapshot, type Snapshot } from './cleanup';
 import { credentials, hasTestAccount, testClient } from './env';
+import { applyPatches, discoverRows } from '../scripts/lib/upptack.mjs';
+import { COUNTRIES } from '../src/lib/countries';
 
 type Entry = string | Record<string, string>;
 const TEXTER = (
@@ -81,6 +83,38 @@ async function injectStates(page: Page) {
   });
 }
 
+// Upptäck (content/_upptack.json). Läggs in i svaret från places när Hugo inte har kört npm run import än,
+// med samma rader som importen skriver (scripts/lib/upptack.mjs).
+const DISCOVER = (() => {
+  const dir = join(process.cwd(), 'content');
+  const read = (n: string) => JSON.parse(readFileSync(join(dir, n), 'utf8').replace(/^\uFEFF/, ''));
+  const content = readdirSync(dir)
+    .filter((f) => /^[A-Z]{2}\.json$/.test(f))
+    .flatMap((f) => read(f).places as { id: string }[]);
+  const names = new Intl.DisplayNames('sv-SE', { type: 'region' });
+  const coords = (iso: string) => {
+    const c = COUNTRIES.find(([x]) => x === iso);
+    return c ? [c[1], c[2]] : null;
+  };
+  return discoverRows(read('_upptack.json'), content, (iso: string) => names.of(iso) ?? iso, coords) as {
+    countries: { id: string }[];
+    cities: { id: string; name: string }[];
+    patches: Map<string, unknown>;
+  };
+})();
+
+/** Lägger till Upptäcks platser och data i svaret från places om de saknas i databasen. */
+async function injectDiscover(page: Page) {
+  await page.route('**/rest/v1/places?*', async (route) => {
+    const res = await route.fetch();
+    const rows = (await res.json()) as { id: string }[];
+    if (!Array.isArray(rows)) return route.fulfill({ response: res });
+    const have = new Set(rows.map((r) => r.id));
+    const add = [...DISCOVER.countries, ...DISCOVER.cities].filter((p) => !have.has(p.id));
+    await route.fulfill({ response: res, json: [...applyPatches(rows, DISCOVER.patches), ...add] });
+  });
+}
+
 test.describe.configure({ mode: 'serial' });
 test.skip(!hasTestAccount, 'TEST_EMAIL och TEST_PASSWORD saknas i .env.local');
 
@@ -89,6 +123,8 @@ let snap: Snapshot | null = null;
 let hasMonaco = false;
 /** USA:s delstater (content/US.json) finns i databasen först när Hugo har kört npm run import. */
 let hasStates = false;
+/** Upptäcks lätta platser (content/_upptack.json) finns i databasen först när Hugo har kört npm run import. */
+let hasDiscover = false;
 
 test.beforeAll(async () => {
   const { db, userId } = await testClient();
@@ -96,6 +132,10 @@ test.beforeAll(async () => {
   const { data } = await db.from('places').select('id, data').eq('id', 'MC-monaco').maybeSingle();
   hasMonaco = Boolean((data as { data?: { prices?: unknown } } | null)?.data?.prices);
   hasStates = Boolean((await db.from('places').select('id').eq('id', 'US-ca').maybeSingle()).data);
+  const mc = await db.from('places').select('data').eq('id', 'MC-monaco').maybeSingle();
+  hasDiscover =
+    Boolean((await db.from('places').select('id').eq('id', 'BA-sarajevo').maybeSingle()).data) &&
+    Boolean((mc.data as { data?: { alternatives?: unknown } } | null)?.data?.alternatives);
   // Röktestet går på svenska. Står testkontot på ett annat språk byts det här, och afterAll återställer det.
   const settings = (snap.settings ?? {}) as { theme?: Record<string, unknown> };
   if (settings.theme?.lang && settings.theme.lang !== 'sv')
@@ -711,7 +751,7 @@ test('röktest', async ({ page }) => {
       // Knappen för landlistan intill lägesväljaren öppnar samma val som under Anpassning.
       await page.getByRole('button', { name: tx('karta.landlista.aria') }).click();
       const sheet = page.getByRole('dialog');
-      await expect(sheet.getByRole('radio')).toHaveCount(3);
+      await expect(sheet.getByRole('radio')).toHaveCount(4);
       await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
 
       // Vi i läget Tillsammans (förvalt): landet räknas.
@@ -729,6 +769,80 @@ test('röktest', async ({ page }) => {
     }
     // Tillbaka i testkontots vanliga grupp.
     await page.goto('/karta');
+  });
+
+  await test.step('Upptäck: billigast ger Sarajevo men inte Monaco, Sarajevo sparas som Vill åka, Monaco visar Menton', async () => {
+    if (!hasDiscover) await injectDiscover(page);
+    const { db, userId } = await testClient();
+    // Har Sarajevo redan en status tas den bort under steget. afterAll lägger tillbaka den.
+    await db.from('place_status').delete().eq('user_id', userId).eq('place_id', 'BA-sarajevo');
+    try {
+      await page.goto('/karta');
+      const nav = page.locator('nav.nav');
+      // Sex flikar och Upptäck direkt efter Karta. Raden får plats på 390 px utan att rulla i sidled.
+      await expect(nav.getByRole('link')).toHaveCount(6);
+      await expect(nav.getByRole('link').nth(1)).toHaveText(tx('flik.upptack'));
+      expect(await nav.evaluate((n) => n.scrollWidth <= n.clientWidth + 1)).toBe(true);
+      await nav.getByRole('link', { name: tx('flik.upptack'), exact: true }).click();
+      await expect(page).toHaveURL(/\/upptack$/);
+      await expect(page.getByRole('heading', { level: 1, name: tx('flik.upptack') })).toBeVisible();
+      await expect(page.getByText(tx('ingress.upptack'))).toBeVisible();
+
+      const open = (name: string) => page.getByRole('link', { name: tx('upptack.kort.oppna').replace('{plats}', name), exact: true });
+      await expect(open('Sarajevo')).toBeVisible({ timeout: 20_000 });
+      await expect(open('Monaco')).toBeVisible();
+
+      await page.getByRole('button', { name: tx('upptack.filter.rubrik'), exact: true }).click();
+      await page.getByRole('button', { name: tx('upptack.pris.1'), exact: true }).click();
+      await expect(page).toHaveURL(/[?&]pris=1(&|$)/);
+      await expect(open('Sarajevo')).toBeVisible();
+      await expect(open('Monaco')).toHaveCount(0);
+
+      // Spara Sarajevo som Vill åka.
+      const card = page.locator('article.disc-card', { has: open('Sarajevo') });
+      const saved = page.waitForResponse((r) => r.url().includes('/rest/v1/place_status') && r.request().method() === 'POST' && r.ok());
+      await card.getByRole('button', { name: tx('upptack.kort.vill'), exact: true }).click();
+      await saved;
+      await expect(card.getByText(tx('upptack.kort.sparad'), { exact: true })).toBeVisible();
+      const stored = await db.from('place_status').select('status').eq('user_id', userId).eq('place_id', 'BA-sarajevo').single();
+      expect(stored.data).toEqual({ status: 'vill' });
+
+      // Kortet öppnar platsen, och tillbaka står filtret kvar.
+      await open('Sarajevo').click();
+      await expect(page).toHaveURL(/\/karta\/BA-sarajevo$/);
+      await expect(page.getByRole('heading', { level: 1, name: 'Sarajevo' })).toBeVisible();
+      await expect(page.getByRole('button', { name: tx('karta.status.vill-aka'), exact: true })).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.getByText(tx('upptack.pris.1'), { exact: true })).toBeVisible();
+      await page.getByRole('link', { name: tx('knapp.tillbaka') }).click();
+      await expect(page).toHaveURL(/\/upptack\?pris=1$/);
+      await expect(open('Sarajevo')).toBeVisible();
+      await expect(open('Monaco')).toHaveCount(0);
+
+      // Monaco: rutan med alternativ har Menton.
+      await page.goto('/karta/MC-monaco');
+      const box = page.locator('section.alt-box');
+      await expect(box.getByRole('heading', { name: tx('upptack.alt.rubrik'), exact: true })).toBeVisible({ timeout: 20_000 });
+      await expect(box.getByRole('link', { name: /Menton/ })).toHaveAttribute('href', '/karta/FR-menton');
+    } finally {
+      // Städa: Sarajevo får ingen status kvar.
+      await db.from('place_status').delete().eq('user_id', userId).eq('place_id', 'BA-sarajevo');
+      await db.auth.signOut();
+      if (!hasDiscover) await page.unroute('**/rest/v1/places?*');
+    }
+  });
+
+  await test.step('Vi: rutan Kontinenter visar världsdelarnas namn, inte koder', async () => {
+    await page.goto('/vi');
+    const tile = page.locator('button.card.stat', { hasText: tx('vi.siffror.kontinenter') }).first();
+    await expect(tile).toBeVisible({ timeout: 20_000 });
+    if ((await tile.locator('.num').textContent())?.trim() === '0') return;
+    await tile.click();
+    const sheet = page.getByRole('dialog');
+    const names = ['002', '142', '150', '003', '005', '009', '010'].map((c) => tx(`kontinent.${c}`));
+    await expect(sheet.locator('.li b').first()).toBeVisible();
+    const shown = await sheet.locator('.li b').allTextContents();
+    for (const x of shown) expect(names, `${x} ska vara en världsdel`).toContain(x.trim());
+    await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
   });
 
   await test.step('Landlista: FN:s medlemsländer ger nämnaren 193 på Jag, och sedan tillbaka till alla', async () => {
