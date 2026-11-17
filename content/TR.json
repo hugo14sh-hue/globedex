@@ -145,11 +145,36 @@
      "Svalare och mer regn.",
      "Kallt och regnigt."
     ],
+    "events": [
+     {
+      "name": "Ramadan",
+      "start": "2027-02-08",
+      "end": "2027-03-08",
+      "text": "Datumen är de förväntade och kan flytta en dag. Restauranger i turistkvarteren har öppet som vanligt, och kvällarna är livliga efter solnedgången.",
+      "source": "https://blog.wego.com/ramadan-in-turkiye/"
+     },
+     {
+      "name": "Ramazan Bayramı",
+      "start": "2027-03-09",
+      "end": "2027-03-11",
+      "text": "Tre dagars helg efter ramadan. Banker och en del butiker är stängda, och det är trångt på färjor och sevärdheter.",
+      "source": "https://blog.wego.com/ramadan-in-turkiye/"
+     }
+    ],
     "seasons": [
      {
-      "name": "Tulpaner i parkerna",
+      "name": "Tulpanfestivalen",
       "from": 4,
-      "to": 4
+      "to": 4,
+      "text": "Brukar pågå hela april, med mest blom de två första veckorna. Parkerna är gratis.",
+      "source": "https://pixidia.com/en/istanbul-tulip-festival-2027-guide/"
+     },
+     {
+      "name": "Istanbul Marathon",
+      "from": 11,
+      "to": 11,
+      "text": "Körs i början av november, från den asiatiska sidan till den europeiska. Broar och gator är avstängda den dagen.",
+      "source": "https://istanbul.com/de/blog/quick-guide/events-and-festivals-in-istanbul"
      }
     ]
    },

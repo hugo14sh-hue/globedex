@@ -154,6 +154,13 @@
       "name": "Badsäsong",
       "from": 5,
       "to": 10
+     },
+     {
+      "name": "Aten- och Epidaurosfestivalen",
+      "from": 6,
+      "to": 8,
+      "text": "Musik, opera, dans och teater, bland annat på Herodes Atticus-teatern nedanför Akropolis.",
+      "source": "https://www.ricksteves.com/europe/greece/festivals"
      }
     ]
    },
