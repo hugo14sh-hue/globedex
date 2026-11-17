@@ -15,6 +15,8 @@ const ATTRIBUTION = [
   '<a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a>',
   // USA:s delstater i läget Regioner (public/geo/delstater.json, byggd av scripts/make-regions.mjs).
   '<a href="https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-1-states-provinces/" target="_blank" rel="noopener">Natural Earth admin 1</a>',
+  // Sveriges landskap i läget Regioner (public/geo/landskap.json, byggd av scripts/make-landskap.mjs). CC0.
+  '<a href="https://github.com/perliedman/svenska-landskap" target="_blank" rel="noopener">Lantmäteriet, Per Liedman (CC0)</a>',
   '<a href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noopener">Terrain Tiles</a>',
 ];
 
@@ -99,8 +101,8 @@ const DOTS = 'platser-punkt';
 const REG_FILL = 'regioner-fill';
 const REG_LINE = 'regioner-line';
 const REG_NAMES = 'regioner-namn';
-/** Delstaternas ytor. Laddas först när läget Regioner väljs. */
-const REGION_GEO = '/geo/delstater.json';
+/** Regionernas ytor (delstater och landskap). Laddas först när läget Regioner väljs. */
+const REGION_GEO = ['/geo/delstater.json', '/geo/landskap.json'];
 const NAMES = 'platser-namn';
 
 export default function MapView(props: MapViewProps) {
@@ -347,7 +349,7 @@ export default function MapView(props: MapViewProps) {
       const m = map.current;
       if (m) {
         const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-        const box = r.code ? regionGeo?.boxes[r.code] : undefined;
+        const box = regionGeo?.boxes[r.code];
         if (box) m.fitBounds(box, { padding: 40, maxZoom: Math.max(m.getZoom(), 6), duration: reduce ? 0 : 600 });
         else m.easeTo({ center: [r.lon, r.lat], zoom: Math.max(m.getZoom(), 5), duration: reduce ? 0 : 600 });
       }
@@ -363,13 +365,16 @@ export default function MapView(props: MapViewProps) {
     for (const layer of [REG_FILL, REG_LINE, REG_NAMES]) m.setLayoutProperty(layer, 'visibility', regionMode ? 'visible' : 'none');
     if (!regionMode || regionGeoAsked.current) return;
     regionGeoAsked.current = true;
-    fetch(REGION_GEO)
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((fc) => setRegionGeo(regionGeoIndex(fc)))
-      .catch(() => {
-        // Utan ytor visas delstaterna som punkter. Nästa gång läget väljs försöker kartan igen.
-        regionGeoAsked.current = false;
-      });
+    void Promise.allSettled(
+      REGION_GEO.map((url) =>
+        fetch(url).then((r) => (r.ok ? (r.json() as Promise<{ features?: unknown[] }>) : Promise.reject(new Error(String(r.status))))),
+      ),
+    ).then((res) => {
+      // Regioner utan yta visas som punkter. Saknas någon fil försöker kartan igen nästa gång läget väljs.
+      if (res.some((x) => x.status === 'rejected')) regionGeoAsked.current = false;
+      const features = res.flatMap((x) => (x.status === 'fulfilled' && Array.isArray(x.value?.features) ? x.value.features : []));
+      if (features.length) setRegionGeo(regionGeoIndex({ features } as Parameters<typeof regionGeoIndex>[0]));
+    });
   }, [ready, regionMode]);
 
   // Ytorna in i kartan (också när kartan har skapats om för mörkt läge).
@@ -380,7 +385,7 @@ export default function MapView(props: MapViewProps) {
   }, [ready, regionGeo]);
 
   // Regionernas färger och namn.
-  const regionKey = props.regions.map((r) => `${r.id}:${r.code ?? ''}`).join(',');
+  const regionKey = props.regions.map((r) => `${r.id}:${r.code}`).join(',');
   const regionFillsKey = JSON.stringify(props.regionFills);
   useEffect(() => {
     const m = map.current;
@@ -389,11 +394,11 @@ export default function MapView(props: MapViewProps) {
     m.removeFeatureState({ source: 'regioner' });
     for (const r of p.regions) {
       const color = p.regionFills[r.id];
-      if (r.code && color && regionGeo?.boxes[r.code]) m.setFeatureState({ source: 'regioner', id: r.code }, { color, opacity: 0.85 });
+      if (color && regionGeo?.boxes[r.code]) m.setFeatureState({ source: 'regioner', id: r.code }, { color, opacity: 0.85 });
     }
     m.setPaintProperty(REG_FILL, 'fill-color', ['coalesce', ['feature-state', 'color'], p.fallback]);
     const names = p.regions.map((r) => {
-      const lp = r.code ? regionGeo?.labels[r.code] : undefined;
+      const lp = regionGeo?.labels[r.code];
       return {
         type: 'Feature' as const,
         properties: { name: r.name, pt: !lp },
@@ -404,7 +409,7 @@ export default function MapView(props: MapViewProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, regionGeo, regionKey, regionFillsKey, props.fallback]);
 
-  // Regioner utan yta (i dag Sveriges landskap): tryckbara punkter på 44 px på platsens koordinater.
+  // Regioner utan yta (när ytfilen inte gick att hämta): tryckbara punkter på 44 px på platsens koordinater.
   useEffect(() => {
     const m = map.current;
     const root = el.current;
@@ -412,7 +417,7 @@ export default function MapView(props: MapViewProps) {
     const p = latest.current;
     const show = () => root.classList.toggle('show-regions', m.getZoom() >= REGION_MIN_ZOOM);
     const made = p.regions
-      .filter((r) => !r.code || !regionGeo?.boxes[r.code])
+      .filter((r) => !regionGeo?.boxes[r.code])
       .map((r) => {
         const b = document.createElement('button');
         b.type = 'button';

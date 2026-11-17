@@ -1,5 +1,7 @@
 // Regioner på kartan (läget Regioner): landskap i Sverige och delstater i USA, alltså platser med layer.
 // Delstaterna har ytor i public/geo/delstater.json (Natural Earth admin 1), kopplade via data.iso_3166_2.
+// Landskapen har ytor i public/geo/landskap.json (Lantmäteriet via perliedman/svenska-landskap), kopplade
+// via namnet när filen byggs (scripts/make-landskap.mjs) och nycklade på platsens id, eftersom de saknar kod.
 // Regioner utan yta visas som tryckbara punkter på platsens koordinater. Etiketter och inzoomning utgår
 // från ytan när den finns, eftersom koordinaterna i innehållet är ungefärliga. Testas i mapRegions.test.ts.
 
@@ -16,8 +18,8 @@ export interface MapRegion {
   layer: string;
   lat: number;
   lon: number;
-  /** ISO 3166-2 (data.iso_3166_2), kopplar till ytan. Null när platsen saknar kod. */
-  code: string | null;
+  /** Nyckeln till ytan: ISO 3166-2 (data.iso_3166_2) när platsen har en kod, annars platsens id. */
+  code: string;
 }
 
 interface PlaceLike {
@@ -43,7 +45,7 @@ export function regionCode(data: unknown): string | null {
 export function mapRegions(places: PlaceLike[], locale?: string): MapRegion[] {
   return places
     .filter((p) => p.kind === 'region' && p.layer && p.parent_id && p.lat != null && p.lon != null)
-    .map((p) => ({ id: p.id, name: p.name, parentId: p.parent_id!, layer: p.layer!, lat: p.lat!, lon: p.lon!, code: regionCode(p.data) }))
+    .map((p) => ({ id: p.id, name: p.name, parentId: p.parent_id!, layer: p.layer!, lat: p.lat!, lon: p.lon!, code: regionCode(p.data) ?? p.id }))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
 }
 
@@ -84,7 +86,7 @@ function extend(box: Box | null, c: unknown): Box | null {
   return b;
 }
 
-/** Läser delstater.json: gränser och etikettpunkt per kod. */
+/** Läser ytfilerna (delstater.json, landskap.json): gränser och etikettpunkt per kod. */
 export function regionGeoIndex(fc: { features?: GeoFeature[] } | null | undefined): RegionGeoIndex {
   const features = Array.isArray(fc?.features) ? fc!.features : [];
   const boxes: Record<string, Box> = {};
@@ -110,7 +112,7 @@ const overlaps = (a: Box, b: Box) => a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3
 export function regionsInView(regions: MapRegion[], geo: RegionGeoIndex | null, zoom: number, view: Box): boolean {
   if (zoom < REGION_MIN_ZOOM) return false;
   return regions.some((r) => {
-    const box = r.code ? geo?.boxes[r.code] : undefined;
+    const box = geo?.boxes[r.code];
     return overlaps(box ?? [r.lon, r.lat, r.lon, r.lat], view);
   });
 }

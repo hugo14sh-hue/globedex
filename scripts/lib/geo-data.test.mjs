@@ -49,3 +49,45 @@ describe('delstaternas ytor', () => {
     expect(outside).toEqual([]);
   });
 });
+
+/** Ligger punkten inne i ytan (jämnt antal korsningar räknat över alla ringar, så att hål räknas bort)? */
+function inside([x, y], geometry) {
+  const polys = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+  return polys.some((poly) => {
+    let hit = false;
+    for (const r of poly)
+      for (let i = 0, j = r.length - 1; i < r.length; j = i++)
+        if (r[i][1] > y !== r[j][1] > y && x < r[j][0] + ((y - r[j][1]) * (r[i][0] - r[j][0])) / (r[i][1] - r[j][1])) hit = !hit;
+    return hit;
+  });
+}
+
+// Sveriges landskap (public/geo/landskap.json, byggd av scripts/make-landskap.mjs) mot platserna i content/SE.json.
+// Ytorna är nycklade på platsens id eftersom landskapen saknar ISO 3166-2-kod.
+describe('landskapens ytor', () => {
+  const buf = readFileSync(join(process.cwd(), 'public/geo/landskap.json'));
+  const land = JSON.parse(buf.toString('utf8'));
+  const se = JSON.parse(readFileSync(join(process.cwd(), 'content/SE.json'), 'utf8').replace(/^﻿/, ''));
+  const ids = se.places.filter((p) => p.layer === 'landskap').map((p) => p.id);
+  const geo = regionGeoIndex(land);
+
+  it('filen är högst 300 kB', () => {
+    expect(buf.length).toBeLessThanOrEqual(300 * 1024);
+  });
+
+  it('alla 25 landskap i innehållet har en yta, och varje yta hör till ett landskap', () => {
+    expect(ids).toHaveLength(25);
+    expect(ids.filter((id) => !geo.boxes[id])).toEqual([]);
+    expect(Object.keys(geo.boxes).sort()).toEqual([...ids].sort());
+  });
+
+  it('etiketten ligger inne i ytan', () => {
+    const outside = land.features.filter((f) => !inside([f.properties.lx, f.properties.ly], f.geometry)).map((f) => f.properties.code);
+    expect(outside).toEqual([]);
+  });
+
+  it('ingen yta krockar med en delstats kod', () => {
+    const states = regionGeoIndex(JSON.parse(readFileSync(join(process.cwd(), 'public/geo/delstater.json'), 'utf8')));
+    expect(Object.keys(geo.boxes).filter((c) => states.boxes[c])).toEqual([]);
+  });
+});

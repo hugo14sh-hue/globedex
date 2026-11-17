@@ -37,10 +37,11 @@ describe('regioner på kartan', () => {
     expect(regionGeoIndex(null).boxes).toEqual({});
   });
 
-  it('Sveriges landskap saknar yta och visas som punkter', () => {
+  it('landskapen saknar ISO-kod och kopplas till ytan med platsens id', () => {
     const se = regionsOf(regions, 'SE');
-    expect(se.length).toBeGreaterThan(0);
-    expect(se.every((r) => r.code === null)).toBe(true);
+    expect(se).toHaveLength(25);
+    expect(se.every((r) => r.code === r.id)).toBe(true);
+    expect(states.find((r) => r.id === 'US-ca')?.code).toBe('US-CA');
   });
 
   it('läser koden i data.iso_3166_2', () => {
@@ -55,7 +56,7 @@ describe('regioner på kartan', () => {
     expect(regionsInView(regions, geo, REGION_MIN_ZOOM - 0.5, usa)).toBe(false);
     expect(regionsInView(regions, geo, 4, usa)).toBe(true);
     expect(regionsInView(regions, geo, 4, japan)).toBe(false);
-    // Sverige: landskapen syns som punkter.
+    // Sverige utan hämtade ytor: landskapen syns som punkter.
     expect(regionsInView(regions, null, 5, [10, 55, 25, 69])).toBe(true);
   });
 });

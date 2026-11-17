@@ -58,6 +58,17 @@ const US_STATES = (
   }
 ).places.filter((p) => p.layer === 'delstat');
 
+// Sveriges landskap (content/SE.json). Ritas som ytor i läget Regioner (public/geo/landskap.json).
+const SE_LANDSKAP = new Set(
+  (
+    JSON.parse(readFileSync(join(process.cwd(), 'content/SE.json'), 'utf8').replace(/^﻿/, '')) as {
+      places: { layer?: string; name: string }[];
+    }
+  ).places
+    .filter((p) => p.layer === 'landskap')
+    .map((p) => p.name),
+);
+
 /** Lägger till delstaterna i svaret från places om de saknas i databasen. */
 async function injectStates(page: Page) {
   await page.route('**/rest/v1/places?*', async (route) => {
@@ -532,29 +543,56 @@ test('röktest', async ({ page }) => {
     await page.unroute('**/rest/v1/places?*');
   });
 
-  await test.step('Regioner: läget visar tomt läge utzoomat och landskapen som punkter inzoomat', async () => {
+  await test.step('Regioner: läget visar tomt läge utzoomat och landskapen som ytor inzoomat', async () => {
     await page.goto('/karta?lage=regioner');
     await expect(page.getByRole('button', { name: tx('karta.lage.regioner'), exact: true })).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.locator('.map canvas')).toBeVisible({ timeout: 30_000 });
+    const canvas = page.locator('.map canvas');
+    await expect(canvas).toBeVisible({ timeout: 30_000 });
     // Europa från start: för långt ut för regionerna.
     await expect(page.getByText(tx('karta.regioner.tom'))).toBeVisible({ timeout: 20_000 });
-    const point = page.locator('button.map-region').first();
-    await expect(point).toHaveCount(1, { timeout: 30_000 });
-    await page.locator('.map canvas').focus();
-    for (let i = 0; i < 4 && !(await point.isVisible()); i++) {
-      await page.keyboard.press('+');
-      await page.waitForTimeout(700);
+    await page.waitForTimeout(1500);
+    // Punkten i Sverige (15° O, 62° N) på kartan, som har passats in på Europa (MAP_BOUNDS, 8 px marginal) i Mercator.
+    // Punkten räknas relativt kartan: hjulet zoomar kring muspekaren, så platsen ligger kvar under den.
+    // Sidan kan skrollas medan kartan laddar, så kartans läge mäts på nytt före varje hjulsteg och klick.
+    const first = (await canvas.boundingBox())!;
+    const merc = (lat: number) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
+    const [w, s, e, n] = [-12, 34, 35, 71];
+    const scale = Math.min((first.width - 16) / (((e - w) * Math.PI) / 180), (first.height - 16) / (merc(n) - merc(s)));
+    const rel = {
+      x: first.width / 2 + ((15 - (w + e) / 2) * Math.PI * scale) / 180,
+      y: first.height / 2 - (merc(62) - (merc(n) + merc(s)) / 2) * scale,
+    };
+    const at = async (dx = 0, dy = 0) => {
+      await canvas.scrollIntoViewIfNeeded();
+      const b = (await canvas.boundingBox())!;
+      return { x: b.x + rel.x + dx, y: b.y + rel.y + dy };
+    };
+    for (let i = 0; i < 30 && (await page.getByText(tx('karta.regioner.tom')).count()); i++) {
+      const p = await at();
+      await page.mouse.move(p.x, p.y);
+      await page.mouse.wheel(0, -400);
+      await page.waitForTimeout(300);
     }
-    await expect(point).toBeVisible();
+    await page.waitForTimeout(1200);
     await expect(page.getByText(tx('karta.regioner.tom'))).toHaveCount(0);
-    // Punkten är 44 px och öppnar samma bottenark som ett land.
-    const size = (await point.boundingBox())!;
-    expect(Math.round(size.width)).toBeGreaterThanOrEqual(44);
-    const name = (await point.getAttribute('aria-label'))!;
-    await point.click();
+    // Landskapen har ytor och visas inte längre som punkter.
+    await expect(page.locator('button.map-region')).toHaveCount(0);
     const sheet = page.getByRole('dialog');
-    await expect(sheet.getByRole('heading', { name, exact: true })).toBeVisible();
+    let picked = '';
+    for (const [dx, dy] of [[0, 0], [0, -30], [0, 30], [-30, 0], [30, 0]]) {
+      const p = await at(dx, dy);
+      await page.mouse.click(p.x, p.y);
+      if (await sheet.isVisible().catch(() => false)) {
+        picked = (await sheet.getByRole('heading').first().textContent()) ?? '';
+        if (SE_LANDSKAP.has(picked)) break;
+        await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+      }
+      await page.waitForTimeout(300);
+    }
+    expect(SE_LANDSKAP.has(picked), `Inget landskap träffades (${picked})`).toBe(true);
+    // Samma bottenark som en delstat.
     await expect(sheet.getByRole('button', { name: tx('karta.status.besokt'), exact: true })).toBeVisible();
+    await expect(sheet.getByRole('link', { name: tx('land.vy.oversikt') })).toHaveAttribute('href', /^\/karta\/SE-[a-z]+$/);
     await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
     await expect(sheet).toBeHidden();
   });
