@@ -137,6 +137,12 @@ export async function fetchTrips(groupId: string): Promise<Trip[]> {
   return must(await supabase.from('trips').select('*').eq('group_id', groupId).order('start_date', { nullsFirst: false })) as Trip[];
 }
 
+/** Resor i flera grupper (listan över resor visar alla grupper man är med i, med filter). */
+export async function fetchTripsIn(groupIds: string[]): Promise<Trip[]> {
+  if (!groupIds.length) return [];
+  return must(await supabase.from('trips').select('*').in('group_id', groupIds).order('start_date', { nullsFirst: false })) as Trip[];
+}
+
 export async function fetchTrip(id: string): Promise<Trip | null> {
   return must(await supabase.from('trips').select('*').eq('id', id).maybeSingle()) as Trip | null;
 }

@@ -4,6 +4,10 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 export interface Snapshot {
   groupId: string;
+  /** Reseläget, som röktestet byter när det skapar en pargrupp (Körning 14). */
+  travelMode: string;
+  /** Grupper som testkontot hade skapat före testet. Andra grupper som kontot har skapat tas bort efteråt. */
+  ownGroups: string[];
   /** Profilens inställningar (tema och språk), som röktestet ändrar. */
   settings: unknown;
   statuses: Record<string, unknown>[];
@@ -22,12 +26,14 @@ async function rows<T>(q: PromiseLike<{ data: T[] | null; error: { message: stri
 }
 
 export async function snapshot(db: SupabaseClient, userId: string): Promise<Snapshot> {
-  const [profile] = await rows<{ active_group_id: string; settings: unknown }>(
-    db.from('profiles').select('active_group_id, settings').eq('id', userId),
+  const [profile] = await rows<{ active_group_id: string; travel_mode: string; settings: unknown }>(
+    db.from('profiles').select('active_group_id, travel_mode, settings').eq('id', userId),
   );
   const groupId = profile.active_group_id;
   return {
     groupId,
+    travelMode: profile.travel_mode,
+    ownGroups: (await rows<{ id: string }>(db.from('groups').select('id').eq('created_by', userId))).map((r) => r.id),
     settings: profile.settings,
     statuses: await rows(db.from('place_status').select('*').eq('user_id', userId)),
     checks: (await rows<{ item_id: string }>(db.from('item_checks').select('item_id').eq('user_id', userId))).map((r) => r.item_id),
@@ -70,9 +76,14 @@ export async function restore(db: SupabaseClient, userId: string, s: Snapshot): 
   }
   if (s.vaultEmpty) await del('vault_items', 'id', [], ['user_id', userId]);
   {
-    const { error } = await db.from('profiles').update({ settings: s.settings }).eq('id', userId);
+    const { error } = await db
+      .from('profiles')
+      .update({ settings: s.settings, active_group_id: s.groupId, travel_mode: s.travelMode })
+      .eq('id', userId);
     if (error) throw new Error(`profiles: ${error.message}`);
     done.push('profilens inställningar');
   }
+  // Grupper som testet skapade (pargruppen för tillsammans). Medlemskap följer med, och together_group blir tomt.
+  await del('groups', 'id', s.ownGroups, ['created_by', userId]);
   return done;
 }

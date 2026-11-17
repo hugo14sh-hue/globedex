@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { supabase } from './supabase';
 import { isStatus, type PlaceStatus, type StatusMap } from './statusLogic';
+import { togetherFor, toRows, type StatusRow } from './togetherLogic';
 
 export { countryIdFor, groupByStatus, isStatus, shouldMarkPlanned, STATUS_KEY, STATUSES, type PlaceStatus } from './statusLogic';
 
@@ -16,11 +17,13 @@ interface State {
   userId: string | null;
   loaded: boolean;
   statuses: StatusMap;
+  /** together_group per plats: gruppens id när platsen besöktes tillsammans. Saknas: på egen hand. */
+  together: Record<string, string>;
   checks: Set<string>;
   finds: Record<string, Find>;
 }
 
-let state: State = { userId: null, loaded: false, statuses: {}, checks: new Set(), finds: {} };
+let state: State = { userId: null, loaded: false, statuses: {}, together: {}, checks: new Set(), finds: {} };
 const listeners = new Set<() => void>();
 const emit = (next: State) => {
   state = next;
@@ -35,7 +38,7 @@ let loading: Promise<void> | null = null;
 
 async function load(userId: string) {
   const [s, c, f] = await Promise.all([
-    supabase.from('place_status').select('place_id, status').eq('user_id', userId),
+    supabase.from('place_status').select('place_id, status, together_group').eq('user_id', userId),
     supabase.from('item_checks').select('item_id').eq('user_id', userId),
     supabase.from('finds').select('compendium_id, found_on, place_id').eq('user_id', userId),
   ]);
@@ -43,10 +46,15 @@ async function load(userId: string) {
   if (c.error) throw new Error(c.error.message);
   if (f.error) throw new Error(f.error.message);
   const statuses: StatusMap = {};
-  for (const r of s.data as { place_id: string; status: string }[]) if (isStatus(r.status)) statuses[r.place_id] = r.status;
+  const together: Record<string, string> = {};
+  for (const r of s.data as { place_id: string; status: string; together_group: string | null }[]) {
+    if (!isStatus(r.status)) continue;
+    statuses[r.place_id] = r.status;
+    if (r.together_group) together[r.place_id] = r.together_group;
+  }
   const finds: Record<string, Find> = {};
   for (const r of f.data as ({ compendium_id: string } & Find)[]) finds[r.compendium_id] = { found_on: r.found_on, place_id: r.place_id };
-  emit({ userId, loaded: true, statuses, checks: new Set((c.data as { item_id: string }[]).map((r) => r.item_id)), finds });
+  emit({ userId, loaded: true, statuses, together, checks: new Set((c.data as { item_id: string }[]).map((r) => r.item_id)), finds });
 }
 
 /** Hämtar användarens status, avbockningar och fynd en gång per inloggning. */
@@ -55,7 +63,7 @@ export function useMyPlaces(userId: string | null) {
   useEffect(() => {
     if (!userId) return;
     if (state.userId === userId && state.loaded) return;
-    if (state.userId !== userId) emit({ userId, loaded: false, statuses: {}, checks: new Set(), finds: {} });
+    if (state.userId !== userId) emit({ userId, loaded: false, statuses: {}, together: {}, checks: new Set(), finds: {} });
     if (!loading) {
       loading = load(userId)
         .catch(() => emit({ ...state, loaded: true }))
@@ -67,20 +75,30 @@ export function useMyPlaces(userId: string | null) {
   return snap;
 }
 
-/** Sätter eller tar bort status. Ändras direkt på skärmen och backas om sparandet misslyckas. */
-export async function setPlaceStatus(placeId: string, status: PlaceStatus | null): Promise<void> {
+/**
+ * Sätter eller tar bort status. Ändras direkt på skärmen och backas om sparandet misslyckas.
+ * together är gruppens id (tillsammans), null (på egen hand) eller utelämnat (valet ligger kvar).
+ * För vill åka och planerad blir together_group alltid tomt.
+ */
+export async function setPlaceStatus(placeId: string, status: PlaceStatus | null, together?: string | null): Promise<void> {
   const userId = state.userId;
   if (!userId) throw new Error('Inte inloggad');
-  const before = state.statuses;
-  const statuses = { ...before };
+  const before = { statuses: state.statuses, together: state.together };
+  const statuses = { ...before.statuses };
+  const nextTogether = { ...before.together };
+  const group = togetherFor(status, together, before.together[placeId] ?? null);
   if (status) statuses[placeId] = status;
   else delete statuses[placeId];
-  emit({ ...state, statuses });
+  if (group) nextTogether[placeId] = group;
+  else delete nextTogether[placeId];
+  emit({ ...state, statuses, together: nextTogether });
   const res = status
-    ? await supabase.from('place_status').upsert({ user_id: userId, place_id: placeId, status }, { onConflict: 'user_id,place_id' })
+    ? await supabase
+        .from('place_status')
+        .upsert({ user_id: userId, place_id: placeId, status, together_group: group }, { onConflict: 'user_id,place_id' })
     : await supabase.from('place_status').delete().eq('user_id', userId).eq('place_id', placeId);
   if (res.error) {
-    emit({ ...state, statuses: before });
+    emit({ ...state, ...before });
     throw new Error(res.error.message);
   }
 }
@@ -165,37 +183,36 @@ export async function setItemCheck(
 }
 
 /**
- * Gruppmedlemmarnas status (inte den egna), per user_id. RLS släpper bara igenom
+ * Gruppmedlemmarnas status (inte den egna), per user_id och som rader med together_group. RLS släpper bara igenom
  * status som inte är privat och bara för personer man delar grupp med.
  */
-export function useMemberStatuses(memberIds: string[]): { loaded: boolean; byUser: Record<string, StatusMap> } {
+export function useMemberStatuses(memberIds: string[]): { loaded: boolean; byUser: Record<string, StatusMap>; rows: StatusRow[] } {
   const key = [...memberIds].sort().join(',');
-  const [res, setRes] = useState<{ key: string; byUser: Record<string, StatusMap> }>({ key: '', byUser: {} });
+  const [res, setRes] = useState<{ key: string; byUser: Record<string, StatusMap>; rows: StatusRow[] }>({ key: '', byUser: {}, rows: [] });
   useEffect(() => {
     const ids = key ? key.split(',') : [];
     if (!ids.length) {
-      setRes({ key, byUser: {} });
+      setRes({ key, byUser: {}, rows: [] });
       return;
     }
     let alive = true;
     supabase
       .from('place_status')
-      .select('user_id, place_id, status')
+      .select('user_id, place_id, status, together_group')
       .in('user_id', ids)
       .then(({ data, error }) => {
         if (!alive) return;
         const byUser: Record<string, StatusMap> = {};
         for (const id of ids) byUser[id] = {};
-        if (!error)
-          for (const r of data as { user_id: string; place_id: string; status: string }[])
-            if (isStatus(r.status) && byUser[r.user_id]) byUser[r.user_id][r.place_id] = r.status;
-        setRes({ key, byUser });
+        const rows = error ? [] : toRows(data as Parameters<typeof toRows>[0]).filter((r) => byUser[r.user_id]);
+        for (const r of rows) byUser[r.user_id][r.place_id] = r.status;
+        setRes({ key, byUser, rows });
       });
     return () => {
       alive = false;
     };
   }, [key]);
-  return { loaded: res.key === key, byUser: res.byUser };
+  return { loaded: res.key === key, byUser: res.byUser, rows: res.rows };
 }
 
 /**

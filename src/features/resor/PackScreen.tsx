@@ -19,7 +19,7 @@ export default function PackScreen() {
 function Pack({ trip }: { trip: Trip }) {
   const t = useT();
   const { toast, party } = useFeedback();
-  const people = usePeople();
+  const people = usePeople(trip.group_id);
   const [list, setList] = useState<PackItem[] | null>(null);
   const [title, setTitle] = useState('');
   const [grp, setGrp] = useState('');

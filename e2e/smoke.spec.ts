@@ -660,6 +660,77 @@ test('röktest', async ({ page }) => {
     if (!hasStates) await page.unroute('**/rest/v1/places?*');
   });
 
+  await test.step('tillsammans: ett land besökt tillsammans får sin färg på Min karta och Vår karta och räknas i Vi', async () => {
+    // Testkontot har ingen partner: testet skapar en egen pargrupp (bara testkontot som medlem) och gör den aktiv.
+    // Gruppen tas bort och reseläget återställs i slutet av steget, och afterAll städar om något går fel.
+    const { db, userId } = await testClient();
+    const { data: gid, error } = await db.rpc('create_group', { group_name: 'E2E tillsammans', group_kind: 'par' });
+    expect(error, error?.message).toBeNull();
+    try {
+      const upd = await db.from('profiles').update({ active_group_id: gid, travel_mode: 'par' }).eq('id', userId);
+      expect(upd.error, upd.error?.message).toBeNull();
+
+      // Italien på landssidan: Besökt, sedan Tillsammans med gruppen.
+      await page.goto('/karta/IT');
+      const h1 = page.getByRole('heading', { level: 1 });
+      await expect(h1).toBeVisible({ timeout: 20_000 });
+      const name = (await h1.textContent()) ?? '';
+      const besokt = page.getByRole('button', { name: tx('karta.status.besokt'), exact: true });
+      if ((await besokt.getAttribute('aria-pressed')) !== 'true') await besokt.click();
+      await expect(besokt).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.getByRole('heading', { name: tx('karta.sallskap.rubrik') })).toBeVisible();
+      await expect(page.getByText(tx('karta.sallskap.hjalp'))).toBeVisible();
+      // Förvalt är Bara jag.
+      await expect(page.getByRole('button', { name: tx('karta.sallskap.jag'), exact: true })).toHaveAttribute('aria-pressed', 'true');
+      const saved = page.waitForResponse((r) => r.url().includes('/rest/v1/place_status') && r.request().method() === 'POST' && r.ok());
+      const together = page.getByRole('button', { name: tx('karta.sallskap.tillsammans').replace('{grupp}', 'E2E tillsammans'), exact: true });
+      await together.click();
+      await saved;
+      await expect(together).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.getByText(new RegExp(`${esc(name)}: .*E2E tillsammans`))).toBeVisible();
+      const stored = await db.from('place_status').select('status, together_group').eq('user_id', userId).eq('place_id', 'IT').single();
+      expect(stored.data).toEqual({ status: 'besokt', together_group: gid });
+
+      // Min karta: landet har färgen för tillsammans (ringen runt flaggan i listan har samma färg som kartan).
+      await page.goto('/karta');
+      const expected = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--st-tillsammans').trim().toUpperCase());
+      expect(expected).toMatch(/^#[0-9A-F]{6}$/);
+      const ring = async () =>
+        ((await page.locator('a[href="/karta/IT"] .flag, a[href="/karta/IT"] .badge').first().getAttribute('style')) ?? '').toUpperCase();
+      await expect.poll(ring, { timeout: 20_000 }).toContain(expected);
+      await expect(page.getByRole('heading', { name: tx('karta.forklaring.rubrik') })).toBeVisible();
+      await expect(page.locator('.lg').getByText(tx('karta.forklaring.tillsammans'), { exact: true })).toBeVisible();
+      await expect(page.locator('.lg').getByText(tx('karta.forklaring.sjalv'), { exact: true })).toBeVisible();
+
+      // Vår karta: samma färg, och förklaringen har de fyra färgerna.
+      await page.getByRole('group', { name: tx('karta.vy.aria') }).getByRole('button', { name: tx('karta.visa.var'), exact: true }).click();
+      await expect.poll(ring).toContain(expected);
+      for (const k of ['karta.forklaring.tillsammans', 'karta.forklaring.bada', 'karta.forklaring.bara-jag'])
+        await expect(page.locator('.lg').getByText(tx(k), { exact: true })).toBeVisible();
+
+      // Knappen för landlistan intill lägesväljaren öppnar samma val som under Anpassning.
+      await page.getByRole('button', { name: tx('karta.landlista.aria') }).click();
+      const sheet = page.getByRole('dialog');
+      await expect(sheet.getByRole('radio')).toHaveCount(3);
+      await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+
+      // Vi i läget Tillsammans (förvalt): landet räknas.
+      await page.goto('/vi');
+      const views = page.getByRole('group', { name: tx('vi.vy.aria') });
+      await expect(views.getByRole('button', { name: tx('vi.vy.tillsammans'), exact: true })).toHaveAttribute('aria-pressed', 'true', { timeout: 20_000 });
+      await expect(page.getByText(tx('vi.vy.hjalp.tillsammans'))).toBeVisible();
+      await page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first().click();
+      await expect(page.getByRole('dialog').getByText(name, { exact: true })).toBeVisible();
+      await page.getByRole('dialog').getByRole('button', { name: tx('knapp.stang') }).click();
+    } finally {
+      await db.from('profiles').update({ active_group_id: snap!.groupId, travel_mode: snap!.travelMode }).eq('id', userId);
+      await db.from('groups').delete().eq('id', gid);
+      await db.auth.signOut();
+    }
+    // Tillbaka i testkontots vanliga grupp.
+    await page.goto('/karta');
+  });
+
   await test.step('Landlista: FN:s medlemsländer ger nämnaren 193 på Jag, och sedan tillbaka till alla', async () => {
     await page.goto('/vi/anpassning');
     await expect(page.getByText(tx('landlista.rubrik'))).toBeVisible();

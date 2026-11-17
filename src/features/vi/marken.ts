@@ -8,11 +8,11 @@ import type { Badge } from '../../lib/texter';
 import { CONTINENT_OF } from '../../lib/continents';
 import { countsAsCountry, DEFAULT_COUNTRY_LIST } from '../../lib/landlistor';
 import { tripPhase, todayIso } from '../../lib/tripLogic';
-import type { PlaceStatus } from '../../lib/statusLogic';
+import { VISITED, type PlaceStatus } from '../../lib/statusLogic';
 import type { Rarity } from '../../lib/content';
 
-/** Statusar som räknas som besökt. Mellanlandat räknas inte. */
-export const VISITED: PlaceStatus[] = ['bor', 'bott', 'besokt'];
+/** Statusar som räknas som besökt. Mellanlandat räknas inte. Definieras i statusLogic. */
+export { VISITED };
 
 export interface TripLike {
   id: string;

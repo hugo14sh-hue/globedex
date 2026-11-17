@@ -24,6 +24,13 @@ import { pricesOf } from '../../lib/prices';
 import { COUNTRIES } from '../../lib/countries';
 import type { CountryPoint } from '../../lib/mapPoints';
 import { mapRegions } from '../../lib/mapRegions';
+import { companyGroups, myMap, ourMap, ourVisited, type MapKey, type StatusRow } from '../../lib/togetherLogic';
+import { APP_COUNTRIES, countryListTotal, countsAsCountry } from '../../lib/landlistor';
+import { CountryListPicker } from '../../components/CountryListPicker';
+import { Icon } from '../../components/Icon';
+
+/** Förklaringens rader: färgnyckel och text. */
+type LegendRow = { key: MapKey; label: string };
 
 // Kartmotorn laddas först när fliken öppnas.
 const MapView = lazy(() => import('./MapView'));
@@ -41,16 +48,37 @@ export default function KartaScreen() {
   const t = useT();
   const nav = useNavigate();
   const { theme } = useTheme();
-  const { session, members } = useSession();
+  const { session, members, groups, activeGroup } = useSession();
   const mode = useTravelMode();
   const me = session?.user.id ?? null;
   const mine = useMyPlaces(me);
+  // Med i en par- eller gruppgrupp: besökt får två färger på Min karta (på egen hand och tillsammans).
+  const withCompany = companyGroups(groups).length > 0;
   // Par och grupp: Min karta, Vår karta eller en enskild medlems karta. Solo: bara den egna.
   const others = useMemo(() => (mode === 'solo' ? [] : members.filter((m) => m.user_id !== me)), [mode, members, me]);
   const memberStatuses = useMemberStatuses(others.map((m) => m.user_id));
   const [whoPicked, setWho] = useState<MapWho>('min');
   const who: MapWho = mode === 'solo' || (whoPicked !== 'min' && whoPicked !== 'var' && !others.some((m) => m.user_id === whoPicked)) ? 'min' : whoPicked;
   const shown = useMemo(() => statusesFor(who, mine.statuses, memberStatuses.byUser), [who, mine.statuses, memberStatuses.byUser]);
+  // Vår karta räknas från allas rader, med together_group.
+  const gid = activeGroup?.id ?? '';
+  const memberIds = useMemo(() => [...new Set([...(me ? [me] : []), ...others.map((m) => m.user_id)])], [me, others]);
+  const allRows = useMemo<StatusRow[]>(
+    () => [
+      ...Object.entries(mine.statuses).map(([place_id, status]) => ({ user_id: me ?? '', place_id, status, together_group: mine.together[place_id] ?? null })),
+      ...memberStatuses.rows,
+    ],
+    [mine.statuses, mine.together, me, memberStatuses.rows],
+  );
+  const ours = useMemo(() => (who === 'var' ? ourVisited(allRows, me ?? '', memberIds, gid) : {}), [who, allRows, me, memberIds, gid]);
+  // Färgnyckeln per plats på vald karta.
+  const keys = useMemo<Record<string, MapKey>>(() => {
+    if (who === 'min') return myMap(mine.statuses, mine.together, withCompany);
+    if (who === 'var') return ourMap(allRows, me ?? '', memberIds, gid);
+    return shown;
+  }, [who, mine.statuses, mine.together, withCompany, allRows, me, memberIds, gid, shown]);
+  const nameOf = (uid: string) => others.find((m) => m.user_id === uid)?.display_name ?? '';
+  const othersNames = (ids: string[]) => ids.map(nameOf).filter(Boolean).join(', ');
   const whoLabel = (w: MapWho) =>
     w === 'min' ? t('karta.visa.min') : w === 'var' ? t('karta.visa.var') : t('karta.visa.medlem', { namn: others.find((m) => m.user_id === w)?.display_name ?? '' });
   const [places, setPlaces] = useState<Place[]>([]);
@@ -102,9 +130,16 @@ export default function KartaScreen() {
       }
       return out;
     }
-    for (const [id, s] of Object.entries(shown)) if (/^[A-Z]{2}$/.test(id)) out[id] = colors[s];
+    for (const [id, k] of Object.entries(keys)) if (/^[A-Z]{2}$/.test(id)) out[id] = colors[k];
     return out;
-  }, [mapMode, places, month, shown, colors]);
+  }, [mapMode, places, month, keys, colors]);
+
+  // Länder utanför vald landlista ritas med streck. Listan alla har inga.
+  const hatched = useMemo(
+    () => (theme.countryList === 'alla' ? [] : APP_COUNTRIES.filter((c) => !countsAsCountry(c, theme.countryList))),
+    [theme.countryList],
+  );
+  const [listOpen, setListOpen] = useState(false);
 
   // Regionerna (platser med lager, i dag landskap och delstater). Färgas efter status precis som länder.
   const regions = useMemo(() => mapRegions(places, LOCALE), [places]);
@@ -112,11 +147,38 @@ export default function KartaScreen() {
     const out: Record<string, string> = {};
     if (mapMode !== 'regioner') return out;
     for (const r of regions) {
-      const s = shown[r.id];
-      if (s) out[r.id] = colors[s];
+      const k = keys[r.id];
+      if (k) out[r.id] = colors[k];
     }
     return out;
-  }, [mapMode, regions, shown, colors]);
+  }, [mapMode, regions, keys, colors]);
+
+  // Förklaringen visar de färger som vald karta använder. Vill åka och planerad som förut.
+  const legend = useMemo<LegendRow[]>(() => {
+    const st = (s: PlaceStatus): LegendRow => ({ key: s, label: t(STATUS_KEY[s]) });
+    if (who === 'var')
+      return [
+        { key: 'tillsammans', label: t('karta.forklaring.tillsammans') },
+        { key: 'bada', label: t('karta.forklaring.bada') },
+        { key: 'bara-jag', label: t('karta.forklaring.bara-jag') },
+        { key: 'bara-annan', label: t('karta.forklaring.bara-annan', { namn: othersNames(others.map((m) => m.user_id)) }) },
+        st('planerad'),
+        st('vill'),
+        st('mellan'),
+      ];
+    if (who === 'min' && withCompany)
+      return [
+        st('bor'),
+        st('bott'),
+        { key: 'besokt', label: t('karta.forklaring.sjalv') },
+        { key: 'tillsammans', label: t('karta.forklaring.tillsammans') },
+        st('planerad'),
+        st('vill'),
+        st('mellan'),
+      ];
+    return (['bor', 'bott', 'besokt', 'planerad', 'vill', 'mellan'] as PlaceStatus[]).map(st);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [who, withCompany, others, t]);
 
   const markers = useMemo<MapMarker[]>(() => {
     if (mapMode !== 'upptack') return [];
@@ -159,7 +221,7 @@ export default function KartaScreen() {
         <Ingress k="ingress.karta" />
 
         {mode !== 'solo' && (
-          <div className="chips" role="group" aria-label={t('flik.karta')}>
+          <div className="chips" role="group" aria-label={t('karta.vy.aria')}>
             {(['min', 'var', ...others.map((m) => m.user_id)] as MapWho[]).map((w) => (
               <button key={w} type="button" className="chip" aria-pressed={who === w} onClick={() => setWho(w)}>
                 {whoLabel(w)}
@@ -182,6 +244,7 @@ export default function KartaScreen() {
                 fills={fills}
                 fallback={colors.ej}
                 fallbackOpacity={mapMode === 'smart' ? 0.35 : 0.85}
+                hatched={hatched}
                 markers={markers}
                 markerColor={colors.bor}
                 route={play.route}
@@ -250,6 +313,15 @@ export default function KartaScreen() {
             </button>
           ))}
         </div>
+        {/* Vilka länder som räknas: samma val som under Anpassning. */}
+        {/* Namnet är karta.landlista.aria följt av den synliga texten, så att den synliga texten ingår i namnet (WCAG 2.5.3). */}
+        <button type="button" className="chip soft list-chip" aria-labelledby="landlista-aria landlista-knapp" aria-haspopup="dialog" onClick={() => setListOpen(true)}>
+          <span id="landlista-aria" className="sr-only">
+            {t('karta.landlista.aria')}
+          </span>
+          <Icon name="filter" size={16} />
+          <span id="landlista-knapp">{t('karta.landlista.knapp', { antal: countryListTotal(theme.countryList) })}</span>
+        </button>
 
         {mapMode === 'smart' ? (
           <>
@@ -276,14 +348,19 @@ export default function KartaScreen() {
             </div>
           </>
         ) : (
-          <div className="lg">
-            {(['bor', 'bott', 'besokt', 'planerad', 'vill', 'mellan'] as PlaceStatus[]).map((s) => (
-              <span key={s}>
-                <i style={{ background: colors[s] }} />
-                {t(STATUS_KEY[s])}
-              </span>
-            ))}
-          </div>
+          <section className="col legend" aria-labelledby="karta-forklaring">
+            <h2 className="eb" id="karta-forklaring">
+              {t('karta.forklaring.rubrik')}
+            </h2>
+            <div className="lg">
+              {legend.map((r) => (
+                <span key={r.key}>
+                  <i style={{ background: colors[r.key] }} />
+                  {r.label}
+                </span>
+              ))}
+            </div>
+          </section>
         )}
 
         <h2 className="eb">{t(mode === 'solo' ? 'karta.platser.jag' : 'karta.platser.vi')}</h2>
@@ -306,7 +383,7 @@ export default function KartaScreen() {
                   to={`/karta/${r.id}`}
                   title={r.name}
                   sub={t(STATUS_KEY[r.status])}
-                  lead={<Flag placeId={r.id} ring={colors[r.status]} />}
+                  lead={<Flag placeId={r.id} ring={colors[keys[r.id] ?? r.status]} />}
                   meta={p ? <PriceLevel level={p.level} small /> : undefined}
                 />
               );
@@ -317,13 +394,22 @@ export default function KartaScreen() {
         <BottomSheet
           open={Boolean(picked)}
           title={pickedName}
-          lead={picked ? <Flag placeId={picked} ring={shown[picked] ? colors[shown[picked]] : undefined} /> : undefined}
+          lead={picked ? <Flag placeId={picked} ring={keys[picked] ? colors[keys[picked]] : undefined} /> : undefined}
           onClose={() => setPicked(null)}>
           {picked && (
             <>
               {who !== 'min' && (
                 <span className="mu">
                   {whoLabel(who)}: {t(STATUS_KEY[shown[picked] ?? 'ej'])}
+                </span>
+              )}
+              {/* Vår karta: vem som har varit här. I en grupp med fler än två står namnen här. */}
+              {who === 'var' && ours[picked] && (
+                <span className="row-start">
+                  <i className="dot" style={{ background: colors[ours[picked].key] }} aria-hidden="true" />
+                  {ours[picked].key === 'bara-annan'
+                    ? t('karta.forklaring.bara-annan', { namn: othersNames(ours[picked].others) })
+                    : t(`karta.forklaring.${ours[picked].key}`)}
                 </span>
               )}
               {/* Bara den egna statusen går att ändra. */}
@@ -338,6 +424,10 @@ export default function KartaScreen() {
               <Row to={`/karta/${picked}`} icon="map" title={t('land.vy.oversikt')} />
             </>
           )}
+        </BottomSheet>
+
+        <BottomSheet open={listOpen} title={t('landlista.rubrik')} onClose={() => setListOpen(false)}>
+          <CountryListPicker legend={false} />
         </BottomSheet>
       </main>
     </>

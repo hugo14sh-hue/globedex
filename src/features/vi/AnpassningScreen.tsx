@@ -1,9 +1,9 @@
 import { BackLink } from '../../components/BackLink';
 import { useFeedback } from '../../components/Feedback';
 import { Segment } from '../../components/Segment';
+import { CountryListPicker } from '../../components/CountryListPicker';
 import {
   APP_NAME,
-  COUNTRY_LISTS,
   DEFAULT_THEME,
   RADIUS_MAX,
   RADIUS_MIN,
@@ -15,7 +15,6 @@ import {
   type Tone,
   type TravelMode,
 } from '../../config';
-import { countryListKey, countryListTotal } from '../../lib/landlistor';
 import { useSession } from '../../lib/session';
 import { text } from '../../lib/texter';
 import { useT } from '../../lib/useT';
@@ -188,25 +187,7 @@ export default function AnpassningScreen() {
       {lang !== 'sv' && <p className="mu">{t('sprak.innehall-svenska')}</p>}
 
       {/* Vilka länder som räknas i statistik, mål och märken. Sparas lokalt och i profilen som språkvalet. */}
-      <fieldset className="col">
-        <legend className="eb">{t('landlista.rubrik')}</legend>
-        <p className="mu" id="landlista-hjalp">
-          {t('landlista.hjalp')}
-        </p>
-        {COUNTRY_LISTS.map((l) => (
-          <label key={l} className="check">
-            <input
-              type="radio"
-              name="landlista"
-              value={l}
-              checked={theme.countryList === l}
-              aria-describedby="landlista-hjalp"
-              onChange={() => update({ countryList: l })}
-            />
-            {t(countryListKey(l), { totalt: countryListTotal(l) })}
-          </label>
-        ))}
-      </fieldset>
+      <CountryListPicker />
 
       {/* Återställ gäller utseendet. Språkvalet och landlistan ligger kvar. */}
       <button type="button" className="btn ghost" onClick={() => setTheme({ ...DEFAULT_THEME, lang: theme.lang, countryList: theme.countryList })}>

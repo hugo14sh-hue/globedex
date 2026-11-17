@@ -486,6 +486,20 @@ do $$ declare t text; begin
   end loop;
 end $$;
 
+-- På egen hand eller tillsammans (Körning 14). Har minst en medlem en rad med together_group lika med
+-- gruppens id räknas platsen som besökt tillsammans för hela gruppen. Var och en skriver bara sina egna
+-- rader (own_write ovan), och together_group får bara vara en grupp man är med i.
+alter table public.place_status
+  add column if not exists together_group uuid references public.groups(id) on delete set null;
+comment on column public.place_status.together_group is
+  'Gruppen man besökte platsen tillsammans med. Tomt betyder på egen hand.';
+drop policy if exists "together_member" on public.place_status;
+create policy "together_member" on public.place_status as restrictive for all to authenticated
+  using (true)
+  with check (together_group is null or public.is_member(together_group));
+create index if not exists place_status_together_idx
+  on public.place_status (together_group) where together_group is not null;
+
 create policy "own_write" on public.swipe_votes for all to authenticated
   using (user_id = auth.uid()) with check (user_id = auth.uid());
 create policy "group_read" on public.swipe_votes for select to authenticated

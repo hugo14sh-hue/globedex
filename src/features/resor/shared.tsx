@@ -9,6 +9,8 @@ import { hasText } from '../../lib/texter';
 import { fetchTrip, isOldSchema, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
 import { dateFormat, numberFormat } from '../../lib/locale';
+import { supabase } from '../../lib/supabase';
+import type { Member } from '../../lib/types';
 
 type T = ReturnType<typeof useT>;
 
@@ -48,16 +50,42 @@ export function formatRange(start: string | null, end: string | null): string {
 }
 
 /** Gruppens medlemmar som id och namn. Solo: bara jag. */
-export function usePeople() {
-  const { session, members } = useSession();
+export function usePeople(groupId?: string | null) {
+  const { session, members, groups, activeGroup } = useSession();
   const mode = useTravelMode();
   const me = session?.user.id ?? '';
+  // Resans grupp kan vara en annan än den som är vald i appen (Vem reser?, Körning 14).
+  // En sologrupp är bara jag. En annan par- eller gruppgrupp hämtar sina medlemmar.
+  const group = groupId && groupId !== activeGroup?.id ? (groups.find((g) => g.id === groupId) ?? null) : null;
+  const fetched = useGroupMembers(group && group.kind !== 'solo' ? group.id : null);
   return useMemo(() => {
-    const ids = mode === 'solo' ? [me] : members.map((m) => m.user_id);
+    const solo = group ? group.kind === 'solo' : mode === 'solo';
+    const list = group ? fetched : members;
+    const ids = solo ? [me] : list.map((m) => m.user_id);
     if (me && !ids.includes(me)) ids.unshift(me);
-    const name = (id: string | null) => members.find((m) => m.user_id === id)?.display_name ?? '';
-    return { me, ids: ids.filter(Boolean), name, solo: mode === 'solo' };
-  }, [mode, members, me]);
+    const name = (id: string | null) => list.find((m) => m.user_id === id)?.display_name ?? '';
+    return { me, ids: ids.filter(Boolean), name, solo };
+  }, [mode, members, me, group, fetched]);
+}
+
+/** Medlemmarna i en grupp som inte är den valda i appen. Tom lista utan grupp eller vid fel. */
+function useGroupMembers(groupId: string | null): Member[] {
+  const [res, setRes] = useState<{ id: string | null; list: Member[] }>({ id: null, list: [] });
+  useEffect(() => {
+    if (!groupId) return;
+    let alive = true;
+    (async () => {
+      const m = await supabase.from('group_members').select('user_id, role').eq('group_id', groupId);
+      const rows = (m.data ?? []) as { user_id: string; role: Member['role'] }[];
+      const n = rows.length ? await supabase.from('profiles').select('id, display_name').in('id', rows.map((r) => r.user_id)) : { data: [] };
+      const names = (n.data ?? []) as { id: string; display_name: string }[];
+      if (alive) setRes({ id: groupId, list: rows.map((r) => ({ ...r, display_name: names.find((x) => x.id === r.user_id)?.display_name ?? '' })) });
+    })().catch(() => alive && setRes({ id: groupId, list: [] }));
+    return () => {
+      alive = false;
+    };
+  }, [groupId]);
+  return res.id === groupId ? res.list : [];
 }
 
 /** Hämtar resan i adressen. null när den inte finns eller inte syns för användaren (RLS). */

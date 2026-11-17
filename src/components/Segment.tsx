@@ -14,12 +14,15 @@ export function Segment<T extends string>({
   value,
   onChange,
   label,
+  ariaLabel,
 }: {
   options: SegmentOption<T>[];
   value: T;
   onChange: (v: T) => void;
   /** Synlig rubrik ovanför, och namn för skärmläsare. */
   label?: string;
+  /** Namn för skärmläsare när ingen rubrik syns. */
+  ariaLabel?: string;
 }) {
   const id = useId();
   return (
@@ -29,7 +32,7 @@ export function Segment<T extends string>({
           {label}
         </span>
       )}
-      <div className="seg" role="group" aria-labelledby={label ? id : undefined}>
+      <div className="seg" role="group" aria-labelledby={label ? id : undefined} aria-label={label ? undefined : ariaLabel}>
         {options.map((o) => (
           <button
             key={o.value}

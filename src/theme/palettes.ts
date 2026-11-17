@@ -29,6 +29,17 @@ export const STATUS_FIXED = {
   ejMork: '#2A353C',
 } as const;
 
+/**
+ * Besökt i sällskap (Min karta och Vår karta). Bara jag har samma färg som besökt (STATUS_FIXED.besokt).
+ * Ljust tema enligt Hugo. Mörkt tema: samma kulörer, ljusare rosa och lila för mörk bakgrund och en
+ * mer orange ton för bara den andra, så att den skiljer sig från planerad (CIEDE2000 14 mot planerad).
+ * Avstånden kontrolleras i companyColors.test.ts.
+ */
+export const COMPANY_COLORS = {
+  ljus: { tillsammans: '#E0527A', bada: '#7B61C9', baraAnnan: '#E0A030' },
+  mork: { tillsammans: '#EA6F93', bada: '#9A86E0', baraAnnan: '#D98A2B' },
+} as const;
+
 export const RARITY_COLORS = {
   vanlig: '#8A939B',
   ovanlig: '#3FA34D',

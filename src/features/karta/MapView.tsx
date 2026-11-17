@@ -56,6 +56,8 @@ export interface MapViewProps {
   fallback: string;
   /** Opacitet för länder utan färg (lägre i Smart månad). */
   fallbackOpacity: number;
+  /** Länder utanför vald landlista (ISO-koder). Ritas med diagonala streck ovanpå sin vanliga färg. */
+  hatched: string[];
   markers: MapMarker[];
   markerColor: string;
   /** Resa som spelas upp etapp för etapp. */
@@ -95,6 +97,26 @@ function fillOpacity(fallback: number): maplibregl.ExpressionSpecification {
 }
 
 const FILL = 'lander-fill';
+const HATCH = 'lander-streck';
+const HATCH_IMG = 'streck';
+
+/**
+ * Mönstret för länder utanför vald landlista: diagonala streck, 16 × 16 bildpunkter i dubbel upplösning.
+ * Mörka streck i ljust läge och ljusa i mörkt, halvgenomskinliga så att landets färg syns under.
+ */
+function hatchImage(dark: boolean): { width: number; height: number; data: Uint8Array } {
+  const size = 16;
+  const data = new Uint8Array(size * size * 4);
+  const [r, g, b] = dark ? [242, 239, 233] : [27, 27, 31];
+  for (let y = 0; y < size; y++)
+    for (let x = 0; x < size; x++) {
+      // Streck från nedre vänstra till övre högra hörnet, tre bildpunkter breda.
+      if ((x + y) % size < 3) data.set([r, g, b, 150], (y * size + x) * 4);
+    }
+  return { width: size, height: size, data };
+}
+
+const hatchFilter = (list: string[]): maplibregl.FilterSpecification => ['in', ['get', 'iso'], ['literal', list]];
 const LINE = 'lander-line';
 const HILL = 'terrang';
 const DOTS = 'platser-punkt';
@@ -181,6 +203,21 @@ export default function MapView(props: MapViewProps) {
           paint: {
             'fill-color': ['coalesce', ['feature-state', 'color'], latest.current.fallback],
             'fill-opacity': fillOpacity(latest.current.fallbackOpacity),
+          },
+        },
+        firstSymbol,
+      );
+      // Streck ovanpå färgen för länder utanför vald landlista. Klick går till landet under (lagret FILL).
+      if (!m.hasImage(HATCH_IMG)) m.addImage(HATCH_IMG, hatchImage(latest.current.dark), { pixelRatio: 2 });
+      m.addLayer(
+        {
+          id: HATCH,
+          type: 'fill',
+          source: 'lander',
+          filter: hatchFilter(latest.current.hatched),
+          paint: {
+            'fill-pattern': HATCH_IMG,
+            'fill-opacity': ['interpolate', ['linear'], ['zoom'], FADE_FROM, 1, FADE_TO, 0.5],
           },
         },
         firstSymbol,
@@ -480,6 +517,15 @@ export default function MapView(props: MapViewProps) {
     m.setPaintProperty(FILL, 'fill-opacity', fillOpacity(props.fallbackOpacity));
   }, [ready, geoLoaded, fillsKey, props.fallback, props.fallbackOpacity]);
 
+  // Länder utanför vald landlista: streckmönstret och märkningen på punkterna.
+  const hatchKey = props.hatched.join(',');
+  useEffect(() => {
+    const m = map.current;
+    if (m && ready && m.getLayer(HATCH)) m.setFilter(HATCH, hatchFilter(latest.current.hatched));
+    const out = new Set(latest.current.hatched);
+    for (const b of el.current?.querySelectorAll<HTMLElement>('.map-flag') ?? []) b.classList.toggle('utanfor', out.has(b.dataset.iso ?? ''));
+  }, [ready, bounds, hatchKey]);
+
   // Små länder som punkt med flagga, från zoomnivå 4. Ringen har landets färg på kartan.
   const pointKey = props.pointCandidates.map((c) => c.iso).join(',');
   useEffect(() => {
@@ -490,7 +536,7 @@ export default function MapView(props: MapViewProps) {
     const made = list.map((c) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'map-flag';
+      b.className = latest.current.hatched.includes(c.iso) ? 'map-flag utanfor' : 'map-flag';
       b.dataset.iso = c.iso;
       b.setAttribute('aria-label', latest.current.countryLabel(c.iso));
       const img = document.createElement('img');

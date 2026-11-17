@@ -13,6 +13,7 @@ import { countryIdFor, setPlaceStatus, shouldMarkPlanned, useMyPlaces } from '..
 import { addDays, budgetSuggestion, datesForMonth, nights, todayIso } from '../../lib/tripLogic';
 import { createTrip, fetchHome, type Home, type NewLeg } from '../../lib/trips';
 import { useSession } from '../../lib/session';
+import { companyGroups, defaultTripGroup } from '../../lib/togetherLogic';
 import { useT } from '../../lib/useT';
 import { SMART_COLORS } from '../../theme/palettes';
 import { monthNames } from '../karta/months';
@@ -27,8 +28,14 @@ export default function PlanScreen() {
   const nav = useNavigate();
   const { party, toast } = useFeedback();
   const [params] = useSearchParams();
-  const { activeGroup } = useSession();
-  const people = usePeople();
+  const { activeGroup, groups, session } = useSession();
+  // Vem reser? Användarens sologrupp och varje par- eller gruppgrupp. Förvalt: gruppen som är vald i appen.
+  const soloGroup = groups.find((g) => g.kind === 'solo' && g.created_by === session?.user.id) ?? null;
+  const whoOptions = [...(soloGroup ? [soloGroup] : []), ...companyGroups(groups)];
+  const [whoPicked, setWho] = useState<string | null>(null);
+  const tripGroupId = whoPicked && whoOptions.some((g) => g.id === whoPicked) ? whoPicked : defaultTripGroup(activeGroup?.id ?? null, soloGroup?.id ?? null, whoOptions.map((g) => g.id));
+  const tripGroup = groups.find((g) => g.id === tripGroupId) ?? activeGroup;
+  const people = usePeople(tripGroup?.id);
   const mine = useMyPlaces(people.me || null);
   const [places, setPlaces] = useState<Place[]>([]);
   const [home, setHome] = useState<Home | null>(null);
@@ -108,7 +115,7 @@ export default function PlanScreen() {
 
   const save = async (e: FormEvent) => {
     e.preventDefault();
-    if (!activeGroup || !dest || busy) return;
+    if (!tripGroup || !dest || busy) return;
     setBusy(true);
     const to = place?.lat != null && place.lon != null ? { lat: place.lat, lon: place.lon } : countryPoint(dest.slice(0, 2));
     const leg: NewLeg = {
@@ -129,7 +136,7 @@ export default function PlanScreen() {
     try {
       const trip = await createTrip(
         {
-          group_id: activeGroup.id,
+          group_id: tripGroup.id,
           title: title.trim() || destName,
           place_id: dest,
           start_date: start || null,
@@ -157,6 +164,31 @@ export default function PlanScreen() {
       <BackTo to="/resor" />
       <h1>{t('resor.planera')}</h1>
       <form className="col" onSubmit={save}>
+        {/* Vem reser? Styr resans grupp (trips.group_id). Visas när det finns mer än ett val. */}
+        {whoOptions.length > 1 && (
+          <fieldset className="col">
+            <legend className="eb">{t('resa.vem.rubrik')}</legend>
+            {whoOptions.map((g) => (
+              <label key={g.id} className="check">
+                <input
+                  type="radio"
+                  name="vem-reser"
+                  value={g.id}
+                  checked={tripGroupId === g.id}
+                  aria-describedby={g.kind === 'solo' ? 'vem-reser-hjalp' : undefined}
+                  onChange={() => setWho(g.id)}
+                />
+                {g.kind === 'solo' ? t('resa.vem.solo') : t('resa.vem.grupp', { grupp: g.name })}
+              </label>
+            ))}
+            {tripGroup?.kind === 'solo' && (
+              <p className="mu" id="vem-reser-hjalp">
+                {t('resa.vem.hjalp')}
+              </p>
+            )}
+          </fieldset>
+        )}
+
         <h2 className="eb">1. {t('resor.steg.vart')}</h2>
         <DestSelect label={t('resor.steg.vart')} places={places} value={dest} onChange={setDest} />
 
@@ -310,7 +342,7 @@ export default function PlanScreen() {
               {t('falt.titel')}
               <input value={title} maxLength={60} required onChange={(e) => setTitle(e.target.value)} />
             </label>
-            <button type="submit" className="btn acc" disabled={busy || !activeGroup}>
+            <button type="submit" className="btn acc" disabled={busy || !tripGroup}>
               {t('knapp.spara')}
             </button>
           </>

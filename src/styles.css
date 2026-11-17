@@ -1965,3 +1965,39 @@ fieldset.card legend {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
   pointer-events: none;
 }
+
+/* Körning 14: på egen hand eller tillsammans. */
+
+/* Raden Vem var med? under statusvalet. */
+.company {
+  gap: 6px;
+}
+.company .chip {
+  white-space: normal;
+  text-align: left;
+}
+
+/* Knappen för landlistan intill kartans lägesväljare. */
+.list-chip {
+  align-self: flex-start;
+}
+
+/* En prick och en text på samma rad (vem som har varit på platsen, i bottenarket på Vår karta). */
+.row-start {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Små länder utanför vald landlista: streckad ring runt flaggan, som strecken på kartan. */
+.map-flag.utanfor img {
+  outline: 2px dashed var(--tx);
+  outline-offset: 5px;
+}
+
+/* Resans märke Solo och filtret i listan över resor. */
+.trip-filter {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  padding-bottom: 2px;
+}

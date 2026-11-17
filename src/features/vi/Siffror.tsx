@@ -13,6 +13,9 @@ import { badgeStates, tripDays, type BadgeState } from './marken';
 import type { ViData } from './useViData';
 import { continentName, numbers, timeline, type TimelineType } from './viLogic';
 import { LOCALE, numberFormat } from '../../lib/locale';
+import { Segment } from '../../components/Segment';
+import { useSession } from '../../lib/session';
+import { viewStatuses, type ViView } from '../../lib/togetherLogic';
 
 const nf = { format: (n: number) => numberFormat().format(n) };
 
@@ -45,11 +48,25 @@ function useNewBadgeToast(states: BadgeState[] | null, userId: string) {
 
 export function Siffror({ data, userId }: { data: ViData; userId: string }) {
   const t = useT();
+  const { members } = useSession();
   const [stat, setStat] = useState<StatId | null>(null);
   const [badge, setBadge] = useState<BadgeState | null>(null);
   const [allTl, setAllTl] = useState(false);
   const x = data.input;
-  const nums = useMemo(() => numbers(x, data.compendium.length), [x, data.compendium.length]);
+  // Par och grupp: vems siffror (tillsammans, någon av oss, jag, den andra). Gäller länder, kontinenter,
+  // landskap och delstater. Resor, fynd och bucketlistan räknas som förut i alla lägen.
+  const others = useMemo(
+    () => (x.mode === 'solo' ? [] : members.filter((m) => m.user_id !== userId && data.memberIds.includes(m.user_id))),
+    [x.mode, members, userId, data.memberIds],
+  );
+  const views: ViView[] = x.mode !== 'solo' ? ['tillsammans', 'nagon', 'jag', ...others.map((m) => m.user_id)] : [];
+  const [viewPicked, setView] = useState<ViView>('tillsammans');
+  const view: ViView | null = views.length ? (views.includes(viewPicked) ? viewPicked : 'tillsammans') : null;
+  const counted = useMemo(
+    () => (view ? { ...x, statuses: viewStatuses(view, data.statusRows, userId, data.memberIds, data.groupId) } : x),
+    [view, x, data.statusRows, data.memberIds, data.groupId, userId],
+  );
+  const nums = useMemo(() => numbers(counted, data.compendium.length), [counted, data.compendium.length]);
   const states = useMemo(() => badgeStates(badges(), x), [x]);
   useNewBadgeToast(states, userId);
   const findName = useMemo(() => {
@@ -87,7 +104,11 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
     },
     { id: 'bucket', value: nf.format(nums.bucket), label: t('vi.siffror.bucket') },
   ];
-  const empty = !nums.lander.length && !nums.resor.length && !nums.fynd && !nums.bucket && !nums.landskap.length;
+  // Läget Tillsammans är tomt när inget land, landskap eller delstat är besökt tillsammans.
+  const togetherEmpty = view === 'tillsammans' && !nums.lander.length && !nums.landskap.length && !nums.delstater.length;
+  const empty = togetherEmpty || (!nums.lander.length && !nums.resor.length && !nums.fynd && !nums.bucket && !nums.landskap.length);
+  const emptyKey = view === 'tillsammans' ? 'vi.siffror.tom.tillsammans' : 'vi.siffror.tom';
+  const placeStat = stat === 'lander' || stat === 'kontinenter' || stat === 'landskap' || stat === 'delstater';
 
   const detail = (): { title: string; rows: { key: string; title: string; sub?: string; right?: string; to?: string }[] } => {
     switch (stat) {
@@ -143,9 +164,26 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
 
   return (
     <>
+      {view && (
+        <div className="col">
+          <Segment<ViView>
+            ariaLabel={t('vi.vy.aria')}
+            value={view}
+            onChange={setView}
+            options={views.map((v) => ({
+              value: v,
+              label:
+                v === 'tillsammans' || v === 'nagon' || v === 'jag'
+                  ? t(`vi.vy.${v}`)
+                  : t('vi.vy.annan', { namn: others.find((m) => m.user_id === v)?.display_name ?? '' }),
+            }))}
+          />
+          {(view === 'tillsammans' || view === 'nagon') && <p className="mu">{t(`vi.vy.hjalp.${view}`)}</p>}
+        </div>
+      )}
       {empty && (
         <div className="card soft">
-          <p>{t('vi.siffror.tom')}</p>
+          <p>{t(emptyKey)}</p>
         </div>
       )}
       <div className="g2">
@@ -210,7 +248,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
         {stat === 'delstater' && <p className="mu">{t('vi.siffror.av', { antal: nums.delstater.length, totalt: nums.delstaterTotalt })}</p>}
         {stat === 'fynd' && nums.fyndTotalt > 0 && <p className="mu">{t('samling.raknare', { antal: nums.fynd, totalt: nums.fyndTotalt })}</p>}
         {d.rows.length === 0 ? (
-          <p className="mu">{t('vi.siffror.tom')}</p>
+          <p className="mu">{t(placeStat ? emptyKey : 'vi.siffror.tom')}</p>
         ) : (
           d.rows.map((r) => <Row key={r.key} title={r.title} sub={r.sub} to={r.to} right={r.right ? <span className="chip soft">{r.right}</span> : r.to ? undefined : <span />} />)
         )}

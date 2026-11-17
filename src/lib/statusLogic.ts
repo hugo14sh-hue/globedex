@@ -16,6 +16,9 @@ export const STATUS_KEY: Record<PlaceStatus | 'ej', string> = {
   ej: 'karta.status.ej-satt',
 };
 
+/** Statusar som räknas som besökt. Mellanlandat räknas inte. */
+export const VISITED: PlaceStatus[] = ['bor', 'bott', 'besokt'];
+
 export const isStatus = (v: unknown): v is PlaceStatus => STATUSES.includes(v as PlaceStatus);
 
 /** Grupperar platser efter status i listans ordning. Tomma grupper tas bort. */

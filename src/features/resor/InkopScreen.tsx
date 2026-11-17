@@ -22,7 +22,7 @@ export default function InkopScreen() {
 function Inkop({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const t = useT();
   const { toast } = useFeedback();
-  const people = usePeople();
+  const people = usePeople(trip.group_id);
   const [list, setList] = useState<ShopItem[] | null>(null);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');

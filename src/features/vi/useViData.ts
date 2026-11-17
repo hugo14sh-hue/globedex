@@ -9,6 +9,7 @@ import { fetchBucketItems, fetchCollections, type Collection } from '../../lib/l
 import { fetchReviews, type Review } from '../../lib/reviews';
 import { useSession, useTravelMode } from '../../lib/session';
 import { isStatus } from '../../lib/statusLogic';
+import { toRows, type StatusRow } from '../../lib/togetherLogic';
 import { supabase } from '../../lib/supabase';
 import { fetchExpenseRows, fetchLegCounts, fetchPackingStats, fetchTrips, type Trip } from '../../lib/trips';
 import { todayIso } from '../../lib/tripLogic';
@@ -24,6 +25,10 @@ export interface ViData {
   bucket: BucketItem[];
   collections: Collection[];
   reviews: Review[];
+  /** Platsstatus för alla i gruppen (den egna och medlemmarnas som inte är privat), med together_group. */
+  statusRows: StatusRow[];
+  memberIds: string[];
+  groupId: string;
 }
 
 const ok = <T,>(r: PromiseSettledResult<T>, fallback: T): T => (r.status === 'fulfilled' ? r.value : fallback);
@@ -67,7 +72,7 @@ export function useViData() {
     const memberIds = memberKey ? memberKey.split(',') : [me];
     (async () => {
       const today = todayIso();
-      const [placesR, compR, itemsR, statusR, findsR, checksR, tripsR, bucketR, votesR, ideasR, reviewsR, colsR, vaultR] = await Promise.allSettled([
+      const [placesR, compR, itemsR, statusR, findsR, checksR, tripsR, bucketR, votesR, ideasR, reviewsR, colsR, vaultR, groupStatusR] = await Promise.allSettled([
         fetchPlaces(),
         fetchCompendium(),
         fetchAllItems(),
@@ -88,6 +93,10 @@ export function useViData() {
         fetchCollections(me),
         // Bara typ och datum. Innehållet är krypterat och behövs inte här.
         rows<{ kind: string; updated_at: string | null }>(supabase.from('vault_items').select('kind, updated_at').eq('user_id', me)),
+        // Siffrornas lägen (tillsammans, någon av oss, jag, den andra). RLS släpper inte igenom andras privata rader.
+        rows<{ user_id: string; place_id: string; status: string; together_group: string | null; updated_at: string | null }>(
+          supabase.from('place_status').select('user_id, place_id, status, together_group, updated_at').in('user_id', memberIds),
+        ),
       ]);
       const trips = ok(tripsR, [] as Trip[]);
       const ids = trips.map((t) => t.id);
@@ -133,7 +142,7 @@ export function useViData() {
         vault: ok(vaultR, []).filter((v) => v.kind !== CHECK_KIND),
         customPalette,
       };
-      setData({ input, places, compendium, trips, bucket, collections, reviews });
+      setData({ input, places, compendium, trips, bucket, collections, reviews, statusRows: toRows(ok(groupStatusR, [])), memberIds, groupId: gid });
     })();
     return () => {
       alive = false;

@@ -12,7 +12,8 @@ import {
   type ThemeSettings,
   type Tone,
 } from '../config';
-import { PALETTES, STATUS_FIXED, type Palette } from './palettes';
+import { COMPANY_COLORS, PALETTES, STATUS_FIXED, type Palette } from './palettes';
+import type { MapKey } from '../lib/togetherLogic';
 import { contrast, isHex, MIN_CONTRAST, mix, onColor, TEXT_DARK } from './color';
 import { BODY_FONTS, HEADING_FONTS, loadFonts } from './fonts';
 
@@ -69,18 +70,28 @@ export function themeVars(s: ThemeSettings): Record<string, string> {
     '--st-vill': `color-mix(in srgb, ${P.a} 62%, ${base})`,
     '--st-mellan': STATUS_FIXED.mellan,
     '--st-ej': d ? STATUS_FIXED.ejMork : STATUS_FIXED.ejLjus,
+    '--st-tillsammans': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).tillsammans,
+    '--st-bada': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).bada,
+    '--st-bara-jag': STATUS_FIXED.besokt,
+    '--st-bara-annan': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).baraAnnan,
   };
 }
 
 /**
  * Kartans statusfärger som hex (MapLibre förstår inte color-mix).
  * Samma regler som CSS-variablerna --st-*: bor = primär, har bott = primär 55 %, vill åka = accent 62 %.
+ * Också färgerna för besökt i sällskap (tillsammans, båda var för sig, bara jag, bara den andra).
  */
-export function statusColors(s: ThemeSettings): Record<'bor' | 'bott' | 'besokt' | 'planerad' | 'vill' | 'mellan' | 'ej', string> {
+export function statusColors(s: ThemeSettings): Record<MapKey | 'ej', string> {
   const P = resolvePalette(s);
   const p = s.dark ? P.pd : P.p;
   const base = s.dark ? P.sd : '#FFFFFF';
+  const c = s.dark ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus;
   return {
+    tillsammans: c.tillsammans,
+    bada: c.bada,
+    'bara-jag': STATUS_FIXED.besokt,
+    'bara-annan': c.baraAnnan,
     bor: p,
     bott: mix(base, p, 0.55),
     besokt: STATUS_FIXED.besokt,

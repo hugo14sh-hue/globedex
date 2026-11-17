@@ -28,7 +28,7 @@ export default function KassaScreen() {
 function Kassa({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const t = useT();
   const { toast } = useFeedback();
-  const people = usePeople();
+  const people = usePeople(trip.group_id);
   const [view, setView] = useUrlState<View>('vy', 'skulder', ['skulder', 'budget']);
   const [list, setList] = useState<Expense[] | null>(null);
   const [adding, setAdding] = useState(false);
@@ -223,7 +223,7 @@ function Kassa({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
 function AddExpense({ open, trip, onClose, onSaved }: { open: boolean; trip: Trip; onClose: () => void; onSaved: () => void }) {
   const t = useT();
   const { toast } = useFeedback();
-  const people = usePeople();
+  const people = usePeople(trip.group_id);
   const today = todayIso();
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
