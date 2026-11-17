@@ -29,7 +29,7 @@ export interface DiscoverEntry {
   tags: string[];
   /** Smultronställe. */
   gem: boolean;
-  /** En mening om platsen. Saknas för befintliga städer (se slutrapporten för Körning 15). */
+  /** En mening om platsen. Befintliga städer får den från existing i _upptack.json (Körning 16), och kan sakna den. */
   why: string | null;
   light: boolean;
   alternatives: Alternative[];
@@ -75,7 +75,7 @@ export function toEntry(p: Place): DiscoverEntry | null {
     climate: typeof d.climate === 'string' ? d.climate : null,
     tags: strings(d.tags),
     gem: d.gem === true,
-    why: light && typeof d.why === 'string' ? d.why : null,
+    why: typeof d.why === 'string' && d.why.trim() ? d.why : null,
     light,
     alternatives: alternativesOf(p),
   };

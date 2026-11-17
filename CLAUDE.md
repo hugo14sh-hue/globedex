@@ -68,11 +68,13 @@ CSS-variabler: --p primär, --a accent, --bg, --sf yta, --tx text, --mu dämpad 
 solo, par eller grupp (profiles.travel_mode, groups.kind). Sista fliken heter Jag, Vi eller Gruppen. Solo: ingen skulddel i resekassan, swipe heter Sortera och lägger ja direkt på listan. Par och grupp: utgifter delas lika på medlemmarna om inget annat anges, matchning när alla sagt ja.
 
 ## Flikar i fas 1 (detaljer i prototypen)
-1. Karta: geografisk karta, lägena Ren, Upptäck, Terräng 3D och Smart månad, växling Europa och världen, statusfärger, resa som spelas upp etapp för etapp, listan Era platser. Landssida med vyerna Översikt, Lista, Guide, Månad, Boka samt Köp med hem.
-2. Idag: välj plats (hemma, sparad, egen, position) och Idag eller I helgen. Vyerna Slumpa och Nära (1 h, 3 h, en dag, helg med bil). Utflykt kan göras om till resa.
-3. Listor: Samlingsbok (Kort, Kompendium, Samlingar), Bucketlist, Swipe (Kortbunt, Lista).
-4. Resor: Planera nästa resa (vart, hur länge, när, datum och flyg, boende, budget), nedräkning, resplan med etapper, Resekassa (Skulder, Budget), Packlista, Innan avresa (redigerbar), bokningar, inköpslista, tidigare resor, import.
-5. Vi: Siffror och Wrapped, märken, tidslinje, Valvet (med hälsa och födelsedatum som styr packlista och Regler för dig), Vår guide, Anpassning, Exportera till Claude (visa texten före kopiering).
+Sex flikar: Karta, Upptäck, Idag, Listor, Resor och den sista fliken (Jag, Vi eller Gruppen). På mobil ligger flikraden längst ned, från 900 px som en smal meny till vänster.
+1. Karta: geografisk karta, lägena Ren, Upptäck, Terräng 3D, Smart månad och Regioner, fokus i en rullgardin (hela världen, en världsdel eller ett land, med sökning), helskärm, Min karta och Vår karta, statusfärger, resa som spelas upp etapp för etapp, listan Platser grupperad per världsdel med städer under sitt land och val av vilka statusar som visas. Landssida med vyerna Översikt, Lista, Guide, Månad, Boka samt Köp med hem.
+2. Upptäck: platser att åka till, filtrerade på prisnivå, månad, klimat, typ av resa, världsdel och land, med sortering. Varje kort visar prisnivå, en mening om platsen, bästa månader och taggar, kan sparas som Vill åka och kan visa billigare alternativ.
+3. Idag: välj plats (hemma, sparad, egen, position) och Idag eller I helgen. Vyerna Slumpa och Nära (1 h, 3 h, en dag, helg med bil). Utflykt kan göras om till resa.
+4. Listor: Samlingsbok (Kort, Kompendium, Samlingar), Bucketlist, Swipe (Kortbunt, Lista).
+5. Resor: Planera nästa resa (vart, hur länge, när, datum och flyg, boende, budget), nedräkning, resplan med etapper, Resekassa (Skulder, Budget), Packlista, Innan avresa (redigerbar), bokningar, inköpslista, tidigare resor, import.
+6. Jag, Vi eller Gruppen: Siffror och Wrapped, märken, tidslinje, Valvet (med hälsa och födelsedatum som styr packlista och Regler för dig), Vår guide, Anpassning (tema, språk, landlista, kartans färger och kartans utseende), Exportera till Claude (visa texten före kopiering).
 Princip: varje flik visar en översikt, och varje rad, ruta och siffra öppnar en detaljvy i ett bottenark eller en undersida.
 
 ## Länkar ut (ingen API i fas 1)

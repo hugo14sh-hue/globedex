@@ -6,7 +6,7 @@
 const FILE = '_upptack.json';
 const TOP = ['_om', 'tags', 'climates', 'pli_year', 'pli_restaurants_hotels', 'existing', 'places', 'alternatives'];
 const PLACE_FIELDS = ['id', 'name', 'country', 'lat', 'lon', 'level', 'level_rule', 'level_note', 'climate', 'best_months', 'tags', 'gem', 'why', 'citybreak_gbp'];
-const EXISTING_FIELDS = ['climate', 'tags'];
+const EXISTING_FIELDS = ['climate', 'tags', 'why'];
 const ALT_FIELDS = ['for', 'place', 'why', 'cheaper'];
 /** Fälten som lätta platser får i data (utöver light). Allt annat på platsen är kolumner i places. */
 const LIGHT_DATA = ['level', 'level_rule', 'level_note', 'climate', 'best_months', 'tags', 'gem', 'why', 'citybreak_gbp'];
@@ -106,7 +106,7 @@ export function validateDiscover(json, appCountries, contentPlaces) {
   }
 
   // Befintliga städer: klimat och taggar.
-  if (!isObj(json.existing)) err('-', 'existing', 'objekt med platsens id och { climate, tags }');
+  if (!isObj(json.existing)) err('-', 'existing', 'objekt med platsens id och { climate, tags, why }');
   else
     for (const [id, e] of Object.entries(json.existing)) {
       const p = content.get(id);
@@ -114,12 +114,14 @@ export function validateDiscover(json, appCountries, contentPlaces) {
       else if (p.kind !== 'city') err(id, 'existing', 'ska vara en stad (kind city)');
       if (seen.has(id)) err(id, 'existing', 'finns också i places');
       if (!isObj(e)) {
-        err(id, 'existing', 'ska vara { climate, tags }');
+        err(id, 'existing', 'ska vara { climate, tags, why }');
         continue;
       }
       for (const k of Object.keys(e)) if (!EXISTING_FIELDS.includes(k)) err(id, k, 'okänt fält');
       checkClimate(id, e.climate);
       checkTags(id, e.tags);
+      // why får saknas här, men finns det gäller samma regel som för places: en mening.
+      if (e.why !== undefined && !isStr(e.why)) err(id, 'why', 'en mening krävs');
       if (p) levels.set(id, contentLevel(p));
     }
 
@@ -205,7 +207,7 @@ export function discoverRows(json, contentPlaces, countryName, countryCoords) {
     });
 
   const patches = new Map();
-  for (const [id, e] of Object.entries(json.existing ?? {})) patches.set(id, { climate: e.climate, tags: e.tags });
+  for (const [id, e] of Object.entries(json.existing ?? {})) patches.set(id, { climate: e.climate, tags: e.tags, ...(e.why !== undefined ? { why: e.why } : {}) });
   for (const [id, list] of alts) if (content.has(id)) patches.set(id, { ...(patches.get(id) ?? {}), alternatives: list });
 
   return { countries, cities, patches };

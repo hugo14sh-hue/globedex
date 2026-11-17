@@ -6,6 +6,7 @@ import {
   applyFilter,
   bestMonths,
   discoverEntries,
+  toEntry,
   filterCount,
   filterOptions,
   fromParams,
@@ -67,6 +68,11 @@ describe('Upptäck: platserna', () => {
     expect(bestMonths([2, 2, 3, 4, 3, 3, 3, 3, 5, 4, 2, 2])).toEqual([4, 9, 10]);
     expect(bestMonths(null)).toEqual([]);
     expect(ENTRIES.find((e) => e.id === 'MC-d')).toMatchObject({ level: 5, months: [4, 9, 10], climate: 'medelhav', why: null, light: false });
+  });
+
+  it('befintliga städer visar why när den finns (existing i _upptack.json)', () => {
+    const p = { ...PLACES[3], data: { ...PLACES[3].data, why: 'En mening.' } };
+    expect(toEntry(p)?.why).toBe('En mening.');
   });
 
   it('lätta platser tar nivå och månader ur data', () => {

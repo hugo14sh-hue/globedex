@@ -27,6 +27,15 @@ export type TravelMode = 'solo' | 'par' | 'grupp';
 /** Vilka länder som räknas i statistik, mål och märken (content/_landlistor.json). Se src/lib/landlistor.ts. */
 export type CountryList = 'fn' | 'fn-plus' | 'fn-tw-xk' | 'alla';
 export const COUNTRY_LISTS: CountryList[] = ['fn', 'fn-plus', 'fn-tw-xk', 'alla'];
+/** Kartans egen stil (hav, land utan status, gränser och etiketter), oberoende av appens tema. */
+export type MapStyle = 'auto' | 'ljus' | 'mork';
+export const MAP_STYLES: MapStyle[] = ['auto', 'ljus', 'mork'];
+/** Statusar som kan få en egen färg under Anpassning (src/lib/mapColors.ts). Bara jag följer besökt. */
+export type ColorKey = 'bor' | 'bott' | 'besokt' | 'tillsammans' | 'bada' | 'bara-annan' | 'planerad' | 'vill' | 'mellan';
+export const COLOR_KEYS: ColorKey[] = ['bor', 'bott', 'besokt', 'tillsammans', 'bada', 'bara-annan', 'planerad', 'vill', 'mellan'];
+/** Färgnycklar på kartan som kan släckas i listan (statusarna och besökt i sällskap). */
+export type HideKey = ColorKey | 'bara-jag';
+export const HIDE_KEYS: HideKey[] = [...COLOR_KEYS, 'bara-jag'];
 
 export interface ThemeSettings {
   palette: PaletteId;
@@ -41,6 +50,14 @@ export interface ThemeSettings {
   lang: Lang | null;
   /** Vilka länder som räknas. Sparas lokalt och i profilen som språkvalet. */
   countryList: CountryList;
+  /** Egna statusfärger (hex). En status utan eget val följer paletten. */
+  mapColors: Partial<Record<ColorKey, string>>;
+  /** Kartans stil: följ appens tema, alltid ljus eller alltid mörk. */
+  mapStyle: MapStyle;
+  /** Statusar som är släckta i kartans lista (och tonas ner på kartan). */
+  mapHidden: HideKey[];
+  /** Kartans fokus: varlden, en världsdel (M49-kod) eller ett land (ISO-kod). Se src/lib/mapFocus.ts. */
+  mapFocus: string;
 }
 
 /** Startläge: Djuphav, Fraunces + DM Sans, ljust, 16 px rundning. */
@@ -55,6 +72,10 @@ export const DEFAULT_THEME: ThemeSettings = {
   tone: 'neutral',
   lang: null,
   countryList: 'alla',
+  mapColors: {},
+  mapStyle: 'auto',
+  mapHidden: [],
+  mapFocus: '150',
 };
 
 export const DEFAULT_THEME_COLOR = '#0F4C5C';
@@ -69,7 +90,7 @@ export const INVITE_DAYS = 7;
 /** Avreseorter för flygsökningen (IATA). */
 export const HOME_AIRPORTS = ['GOT', 'CPH'] as const;
 
-/** Kartans vyer: Europa och världen som [väst, syd, öst, nord]. */
+/** Kartans utsnitt för Europa och hela världen som [väst, syd, öst, nord]. Övriga världsdelar i src/lib/mapFocus.ts. */
 export const MAP_BOUNDS = {
   europa: [-12, 34, 35, 71] as [number, number, number, number],
   varlden: [-170, -58, 190, 80] as [number, number, number, number],

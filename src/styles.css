@@ -210,13 +210,13 @@ p {
 
 .g2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
 }
 
 .g3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -638,7 +638,7 @@ label,
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  z-index: 5;
+  z-index: 6; /* Över helskärmskartan (z-index 5). */
 }
 
 .sheet-in {
@@ -1185,7 +1185,7 @@ h4.eb {
 
 .bok {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   list-style: none;
   margin: 0;
@@ -1468,6 +1468,8 @@ button.hero.idea {
 }
 
 .card.mark {
+  min-width: 0;
+  overflow-wrap: anywhere;
   align-items: center;
   text-align: center;
   gap: 6px;
@@ -2174,4 +2176,486 @@ fieldset.card legend {
 
 .light-src p {
   margin: 0;
+}
+
+/* ---------- Kartan, Körning 16: fokus, helskärm, panel och listan Platser ---------- */
+/* Kartytan klipper själv (maplibre), så att rullgardinen för fokus kan hänga ut under kartan. */
+.k-map {
+  overflow: visible;
+}
+
+.k-map .map-canvas,
+.k-map .map-wait {
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.k-top {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.k-top > * {
+  pointer-events: auto;
+}
+
+.k-tr {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+
+.k-top .chip,
+.k-bar .chip {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.chip.k-icon {
+  width: 44px;
+  padding: 0;
+}
+
+.focus-sel {
+  position: relative;
+  min-width: 0;
+}
+
+.focus-btn {
+  max-width: min(62vw, 320px);
+}
+
+.focus-val {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.focus-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(62dvh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 5;
+  padding: 10px;
+  gap: 6px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.focus-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.focus-opt {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px;
+  border-radius: max(4px, calc(var(--r) - 6px));
+}
+
+.focus-opt:hover {
+  background: var(--tr);
+}
+
+.focus-opt[aria-current='true'] {
+  background: var(--soft);
+  font-weight: 700;
+}
+
+.focus-panel .eb {
+  margin-top: 6px;
+}
+
+/* Lägen, Min karta och Vår karta och landlistan ovanpå kartan (helskärm och bred skärm). */
+.k-bar {
+  position: absolute;
+  top: 64px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.k-bar > * {
+  pointer-events: auto;
+  max-width: 100%;
+}
+
+.k-bar .chips {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+}
+
+/* Listan Platser */
+.pl-show .chip[aria-pressed='false'] {
+  color: var(--mu);
+  text-decoration: line-through;
+}
+
+.pl-show .chip[aria-pressed='false'] .dot {
+  opacity: 0.35;
+}
+
+.pl-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pl-cont-h {
+  font: inherit;
+  margin: 0;
+}
+
+.pl-cont-btn {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 1.05rem/1.2 var(--fh);
+}
+
+.pl-cont-btn > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.pl-cont-btn .mu {
+  font: 600 0.867rem var(--fb);
+}
+
+.pl-cont-btn svg,
+.pl-fold svg {
+  transition: transform 0.2s;
+}
+
+.pl-cont-btn[aria-expanded='false'] svg {
+  transform: rotate(-90deg);
+}
+
+.pl-fold[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.pl-list,
+.pl-cities {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pl-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pl-row > .li {
+  flex: 1;
+  min-width: 0;
+}
+
+.pl-fold {
+  flex: none;
+}
+
+.pl-cities {
+  margin: 6px 0 0 18px;
+  padding-left: 12px;
+  border-left: 2px solid var(--ln);
+}
+
+/* Kartans färger under Anpassning */
+.color-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.color-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  border-radius: var(--r);
+  padding: 8px 10px;
+}
+
+.color-row .t {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.color-in {
+  width: 52px;
+  flex: none;
+}
+
+.field-warn {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #8a5300;
+}
+
+[data-theme='dark'] .field-warn {
+  color: #ffc46b;
+}
+
+/* Helskärm: en vy i appen över flikraden och sidhuvudet (inte Fullscreen API), med safe-area. */
+body.fs-locked {
+  overflow: hidden;
+}
+
+main.karta.fs {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: block;
+  background: var(--bg);
+}
+
+.karta.fs .k-map {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+.karta.fs .k-top {
+  top: calc(10px + env(safe-area-inset-top));
+  left: calc(10px + env(safe-area-inset-left));
+  right: calc(10px + env(safe-area-inset-right));
+}
+
+.karta.fs .k-bar {
+  top: calc(64px + env(safe-area-inset-top));
+  left: calc(10px + env(safe-area-inset-left));
+  right: calc(10px + env(safe-area-inset-right));
+}
+
+/* Mobil helskärm: panelen är ett ark från nederkanten. Stängt syns bara handtaget och rubriken. */
+.k-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  max-height: 75dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.2);
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  transition: transform 0.25s ease;
+}
+
+.k-sheet-h {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  touch-action: none;
+  flex: none;
+}
+
+.k-sheet .k-side-in {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 16px 20px;
+  gap: 14px;
+}
+
+.karta.fs:not(.wide) .maplibregl-ctrl-bottom-right,
+.karta.fs:not(.wide) .maplibregl-ctrl-bottom-left {
+  bottom: calc(64px + env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-sheet,
+  .pl-cont-btn svg,
+  .pl-fold svg {
+    transition: none;
+  }
+}
+
+/* ---------- Större skärmar (från 900 px) ---------- */
+.nav-brand {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --nav-w: 104px;
+  }
+
+  .app {
+    max-width: none;
+    padding-left: var(--nav-w);
+  }
+
+  /* Flikraden blir en smal meny till vänster med ikon och text. */
+  .nav {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: none;
+    width: var(--nav-w);
+    max-width: none;
+    min-height: 0;
+    padding: calc(16px + env(safe-area-inset-top)) 8px 16px calc(8px + env(safe-area-inset-left));
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 4px;
+    border-top: 0;
+    border-right: 1px solid var(--ln);
+    overflow-y: auto;
+  }
+
+  .nav-brand {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0 14px;
+  }
+
+  .nav a {
+    flex: none;
+    min-height: 64px;
+    border-radius: var(--r);
+    padding: 6px 4px;
+  }
+
+  .nav a[aria-current='page'] {
+    background: var(--soft);
+  }
+
+  /* Innehållet får en största bredd och centreras. */
+  .scr {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+
+  /* Sidhuvudet på Karta: märket står överst i menyn i stället. */
+  .topbar {
+    display: none;
+  }
+
+  /* Ark: en centrerad dialog i stället för ett ark nedifrån. */
+  .sheet {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .sheet-in {
+    max-height: min(85dvh, 760px);
+    border-radius: calc(var(--r) + 10px);
+    padding: 18px 20px 24px;
+  }
+
+  .sheet-in .grab {
+    display: none;
+  }
+
+  /* Kartfliken: kartan i hela höjden till höger om menyn, förklaringen och listan i en kolumn till höger. */
+  main.karta.wide {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 0;
+  }
+
+  main.karta.wide.side-shut {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main.karta.wide.side-shut .k-side {
+    display: none;
+  }
+
+  .karta.wide .k-map {
+    position: relative;
+    inset: auto;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .karta.wide .k-side {
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-left: 1px solid var(--ln);
+    background: var(--bg);
+  }
+
+  .karta.wide .k-side-in {
+    padding: calc(20px + env(safe-area-inset-top)) 18px 32px;
+    gap: 14px;
+  }
+
+  .karta.wide .k-top {
+    top: calc(14px + env(safe-area-inset-top));
+    left: 14px;
+    right: 14px;
+  }
+
+  .karta.wide .k-bar {
+    top: calc(68px + env(safe-area-inset-top));
+    left: 14px;
+    right: 14px;
+  }
+
+  .karta.wide .k-bar .chips {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+
+/* Statusens prick på en tänd knapp: en ring i ytans färg, så att den syns också när den har primärfärgen. */
+.pl-show .dot {
+  box-shadow: 0 0 0 2px var(--sf);
 }

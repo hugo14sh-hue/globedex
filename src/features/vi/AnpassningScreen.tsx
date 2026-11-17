@@ -23,6 +23,8 @@ import { BODY_FONTS, HEADING_FONTS } from '../../theme/fonts';
 import { PALETTES } from '../../theme/palettes';
 import { hasLowContrast, resolvePalette } from '../../theme/theme';
 import { useTheme } from '../../theme/ThemeProvider';
+import { MapStyleChoice } from '../karta/MapStyleChoice';
+import { MapColors } from './MapColors';
 
 export default function AnpassningScreen() {
   const t = useT();
@@ -189,8 +191,19 @@ export default function AnpassningScreen() {
       {/* Vilka länder som räknas i statistik, mål och märken. Sparas lokalt och i profilen som språkvalet. */}
       <CountryListPicker />
 
-      {/* Återställ gäller utseendet. Språkvalet och landlistan ligger kvar. */}
-      <button type="button" className="btn ghost" onClick={() => setTheme({ ...DEFAULT_THEME, lang: theme.lang, countryList: theme.countryList })}>
+      {/* Kartans färger och utseende (Körning 16). Sparas i profilen med temat. */}
+      <MapColors />
+      <MapStyleChoice />
+
+      {/* Återställ gäller utseendet, också kartans färger och stil. Språkvalet, landlistan, kartans fokus och
+          släckta statusar ligger kvar. */}
+      <button
+        type="button"
+        className="btn ghost"
+        onClick={() =>
+          setTheme({ ...DEFAULT_THEME, lang: theme.lang, countryList: theme.countryList, mapFocus: theme.mapFocus, mapHidden: theme.mapHidden })
+        }
+      >
         {t('anpassa.aterstall')}
       </button>
     </main>

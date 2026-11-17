@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import maplibregl, { type GeoJSONSource, type MapGeoJSONFeature } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { MAP_BOUNDS } from '../../config';
+import { focusBounds, focusPadding } from '../../lib/mapFocus';
 import { countryBounds, pointCountries, POINT_MIN_ZOOM, type CountryPoint } from '../../lib/mapPoints';
 import { REGION_MIN_ZOOM, regionGeoIndex, regionsInView, type MapRegion, type RegionGeoIndex } from '../../lib/mapRegions';
 
@@ -22,7 +22,6 @@ const ATTRIBUTION = [
 
 export type MapMode = 'ren' | 'upptack' | 'terrang' | 'smart' | 'regioner';
 export type { MapRegion };
-export type MapExtent = 'europa' | 'varlden';
 
 export interface MapMarker {
   id: string;
@@ -48,9 +47,11 @@ export interface MapRoute {
 }
 
 export interface MapViewProps {
+  /** Kartans stil: mörk eller ljus (kartstil.*, oberoende av appens tema). */
   dark: boolean;
   mode: MapMode;
-  extent: MapExtent;
+  /** Kartans fokus: varlden, en världsdel (M49) eller ett land (ISO), se src/lib/mapFocus.ts. */
+  focus: string;
   /** Färg per land (ISO-kod). Länder utan färg får fallback. */
   fills: Record<string, string>;
   fallback: string;
@@ -149,8 +150,8 @@ export default function MapView(props: MapViewProps) {
     const m = new maplibregl.Map({
       container: el.current,
       style: p.dark ? STYLE.dark : STYLE.light,
-      bounds: MAP_BOUNDS[p.extent],
-      fitBoundsOptions: { padding: 8 },
+      bounds: focusBounds(p.focus),
+      fitBoundsOptions: { padding: focusPadding(p.focus) },
       renderWorldCopies: false,
       attributionControl: false,
       locale: { 'AttributionControl.ToggleAttribution': p.attribLabel },
@@ -173,6 +174,9 @@ export default function MapView(props: MapViewProps) {
     };
     for (const ev of ['movestart', 'click'] as const) m.on(ev, onUser);
     let failed = false;
+    // Kartytan ändrar storlek utan att fönstret gör det (helskärm, panelen som fälls in): rita om.
+    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => m.resize()) : null;
+    ro?.observe(el.current);
 
     m.on('error', (e) => {
       // Enstaka plattor kan saknas (till exempel höjddata över hav). Bara stilen är kritisk.
@@ -374,6 +378,7 @@ export default function MapView(props: MapViewProps) {
 
     return () => {
       window.clearTimeout(timer);
+      ro?.disconnect();
       map.current = null;
       m.remove();
     };
@@ -638,13 +643,17 @@ export default function MapView(props: MapViewProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, routeBounds]);
 
-  // Europa eller världen.
+  // Fokus: världen, en världsdel eller ett land fyller kartytan. Mjuk rörelse, ingen vid reducerad rörelse.
   useEffect(() => {
     const m = map.current;
     if (!m || !ready || !m.getLayer(FILL)) return;
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    m.fitBounds(MAP_BOUNDS[props.extent], { padding: 8, duration: reduce ? 0 : 700, pitch: props.mode === 'terrang' ? 50 : 0 });
-  }, [ready, props.extent]);
+    m.fitBounds(focusBounds(props.focus), {
+      padding: focusPadding(props.focus),
+      duration: reduce ? 0 : 900,
+      pitch: latest.current.mode === 'terrang' ? 50 : 0,
+    });
+  }, [ready, props.focus]);
 
   return <div ref={el} className="map-canvas" role="region" aria-label={props.label} />;
 }

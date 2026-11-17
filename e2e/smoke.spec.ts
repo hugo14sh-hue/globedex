@@ -639,7 +639,7 @@ test('röktest', async ({ page }) => {
 
   await test.step('Regioner: en delstat i USA går att trycka på i kartan och får status Besökt', async () => {
     if (!hasStates) await injectStates(page);
-    await page.goto('/karta?lage=regioner&utsnitt=varlden');
+    await page.goto('/karta?lage=regioner&fokus=varlden');
     const canvas = page.locator('.map canvas');
     await expect(canvas).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText(tx('karta.regioner.tom'))).toBeVisible({ timeout: 20_000 });
@@ -861,6 +861,122 @@ test('röktest', async ({ page }) => {
     await alla.check();
     await saved;
     await expect(alla).toBeChecked();
+  });
+
+  await test.step('kartan: fokus Asien, helskärm med Escape, egen färg på vill åka och släckt besökt (Körning 16)', async () => {
+    const patched = () => page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
+    await page.goto('/karta');
+    await expect(page.locator('.map canvas')).toBeVisible({ timeout: 30_000 });
+
+    // Fokus: Asien i rullgardinen. Valet står i adressen och sparas i profilen.
+    const focusBtn = page.getByRole('button', { name: new RegExp(`^${esc(tx('karta.fokus.aria'))}`) });
+    await expect(focusBtn).toHaveAccessibleName(`${tx('karta.fokus.aria')} ${tx('kontinent.150')}`);
+    await focusBtn.click();
+    await expect(page.getByRole('heading', { name: tx('karta.fokus.rubrik.varldsdelar') })).toBeVisible();
+    await expect(page.getByLabel(tx('karta.fokus.sok'))).toBeVisible();
+    let saved = patched();
+    await page.getByRole('button', { name: tx('kontinent.142'), exact: true }).click();
+    await saved;
+    await expect(page).toHaveURL(/fokus=142/);
+    await expect(focusBtn).toHaveAccessibleName(`${tx('karta.fokus.aria')} ${tx('kontinent.142')}`);
+    await expect(focusBtn).toBeFocused();
+
+    // Helskärm: täcker flikraden, står i adressen och stängs med Escape. Fokus tillbaka till knappen.
+    const open = page.getByRole('button', { name: tx('karta.helskarm.oppna'), exact: true });
+    await open.click();
+    await expect(page).toHaveURL(/helskarm=1/);
+    const close = page.getByRole('button', { name: tx('karta.helskarm.stang'), exact: true });
+    await expect(close).toBeVisible();
+    await expect(page.locator('main.karta.fs')).toBeVisible();
+    await expect(page.locator('nav.nav')).toHaveJSProperty('inert', true);
+    await expect(page.getByRole('button', { name: tx('karta.helskarm.panel'), exact: true })).toHaveAttribute('aria-expanded', 'false');
+    await page.keyboard.press('Escape');
+    await expect(page).not.toHaveURL(/helskarm/);
+    await expect(page.locator('main.karta.fs')).toHaveCount(0);
+    await expect(open).toBeFocused();
+    await expect(page.locator('nav.nav')).toHaveJSProperty('inert', false);
+
+    // Egen färg på vill åka: syns i förklaringen. Sedan återställs den.
+    await page.goto('/vi/anpassning');
+    await expect(page.getByRole('heading', { name: tx('farger.rubrik') })).toBeVisible();
+    const vill = page.getByLabel(tx('farger.valj').replace('{status}', tx('karta.status.vill-aka')), { exact: true });
+    saved = patched();
+    await vill.fill('#123abc');
+    await saved;
+    await expect(page.getByText(tx('farger.sparat'))).toBeVisible();
+    const swatch = () => page.locator('.legend .lg span', { hasText: new RegExp(`^${esc(tx('karta.status.vill-aka'))}$`) }).locator('i');
+    await page.goto('/karta');
+    await expect(swatch()).toHaveCSS('background-color', 'rgb(18, 58, 188)');
+    await page.goto('/vi/anpassning');
+    saved = patched();
+    await page.getByRole('button', { name: tx('farger.aterstall'), exact: true }).click();
+    await saved;
+    await expect(page.getByRole('button', { name: tx('farger.aterstall'), exact: true })).toBeDisabled();
+    await page.goto('/karta');
+    await expect(swatch()).toBeVisible();
+    await expect(swatch()).not.toHaveCSS('background-color', 'rgb(18, 58, 188)');
+
+    // Släck besökt: knappen blir släckt och ingen rad i listan har statusen besökt.
+    const show = page.getByRole('group', { name: tx('karta.lista.visa.aria') });
+    const besoktName = new RegExp(`^(${esc(tx('karta.status.besokt'))}|${esc(tx('karta.forklaring.sjalv'))})$`);
+    const btn = show.getByRole('button', { name: besoktName });
+    await expect(btn).toHaveAttribute('aria-pressed', 'true');
+    const label = (await btn.textContent())!.trim();
+    const list = page.locator('section.pl');
+    const unfold = async () => {
+      const closed = list.locator('button.pl-fold[aria-expanded=false]');
+      for (let i = 0; i < 50 && (await closed.count()); i++) await closed.first().click();
+    };
+    await expect(list.locator('.pl-cont').first()).toBeVisible({ timeout: 20_000 });
+    await unfold();
+    // Röktestet har satt Besökt på en delstat i USA tidigare, så minst en rad har statusen.
+    await expect(list.locator('.li .mu', { hasText: new RegExp(`^${esc(label)}$`) }).first()).toBeVisible();
+    saved = patched();
+    await btn.click();
+    await saved;
+    await expect(btn).toHaveAttribute('aria-pressed', 'false');
+    await unfold();
+    await expect(list.locator('.li .mu', { hasText: new RegExp(`^${esc(label)}$`) })).toHaveCount(0);
+    // Tänd igen, och tillbaka till Europa (afterAll lägger också tillbaka inställningarna).
+    saved = patched();
+    await btn.click();
+    await saved;
+    await expect(btn).toHaveAttribute('aria-pressed', 'true');
+    await focusBtn.click();
+    saved = patched();
+    await page.getByRole('button', { name: tx('kontinent.150'), exact: true }).click();
+    await saved;
+  });
+
+  await test.step('större skärmar: menyn står till vänster från 900 px och ingen sida rullar i sidled', async () => {
+    const paths = ['/karta', '/upptack', '/idag', '/listor', '/resor', '/vi', '/vi/anpassning', '/karta/SE'];
+    try {
+      for (const width of [390, 768, 1024, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        for (const path of paths) {
+          await page.goto(path);
+          await expect(page.locator('nav.nav')).toBeVisible({ timeout: 20_000 });
+          await page.waitForTimeout(600);
+          const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+          expect(over, `${path} rullar i sidled vid ${width} px`).toBeLessThanOrEqual(0);
+          if (width === 1440) {
+            const nav = (await page.locator('nav.nav').boundingBox())!;
+            expect(nav.x, `menyn vid ${path}`).toBe(0);
+            expect(nav.width).toBeLessThan(160);
+            expect(nav.height).toBeGreaterThan(800);
+          }
+        }
+      }
+      // Kartan fyller höjden till höger om menyn, och kolumnen till höger har listan.
+      await page.goto('/karta');
+      const map = (await page.locator('.k-map').boundingBox())!;
+      const nav = (await page.locator('nav.nav').boundingBox())!;
+      expect(map.x).toBeGreaterThanOrEqual(nav.width - 1);
+      expect(map.height).toBeGreaterThan(880);
+      await expect(page.locator('aside.k-side section.pl')).toBeVisible();
+    } finally {
+      await page.setViewportSize({ width: 390, height: 844 });
+    }
   });
 
   await test.step('engelska: flikarna och inloggningssidan byter språk, och sedan tillbaka till svenska', async () => {

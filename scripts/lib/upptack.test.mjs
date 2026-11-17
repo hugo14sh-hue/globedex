@@ -77,6 +77,11 @@ describe('validering av _upptack.json', () => {
     expect(errs(file({ places: [place({ best_months: [1, 12] })] }))).toEqual([]);
   });
 
+  it('befintliga platser får why, med samma regel som places (en mening)', () => {
+    expect(errs(file({ existing: { 'XX-dyr': { climate: 'kust', tags: ['strand'], why: 'En mening.' } } }))).toEqual([]);
+    for (const why of ['', '  ', 3, null]) expect(errs(file({ existing: { 'XX-dyr': { climate: 'kust', tags: ['strand'], why } } }))).toContain('XX-dyr/why');
+  });
+
   it('befintliga platser ska finnas i landsfilerna', () => {
     expect(errs(file({ existing: { 'XX-saknas': { climate: 'kust', tags: ['mat'] } } }))).toContain('XX-saknas/existing');
   });
@@ -144,5 +149,10 @@ describe('raderna som importen skriver', () => {
       alternatives: [{ place: 'YY-a', why: 'w', cheaper: true }],
     });
     expect(out[1].data).toEqual({});
+  });
+
+  it('why på en befintlig plats hamnar i data.why', () => {
+    const r = discoverRows(file({ existing: { 'XX-dyr': { climate: 'kust', tags: ['strand'], why: 'En mening.' } } }), CONTENT, (iso) => iso, () => [0, 0]);
+    expect(applyPatches([{ id: 'XX-dyr', data: {} }], r.patches)[0].data.why).toBe('En mening.');
   });
 });

@@ -93,7 +93,8 @@
     "glamour",
     "kust",
     "bilsport"
-   ]
+   ],
+   "why": "Furstendöme på två kvadratkilometer, med kasino, lyxbåtar och Formel 1 på gatorna."
   },
   "DK-kopenhamn": {
    "climate": "kust",
@@ -101,7 +102,8 @@
     "storstad",
     "mat",
     "arkitektur"
-   ]
+   ],
+   "why": "Cykelstad med kanaler, Tivoli och ett av Nordens bästa matutbud."
   },
   "NO-oslo": {
    "climate": "nordiskt",
@@ -109,7 +111,8 @@
     "storstad",
     "natur",
     "konst"
-   ]
+   ],
+   "why": "Huvudstad mellan fjord och skog, med Operan, Munchmuseet och bad mitt i stan."
   },
   "NL-amsterdam": {
    "climate": "kust",
@@ -117,7 +120,8 @@
     "storstad",
     "konst",
     "nattliv"
-   ]
+   ],
+   "why": "Kanaler, cyklar och museer som Rijksmuseum och Van Gogh-museet."
   },
   "DE-berlin": {
    "climate": "kontinentalt",
@@ -126,7 +130,8 @@
     "historia",
     "nattliv",
     "konst"
-   ]
+   ],
+   "why": "Historia i varje kvarter, stora museer och ett nattliv som håller på till morgonen."
   },
   "SE-stockholm": {
    "climate": "nordiskt",
@@ -134,7 +139,8 @@
     "storstad",
     "kust",
     "gamla-stan"
-   ]
+   ],
+   "why": "Huvudstad på fjorton öar, med Gamla stan, Vasamuseet och skärgården utanför."
   },
   "FI-helsingfors": {
    "climate": "nordiskt",
@@ -142,7 +148,8 @@
     "storstad",
     "arkitektur",
     "bad"
-   ]
+   ],
+   "why": "Design, bastu vid havet och sjöfästningen Sveaborg en kort färjetur bort."
   },
   "IS-reykjavik": {
    "climate": "nordiskt",
@@ -150,7 +157,8 @@
     "natur",
     "bad",
     "vandring"
-   ]
+   ],
+   "why": "Liten huvudstad och bas för vattenfall, gejsrar, varma bad och norrsken."
   },
   "GR-aten": {
    "climate": "medelhav",
@@ -158,7 +166,8 @@
     "storstad",
     "historia",
     "mat"
-   ]
+   ],
+   "why": "Akropolis ovanför en stökig och levande storstad med tavernor i varje gränd."
   },
   "HR-dubrovnik": {
    "climate": "medelhav",
@@ -166,7 +175,8 @@
     "kust",
     "gamla-stan",
     "strand"
-   ]
+   ],
+   "why": "Muromgärdad stad vid Adriatiska havet, med stadsmur att gå runt och bad från klipporna."
   },
   "HR-split": {
    "climate": "medelhav",
@@ -175,7 +185,8 @@
     "gamla-stan",
     "strand",
     "historia"
-   ]
+   ],
+   "why": "En stad byggd inuti ett romerskt kejsarpalats, med färjor ut till öarna."
   },
   "HR-zagreb": {
    "climate": "kontinentalt",
@@ -183,7 +194,8 @@
     "gamla-stan",
     "jul",
     "mat"
-   ]
+   ],
+   "why": "Kaféliv, övre staden med bergbana och en stor julmarknad i december."
   },
   "TR-istanbul": {
    "climate": "medelhav",
@@ -191,7 +203,8 @@
     "storstad",
     "historia",
     "mat"
-   ]
+   ],
+   "why": "Stad på två kontinenter, med Hagia Sofia, basarer och färjor över Bosporen."
   }
  },
  "places": [

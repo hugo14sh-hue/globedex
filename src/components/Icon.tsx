@@ -37,6 +37,8 @@ const PATHS = {
   download: 'M12 4v11M8 11l4 4 4-4M5 20h14',
   locate: 'M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 2v4M12 18v4M2 12h4M18 12h4',
   filter: 'M4 6h16M7 12h10M10 18h4',
+  expand: 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
+  side: 'M4 5h16v14H4zM15 5v14',
   shuffle: 'M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3',
   compass: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM15.5 8.5l-2 5-5 2 2-5z',
 } as const;

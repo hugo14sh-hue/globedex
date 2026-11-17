@@ -1,11 +1,15 @@
 import {
   APP_NAME,
+  COLOR_KEYS,
   COUNTRY_LISTS,
   DEFAULT_THEME,
+  HIDE_KEYS,
+  MAP_STYLES,
   LANGS,
   RADIUS_MAX,
   RADIUS_MIN,
   type BodyFont,
+  type ColorKey,
   type HeadingFont,
   type PaletteId,
   type TextSize,
@@ -16,6 +20,7 @@ import { COMPANY_COLORS, PALETTES, STATUS_FIXED, type Palette } from './palettes
 import type { MapKey } from '../lib/togetherLogic';
 import { contrast, isHex, MIN_CONTRAST, mix, onColor, TEXT_DARK } from './color';
 import { BODY_FONTS, HEADING_FONTS, loadFonts } from './fonts';
+import { isFocus } from '../lib/mapFocus';
 
 export function resolvePalette(s: ThemeSettings): Palette {
   const fixed = PALETTES.find((p) => p.id === s.palette);
@@ -46,7 +51,6 @@ export function themeVars(s: ThemeSettings): Record<string, string> {
   const sf = d ? P.sd : '#FFFFFF';
   const h = HEADING_FONTS.find((f) => f.name === s.headingFont) ?? HEADING_FONTS[0];
   const b = BODY_FONTS.find((f) => f.name === s.bodyFont) ?? BODY_FONTS[0];
-  const base = d ? P.sd : '#FFFFFF';
   return {
     '--p': p,
     '--a': P.a,
@@ -63,30 +67,32 @@ export function themeVars(s: ThemeSettings): Record<string, string> {
     '--fb': b.stack,
     '--r': `${s.radius}px`,
     '--fs': FONT_SIZE[s.textSize],
-    '--st-bor': p,
-    '--st-bott': `color-mix(in srgb, ${p} 55%, ${base})`,
-    '--st-besokt': STATUS_FIXED.besokt,
-    '--st-planerad': STATUS_FIXED.planerad,
-    '--st-vill': P.vill ?? `color-mix(in srgb, ${P.a} 62%, ${base})`,
-    '--st-mellan': STATUS_FIXED.mellan,
-    '--st-ej': d ? STATUS_FIXED.ejMork : STATUS_FIXED.ejLjus,
-    '--st-tillsammans': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).tillsammans,
-    '--st-bada': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).bada,
-    '--st-bara-jag': STATUS_FIXED.besokt,
-    '--st-bara-annan': (d ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus).baraAnnan,
+    ...Object.fromEntries(Object.entries(statusColors(s)).map(([k, v]) => [`--st-${k}`, v])),
   };
 }
 
 /**
- * Kartans statusfärger som hex (MapLibre förstår inte color-mix).
- * Samma regler som CSS-variablerna --st-*: bor = primär, har bott = primär 55 %, vill åka = accent 62 %.
- * Också färgerna för besökt i sällskap (tillsammans, båda var för sig, bara jag, bara den andra).
+ * Kartans statusfärger som hex (MapLibre förstår inte color-mix). Samma färger som CSS-variablerna --st-*.
+ * Paletten: bor = primär, har bott = primär 55 %, vill åka = accent 62 %, och färgerna för besökt i sällskap
+ * (tillsammans, båda var för sig, bara jag, bara den andra). Användarens egna färger (mapColors) går före,
+ * i både ljust och mörkt läge. dark väljer variant (kartans stil kan vara mörk när appen är ljus).
  */
-export function statusColors(s: ThemeSettings): Record<MapKey | 'ej', string> {
+export function statusColors(s: ThemeSettings, dark: boolean = s.dark): Record<MapKey | 'ej', string> {
+  const base = paletteStatusColors(s, dark);
+  const own = s.mapColors ?? {};
+  const out = { ...base };
+  for (const k of COLOR_KEYS) if (own[k]) out[k] = own[k]!;
+  // Bara jag är besökt på egen hand och följer den färgen.
+  if (own.besokt) out['bara-jag'] = own.besokt;
+  return out;
+}
+
+/** Palettens statusfärger, utan användarens egna val. dark styr ljus eller mörk variant. */
+export function paletteStatusColors(s: ThemeSettings, dark: boolean = s.dark): Record<MapKey | 'ej', string> {
   const P = resolvePalette(s);
-  const p = s.dark ? P.pd : P.p;
-  const base = s.dark ? P.sd : '#FFFFFF';
-  const c = s.dark ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus;
+  const p = dark ? P.pd : P.p;
+  const base = dark ? P.sd : '#FFFFFF';
+  const c = dark ? COMPANY_COLORS.mork : COMPANY_COLORS.ljus;
   return {
     tillsammans: c.tillsammans,
     bada: c.bada,
@@ -98,9 +104,12 @@ export function statusColors(s: ThemeSettings): Record<MapKey | 'ej', string> {
     planerad: STATUS_FIXED.planerad,
     vill: P.vill ?? mix(base, P.a, 0.62),
     mellan: STATUS_FIXED.mellan,
-    ej: s.dark ? STATUS_FIXED.ejMork : STATUS_FIXED.ejLjus,
+    ej: dark ? STATUS_FIXED.ejMork : STATUS_FIXED.ejLjus,
   };
 }
+
+/** Är kartan mörk? Kartans stil följer appens tema (auto) eller är vald för sig. */
+export const mapIsDark = (s: ThemeSettings): boolean => (s.mapStyle === 'auto' ? s.dark : s.mapStyle === 'mork');
 
 /** Sätter temat på dokumentet. Laddar bara de två fonter som används. */
 export function applyTheme(s: ThemeSettings): void {
@@ -155,7 +164,22 @@ export function sanitizeTheme(raw: unknown): ThemeSettings {
     tone: pick(r.tone, TONES, DEFAULT_THEME.tone),
     lang: LANGS.includes(r.lang as never) ? (r.lang as ThemeSettings['lang']) : null,
     countryList: pick(r.countryList, COUNTRY_LISTS, DEFAULT_THEME.countryList),
+    mapColors: sanitizeColors(r.mapColors),
+    mapStyle: pick(r.mapStyle, MAP_STYLES, DEFAULT_THEME.mapStyle),
+    mapHidden: Array.isArray(r.mapHidden) ? HIDE_KEYS.filter((k) => (r.mapHidden as unknown[]).includes(k)) : [],
+    mapFocus: typeof r.mapFocus === 'string' && isFocus(r.mapFocus) ? r.mapFocus : DEFAULT_THEME.mapFocus,
   };
+}
+
+/** Egna statusfärger: bara kända statusar och giltiga hexfärger. */
+function sanitizeColors(raw: unknown): Partial<Record<ColorKey, string>> {
+  const out: Partial<Record<ColorKey, string>> = {};
+  if (!raw || typeof raw !== 'object') return out;
+  for (const k of COLOR_KEYS) {
+    const v = (raw as Record<string, unknown>)[k];
+    if (typeof v === 'string' && isHex(v)) out[k] = v.toUpperCase();
+  }
+  return out;
 }
 
 const STORAGE_KEY = `${APP_NAME.toLowerCase()}.tema`;

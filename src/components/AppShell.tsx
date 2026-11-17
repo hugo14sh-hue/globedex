@@ -6,11 +6,12 @@ import { useSession, useTravelMode } from '../lib/session';
 import { useOfflineWarmup } from '../lib/offlineWarmup';
 import { useFeedback } from './Feedback';
 import { Loading } from './Loading';
+import { Logo } from './Logo';
 
 const LAST_TAB = { solo: 'flik.jag', par: 'flik.vi', grupp: 'flik.gruppen' } as const;
 
 /**
- * Sex flikar längst ned. Sista fliken heter Jag, Vi eller Gruppen efter reseläget.
+ * Sex flikar längst ned på mobil, och från 900 px en smal meny till vänster med märket överst (Körning 16). Sista fliken heter Jag, Vi eller Gruppen efter reseläget.
  * Upptäck (Körning 15) står direkt efter Karta. Flikarna delar bredden lika (63 px var på 390 px) och
  * etiketten bryts inte: får den inte plats krymper den med ellips, så att raden aldrig blir bredare än skärmen.
  */
@@ -50,6 +51,10 @@ export function AppShell() {
         <Outlet />
       </Suspense>
       <nav className="nav">
+        {/* Märket i menyn på bred skärm, där sidhuvudet på Karta inte visas. Döljs på mobil. */}
+        <span className="nav-brand">
+          <Logo size={40} />
+        </span>
         {tabs.map(([to, label, icon]) => (
           <NavLink key={to} to={to}>
             <Icon name={icon} size={24} />

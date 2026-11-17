@@ -1,5 +1,6 @@
 // Röktest för topplisten på Karta: listen har en egen rad överst, och knapparna under den
-// (Min karta och Vår karta, kartlägena och Europa eller världen) täcks aldrig av den.
+// (Min karta och Vår karta, kartlägena, fokus och helskärm) täcks aldrig av den. Statusknapparna ovanför listan
+// Platser ligger längre ned på sidan och räknas inte.
 // Provas i bredderna 360, 390 och 430 px, med och utan safe-area (en telefon med notch simuleras
 // med CSS-variabeln --safe-top, som topplisten använder före env(safe-area-inset-top)).
 import { readFileSync } from 'node:fs';
@@ -39,7 +40,7 @@ async function login(page: Page) {
 async function uncovered(page: Page) {
   return page.evaluate(() => {
     const bar = document.querySelector('.topbar')!.getBoundingClientRect();
-    const buttons = [...document.querySelectorAll<HTMLElement>('main .chips button, main .map .zoom button')];
+    const buttons = [...document.querySelectorAll<HTMLElement>('main .chips:not(.pl-show) button, main .map .k-top button')];
     return {
       count: buttons.length,
       bad: buttons
