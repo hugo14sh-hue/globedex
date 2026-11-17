@@ -31,12 +31,12 @@ export const STATUS_FIXED = {
 
 /**
  * Besökt i sällskap (Min karta och Vår karta). Bara jag har samma färg som besökt (STATUS_FIXED.besokt).
- * Ljust tema enligt Hugo. Mörkt tema: samma kulörer, ljusare rosa och lila för mörk bakgrund och en
+ * Ljust tema enligt Hugo (bara den andra #D9822B, så att den skiljer sig från planerad). Mörkt tema: samma kulörer, ljusare rosa och lila för mörk bakgrund och en
  * mer orange ton för bara den andra, så att den skiljer sig från planerad (CIEDE2000 14 mot planerad).
  * Avstånden kontrolleras i companyColors.test.ts.
  */
 export const COMPANY_COLORS = {
-  ljus: { tillsammans: '#E0527A', bada: '#7B61C9', baraAnnan: '#E0A030' },
+  ljus: { tillsammans: '#E0527A', bada: '#7B61C9', baraAnnan: '#D9822B' },
   mork: { tillsammans: '#EA6F93', bada: '#9A86E0', baraAnnan: '#D98A2B' },
 } as const;
 

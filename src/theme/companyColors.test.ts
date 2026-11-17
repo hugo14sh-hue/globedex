@@ -76,18 +76,9 @@ describe('färgerna för besökt i sällskap', () => {
       for (const x of pairs(true, p.id)) expect(x.de, `${x.a} mot ${x.b}`).toBeGreaterThanOrEqual(MIN_DE);
     });
 
-  // Ljust läge med Hugos färger: de här paren ligger under gränsen och står i slutrapporten för Körning 14.
-  // Bara den andra (#E0A030) ligger nära planerad (#F4B942) i alla paletter. Bara jag har samma färg som besökt,
-  // som redan låg nära vill åka i Terrakotta. Testet stoppar nya par, men låter de kända stå kvar tills Hugo väljer.
-  const KNOWN_LIGHT = [
-    'djuphav bara-annan planerad',
-    'medelhav bara-annan planerad',
-    'medelhav bara-annan vill',
-    'terrakotta bara-jag vill',
-    'terrakotta bara-annan planerad',
-    'skog bara-annan planerad',
-    'nattflyg bara-annan planerad',
-  ];
+  // Ljust läge: bara jag har samma färg som besökt, som redan låg nära vill åka i Terrakotta (före Körning 14).
+  // Det är det enda kända paret under gränsen. Testet stoppar nya par.
+  const KNOWN_LIGHT = ['terrakotta bara-jag vill'];
   it('ljust läge: inga andra par än de kända ligger för nära', () => {
     const low = PALETTES.flatMap((p) => pairs(false, p.id).filter((x) => x.de < MIN_DE).map((x) => `${p.id} ${x.a} ${x.b}`));
     expect(low).toEqual(KNOWN_LIGHT);
