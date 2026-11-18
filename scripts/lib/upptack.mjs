@@ -4,8 +4,8 @@
 // av npm run import. Röktestet (e2e/) använder samma rader när importen inte är körd. Testas i upptack.test.mjs.
 
 const FILE = '_upptack.json';
-const TOP = ['_om', 'tags', 'climates', 'pli_year', 'pli_restaurants_hotels', 'existing', 'places', 'alternatives'];
-const PLACE_FIELDS = ['id', 'name', 'country', 'lat', 'lon', 'level', 'level_rule', 'level_note', 'climate', 'best_months', 'tags', 'gem', 'why', 'citybreak_gbp'];
+const TOP = ['_om', 'tags', 'climates', 'pli_year', 'pli_restaurants_hotels', 'pli_world', 'pli_world_year', 'existing', 'places', 'alternatives'];
+const PLACE_FIELDS = ['id', 'name', 'country', 'lat', 'lon', 'level', 'level_rule', 'level_note', 'climate', 'best_months', 'tags', 'gem', 'why', 'citybreak_gbp', 'basis'];
 const EXISTING_FIELDS = ['climate', 'tags', 'why'];
 const ALT_FIELDS = ['for', 'place', 'why', 'cheaper'];
 /** Fälten som lätta platser får i data (utöver light). Allt annat på platsen är kolumner i places. */
@@ -21,6 +21,26 @@ const isInt = (v) => Number.isInteger(v);
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isLevel = (v) => isInt(v) && v >= 1 && v <= 5;
+
+/** Värden i fältet basis. Saknas fältet gäller Eurostat (pli_restaurants_hotels). */
+export const BASES = ['icp'];
+
+/**
+ * Regelns prisnivå (level_rule) ur landets index. Gränserna står i _om.niva och _om.niva_varlden.
+ * Eurostat (EU-27 = 100): under 65 = 1, 65-89 = 2, 90-114 = 3, 115-149 = 4, 150 och över = 5.
+ * Världsbanken, basis icp (världen = 100): under 68 = 1, 68-111 = 2, 112-134 = 3, 135-169 = 4, 170 och över = 5.
+ * Världsbankens index har decimaler: värdet räknas mot nästa gräns undre värde (111,6 ger 2, 112 ger 3).
+ */
+export function ruleLevel(index, basis) {
+  const limits = basis === 'icp' ? [68, 112, 135, 170] : [65, 90, 115, 150];
+  return 1 + limits.filter((l) => index >= l).length;
+}
+
+/** Tabellen med landets index och året för en plats: pli_world för basis icp, annars pli_restaurants_hotels. */
+export const indexTable = (json, basis) =>
+  basis === 'icp'
+    ? { key: 'pli_world', table: json.pli_world, year: json.pli_world_year }
+    : { key: 'pli_restaurants_hotels', table: json.pli_restaurants_hotels, year: json.pli_year };
 
 /** Prisnivån för en befintlig stad: data.prices.level i landsfilen. */
 const contentLevel = (p) => (isObj(p?.data?.prices) && isLevel(p.data.prices.level) ? p.data.prices.level : null);
@@ -56,6 +76,18 @@ export function validateDiscover(json, appCountries, contentPlaces) {
       if (!COUNTRY_RE.test(c) || !known.has(c)) err(c, 'pli_restaurants_hotels', 'finns inte bland appens länder (src/lib/countries.ts)');
       if (!isNum(v) || v <= 0) err(c, 'pli_restaurants_hotels', 'ska vara ett tal över 0');
     }
+  // Världsbankens index (världen = 100) för platser med basis icp. Får saknas när ingen plats har basis icp.
+  const usesWorld = Array.isArray(json.places) && json.places.some((p) => isObj(p) && p.basis === 'icp');
+  if (json.pli_world !== undefined || usesWorld) {
+    if (!isObj(json.pli_world)) err('-', 'pli_world', 'objekt med landskod och index krävs');
+    else
+      for (const [c, v] of Object.entries(json.pli_world)) {
+        if (!COUNTRY_RE.test(c) || !known.has(c)) err(c, 'pli_world', 'finns inte bland appens länder (src/lib/countries.ts)');
+        if (!isNum(v) || v <= 0) err(c, 'pli_world', 'ska vara ett tal över 0');
+      }
+  }
+  if (json.pli_world_year !== undefined || usesWorld)
+    if (!isInt(json.pli_world_year) || json.pli_world_year < 2000 || json.pli_world_year > 2100) err('-', 'pli_world_year', 'årtal krävs');
 
   const checkClimate = (id, v) => {
     if (!lists.climates.has(v)) err(id, 'climate', `ska vara ett av värdena i climates (${[...lists.climates].join(', ')})`);
@@ -94,6 +126,15 @@ export function validateDiscover(json, appCountries, contentPlaces) {
       if (p.level === p.level_rule && p.level_note !== undefined) err(id, 'level_note', 'bara när level avviker från level_rule');
     }
     if (p.level_note !== undefined && !isStr(p.level_note)) err(id, 'level_note', 'text');
+    // Regeln: landet ska finnas i rätt index, och level_rule ska följa gränserna för det indexet.
+    if (p.basis !== undefined && !BASES.includes(p.basis)) err(id, 'basis', `ska vara ${BASES.join(' eller ')}, eller saknas (Eurostat)`);
+    else if (isStr(p.country)) {
+      const { key, table } = indexTable(json, p.basis);
+      const v = isObj(table) ? table[p.country] : undefined;
+      if (!isNum(v)) err(id, 'country', `landet ${p.country} saknas i ${key}`);
+      else if (isLevel(p.level_rule) && p.level_rule !== ruleLevel(v, p.basis))
+        err(id, 'level_rule', `ska vara ${ruleLevel(v, p.basis)} (${key} ${v})`);
+    }
     checkClimate(id, p.climate);
     const m = p.best_months;
     if (!Array.isArray(m) || m.length === 0 || !m.every((x) => isInt(x) && x >= 1 && x <= 12) || new Set(m).size !== m.length)
@@ -182,16 +223,18 @@ export function discoverRows(json, contentPlaces, countryName, countryCoords) {
   const content = new Set(contentPlaces.map((p) => p.id));
   const alts = alternativesByPlace(json);
   const judged = Array.isArray(json._om?.own_judgment) ? json._om.own_judgment : [];
-  const pli = json.pli_restaurants_hotels ?? {};
 
   const cities = json.places.map((p) => {
     const data = { light: true };
     for (const k of LIGHT_DATA) if (p[k] !== undefined) data[k] = p[k];
     if (alts.has(p.id)) data.alternatives = alts.get(p.id);
-    if (typeof pli[p.country] === 'number') {
-      data.pli = pli[p.country];
-      data.pli_year = json.pli_year;
+    // Källraden: landets värde i rätt index. basis icp ger Världsbankens index (upptack.index.varlden).
+    const { table, year } = indexTable(json, p.basis);
+    if (typeof table?.[p.country] === 'number') {
+      data.pli = table[p.country];
+      data.pli_year = year;
     }
+    if (p.basis !== undefined) data.basis = p.basis;
     // Fälten som är egen bedömning (_om.own_judgment), bara de som finns på platsen.
     const own = judged.filter((k) => k in data);
     if (own.length) data.own_judgment = own;

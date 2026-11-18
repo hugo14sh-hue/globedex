@@ -43,7 +43,12 @@ export interface PlaceData {
   gem?: boolean;
   why?: string;
   citybreak_gbp?: number;
-  /** Landets index för restauranger och hotell (EU = 100) och året, för källraden upptack.index. */
+  /** Indexet som prisnivån bygger på: icp är Världsbankens prisnivåindex. Saknas fältet gäller Eurostat. */
+  basis?: 'icp';
+  /**
+   * Landets index och året, för källraden: Eurostats index för restauranger och hotell (EU = 100,
+   * upptack.index), eller Världsbankens prisnivåindex (världen = 100, upptack.index.varlden) när basis är icp.
+   */
   pli?: number;
   pli_year?: number;
   alternatives?: { place: string; why: string; cheaper: boolean }[];

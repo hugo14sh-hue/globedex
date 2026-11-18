@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { applyPatches, discoverRows, validateDiscover } from './upptack.mjs';
+import { applyPatches, discoverRows, ruleLevel, validateDiscover } from './upptack.mjs';
 
 // Testdata med påhittade id:n och platshållartext. Bara för valideringen.
 const APP = ['XX', 'YY', 'ZZ'];
@@ -107,6 +107,36 @@ describe('validering av _upptack.json', () => {
     expect(errs(file({ alternatives: [{ for: 'XX-utan-pris', place: 'YY-a', why: 'w', cheaper: true }] }))).toContain('XX-utan-pris > YY-a/for');
   });
 
+  it('regeln för Eurostat: under 65 = 1, 65-89 = 2, 90-114 = 3, 115-149 = 4, 150 och över = 5', () => {
+    expect([64, 65, 89, 90, 114, 115, 149, 150].map((v) => ruleLevel(v))).toEqual([1, 2, 2, 3, 3, 4, 4, 5]);
+  });
+
+  it('regeln för Världsbanken (basis icp): under 68 = 1, 68-111 = 2, 112-134 = 3, 135-169 = 4, 170 och över = 5', () => {
+    expect([67.9, 68, 111, 111.6, 112, 134.9, 135, 169.9, 170].map((v) => ruleLevel(v, 'icp'))).toEqual([1, 2, 2, 2, 3, 3, 4, 4, 5]);
+  });
+
+  it('level_rule kontrolleras mot rätt regel', () => {
+    // 66 ger 2 enligt Eurostat men 1 enligt Världsbanken.
+    const world = { pli_world: { YY: 66 }, pli_world_year: 2021 };
+    expect(errs(file({ pli_restaurants_hotels: { YY: 66 } }))).toEqual([]);
+    expect(errs(file({ ...world, places: [place({ basis: 'icp' })] }))).toContain('YY-a/level_rule');
+    expect(errs(file({ ...world, places: [place({ basis: 'icp', level: 1, level_rule: 1 })] }))).toEqual([]);
+    expect(errs(file({ places: [place({ level_rule: 3, level_note: 'n' })] }))).toContain('YY-a/level_rule');
+  });
+
+  it('en plats med basis icp har sitt land i pli_world, en utan basis i pli_restaurants_hotels', () => {
+    expect(errs(file({ pli_world: { ZZ: 80 }, pli_world_year: 2021, places: [place({ basis: 'icp' })] }))).toContain('YY-a/country');
+    expect(errs(file({ pli_restaurants_hotels: { ZZ: 70 } }))).toContain('YY-a/country');
+    expect(errs(file({ places: [place({ basis: 'eurostat' })] }))).toContain('YY-a/basis');
+  });
+
+  it('pli_world och pli_world_year krävs när en plats har basis icp', () => {
+    const e = errs(file({ places: [place({ basis: 'icp' })] }));
+    expect(e).toContain('-/pli_world');
+    expect(e).toContain('-/pli_world_year');
+    expect(errs(file({ pli_world: { QQ: 80 }, pli_world_year: 2021 }))).toContain('QQ/pli_world');
+  });
+
   it('okända fält stoppas', () => {
     expect(errs(file({ extra: 1 }))).toContain('-/extra');
     expect(errs(file({ places: [place({ price: 1 })] }))).toContain('YY-a/price');
@@ -149,6 +179,17 @@ describe('raderna som importen skriver', () => {
       alternatives: [{ place: 'YY-a', why: 'w', cheaper: true }],
     });
     expect(out[1].data).toEqual({});
+  });
+
+  it('en plats med basis icp får Världsbankens index och år i data, och data.basis', () => {
+    const r = discoverRows(
+      file({ pli_world: { YY: 66.5 }, pli_world_year: 2021, places: [place({ basis: 'icp', level: 1, level_rule: 1 })] }),
+      CONTENT,
+      (iso) => iso,
+      () => [0, 0],
+    );
+    expect(r.cities[0].data).toMatchObject({ basis: 'icp', pli: 66.5, pli_year: 2021 });
+    expect(rows.cities[0].data.basis).toBeUndefined();
   });
 
   it('why på en befintlig plats hamnar i data.why', () => {

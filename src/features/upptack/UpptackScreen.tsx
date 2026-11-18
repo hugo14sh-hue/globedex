@@ -2,7 +2,7 @@
 // Platserna är lätta platser och befintliga städer med klimat och taggar (src/lib/upptack.ts).
 // Valda filter och sorteringen står i adressen (query-parametrar), så att en filtrering går att dela
 // och ligger kvar när man backar från en plats.
-import { useEffect, useId, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { climates as CLIMATES, tags as TAGS } from '../../../content/_upptack.json';
 import { useFeedback } from '../../components/Feedback';
@@ -15,21 +15,27 @@ import { Segment } from '../../components/Segment';
 import { fetchPlaces, placeName, type Place } from '../../lib/content';
 import { continentLabel } from '../../lib/continentNames';
 import { LOCALE } from '../../lib/locale';
+import { countryOptions } from '../../lib/mapFocus';
 import { useSession } from '../../lib/session';
 import { setPlaceStatus, STATUS_KEY, useMyPlaces, type PlaceStatus } from '../../lib/status';
 import {
   alternativeRows,
   applyFilter,
+  COUNTRY_SEARCH_FROM,
   discoverEntries,
   filterCount,
   filterOptions,
   fromParams,
+  monthList,
+  nextCount,
   NO_FILTER,
+  PAGE_SIZE,
   showsAltLink,
   sortEntries,
   SORTS,
   toggleIn,
   toParams,
+  visibleEntries,
   type DiscoverEntry,
   type DiscoverFilter,
   type DiscoverSort,
@@ -83,9 +89,35 @@ export default function UpptackScreen() {
   const short = useMemo(() => shortMonthNames(), []);
   const active = filterCount(filter);
 
-  if (!places) return <Loading />;
+  // Länderna i filtret. Fler än COUNTRY_SEARCH_FROM: sökfältet från kartans fokusval (Körning 18). Det valda
+  // landet står kvar i listan även när det inte matchar sökningen.
+  const [countryQuery, setCountryQuery] = useState('');
+  const searchCountries = options.countries.length > COUNTRY_SEARCH_FROM;
+  const countries = useMemo(() => {
+    const nameOf = (c: string) => (places ? placeName(places, c) : c);
+    const list = countryOptions(options.countries, nameOf, LOCALE, searchCountries ? countryQuery : '').map((o) => o.value);
+    return filter.country && options.countries.includes(filter.country) && !list.includes(filter.country) ? [filter.country, ...list] : list;
+  }, [places, options.countries, searchCountries, countryQuery, filter.country]);
 
-  const countries = [...options.countries].sort((a, b) => placeName(places, a).localeCompare(placeName(places, b), LOCALE));
+  // De första PAGE_SIZE korten, och PAGE_SIZE till när man rullar ned till slutet (Körning 18). Börjar om
+  // när filtren eller sorteringen ändras. Antalet i upptack.antal räknas på hela listan.
+  const pageKey = params.toString();
+  const [paging, setPaging] = useState({ key: pageKey, count: PAGE_SIZE });
+  const count = paging.key === pageKey ? paging.count : PAGE_SIZE;
+  const visible = useMemo(() => visibleEntries(shown, count), [shown, count]);
+  const more = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = more.current;
+    if (!el || count >= shown.length) return;
+    const load = () => setPaging({ key: pageKey, count: nextCount(count, shown.length) });
+    // Utan IntersectionObserver visas resten direkt.
+    if (typeof IntersectionObserver === 'undefined') return load();
+    const io = new IntersectionObserver((list) => list.some((e) => e.isIntersecting) && load(), { rootMargin: '600px 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [count, shown.length, pageKey]);
+
+  if (!places) return <Loading />;
 
   return (
     <main className="scr wide">
@@ -160,13 +192,38 @@ export default function UpptackScreen() {
             </ChipGroup>
           )}
 
-          {countries.length > 0 && (
-            <ChipGroup legend={t('upptack.filter.land')}>
+          {options.countries.length > 0 && (
+            <ChipGroup
+              legend={t('upptack.filter.land')}
+              search={
+                searchCountries && (
+                  <>
+                    <label className="sr-only" htmlFor={`${panelId}-sok`}>
+                      {t('karta.fokus.sok')}
+                    </label>
+                    <input
+                      id={`${panelId}-sok`}
+                      className="focus-search"
+                      type="search"
+                      autoComplete="off"
+                      placeholder={t('karta.fokus.sok')}
+                      value={countryQuery}
+                      onChange={(e) => setCountryQuery(e.target.value)}
+                    />
+                  </>
+                )
+              }
+            >
               {countries.map((c) => (
                 <button key={c} type="button" className="chip" aria-pressed={filter.country === c} onClick={() => set({ country: filter.country === c ? null : c })}>
                   {placeName(places, c)}
                 </button>
               ))}
+              {countries.length === 0 && (
+                <p className="mu" role="status">
+                  {t('karta.fokus.inga')}
+                </p>
+              )}
             </ChipGroup>
           )}
 
@@ -208,13 +265,16 @@ export default function UpptackScreen() {
           <p>{t('upptack.tom')}</p>
         </div>
       ) : (
-        <ul className="disc-list">
-          {shown.map((e) => (
-            <li key={e.id}>
-              <DiscoverCard entry={e} places={places} status={mine.statuses[e.id]} short={short} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="disc-list">
+            {visible.map((e) => (
+              <li key={e.id}>
+                <DiscoverCard entry={e} places={places} status={mine.statuses[e.id]} short={short} />
+              </li>
+            ))}
+          </ul>
+          {count < shown.length && <div ref={more} className="disc-more" aria-hidden="true" />}
+        </>
       )}
       </div>
       </div>
@@ -224,10 +284,11 @@ export default function UpptackScreen() {
   );
 }
 
-function ChipGroup({ legend, children }: { legend: string; children: React.ReactNode }) {
+function ChipGroup({ legend, search, children }: { legend: string; search?: React.ReactNode; children: React.ReactNode }) {
   return (
     <fieldset className="col">
       <legend className="eb">{legend}</legend>
+      {search}
       <div className="chips">{children}</div>
     </fieldset>
   );
@@ -282,7 +343,7 @@ function DiscoverCard({
         </div>
       )}
       {e.why && <p>{e.why}</p>}
-      {e.months.length > 0 && <p className="mu">{t('upptack.kort.basta', { manad: e.months.map((m) => short[m - 1]).join(', ') })}</p>}
+      {e.months.length > 0 && <p className="mu">{t('upptack.kort.basta', { manad: monthList(e.months, short) })}</p>}
       {e.tags.length > 0 && (
         <div className="chips">
           {e.tags.map((x) => (

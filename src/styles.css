@@ -2059,6 +2059,11 @@ fieldset.card legend {
   margin: 0;
 }
 
+/* Upptäck: markören efter de visade korten. När den syns laddas fler (Körning 18). */
+.disc-more {
+  height: 1px;
+}
+
 .disc-list,
 .alt-list {
   list-style: none;

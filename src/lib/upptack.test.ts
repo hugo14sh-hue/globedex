@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import discover from '../../content/_upptack.json';
 import type { Place } from './content';
 import {
   altHeadingKey,
@@ -10,11 +11,16 @@ import {
   filterCount,
   filterOptions,
   fromParams,
+  indexLine,
   isLight,
+  monthList,
+  nextCount,
+  PAGE_SIZE,
   NO_FILTER,
   showsAltLink,
   sortEntries,
   toParams,
+  visibleEntries,
   type DiscoverFilter,
 } from './upptack';
 
@@ -172,5 +178,51 @@ describe('Upptäck: alternativ', () => {
     expect(showsAltLink(e)).toBe(true);
     expect(showsAltLink({ ...e, level: 3 })).toBe(false);
     expect(showsAltLink({ ...e, alternatives: [] })).toBe(false);
+  });
+});
+
+describe('Upptäck: resten av världen (Körning 18)', () => {
+  const SHORT = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+
+  it('källraden: Eurostat utan basis, Världsbanken med basis icp', () => {
+    expect(indexLine({ pli: 59, pli_year: 2025 }, 'Bosnien')).toEqual({ key: 'upptack.index', values: { plats: 'Bosnien', antal: 59, ar: 2025 } });
+    expect(indexLine({ basis: 'icp', pli: 95.6, pli_year: 2021 }, 'Singapore')).toEqual({
+      key: 'upptack.index.varlden',
+      values: { plats: 'Singapore', antal: 95.6, ar: 2021 },
+    });
+    expect(indexLine({ basis: 'icp' }, 'Singapore')).toBeNull();
+  });
+
+  it('månader över årsskiftet står i filens ordning och matchar månadsfiltret', () => {
+    const e = discoverEntries([light('TH-a', { best_months: [11, 12, 1, 2] })])[0];
+    expect(e.months).toEqual([11, 12, 1, 2]);
+    expect(monthList(e.months, SHORT)).toBe('nov, dec, jan, feb');
+    for (const m of [11, 12, 1, 2]) expect(applyFilter([e], { ...NO_FILTER, month: m })).toHaveLength(1);
+    for (const m of [3, 10]) expect(applyFilter([e], { ...NO_FILTER, month: m })).toHaveLength(0);
+  });
+
+  it('de första 30 korten, och 30 till per laddning tills listan är slut', () => {
+    const list = Array.from({ length: 140 }, (_, i) => i);
+    expect(PAGE_SIZE).toBe(30);
+    expect(visibleEntries(list, PAGE_SIZE)).toEqual(list.slice(0, 30));
+    const steps = [PAGE_SIZE];
+    while (steps[steps.length - 1] < list.length) steps.push(nextCount(steps[steps.length - 1], list.length));
+    expect(steps).toEqual([30, 60, 90, 120, 140]);
+    expect(visibleEntries(list, 140)).toHaveLength(140);
+    // Kortare lista än en sida: alla visas.
+    expect(visibleEntries([1, 2], PAGE_SIZE)).toEqual([1, 2]);
+  });
+
+  it('världsdelarna i filtret: alla sex bebodda världsdelar när platserna finns där', () => {
+    const e = discoverEntries(['SE-a', 'TH-a', 'ZA-a', 'US-a', 'BR-a', 'AU-a'].map((id) => light(id)));
+    expect(filterOptions(e).continents).toEqual(['AF', 'AS', 'EU', 'NA', 'OC', 'SA']);
+  });
+
+  it('den riktiga filen: platser i alla sex bebodda världsdelar, och de nya klimaten och taggarna finns', () => {
+    const e = discoverEntries(discover.places.map((p) => light(p.id, { best_months: p.best_months })));
+    expect(filterOptions(e).continents).toEqual(['AF', 'AS', 'EU', 'NA', 'OC', 'SA']);
+    expect(filterOptions(e).countries.length).toBeGreaterThan(20);
+    expect(discover.climates).toEqual(expect.arrayContaining(['tropiskt', 'subtropiskt', 'oken']));
+    expect(discover.tags).toEqual(expect.arrayContaining(['djurliv', 'dykning', 'tempel', 'oar']));
   });
 });

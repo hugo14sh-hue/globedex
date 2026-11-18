@@ -1,6 +1,6 @@
 {
  "_om": {
-  "vad": "Lätta platser för fliken Upptäck: prisnivå, klimat, bästa månader, taggar och alternativ. Befintliga städer med fullt innehåll ligger kvar i landsfilerna och får här bara klimat och taggar.",
+  "vad": "Lätta platser för fliken Upptäck: prisnivå, klimat, bästa månader, taggar och alternativ. Befintliga städer med fullt innehåll ligger kvar i landsfilerna och får här bara klimat, taggar och why.",
   "checked": "2026-11-17",
   "niva": "level 1-5 följer Eurostats prisnivåindex för restauranger och hotell 2025 (landets snitt, EU-27 = 100): under 65 = 1, 65-89 = 2, 90-114 = 3, 115-149 = 4, 150 och över = 5. level_rule är regelns värde. Avviker level från regeln finns skälet i level_note, och det är vår bedömning.",
   "own_judgment": [
@@ -16,9 +16,12 @@
   "sources": [
    "https://ec.europa.eu/eurostat/statistics-explained/index.php/comparative_price_levels_of_consumer_goods_and_services",
    "https://monstat.org/uploads/files/cijene/Komparativne/2025/Comparative%20price%20levels%20in%202025.pdf",
-   "https://post-office.mynewsdesk.com/pressreleases/emerging-city-break-destinations-rate-as-best-value-in-latest-post-office-report-while-lille-tops-the-list-of-train-travel-cities-3450320"
+   "https://post-office.mynewsdesk.com/pressreleases/emerging-city-break-destinations-rate-as-best-value-in-latest-post-office-report-while-lille-tops-the-list-of-train-travel-cities-3450320",
+   "https://www.worldbank.org/en/programs/icp",
+   "https://en.wikipedia.org/wiki/List_of_countries_by_price_level"
   ],
-  "citybreak_gbp": "Post Office City Costs Barometer 2026: tolv turistutgifter för två personer, bland annat två nätter på trestjärnigt hotell, i brittiska pund."
+  "citybreak_gbp": "Post Office City Costs Barometer 2026: tolv turistutgifter för två personer, bland annat två nätter på trestjärnigt hotell, i brittiska pund.",
+  "niva_varlden": "Platser med basis = icp ligger utanför Eurostats index. Deras level_rule följer Världsbankens prisnivåindex för 2021 (ICP, landets snitt, världen = 100), läst ur Wikipedias sammanställning: under 68 = 1, 68-111 = 2, 112-134 = 3, 135-169 = 4, 170 och över = 5. Gränserna är valda så att de ger ungefär samma nivå som Eurostat-regeln för de europeiska länderna. Indexet är från 2021 och gäller hela ekonomin, så det är grövre än Eurostats: avvikelser står i level_note."
  },
  "tags": [
   "storstad",
@@ -40,14 +43,21 @@
   "bad",
   "jul",
   "utsikt",
-  "bilsport"
+  "bilsport",
+  "djurliv",
+  "dykning",
+  "tempel",
+  "oar"
  ],
  "climates": [
   "medelhav",
   "kontinentalt",
   "kust",
   "nordiskt",
-  "alpint"
+  "alpint",
+  "tropiskt",
+  "subtropiskt",
+  "oken"
  ],
  "pli_year": 2025,
  "pli_restaurants_hotels": {
@@ -205,6 +215,25 @@
     "mat"
    ],
    "why": "Stad på två kontinenter, med Hagia Sofia, basarer och färjor över Bosporen."
+  },
+  "US-new-york": {
+   "climate": "kontinentalt",
+   "tags": [
+    "storstad",
+    "konst",
+    "nattliv",
+    "mat"
+   ],
+   "why": "Skyskrapor, Central Park, museer och en stad som håller öppet dygnet runt."
+  },
+  "AU-sydney": {
+   "climate": "subtropiskt",
+   "tags": [
+    "storstad",
+    "strand",
+    "utsikt"
+   ],
+   "why": "Operahuset och Harbour Bridge vid hamnen, med surfstränder en bussresa bort."
   }
  },
  "places": [
@@ -1830,6 +1859,1756 @@
    ],
    "gem": true,
    "why": "Danmarks andra stad, med konstmuseet ARoS, friluftsmuseet Den Gamle By och hamnbad."
+  },
+  {
+   "id": "JP-tokyo",
+   "name": "Tokyo",
+   "country": "JP",
+   "lat": 35.68,
+   "lon": 139.69,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    10,
+    11
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Världens största storstadsområde, där neon, tempel och små barer med sex platser ryms i samma kvarter.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: yenen har tappat mycket i värde sedan indexet mättes 2021, så Japan är billigare för besökare i dag."
+  },
+  {
+   "id": "JP-kyoto",
+   "name": "Kyoto",
+   "country": "JP",
+   "lat": 35.01,
+   "lon": 135.77,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    10,
+    11
+   ],
+   "tags": [
+    "tempel",
+    "historia",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Japans gamla kejsarstad, med tempel, trädgårdar och geishakvarteret Gion.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: yenen har tappat mycket i värde sedan indexet mättes 2021, så Japan är billigare för besökare i dag."
+  },
+  {
+   "id": "JP-kanazawa",
+   "name": "Kanazawa",
+   "country": "JP",
+   "lat": 36.56,
+   "lon": 136.65,
+   "level": 3,
+   "level_rule": 4,
+   "climate": "subtropiskt",
+   "best_months": [
+    4,
+    5,
+    10,
+    11
+   ],
+   "tags": [
+    "historia",
+    "konst",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Trädgården Kenrokuen, samurajkvarter och fiskmarknad, utan Kyotos trängsel.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: yenen har tappat mycket i värde sedan indexet mättes 2021, så Japan är billigare för besökare i dag."
+  },
+  {
+   "id": "KR-seoul",
+   "name": "Seoul",
+   "country": "KR",
+   "lat": 37.57,
+   "lon": 126.98,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "nattliv",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Kungapalats mellan skyskrapor, gatumat och ett nattliv som aldrig stänger.",
+   "basis": "icp"
+  },
+  {
+   "id": "KR-busan",
+   "name": "Busan",
+   "country": "KR",
+   "lat": 35.18,
+   "lon": 129.08,
+   "level": 3,
+   "level_rule": 3,
+   "climate": "subtropiskt",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "mat",
+    "storstad"
+   ],
+   "gem": true,
+   "why": "Sydkoreas hamnstad, med stadsstränder, fiskmarknad och tempel vid havet.",
+   "basis": "icp"
+  },
+  {
+   "id": "TW-taipei",
+   "name": "Taipei",
+   "country": "TW",
+   "lat": 25.03,
+   "lon": 121.57,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    10,
+    11
+   ],
+   "tags": [
+    "mat",
+    "storstad",
+    "natur"
+   ],
+   "gem": true,
+   "why": "Nattmarknader, tehus och vandringsleder som börjar där tunnelbanan slutar.",
+   "basis": "icp"
+  },
+  {
+   "id": "HK-hongkong",
+   "name": "Hongkong",
+   "country": "HK",
+   "lat": 22.32,
+   "lon": 114.17,
+   "level": 4,
+   "level_rule": 3,
+   "climate": "subtropiskt",
+   "best_months": [
+    10,
+    11,
+    12,
+    3
+   ],
+   "tags": [
+    "storstad",
+    "utsikt",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Skyskrapor mellan berg och hav, med dim sum och färja över hamnen.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: boendet är dyrt för besökare."
+  },
+  {
+   "id": "SG-singapore",
+   "name": "Singapore",
+   "country": "SG",
+   "lat": 1.35,
+   "lon": 103.82,
+   "level": 4,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    2,
+    3,
+    4,
+    6,
+    7
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Stadsstat med matmarknader, trädgårdar och fyra kök på samma gata.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: hotell och alkohol är dyra för besökare, även om gatumaten är billig."
+  },
+  {
+   "id": "TH-bangkok",
+   "name": "Bangkok",
+   "country": "TH",
+   "lat": 13.76,
+   "lon": 100.5,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "tempel",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Tempel, kanaler och gatumat i en av Asiens mest intensiva städer.",
+   "basis": "icp"
+  },
+  {
+   "id": "TH-chiang-mai",
+   "name": "Chiang Mai",
+   "country": "TH",
+   "lat": 18.79,
+   "lon": 98.99,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "tags": [
+    "tempel",
+    "mat",
+    "berg"
+   ],
+   "gem": true,
+   "why": "Gammal stad innanför vallgrav i norra Thailand, med hundratals tempel och bergen nära.",
+   "basis": "icp"
+  },
+  {
+   "id": "TH-krabi",
+   "name": "Krabi",
+   "country": "TH",
+   "lat": 8.09,
+   "lon": 98.91,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "strand",
+    "oar",
+    "natur"
+   ],
+   "gem": false,
+   "why": "Kalkstensklippor rakt upp ur havet och båtar ut till öarna.",
+   "basis": "icp"
+  },
+  {
+   "id": "VN-hanoi",
+   "name": "Hanoi",
+   "country": "VN",
+   "lat": 21.03,
+   "lon": 105.85,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "subtropiskt",
+   "best_months": [
+    10,
+    11,
+    3,
+    4
+   ],
+   "tags": [
+    "mat",
+    "gamla-stan",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Trånga gamla kvarter, sjöar och nudelsoppa på plastpall.",
+   "basis": "icp"
+  },
+  {
+   "id": "VN-hoi-an",
+   "name": "Hoi An",
+   "country": "VN",
+   "lat": 15.88,
+   "lon": 108.34,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat",
+    "strand"
+   ],
+   "gem": true,
+   "why": "Gammal handelsstad med lyktor, skräddare och strand på cykelavstånd.",
+   "basis": "icp"
+  },
+  {
+   "id": "VN-ho-chi-minh",
+   "name": "Ho Chi Minh-staden",
+   "country": "VN",
+   "lat": 10.78,
+   "lon": 106.7,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Vietnams största stad, med mopeder, marknader och krigshistoria.",
+   "basis": "icp"
+  },
+  {
+   "id": "KH-siem-reap",
+   "name": "Siem Reap",
+   "country": "KH",
+   "lat": 13.36,
+   "lon": 103.86,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "tags": [
+    "tempel",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Staden intill Angkor Wat och de andra templen från khmerriket.",
+   "basis": "icp"
+  },
+  {
+   "id": "LA-luang-prabang",
+   "name": "Luang Prabang",
+   "country": "LA",
+   "lat": 19.89,
+   "lon": 102.13,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "tags": [
+    "tempel",
+    "natur"
+   ],
+   "gem": true,
+   "why": "Tempelstad där Mekong möter en biflod, med vattenfall utanför stan.",
+   "basis": "icp"
+  },
+  {
+   "id": "ID-ubud",
+   "name": "Ubud",
+   "country": "ID",
+   "lat": -8.51,
+   "lon": 115.26,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "tempel",
+    "natur",
+    "konst"
+   ],
+   "gem": false,
+   "why": "Balis kulturstad, omgiven av risterrasser och tempel.",
+   "basis": "icp"
+  },
+  {
+   "id": "ID-yogyakarta",
+   "name": "Yogyakarta",
+   "country": "ID",
+   "lat": -7.8,
+   "lon": 110.36,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "tempel",
+    "konst",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Javas kulturstad, med templen Borobudur och Prambanan inom räckhåll.",
+   "basis": "icp"
+  },
+  {
+   "id": "MY-kuala-lumpur",
+   "name": "Kuala Lumpur",
+   "country": "MY",
+   "lat": 3.14,
+   "lon": 101.69,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    5,
+    6,
+    7
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Tvillingtorn, matmarknader och malajiskt, kinesiskt och indiskt kök sida vid sida.",
+   "basis": "icp"
+  },
+  {
+   "id": "MY-george-town",
+   "name": "George Town",
+   "country": "MY",
+   "lat": 5.41,
+   "lon": 100.33,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "mat",
+    "gamla-stan",
+    "konst"
+   ],
+   "gem": true,
+   "why": "Penangs gamla stad, känd för gatumat, gatukonst och handelshus.",
+   "basis": "icp"
+  },
+  {
+   "id": "PH-el-nido",
+   "name": "El Nido",
+   "country": "PH",
+   "lat": 11.18,
+   "lon": 119.39,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tags": [
+    "strand",
+    "oar",
+    "dykning"
+   ],
+   "gem": true,
+   "why": "Laguner och kalkstensöar på Palawan, som man tar sig runt med båt.",
+   "basis": "icp"
+  },
+  {
+   "id": "IN-jaipur",
+   "name": "Jaipur",
+   "country": "IN",
+   "lat": 26.91,
+   "lon": 75.79,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "oken",
+   "best_months": [
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "historia",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Den rosa staden i Rajasthan, med palats och fortet Amber.",
+   "basis": "icp"
+  },
+  {
+   "id": "IN-kochi",
+   "name": "Kochi",
+   "country": "IN",
+   "lat": 9.93,
+   "lon": 76.27,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "tags": [
+    "kust",
+    "mat",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Hamnstad i Kerala med kinesiska fiskenät, kryddhandel och kanaler söderut.",
+   "basis": "icp"
+  },
+  {
+   "id": "LK-galle",
+   "name": "Galle",
+   "country": "LK",
+   "lat": 6.03,
+   "lon": 80.22,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "strand"
+   ],
+   "gem": true,
+   "why": "Holländskt fort på en udde i södra Sri Lanka, med stränder runt omkring.",
+   "basis": "icp"
+  },
+  {
+   "id": "NP-katmandu",
+   "name": "Katmandu",
+   "country": "NP",
+   "lat": 27.72,
+   "lon": 85.32,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "subtropiskt",
+   "best_months": [
+    10,
+    11,
+    3,
+    4
+   ],
+   "tags": [
+    "tempel",
+    "berg",
+    "vandring"
+   ],
+   "gem": false,
+   "why": "Tempeltorg och stupor i en dal under Himalaya, och startpunkt för vandringar.",
+   "basis": "icp"
+  },
+  {
+   "id": "AE-dubai",
+   "name": "Dubai",
+   "country": "AE",
+   "lat": 25.2,
+   "lon": 55.27,
+   "level": 4,
+   "level_rule": 2,
+   "climate": "oken",
+   "best_months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "storstad",
+    "glamour",
+    "strand"
+   ],
+   "gem": false,
+   "why": "Skyskrapor, köpcentrum och strand i öknen.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: hotell, restauranger och alkohol är dyra för besökare."
+  },
+  {
+   "id": "OM-muskat",
+   "name": "Muskat",
+   "country": "OM",
+   "lat": 23.59,
+   "lon": 58.41,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "oken",
+   "best_months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "kust",
+    "berg",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Låg vit huvudstad mellan berg och hav, med souk, fort och wadis utanför stan.",
+   "basis": "icp"
+  },
+  {
+   "id": "JO-petra",
+   "name": "Wadi Musa",
+   "country": "JO",
+   "lat": 30.32,
+   "lon": 35.48,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "oken",
+   "best_months": [
+    3,
+    4,
+    5,
+    10,
+    11
+   ],
+   "tags": [
+    "historia",
+    "vandring"
+   ],
+   "gem": false,
+   "why": "Orten vid Petra, klippstaden som nabatéerna högg ut ur rosa sandsten.",
+   "basis": "icp"
+  },
+  {
+   "id": "GE-tbilisi",
+   "name": "Tbilisi",
+   "country": "GE",
+   "lat": 41.72,
+   "lon": 44.79,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat",
+    "vin",
+    "bad"
+   ],
+   "gem": true,
+   "why": "Träbalkonger, svavelbad och ett av världens äldsta vinländer runt hörnet.",
+   "basis": "icp"
+  },
+  {
+   "id": "AM-jerevan",
+   "name": "Jerevan",
+   "country": "AM",
+   "lat": 40.18,
+   "lon": 44.51,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "historia",
+    "mat",
+    "utsikt"
+   ],
+   "gem": true,
+   "why": "Rosa tuffsten, kaféer och utsikt mot berget Ararat.",
+   "basis": "icp"
+  },
+  {
+   "id": "UZ-samarkand",
+   "name": "Samarkand",
+   "country": "UZ",
+   "lat": 39.65,
+   "lon": 66.96,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "arkitektur",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Sidenvägens stad, med torget Registan och blå kakelkupoler.",
+   "basis": "icp"
+  },
+  {
+   "id": "TR-antalya",
+   "name": "Antalya",
+   "country": "TR",
+   "lat": 36.9,
+   "lon": 30.7,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "gamla-stan",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Gammal hamnstad på turkiska Rivieran, med stränder och antika ruiner i närheten."
+  },
+  {
+   "id": "TR-goreme",
+   "name": "Göreme",
+   "country": "TR",
+   "lat": 38.64,
+   "lon": 34.83,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kontinentalt",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "natur",
+    "vandring",
+    "historia"
+   ],
+   "gem": false,
+   "why": "By mitt i Kappadokien, med klippformationer, grottkyrkor och luftballonger i gryningen."
+  },
+  {
+   "id": "MA-marrakech",
+   "name": "Marrakech",
+   "country": "MA",
+   "lat": 31.63,
+   "lon": -8.0,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "oken",
+   "best_months": [
+    3,
+    4,
+    5,
+    10,
+    11
+   ],
+   "tags": [
+    "gamla-stan",
+    "mat",
+    "arkitektur"
+   ],
+   "gem": false,
+   "why": "Souker, riader och torget Jemaa el-Fna, med Atlasbergen vid horisonten.",
+   "basis": "icp"
+  },
+  {
+   "id": "MA-chefchaouen",
+   "name": "Chefchaouen",
+   "country": "MA",
+   "lat": 35.17,
+   "lon": -5.27,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "gamla-stan",
+    "berg"
+   ],
+   "gem": true,
+   "why": "Blåmålad bergsstad i Rifbergen.",
+   "basis": "icp"
+  },
+  {
+   "id": "MA-essaouira",
+   "name": "Essaouira",
+   "country": "MA",
+   "lat": 31.51,
+   "lon": -9.77,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "kust",
+   "best_months": [
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "kust",
+    "gamla-stan",
+    "mat"
+   ],
+   "gem": true,
+   "why": "Blåsig hamnstad med vita murar vid Atlanten, lugnare än Marrakech.",
+   "basis": "icp"
+  },
+  {
+   "id": "EG-kairo",
+   "name": "Kairo",
+   "country": "EG",
+   "lat": 30.04,
+   "lon": 31.24,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "oken",
+   "best_months": [
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "historia",
+    "storstad"
+   ],
+   "gem": false,
+   "why": "Pyramiderna i Giza i utkanten av en av Afrikas största städer.",
+   "basis": "icp"
+  },
+  {
+   "id": "EG-luxor",
+   "name": "Luxor",
+   "country": "EG",
+   "lat": 25.69,
+   "lon": 32.64,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "oken",
+   "best_months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "tags": [
+    "historia",
+    "tempel"
+   ],
+   "gem": false,
+   "why": "Karnak, Luxortemplet och Konungarnas dal på var sin sida om Nilen.",
+   "basis": "icp"
+  },
+  {
+   "id": "TN-tunis",
+   "name": "Tunis",
+   "country": "TN",
+   "lat": 36.81,
+   "lon": 10.18,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "medelhav",
+   "best_months": [
+    4,
+    5,
+    9,
+    10
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "kust"
+   ],
+   "gem": true,
+   "why": "Medina, Bardomuseets mosaiker och ruinerna av Karthago i en förort.",
+   "basis": "icp"
+  },
+  {
+   "id": "ZA-kapstaden",
+   "name": "Kapstaden",
+   "country": "ZA",
+   "lat": -33.92,
+   "lon": 18.42,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "natur",
+    "vin",
+    "strand",
+    "utsikt"
+   ],
+   "gem": false,
+   "why": "Taffelberget ovanför stan, stränder på två hav och vingårdar en kort bilresa bort.",
+   "basis": "icp"
+  },
+  {
+   "id": "TZ-zanzibar",
+   "name": "Stone Town",
+   "country": "TZ",
+   "lat": -6.16,
+   "lon": 39.19,
+   "level": 2,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9,
+    1,
+    2
+   ],
+   "tags": [
+    "strand",
+    "gamla-stan",
+    "dykning"
+   ],
+   "gem": false,
+   "why": "Zanzibars gamla stenstad, med snidade dörrar, kryddmarknad och stränder runt ön.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: ön är dyrare för besökare än Tanzania i snitt."
+  },
+  {
+   "id": "NA-swakopmund",
+   "name": "Swakopmund",
+   "country": "NA",
+   "lat": -22.68,
+   "lon": 14.53,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "oken",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "natur",
+    "kust"
+   ],
+   "gem": true,
+   "why": "Kuststad med tysk kolonialarkitektur där Namiböknens sanddyner möter Atlanten.",
+   "basis": "icp"
+  },
+  {
+   "id": "US-san-francisco",
+   "name": "San Francisco",
+   "country": "US",
+   "lat": 37.77,
+   "lon": -122.42,
+   "level": 5,
+   "level_rule": 4,
+   "climate": "medelhav",
+   "best_months": [
+    5,
+    6,
+    9,
+    10
+   ],
+   "tags": [
+    "storstad",
+    "utsikt",
+    "mat"
+   ],
+   "gem": false,
+   "why": "Backar, spårvagnar och Golden Gate-bron vid en dimmig bukt.",
+   "basis": "icp",
+   "level_note": "Vår bedömning, samma nivå som vi satt på New York."
+  },
+  {
+   "id": "US-new-orleans",
+   "name": "New Orleans",
+   "country": "US",
+   "lat": 29.95,
+   "lon": -90.07,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    10,
+    11
+   ],
+   "tags": [
+    "musik",
+    "mat",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Jazzens födelsestad, med franska kvarteren och kreolskt kök.",
+   "basis": "icp"
+  },
+  {
+   "id": "US-chicago",
+   "name": "Chicago",
+   "country": "US",
+   "lat": 41.88,
+   "lon": -87.63,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    5,
+    6,
+    9
+   ],
+   "tags": [
+    "arkitektur",
+    "storstad",
+    "musik"
+   ],
+   "gem": false,
+   "why": "Skyskrapans hemstad vid Michigansjön, med blues och djup pizza.",
+   "basis": "icp"
+  },
+  {
+   "id": "US-savannah",
+   "name": "Savannah",
+   "country": "US",
+   "lat": 32.08,
+   "lon": -81.09,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    5,
+    10,
+    11
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "romantik"
+   ],
+   "gem": true,
+   "why": "Sydstatsstad med torg i rutnät, ekar med spansk mossa och gamla trähus.",
+   "basis": "icp"
+  },
+  {
+   "id": "CA-vancouver",
+   "name": "Vancouver",
+   "country": "CA",
+   "lat": 49.28,
+   "lon": -123.12,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "natur",
+    "storstad",
+    "berg"
+   ],
+   "gem": false,
+   "why": "Storstad mellan hav och berg, med regnskog i stadsparken.",
+   "basis": "icp"
+  },
+  {
+   "id": "CA-quebec",
+   "name": "Québec",
+   "country": "CA",
+   "lat": 46.81,
+   "lon": -71.21,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9,
+    12
+   ],
+   "tags": [
+    "gamla-stan",
+    "historia",
+    "jul"
+   ],
+   "gem": true,
+   "why": "Fransktalande stad med stadsmur och gamla kvarter ovanför Saint Lawrencefloden.",
+   "basis": "icp"
+  },
+  {
+   "id": "CA-montreal",
+   "name": "Montréal",
+   "country": "CA",
+   "lat": 45.5,
+   "lon": -73.57,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kontinentalt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "mat",
+    "musik",
+    "storstad"
+   ],
+   "gem": false,
+   "why": "Fransktalande storstad med festivaler hela sommaren och bagels dygnet runt.",
+   "basis": "icp"
+  },
+  {
+   "id": "MX-mexico-city",
+   "name": "Mexico City",
+   "country": "MX",
+   "lat": 19.43,
+   "lon": -99.13,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    10,
+    11
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "konst",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Jättestad på hög höjd, med aztekiska ruiner, muralmålningar och tacos i varje gathörn.",
+   "basis": "icp"
+  },
+  {
+   "id": "MX-oaxaca",
+   "name": "Oaxaca",
+   "country": "MX",
+   "lat": 17.07,
+   "lon": -96.72,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "subtropiskt",
+   "best_months": [
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "mat",
+    "konst",
+    "gamla-stan"
+   ],
+   "gem": true,
+   "why": "Mexikos matstad, med mole, mezcal och ruinstaden Monte Albán ovanför.",
+   "basis": "icp"
+  },
+  {
+   "id": "MX-merida",
+   "name": "Mérida",
+   "country": "MX",
+   "lat": 20.97,
+   "lon": -89.62,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "historia",
+    "mat",
+    "gamla-stan"
+   ],
+   "gem": true,
+   "why": "Kolonial huvudstad på Yucatán, nära mayaruiner och cenoter.",
+   "basis": "icp"
+  },
+  {
+   "id": "CR-la-fortuna",
+   "name": "La Fortuna",
+   "country": "CR",
+   "lat": 10.47,
+   "lon": -84.64,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tags": [
+    "natur",
+    "djurliv",
+    "bad",
+    "vandring"
+   ],
+   "gem": false,
+   "why": "Liten stad vid vulkanen Arenal, med varma källor, regnskog och hängbroar.",
+   "basis": "icp"
+  },
+  {
+   "id": "GT-antigua",
+   "name": "Antigua Guatemala",
+   "country": "GT",
+   "lat": 14.56,
+   "lon": -90.73,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "subtropiskt",
+   "best_months": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tags": [
+    "gamla-stan",
+    "arkitektur",
+    "berg"
+   ],
+   "gem": true,
+   "why": "Kolonial stad med kullerstensgator, omgiven av tre vulkaner.",
+   "basis": "icp"
+  },
+  {
+   "id": "PA-panama",
+   "name": "Panama City",
+   "country": "PA",
+   "lat": 8.98,
+   "lon": -79.52,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "storstad",
+    "historia"
+   ],
+   "gem": false,
+   "why": "Skyskrapor, gamla stan Casco Viejo och fartyg på väg genom kanalen.",
+   "basis": "icp"
+  },
+  {
+   "id": "CO-cartagena",
+   "name": "Cartagena",
+   "country": "CO",
+   "lat": 10.39,
+   "lon": -75.48,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "tropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "gamla-stan",
+    "kust",
+    "strand"
+   ],
+   "gem": false,
+   "why": "Muromgärdad kolonial stad vid Karibiska havet, i starka färger.",
+   "basis": "icp"
+  },
+  {
+   "id": "CO-medellin",
+   "name": "Medellín",
+   "country": "CO",
+   "lat": 6.24,
+   "lon": -75.58,
+   "level": 1,
+   "level_rule": 1,
+   "climate": "subtropiskt",
+   "best_months": [
+    12,
+    1,
+    2,
+    6,
+    7,
+    8
+   ],
+   "tags": [
+    "storstad",
+    "nattliv",
+    "konst"
+   ],
+   "gem": true,
+   "why": "Storstad i en grön dal, med linbanor upp till kvarteren på sluttningarna.",
+   "basis": "icp"
+  },
+  {
+   "id": "PE-cusco",
+   "name": "Cusco",
+   "country": "PE",
+   "lat": -13.53,
+   "lon": -71.97,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "alpint",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "historia",
+    "vandring",
+    "berg"
+   ],
+   "gem": false,
+   "why": "Inkarikets huvudstad i Anderna, och porten till Machu Picchu.",
+   "basis": "icp"
+  },
+  {
+   "id": "PE-lima",
+   "name": "Lima",
+   "country": "PE",
+   "lat": -12.05,
+   "lon": -77.04,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "oken",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "mat",
+    "kust",
+    "storstad"
+   ],
+   "gem": false,
+   "why": "Sydamerikas matstad, på klippor ovanför Stilla havet.",
+   "basis": "icp"
+  },
+  {
+   "id": "EC-quito",
+   "name": "Quito",
+   "country": "EC",
+   "lat": -0.18,
+   "lon": -78.47,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "alpint",
+   "best_months": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "gamla-stan",
+    "berg",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Huvudstad på hög höjd i Anderna, med en stor kolonial stadskärna, nästan på ekvatorn.",
+   "basis": "icp"
+  },
+  {
+   "id": "CL-valparaiso",
+   "name": "Valparaíso",
+   "country": "CL",
+   "lat": -33.05,
+   "lon": -71.62,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "medelhav",
+   "best_months": [
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "konst",
+    "kust",
+    "utsikt"
+   ],
+   "gem": true,
+   "why": "Hamnstad på branta kullar, med bergbanor, gatukonst och färgglada hus.",
+   "basis": "icp"
+  },
+  {
+   "id": "AR-buenos-aires",
+   "name": "Buenos Aires",
+   "country": "AR",
+   "lat": -34.6,
+   "lon": -58.38,
+   "level": 2,
+   "level_rule": 1,
+   "climate": "subtropiskt",
+   "best_months": [
+    3,
+    4,
+    5,
+    9,
+    10,
+    11
+   ],
+   "tags": [
+    "storstad",
+    "mat",
+    "musik",
+    "nattliv"
+   ],
+   "gem": false,
+   "why": "Tango, grillat kött och breda avenyer.",
+   "basis": "icp",
+   "level_note": "Vår bedömning: priserna har stigit kraftigt sedan indexet mättes 2021."
+  },
+  {
+   "id": "BR-rio",
+   "name": "Rio de Janeiro",
+   "country": "BR",
+   "lat": -22.91,
+   "lon": -43.17,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tags": [
+    "strand",
+    "storstad",
+    "utsikt",
+    "natur"
+   ],
+   "gem": false,
+   "why": "Stränder, Sockertoppen och Kristusstatyn i en stad inklämd mellan berg och hav.",
+   "basis": "icp"
+  },
+  {
+   "id": "BR-salvador",
+   "name": "Salvador",
+   "country": "BR",
+   "lat": -12.97,
+   "lon": -38.5,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    9,
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "musik",
+    "historia",
+    "strand"
+   ],
+   "gem": true,
+   "why": "Brasiliens första huvudstad, med färgglada kolonialkvarter och afrobrasiliansk musik.",
+   "basis": "icp"
+  },
+  {
+   "id": "UY-colonia",
+   "name": "Colonia del Sacramento",
+   "country": "UY",
+   "lat": -34.47,
+   "lon": -57.84,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "subtropiskt",
+   "best_months": [
+    10,
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tags": [
+    "gamla-stan",
+    "romantik",
+    "historia"
+   ],
+   "gem": true,
+   "why": "Portugisisk kolonial småstad vid Río de la Plata, en färjetur från Buenos Aires.",
+   "basis": "icp"
+  },
+  {
+   "id": "AU-melbourne",
+   "name": "Melbourne",
+   "country": "AU",
+   "lat": -37.81,
+   "lon": 144.96,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tags": [
+    "mat",
+    "konst",
+    "storstad"
+   ],
+   "gem": false,
+   "why": "Kaffe, gränder med gatukonst och spårvagnar.",
+   "basis": "icp"
+  },
+  {
+   "id": "AU-hobart",
+   "name": "Hobart",
+   "country": "AU",
+   "lat": -42.88,
+   "lon": 147.33,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "natur",
+    "mat",
+    "konst"
+   ],
+   "gem": true,
+   "why": "Tasmaniens huvudstad, med konstmuseet MONA, lördagsmarknad och vildmark nära.",
+   "basis": "icp"
+  },
+  {
+   "id": "AU-cairns",
+   "name": "Cairns",
+   "country": "AU",
+   "lat": -16.92,
+   "lon": 145.77,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "tropiskt",
+   "best_months": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "tags": [
+    "dykning",
+    "natur",
+    "strand"
+   ],
+   "gem": false,
+   "why": "Utgångspunkt för Stora barriärrevet och regnskogen Daintree.",
+   "basis": "icp"
+  },
+  {
+   "id": "NZ-queenstown",
+   "name": "Queenstown",
+   "country": "NZ",
+   "lat": -45.03,
+   "lon": 168.66,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "alpint",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "natur",
+    "vandring",
+    "berg"
+   ],
+   "gem": false,
+   "why": "Liten stad vid en sjö mellan berg, känd för äventyrssporter.",
+   "basis": "icp"
+  },
+  {
+   "id": "NZ-wellington",
+   "name": "Wellington",
+   "country": "NZ",
+   "lat": -41.29,
+   "lon": 174.78,
+   "level": 4,
+   "level_rule": 4,
+   "climate": "kust",
+   "best_months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "tags": [
+    "konst",
+    "mat",
+    "utsikt"
+   ],
+   "gem": true,
+   "why": "Kompakt huvudstad vid en vik, med nationalmuseet Te Papa och bergbana upp till utsikten.",
+   "basis": "icp"
+  },
+  {
+   "id": "FJ-nadi",
+   "name": "Nadi",
+   "country": "FJ",
+   "lat": -17.78,
+   "lon": 177.44,
+   "level": 2,
+   "level_rule": 2,
+   "climate": "tropiskt",
+   "best_months": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "tags": [
+    "strand",
+    "oar",
+    "dykning"
+   ],
+   "gem": false,
+   "why": "Fijis port till ögrupperna Mamanuca och Yasawa.",
+   "basis": "icp"
   }
  ],
  "alternatives": [
@@ -2114,6 +3893,142 @@
    "place": "ES-malaga",
    "why": "Strandstad vid Medelhavet med museer.",
    "cheaper": true
+  },
+  {
+   "for": "US-new-york",
+   "place": "US-chicago",
+   "why": "Amerikansk storstad med skyskrapor, museer och musik.",
+   "cheaper": true
+  },
+  {
+   "for": "US-new-york",
+   "place": "CA-montreal",
+   "why": "Nordamerikansk storstad med mat och festivaler.",
+   "cheaper": true
+  },
+  {
+   "for": "US-san-francisco",
+   "place": "CL-valparaiso",
+   "why": "Kullar, utsikt och färgglada hus vid Stilla havet.",
+   "cheaper": true
+  },
+  {
+   "for": "US-san-francisco",
+   "place": "CA-vancouver",
+   "why": "Storstad vid Stilla havet med naturen nära.",
+   "cheaper": true
+  },
+  {
+   "for": "SG-singapore",
+   "place": "MY-kuala-lumpur",
+   "why": "Storstad i grannlandet med samma blandning av kök.",
+   "cheaper": true
+  },
+  {
+   "for": "SG-singapore",
+   "place": "MY-george-town",
+   "why": "Gatumat och handelshus på Penang.",
+   "cheaper": true
+  },
+  {
+   "for": "HK-hongkong",
+   "place": "TW-taipei",
+   "why": "Kinesisktalande storstad med nattmarknader och berg.",
+   "cheaper": true
+  },
+  {
+   "for": "HK-hongkong",
+   "place": "MY-kuala-lumpur",
+   "why": "Asiatisk storstad med skyskrapor och matmarknader.",
+   "cheaper": true
+  },
+  {
+   "for": "AE-dubai",
+   "place": "OM-muskat",
+   "why": "Arabiska halvön i lugnare och mer traditionell form.",
+   "cheaper": true
+  },
+  {
+   "for": "JP-tokyo",
+   "place": "TW-taipei",
+   "why": "Östasiatisk storstad med mat i centrum.",
+   "cheaper": true
+  },
+  {
+   "for": "JP-tokyo",
+   "place": "KR-seoul",
+   "why": "Östasiatisk storstad med palats och nattliv.",
+   "cheaper": false
+  },
+  {
+   "for": "JP-kyoto",
+   "place": "JP-kanazawa",
+   "why": "Trädgårdar och gamla kvarter i samma land.",
+   "cheaper": false
+  },
+  {
+   "for": "JP-kyoto",
+   "place": "LA-luang-prabang",
+   "why": "Tempelstad i lugnt tempo.",
+   "cheaper": true
+  },
+  {
+   "for": "AU-sydney",
+   "place": "AU-melbourne",
+   "why": "Australisk storstad med mer fokus på mat och kultur.",
+   "cheaper": false
+  },
+  {
+   "for": "ZA-kapstaden",
+   "place": "CL-valparaiso",
+   "why": "Kuststad med vinlandet nära.",
+   "cheaper": false
   }
- ]
+ ],
+ "pli_world": {
+  "JP": 142.5,
+  "KR": 114.6,
+  "TW": 81.4,
+  "HK": 119.7,
+  "SG": 95.6,
+  "TH": 55.2,
+  "VN": 48.7,
+  "ID": 53.3,
+  "MY": 57.9,
+  "PH": 62.3,
+  "KH": 55.2,
+  "LA": 49.5,
+  "IN": 44.4,
+  "LK": 44.2,
+  "NP": 43.6,
+  "AE": 101.9,
+  "OM": 79.3,
+  "JO": 72.4,
+  "GE": 42.5,
+  "AM": 46.6,
+  "UZ": 38.7,
+  "MA": 69.6,
+  "EG": 39.0,
+  "TN": 49.7,
+  "ZA": 79.1,
+  "TZ": 52.6,
+  "NA": 72.0,
+  "US": 158.5,
+  "CA": 149.1,
+  "MX": 77.7,
+  "CR": 84.3,
+  "GT": 65.7,
+  "PA": 79.4,
+  "CO": 55.7,
+  "PE": 70.8,
+  "EC": 71.1,
+  "CL": 88.3,
+  "AR": 63.2,
+  "BR": 69.8,
+  "UY": 102.3,
+  "AU": 168.6,
+  "NZ": 163.2,
+  "FJ": 69.6
+ },
+ "pli_world_year": 2021
 }

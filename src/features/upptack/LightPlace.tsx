@@ -5,6 +5,7 @@ import { Estimate } from '../../components/Estimate';
 import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
 import { isEstimate, placeName, type Place } from '../../lib/content';
+import { indexLine, monthList } from '../../lib/upptack';
 import { useT } from '../../lib/useT';
 import { shortMonthNames } from '../karta/months';
 import { AltBox } from './Alternativ';
@@ -20,10 +21,10 @@ export function LightPlace({ place, places }: { place: Place; places: Place[] })
   const tags = d.tags ?? [];
   const country = place.parent_id ?? place.id.slice(0, 2);
   const level = typeof d.level === 'number' && d.level >= 1 && d.level <= 5 ? d.level : null;
+  // Källraden för prisnivån: Eurostat (upptack.index) eller Världsbanken för basis icp (upptack.index.varlden).
+  const index = indexLine(d, placeName(places, country));
   const sources = [
-    typeof d.pli === 'number' && typeof d.pli_year === 'number'
-      ? t('upptack.index', { plats: placeName(places, country), antal: d.pli, ar: d.pli_year })
-      : null,
+    index ? t(index.key, index.values) : null,
     d.level_note ?? null,
     typeof d.citybreak_gbp === 'number' ? t('upptack.barometer', { belopp: d.citybreak_gbp, ar: BAROMETER_YEAR }) : null,
   ].filter((x): x is string => Boolean(x));
@@ -49,7 +50,7 @@ export function LightPlace({ place, places }: { place: Place; places: Place[] })
         )}
         {months.length > 0 && (
           <div className="row">
-            <span>{t('upptack.kort.basta', { manad: months.map((m) => short[m - 1]).join(', ') })}</span>
+            <span>{t('upptack.kort.basta', { manad: monthList(months, short) })}</span>
             {isEstimate(d, 'best_months') && <Estimate />}
           </div>
         )}

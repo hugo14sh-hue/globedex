@@ -193,6 +193,46 @@ export function toParams(f: DiscoverFilter, sort: DiscoverSort): Record<string, 
 /** Lägger till eller tar bort ett värde i en lista. */
 export const toggleIn = <T,>(list: T[], v: T): T[] => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
 
+// ---------- Bästa månader ----------
+
+/**
+ * Månaderna för {manad} i upptack.kort.basta: korta namn i den ordning de står i filen, så att månader över
+ * årsskiftet (11, 12, 1, 2 på södra halvklotet) skrivs nov, dec, jan, feb och inte jan, feb, nov, dec.
+ */
+export const monthList = (months: number[], short: string[]): string => months.map((m) => short[m - 1]).join(', ');
+
+// ---------- Fler kort när man rullar ----------
+
+/** Antal kort som visas först, och antal som läggs till varje gång man rullar ned till slutet av listan. */
+export const PAGE_SIZE = 30;
+
+/** Antalet kort att visa efter en laddning till: PAGE_SIZE fler, men aldrig fler än listan har. */
+export const nextCount = (shown: number, total: number): number => Math.min(total, shown + PAGE_SIZE);
+
+/** Korten som visas: de första count. Antalet i upptack.antal räknas på hela listan, inte på det här. */
+export const visibleEntries = <T,>(list: T[], count: number): T[] => list.slice(0, Math.max(0, count));
+
+/** Antal länder i filtret upptack.filter.land som gör att listan får sökfältet från kartans fokusval. */
+export const COUNTRY_SEARCH_FROM = 20;
+
+// ---------- Källraden på en lätt plats ----------
+
+/**
+ * Källraden för prisnivån på en lätt plats sida, eller null när indexet saknas.
+ * basis icp: upptack.index.varlden (Världsbankens prisnivåindex, världen = 100). Annars upptack.index (Eurostat).
+ * {plats} är landets namn, {antal} landets värde i indexet och {ar} indexets år.
+ */
+export function indexLine(
+  d: Pick<Place['data'], 'basis' | 'pli' | 'pli_year'>,
+  countryName: string,
+): { key: string; values: { plats: string; antal: number; ar: number } } | null {
+  if (typeof d.pli !== 'number' || typeof d.pli_year !== 'number') return null;
+  return {
+    key: d.basis === 'icp' ? 'upptack.index.varlden' : 'upptack.index',
+    values: { plats: countryName, antal: d.pli, ar: d.pli_year },
+  };
+}
+
 // ---------- Alternativ ----------
 
 /** Rubriken i alternativrutan: upptack.alt.rubrik när minst ett alternativ är billigare, annars upptack.alt.rubrik.lika. */

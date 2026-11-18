@@ -967,7 +967,7 @@
     "upptack.alt.till": "Billigare alternativ till {plats}",
     "upptack.index": "Restauranger och hotell i {plats}: {antal} (EU = 100, Eurostat {ar})",
     "upptack.barometer": "Weekend för två: {belopp} pund (Post Office {ar})",
-    "upptack.kalla": "Prisnivån bygger på Eurostats prisindex för restauranger och hotell, som gäller hela landet. Bästa månader, taggar och alternativ är vår bedömning.",
+    "upptack.kalla": "Prisnivån bygger på Eurostats prisindex för restauranger och hotell i Europa och på Världsbankens prisnivåindex i övriga världen. Båda gäller hela landet. Bästa månader, taggar och alternativ är vår bedömning.",
     "landlista.fn-tw-xk": "FN, observatörer, Taiwan och Kosovo ({totalt})",
     "upptack.tagg.storstad": "Storstad",
     "upptack.tagg.gamla-stan": "Gammal stadskärna",
@@ -1026,7 +1026,15 @@
     "karta.lista.falla-ut": "Visa städer i {plats}",
     "karta.lista.falla-in": "Dölj städer i {plats}",
     "karta.lista.platser": "{antal} platser",
-    "karta.lista.platser.en": "1 plats"
+    "karta.lista.platser.en": "1 plats",
+    "upptack.klimat.tropiskt": "Tropiskt",
+    "upptack.klimat.subtropiskt": "Subtropiskt",
+    "upptack.klimat.oken": "Ökenklimat",
+    "upptack.tagg.djurliv": "Djurliv",
+    "upptack.tagg.dykning": "Dykning och snorkling",
+    "upptack.tagg.tempel": "Tempel",
+    "upptack.tagg.oar": "Öar",
+    "upptack.index.varlden": "Prisnivå i {plats}: {antal} (världen = 100, Världsbanken {ar})"
   },
   "marken": [
     {

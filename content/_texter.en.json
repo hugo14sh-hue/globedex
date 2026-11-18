@@ -963,7 +963,7 @@
     "upptack.alt.till": "Cheaper alternatives to {plats}",
     "upptack.index": "Restaurants and hotels in {plats}: {antal} (EU = 100, Eurostat {ar})",
     "upptack.barometer": "Weekend for two: £{belopp} (Post Office {ar})",
-    "upptack.kalla": "The price level is based on Eurostat's price index for restaurants and hotels, which covers the whole country. Best months, tags and alternatives are our own judgement.",
+    "upptack.kalla": "The price level is based on Eurostat's price index for restaurants and hotels in Europe and the World Bank's price level index elsewhere. Both cover the whole country. Best months, tags and alternatives are our own judgement.",
     "landlista.fn-tw-xk": "UN, observers, Taiwan and Kosovo ({totalt})",
     "upptack.tagg.storstad": "Big city",
     "upptack.tagg.gamla-stan": "Old town",
@@ -1022,7 +1022,15 @@
     "karta.lista.falla-ut": "Show cities in {plats}",
     "karta.lista.falla-in": "Hide cities in {plats}",
     "karta.lista.platser": "{antal} places",
-    "karta.lista.platser.en": "1 place"
+    "karta.lista.platser.en": "1 place",
+    "upptack.klimat.tropiskt": "Tropical",
+    "upptack.klimat.subtropiskt": "Subtropical",
+    "upptack.klimat.oken": "Desert",
+    "upptack.tagg.djurliv": "Wildlife",
+    "upptack.tagg.dykning": "Diving and snorkelling",
+    "upptack.tagg.tempel": "Temples",
+    "upptack.tagg.oar": "Islands",
+    "upptack.index.varlden": "Price level in {plats}: {antal} (world = 100, World Bank {ar})"
   },
   "marken": [
     {

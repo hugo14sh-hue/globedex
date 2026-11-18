@@ -133,9 +133,12 @@ test.beforeAll(async () => {
   hasMonaco = Boolean((data as { data?: { prices?: unknown } } | null)?.data?.prices);
   hasStates = Boolean((await db.from('places').select('id').eq('id', 'US-ca').maybeSingle()).data);
   const mc = await db.from('places').select('data').eq('id', 'MC-monaco').maybeSingle();
+  // Körning 18: platserna utanför Europa (basis icp) finns först när importen är körd med den nya filen.
+  const sg = await db.from('places').select('data').eq('id', 'SG-singapore').maybeSingle();
   hasDiscover =
     Boolean((await db.from('places').select('id').eq('id', 'BA-sarajevo').maybeSingle()).data) &&
-    Boolean((mc.data as { data?: { alternatives?: unknown } } | null)?.data?.alternatives);
+    Boolean((mc.data as { data?: { alternatives?: unknown } } | null)?.data?.alternatives) &&
+    (sg.data as { data?: { basis?: unknown } } | null)?.data?.basis === 'icp';
   // Röktestet går på svenska. Står testkontot på ett annat språk byts det här, och afterAll återställer det.
   const settings = (snap.settings ?? {}) as { theme?: Record<string, unknown> };
   if (settings.theme?.lang && settings.theme.lang !== 'sv')
@@ -792,7 +795,18 @@ test('röktest', async ({ page }) => {
 
       const open = (name: string) => page.getByRole('link', { name: tx('upptack.kort.oppna').replace('{plats}', name), exact: true });
       await expect(open('Sarajevo')).toBeVisible({ timeout: 20_000 });
-      await expect(open('Monaco')).toBeVisible();
+      // Körning 18: de första 30 korten visas, fler laddas när man rullar. Monaco (nivå 5) står långt ned.
+      const cards = page.locator('article.disc-card');
+      await expect(cards).toHaveCount(30);
+      const total = Number((await page.locator('.disc-count').textContent())?.match(/\d+/)?.[0]);
+      expect(total).toBeGreaterThan(30);
+      await expect(async () => {
+        const more = page.locator('.disc-more');
+        if (await more.count()) await more.scrollIntoViewIfNeeded();
+        await expect(open('Monaco')).toBeVisible({ timeout: 1_000 });
+      }).toPass({ timeout: 20_000 });
+      await expect(cards).toHaveCount(total);
+      await expect(page.locator('.disc-count')).toContainText(String(total));
 
       await page.getByRole('button', { name: tx('upptack.filter.rubrik'), exact: true }).click();
       await page.getByRole('button', { name: tx('upptack.pris.1'), exact: true }).click();
@@ -819,6 +833,23 @@ test('röktest', async ({ page }) => {
       await expect(page).toHaveURL(/\/upptack\?pris=1$/);
       await expect(open('Sarajevo')).toBeVisible();
       await expect(open('Monaco')).toHaveCount(0);
+
+      // Körning 18: världsdelen Asien och upptack.pris.1 ger Bangkok men inte Tokyo.
+      await page.goto('/upptack?pris=1');
+      // Med ett valt filter står antalet i knappens namn (Filter 1).
+      await page.getByRole('button', { name: new RegExp(`^${tx('upptack.filter.rubrik')}`) }).click();
+      await page.getByRole('button', { name: tx('kontinent.142'), exact: true }).click();
+      await expect(page).toHaveURL(/[?&]kontinent=AS(&|$)/);
+      await expect(open('Bangkok')).toBeVisible({ timeout: 20_000 });
+      await expect(open('Tokyo')).toHaveCount(0);
+
+      // Singapore: Kuala Lumpur i alternativrutan och källraden från Världsbanken.
+      await page.goto('/karta/SG-singapore');
+      await expect(page.getByRole('heading', { level: 1, name: 'Singapore' })).toBeVisible({ timeout: 20_000 });
+      const sgBox = page.locator('section.alt-box');
+      await expect(sgBox.getByRole('link', { name: /Kuala Lumpur/ })).toHaveAttribute('href', '/karta/MY-kuala-lumpur');
+      const worldLine = tx('upptack.index.varlden').split('{')[0];
+      await expect(page.locator('.light-src p', { hasText: worldLine })).toContainText('Världsbanken');
 
       // Monaco: rutan med alternativ har Menton.
       await page.goto('/karta/MC-monaco');
