@@ -1,0 +1,299 @@
+{
+ "places": {
+  "MC-monaco": {
+   "name": "Monaco",
+   "data": {
+    "best_text": "April and September to October. Hotels are cheapest in February and most expensive in May, and Formula 1 runs on the first weekend of June 2027.",
+    "day_budget_note": "Per person per day excluding flights: a share of a double room in a three-star hotel in Monaco, food, local transport and one sight. A rough estimate. As a day trip from Nice it is considerably cheaper.",
+    "stay": [
+     {
+      "label": "Day trip",
+      "text": "You can fit the changing of the guard, the Rock, the harbour and the casino into one day from Nice."
+     },
+     {
+      "label": "Two nights",
+      "text": "Time for the Oceanographic Museum at an easy pace and an evening on Casino Square."
+     },
+     {
+      "label": "Three nights",
+      "text": "Add a beach day at Larvotto or a match at Stade Louis II."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Monte-Carlo",
+      "text": "The casino and the grand hotels. The most expensive area."
+     },
+     {
+      "name": "La Condamine",
+      "text": "By the harbour and the market hall. This is where you eat cheapest."
+     },
+     {
+      "name": "Fontvieille",
+      "text": "Quiet, close to Stade Louis II."
+     },
+     {
+      "name": "Beausoleil or Nice",
+      "text": "On the French side. Beausoleil borders Monte-Carlo directly, Nice is 20–25 minutes away by train. Clearly cheaper."
+     },
+     {
+      "name": "Monaco-Ville (the Rock)",
+      "text": "The palace, the cathedral and the museum. Good to visit, few places to stay."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Train from Nice",
+      "text": "About 20–25 minutes from Nice-Ville to Monaco-Monte-Carlo. Roughly 4–7 euros one way."
+     },
+     {
+      "mode": "Bus 600 from Nice",
+      "text": "2.50 euros, but allow at least 55 minutes along the coast."
+     },
+     {
+      "mode": "Airport bus 80",
+      "text": "Direct from Nice airport in about an hour. Around 19–20.50 euros."
+     },
+     {
+      "mode": "City bus",
+      "text": "2 euros for a single ticket. Most places are within walking distance anyway."
+     }
+    ],
+    "events": [
+     {
+      "name": "Monte-Carlo Masters (tennis)",
+      "text": "Played at the Monte-Carlo Country Club, just across the border in France."
+     },
+     {
+      "name": "Monaco E-Prix (Formula E)",
+      "text": "One source gives the dates as provisional."
+     },
+     {
+      "name": "Monaco Grand Prix (Formula 1)",
+      "text": "The race is on Sunday 6 June. For the first time, a sprint race is also held during the weekend."
+     },
+     {
+      "name": "Monaco Yacht Show",
+      "text": "Boat show in Port Hercule. Other sources say the dates are not confirmed."
+     },
+     {
+      "name": "National Day",
+      "text": "Celebrated every year on 19 November."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Monaco Grand Prix (Formula 1)",
+      "text": "Held over a weekend in May or June every year. In 2027 it is 4–6 June. Hotels are at their most expensive then and streets are closed."
+     },
+     {
+      "name": "State Apartments of the Prince's Palace open",
+      "text": "In 2026 they were open from 30 March to 15 October."
+     },
+     {
+      "name": "Swimming season"
+     }
+    ],
+    "month_notes": [
+     "Quiet and cool. Hotels are among the cheapest of the year.",
+     "The cheapest month for hotels. Too cold for the beach.",
+     "Milder and still low season. The State Apartments of the Prince's Palace open at the end of the month.",
+     "Pleasant walking weather. The Monte-Carlo Masters tennis tournament pushes up hotel prices at the start of the month.",
+     "Warm, but the most expensive month of the year for hotels. Formula E races on the streets.",
+     "Formula 1 runs on the first weekend in 2027. Everything is full and at its most expensive then. The rest of the month is beach weather.",
+     "High summer: hot, crowded and expensive.",
+     "High summer: hot, crowded and expensive.",
+     "Warm sea and fewer tourists. Avoid the days around the Monaco Yacht Show.",
+     "Still mild, quieter and cheaper.",
+     "Low season. National Day is celebrated on 19 November.",
+     "Low season and short days."
+    ],
+    "prices": {
+     "summary": "Among the most expensive places to stay in Europe. Food and drink can be kept down, the hotel cannot.",
+     "tips": [
+      "Stay in Nice and take the train in. A three-star hotel near the station there costs roughly 100–160 euros per night.",
+      "Have lunch in the market hall in La Condamine instead of by the casino.",
+      "Hotels are cheapest in February and most expensive in May."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "Single ticket on the city bus."
+      },
+      {
+       "note": "The average is Booking.com's. The lowest level is our own weighting."
+      },
+      {
+       "note": "Sources differ: averages between 495 and 890 euros."
+      }
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "MC-fakta-betala": {
+   "title": "Currency: euro (EUR)",
+   "summary": "The country uses the euro (EUR)."
+  },
+  "MC-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not count as a travel document.",
+   "body": "You enter via France and there is no border control between the countries. The casino only admits people who show a passport or ID card."
+  },
+  "MC-fakta-mobil": {
+   "title": "EU roaming does not apply here",
+   "summary": "Monaco is not in the EU. Data and calls can cost extra.",
+   "body": "If your phone connects to Monaco Telecom, your operator's price list for countries outside the EU applies. Check the price before the trip or turn off data roaming when you cross the border."
+  },
+  "MC-fakta-dricks": {
+   "title": "Service charge is included",
+   "summary": "Tips are not expected. Round up or leave 5–10% if you are happy.",
+   "body": "The bill already includes a service charge, the same way as in France."
+  },
+  "MC-fakta-fun-fact": {
+   "title": "National Day on 19 November",
+   "summary": "People eat barbagiuan then, fried pastries regarded as the national dish."
+  },
+  "MC-monaco-fakta-ta-sig-dit": {
+   "title": "Train from Nice in 20–25 minutes",
+   "summary": "The nearest airport is Nice. The train is the fastest and cheapest way in.",
+   "body": "The regional train runs along the coast from Nice-Ville to Monaco-Monte-Carlo and costs roughly 4–7 euros one way. Bus 600 costs 2.50 euros but takes at least 55 minutes. Airport bus 80 runs direct from the airport for around 19–20.50 euros."
+  },
+  "MC-monaco-fakta-boende": {
+   "title": "Stay in Nice and come in for the day",
+   "summary": "Hotels in Monaco cost several times more than in Nice.",
+   "body": "A three-star hotel in Monaco averages around 375 euros per night. Near Nice-Ville station the same class costs roughly 100–160 euros."
+  }
+ },
+ "items": {
+  "MC-monaco-kasinot": {
+   "name": "Casino de Monte-Carlo",
+   "summary": "Look in during the morning. Gaming starts at 2 pm.",
+   "body": "Visits without gaming 10 am–1 pm, last admission 12.15 pm. From 2 pm the rules are age 18, a dress code and a passport or ID card. Driving licences are not accepted. Information on the entrance fee varies, between 10 and 20 euros, so check the price at the desk."
+  },
+  "MC-monaco-oceanografiska": {
+   "name": "Oceanographic Museum",
+   "summary": "Aquarium and museum on the cliff edge. Allow two hours.",
+   "body": "Adults 22.50 euros, 20.50 online. Children aged 4–17 and students 14 euros. Last admission 30 minutes before closing."
+  },
+  "MC-monaco-furstepalatset": {
+   "name": "The Prince's Palace and the changing of the guard",
+   "summary": "The guard changes every day at 11.55 am on the square in front of the palace.",
+   "body": "Be there in good time, the square fills up. The rooms inside the palace are only open part of the year, in 2026 from 30 March to 15 October. The ticket costs 10 or 13 euros depending on the source."
+  },
+  "MC-monaco-condamine": {
+   "name": "Marché de la Condamine",
+   "summary": "The market hall at Place d'Armes. Open every day since 1880.",
+   "body": "This is where you eat cheapest in Monaco: barbagiuan, socca and the dish of the day at the stalls. The market is open roughly 6 am–2 pm."
+  },
+  "MC-monaco-stade-louis-ii": {
+   "name": "Stade Louis II",
+   "summary": "AS Monaco's home ground in Fontvieille. The team plays in the French Ligue 1.",
+   "body": "Buy tickets directly from the club. Resale sites often charge more than face value."
+  },
+  "MC-monaco-port-hercule": {
+   "name": "Port Hercule",
+   "summary": "The harbour with the big yachts, in the middle of town.",
+   "body": "The start and finish of the Grand Prix circuit run along the quay. Lovely at dusk."
+  },
+  "MC-monaco-grand-prix-banan": {
+   "name": "Walk the Grand Prix circuit",
+   "summary": "The circuit is ordinary streets. You can walk the whole lap.",
+   "body": "From Casino Square down through the hairpin at the Fairmont, through the tunnel and out by the harbour."
+  },
+  "MC-monaco-katedralen": {
+   "name": "Monaco Cathedral",
+   "summary": "Prince Rainier III and Grace Kelly are buried here.",
+   "body": "On the Rock, between the palace and the Oceanographic Museum."
+  },
+  "MC-monaco-larvotto": {
+   "name": "Larvotto",
+   "summary": "Monaco's city beach, east of Monte-Carlo.",
+   "body": "Bring your own if you want to avoid the beach clubs' prices."
+  }
+ },
+ "compendium": {
+  "mat-barbagiuan": {
+   "name": "Barbagiuan",
+   "hint": "A fried pastry filled with Swiss chard and ricotta."
+  },
+  "mat-socca": {
+   "name": "Socca",
+   "hint": "A thin chickpea-flour pancake, eaten standing up."
+  },
+  "sevardhet-kasinot-monte-carlo": {
+   "name": "The casino in Monte-Carlo",
+   "hint": "Can be visited without gambling, in the morning."
+  },
+  "sevardhet-vaktavlosning-monaco": {
+   "name": "The changing of the guard in Monaco",
+   "hint": "Every day at 11.55 am in front of the palace."
+  },
+  "sevardhet-harnalskurvan": {
+   "name": "The hairpin",
+   "hint": "The slowest corner on the Grand Prix circuit, at the Fairmont."
+  },
+  "arena-stade-louis-ii": {
+   "name": "Stade Louis II",
+   "hint": "AS Monaco's home ground in Fontvieille."
+  }
+ },
+ "ideas": {
+  "MC-monaco-ide-vaktavlosning": {
+   "title": "The changing of the guard and the Rock",
+   "body": "Be on the palace square before 11.55 am and then walk the alleys over to the cathedral.",
+   "duration": "about 2 h"
+  },
+  "MC-monaco-ide-banan": {
+   "title": "Walk the Grand Prix circuit",
+   "body": "Start at Casino Square and follow the streets down to the harbour, through the hairpin and the tunnel.",
+   "duration": "about 1.5 h"
+  },
+  "MC-monaco-ide-kasinot": {
+   "title": "The casino in the morning",
+   "body": "Go in between 10 am and 12.15 pm and see the rooms before gaming starts. Bring a passport or ID card.",
+   "duration": "about 1 h"
+  },
+  "MC-monaco-ide-saluhallen": {
+   "title": "Lunch in the market hall",
+   "body": "Share barbagiuan and socca at Marché de la Condamine. Come before 2 pm.",
+   "duration": "about 1 h"
+  },
+  "MC-monaco-ide-museet": {
+   "title": "Oceanographic Museum",
+   "body": "Buy the ticket online, it is two euros cheaper, and finish on the roof terrace.",
+   "duration": "about 2 h"
+  },
+  "MC-monaco-ide-hamnen": {
+   "title": "Dusk at Port Hercule",
+   "body": "Walk around the quay as the lights come on aboard the boats.",
+   "duration": "about 1 h"
+  },
+  "MC-monaco-ide-match": {
+   "title": "Match at Stade Louis II",
+   "body": "Watch AS Monaco in Ligue 1. Buy the tickets from the club.",
+   "duration": "about 3 h"
+  }
+ },
+ "gifts": {
+  "MC-present-f1": {
+   "name": "Grand Prix souvenir",
+   "body": "A cap or model car from the city of the circuit."
+  },
+  "MC-present-frimarken": {
+   "name": "Stamps from Monaco",
+   "body": "The country issues its own stamps, which collectors look for."
+  },
+  "MC-present-spelkort": {
+   "name": "A deck of cards from the casino",
+   "body": "Small, easy to pack and usable at home."
+  }
+ }
+}

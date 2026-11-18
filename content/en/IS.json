@@ -1,0 +1,240 @@
+{
+ "places": {
+  "IS": {
+   "name": "Iceland"
+  },
+  "IS-reykjavik": {
+   "name": "Reykjavik",
+   "data": {
+    "best_text": "June to August for bright nights and open roads, September to March for the northern lights.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The city, the Blue Lagoon and the Golden Circle with Þingvellir, Strokkur and Gullfoss."
+     },
+     {
+      "label": "Five days",
+      "text": "Time for the south coast with an overnight stop on the way."
+     },
+     {
+      "label": "One week",
+      "text": "Add Vatnajökull or drive further east with a rental car."
+     }
+    ],
+    "areas": [
+     {
+      "name": "City centre (101)",
+      "text": "Walking distance to Hallgrímskirkja, Harpa and the restaurants. The most expensive area."
+     },
+     {
+      "name": "Laugardalur",
+      "text": "Cheaper, close to the city's large outdoor pool. Bus into the centre."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Flybus from Keflavik",
+      "text": "45 minutes to the BSÍ bus terminal. A bus leaves 35–45 minutes after every arrival."
+     }
+    ],
+    "events": [
+     {
+      "name": "Dark Music Days",
+      "text": "A festival for new and experimental music."
+     },
+     {
+      "name": "Winter Lights Festival",
+      "text": "A light trail, museum night and pool night across the capital area. Free."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Puffins",
+      "text": "They arrive in mid-April and leave in mid-August. Best from May to July."
+     },
+     {
+      "name": "Midnight sun",
+      "text": "From mid-May to the end of July."
+     },
+     {
+      "name": "Whale watching",
+      "text": "Runs all year, but the chances are best now. Best in June."
+     },
+     {
+      "name": "Highland roads open",
+      "text": "From mid-June to early September. Four-wheel drive required."
+     },
+     {
+      "name": "Ice caves",
+      "text": "Sources give different start dates, from October or November."
+     },
+     {
+      "name": "Northern lights",
+      "text": "Requires darkness and clear skies."
+     }
+    ],
+    "month_notes": [
+     "Dark and cold. Season for northern lights and ice caves.",
+     "Winter with a little more light. Northern lights and ice caves.",
+     "The last good month for northern lights and ice caves.",
+     "Between seasons. The first puffins arrive in the middle of the month.",
+     "The puffins are in place and the midnight sun begins. Cool, and the highlands are closed.",
+     "Midnight sun, puffins and the best time for whale watching. The highland roads open in the middle of the month.",
+     "Warmest and most tourists. Puffins and open highlands. Book accommodation early.",
+     "The puffins leave in the middle of the month. Still summer, and the darkness returns.",
+     "Autumn colours, fewer tourists and the northern lights are back. The highland roads close at the start of the month.",
+     "Darker and wetter. Northern lights, and the ice caves begin to open.",
+     "Winter and short days. Northern lights and ice caves.",
+     "The darkest time of the year. Christmas lights, northern lights and ice caves."
+    ],
+    "prices": {
+     "summary": "Among Europe's most expensive cities, above all for food and alcohol.",
+     "rows": [
+      {
+       "note": "With drinks. The source's own pages give different amounts, hence only a range."
+      },
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "IS-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not normally count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen, which also includes Iceland and Norway. Within the Nordics a Swedish driving licence can be enough in some cases, but a passport or national ID card is recommended."
+  },
+  "IS-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "The same price as in Sweden for calls, texts and data.",
+   "body": "Roam-like-at-home also applies in the EEA countries Iceland, Liechtenstein and Norway. Check whether your plan has a cap on data abroad."
+  },
+  "IS-fakta-betala": {
+   "title": "Currency: Icelandic króna (ISK)",
+   "summary": "The country uses the Icelandic króna (ISK)."
+  },
+  "IS-fakta-alkohol": {
+   "title": "Alcohol from age 20",
+   "summary": "The age limit is 20 for all alcohol.",
+   "body": "The state-run Vínbúðin has a monopoly on alcohol above 2.25 per cent. ID is checked both in shops and in bars."
+  },
+  "IS-reykjavik-fakta-ta-sig-dit": {
+   "title": "Keflavik to Reykjavik in 45 minutes",
+   "summary": "Flybus runs to BSÍ after every arriving flight.",
+   "body": "The bus matches all arrivals, so you can take the one that is waiting. Wifi is available on board."
+  },
+  "IS-fakta-surtsey": {
+   "title": "The island born from the sea",
+   "summary": "The volcanic island of Surtsey has been a World Heritage Site since 2008.",
+   "body": "Iceland has three World Heritage Sites: Þingvellir (2004), Surtsey (2008) and Vatnajökull (2019)."
+  }
+ },
+ "items": {
+  "IS-thingvellir": {
+   "name": "Þingvellir",
+   "summary": "National park and World Heritage Site since 2004.",
+   "body": "The Althing was founded here in the year 930. The landscape and Lake Þingvallavatn belong together geologically."
+  },
+  "IS-vatnajokull": {
+   "name": "Vatnajökull National Park",
+   "summary": "Covers 14 per cent of Iceland, a World Heritage Site since 2019.",
+   "body": "Volcanoes, glaciers and desert in the same park."
+  },
+  "IS-reykjavik-hallgrimskirkja": {
+   "name": "Hallgrímskirkja",
+   "summary": "The church is free, the tower costs money.",
+   "body": "The city's landmark with a view from the tower. The church is used for services and concerts, so the tower and church may close temporarily."
+  },
+  "IS-bla-lagunen": {
+   "name": "The Blue Lagoon",
+   "summary": "Must be booked in advance. The ticket has an arrival hour.",
+   "body": "The lagoon is usually fully booked all year. A ticket for 1 pm is valid for arrival between 1 and 2 pm, and then you can stay as long as you like. Everyone showers without swimwear before bathing."
+  },
+  "IS-reykjavik-harpa": {
+   "name": "Harpa",
+   "summary": "The glass concert hall by the harbour. Free to enter.",
+   "body": "The public areas are open Sun–Tue 10 am–6 pm and Wed–Sat 10 am–8 pm. Concerts and guided tours require a ticket."
+  },
+  "IS-strokkur": {
+   "name": "Strokkur and Geysir",
+   "summary": "The geyser Strokkur erupts every six to ten minutes.",
+   "body": "No entrance fee, free parking and always open. Located in Haukadalur, about 1.5 hours from Reykjavik. Geysir itself has been dormant since 2003."
+  },
+  "IS-gullfoss": {
+   "name": "Gullfoss",
+   "summary": "The waterfall ten minutes east of Geysir.",
+   "body": "The third stop on the Golden Circle together with Þingvellir and Geysir."
+  }
+ },
+ "compendium": {
+  "mat-skyr": {
+   "name": "Skyr",
+   "hint": "A thick cultured dairy product eaten with a spoon."
+  },
+  "mat-pylsa": {
+   "name": "Icelandic hot dog",
+   "hint": "Order it with everything on."
+  },
+  "daggdjur-islandshast": {
+   "name": "Icelandic horse",
+   "hint": "Small and shaggy, often standing by the roadside."
+  },
+  "fagel-lunnefagel": {
+   "name": "Puffin",
+   "hint": "Black and white with a colourful beak, on the coast in summer."
+  },
+  "naturfenomen-gejser": {
+   "name": "Erupting geyser",
+   "hint": "A hot spring that throws up water at regular intervals."
+  },
+  "naturfenomen-norrsken": {
+   "name": "Northern lights",
+   "hint": "Requires darkness and clear skies."
+  }
+ },
+ "ideas": {
+  "IS-reykjavik-ide-thingvellir": {
+   "title": "Day trip to Þingvellir",
+   "body": "Walk in the rift valley where the Althing met.",
+   "duration": "Half a day"
+  },
+  "IS-reykjavik-ide-kyrktornet": {
+   "title": "View from Hallgrímskirkja",
+   "body": "Go up the tower on a clear day and then walk down the main street.",
+   "duration": "about 1 h"
+  },
+  "IS-ide-bla-lagunen": {
+   "title": "The Blue Lagoon on the way to or from your flight",
+   "body": "Book the time well in advance and put the bath on the first or last day.",
+   "duration": "Half a day"
+  },
+  "IS-reykjavik-ide-gyllene-cirkeln": {
+   "title": "The Golden Circle",
+   "body": "Þingvellir, Strokkur and Gullfoss in one day. Works with a rental car or a bus tour.",
+   "duration": "One day"
+  },
+  "IS-reykjavik-ide-harpa": {
+   "title": "Harpa at dusk",
+   "body": "Go in and look at the glass façade from the inside, and continue along the harbour.",
+   "duration": "about 1 h"
+  }
+ },
+ "gifts": {
+  "IS-present-ull": {
+   "name": "Icelandic wool",
+   "body": "A hat or mittens are cheaper and lighter than a whole jumper."
+  },
+  "IS-present-brennivin": {
+   "name": "Brennivín",
+   "body": "Icelandic caraway spirit in a small bottle."
+  },
+  "IS-present-mugg": {
+   "name": "Lava ceramic mug",
+   "body": "Local ceramics with a black, rough surface."
+  }
+ }
+}

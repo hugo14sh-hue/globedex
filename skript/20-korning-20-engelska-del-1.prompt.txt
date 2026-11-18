@@ -1,0 +1,43 @@
+Läs CLAUDE.md, FORMAT.md för innehållet och docs/schema.sql innan du gör något. Körning 1 till 19 är klara.
+
+Körning 20: innehållet på engelska, del 1
+
+Ny mapp finns: content/en/ med fyra filer (_upptack.json, _bucket.json, _packlista.json, _innan-avresa.json). Landsfilerna på engelska kommer senare, en i taget, i samma mapp. Ändra inte i innehållsfilerna: stämmer något inte, skriv det i slutrapporten. Textfilerna är oförändrade (737 nycklar per språk).
+
+Databasen: Hugo har redan kört SQL-blocket nedan. Lägg in det i docs/schema.sql och gör inga andra databasändringar.
+
+   alter table public.places           add column if not exists en jsonb;
+   alter table public.place_facts      add column if not exists en jsonb;
+   alter table public.place_items      add column if not exists en jsonb;
+   alter table public.compendium_items add column if not exists en jsonb;
+   alter table public.bucket_catalog   add column if not exists en jsonb;
+   alter table public.ideas            add column if not exists en jsonb;
+   alter table public.gift_tips        add column if not exists en jsonb;
+
+Principen: svenskan i content/ är originalet. content/en/ innehåller bara översatta texter, aldrig siffror, id:n, datum, koordinater eller källor. Kolumnen en innehåller de engelska texterna för raden, med samma fältnamn som den svenska raden. Saknas en engelsk text visas den svenska, fält för fält. Inget i appen får gå sönder av att en fil eller ett fält saknas i content/en/.
+
+1. Formatet i content/en/. Beskriv det i docs/FORMAT.md.
+   - en/_upptack.json: places { id: { why, name (bara när namnet skiljer sig), level_note (bara när den svenska platsen har en) } }, existing { id: { why } }, alternatives { "<for>><place>": why }.
+   - en/_bucket.json: { id: { name, season, where_text, checklist_items } }. checklist_items finns bara för delmål av typen delar och har samma antal och ordning som items i den svenska filen.
+   - en/_packlista.json: groups { svenskt gruppnamn: engelskt } och items { id: { title } }.
+   - en/_innan-avresa.json: items { id: { title, hint } }.
+   - en/<landskod>.json (kommer senare, bygg stödet nu): samma toppnycklar som landsfilen, men som objekt med id som nyckel:
+     places { id: { name, data } }, facts { id: { title, summary, body } }, items { id: { name, summary, body } }, compendium { id: { name, hint } }, ideas { id: { title, body, duration } }, gifts { id: { name, body } }.
+     data under places speglar den svenska data-strukturen men innehåller bara textfälten: best_text, flight_tips, day_budget_note, stay [ { name, text } ], areas [ { name, text } ], transport [ { mode, text } ], month_notes [ 12 texter ], events [ { name, text } ], seasons [ { name, text } ], prices { summary, tips [ ], rows [ { note } ] }. Listor har samma längd och ordning som i den svenska filen, och en post utan text är ett tomt objekt.
+
+2. Validering i import:check för content/en/: okända id:n, okända fält, listor med fel längd, tomma texter, platshållare som inte finns i den svenska texten, och ett fält som finns på engelska men saknas på svenska. Saknade översättningar är inte fel: skriv i stället ut en sammanställning per fil med antal översatta texter av totalt antal.
+
+3. Importen skriver kolumnen en för de sju tabellerna. För places läggs de engelska texterna från _upptack.json (why, level_note, alternativens why) och från landsfilen ihop i samma en-objekt. Saknas engelska för en rad sätts en till null. Importen ska gå att köra om utan att något dubbleras.
+
+4. Appen. Lägg ett enda ställe, till exempel en funktion i src/lib, som väljer text för en rad och ett fält efter valt språk och faller tillbaka på svenskan. Använd den överallt där innehåll ur de sju tabellerna visas: kartan, platssidor, Smart månad, priser, säsonger, händelser, Idag, Listor, bucketlistan, kompendiet, presenttips, Upptäck, sök och Wrapped. Sök ska hitta platser på båda språken oavsett valt språk.
+   Namn på länder kommer som i dag från webbläsarens namn på valt språk och från land.<id>.
+
+5. Packlistan och Innan avresa kopieras till resan när den skapas. Nya resor får texterna på det språk som är valt när resan skapas. Befintliga resor ändras inte. Gruppnamnen i packlistan översätts med groups när raden visas, om gruppen är en av de fem från mallen.
+
+6. Märken, bucketlistans kategorier och andra texter som redan ligger i _texter.json rörs inte.
+
+7. Enhetstester: fallback fält för fält, en plats med engelska från båda källorna, listor i data (månad 3 på engelska, månad 4 saknas), sök på båda språken, valideringens fel och sammanställning, ny resa på engelska. Röktestet: byt till engelska, öppna Upptäck och kontrollera att kortet för Lisbon har engelsk text och engelskt namn, öppna bucketlistan och kontrollera en engelsk rad, öppna en svensk stad utan översättning och kontrollera att den svenska texten visas, och byt tillbaka till svenska efteråt.
+
+Regler: Skriv inga egna texter och översätt ingenting själv. Saknas en text på något av språken: lista nyckeln i slutrapporten. Gör inga databasändringar själv: behövs en till, ge mig ett SQL-block. Lägg inte till funktioner utöver punkterna: idéer skrivs i docs/fas2.md. Kör inte importen mot databasen. Vänta inte på bakgrundsjobb.
+
+Avsluta med npm run import:check, npm run build, npm run typecheck, npm test och npm run test:e2e, kontrollera exitkoderna, gör en git commit med meddelandet "Körning 20: innehåll på engelska, del 1" och skriv slutrapporten innan du avslutar, med rubrikerna Klart, Inte klart, Röktestet, Saknade textnycklar per språk, Det här behöver Hugo göra.

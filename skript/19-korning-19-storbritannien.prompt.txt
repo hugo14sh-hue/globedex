@@ -1,0 +1,29 @@
+Läs CLAUDE.md, FORMAT.md för innehållet och docs/schema.sql innan du gör något. Körning 1 till 18 är klara.
+
+Körning 19: England, Skottland, Wales och Nordirland som egna länder
+
+Ändrat innehåll finns i content/: _landlistor.json har fått fältet delade, och textfilerna har 7 nya nycklar (737 per språk). Ändra inte i innehållsfilerna: stämmer något inte, skriv det i slutrapporten.
+
+1. _landlistor.json, fältet delade: { "GB": ["GB-eng", "GB-sct", "GB-wls", "GB-nir"] }. Läs _om. Lägg valideringen i import:check (landet finns bland appens länder, delarnas id börjar med landets kod och har namn under land.<id> på båda språken) och beskriv fältet i docs/FORMAT.md. Bygg det allmänt, så att fler länder kan delas senare genom att bara ändra filen.
+
+2. Importen skapar de fyra delarna som platser av typen land, med GB som förälder och Europa som världsdel, på samma sätt som länderna utan landsfil. Namnet kommer från land.<id> på valt språk. Går det inte utan databasändring: ge mig ett SQL-block och skriv varför.
+
+3. Kartdata. Ta fram gränserna för de fyra delarna ur Natural Earth, Admin 0 map units (public domain), i samma detaljnivå och format som appens övriga länder, och lägg dem i public/geo/ med ett skript i scripts/ som går att köra om. Ange källan där appen redan anger kartkällor.
+
+4. Nytt val under Vilka länder räknas, både under Anpassning och i knappen på kartan: en brytare med texten landlista.delade.val och hjälptexten landlista.delade.hjalp. Förvalt är på, också för befintliga användare. Valet sparas i profiles.settings och gäller tillsammans med vilken av de fyra listorna som helst.
+   När det är på:
+   - Kartan ritar de fyra delarna som egna länder som går att öppna och ge status, med egna färger. Storbritannien som helhet går inte att trycka på.
+   - I varje lista där GB ingår räknas de fyra delarna i stället för GB, så totalen ökar med tre (FN 196, FN och observatörer 198, med Taiwan och Kosovo 200, alla 240). Talen i landlista.* fylls i av {totalt} som förut.
+   - Statistik, mål, märken, Vi (alla lägen), listan Platser, kartans fokusval och sök använder delarna i stället för GB.
+   - Flaggor: England, Skottland och Wales har egna flaggor. Använd dem om appens flaggkälla har dem, annars Storbritanniens flagga. Nordirland visas med Storbritanniens flagga.
+   När det är av är allt som i dag, och delarnas statusrader ligger kvar orörda i databasen men visas och räknas inte.
+
+5. Befintliga markeringar. Har användaren en status på GB och valet är på: visa texten karta.delade.flytta ({plats} är landets namn) överst i rutan för var och en av de fyra delarna tills minst en del har fått en status, och föreslå samma status som GB hade som förval. Ta inte bort raden för GB: den används igen om valet slås av. Räkna aldrig både GB och en del.
+
+6. Sådant som pekar på GB fortsätter fungera: resor med Storbritannien som plats, valutan, Innan avresa och lätta platser i Upptäck. I sök efter resmål visas både Storbritannien och de fyra delarna.
+
+7. Enhetstester: totalerna för alla fyra listorna med valet på och av, att GB och delarna aldrig räknas samtidigt, förvalet för befintliga användare, förslaget från GB:s gamla status, valideringen. Röktestet: kontrollera att England går att öppna på kartan, markera Skottland som besökt och kontrollera att antalet länder i Vi ökar med ett, slå av valet och kontrollera att Storbritannien går att öppna igen, och städa efteråt.
+
+Regler: Skriv inga egna texter och översätt ingenting själv. Saknas en text på något av språken: lista nyckeln i slutrapporten. Gör inga databasändringar själv: behövs en, ge mig ett SQL-block. Lägg inte till funktioner utöver punkterna: idéer skrivs i docs/fas2.md. Kör inte importen mot databasen. Vänta inte på bakgrundsjobb.
+
+Avsluta med npm run import:check, npm run build, npm run typecheck, npm test och npm run test:e2e, kontrollera exitkoderna, gör en git commit med meddelandet "Körning 19: Storbritanniens fyra länder" och skriv slutrapporten innan du avslutar, med rubrikerna Klart, Inte klart, Röktestet, Saknade textnycklar per språk, Det här behöver Hugo göra.

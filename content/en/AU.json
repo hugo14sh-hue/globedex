@@ -1,0 +1,219 @@
+{
+ "places": {
+  "AU": {
+   "name": "Australia"
+  },
+  "AU-sydney": {
+   "name": "Sydney",
+   "data": {
+    "best_text": "March to April and October to November. The swimming season is November to March.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Four days",
+      "text": "The harbour, the Opera House, Manly and the coastal walk."
+     },
+     {
+      "label": "One week",
+      "text": "Time for a day trip to the Blue Mountains and more beaches."
+     },
+     {
+      "label": "Ten days",
+      "text": "Add the coast north or south of the city."
+     }
+    ],
+    "areas": [
+     {
+      "name": "CBD and The Rocks",
+      "text": "Walking distance to Circular Quay, the ferries and the Opera House."
+     },
+     {
+      "name": "Surry Hills",
+      "text": "Cafés and restaurants, close to Central where the airport train stops."
+     },
+     {
+      "name": "Bondi",
+      "text": "Beach life and the coastal walk on your doorstep. Bus and train into the city."
+     },
+     {
+      "name": "Manly",
+      "text": "A beach and a small-town feel, 30 minutes by ferry from the city."
+     },
+     {
+      "name": "Kings Cross",
+      "text": "The city's old nightlife district. Cheap, but rowdier at night."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Airport train",
+      "text": "13 minutes to Central. Tap your payment card at the gate. A station fee is added to the fare."
+     },
+     {
+      "mode": "Ferry from Circular Quay",
+      "text": "The ferry to Manly takes 30 minutes and passes the Opera House."
+     }
+    ],
+    "events": [
+     {
+      "name": "New Year's Eve fireworks",
+      "text": "Fireworks over the harbour and the bridge. Good spots fill up early in the day."
+     },
+     {
+      "name": "Sydney Festival",
+      "text": "Three weeks of theatre, music and free outdoor events."
+     },
+     {
+      "name": "Sydney Mardi Gras",
+      "text": "Pride festival that ends with the parade on Oxford Street."
+     },
+     {
+      "name": "Vivid Sydney",
+      "text": "Festival of light by the harbour and the Opera House, 23 nights. Free."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Swimming season"
+     },
+     {
+      "name": "Whales along the coast",
+      "text": "Humpback whales pass by on their migration."
+     }
+    ],
+    "month_notes": [
+     "High summer and beach weather, but school holidays and high prices.",
+     "Warm sea and slightly fewer tourists than in January.",
+     "Late summer: still beach weather and quieter.",
+     "Mild and clear. Good for the coastal walk.",
+     "Autumn. Cooler evenings and more rain.",
+     "Winter in the southern hemisphere: cool and too cold for swimming.",
+     "The coldest month of the year, but rarely below ten degrees.",
+     "Still winter. The cheapest time to stay.",
+     "Spring. Warmer days and few tourists.",
+     "Warm without the summer crowds.",
+     "The swimming season begins and prices are still reasonable.",
+     "Summer, Christmas and New Year's Eve fireworks. Expensive and fully booked towards the end."
+    ],
+    "prices": {
+     "summary": "More expensive than at home, above all beer and dinner at a restaurant.",
+     "tips": [
+      "Another source gives higher prices: 135 dollars for a three-course meal for two, 11 for a beer and 5.60 for a cappuccino."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "AU-fakta-betala": {
+   "title": "Currency: Australian dollar (AUD)",
+   "summary": "The country uses the Australian dollar (AUD)."
+  },
+  "AU-fakta-mobil": {
+   "title": "EU roaming does not apply",
+   "summary": "Australia is outside the EU's roaming rules.",
+   "body": "Operators can charge entirely different prices outside the EU. Check the price list or buy a local data package or eSIM before you turn on mobile data."
+  },
+  "AU-fakta-inresa": {
+   "title": "A free eVisitor is required before the trip",
+   "summary": "Swedish citizens apply for an eVisitor (651) online. It costs nothing.",
+   "body": "The permit is valid for twelve months and lets you stay up to three months per visit. You apply in ImmiAccount in a web browser, not in the ETA app. It cannot be extended."
+  },
+  "AU-fakta-biosakerhet": {
+   "title": "Declare all food, plants and animal products",
+   "summary": "Tick yes on the incoming passenger card if you have food, seeds, wood or animal products with you.",
+   "body": "Fines for undeclared goods were between 550 and 5,500 Australian dollars in 2023. Answer every question truthfully. An officer may inspect what you declare."
+  },
+  "AU-fakta-dricks": {
+   "title": "Tipping is not needed",
+   "summary": "Tipping is not necessary in restaurants, but it is becoming more common.",
+   "body": "Staff are paid wages that do not depend on tips."
+  },
+  "AU-sydney-fakta-ta-sig-dit": {
+   "title": "The airport train takes 13 minutes but has an extra fee",
+   "summary": "The stations at the airport charge 17.92 dollars extra per adult on top of the train fare.",
+   "body": "The fee is deducted automatically when you tap an Opal card or an ordinary payment card. If you buy a single ticket the fee is slightly higher. Anyone topping up an Opal card at the airport must load at least 35 dollars."
+  },
+  "AU-fakta-alkohol": {
+   "title": "Alcohol from age 18",
+   "summary": "The age limit is 18 throughout the country, both to buy and to drink in bars.",
+   "body": "A passport is accepted as ID. Bring it if you look young."
+  }
+ },
+ "items": {
+  "AU-sydney-operahuset": {
+   "name": "The Opera House",
+   "summary": "A World Heritage Site by the harbour. Guided tours take about an hour.",
+   "body": "The building is at Circular Quay, served by trains and ferries."
+  },
+  "AU-sydney-bondi-coogee": {
+   "name": "The Bondi to Coogee coastal walk",
+   "summary": "Six kilometres along the cliffs past five beaches. Free.",
+   "body": "The trail is signposted all the way and takes 2–3 hours. It goes via Tamarama, Bronte and Clovelly. There are stairs, so it does not work with a wheelchair or pram. Take public transport to Bondi, parking is difficult at weekends."
+  },
+  "AU-sydney-manlyfarjan": {
+   "name": "The ferry to Manly",
+   "summary": "30 minutes across the harbour from Circular Quay.",
+   "body": "You see the Opera House and the bridge from the water on the way out."
+  }
+ },
+ "compendium": {
+  "daggdjur-kanguru": {
+   "name": "Kangaroo",
+   "hint": "Easiest to see at dawn and dusk outside the cities."
+  },
+  "daggdjur-koala": {
+   "name": "Koala",
+   "hint": "Sleeps in eucalyptus trees for most of the day."
+  },
+  "fagel-kookaburra": {
+   "name": "Kookaburra",
+   "hint": "Its call sounds like laughter."
+  },
+  "fagel-kakadua": {
+   "name": "Sulphur-crested cockatoo",
+   "hint": "A large white parrot you hear long before you see it."
+  },
+  "dryck-flat-white": {
+   "name": "Flat white",
+   "hint": "Espresso with steamed milk and a thin layer of foam."
+  },
+  "bakverk-lamington": {
+   "name": "Lamington",
+   "hint": "A square of sponge cake dipped in chocolate and coconut."
+  }
+ },
+ "ideas": {
+  "AU-sydney-ide-kustvandring": {
+   "title": "Bondi to Coogee with a swim stop",
+   "body": "Start in Bondi in the morning, swim at Bronte halfway and have lunch in Coogee.",
+   "duration": "Half a day"
+  },
+  "AU-sydney-ide-manly": {
+   "title": "Ferry to Manly at sunset",
+   "body": "Head out in the afternoon and take the ferry back as the sun sets behind the bridge.",
+   "duration": "Half a day"
+  }
+ },
+ "gifts": {
+  "AU-present-mugg": {
+   "name": "Mug with Aboriginal art",
+   "body": "Choose one where the artist is named and gets paid."
+  },
+  "AU-present-kex": {
+   "name": "Chocolate biscuits",
+   "body": "Australia's best-known biscuits, sold in every supermarket."
+  },
+  "AU-present-koala": {
+   "name": "Soft toy koala",
+   "body": "The classic for the youngest."
+  }
+ }
+}
