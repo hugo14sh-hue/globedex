@@ -1,6 +1,8 @@
 // Innehållet från content/ (via Supabase). Bara läsning. Texterna kommer från Hugo, inget skrivs här.
 import { supabase } from './supabase';
 import { displayNames, LOCALE } from './locale';
+import { isCountryId, isSplitPart } from './delade';
+import { t } from './texter';
 import type { Prices } from './prices';
 
 export type PlaceKind = 'country' | 'region' | 'city' | 'spot';
@@ -224,8 +226,12 @@ export async function fetchGifts(placeIds: string[]): Promise<GiftTip[]> {
 /** Sant om fältet är egen bedömning utan källa. */
 export const isEstimate = (data: PlaceData | null | undefined, field: string) => Boolean(data?.own_judgment?.includes(field));
 
-/** Landets namn på valt språk från webbläsaren, för länder som saknar innehåll. */
+/**
+ * Landets namn på valt språk från webbläsaren, för länder som saknar innehåll. En del av ett delat land
+ * (GB-eng) har inget namn i webbläsaren: namnet kommer från texten land.<id> (content/_texter.json).
+ */
 export function countryName(iso: string): string {
+  if (isSplitPart(iso)) return t(`land.${iso}`);
   try {
     return displayNames('region').of(iso) ?? iso;
   } catch {
@@ -240,7 +246,7 @@ export function countryName(iso: string): string {
 export const placeName = (places: Place[], id: string) => {
   const p = places.find((x) => x.id === id);
   if (p && !(p.kind === 'country' && p.data?.light)) return p.name;
-  return /^[A-Z]{2}$/.test(id) ? countryName(id) : (p?.name ?? id);
+  return isCountryId(id) ? countryName(id) : (p?.name ?? id);
 };
 
 // ---------- Listor: samlingsbok, bucketkatalog, idéer ----------

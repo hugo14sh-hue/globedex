@@ -109,8 +109,8 @@ export function Bucketlist() {
 
   // Delmål per punkt: ur katalogens checklist, kartans status och parts.
   const partsCtx = useMemo(
-    () => ({ places, statuses: mine.statuses, name: (id: string) => placeName(places, id), countryList: theme.countryList }),
-    [places, mine.statuses, theme.countryList],
+    () => ({ places, statuses: mine.statuses, name: (id: string) => placeName(places, id), countryList: theme.countryList, splitCountries: theme.splitCountries }),
+    [places, mine.statuses, theme.countryList, theme.splitCountries],
   );
   const partsOf = useCallback(
     (b: BucketItem): PartsView | null => bucketParts(parseChecklist(b.catalog_id ? byId.get(b.catalog_id)?.checklist : null), b.parts, partsCtx),

@@ -48,6 +48,7 @@ import { monthNames, seasonPeriod, shortMonthNames } from './months';
 import { StatusPicker } from './StatusPicker';
 import { RegionSection } from './RegionSection';
 import { outsideCountryList } from '../../lib/landlistor';
+import { isCountryId } from '../../lib/delade';
 import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
@@ -141,7 +142,8 @@ export default function PlaceScreen() {
 
   if (!places || !loaded) return <Loading />;
 
-  const knownCountry = /^[A-Z]{2}$/.test(id);
+  // Länder, också delar av delade länder (GB-eng) som inte finns bland platserna.
+  const knownCountry = isCountryId(id);
   if (!place && !knownCountry) {
     return (
       <main className="scr">
@@ -200,7 +202,7 @@ export default function PlaceScreen() {
               {parent ? ` · ${placeName(places, parent.id)}` : ''}
             </span>
             {/* Besökt land utanför vald landlista: räknas inte i siffror, mål och märken. */}
-            {status && VISITED.includes(status) && outsideCountryList(id, theme.countryList) && (
+            {status && VISITED.includes(status) && outsideCountryList(id, theme.countryList, theme.splitCountries) && (
               <span className="chip soft tag">{t('landlista.utanfor')}</span>
             )}
           </div>

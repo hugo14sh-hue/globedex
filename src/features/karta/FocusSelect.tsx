@@ -6,6 +6,8 @@ import { Icon } from '../../components/Icon';
 import { countryName } from '../../lib/content';
 import { continentLabel } from '../../lib/continentNames';
 import { APP_COUNTRIES } from '../../lib/landlistor';
+import { withSplit } from '../../lib/delade';
+import { useTheme } from '../../theme/ThemeProvider';
 import { LOCALE } from '../../lib/locale';
 import { countryOptions, FOCUS_CONTINENTS, parseFocus, WORLD, type FocusOption } from '../../lib/mapFocus';
 import { M49 } from '../../lib/continentNames';
@@ -25,7 +27,9 @@ export function FocusSelect({ value, onChange }: { value: string; onChange: (v: 
       FOCUS_CONTINENTS.map((c) => ({ value: M49[c], label: continentLabel(c, t) })).sort((a, b) => a.label.localeCompare(b.label, LOCALE)),
     [t],
   );
-  const countries = useMemo(() => countryOptions(APP_COUNTRIES, countryName, LOCALE, query), [query]);
+  // Delade länder: med valet på finns delarna (England, Skottland, Wales, Nordirland) i stället för landet.
+  const split = useTheme().theme.splitCountries;
+  const countries = useMemo(() => countryOptions(withSplit(APP_COUNTRIES, split), countryName, LOCALE, query), [query, split]);
 
   const f = parseFocus(value);
   const current =

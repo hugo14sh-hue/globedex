@@ -4,6 +4,7 @@
 import { MAP_BOUNDS } from '../config';
 import { COUNTRY_BOXES } from './countryBoxes';
 import { COUNTRIES } from './countries';
+import { SPLIT_GEO } from './deladeGeo';
 import { M49 } from './continentNames';
 import type { Continent } from './continents';
 
@@ -41,6 +42,8 @@ export function parseFocus(v: string | null | undefined): Focus | null {
   const c = BY_M49.get(v);
   if (c) return { kind: 'continent', code: c, m49: v };
   if (ISO_RE.test(v) && (COUNTRY_BOXES[v] || POINTS.has(v))) return { kind: 'country', iso: v };
+  // Delar av delade länder (GB-eng) har sitt utsnitt i src/lib/deladeGeo.ts.
+  if (Object.prototype.hasOwnProperty.call(SPLIT_GEO, v)) return { kind: 'country', iso: v };
   return null;
 }
 
@@ -51,7 +54,7 @@ export function focusBounds(v: string): Box {
   const f = parseFocus(v) ?? parseFocus(DEFAULT_FOCUS)!;
   if (f.kind === 'world') return MAP_BOUNDS.varlden;
   if (f.kind === 'continent') return CONTINENT_BOXES[f.code as Exclude<Continent, 'AN'>];
-  const b = COUNTRY_BOXES[f.iso];
+  const b = COUNTRY_BOXES[f.iso] ?? SPLIT_GEO[f.iso]?.box;
   if (b) return b;
   const [lat, lon] = POINTS.get(f.iso)!;
   return [lon - POINT_PAD, lat - POINT_PAD, lon + POINT_PAD, lat + POINT_PAD];

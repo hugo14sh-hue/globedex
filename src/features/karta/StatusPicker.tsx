@@ -4,11 +4,17 @@ import { useSession } from '../../lib/session';
 import { setPlaceStatus, STATUS_KEY, STATUSES, useMyPlaces, type PlaceStatus } from '../../lib/status';
 import { allowsTogether, companyGroups } from '../../lib/togetherLogic';
 import { useT } from '../../lib/useT';
+import { countryName } from '../../lib/content';
+import { splitParent, splitSuggestion } from '../../lib/delade';
+import { useTheme } from '../../theme/ThemeProvider';
 
 /**
  * Väljare för status på en plats. Samma i bottenarket på kartan och på landssidan.
  * Besökt, bor, har bott och mellanlandat: är användaren med i en par- eller gruppgrupp visas raden
  * Vem var med? under statusvalet, med Bara jag och ett val per grupp. Valet sparas i together_group.
+ * Delade länder (Körning 19): har användaren en status på hela landet (GB) och ingen av delarna har fått någon,
+ * står karta.delade.flytta överst för varje del och landets status är förvalet (markerad, sparas vid tryck).
+ * Landets rad tas aldrig bort: den gäller igen om valet slås av.
  */
 export function StatusPicker({
   placeId,
@@ -32,6 +38,10 @@ export function StatusPicker({
   const together = mine.together[placeId] ?? null;
   const headingId = useId();
   const helpId = useId();
+  const moveId = useId();
+  const { theme } = useTheme();
+  const suggested = current ? null : splitSuggestion(placeId, mine.statuses, theme.splitCountries);
+  const parent = splitParent(placeId);
 
   const pick = async (s: PlaceStatus | null) => {
     if ((s ?? null) === (current ?? null)) return;
@@ -62,9 +72,21 @@ export function StatusPicker({
 
   return (
     <>
+      {suggested && parent && (
+        <p className="card soft" id={moveId}>
+          {t('karta.delade.flytta', { plats: countryName(parent) })}
+        </p>
+      )}
       <div className="chips" role="group" aria-label={label}>
         {STATUSES.map((s) => (
-          <button key={s} type="button" className="chip" aria-pressed={current === s} onClick={() => pick(s)}>
+          <button
+            key={s}
+            type="button"
+            className={suggested === s ? 'chip suggest' : 'chip'}
+            aria-pressed={current === s}
+            aria-describedby={suggested === s ? moveId : undefined}
+            onClick={() => pick(s)}
+          >
             <i className="dot" style={{ background: `var(--st-${s})` }} aria-hidden="true" />
             {t(STATUS_KEY[s])}
           </button>

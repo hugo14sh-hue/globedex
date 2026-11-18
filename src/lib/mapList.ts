@@ -1,11 +1,10 @@
 // Listan Platser intill kartan (Körning 16): grupperad per världsdel, länderna i bokstavsordning och de
 // markerade städerna under sitt land. Släckta statusar tas bort ur listan. Ren logik, testas i mapList.test.ts.
 import type { HideKey } from '../config';
-import { CONTINENT_OF, type Continent } from './continents';
+import type { Continent } from './continents';
+import { continentOf, isCountryId } from './delade';
 import { countryIdFor } from './statusLogic';
 import type { MapKey } from './togetherLogic';
-
-const ISO_RE = /^[A-Z]{2}$/;
 
 export interface ListPlace {
   id: string;
@@ -54,7 +53,8 @@ export function groupPlaces(
   };
   for (const [id, key] of Object.entries(keys)) {
     if (isHidden(key, hidden)) continue;
-    if (ISO_RE.test(id)) country(id).key = key;
+    // Länder och delar av delade länder (GB-eng) är egna rader. Vilka som visas styrs av valet (src/lib/delade.ts).
+    if (isCountryId(id)) country(id).key = key;
     else {
       const c = country(countryIdFor(id));
       c.children.push({ id, name: nameOf(id), key });
@@ -64,7 +64,7 @@ export function groupPlaces(
   const byName = <T extends { name: string }>(a: T, b: T) => a.name.localeCompare(b.name, locale);
   const groups = new Map<Continent, ListContinent>();
   for (const c of countries.values()) {
-    const code = CONTINENT_OF[c.id];
+    const code = continentOf(c.id);
     if (!code) continue;
     c.children.sort(byName);
     let g = groups.get(code);

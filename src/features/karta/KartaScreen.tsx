@@ -35,6 +35,7 @@ import { mapRegions } from '../../lib/mapRegions';
 import { companyGroups, myMap, ourMap, ourVisited, type MapKey, type StatusRow } from '../../lib/togetherLogic';
 import { APP_COUNTRIES, countryListTotal, countsAsCountry } from '../../lib/landlistor';
 import { CountryListPicker } from '../../components/CountryListPicker';
+import { isCountryId, shownStatuses, withSplit } from '../../lib/delade';
 import { Icon } from '../../components/Icon';
 
 // Kartmotorn laddas först när fliken öppnas.
@@ -84,12 +85,13 @@ export default function KartaScreen() {
     [mine.statuses, mine.together, me, memberStatuses.rows],
   );
   const ours = useMemo(() => (who === 'var' ? ourVisited(allRows, me ?? '', memberIds, gid) : {}), [who, allRows, me, memberIds, gid]);
+  // Delade länder (landlista.delade.val): med valet på visas delarna och inte landet, med valet av tvärtom.
+  const split = theme.splitCountries;
   // Färgnyckeln per plats på vald karta.
   const keys = useMemo<Record<string, MapKey>>(() => {
-    if (who === 'min') return myMap(mine.statuses, mine.together, withCompany);
-    if (who === 'var') return ourMap(allRows, me ?? '', memberIds, gid);
-    return shown;
-  }, [who, mine.statuses, mine.together, withCompany, allRows, me, memberIds, gid, shown]);
+    const all = who === 'min' ? myMap(mine.statuses, mine.together, withCompany) : who === 'var' ? ourMap(allRows, me ?? '', memberIds, gid) : shown;
+    return shownStatuses(all, split);
+  }, [who, mine.statuses, mine.together, withCompany, allRows, me, memberIds, gid, shown, split]);
   const nameOf = (uid: string) => others.find((m) => m.user_id === uid)?.display_name ?? '';
   const othersNames = (ids: string[]) => ids.map(nameOf).filter(Boolean).join(', ');
   const whoLabel = (w: MapWho) =>
@@ -215,14 +217,14 @@ export default function KartaScreen() {
       }
       return out;
     }
-    for (const [id, k] of Object.entries(keys)) if (/^[A-Z]{2}$/.test(id) && !isHidden(k, hidden)) out[id] = colors[k];
+    for (const [id, k] of Object.entries(keys)) if (isCountryId(id) && !isHidden(k, hidden)) out[id] = colors[k];
     return out;
   }, [mapMode, places, month, keys, colors, hidden]);
 
   // Länder utanför vald landlista ritas med streck. Listan alla har inga.
   const hatched = useMemo(
-    () => (theme.countryList === 'alla' ? [] : APP_COUNTRIES.filter((c) => !countsAsCountry(c, theme.countryList))),
-    [theme.countryList],
+    () => (theme.countryList === 'alla' ? [] : withSplit(APP_COUNTRIES, split).filter((c) => !countsAsCountry(c, theme.countryList, split))),
+    [theme.countryList, split],
   );
 
   // Regionerna (platser med lager, i dag landskap och delstater). Färgas efter status precis som länder.
@@ -349,7 +351,7 @@ export default function KartaScreen() {
         {t('karta.landlista.aria')}
       </span>
       <Icon name="filter" size={16} />
-      <span id="landlista-knapp">{t('karta.landlista.knapp', { antal: countryListTotal(theme.countryList) })}</span>
+      <span id="landlista-knapp">{t('karta.landlista.knapp', { antal: countryListTotal(theme.countryList, split) })}</span>
     </button>
   );
 
@@ -440,6 +442,7 @@ export default function KartaScreen() {
                 fills={fills}
                 fallback={colors.ej}
                 fallbackOpacity={mapMode === 'smart' ? 0.35 : 0.85}
+                split={split}
                 hatched={hatched}
                 markers={markers}
                 markerColor={colors.bor}

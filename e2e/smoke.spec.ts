@@ -878,22 +878,111 @@ test('röktest', async ({ page }) => {
     await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
   });
 
-  await test.step('Landlista: FN:s medlemsländer ger nämnaren 193 på Jag, och sedan tillbaka till alla', async () => {
+  // Med delade länder (förvalt på, Körning 19) räknas England, Skottland, Wales och Nordirland i stället för GB: 196.
+  await test.step('Landlista: FN:s medlemsländer ger nämnaren 196 på Jag, och sedan tillbaka till alla', async () => {
     await page.goto('/vi/anpassning');
     await expect(page.getByText(tx('landlista.rubrik'))).toBeVisible();
     const alla = page.getByRole('radio', { name: new RegExp(`^${esc(tx('landlista.alla')).replace('\\{totalt\\}', '\\d+')}$`) });
-    const fn = page.getByRole('radio', { name: tx('landlista.fn').replace('{totalt}', '193'), exact: true });
+    const fn = page.getByRole('radio', { name: tx('landlista.fn').replace('{totalt}', '196'), exact: true });
     let saved = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
     await fn.check();
     await saved;
     await page.goto('/vi');
     const tile = page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first();
-    await expect(tile.locator('.num')).toHaveText(/^\d+ av 193$/, { timeout: 20_000 });
+    await expect(tile.locator('.num')).toHaveText(/^\d+ av 196$/, { timeout: 20_000 });
     await page.goto('/vi/anpassning');
     saved = page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
     await alla.check();
     await saved;
     await expect(alla).toBeChecked();
+  });
+
+  await test.step('delade länder: England öppnas på kartan, Skottland besökt ökar Vi med ett, valet av ger Storbritannien (Körning 19)', async () => {
+    const { db, userId } = await testClient();
+    const patched = () => page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
+    const sheet = page.getByRole('dialog');
+    /** Trycker mitt på kartan (och lite runt) tills bottenarket öppnas, och svarar med rubriken. */
+    const tapCenter = async () => {
+      const canvas = page.locator('.map canvas');
+      await expect(canvas).toBeVisible({ timeout: 30_000 });
+      // Appen återställer rullningsläget: se till att kartan syns innan den trycks på.
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await canvas.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(2500);
+      const box = (await canvas.boundingBox())!;
+      for (const [dx, dy] of [[0, 0], [0, 20], [-20, 0], [20, 20], [0, -20]]) {
+        await page.mouse.click(box.x + box.width / 2 + dx, box.y + box.height / 2 + dy);
+        if (await sheet.isVisible().catch(() => false)) break;
+        await page.waitForTimeout(400);
+      }
+      await expect(sheet).toBeVisible();
+      return ((await sheet.getByRole('heading').first().textContent()) ?? '').trim();
+    };
+    const landerNum = async () => {
+      await page.goto('/vi');
+      const tile = page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first();
+      await expect(tile.locator('.num')).toHaveText(/^\d+ av \d+$/, { timeout: 20_000 });
+      // Par och grupp: egna markeringar räknas i vyn Jag (Tillsammans är förvalt).
+      const jag = page.locator(`[aria-label="${tx('vi.vy.aria')}"]`).getByText(tx('vi.vy.jag'), { exact: true });
+      if (await jag.count()) {
+        await jag.click();
+        await page.waitForTimeout(300);
+      }
+      return Number(/^(\d+)/.exec((await tile.locator('.num').textContent()) ?? '')?.[1] ?? NaN);
+    };
+    try {
+      // Utgångsläge: valet på, Storbritannien markerat som besökt och ingen del markerad. afterAll lägger tillbaka allt.
+      await db.from('place_status').delete().eq('user_id', userId).in('place_id', ['GB-eng', 'GB-sct', 'GB-wls', 'GB-nir']);
+      const up = await db.from('place_status').upsert({ user_id: userId, place_id: 'GB', status: 'besokt' }, { onConflict: 'user_id,place_id' });
+      expect(up.error, up.error?.message).toBeNull();
+      await page.goto('/vi/anpassning');
+      const toggle = page.getByRole('switch', { name: tx('landlista.delade.val') });
+      await expect(toggle).toBeVisible({ timeout: 20_000 });
+      if (!(await toggle.isChecked())) {
+        const saved = patched();
+        await toggle.check();
+        await saved;
+      }
+
+      // England går att öppna på kartan, med egen flagga och förslaget från Storbritanniens status.
+      await page.goto('/karta?fokus=GB-eng');
+      expect(await tapCenter()).toBe(tx('land.GB-eng'));
+      await expect(sheet.locator('img[src="/flags/gb-eng.svg"]')).toHaveCount(1);
+      await expect(sheet.getByText(tx('karta.delade.flytta').replace('{plats}', 'Storbritannien'))).toBeVisible();
+      await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+
+      // Skottland markeras som besökt (förvalet) och antalet länder i Vi ökar med ett. Storbritannien räknas inte.
+      const before = await landerNum();
+      await page.goto('/karta/GB-sct');
+      await expect(page.getByRole('heading', { level: 1, name: tx('land.GB-sct') })).toBeVisible({ timeout: 20_000 });
+      const besokt = page.getByRole('button', { name: tx('karta.status.besokt'), exact: true });
+      await expect(besokt).toHaveClass(/suggest/);
+      await besokt.click();
+      await expect(besokt).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.getByText(tx('karta.delade.flytta').replace('{plats}', 'Storbritannien'))).toHaveCount(0);
+      await expect.poll(landerNum, { timeout: 20_000 }).toBe(before + 1);
+
+      // Valet av: Storbritannien går att öppna igen på kartan, och raden för GB finns kvar.
+      await page.goto('/vi/anpassning');
+      let saved = patched();
+      await page.getByRole('switch', { name: tx('landlista.delade.val') }).uncheck();
+      await saved;
+      await page.goto('/karta?fokus=GB');
+      expect(await tapCenter()).toBe('Storbritannien');
+      await expect(sheet.getByRole('button', { name: tx('karta.status.besokt'), exact: true })).toHaveAttribute('aria-pressed', 'true');
+      await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+      await page.goto('/vi/anpassning');
+      saved = patched();
+      await page.getByRole('switch', { name: tx('landlista.delade.val') }).check();
+      await saved;
+    } finally {
+      // Städa: inga delar och GB som före testet (afterAll lägger tillbaka ögonblicksbilden).
+      await db.from('place_status').delete().eq('user_id', userId).in('place_id', ['GB-eng', 'GB-sct', 'GB-wls', 'GB-nir']);
+      const old = snap?.statuses.find((r) => r.place_id === 'GB');
+      if (old) await db.from('place_status').upsert(old, { onConflict: 'user_id,place_id' });
+      else await db.from('place_status').delete().eq('user_id', userId).eq('place_id', 'GB');
+      await db.auth.signOut();
+    }
   });
 
   await test.step('kartan: fokus Asien, helskärm med Escape, egen färg på vill åka och släckt besökt (Körning 16)', async () => {

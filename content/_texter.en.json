@@ -1030,7 +1030,14 @@
     "upptack.tagg.dykning": "Diving and snorkelling",
     "upptack.tagg.tempel": "Temples",
     "upptack.tagg.oar": "Islands",
-    "upptack.index.varlden": "Price level in {plats}: {antal} (world = 100, World Bank {ar})"
+    "upptack.index.varlden": "Price level in {plats}: {antal} (world = 100, World Bank {ar})",
+    "land.GB-eng": "England",
+    "land.GB-sct": "Scotland",
+    "land.GB-wls": "Wales",
+    "land.GB-nir": "Northern Ireland",
+    "landlista.delade.val": "Count England, Scotland, Wales and Northern Ireland as four countries",
+    "landlista.delade.hjalp": "The UN counts the United Kingdom as one country. With this on, the four parts are counted separately, on the map and in the statistics.",
+    "karta.delade.flytta": "You have marked {plats} as one country. Choose which parts it applies to."
   },
   "marken": [
     {

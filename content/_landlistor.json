@@ -1,5 +1,5 @@
 {
- "_om": "Vilka länder som räknas i statistik och mål. fn = FN:s 193 medlemsländer. fn_observatorer = FN:s två observatörsstater. Alla övriga landskoder i appen räknas bara i listan alla. fn_plus_tw_xk = Taiwan och Kosovo, som läggs till FN:s medlemmar och observatörer i listan med 197 länder. Det är en vanlig räkning bland resenärer, inte en officiell lista.",
+ "_om": "Vilka länder som räknas i statistik och mål. fn = FN:s 193 medlemsländer. fn_observatorer = FN:s två observatörsstater. Alla övriga landskoder i appen räknas bara i listan alla. fn_plus_tw_xk = Taiwan och Kosovo, som läggs till FN:s medlemmar och observatörer i listan med 197 länder. Det är en vanlig räkning bland resenärer, inte en officiell lista. delade = länder som kan räknas som flera: nyckeln är landet och listan dess delar, som då räknas var för sig i stället för landet. Delarnas namn finns i textfilerna under land.<id>.",
  "fn": [
   "AD",
   "AE",
@@ -202,5 +202,13 @@
  "fn_plus_tw_xk": [
   "TW",
   "XK"
- ]
+ ],
+ "delade": {
+  "GB": [
+   "GB-eng",
+   "GB-sct",
+   "GB-wls",
+   "GB-nir"
+  ]
+ }
 }

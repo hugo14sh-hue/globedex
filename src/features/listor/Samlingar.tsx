@@ -59,8 +59,8 @@ export function Samlingar() {
   // Länder man har varit i (i vald landlista), för räknaren per samling.
   const { theme } = useTheme();
   const visited = useMemo(
-    () => Object.entries(mine.statuses).filter(([id, s]) => countsAsCountry(id, theme.countryList) && VISITED.has(s)).length,
-    [mine.statuses, theme.countryList],
+    () => Object.entries(mine.statuses).filter(([id, s]) => countsAsCountry(id, theme.countryList, theme.splitCountries) && VISITED.has(s)).length,
+    [mine.statuses, theme.countryList, theme.splitCountries],
   );
 
   const create = async (ev: FormEvent) => {

@@ -91,3 +91,20 @@ describe('landskapens ytor', () => {
     expect(Object.keys(geo.boxes).filter((c) => states.boxes[c])).toEqual([]);
   });
 });
+
+// Delarna i delade länder (public/geo/delade.json, byggd av scripts/make-delade.mjs) mot fältet delade.
+describe('delade länders ytor', () => {
+  const geo = JSON.parse(readFileSync(join(process.cwd(), 'public/geo/delade.json'), 'utf8'));
+  const lists = JSON.parse(readFileSync(join(process.cwd(), 'content/_landlistor.json'), 'utf8').replace(/^﻿/, ''));
+
+  it('varje del har en yta med landet som förälder, och landet finns i kartdatat', () => {
+    const want = Object.entries(lists.delade).flatMap(([iso, parts]) => parts.map((p) => `${p}:${iso}`));
+    expect(geo.features.map((f) => `${f.properties.iso}:${f.properties.parent}`).sort()).toEqual(want.sort());
+    for (const iso of Object.keys(lists.delade)) expect(fc.features.some((f) => f.properties.iso === iso)).toBe(true);
+  });
+
+  it('samma format som lander.json: två decimaler', () => {
+    const coords = JSON.stringify(geo.features.map((f) => f.geometry.coordinates));
+    expect(coords).not.toMatch(/\.\d{3,}/);
+  });
+});

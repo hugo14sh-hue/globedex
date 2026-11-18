@@ -208,7 +208,7 @@ export default function AnpassningScreen() {
         type="button"
         className="btn ghost"
         onClick={() =>
-          setTheme({ ...DEFAULT_THEME, lang: theme.lang, countryList: theme.countryList, mapFocus: theme.mapFocus, mapHidden: theme.mapHidden })
+          setTheme({ ...DEFAULT_THEME, lang: theme.lang, countryList: theme.countryList, splitCountries: theme.splitCountries, mapFocus: theme.mapFocus, mapHidden: theme.mapHidden })
         }
       >
         {t('anpassa.aterstall')}

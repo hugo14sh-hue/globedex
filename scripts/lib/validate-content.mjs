@@ -1,5 +1,6 @@
 // Validering av innehållet i content/ enligt docs/FORMAT.md.
 // Ren modul utan nätverk och nycklar, så att den kan testas och köras med npm run import:check.
+import { validateSplit } from './delade.mjs';
 
 export const TABLES = {
   places: 'places',
@@ -579,12 +580,12 @@ export function validatePretripList(name, json) {
  * listorna får inte överlappa.
  */
 export const UN_MEMBERS = 193;
-export function validateCountryLists(name, json, appCountries) {
+export function validateCountryLists(name, json, appCountries, texts) {
   const errs = [];
   const check = makeChecker(name, errs);
   const row = { id: '-' };
   if (!isObj(json)) return [{ file: name, id: '-', field: '-', message: 'filen ska vara ett JSON-objekt' }];
-  for (const k of Object.keys(json)) check(row, k, ['_om', 'fn', 'fn_observatorer', 'fn_plus_tw_xk'].includes(k), 'okänt fält');
+  for (const k of Object.keys(json)) check(row, k, ['_om', 'fn', 'fn_observatorer', 'fn_plus_tw_xk', 'delade'].includes(k), 'okänt fält');
   const known = new Set(appCountries);
   const lists = {};
   for (const key of ['fn', 'fn_observatorer', 'fn_plus_tw_xk']) {
@@ -612,5 +613,8 @@ export function validateCountryLists(name, json, appCountries) {
     const before = new Set([...(lists.fn ?? []), ...(lists.fn_observatorer ?? [])]);
     for (const c of lists.fn_plus_tw_xk) check({ id: c }, 'fn_plus_tw_xk', !before.has(c), 'finns redan i fn eller fn_observatorer');
   }
+  // delade (Körning 19): landet finns bland appens länder, delarnas id börjar med landets kod och de har namn
+  // under land.<id> på båda språken (texts = { sv, en }, objektet texter ur textfilerna).
+  validateSplit(json.delade, appCountries, texts, check);
   return errs;
 }

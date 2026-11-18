@@ -12,6 +12,7 @@ import { useT } from '../../lib/useT';
 import { useViData, type ViData } from './useViData';
 import { EXPORT_PARTS, exportText, type ExportData, type ExportPart } from './viLogic';
 import { LOCALE } from '../../lib/locale';
+import { shownRows } from '../../lib/delade';
 
 const PHASE_KEY = { kommande: 'resor.kommande', pagar: 'resor.pagar', avslutad: 'resor.tidigare' } as const;
 
@@ -54,7 +55,8 @@ function Builder({ data }: { data: ViData }) {
         })),
       statuses: STATUSES.map((s) => ({
         label: t(STATUS_KEY[s]),
-        places: x.statuses
+        // Delade länder: bara de rader som visas med valet (landet eller delarna, aldrig båda).
+        places: shownRows(x.statuses, x.splitCountries)
           .filter((r) => r.status === s)
           .map((r) => name(r.place_id))
           .sort((a, b) => a.localeCompare(b, LOCALE)),

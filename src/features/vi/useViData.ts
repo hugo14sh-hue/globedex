@@ -65,6 +65,7 @@ export function useViData() {
   const customPalette = theme.palette === 'egen';
   // Den som tittar räknar med sitt eget val, även i par och grupp.
   const countryList = theme.countryList;
+  const splitCountries = theme.splitCountries;
 
   useEffect(() => {
     if (!me || !gid) return;
@@ -123,6 +124,7 @@ export function useViData() {
           .filter((s) => isStatus(s.status))
           .map((s) => ({ place_id: s.place_id, status: s.status as ViInput['statuses'][number]['status'], updated_at: s.updated_at })),
         countryList,
+        splitCountries,
         seRegions: places.filter((p) => p.parent_id === 'SE' && p.layer === 'landskap').map((p) => p.id),
         usStates: places.filter((p) => p.parent_id === 'US' && p.layer === 'delstat').map((p) => p.id),
         trips,
@@ -147,7 +149,7 @@ export function useViData() {
     return () => {
       alive = false;
     };
-  }, [me, gid, mode, memberKey, customPalette, countryList, n]);
+  }, [me, gid, mode, memberKey, customPalette, countryList, splitCountries, n]);
 
   return { data, reload };
 }

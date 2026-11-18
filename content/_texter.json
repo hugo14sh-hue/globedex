@@ -1034,7 +1034,14 @@
     "upptack.tagg.dykning": "Dykning och snorkling",
     "upptack.tagg.tempel": "Tempel",
     "upptack.tagg.oar": "Öar",
-    "upptack.index.varlden": "Prisnivå i {plats}: {antal} (världen = 100, Världsbanken {ar})"
+    "upptack.index.varlden": "Prisnivå i {plats}: {antal} (världen = 100, Världsbanken {ar})",
+    "land.GB-eng": "England",
+    "land.GB-sct": "Skottland",
+    "land.GB-wls": "Wales",
+    "land.GB-nir": "Nordirland",
+    "landlista.delade.val": "Räkna England, Skottland, Wales och Nordirland som fyra länder",
+    "landlista.delade.hjalp": "FN räknar Storbritannien som ett land. Med det här valet räknas de fyra delarna var för sig, på kartan och i statistiken.",
+    "karta.delade.flytta": "Du har markerat {plats} som ett land. Välj vilka delar det gäller."
   },
   "marken": [
     {

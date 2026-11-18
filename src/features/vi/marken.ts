@@ -5,7 +5,7 @@
 import type { CountryList, TravelMode } from '../../config';
 import { balances, settle, spent, type ExpenseLike } from '../../lib/kassa';
 import type { Badge } from '../../lib/texter';
-import { CONTINENT_OF } from '../../lib/continents';
+import { continentOf, DEFAULT_SPLIT } from '../../lib/delade';
 import { countsAsCountry, DEFAULT_COUNTRY_LIST } from '../../lib/landlistor';
 import { tripPhase, todayIso } from '../../lib/tripLogic';
 import { VISITED, type PlaceStatus } from '../../lib/statusLogic';
@@ -34,6 +34,8 @@ export interface ViInput {
   statuses: { place_id: string; status: PlaceStatus; updated_at: string | null }[];
   /** Vilka länder som räknas (Anpassning). Styr länder, kontinenter, märken och Wrapped. */
   countryList: CountryList;
+  /** Delade länder (landlista.delade.val): delarna räknas i stället för landet. Förvalt på. */
+  splitCountries: boolean;
   /** Sveriges landskap i innehållet (places med layer landskap). */
   seRegions: string[];
   /** USA:s delstater i innehållet (places med layer delstat). */
@@ -65,6 +67,7 @@ export const emptyInput = (mode: TravelMode = 'solo', today = todayIso()): ViInp
   today,
   statuses: [],
   countryList: DEFAULT_COUNTRY_LIST,
+  splitCountries: DEFAULT_SPLIT,
   seRegions: [],
   usStates: [],
   trips: [],
@@ -108,18 +111,22 @@ export const doneTrips = (x: ViInput) => x.trips.filter((t) => t.kind === 'resa'
 
 const tripDate = (t: TripLike) => t.end_date ?? t.start_date ?? day(t.created_at);
 
-/** Besökta länder med datum (ISO-kod -> senaste ändring). Bara länder i vald landlista räknas. */
-export function visitedCountries(x: Pick<ViInput, 'statuses' | 'countryList'>): Record<string, string | null> {
+/**
+ * Besökta länder med datum (ISO-kod -> senaste ändring). Bara länder i vald landlista räknas. Delade länder:
+ * med valet räknas delarna och aldrig landet, utan valet tvärtom. Saknas valet gäller förvalet.
+ */
+export function visitedCountries(x: Pick<ViInput, 'statuses' | 'countryList'> & { splitCountries?: boolean }): Record<string, string | null> {
   const out: Record<string, string | null> = {};
-  for (const s of x.statuses) if (countsAsCountry(s.place_id, x.countryList) && VISITED.includes(s.status)) out[s.place_id] = day(s.updated_at);
+  const split = x.splitCountries ?? DEFAULT_SPLIT;
+  for (const s of x.statuses) if (countsAsCountry(s.place_id, x.countryList, split) && VISITED.includes(s.status)) out[s.place_id] = day(s.updated_at);
   return out;
 }
 
 /** Besökta kontinenter med datum för första landet där. */
-export function visitedContinents(x: Pick<ViInput, 'statuses' | 'countryList'>): Record<string, string | null> {
+export function visitedContinents(x: Pick<ViInput, 'statuses' | 'countryList'> & { splitCountries?: boolean }): Record<string, string | null> {
   const out: Record<string, string | null> = {};
   for (const [iso, d] of Object.entries(visitedCountries(x))) {
-    const c = CONTINENT_OF[iso];
+    const c = continentOf(iso);
     if (!c) continue;
     if (!(c in out) || (d && (!out[c] || d < out[c]!))) out[c] = d;
   }

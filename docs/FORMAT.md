@@ -295,12 +295,28 @@ En valuta som saknas i sek_per visas bara i lokal valuta. `npm run import:check`
 Ligger i content/_landlistor.json och läses in i appen vid bygget (inte till databasen). Styr nämnaren och vad som räknas i statistik, mål och märken, efter valet under Anpassning (FN:s medlemsländer, med observatörer, eller alla länder i appen). Kartan visar alltid alla länder.
 
 ```json
-{ "_om": "...", "fn": ["AD", "AE", "..."], "fn_observatorer": ["PS", "VA"], "fn_plus_tw_xk": ["TW", "XK"] }
+{ "_om": "...", "fn": ["AD", "AE", "..."], "fn_observatorer": ["PS", "VA"], "fn_plus_tw_xk": ["TW", "XK"], "delade": { "GB": ["GB-eng", "..."] } }
 ```
 
 fn_plus_tw_xk ger valet landlista.fn-tw-xk: fn, fn_observatorer och de här koderna (197). Koderna får inte redan finnas i fn eller fn_observatorer.
 
 `npm run import:check` stoppar okända fält, koder som inte finns bland appens länder (src/lib/countries.ts), dubbletter, en fn-lista som inte har 193 unika koder och koder som finns i båda listorna.
+
+### delade (Körning 19)
+Länder som kan räknas som flera. Nyckeln är landets kod och värdet listan med dess delar:
+
+```json
+{ "delade": { "GB": ["GB-eng", "GB-sct", "GB-wls", "GB-nir"] } }
+```
+
+- Valet landlista.delade.val (Anpassning och knappen på kartan, sparas i profiles.settings, förvalt på) gäller med vilken lista som helst. Med valet på räknas delarna i stället för landet i varje lista där landet ingår (för GB: FN 196, FN och observatörer 198, med Taiwan och Kosovo 200, alla 240), och kartan ritar delarna som egna länder. Landet och en del räknas aldrig samtidigt. Med valet av är allt som utan fältet, och delarnas statusrader ligger kvar utan att visas.
+- Delens id är landets kod, ett bindestreck och små bokstäver eller siffror ("GB-eng"). Namnet står i textfilerna under land.<id> på båda språken.
+- Gränserna ligger i public/geo/delade.json och mittpunkt och utsnitt i src/lib/deladeGeo.ts. Båda byggs av `node scripts/make-delade.mjs` ur Natural Earth admin 0 map units 1:50m (public domain), som kopplar delen till ytan via GU_A3 (delens kod efter bindestrecket i versaler: GB-eng -> ENG). Kör skriptet när fältet ändras.
+- Flaggor: `npm run flags` kopierar delens egen flagga från flag-icons (gb-eng). Delar i src/lib/flagParts.ts (Nordirland) visas med landets flagga.
+- `npm run import` skriver delarna som platser av typen country med landet som parent_id, data.light = true och namnet ur land.<id> i _texter.json, som länderna utan landsfil. Finns landet inte bland platserna läggs det till på samma sätt. Världsdelen är landets (appen räknar den från landet).
+- Fler länder delas genom att bara lägga till dem i fältet, skriva namnen i textfilerna och köra skriptet.
+
+`npm run import:check` stoppar också: delade som inte är ett objekt, länder som inte finns bland appens länder, tomma listor, delar vars id inte börjar med landets kod och bindestreck, delar som finns två gånger, delar utan namn under land.<id> i _texter.json eller _texter.en.json och delar utan yta i src/lib/deladeGeo.ts.
 
 ## Upptäck
 Ligger i content/_upptack.json och läses in till places av `npm run import` (scripts/lib/upptack.mjs). Formatet står i filens _om.

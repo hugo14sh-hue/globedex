@@ -164,6 +164,8 @@ export function sanitizeTheme(raw: unknown): ThemeSettings {
     tone: pick(r.tone, TONES, DEFAULT_THEME.tone),
     lang: LANGS.includes(r.lang as never) ? (r.lang as ThemeSettings['lang']) : null,
     countryList: pick(r.countryList, COUNTRY_LISTS, DEFAULT_THEME.countryList),
+    // Saknas valet (befintliga användare före Körning 19) gäller förvalet: på.
+    splitCountries: typeof r.splitCountries === 'boolean' ? r.splitCountries : DEFAULT_THEME.splitCountries,
     mapColors: sanitizeColors(r.mapColors),
     mapStyle: pick(r.mapStyle, MAP_STYLES, DEFAULT_THEME.mapStyle),
     mapHidden: Array.isArray(r.mapHidden) ? HIDE_KEYS.filter((k) => (r.mapHidden as unknown[]).includes(k)) : [],

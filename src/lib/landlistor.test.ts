@@ -19,18 +19,19 @@ const input = (countryList: CountryList, p: Partial<ViInput> = {}): ViInput => (
 });
 
 describe('landlistor', () => {
+  // Utan delade länder (valet landlista.delade.val av). Med valet: se delade.test.ts.
   it('nämnaren: 193, 195 och alla länder i appen', () => {
-    expect(countryListTotal('fn')).toBe(193);
-    expect(countryListTotal('fn-plus')).toBe(195);
-    expect(countryListTotal('alla')).toBe(APP_COUNTRIES.length);
-    expect(countryListCodes('fn')).toHaveLength(193);
-    expect(countryListCodes('fn-plus')).toEqual([...new Set([...lists.fn, ...lists.fn_observatorer])].sort());
+    expect(countryListTotal('fn', false)).toBe(193);
+    expect(countryListTotal('fn-plus', false)).toBe(195);
+    expect(countryListTotal('alla', false)).toBe(APP_COUNTRIES.length);
+    expect(countryListCodes('fn', false)).toHaveLength(193);
+    expect(countryListCodes('fn-plus', false)).toEqual([...new Set([...lists.fn, ...lists.fn_observatorer])].sort());
   });
 
   it('FN, observatörer, Taiwan och Kosovo: 197 länder', () => {
-    expect(countryListTotal('fn-tw-xk')).toBe(197);
-    expect(countryListCodes('fn-tw-xk')).toHaveLength(197);
-    expect(countryListCodes('fn-tw-xk')).toEqual([...new Set([...lists.fn, ...lists.fn_observatorer, ...lists.fn_plus_tw_xk])].sort());
+    expect(countryListTotal('fn-tw-xk', false)).toBe(197);
+    expect(countryListCodes('fn-tw-xk', false)).toHaveLength(197);
+    expect(countryListCodes('fn-tw-xk', false)).toEqual([...new Set([...lists.fn, ...lists.fn_observatorer, ...lists.fn_plus_tw_xk])].sort());
     expect(['SE', 'VA', 'TW', 'XK', 'GL'].map((c) => countsAsCountry(c, 'fn-tw-xk'))).toEqual([true, true, true, true, false]);
     expect(Object.keys(visitedCountries(input('fn-tw-xk'))).sort()).toEqual(['SE', 'TW', 'VA']);
     expect(sanitizeTheme({ countryList: 'fn-tw-xk' }).countryList).toBe('fn-tw-xk');
@@ -67,12 +68,15 @@ describe('landlistor', () => {
   });
 
   it('siffrorna på Jag och Vi: antal och nämnare', () => {
-    const fn = numbers(input('fn'), 0);
+    const off = { splitCountries: false };
+    const fn = numbers(input('fn', off), 0);
     expect([fn.lander.length, fn.landerTotalt]).toEqual([1, 193]);
-    const plus = numbers(input('fn-plus'), 0);
+    const plus = numbers(input('fn-plus', off), 0);
     expect([plus.lander.length, plus.landerTotalt]).toEqual([2, 195]);
-    const alla = numbers(input('alla'), 0);
+    const alla = numbers(input('alla', off), 0);
     expect([alla.lander.length, alla.landerTotalt]).toEqual([4, APP_COUNTRIES.length]);
+    // Med valet (förvalt) ökar bara nämnaren: inga delar eller GB bland statusarna.
+    expect(numbers(input('fn'), 0).landerTotalt).toBe(196);
   });
 
   it('märken med länder följer listan', () => {

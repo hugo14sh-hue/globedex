@@ -50,6 +50,11 @@ export interface ThemeSettings {
   lang: Lang | null;
   /** Vilka länder som räknas. Sparas lokalt och i profilen som språkvalet. */
   countryList: CountryList;
+  /**
+   * Räkna delarna i delade länder (England, Skottland, Wales och Nordirland) som egna länder
+   * (landlista.delade.val, src/lib/delade.ts). Gäller med vilken lista som helst. Förvalt på.
+   */
+  splitCountries: boolean;
   /** Egna statusfärger (hex). En status utan eget val följer paletten. */
   mapColors: Partial<Record<ColorKey, string>>;
   /** Kartans stil: följ appens tema, alltid ljus eller alltid mörk. */
@@ -72,6 +77,7 @@ export const DEFAULT_THEME: ThemeSettings = {
   tone: 'neutral',
   lang: null,
   countryList: 'alla',
+  splitCountries: true,
   mapColors: {},
   mapStyle: 'auto',
   mapHidden: [],

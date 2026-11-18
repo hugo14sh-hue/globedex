@@ -1,4 +1,5 @@
 // Ren logik för platsstatus, utan databas. Testas i statusLogic.test.ts.
+import { isSplitPart } from './delade';
 
 export type PlaceStatus = 'bor' | 'bott' | 'besokt' | 'planerad' | 'vill' | 'mellan';
 
@@ -58,8 +59,8 @@ export function statusesFor(who: MapWho, mine: StatusMap, others: Record<string,
   return others[who] ?? {};
 }
 
-/** Landets id för en plats-id ('SE-vastergotland' ger 'SE'). */
-export const countryIdFor = (placeId: string) => placeId.slice(0, 2);
+/** Landets id för en plats-id ('SE-vastergotland' ger 'SE'). En del av ett delat land är sitt eget land ('GB-eng'). */
+export const countryIdFor = (placeId: string) => (isSplitPart(placeId) ? placeId : placeId.slice(0, 2));
 
 /**
  * Ska landet bli planerat när en resa skapas? Bara om status saknas eller är vill åka,

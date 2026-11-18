@@ -6,6 +6,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { focusBounds, focusPadding } from '../../lib/mapFocus';
 import { countryBounds, pointCountries, POINT_MIN_ZOOM, type CountryPoint } from '../../lib/mapPoints';
 import { REGION_MIN_ZOOM, regionGeoIndex, regionsInView, type MapRegion, type RegionGeoIndex } from '../../lib/mapRegions';
+import { splitGeo } from '../../lib/delade';
 
 /** OpenFreeMap: kontrollerad 2026-11-13 på openfreemap.org (fri, ingen nyckel, attribution visas av stilen). */
 const STYLE = { light: 'https://tiles.openfreemap.org/styles/positron', dark: 'https://tiles.openfreemap.org/styles/dark' };
@@ -13,6 +14,8 @@ const STYLE = { light: 'https://tiles.openfreemap.org/styles/positron', dark: 'h
 const DEM_TILES = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
 const ATTRIBUTION = [
   '<a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a>',
+  // England, Skottland, Wales och Nordirland (public/geo/delade.json, byggd av scripts/make-delade.mjs).
+  '<a href="https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-details/" target="_blank" rel="noopener">Natural Earth admin 0 map units</a>',
   // USA:s delstater i läget Regioner (public/geo/delstater.json, byggd av scripts/make-regions.mjs).
   '<a href="https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-1-states-provinces/" target="_blank" rel="noopener">Natural Earth admin 1</a>',
   // Sveriges landskap i läget Regioner (public/geo/landskap.json, byggd av scripts/make-landskap.mjs). CC0.
@@ -57,6 +60,11 @@ export interface MapViewProps {
   fallback: string;
   /** Opacitet för länder utan färg (lägre i Smart månad). */
   fallbackOpacity: number;
+  /**
+   * Delade länder (landlista.delade.val): delarna (England, Skottland, Wales och Nordirland) ritas och öppnas
+   * som egna länder i stället för landet. Ytorna hämtas från public/geo/delade.json.
+   */
+  split: boolean;
   /** Länder utanför vald landlista (ISO-koder). Ritas med diagonala streck ovanpå sin vanliga färg. */
   hatched: string[];
   markers: MapMarker[];
@@ -135,6 +143,9 @@ export default function MapView(props: MapViewProps) {
   // Kartdatat för länderna: hämtas en gång, ger både ytorna och vilka länder som är för små att träffa.
   const [bounds, setBounds] = useState<ReturnType<typeof countryBounds> | null>(null);
   const [geoLoaded, setGeoLoaded] = useState(0);
+  // Ländernas ytor och delarnas ytor (delade länder). Kartan får länderna med delarna utbytta när valet är på.
+  const [landerFc, setLanderFc] = useState<{ features: { properties?: { iso?: unknown } | null }[] } | null>(null);
+  const [partsFc, setPartsFc] = useState<{ features: { properties?: { iso?: unknown } | null }[] } | null>(null);
   // Regionernas ytor: hämtas första gången läget Regioner väljs.
   const [regionGeo, setRegionGeo] = useState<RegionGeoIndex | null>(null);
   const regionGeoAsked = useRef(false);
@@ -190,13 +201,16 @@ export default function MapView(props: MapViewProps) {
     m.on('load', () => {
       const firstSymbol = m.getStyle().layers.find((l) => l.type === 'symbol')?.id;
       m.addSource('lander', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, promoteId: 'iso' });
-      fetch('/geo/lander.json')
-        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      const getJson = (url: string) => fetch(url).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))));
+      getJson('/geo/lander.json')
         .then((fc) => {
-          if (map.current !== m) return;
-          (m.getSource('lander') as GeoJSONSource | undefined)?.setData(fc);
-          setBounds(countryBounds(fc));
-          setGeoLoaded((n) => n + 1);
+          if (map.current === m) setLanderFc({ ...fc });
+        })
+        .catch(() => undefined);
+      // Delarnas ytor. Saknas filen ritas landet som helhet.
+      getJson('/geo/delade.json')
+        .then((fc) => {
+          if (map.current === m && Array.isArray(fc?.features)) setPartsFc(fc);
         })
         .catch(() => undefined);
       m.addLayer(
@@ -383,6 +397,16 @@ export default function MapView(props: MapViewProps) {
       m.remove();
     };
   }, [props.dark]);
+
+  // Länderna in i kartan, med delarna utbytta när valet är på (också när kartan har skapats om för mörkt läge).
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready || !landerFc) return;
+    const fc = splitGeo(landerFc, partsFc, props.split);
+    (m.getSource('lander') as GeoJSONSource | undefined)?.setData(fc as Parameters<GeoJSONSource['setData']>[0]);
+    setBounds(countryBounds(fc as Parameters<typeof countryBounds>[0]));
+    setGeoLoaded((n) => n + 1);
+  }, [ready, landerFc, partsFc, props.split]);
 
   // Ett tryck på en region: zooma in på ytan (eller punkten när ytan saknas) och öppna bottenarket.
   const regionTap = useRef<(r: MapRegion) => void>(() => undefined);

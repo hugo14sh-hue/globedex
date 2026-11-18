@@ -1,4 +1,6 @@
 // Läser content/??.json, content/_upptack.json och content/_bucket.json till Supabase (upsert på id).
+// _landlistor.json, fältet delade: delarna (England, Skottland, Wales, Nordirland) blir länder med landet som
+// förälder, som länderna utan landsfil (scripts/lib/delade.mjs). Namnet kommer från land.<id> i _texter.json.
 // _upptack.json: de lätta platserna blir städer under sitt land (data.light = true), befintliga städer får
 // climate och tags i data och alternativen hamnar i data.alternatives på den dyrare platsen (scripts/lib/upptack.mjs).
 // Kontrollerar också content/_packlista.json, content/_innan-avresa.json, content/_valutor.json och
@@ -16,6 +18,8 @@ import { COUNTRIES } from '../src/lib/countries.ts';
 import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
 import { applyPatches, discoverRows, validateDiscover } from './lib/upptack.mjs';
 import { sortPlaces } from './lib/validate-content.mjs';
+import { splitRows } from './lib/delade.mjs';
+import { SPLIT_GEO } from '../src/lib/deladeGeo.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
@@ -37,6 +41,13 @@ async function main() {
   const bucket = { name: '_bucket.json', json: await readJson('_bucket.json') };
 
   const { errors, rows } = validateContent(parsed, bucket);
+  const textsSv = await readJson('_texter.json');
+  const textsEn = await readJson('_texter.en.json');
+  const svName = new Intl.DisplayNames('sv-SE', { type: 'region' });
+  const countryCoords = (iso) => {
+    const c = COUNTRIES.find(([x]) => x === iso);
+    return c ? [c[1], c[2]] : null;
+  };
 
   // Upptäck: lätta platser, klimat och taggar och alternativ. Saknas filen hoppas den över.
   let discover = null;
@@ -46,12 +57,7 @@ async function main() {
     const before = errors.length;
     errors.push(...validateDiscover(json, COUNTRIES.map(([iso]) => iso), contentPlaces));
     if (errors.length === before) {
-      const names = new Intl.DisplayNames('sv-SE', { type: 'region' });
-      const coords = (iso) => {
-        const c = COUNTRIES.find(([x]) => x === iso);
-        return c ? [c[1], c[2]] : null;
-      };
-      discover = discoverRows(json, contentPlaces, (iso) => names.of(iso) ?? iso, coords);
+      discover = discoverRows(json, contentPlaces, (iso) => svName.of(iso) ?? iso, countryCoords);
       rows.places = sortPlaces([...applyPatches(rows.places, discover.patches), ...discover.countries, ...discover.cities]);
     }
   }
@@ -71,14 +77,25 @@ async function main() {
     appLists.push(['_valutor.json', json?.sek_per && typeof json.sek_per === 'object' ? Object.keys(json.sek_per).length : 0]);
   }
   // Vilka länder som räknas (FN:s medlemsländer och observatörer). Läses in i appen vid bygget.
+  // Fältet delade blir dessutom platser: delarna som länder med landet som förälder.
+  let split = [];
   {
     const json = await readJson('_landlistor.json');
-    errors.push(...validateCountryLists('_landlistor.json', json, COUNTRIES.map(([iso]) => iso)));
+    const before = errors.length;
+    errors.push(...validateCountryLists('_landlistor.json', json, COUNTRIES.map(([iso]) => iso), { sv: textsSv?.texter, en: textsEn?.texter }));
     const n = (k) => (Array.isArray(json?.[k]) ? json[k].length : 0);
-    appLists.push(['_landlistor.json', `fn ${n('fn')}, fn_observatorer ${n('fn_observatorer')}, fn_plus_tw_xk ${n('fn_plus_tw_xk')}`]);
+    const parts = Object.values(json?.delade ?? {}).flat().length;
+    appLists.push(['_landlistor.json', `fn ${n('fn')}, fn_observatorer ${n('fn_observatorer')}, fn_plus_tw_xk ${n('fn_plus_tw_xk')}, delade ${parts}`]);
+    if (errors.length === before && json.delade) {
+      const partCoords = (id) => (SPLIT_GEO[id] ? [SPLIT_GEO[id].lat, SPLIT_GEO[id].lon] : null);
+      for (const id of Object.values(json.delade).flat())
+        if (!SPLIT_GEO[id]) errors.push({ file: '_landlistor.json', id, field: 'delade', message: 'ingen yta i src/lib/deladeGeo.ts: kör node scripts/make-delade.mjs' });
+      split = splitRows(json.delade, rows.places.map((p) => p.id), textsSv.texter, (iso) => svName.of(iso) ?? iso, countryCoords, partCoords);
+      rows.places = sortPlaces([...rows.places, ...split]);
+    }
   }
   // Gränssnittets texter på svenska och engelska: samma nycklar, form, platshållare och märken.
-  const textErrors = compareTexts(await readJson('_texter.json'), await readJson('_texter.en.json'));
+  const textErrors = compareTexts(textsSv, textsEn);
   if (errors.length || textErrors.length) {
     console.error(`Valideringen stoppade importen: ${errors.length + textErrors.length} fel. Inget har skrivits.`);
     for (const e of errors) console.error(`  ${formatError(e)}`);
@@ -93,6 +110,7 @@ async function main() {
     console.log(
       `  _upptack.json: ${discover.cities.length} lätta platser, ${discover.countries.length} länder utan landsfil, ${discover.patches.size} befintliga platser får klimat, taggar eller alternativ`,
     );
+  if (split.length) console.log(`  _landlistor.json, delade: ${split.length} länder (${split.map((p) => p.id).join(', ')})`);
   for (const [name, n] of appLists) console.log(`  ${name}: ${n} (läses in i appen vid bygget)`);
   console.log('  _texter.json och _texter.en.json: samma nycklar, form, platshållare och märken');
   if (checkOnly) return 0;

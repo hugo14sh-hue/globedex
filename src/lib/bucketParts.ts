@@ -11,6 +11,7 @@ import { emptyInput, VISITED, visitedContinents, visitedCountries } from '../fea
 import type { PlaceStatus } from './statusLogic';
 import type { CountryList } from '../config';
 import { countsAsCountry, DEFAULT_COUNTRY_LIST } from './landlistor';
+import { DEFAULT_SPLIT } from './delade';
 import { LOCALE } from './locale';
 
 export type CountMetric = 'countries_visited' | 'continents_visited';
@@ -63,6 +64,8 @@ export interface PartsContext {
   name: (id: string) => string;
   /** Vilka länder som räknas (Anpassning). Saknas: alla. */
   countryList?: CountryList;
+  /** Delade länder (landlista.delade.val). Saknas: förvalet, på. */
+  splitCountries?: boolean;
 }
 
 const isObj = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -109,8 +112,13 @@ const statusList = (statuses: Record<string, PlaceStatus>) =>
   }));
 
 /** Samma uträkning som Siffror: antal besökta länder eller kontinenter i vald landlista. */
-export function visitedCount(metric: CountMetric, statuses: Record<string, PlaceStatus>, countryList: CountryList = DEFAULT_COUNTRY_LIST): number {
-  const x = { ...emptyInput(), statuses: statusList(statuses), countryList };
+export function visitedCount(
+  metric: CountMetric,
+  statuses: Record<string, PlaceStatus>,
+  countryList: CountryList = DEFAULT_COUNTRY_LIST,
+  splitCountries = DEFAULT_SPLIT,
+): number {
+  const x = { ...emptyInput(), statuses: statusList(statuses), countryList, splitCountries };
   return Object.keys(metric === 'countries_visited' ? visitedCountries(x) : visitedContinents(x)).length;
 }
 
@@ -145,7 +153,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
         )
       : null;
   if (checklist.type === 'antal') {
-    const value = visitedCount(checklist.metric, ctx.statuses, ctx.countryList);
+    const value = visitedCount(checklist.metric, ctx.statuses, ctx.countryList, ctx.splitCountries);
     return {
       kind: 'antal',
       metric: checklist.metric,
@@ -167,7 +175,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
   }
   // Länder i vald landlista med status besökt. Man bockar av själv, och titeln är landets namn.
   const countries = Object.entries(ctx.statuses)
-    .filter(([id, s]) => countsAsCountry(id, ctx.countryList ?? DEFAULT_COUNTRY_LIST) && s === 'besokt')
+    .filter(([id, s]) => countsAsCountry(id, ctx.countryList ?? DEFAULT_COUNTRY_LIST, ctx.splitCountries ?? DEFAULT_SPLIT) && s === 'besokt')
     .map(([id]) => ({ id, name: ctx.name(id) }))
     .sort((a, b) => a.name.localeCompare(b.name, LOCALE));
   return rows(countries.map((c) => ({ ...manual(c.name, parts), placeId: c.id })));

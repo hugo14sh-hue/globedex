@@ -251,6 +251,11 @@ p {
   border-color: var(--p);
 }
 
+/* Förvalet för en del av ett delat land: statusen som hela landet hade (karta.delade.flytta). */
+.chip.suggest {
+  border: 2px dashed var(--p);
+}
+
 .chip.soft {
   background: var(--soft);
   border: 0;

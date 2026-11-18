@@ -33,7 +33,7 @@ export function numbers(x: ViInput, compendiumTotal: number): Numbers {
     landskapTotalt: x.seRegions.length,
     delstater: Object.keys(visitedRegions(x, x.usStates)),
     delstaterTotalt: x.usStates.length,
-    landerTotalt: countryListTotal(x.countryList),
+    landerTotalt: countryListTotal(x.countryList, x.splitCountries),
     resor,
     resdagar: resor.reduce((s, t) => s + tripDays(t), 0),
     fynd: x.finds.length,
@@ -71,7 +71,7 @@ export function wrapped(x: ViInput, year: number): WrappedYear | null {
   if (!trips.length) return null;
   const y = String(year);
   // Bara länder i vald landlista räknas.
-  const countries = [...new Set(trips.filter((t) => t.place_id).map((t) => countryIdFor(t.place_id!)))].filter((c) => countsAsCountry(c, x.countryList)).sort();
+  const countries = [...new Set(trips.filter((t) => t.place_id).map((t) => countryIdFor(t.place_id!)))].filter((c) => countsAsCountry(c, x.countryList, x.splitCountries)).sort();
   let longest: WrappedYear['longest'] = null;
   for (const t of trips) {
     const d = tripDays(t);
