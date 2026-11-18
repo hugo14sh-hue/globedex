@@ -48,7 +48,7 @@ import { monthNames, seasonPeriod, shortMonthNames } from './months';
 import { StatusPicker } from './StatusPicker';
 import { RegionSection } from './RegionSection';
 import { outsideCountryList } from '../../lib/landlistor';
-import { isCountryId } from '../../lib/delade';
+import { isCountryId, showsStatusPicker, splitParts } from '../../lib/delade';
 import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
@@ -216,7 +216,26 @@ export default function PlaceScreen() {
       </div>
 
       <div className="pl-do">
-      <StatusPicker placeId={id} name={name} current={status} total={total} label={name} />
+      {/* Delat land med valet på (Körning 19): ingen egen status, delarna visas som rader som öppnar sin sida. */}
+      {showsStatusPicker(id, theme.splitCountries) ? (
+        <StatusPicker placeId={id} name={name} current={status} total={total} label={name} />
+      ) : (
+        <ul className="pl-list split-parts">
+          {splitParts(id).map((part) => {
+            const s = mine.statuses[part];
+            return (
+              <li key={part}>
+                <Row
+                  to={`/karta/${part}`}
+                  title={placeName(places, part)}
+                  sub={t(STATUS_KEY[s ?? 'ej'])}
+                  lead={<Flag placeId={part} ring={s ? statusColors(theme)[s] : undefined} />}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
 
       {/* Landskap och delstater: räknare och lista att bocka av. Visas på översikten. */}
       {view === 'oversikt' && knownCountry && <RegionSection countryId={id} countryName={name} places={places} statuses={mine.statuses} />}

@@ -60,6 +60,12 @@ export const continentOf = (id: string): Continent | undefined => CONTINENT_OF[P
  */
 export const statusShown = (id: string, split: boolean): boolean => (split ? !isSplitCountry(id) : !PARENT.has(id));
 
+/**
+ * Visas statusväljaren på platsens sida? Med valet på har ett delat land (GB) ingen egen statusväljare:
+ * sidan visar delarna i stället. Med valet av visas den som förut, och delarnas sidor har den alltid.
+ */
+export const showsStatusPicker = (id: string, split: boolean): boolean => !(split && isSplitCountry(id));
+
 /** Bara de statusar som visas med valet. */
 export function shownStatuses<T>(statuses: Record<string, T>, split: boolean): Record<string, T> {
   const out: Record<string, T> = {};

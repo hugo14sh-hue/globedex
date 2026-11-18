@@ -6,8 +6,10 @@ import {
   flagCode,
   isCountryId,
   isoOf,
+  showsStatusPicker,
   shownStatuses,
   SPLIT,
+  splitParts,
   splitGeo,
   splitSuggestion,
   statusShown,
@@ -153,6 +155,16 @@ describe('vad som visas med valet', () => {
     expect(shownStatuses(s, false)).toEqual({ GB: 'besokt', 'GB-london': 'vill', SE: 'bor' });
     expect(s).toHaveProperty('GB');
     expect(statusShown('SE', true) && statusShown('SE', false)).toBe(true);
+  });
+
+  it('landssidan för GB: statusväljaren döljs med valet på och visas med valet av, delarna visas i stället', () => {
+    expect(showsStatusPicker('GB', true)).toBe(false);
+    expect(showsStatusPicker('GB', false)).toBe(true);
+    expect(splitParts('GB')).toEqual(['GB-eng', 'GB-sct', 'GB-wls', 'GB-nir']);
+    for (const id of ['GB-eng', 'GB-nir', 'GB-london', 'SE']) {
+      expect(showsStatusPicker(id, true)).toBe(true);
+      expect(showsStatusPicker(id, false)).toBe(true);
+    }
   });
 
   it('listan Platser: delarna är egna länder i Europa', () => {

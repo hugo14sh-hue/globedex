@@ -897,7 +897,7 @@ test('röktest', async ({ page }) => {
     await expect(alla).toBeChecked();
   });
 
-  await test.step('delade länder: England öppnas på kartan, Skottland besökt ökar Vi med ett, valet av ger Storbritannien (Körning 19)', async () => {
+  await test.step('delade länder: England öppnas på kartan, Skottland besökt ökar Vi med ett, Storbritanniens sida visar delarna, valet av ger Storbritannien (Körning 19)', async () => {
     const { db, userId } = await testClient();
     const patched = () => page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
     const sheet = page.getByRole('dialog');
@@ -923,12 +923,21 @@ test('röktest', async ({ page }) => {
       const tile = page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first();
       await expect(tile.locator('.num')).toHaveText(/^\d+ av \d+$/, { timeout: 20_000 });
       // Par och grupp: egna markeringar räknas i vyn Jag (Tillsammans är förvalt).
-      const jag = page.locator(`[aria-label="${tx('vi.vy.aria')}"]`).getByText(tx('vi.vy.jag'), { exact: true });
+      const jag = page.locator(`[aria-label="${tx('vi.vy.aria')}"]`).getByRole('button', { name: tx('vi.vy.jag'), exact: true });
       if (await jag.count()) {
         await jag.click();
-        await page.waitForTimeout(300);
+        await expect(jag).toHaveAttribute('aria-pressed', 'true');
       }
-      return Number(/^(\d+)/.exec((await tile.locator('.num').textContent()) ?? '')?.[1] ?? NaN);
+      // Siffran läses när den stått still en stund, så att data som laddas efter hand inte ger fel utgångsläge.
+      const read = async () => Number(/^(\d+)/.exec((await tile.locator('.num').textContent()) ?? '')?.[1] ?? NaN);
+      let last = await read();
+      for (let i = 0; i < 10; i++) {
+        await page.waitForTimeout(800);
+        const now = await read();
+        if (now === last) break;
+        last = now;
+      }
+      return last;
     };
     try {
       // Utgångsläge: valet på, Storbritannien markerat som besökt och ingen del markerad. afterAll lägger tillbaka allt.
@@ -962,6 +971,14 @@ test('röktest', async ({ page }) => {
       await expect(page.getByText(tx('karta.delade.flytta').replace('{plats}', 'Storbritannien'))).toHaveCount(0);
       await expect.poll(landerNum, { timeout: 20_000 }).toBe(before + 1);
 
+      // Storbritanniens sida med valet på: delarna som rader (England öppnar sin sida) och ingen statusväljare.
+      await page.goto('/karta/GB');
+      await expect(page.getByRole('heading', { level: 1, name: 'Storbritannien' })).toBeVisible({ timeout: 20_000 });
+      const england = page.locator('main').getByRole('link', { name: new RegExp(`^${esc(tx('land.GB-eng'))}`) });
+      await expect(england).toBeVisible();
+      await expect(england).toHaveAttribute('href', '/karta/GB-eng');
+      await expect(page.locator('main').getByRole('button', { name: tx('karta.status.besokt'), exact: true })).toHaveCount(0);
+
       // Valet av: Storbritannien går att öppna igen på kartan, och raden för GB finns kvar.
       await page.goto('/vi/anpassning');
       let saved = patched();
@@ -971,6 +988,9 @@ test('röktest', async ({ page }) => {
       expect(await tapCenter()).toBe('Storbritannien');
       await expect(sheet.getByRole('button', { name: tx('karta.status.besokt'), exact: true })).toHaveAttribute('aria-pressed', 'true');
       await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
+      // Med valet av har Storbritanniens sida statusväljaren som förut.
+      await page.goto('/karta/GB');
+      await expect(page.locator('main').getByRole('button', { name: tx('karta.status.besokt'), exact: true })).toBeVisible({ timeout: 20_000 });
       await page.goto('/vi/anpassning');
       saved = patched();
       await page.getByRole('switch', { name: tx('landlista.delade.val') }).check();
