@@ -1,0 +1,358 @@
+{
+ "places": {
+  "NL": {
+   "name": "Netherlands",
+   "data": {
+    "best_text": "April to mid-May for the tulips, September for milder weather and smaller crowds.",
+    "transport": [
+     {
+      "mode": "Train",
+      "text": "Check in and out with the same bank card or phone at the gates. No ticket needs to be bought in advance."
+     },
+     {
+      "mode": "Bus, tram and metro",
+      "text": "The same card as on the train. Do not forget to check out when you get off."
+     }
+    ]
+   }
+  },
+  "NL-amsterdam": {
+   "name": "Amsterdam",
+   "data": {
+    "best_text": "Mid-April for tulips and Keukenhof, September for shorter queues.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The canal ring, one museum and the ferry to Noord. Book the museum times before you go."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for two museums, De Pijp and half a day at Zaanse Schans or Keukenhof in season."
+     },
+     {
+      "label": "One week",
+      "text": "Add day trips by train, for example Kinderdijk, and quieter days in Noord and Oost."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Jordaan and the canal ring",
+      "text": "Walking distance to most things and quiet in the evening. The most expensive in the city."
+     },
+     {
+      "name": "De Pijp",
+      "text": "The Albert Cuyp market, plenty of food and close to the museums. Metro 52 to Centraal."
+     },
+     {
+      "name": "Oud-West",
+      "text": "A residential area near Vondelpark with trams into the centre. Often cheaper than the canal ring."
+     },
+     {
+      "name": "Noord",
+      "text": "Cheaper and newer hotels. The free ferry to Centraal runs around the clock on the line to Buiksloterweg."
+     },
+     {
+      "name": "De Wallen (Red Light District)",
+      "text": "Rowdy and noisy at night, with the strictest rules on alcohol and cannabis in the street. Visit, but sleep somewhere else."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "On foot and by bike",
+      "text": "The centre is small. Most things within the canal ring can be reached on foot."
+     },
+     {
+      "mode": "Tram, metro and bus (GVB)",
+      "text": "Tap your bank card or phone when boarding and getting off. The same card both times."
+     },
+     {
+      "mode": "Ferry across the IJ",
+      "text": "Free for pedestrians and cyclists, leaving from behind Centraal Station for Noord and NDSM."
+     },
+     {
+      "mode": "Train from Schiphol",
+      "text": "Direct train to Amsterdam Centraal in about 16–17 minutes. Pay by card at the gate."
+     }
+    ],
+    "events": [
+     {
+      "name": "Amsterdam Light Festival",
+      "text": "Light art along the canals."
+     },
+     {
+      "name": "Keukenhof opens",
+      "text": "The tulip park in Lisse opens for the season and stays open until early May."
+     },
+     {
+      "name": "King's Day",
+      "text": "The whole city dresses in orange. Street party and flea market, and hotels sell out early."
+     },
+     {
+      "name": "Rolling Kitchens",
+      "text": "A food truck festival in Westerpark."
+     },
+     {
+      "name": "Grachtenfestival",
+      "text": "Classical music and jazz on stages beside and on the canals."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Tulips and Keukenhof",
+      "text": "Keukenhof opens on 18 March 2027 and closes in early May. Peak bloom is in mid-April."
+     },
+     {
+      "name": "Amsterdam Light Festival",
+      "text": "Light art along the canals, from late November to mid-January."
+     }
+    ],
+    "month_notes": [
+     "Cold, wet and grey. Short queues for the museums.",
+     "Cold and grey. The cheapest time to stay.",
+     "Spring begins. Keukenhof opens towards the end.",
+     "The tulips are in bloom. Big crowds around King's Day at the end of the month.",
+     "Warm and green. The tulip season ends in the middle.",
+     "Long evenings on the terraces by the canals.",
+     "High summer, lots of tourists and high prices.",
+     "High summer and lots of tourists.",
+     "Still mild, with shorter queues.",
+     "Autumn and rain.",
+     "Grey and wet.",
+     "Festival of light along the canals. Cold and dark early."
+    ],
+    "prices": {
+     "summary": "More expensive than at home in restaurants. Beer costs about the same as in Sweden.",
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "According to Amsterdam Tips, not Numbeo."
+      },
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "NL-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "A Swedish driving licence is not enough. Bring a passport or a national ID card issued by the police.",
+   "body": "The Netherlands is in the EU and Schengen. As a Swedish citizen you travel with a passport or a national ID card issued by the Swedish Police. Driving licences and ordinary ID cards are not travel documents. Normally there is no border control, but you must be able to show the document."
+  },
+  "NL-fakta-alkohol": {
+   "title": "Alcohol from age 18",
+   "summary": "Age 18 for all alcohol, including beer and wine.",
+   "body": "You must be 18 to buy alcohol. Anyone under 18 carrying alcohol in a public place can be penalised. Expect to be asked for ID."
+  },
+  "NL-fakta-droger": {
+   "title": "Cannabis is only tolerated in coffeeshops",
+   "summary": "Drugs are illegal. Cannabis is tolerated in coffeeshops, not freely.",
+   "body": "Drugs are illegal in the Netherlands. The sale of small amounts of cannabis is tolerated in coffeeshops for adults, but that does not make the drug legal, and municipalities have their own rules for the street. Never take anything home to Sweden."
+  },
+  "NL-fakta-hyrbil": {
+   "title": "Car rental from age 21",
+   "summary": "At least 21 at Sixt and Avis, with a fee for drivers under 25.",
+   "body": "At Sixt in the Netherlands the driver must be at least 21 and have held a licence for two years. Drivers under 25 pay a young driver fee. Terms differ between companies and car classes, so read them in the booking."
+  },
+  "NL-fakta-medicin": {
+   "title": "Controlled medicines require a Schengen certificate",
+   "summary": "Get a Schengen certificate from a pharmacy for medicines classed as narcotics.",
+   "body": "If you travel within Schengen with medicines classed as narcotics you need a Schengen certificate from a pharmacy. It covers a maximum of 30 days' use, with one certificate per medicine. Insulin may be carried in hand luggage."
+  },
+  "NL-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "EU roaming: the same price as in Sweden for calls, texts and data.",
+   "body": "In the EU you pay the same as at home for calls, texts and data. The operator may set a cap on how much data is included abroad, so check your plan if you have a large allowance."
+  },
+  "NL-fakta-eluttag": {
+   "title": "The same plugs as at home",
+   "summary": "Type C and F, 230 V. No adapter needed.",
+   "body": "The Netherlands has type C and F sockets with 230 V and 50 Hz, the same as in Sweden."
+  },
+  "NL-fakta-betala": {
+   "title": "Your bank card is the ticket",
+   "summary": "Check in and out on public transport with the same card or phone.",
+   "body": "All public transport is based on checking in and checking out. You can use a contactless bank card or your phone. Use exactly the same card or device both times, otherwise it counts as a new journey. In Amsterdam the readers are inside the tram."
+  },
+  "NL-amsterdam-fakta-ta-sig-dit": {
+   "title": "Schiphol to the centre in a quarter of an hour",
+   "summary": "Direct train Schiphol–Amsterdam Centraal, about 16–17 minutes.",
+   "body": "The train station is beneath the airport. Direct trains run to Amsterdam Centraal in about 16–17 minutes. You pay by tapping a bank card or phone at the gate, and check out with the same card."
+  },
+  "NL-amsterdam-fakta-turistskatt": {
+   "title": "Tourist tax of 12.5% on accommodation",
+   "summary": "12.5% of the room price in 2026. An increase for 2027 has been proposed.",
+   "body": "Amsterdam charges 12.5% of the overnight price in tourist tax in 2026. Check whether it is included in the price you see when you book. The city government has proposed 16% from 2027 and more after that, but it had not been decided when this was written."
+  },
+  "NL-amsterdam-fakta-gaturegler": {
+   "title": "No drinking or smoking in the street in the centre",
+   "summary": "Alcohol and cannabis are banned in the street in the old centre. The fine is 100 euros.",
+   "body": "Alcohol and cannabis are banned in most public places in the centre. Since 25 May 2023 it has been forbidden to smoke cannabis in the street in the old centre, including the Red Light District, Nieuwmarkt and Dam. The fine is 100 euros."
+  },
+  "NL-amsterdam-fakta-kanalringen": {
+   "title": "The canals are World Heritage",
+   "summary": "The 17th-century canal ring became a UNESCO World Heritage Site in 2010.",
+   "body": "Amsterdam's canal ring inside the Singelgracht was inscribed on UNESCO's World Heritage List in 2010."
+  },
+  "NL-fakta-kinderdijk": {
+   "title": "19 windmills in a row",
+   "summary": "Kinderdijk's 19 mills have been World Heritage since 1997.",
+   "body": "The 19 windmills at Kinderdijk were built to pump away water. 17 of them date from 1738–1740. The area has been a World Heritage Site since 1997."
+  },
+  "NL-amsterdam-fakta-arenan": {
+   "title": "The arena that changed its name",
+   "summary": "Ajax's home ground was called Amsterdam ArenA until it was renamed after Johan Cruijff.",
+   "body": "Ajax plays at the Johan Cruijff ArenA, built 1993–1996. It replaced De Meer, which held only 19,000 spectators."
+  }
+ },
+ "items": {
+  "NL-amsterdam-anne-frank-huset": {
+   "name": "The Anne Frank House",
+   "summary": "Tickets are only sold online and are released on Tuesdays at 10 am.",
+   "body": "You cannot buy a ticket at the door. Every Tuesday at 10 am, tickets are released for visits six weeks later, only at annefrank.org. There is no waiting list, so set a reminder."
+  },
+  "NL-amsterdam-rijksmuseum": {
+   "name": "Rijksmuseum",
+   "summary": "The Night Watch and Vermeer. Book a start time online.",
+   "body": "The visit begins with a booked start time. Free admission up to and including age 18, but a start time is still required. Rembrandt's The Night Watch and Vermeer's The Milkmaid hang in the Gallery of Honour."
+  },
+  "NL-amsterdam-van-gogh-museet": {
+   "name": "Van Gogh Museum",
+   "summary": "Tickets are only available online.",
+   "body": "Tickets are only sold online. The ticket covers both the permanent collection and current exhibitions. Buy through the museum's own site or the resellers the museum lists."
+  },
+  "NL-amsterdam-kanalringen": {
+   "name": "The canal ring",
+   "summary": "The 17th-century canals inside the Singelgracht, a World Heritage Site since 2010.",
+   "body": "Walk along Herengracht, Keizersgracht and Prinsengracht. Free and best early in the morning or at dusk."
+  },
+  "NL-amsterdam-farjan-till-noord": {
+   "name": "The free ferry to Noord",
+   "summary": "Blue and white ferries behind Centraal Station. Free.",
+   "body": "The ferries run frequently from the back of Centraal Station across the IJ to Noord and NDSM. The line to Buiksloterweg takes you to the Eye Filmmuseum. Just walk on, no ticket."
+  },
+  "NL-amsterdam-stroopwafel-albert-cuyp": {
+   "name": "A freshly baked stroopwafel at Albert Cuyp",
+   "summary": "A warm syrup waffle from a market stall in De Pijp.",
+   "body": "At the Albert Cuyp market, stroopwafels are baked while you wait. The waffle originally comes from Gouda."
+  },
+  "NL-amsterdam-johan-cruijff-arena": {
+   "name": "Johan Cruijff ArenA",
+   "summary": "Ajax's home ground, with behind-the-scenes tours.",
+   "body": "Guided tours in English and Dutch take about 60–75 minutes and go through the press room, mixed zone and dressing rooms. The arena is about 10 km south-east of the centre."
+  },
+  "NL-keukenhof": {
+   "name": "Keukenhof",
+   "summary": "The tulip park is open 18 March–9 May 2027.",
+   "body": "The park is only open in spring: 18 March to 9 May 2027, 8 am–7 pm, last admission 6.15 pm. Tickets are sold at keukenhof.nl."
+  },
+  "NL-zaanse-schans": {
+   "name": "Zaanse Schans",
+   "summary": "Windmills about 17 minutes by train from Amsterdam Centraal.",
+   "body": "The train to Zaandijk Zaanse Schans takes about 17 minutes, followed by a 15-minute walk. According to the area's own website it is free to walk around the village, while mills and some museums charge admission."
+  },
+  "NL-kinderdijk": {
+   "name": "Kinderdijk",
+   "summary": "19 windmills, a World Heritage Site since 1997.",
+   "body": "The country's best-known windmill landscape, with 17 mills built 1738–1740 and two even older. Located in South Holland, east of Rotterdam."
+  }
+ },
+ "compendium": {
+  "bakverk-stroopwafel": {
+   "name": "Stroopwafel",
+   "hint": "Two thin waffles with syrup in between."
+  },
+  "blomma-tulpan": {
+   "name": "Tulip field in bloom",
+   "hint": "Only a few weeks in spring."
+  },
+  "sevardhet-vaderkvarn": {
+   "name": "Dutch windmill",
+   "hint": "Built to pump water, not to grind flour."
+  },
+  "sevardhet-nattvakten": {
+   "name": "The Night Watch",
+   "hint": "Rembrandt, 1642."
+  },
+  "arena-johan-cruijff-arena": {
+   "name": "Johan Cruijff ArenA",
+   "hint": "Ajax's home ground."
+  },
+  "fardmedel-ij-farjan": {
+   "name": "The ferry across the IJ",
+   "hint": "Blue and white, and free."
+  }
+ },
+ "ideas": {
+  "NL-amsterdam-ide-farja-noord": {
+   "title": "The ferry to Noord at sunset",
+   "body": "Take the free ferry behind Centraal to Buiksloterweg, walk along the water and ride back as it gets dark.",
+   "duration": "about 2 h"
+  },
+  "NL-amsterdam-ide-kanalpromenad": {
+   "title": "Morning walk along three canals",
+   "body": "Herengracht, Keizersgracht and Prinsengracht before the city wakes up. Finish with coffee in the Jordaan.",
+   "duration": "about 2 h"
+  },
+  "NL-amsterdam-ide-albert-cuyp": {
+   "title": "Eat your way through Albert Cuyp",
+   "body": "Share a freshly baked stroopwafel and pick lunch from the stalls at the market in De Pijp.",
+   "duration": "about 2 h"
+  },
+  "NL-amsterdam-ide-museikvall": {
+   "title": "One museum, booked in advance",
+   "body": "Choose the Rijksmuseum or the Van Gogh Museum and book a start time before the trip. The Anne Frank House requires booking six weeks ahead.",
+   "duration": "Half a day"
+  },
+  "NL-amsterdam-ide-zaanse-schans": {
+   "title": "Half a day among the windmills",
+   "body": "Train to Zaandijk Zaanse Schans in about 17 minutes and a walk across the bridge to the mills.",
+   "duration": "Half a day"
+  },
+  "NL-amsterdam-ide-keukenhof": {
+   "title": "Keukenhof in tulip time",
+   "body": "Only possible between 18 March and 9 May 2027. Buy tickets in advance and go early.",
+   "duration": "One day"
+  },
+  "NL-amsterdam-ide-arenatur": {
+   "title": "Tour of the Johan Cruijff ArenA",
+   "body": "Walk the players' tunnel and see the dressing rooms at Ajax's home ground. The tour takes about 60–75 minutes.",
+   "duration": "about 2 h"
+  }
+ },
+ "gifts": {
+  "NL-present-stroopwafels": {
+   "name": "Stroopwafels in a tin",
+   "body": "They keep for the whole trip and the tin stays. Found in supermarkets and at markets."
+  },
+  "NL-present-delfts-blauw": {
+   "name": "Delft Blue",
+   "body": "Blue and white ceramics with windmills and tulips. Choose a mug or small bowl rather than a large vase."
+  },
+  "NL-present-tulpanlokar": {
+   "name": "Tulip bulbs",
+   "body": "Sold packaged for travellers. They are planted in autumn, so they work best as a gift after a spring trip if the recipient has a garden."
+  },
+  "NL-present-gouda": {
+   "name": "Aged Gouda",
+   "body": "Waxed whole or in a piece. Choose an aged variety, it survives the journey best."
+  },
+  "NL-present-ajax": {
+   "name": "Ajax scarf",
+   "body": "From the club's official shop at the arena."
+  },
+  "NL-present-nijntje": {
+   "name": "Nijntje (Miffy)",
+   "body": "The Dutch rabbit comes as soft toys and books."
+  },
+  "NL-present-jenever": {
+   "name": "Jenever",
+   "body": "Dutch juniper spirit, the forerunner of gin. Comes in small bottles."
+  }
+ }
+}

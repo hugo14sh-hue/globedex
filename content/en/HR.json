@@ -1,0 +1,405 @@
+{
+ "places": {
+  "HR": {
+   "name": "Croatia"
+  },
+  "HR-dubrovnik": {
+   "name": "Dubrovnik",
+   "data": {
+    "best_text": "May, June and September. In July and August the cruise ships fill the old town.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Two nights",
+      "text": "The city walls early and the old town in the evening."
+     },
+     {
+      "label": "Three nights",
+      "text": "Time for an island or a beach day."
+     },
+     {
+      "label": "Five nights",
+      "text": "Add a day trip along the coast."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Ploče",
+      "text": "Just east of the old town, where the airport bus stops. Views of the walls."
+     },
+     {
+      "name": "Lapad",
+      "text": "Beaches and quieter evenings. Bus into the old town."
+     },
+     {
+      "name": "Gruž",
+      "text": "By the ferry port and the bus station. The cheapest."
+     },
+     {
+      "name": "Inside the old town",
+      "text": "Stairs, no cars and expensive. Hard work with a suitcase."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "City bus",
+      "text": "Included in the Dubrovnik Pass together with the city walls and several museums."
+     },
+     {
+      "mode": "Airport bus",
+      "text": "About 35 minutes to Ploče Gate by the old town, then on to the bus station in Gruž. Leaves roughly 30 minutes after each landing."
+     }
+    ],
+    "events": [
+     {
+      "name": "Dubrovnik Summer Festival",
+      "text": "Theatre, concerts and dance on stages in the old town. The dates are the festival's usual ones, taken from an events calendar."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Swimming season"
+     },
+     {
+      "name": "The cruise ships",
+      "text": "The old town is at its fullest in the middle of the day."
+     }
+    ],
+    "month_notes": [
+     "Low season. Much is closed.",
+     "Low season. Much is closed.",
+     "Quiet and cool. Some places open towards the end.",
+     "Spring arrives, but the sea is cold.",
+     "Warm, and the walls can be walked without crowds.",
+     "Swimming weather before high-season prices.",
+     "Hot and full. The cruise ships fill the old town.",
+     "The hottest, most expensive and most crowded.",
+     "Warm sea and fewer cruise passengers.",
+     "Still mild. The season ends towards the end.",
+     "The rainiest time of the year. Much closes.",
+     "Low season. Much is closed."
+    ],
+    "prices": {
+     "summary": "Croatia's most expensive city. Prices in the old town are close to Swedish ones.",
+     "rows": [
+      {},
+      {}
+     ]
+    }
+   }
+  },
+  "HR-split": {
+   "name": "Split",
+   "data": {
+    "best_text": "May, June and September.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Two nights",
+      "text": "The palace and Marjan."
+     },
+     {
+      "label": "Three nights",
+      "text": "Time for a day trip to Krka or an island."
+     },
+     {
+      "label": "Five nights",
+      "text": "A good base for island hopping by ferry."
+     }
+    ],
+    "areas": [
+     {
+      "name": "The old town and the palace",
+      "text": "Everything within walking distance, five minutes from the bus station and the ferries."
+     },
+     {
+      "name": "Veli Varoš",
+      "text": "The old fishermen's quarter at the foot of Marjan. Quieter."
+     },
+     {
+      "name": "Bačvice",
+      "text": "Close to the beach and still within walking distance of the palace."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Airport bus",
+      "text": "About 30 minutes non-stop to the bus station, which is next to the ferry port and a five-minute walk from the old town."
+     }
+    ],
+    "events": [
+     {
+      "name": "Ultra Europe",
+      "text": "A big dance music festival at Park Mladeži. The city is full and accommodation is expensive on those days."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Swimming season"
+     },
+     {
+      "name": "Frequent ferries to the islands"
+     }
+    ],
+    "month_notes": [
+     "Low season. Few ferries to the islands.",
+     "Low season. Few ferries to the islands.",
+     "Quiet and cool.",
+     "Spring arrives, but the sea is cold.",
+     "Warm, and the ferries run more often.",
+     "Swimming weather before high-season prices.",
+     "Hot and crowded. Good ferry connections.",
+     "The hottest and most expensive.",
+     "Warm sea and quieter.",
+     "Still mild. The ferries thin out.",
+     "Rainy, and much closes.",
+     "Low season."
+    ],
+    "prices": {
+     "summary": "About the same as at home in restaurants, cheaper for coffee.",
+     "tips": [
+      "A mid-range hotel costs roughly 90–120 euros per night according to Radical Storage."
+     ],
+     "rows": [
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  },
+  "HR-zagreb": {
+   "name": "Zagreb",
+   "data": {
+    "best_text": "May, June and September, or December for the Christmas market.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "One day",
+      "text": "The Upper Town with the cannon shot, St Mark's Church and the museum."
+     },
+     {
+      "label": "Weekend",
+      "text": "Time for the market and the parks of the Lower Town."
+     },
+     {
+      "label": "Four days",
+      "text": "Add a day trip to the Plitvice Lakes."
+     }
+    ],
+    "areas": [
+     {
+      "name": "The Lower Town (Donji grad)",
+      "text": "Parks, cafés and trams everywhere. Walking distance to the funicular."
+     },
+     {
+      "name": "The Upper Town (Gornji grad)",
+      "text": "Quiet and beautiful, but hilly."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Airport bus",
+      "text": "35–40 minutes to the central bus station. From there you take a tram to the square."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "The Advent Christmas market"
+     }
+    ],
+    "month_notes": [
+     "Cold and grey.",
+     "Cold and grey.",
+     "Spring begins.",
+     "Mild, and the outdoor terraces open.",
+     "Warm and green in the parks.",
+     "Warm with long evenings.",
+     "Hot, and many people are at the coast.",
+     "Hot, and many people are at the coast.",
+     "Warm and just the right number of people.",
+     "Autumn and clear days.",
+     "Grey before the Christmas market.",
+     "Christmas market all over the centre."
+    ],
+    "prices": {
+     "summary": "Cheaper than at home, especially beer and coffee.",
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "HR-fakta-betala": {
+   "title": "Currency: euro (EUR)",
+   "summary": "The country uses the euro (EUR)."
+  },
+  "HR-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen. A Swedish driving licence is not normally accepted as a travel document."
+  },
+  "HR-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "EU roaming: the same price as in Sweden.",
+   "body": "You pay as at home for calls, texts and data, but the operator may set a cap on data abroad."
+  },
+  "HR-dubrovnik-fakta-pass": {
+   "title": "The Dubrovnik Pass can pay off",
+   "summary": "The pass gives free admission to the city walls, museums and the city buses.",
+   "body": "The city walls, the Rector's Palace, the Franciscan Monastery museum, the Maritime Museum and the Ethnographic Museum are included in all three versions of the pass."
+  },
+  "HR-fakta-alkohol": {
+   "title": "Alcohol from age 18",
+   "summary": "Shops must refuse anyone who looks under 18 and has no ID.",
+   "body": "The same rule applies to energy drinks. A new law also gives towns and municipalities the right to restrict shops' alcohol sales at night, so the hours may differ between places."
+  },
+  "HR-dubrovnik-fakta-ta-sig-dit": {
+   "title": "Airport bus to the old town in 35 minutes",
+   "summary": "The bus stops at Ploče Gate and continues to Gruž.",
+   "body": "A single ticket costs 10 euros and a return 15 euros. The ticket is valid for any departure the same day. Towards the airport the bus leaves from the bus station in Gruž and stops at the cable car near the old town."
+  },
+  "HR-split-fakta-ta-sig-dit": {
+   "title": "Airport bus to Split in 30 minutes",
+   "summary": "The bus runs directly to the bus station by the ferry port.",
+   "body": "A single ticket costs 10 euros and a return 15 euros. From the airport the bus leaves roughly 30 minutes after each landing. In summer, traffic can make the journey longer."
+  },
+  "HR-fakta-krka-bad": {
+   "title": "Swimming ban in Krka",
+   "summary": "Swimming in Krka National Park has been prohibited since 1 January 2021.",
+   "body": "Older pictures and guides show people swimming below the Skradinski buk waterfall. It is no longer allowed."
+  },
+  "HR-zagreb-fakta-ta-sig-dit": {
+   "title": "Airport bus to the bus station in 35–40 minutes",
+   "summary": "Pleso Prijevoz runs between the airport and the central bus station.",
+   "body": "The city's local buses also run from the airport but take longer."
+  }
+ },
+ "items": {
+  "HR-dubrovnik-stadsmuren": {
+   "name": "The city walls",
+   "summary": "One lap around the old town. The ticket is valid once.",
+   "body": "If you leave the walls you have to buy a new ticket. Fort Lovrijenac is included. Allow 1.5–2 hours for the full lap, and go early in the day."
+  },
+  "HR-plitvice": {
+   "name": "The Plitvice Lakes",
+   "summary": "A national park with lakes and waterfalls. Buy your ticket online.",
+   "body": "The ticket is valid for the entrance and the time you chose when buying. Save it on your phone or print it."
+  },
+  "HR-split-diocletianus-palats": {
+   "name": "Diocletian's Palace",
+   "summary": "A Roman emperor's palace that became the old town. Free and open around the clock.",
+   "body": "A World Heritage Site since 1979, the same year as Dubrovnik's old town and Plitvice. The palace area itself costs nothing. The cellars have a ticket, sold at the desk in the palace or by the Split City Museum."
+  },
+  "HR-split-marjan": {
+   "name": "Marjan",
+   "summary": "A wooded hill with the city's highest viewpoint. Free all year.",
+   "body": "The paths through the pine forest are open all year. From the summit, Telegrin, you see the old town, the islands and the mountains. You walk there from the old town or take bus 12."
+  },
+  "HR-krka": {
+   "name": "Krka National Park",
+   "summary": "The Skradinski buk waterfall. Swimming has been prohibited since 2021.",
+   "body": "The park's own rules prohibit swimming from 1 January 2021. Expect to see the falls from the boardwalks, not from the water."
+  },
+  "HR-zagreb-lotrscak": {
+   "name": "Lotrščak Tower and the noon cannon",
+   "summary": "Every day at noon a cannon is fired from the tower.",
+   "body": "The tower was built in 1266 to defend the city's southern gate. The cannon has fired a shot at midday since 1877. Stand on the promenade below just before twelve."
+  },
+  "HR-zagreb-markuskyrkan": {
+   "name": "St Mark's Church",
+   "summary": "A 13th-century church with a colourful tiled roof in the Upper Town.",
+   "body": "The roof is laid like a mosaic with two coats of arms: Zagreb's and that of the Triune Kingdom of Croatia, Slavonia and Dalmatia."
+  },
+  "HR-zagreb-brustna-relationer": {
+   "name": "The Museum of Broken Relationships",
+   "summary": "Donated objects from loves that ended, with the story behind them.",
+   "body": "The museum is in the Upper Town near St Mark's Church and is included in the Zagreb Card."
+  },
+  "HR-zagreb-uspinjaca": {
+   "name": "The funicular",
+   "summary": "Only 66 metres long. Runs from Tomićeva Street up to Lotrščak Tower.",
+   "body": "The funicular links the Lower and Upper Towns."
+  }
+ },
+ "compendium": {
+  "mat-cevapi": {
+   "name": "Ćevapi",
+   "hint": "Small grilled minced-meat rolls in bread with raw onion."
+  },
+  "mat-burek": {
+   "name": "Burek",
+   "hint": "A filled filo pastry pie bought at the bakery."
+  },
+  "mat-svart-risotto": {
+   "name": "Black risotto",
+   "hint": "The colour comes from cuttlefish ink."
+  },
+  "bakverk-fritule": {
+   "name": "Fritule",
+   "hint": "Small fried doughnuts, most common around Christmas."
+  },
+  "sevardhet-havsorgeln": {
+   "name": "The Sea Organ in Zadar",
+   "hint": "Steps by the water where the waves play."
+  },
+  "daggdjur-delfin-adriatiska": {
+   "name": "Dolphin in the Adriatic",
+   "hint": "The best chance is from a boat between the islands."
+  }
+ },
+ "ideas": {
+  "HR-dubrovnik-ide-muren": {
+   "title": "The city walls early in the morning",
+   "body": "Walk the full lap before the heat and the cruise passengers arrive.",
+   "duration": "about 2 h"
+  },
+  "HR-ide-plitvice": {
+   "title": "A full day at the Plitvice Lakes",
+   "body": "Book the entrance and time online and be there early.",
+   "duration": "One day"
+  },
+  "HR-split-ide-palatset": {
+   "title": "An evening in Diocletian's Palace",
+   "body": "Go in through one of the gates after dark, when the alleys are at their quietest.",
+   "duration": "about 2 h"
+  },
+  "HR-split-ide-marjan": {
+   "title": "Sunset on Marjan",
+   "body": "Walk up to Telegrin with something to drink and watch the sun set over the islands.",
+   "duration": "about 2 h"
+  },
+  "HR-split-ide-krka": {
+   "title": "Day trip to Krka",
+   "body": "See Skradinski buk from the boardwalks. Leave your swimwear at home, swimming is banned.",
+   "duration": "One day"
+  },
+  "HR-zagreb-ide-ovre-staden": {
+   "title": "The Upper Town for the cannon shot",
+   "body": "Take the funicular up just before twelve, hear the cannon and walk on to St Mark's Church and the museum.",
+   "duration": "Half a day"
+  }
+ },
+ "gifts": {
+  "HR-present-slips": {
+   "name": "Necktie",
+   "body": "The cravat is named after the Croats."
+  },
+  "HR-present-lavendel": {
+   "name": "Lavender sachets",
+   "body": "Sold at the markets along the coast."
+  },
+  "HR-present-keramik": {
+   "name": "Ceramics from the coast",
+   "body": "Mugs and dishes in blue and white."
+  }
+ }
+}

@@ -1,0 +1,380 @@
+{
+ "places": {
+  "GR": {
+   "name": "Greece"
+  },
+  "GR-aten": {
+   "name": "Athens",
+   "data": {
+    "best_text": "April to May and October. In July and August it is too hot for the Acropolis in the middle of the day.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The Acropolis in the first time slot, the museum and the Agora."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for an evening in Psyrri and half a day by the sea."
+     },
+     {
+      "label": "Five days",
+      "text": "Add Delphi or a day trip by ferry from Piraeus."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Plaka",
+      "text": "Below the Acropolis with everything within walking distance. Touristy and more expensive."
+     },
+     {
+      "name": "Koukaki",
+      "text": "A quieter residential area next to the Acropolis Museum."
+     },
+     {
+      "name": "Psyrri and Monastiraki",
+      "text": "Food and bars, and a direct metro to the airport and Piraeus."
+     },
+     {
+      "name": "Around Omonia",
+      "text": "Cheap hotels but rowdy at night."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Metro line 3 from the airport",
+      "text": "About 40 minutes to Syntagma. Trains run every 30 minutes, the first around 6.30 am and the last around 11.30 pm."
+     },
+     {
+      "mode": "Airport bus X95",
+      "text": "Runs to Syntagma and is the option at night when the metro is not running."
+     },
+     {
+      "mode": "Metro to the port of Piraeus",
+      "text": "The green line from Omonia and Monastiraki, the blue line from Syntagma. The station is right in front of the port."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Swimming season"
+     },
+     {
+      "name": "Athens Epidaurus Festival",
+      "text": "Music, opera, dance and theatre, including at the Odeon of Herodes Atticus below the Acropolis."
+     }
+    ],
+    "month_notes": [
+     "Mild but rainy. Few tourists and short queues.",
+     "Mild and quiet. Cheap to stay.",
+     "Spring begins. Good weather for the ruins.",
+     "Warm without the heat. Best for the Acropolis.",
+     "Warm and dry, before the high-summer crowds.",
+     "Hot in the middle of the day. Go to the Acropolis early.",
+     "Too hot for the ruins in the middle of the day.",
+     "The hottest time of the year, and many Athenians are away.",
+     "The heat eases and the sea is warm.",
+     "Warm, clear and quieter.",
+     "Mild. More rain towards the end.",
+     "Cool and rainy, but quiet."
+    ],
+    "prices": {
+     "summary": "Cheaper than at home in restaurants and cafés.",
+     "tips": [
+      "The figures are Numbeo's average for all of Greece from October 2026, not for Athens alone."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  },
+  "GR-santorini": {
+   "name": "Santorini",
+   "data": {
+    "best_text": "May, June and September. July and August are the most expensive and crowded, and in winter much is closed.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Two nights",
+      "text": "The caldera, a sunset and Akrotiri."
+     },
+     {
+      "label": "Three nights",
+      "text": "Time for a boat trip and a beach day on the east side."
+     },
+     {
+      "label": "Five nights",
+      "text": "Only if you want to take it easy. Better to combine with another island."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Fira",
+      "text": "The bus hub. From here you can reach the rest of the island without a rental car."
+     },
+     {
+      "name": "Imerovigli",
+      "text": "Quieter than Fira with the same view over the caldera. Expensive."
+     },
+     {
+      "name": "Kamari and Perissa",
+      "text": "The beaches on the east side. Clearly cheaper, but no caldera view."
+     },
+     {
+      "name": "Oia",
+      "text": "The most beautiful, but the most expensive and crowded at sunset. Go there for the day."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Fast ferry from Piraeus",
+      "text": "4–5 hours. Fastest, but more expensive and with no deck to stand on."
+     },
+     {
+      "mode": "Conventional ferry from Piraeus",
+      "text": "7–8 hours. Runs daily all year and has cabins on the night departures."
+     },
+     {
+      "mode": "Bus from the port",
+      "text": "The local bus only runs between the port of Athinios and Fira. For other villages you change in Fira."
+     }
+    ],
+    "prices": {
+     "summary": "Greece's most expensive island. Food costs 25–45 per cent more than in Athens, and the most with a view over the caldera.",
+     "tips": [
+      "Eat the main meal of the day at lunch. Restaurants with a view often have lunch menus that are 25–35 per cent cheaper than dinner.",
+      "Oia is the most expensive. The same dish can cost two to three times more there than in Kamari or Pyrgos."
+     ],
+     "rows": [
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  },
+  "GR-kreta": {
+   "name": "Crete",
+   "data": {
+    "best_text": "May, June and September. The Samaria Gorge is only open May to October.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Five days",
+      "text": "Choose one side of the island. West for Samaria, east for Knossos."
+     },
+     {
+      "label": "One week",
+      "text": "Time for both Chania and Heraklion with a rental car."
+     },
+     {
+      "label": "Ten days",
+      "text": "Add the south coast and the mountain villages."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Chania",
+      "text": "A Venetian harbour and the best base for the Samaria Gorge."
+     },
+     {
+      "name": "Rethymno",
+      "text": "In the middle of the north coast, good if you want to reach both directions."
+     },
+     {
+      "name": "Heraklion",
+      "text": "Closest to Knossos, the airport and the ferry to Santorini."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Ferry Heraklion–Santorini",
+      "text": "1.5–3 hours. Fast ferries run daily during the season."
+     }
+    ],
+    "prices": {
+     "summary": "Cheaper than at home in local tavernas. By the harbours in the tourist towns it costs clearly more.",
+     "tips": [
+      "A full taverna meal with house wine costs 15–22 euros per person at a local place, and 35–45 euros by the harbour in Chania."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "GR-fakta-betala": {
+   "title": "Currency: euro (EUR)",
+   "summary": "The country uses the euro (EUR)."
+  },
+  "GR-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen. A Swedish driving licence is not normally accepted as a travel document."
+  },
+  "GR-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "EU roaming: the same price as in Sweden.",
+   "body": "You pay as at home for calls, texts and data, but the operator may set a cap on data abroad."
+  },
+  "GR-fakta-turistskatt": {
+   "title": "Climate fee per room and night",
+   "summary": "0.50–15 euros per room and night depending on hotel class and season.",
+   "body": "The fee is charged per room, not per person, and is usually paid on site at check-in or check-out. High season counts from 1 April to 31 October. The fee is the same on all islands."
+  },
+  "GR-aten-fakta-ta-sig-dit": {
+   "title": "Airport to Syntagma in 40 minutes",
+   "summary": "Metro line 3 runs directly to the centre.",
+   "body": "The airport journey requires a special ticket, the ordinary 90-minute ticket is not valid. A three-day tourist ticket includes one trip to and from the airport."
+  },
+  "GR-fakta-alkohol": {
+   "title": "Alcohol from age 18, ID required",
+   "summary": "You must be able to show ID proving you are 18 to buy alcohol.",
+   "body": "A law from July 2025 requires valid ID at purchase. Anyone under 18 may also not enter bars and nightclubs. Venues that break the rules can be fined up to 10,000 euros."
+  },
+  "GR-aten-fakta-pireus": {
+   "title": "The ferries leave from Piraeus",
+   "summary": "The metro runs all the way to the port. Check which gate your ferry has.",
+   "body": "The port is large. The Cyclades leave from E6, E7, E9 and E10, the Saronic Islands from E8, the Dodecanese from E1 and Heraklion on Crete from E2 and E3. The blue line runs directly from the airport to the port. The gate is on the ticket."
+  },
+  "GR-santorini-fakta-ta-sig-dit": {
+   "title": "All ferries dock at Athinios",
+   "summary": "The port is 8 km from Fira and 20 km from Oia.",
+   "body": "Athinios is on the island's west coast, below the cliffs of the caldera. On a conventional ferry you glide in beneath the cliff walls, which is one of the highlights of the trip. Only one company runs a fast ferry from Piraeus."
+  },
+  "GR-santorini-fakta-kryssningsavgift": {
+   "title": "20 euros applies only to cruise passengers",
+   "summary": "The fee and the cap of 8,000 per day apply to those arriving by cruise ship.",
+   "body": "If you arrive by ferry or plane and stay overnight you are not affected. The fee is charged to the cruise account each time the passenger goes ashore in a Greek port."
+  }
+ },
+ "items": {
+  "GR-aten-akropolis": {
+   "name": "The Acropolis",
+   "summary": "Book a time slot in advance. A maximum of 20,000 visitors per day.",
+   "body": "The ticket is valid for a set hour. Official sales are at hhticket.gr and the morning slots in summer sell out several weeks ahead. Take the first slot, the heat gets hard by eleven."
+  },
+  "GR-aten-akropolismuseet": {
+   "name": "The Acropolis Museum",
+   "summary": "Its own ticket and its own booking, separate from the Acropolis itself.",
+   "body": "The museum is on the southern slope of the Acropolis and sells timed tickets on its own site."
+  },
+  "GR-aten-agora": {
+   "name": "The Ancient Agora",
+   "summary": "The Temple of Hephaestus stands here, with its roof and columns intact.",
+   "body": "The Agora lies below the northern slope of the Acropolis. It has its own ticket, the old combined ticket with the Acropolis no longer exists. Tickets can usually be bought at the desk or at hhticket.gr on the day."
+  },
+  "GR-meteora": {
+   "name": "Meteora",
+   "summary": "Six active monasteries on rock pinnacles. A World Heritage Site since 1988.",
+   "body": "Each monastery charges 5 euros admission, in cash at the entrance. The monasteries have different opening hours and each has its own closed weekday, so two or three per day is about right. A dress code applies. Allow 4–6 hours."
+  },
+  "GR-delfi": {
+   "name": "Delphi",
+   "summary": "The sanctuary of Apollo and the site of the oracle. A World Heritage Site since 1987.",
+   "body": "Located 185 km from Athens, about 2.5 hours by car. The site includes the Temple of Apollo, the theatre, the stadium, the Treasury of the Athenians and an archaeological museum. Spring is the loveliest, when the slopes are in bloom."
+  },
+  "GR-santorini-akrotiri": {
+   "name": "Akrotiri",
+   "summary": "A Bronze Age town preserved under volcanic ash.",
+   "body": "The town was a trading centre with links to Crete and Egypt. The ticket costs 20 euros, 10 euros with a discount. Opening hours shift with the season and it is closed one day a week, so check the official site the same week. Buses run from Fira."
+  },
+  "GR-kreta-knossos": {
+   "name": "Knossos",
+   "summary": "The Minoan palace outside Heraklion. A timed ticket is required.",
+   "body": "You choose a set time when you buy the ticket. It costs 20 euros, 10 euros with a discount, and is sold at hhticket.gr. You can buy at the desk, but the queues are long in high season."
+  },
+  "GR-kreta-samaria": {
+   "name": "The Samaria Gorge",
+   "summary": "A 16 km hike from the mountains down to the sea. Open May–October.",
+   "body": "The park is open 1 May–31 October, 7 am–4 pm, with entrances at Xyloskalo and Agia Roumeli. Admission is 5 euros and children under 15 go free. Keep the ticket, it is checked at the exit. The whole hike takes 6–7 hours. The southern entrance can only be reached by boat."
+  }
+ },
+ "compendium": {
+  "mat-souvlaki": {
+   "name": "Souvlaki",
+   "hint": "Grilled skewers, often in pita bread."
+  },
+  "mat-grekisk-sallad": {
+   "name": "Horiatiki",
+   "hint": "A village salad with a whole slab of feta on top."
+  },
+  "dryck-freddo": {
+   "name": "Freddo espresso",
+   "hint": "Iced coffee shaken cold."
+  },
+  "bakverk-loukoumades": {
+   "name": "Loukoumades",
+   "hint": "Fried dough balls with honey."
+  },
+  "trad-olivtrad": {
+   "name": "Old olive tree",
+   "hint": "Look for a really gnarled and twisted trunk."
+  },
+  "sevardhet-vaderkvarn-kykladerna": {
+   "name": "Whitewashed windmill",
+   "hint": "Round, white and with a thatched roof, on the islands."
+  }
+ },
+ "ideas": {
+  "GR-aten-ide-akropolis-morgon": {
+   "title": "The Acropolis in the first time slot",
+   "body": "Be there when it opens and go to the museum afterwards when the sun is high.",
+   "duration": "Half a day"
+  },
+  "GR-aten-ide-delfi": {
+   "title": "Day trip to Delphi",
+   "body": "Leave early, walk the Sacred Way up to the temple and save the museum for last.",
+   "duration": "One day"
+  },
+  "GR-ide-meteora": {
+   "title": "Two days in Meteora",
+   "body": "Stay in Kalambaka and split the monasteries over two days. Bring cash and clothes that cover you.",
+   "duration": "Two days"
+  },
+  "GR-aten-ide-agora": {
+   "title": "The Agora after the Acropolis",
+   "body": "Walk down from the Acropolis to the Agora when the crowds up there are at their biggest.",
+   "duration": "about 2 h"
+  },
+  "GR-ide-oluff": {
+   "title": "Island hopping from Piraeus",
+   "body": "A conventional ferry to Santorini with a deck seat, and a fast ferry on to Crete.",
+   "duration": "One week"
+  },
+  "GR-santorini-ide-akrotiri": {
+   "title": "Akrotiri at opening",
+   "body": "Take the bus from Fira and be there when they open. It echoes under the roof when the groups arrive.",
+   "duration": "about 2 h"
+  },
+  "GR-kreta-ide-samaria": {
+   "title": "Hike the Samaria Gorge",
+   "body": "Start at Xyloskalo when the gates open and finish with a dip at Agia Roumeli. Check the day before that the gorge is open.",
+   "duration": "One day"
+  }
+ },
+ "gifts": {
+  "GR-present-olivolja": {
+   "name": "Olive oil in a tin",
+   "body": "Tin survives a suitcase better than glass."
+  },
+  "GR-present-honung": {
+   "name": "Thyme honey",
+   "body": "Dark, aromatic honey sold in small jars."
+  },
+  "GR-present-keramik": {
+   "name": "Hand-painted ceramics",
+   "body": "Cups and bowls with a meander pattern or in sea blue."
+  }
+ }
+}

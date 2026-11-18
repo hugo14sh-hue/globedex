@@ -1,0 +1,271 @@
+{
+ "places": {
+  "DE": {
+   "name": "Germany"
+  },
+  "DE-berlin": {
+   "name": "Berlin",
+   "data": {
+    "best_text": "May, June and September for life outdoors without the high-summer heat, December for the Christmas markets.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The Reichstag dome, the Holocaust Memorial and the East Side Gallery."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for Bernauer Straße, Museum Island and an evening in Kreuzberg."
+     },
+     {
+      "label": "One week",
+      "text": "Add Potsdam and quieter days in Prenzlauer Berg."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Mitte",
+      "text": "Closest to the sights and the central station. The most expensive and least local."
+     },
+     {
+      "name": "Prenzlauer Berg",
+      "text": "Quiet streets, cafés and a Sunday market. Tram and U-Bahn into the centre."
+     },
+     {
+      "name": "Kreuzberg",
+      "text": "The most food and nightlife. Lively at night."
+     },
+     {
+      "name": "Friedrichshain",
+      "text": "Cheaper, close to the East Side Gallery and the clubs."
+     },
+     {
+      "name": "Around Kottbusser Tor and Görlitzer Park",
+      "text": "Good for eating, but rowdy at night. Stay a few blocks away."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "The FEX airport train",
+      "text": "About 23 minutes to the central station via Südkreuz and Potsdamer Platz. Together with the RE20, up to five trains an hour."
+     },
+     {
+      "mode": "S-Bahn, U-Bahn, bus and tram",
+      "text": "One and the same ticket is valid on everything. A single ticket is valid for two hours in one direction."
+     }
+    ],
+    "events": [
+     {
+      "name": "Berlinale",
+      "text": "The film festival. Tickets for the screenings are sold to the public."
+     },
+     {
+      "name": "Berlin Half Marathon",
+      "text": "Streets in the centre are closed during the race."
+     },
+     {
+      "name": "Karneval der Kulturen",
+      "text": "A street festival and parade in Kreuzberg. The dates are expected, not confirmed."
+     },
+     {
+      "name": "The Pergamon Museum reopens",
+      "text": "The museum on Museum Island opens after the renovation."
+     },
+     {
+      "name": "Berlin Art Week",
+      "text": "Exhibitions in galleries all over the city."
+     },
+     {
+      "name": "Berlin Marathon",
+      "text": "One of the world's biggest races. Hotels are expensive that weekend and the centre is closed off."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Beer gardens and swimming lakes"
+     },
+     {
+      "name": "Christmas markets",
+      "text": "The first ones open on 23 November."
+     }
+    ],
+    "month_notes": [
+     "Cold, grey and short days. Cheap to stay.",
+     "Still winter. Good museum weather.",
+     "Spring is slow to arrive, but the days are getting longer.",
+     "The outdoor terraces open. The weather can turn.",
+     "Warm and green. The beer gardens are open.",
+     "Long bright evenings and plenty of life outdoors.",
+     "High summer. It can get hot, and many Berliners are away.",
+     "High summer and swimming lakes. Lots of tourists.",
+     "Warm but not hot, and fewer tourists.",
+     "Autumn. Cooler, with lovely colours in the parks.",
+     "Grey and cold before the Christmas markets open.",
+     "Christmas markets all over the city. Cold and dark early."
+    ],
+    "prices": {
+     "summary": "About the same as at home in restaurants, and cheaper for beer.",
+     "tips": [
+      "A double room costs 160–220 euros per night on average according to Kayak, depending on which of Kayak's pages you read."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "According to Settle in Berlin, not Numbeo."
+      },
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "DE-fakta-betala": {
+   "title": "Currency: euro (EUR)",
+   "summary": "The country uses the euro (EUR)."
+  },
+  "DE-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen. A Swedish driving licence is not normally accepted as a travel document."
+  },
+  "DE-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "EU roaming: the same price as in Sweden.",
+   "body": "You pay as at home for calls, texts and data, but the operator may set a cap on data abroad."
+  },
+  "DE-fakta-alkohol-16": {
+   "title": "Beer and wine from age 16",
+   "summary": "Beer, wine and sparkling wine may be sold to anyone aged 16 or over.",
+   "body": "The limit applies both in shops and where alcohol is served."
+  },
+  "DE-fakta-alkohol-18": {
+   "title": "Spirits from age 18",
+   "summary": "Spirits, liqueurs and alcopops require age 18.",
+   "body": "This also applies to mixed drinks containing spirits."
+  },
+  "DE-berlin-fakta-ta-sig-dit": {
+   "title": "BER to the central station in 23 minutes",
+   "summary": "The FEX airport train runs via Südkreuz and Potsdamer Platz.",
+   "body": "The station is directly below the terminal. It takes about 14 minutes to Südkreuz."
+  },
+  "DE-berlin-fakta-abc-biljett": {
+   "title": "The airport requires an ABC ticket",
+   "summary": "BER is in zone C. An ordinary AB ticket is not enough.",
+   "body": "The ticket is valid on all transport within the zones, including the airport train. Buy an ABC ticket at the airport for the trip into the city."
+  },
+  "DE-berlin-fakta-biljettpriser": {
+   "title": "Single ticket 4 euros, to the airport 5 euros",
+   "summary": "AB costs 4 euros and ABC 5 euros. A 24-hour AB ticket costs 11.20 euros.",
+   "body": "A 24-hour ABC ticket costs 12.90 euros. A small-group day ticket is valid for up to five people and costs 35.30 euros for AB. The prices apply in 2026 and will partly rise in January 2027."
+  },
+  "DE-berlin-fakta-turistskatt": {
+   "title": "City tax of 7.5 per cent",
+   "summary": "The tax is 7.5% of the net room price. Breakfast is not included in the calculation.",
+   "body": "It applies to all paid overnight stays, since April 2024 including business trips. Check whether the tax is included in the price you see when you book."
+  },
+  "DE-berlin-fakta-sondagsstangt": {
+   "title": "Shops are closed on Sundays",
+   "summary": "Almost all shops are closed on Sundays. Buy food on Saturday.",
+   "body": "The exceptions are shops at railway stations and airports. On eight Sundays a year, including some in Advent, shops may open 1–8 pm. Monday to Saturday they may open around the clock."
+  }
+ },
+ "items": {
+  "DE-berlin-reichstagskupolen": {
+   "name": "The Reichstag dome",
+   "summary": "Free, but you must register in advance.",
+   "body": "The dome and roof terrace cost nothing. Register via the Bundestag's form with name and date of birth. It is not possible to book by phone. A free audio guide is included."
+  },
+  "DE-berlin-murmuseet-bernauer": {
+   "name": "The Berlin Wall Memorial",
+   "summary": "Free. A section of the Wall still stands here with the border strip and a watchtower.",
+   "body": "The memorial lies along Bernauer Straße, which was the border between East and West. The outdoor exhibition is open every day 8 am–10 pm. The documentation centre and visitor centre are open Tuesday–Sunday 10 am–6 pm."
+  },
+  "DE-berlin-east-side-gallery": {
+   "name": "East Side Gallery",
+   "summary": "1,316 metres of Wall with paintings along the Spree. Free and always open.",
+   "body": "This is the longest continuous section of the Wall still standing. It is in Friedrichshain and has been managed since 2018 by the Berlin Wall Foundation."
+  },
+  "DE-berlin-museumsinsel": {
+   "name": "Museum Island",
+   "summary": "Five museums on an island in the Spree. A World Heritage Site since 1999.",
+   "body": "The Pergamon Museum is completely closed for renovation and reopens on 4 June 2027, then with the Pergamon Altar. Until then, the exhibition Pergamonmuseum. Das Panorama is shown opposite the island. The other museums are open."
+  },
+  "DE-berlin-forintelsemonumentet": {
+   "name": "The Holocaust Memorial",
+   "summary": "2,711 concrete blocks of different heights near the Brandenburg Gate. Always open.",
+   "body": "The field is free and can be entered from any side. Beneath it is an exhibition, Ort der Information, which is open Tuesday–Sunday 10 am–6 pm and is also free."
+  },
+  "DE-berlin-tv-tornet": {
+   "name": "The TV Tower",
+   "summary": "368 metres high at Alexanderplatz. Book a time online.",
+   "body": "With an online ticket you choose the day and time and skip the ticket queue. Tickets often sell out, so book in advance."
+  }
+ },
+ "compendium": {
+  "mat-currywurst": {
+   "name": "Currywurst",
+   "hint": "Sliced sausage with ketchup and curry powder."
+  },
+  "mat-doner-berlin": {
+   "name": "Döner in bread",
+   "hint": "Berlin's most common fast food."
+  },
+  "bakverk-brezel": {
+   "name": "Brezel",
+   "hint": "A salted pretzel made from lye bread."
+  },
+  "bakverk-berliner": {
+   "name": "Jam doughnut",
+   "hint": "A fried bun filled with jam."
+  },
+  "dryck-gluhwein": {
+   "name": "Glühwein at a Christmas market",
+   "hint": "Hot spiced wine in a mug with a deposit."
+  },
+  "sevardhet-ampelmann": {
+   "name": "Ampelmännchen",
+   "hint": "The little man with a hat in the pedestrian crossing lights."
+  }
+ },
+ "ideas": {
+  "DE-berlin-ide-kupolen": {
+   "title": "Evening visit to the Reichstag dome",
+   "body": "Register before the trip and choose a time at dusk.",
+   "duration": "about 1 h"
+  },
+  "DE-berlin-ide-muren": {
+   "title": "Follow the Wall in a day",
+   "body": "Start at Bernauer Straße in the morning and take the S-Bahn to the East Side Gallery in the afternoon. Both are free.",
+   "duration": "One day"
+  },
+  "DE-berlin-ide-gratis": {
+   "title": "A free day in the centre",
+   "body": "The Reichstag dome, the Holocaust Memorial and the Brandenburg Gate are within walking distance of each other.",
+   "duration": "Half a day"
+  },
+  "DE-berlin-ide-museumsinsel": {
+   "title": "A rainy day on Museum Island",
+   "body": "Choose one or two museums. The Pergamon Museum is closed until June 2027.",
+   "duration": "Half a day"
+  }
+ },
+ "gifts": {
+  "DE-present-julmarknadsmugg": {
+   "name": "Mulled-wine mug from a Christmas market",
+   "body": "Every market has its own mug for the year. You pay a deposit and get to keep it."
+  },
+  "DE-present-choklad": {
+   "name": "German chocolate",
+   "body": "Square bars in many flavours that are not sold at home."
+  },
+  "DE-present-ampelmann": {
+   "name": "Ampelmann souvenir",
+   "body": "The little man from the East German traffic lights is on everything from mugs to key rings."
+  }
+ }
+}
