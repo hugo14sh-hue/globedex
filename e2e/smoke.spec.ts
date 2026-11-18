@@ -946,14 +946,17 @@ test('röktest', async ({ page }) => {
       // Appen återställer rullningsläget: se till att kartan syns innan den trycks på.
       await page.evaluate(() => window.scrollTo(0, 0));
       await canvas.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(2500);
+      // Länderna är ritade och kartan har flugit klart till fokus när inga fler anrop görs.
+      await page.waitForLoadState('networkidle');
       const box = (await canvas.boundingBox())!;
-      for (const [dx, dy] of [[0, 0], [0, 20], [-20, 0], [20, 20], [0, -20]]) {
+      const spots = [[0, 0], [0, 20], [-20, 0], [20, 20], [0, -20]];
+      let i = 0;
+      // Trycker på nästa punkt tills bottenarket syns (kartan kan fortfarande röra sig lite).
+      await expect(async () => {
+        const [dx, dy] = spots[i++ % spots.length];
         await page.mouse.click(box.x + box.width / 2 + dx, box.y + box.height / 2 + dy);
-        if (await sheet.isVisible().catch(() => false)) break;
-        await page.waitForTimeout(400);
-      }
-      await expect(sheet).toBeVisible();
+        await expect(sheet).toBeVisible({ timeout: 1000 });
+      }).toPass({ timeout: 20_000 });
       return ((await sheet.getByRole('heading').first().textContent()) ?? '').trim();
     };
     const landerNum = async () => {
@@ -966,16 +969,9 @@ test('röktest', async ({ page }) => {
         await jag.click();
         await expect(jag).toHaveAttribute('aria-pressed', 'true');
       }
-      // Siffran läses när den stått still en stund, så att data som laddas efter hand inte ger fel utgångsläge.
-      const read = async () => Number(/^(\d+)/.exec((await tile.locator('.num').textContent()) ?? '')?.[1] ?? NaN);
-      let last = await read();
-      for (let i = 0; i < 10; i++) {
-        await page.waitForTimeout(800);
-        const now = await read();
-        if (now === last) break;
-        last = now;
-      }
-      return last;
+      // Siffran läses först när alla anrop är klara (data som laddas efter hand ger annars fel utgångsläge).
+      await page.waitForLoadState('networkidle');
+      return Number(/^(\d+)/.exec((await tile.locator('.num').textContent()) ?? '')?.[1] ?? NaN);
     };
     try {
       // Utgångsläge: valet på, Storbritannien markerat som besökt och ingen del markerad. afterAll lägger tillbaka allt.
@@ -1004,7 +1000,12 @@ test('röktest', async ({ page }) => {
       await expect(page.getByRole('heading', { level: 1, name: tx('land.GB-sct') })).toBeVisible({ timeout: 20_000 });
       const besokt = page.getByRole('button', { name: tx('karta.status.besokt'), exact: true });
       await expect(besokt).toHaveClass(/suggest/);
+      // Knappen visar valet direkt och sparar i bakgrunden: vänta på svaret, annars avbryter nästa sidladdning sparandet.
+      const statusSaved = page.waitForResponse(
+        (r) => r.url().includes('/rest/v1/place_status') && r.request().method() === 'POST' && r.ok(),
+      );
       await besokt.click();
+      await statusSaved;
       await expect(besokt).toHaveAttribute('aria-pressed', 'true');
       await expect(page.getByText(tx('karta.delade.flytta').replace('{plats}', 'Storbritannien'))).toHaveCount(0);
       await expect.poll(landerNum, { timeout: 20_000 }).toBe(before + 1);
