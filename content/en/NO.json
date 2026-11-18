@@ -1,0 +1,298 @@
+{
+ "places": {
+  "NO": {
+   "name": "Norway"
+  },
+  "NO-oslo": {
+   "name": "Oslo",
+   "data": {
+    "best_text": "June to August for the fjord and the islands, February to March for skiing at Holmenkollen.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The Opera House, MUNCH and Vigeland Park."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for island hopping in the fjord and Holmenkollen."
+     },
+     {
+      "label": "Five days",
+      "text": "Add the Bygdøy museums and a day in Nordmarka."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Sentrum",
+      "text": "Close to Oslo S and the airport train, walking distance to the Opera House."
+     },
+     {
+      "name": "Grünerløkka",
+      "text": "Cafés, bars and second-hand shops. Tram into the centre."
+     },
+     {
+      "name": "Frogner and Majorstuen",
+      "text": "Quiet and close to Vigeland Park. More expensive."
+     },
+     {
+      "name": "Around Brugata and lower Grønland",
+      "text": "Rowdier in the evenings. Good for cheap food, worse to stay in."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Flytoget",
+      "text": "19 minutes to Oslo S, departing every ten minutes for most of the day."
+     },
+     {
+      "mode": "Vy regional train",
+      "text": "About 23 minutes to Oslo S and usually costs roughly half as much as Flytoget."
+     },
+     {
+      "mode": "Airport bus",
+      "text": "About 40–50 minutes to Oslo."
+     }
+    ],
+    "events": [
+     {
+      "name": "Holmenkollen Ski Festival",
+      "text": "World Cup in cross-country, ski jumping and Nordic combined."
+     },
+     {
+      "name": "Biathlon World Cup",
+      "text": "Competitions at Holmenkollen."
+     },
+     {
+      "name": "Holmenkollstafetten",
+      "text": "A big relay race through the city. Streets along the course are closed."
+     },
+     {
+      "name": "National Day, 17 May",
+      "text": "The children's parade passes the palace and the whole city is out. Much is closed."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Ski season",
+      "text": "Cross-country tracks in Nordmarka and slopes at Holmenkollen."
+     },
+     {
+      "name": "Swimming and boats to the islands"
+     },
+     {
+      "name": "Christmas markets"
+     }
+    ],
+    "month_notes": [
+     "Cold and snowy. The ski tracks in Nordmarka are open.",
+     "The best month for skiing. Cold but lighter.",
+     "Ski season with spring sun.",
+     "The snow melts. Grey before things turn green.",
+     "Green and bright. National Day is celebrated on 17 May.",
+     "Bright evenings. The boats run to the islands in the fjord.",
+     "Warmest. Swimming in the fjord, but many Oslo residents are away.",
+     "Still summer and swimming weather.",
+     "Autumn colours in the forest and fewer tourists.",
+     "Raw and darker.",
+     "Dark and wet before the snow arrives.",
+     "Christmas markets and dark early."
+    ],
+    "prices": {
+     "summary": "Eating out is expensive, and alcohol is the most expensive of all.",
+     "tips": [
+      "A double room costs around 210 dollars per night on average according to Kayak. The source gives no breakdown by hotel class."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "NO-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not normally count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen, which also includes Iceland and Norway. Within the Nordics a Swedish driving licence can be enough in some cases, but a passport or national ID card is recommended."
+  },
+  "NO-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "The same price as in Sweden for calls, texts and data.",
+   "body": "Roam-like-at-home also applies in the EEA countries Iceland, Liechtenstein and Norway. Check whether your plan has a cap on data abroad."
+  },
+  "NO-fakta-betala": {
+   "title": "Currency: Norwegian krone (NOK)",
+   "summary": "The country uses the Norwegian krone (NOK)."
+  },
+  "NO-fakta-alkohol-18": {
+   "title": "Beer and wine from age 18",
+   "summary": "Age 18 for drinks below 22 per cent.",
+   "body": "The age limit is 18 for beer, wine and cider. Everything above 4.7 per cent is sold only at Vinmonopolet."
+  },
+  "NO-fakta-alkohol-20": {
+   "title": "Spirits from age 20",
+   "summary": "Age 20 for drinks of 22 per cent or more.",
+   "body": "The limit applies to both purchase and serving. Buying for minors is prohibited."
+  },
+  "NO-oslo-fakta-ta-sig-dit": {
+   "title": "Gardermoen to Oslo S in 19 minutes",
+   "summary": "Flytoget takes 19 minutes. Ordinary regional trains take a few minutes longer and are cheaper.",
+   "body": "Flytoget runs every ten minutes. Vy's regional trains take about 23 minutes and usually cost roughly half. The Oslo Pass is valid on Vy trains but not on Flytoget."
+  },
+  "NO-fakta-varldsarv": {
+   "title": "Among the first in the world",
+   "summary": "Urnes Stave Church and Bryggen became World Heritage Sites as early as 1979.",
+   "body": "They were inscribed as numbers 58 and 59 on the World Heritage List. Norway has eight World Heritage Sites."
+  },
+  "NO-oslo-fakta-bygdoybaten": {
+   "title": "The Bygdøy boat needs its own ticket",
+   "summary": "Boat B9 to Bygdøy is not included in Ruter's tickets.",
+   "body": "The island boats B1 and B2 run on an ordinary Ruter ticket, but B9 to Bygdøy does not. With the Oslo Pass, B9 is free."
+  }
+ },
+ "items": {
+  "NO-bryggen": {
+   "name": "Bryggen in Bergen",
+   "summary": "The wooden quarter from the Hanseatic era, a World Heritage Site since 1979.",
+   "body": "One of northern Europe's oldest trading ports with well-preserved wooden buildings."
+  },
+  "NO-vestnorsk-fjordlandskap": {
+   "name": "Geirangerfjord and Nærøyfjord",
+   "summary": "Norway's only natural heritage site on the list, since 2005.",
+   "body": "Two areas that together are called the West Norwegian Fjords."
+  },
+  "NO-urnes-stavkyrka": {
+   "name": "Urnes Stave Church",
+   "summary": "A World Heritage Site since 1979, in Luster by the Sognefjord.",
+   "body": "The church is open to visitors."
+  },
+  "NO-roros": {
+   "name": "Røros Mining Town",
+   "summary": "A mining town from the 17th century, a World Heritage Site since 1980.",
+   "body": "The site was extended in 2010 with the landscape around the town, the Circumference."
+  },
+  "NO-alta": {
+   "name": "The rock carvings in Alta",
+   "summary": "A World Heritage Site since 1985.",
+   "body": "Rock art far north in Finnmark."
+  },
+  "NO-vegaoyan": {
+   "name": "Vegaøyan",
+   "summary": "Norway's first cultural landscape on the list, 2004.",
+   "body": "An archipelago where eider down has been gathered for generations, work mainly carried out by women."
+  },
+  "NO-rjukan-notodden": {
+   "name": "Rjukan–Notodden",
+   "summary": "Industrial heritage, a World Heritage Site since 2015.",
+   "body": "Norway's most recent World Heritage Site."
+  },
+  "NO-oslo-vigelandsparken": {
+   "name": "Vigeland Park",
+   "summary": "More than 200 sculptures by Gustav Vigeland. Free and open around the clock.",
+   "body": "This is where Sinnataggen and the Monolith stand. The park is in Frogner Park and is one of Norway's most visited sights."
+  },
+  "NO-oslo-oyhopping": {
+   "name": "Island hopping in the Oslofjord",
+   "summary": "The boats to the islands run on an ordinary Ruter ticket.",
+   "body": "Line B1 runs all year to Hovedøya and Gressholmen among others. Buy a ticket beforehand, there are no machines on the islands, and do not miss the last boat back."
+  },
+  "NO-oslo-operahuset": {
+   "name": "The Opera House",
+   "summary": "Walk up onto the roof. It is free and built for it.",
+   "body": "The building opened in 2008 in Bjørvika, and the roof rises out of the fjord like an iceberg. A five-minute walk from Oslo S."
+  },
+  "NO-oslo-munch": {
+   "name": "MUNCH",
+   "summary": "The Scream and the rest of Munch's art on 13 floors. Book a time slot in advance.",
+   "body": "The museum admits visitors in time slots and cannot guarantee entry without a pre-booked ticket. Free admission under 18. With the Oslo Pass you collect a ticket on site and may have to wait 15–30 minutes."
+  },
+  "NO-oslo-holmenkollen": {
+   "name": "Holmenkollen",
+   "summary": "A ski museum and a view from the top of the ski jump.",
+   "body": "Take metro line 1 to Holmenkollen and walk about 10 minutes steeply uphill. The museum shows Norway's oldest ski, over 5,000 years old, and the lift goes up the jump tower."
+  },
+  "NO-oslo-akershus": {
+   "name": "Akershus Fortress",
+   "summary": "A medieval castle in the middle of the city. The grounds are free.",
+   "body": "Construction began in 1299 under Håkon V. Museums and events inside the grounds have their own tickets."
+  }
+ },
+ "compendium": {
+  "mat-brunost": {
+   "name": "Brunost",
+   "hint": "A brown, sweet cheese that is sliced thin."
+  },
+  "bakverk-skillingsbolle": {
+   "name": "Skillingsbolle",
+   "hint": "A large cinnamon bun from Bergen."
+  },
+  "mat-norsk-vaffel": {
+   "name": "Norwegian waffle",
+   "hint": "Soft and heart-shaped, ideally with brunost."
+  },
+  "naturfenomen-fjord": {
+   "name": "Fjord",
+   "hint": "A narrow inlet of the sea with steep mountainsides."
+  },
+  "sevardhet-stavkyrka": {
+   "name": "Stave church",
+   "hint": "A medieval wooden church with a tiered roof."
+  }
+ },
+ "ideas": {
+  "NO-oslo-ide-helg": {
+   "title": "Oslo over the weekend",
+   "body": "Take the regional train from Gardermoen instead of Flytoget and spend the money on food.",
+   "duration": "Weekend"
+  },
+  "NO-ide-fjordresa": {
+   "title": "The fjords from Bergen",
+   "body": "Start at Bryggen and continue towards the Nærøyfjord.",
+   "duration": "One day"
+  },
+  "NO-oslo-ide-vigeland": {
+   "title": "Sculpture walk in Vigeland Park",
+   "body": "Find Sinnataggen and walk all the way up to the Monolith.",
+   "duration": "about 2 h"
+  },
+  "NO-oslo-ide-oyhopping": {
+   "title": "Swimming and a picnic on Hovedøya",
+   "body": "Take the boat from Aker Brygge with an ordinary ticket. Best in summer, when the boats run late.",
+   "duration": "Half a day"
+  },
+  "NO-oslo-ide-bjorvika": {
+   "title": "Bjørvika: the opera roof and MUNCH",
+   "body": "Go up onto the opera roof first and then take the pre-booked museum visit next door.",
+   "duration": "Half a day"
+  },
+  "NO-oslo-ide-holmenkollen": {
+   "title": "The metro up to Holmenkollen",
+   "body": "Ride line 1 up through the forest, see the museum and the view from the jump tower.",
+   "duration": "Half a day"
+  },
+  "NO-oslo-ide-akershus": {
+   "title": "Evening walk at Akershus",
+   "body": "Walk around the fortress grounds and look out over the fjord.",
+   "duration": "about 1 h"
+  }
+ },
+ "gifts": {
+  "NO-present-brunost": {
+   "name": "Brunost",
+   "body": "A sweet, brown whey cheese that is sliced thin."
+  },
+  "NO-present-ull": {
+   "name": "Knitted wool",
+   "body": "Mittens or socks in a Norwegian pattern take up the least space."
+  },
+  "NO-present-mugg": {
+   "name": "Enamel mug with a mountain motif",
+   "body": "Durable and easy to pack."
+  }
+ }
+}

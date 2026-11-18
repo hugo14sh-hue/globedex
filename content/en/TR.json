@@ -1,0 +1,247 @@
+{
+ "places": {
+  "TR": {
+   "name": "Turkey"
+  },
+  "TR-istanbul": {
+   "name": "Istanbul",
+   "data": {
+    "best_text": "April to May and September to October.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "Sultanahmet in one day, the Grand Bazaar and the ferry to Kadıköy."
+     },
+     {
+      "label": "Five days",
+      "text": "Time for Topkapı with the Harem, Galata and a trip up the Bosphorus."
+     },
+     {
+      "label": "One week",
+      "text": "Add the Princes' Islands and quieter days on the Asian side."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Karaköy and Galata",
+      "text": "Between the old town and Taksim, with tram T1 and the ferries next door."
+     },
+     {
+      "name": "Sultanahmet",
+      "text": "Walking distance to Hagia Sophia, the Blue Mosque and Topkapı. Quiet in the evening."
+     },
+     {
+      "name": "Kadıköy",
+      "text": "The Asian side. More local, plenty of food, a ferry to Europe in 20–25 minutes."
+     },
+     {
+      "name": "The streets closest to Taksim Square",
+      "text": "Noisy at night. Better to stay down towards Galata."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Metro M11 from the airport",
+      "text": "About 30 minutes to Gayrettepe. From there you change to M2 towards Taksim."
+     },
+     {
+      "mode": "Tram T1",
+      "text": "Runs Kabataş–Karaköy–Eminönü–Sultanahmet–Beyazıt and reaches almost everything in the old town, including the Grand Bazaar."
+     },
+     {
+      "mode": "Ferry across the Bosphorus",
+      "text": "Eminönü or Karaköy to Kadıköy takes 20–25 minutes. You pay with an Istanbulkart as on the metro."
+     }
+    ],
+    "events": [
+     {
+      "name": "Ramadan",
+      "text": "The dates are the expected ones and may shift by a day. Restaurants in the tourist districts are open as usual, and the evenings are lively after sunset."
+     },
+     {
+      "name": "Ramazan Bayramı",
+      "text": "A three-day holiday after Ramadan. Banks and some shops are closed, and ferries and sights are crowded."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Tulip Festival",
+      "text": "Usually runs all of April, with the most blooms in the first two weeks. The parks are free."
+     },
+     {
+      "name": "Istanbul Marathon",
+      "text": "Run in early November, from the Asian side to the European. Bridges and streets are closed that day."
+     }
+    ],
+    "month_notes": [
+     "Cold and rainy. Short queues.",
+     "Cold and rainy.",
+     "Spring begins.",
+     "Mild, and the tulips bloom in the parks.",
+     "Warm without the heat. Best for walking the city.",
+     "Warm. More people at the sights.",
+     "Hot and humid.",
+     "The hottest and most humid month.",
+     "The heat eases. Still a summer feel.",
+     "Mild and clear.",
+     "Cooler and more rain.",
+     "Cold and rainy."
+    ],
+    "prices": {
+     "summary": "Cheap to eat out by Swedish standards. Alcohol is more expensive than the food suggests.",
+     "tips": [
+      "The lira is losing value quickly, so prices in lira rise during the year. Convert at today's rate."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "TR-fakta-betala": {
+   "title": "Currency: Turkish lira (TRY)",
+   "summary": "The country uses the Turkish lira (TRY)."
+  },
+  "TR-fakta-inresa": {
+   "title": "Passport valid for at least 150 days",
+   "summary": "A passport is required and must be valid for at least 150 days on entry. Visa-free for 90 days.",
+   "body": "Swedish citizens may stay a total of 90 days within a 180-day period without a visa. Anyone who stays longer risks a fine and an entry ban. Provisional passports in A4 format are not valid for entry, but the police's pink provisional passport is."
+  },
+  "TR-fakta-lagar": {
+   "title": "Laws that also apply to visitors",
+   "summary": "It is a criminal offence to insult the nation, the head of state or the country's symbols.",
+   "body": "The law also applies to people who are in the country temporarily, and foreign citizens have been detained on those grounds. The Swedish Foreign Ministry urges vigilance at major tourist sites and on public transport."
+  },
+  "TR-fakta-mobil": {
+   "title": "EU roaming does not apply",
+   "summary": "Turkey is outside the EU's roaming rules.",
+   "body": "Operators can charge entirely different prices outside the EU. Check the price list or buy a local data package before you turn on mobile data."
+  },
+  "TR-istanbul-fakta-ta-sig-dit": {
+   "title": "Airport to Gayrettepe in 30 minutes",
+   "summary": "Metro M11 runs from Istanbul Airport in towards the city.",
+   "body": "The metro runs roughly 6 am to midnight. It does not reach the old town directly, so allow for one or two changes to Taksim or Sultanahmet."
+  },
+  "TR-fakta-alkohol": {
+   "title": "Alcohol from age 18",
+   "summary": "Alcohol may not be sold to anyone under 18.",
+   "body": "The age limit applies both in shops and where alcohol is served."
+  },
+  "TR-fakta-alkohol-natt": {
+   "title": "Shops do not sell alcohol 10 pm–6 am",
+   "summary": "Shops may not sell alcohol between 10 pm and 6 am.",
+   "body": "The rule has applied since 9 September 2013. Restaurants and bars may serve during those hours too. Shops are also not allowed to display alcohol."
+  },
+  "TR-istanbul-fakta-istanbulkart": {
+   "title": "Buy an Istanbulkart straight away",
+   "summary": "Cash is not accepted on public transport. The card is bought from yellow machines.",
+   "body": "The machines are called Biletmatik and stand at the airports, in the metro, at tram stops and at ferry piers. Most have an English menu. The card is valid on the metro, trams, buses and ferries."
+  }
+ },
+ "items": {
+  "TR-istanbul-hagia-sofia": {
+   "name": "Hagia Sophia",
+   "summary": "Visitors pay 25 euros for the upper gallery. The prayer hall is free for worshippers.",
+   "body": "The mosaics are in the upper gallery, which has its own tourist entrance on the east side by Topkapı Palace. The Museum Pass Istanbul is not valid here. The security check can take up to half an hour in high season."
+  },
+  "TR-istanbul-bla-mosken": {
+   "name": "The Blue Mosque",
+   "summary": "Free. Closed to visitors during prayers and on Friday mornings.",
+   "body": "No ticket is needed. Visitors are admitted between the five daily prayers, and on Fridays only from around 2.30 pm. Women should cover their hair and men should not wear shorts above the knee. Allow 30–45 minutes. The nearest stop is Sultanahmet on T1."
+  },
+  "TR-istanbul-topkapi": {
+   "name": "Topkapı Palace",
+   "summary": "Closed on Tuesdays. A combined ticket covers the palace, the Harem and Hagia Irene.",
+   "body": "The combined ticket cost 2,750 lira for foreign visitors in October 2026 and is valid for one day. The Turkish museum pass is not valid in the Harem or Hagia Irene. Allow half a day if you include the Harem."
+  },
+  "TR-istanbul-stora-basaren": {
+   "name": "The Grand Bazaar",
+   "summary": "Free admission. Closed on Sundays.",
+   "body": "Open Monday–Saturday roughly 8.30 am–7 pm, and closed on the first day of the major religious holidays. The shops keep their own hours within that span, so some open later and start packing up before closing."
+  },
+  "TR-istanbul-basilikacisternen": {
+   "name": "The Basilica Cistern",
+   "summary": "An underground water reservoir from the year 532 with 336 columns.",
+   "body": "The cistern was built under Emperor Justinian. It got a new state operator on 2 June 2026 and opens at 9 am. The ticket price for foreign visitors could not be confirmed after the change, so check the price at the desk on the day."
+  },
+  "TR-istanbul-bosporenfarjan": {
+   "name": "The ferry to Kadıköy",
+   "summary": "From Europe to Asia in 20–25 minutes, for the price of a metro ride.",
+   "body": "The city's ferries, Şehir Hatları, run from Eminönü to Kadıköy. You tap your Istanbulkart at the gate as on the metro. By car over the bridge, the same stretch can take 45–90 minutes in traffic."
+  },
+  "TR-kappadokien": {
+   "name": "Cappadocia",
+   "summary": "A World Heritage Site since 1985: eroded rock towers and underground cities.",
+   "body": "The World Heritage Site is called Göreme National Park and the Rock Sites of Cappadocia and lies between the towns of Nevşehir, Ürgüp and Avanos. The rock towers are called fairy chimneys. The underground cities of Kaymaklı and Derinkuyu are included."
+  }
+ },
+ "compendium": {
+  "bakverk-baklava": {
+   "name": "Baklava",
+   "hint": "Thin layers of filo pastry with nuts and syrup."
+  },
+  "dryck-turkiskt-te": {
+   "name": "Turkish tea in a tulip glass",
+   "hint": "Served without milk in a small waisted glass."
+  },
+  "dryck-turkiskt-kaffe": {
+   "name": "Turkish coffee",
+   "hint": "Brewed in a small pot, with the grounds left in the cup."
+  },
+  "bakverk-simit": {
+   "name": "Simit",
+   "hint": "A bread ring covered in sesame seeds, sold from carts."
+  },
+  "mat-gozleme": {
+   "name": "Gözleme",
+   "hint": "Thin bread that is filled and cooked on a domed griddle."
+  },
+  "daggdjur-gatukatt-istanbul": {
+   "name": "Street cat in Istanbul",
+   "hint": "They lie on steps, in shops and on café chairs."
+  }
+ },
+ "ideas": {
+  "TR-istanbul-ide-hagia-sofia": {
+   "title": "Hagia Sophia in the morning",
+   "body": "Be there when it opens to avoid the longest security queue.",
+   "duration": "about 2 h"
+  },
+  "TR-istanbul-ide-asiatiska-sidan": {
+   "title": "Ferry to the Asian side",
+   "body": "Take the ferry from Eminönü to Kadıköy, have lunch there and ride back in the evening light.",
+   "duration": "Half a day"
+  },
+  "TR-istanbul-ide-sultanahmet": {
+   "title": "Sultanahmet in one day",
+   "body": "Hagia Sophia at opening, the cistern in the middle of the day and the Blue Mosque in the afternoon. Do not pick a Tuesday if you want to get into Topkapı.",
+   "duration": "One day"
+  },
+  "TR-istanbul-ide-basaren": {
+   "title": "The Grand Bazaar on a weekday morning",
+   "body": "Go early on a weekday. It is closed on Sundays.",
+   "duration": "about 2 h"
+  }
+ },
+ "gifts": {
+  "TR-present-lokum": {
+   "name": "Lokum",
+   "body": "Turkish delight sold loose by weight and in gift boxes."
+  },
+  "TR-present-teglas": {
+   "name": "Tulip-shaped tea glasses",
+   "body": "Small glasses with saucers, which tea is served in everywhere."
+  },
+  "TR-present-kaffekopp": {
+   "name": "Turkish coffee cup",
+   "body": "A small cup with a saucer, often hand-painted."
+  }
+ }
+}

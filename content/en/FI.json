@@ -1,0 +1,238 @@
+{
+ "places": {
+  "FI-helsingfors": {
+   "name": "Helsinki",
+   "data": {
+    "best_text": "June to August for Suomenlinna and the outdoor terraces.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "Suomenlinna, Oodi and a sauna by the water."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for the Design District and a morning at the Market Square."
+     },
+     {
+      "label": "Five days",
+      "text": "Add a day trip by ferry to Tallinn or by train to Porvoo."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Kamppi and the centre",
+      "text": "Close to the railway station and the airport train. Everything within walking distance."
+     },
+     {
+      "name": "Kallio",
+      "text": "Cheaper, younger and full of bars. Metro and tram into the centre."
+     },
+     {
+      "name": "Punavuori",
+      "text": "Design shops and cafés, quiet in the evening."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Trains I and P from the airport",
+      "text": "About 27–32 minutes to the centre. You need an ABC ticket and can pay contactless."
+     }
+    ],
+    "events": [
+     {
+      "name": "Lux Helsinki",
+      "text": "Light art on buildings and in parks. Free."
+     },
+     {
+      "name": "Vappu (Walpurgis Night and May Day)",
+      "text": "Student caps, picnics in the parks and a carnival mood in the centre."
+     },
+     {
+      "name": "Flow Festival",
+      "text": "Music festival in Suvilahti, on the old power plant site."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Bright nights"
+     },
+     {
+      "name": "Outdoor terraces and Suomenlinna"
+     },
+     {
+      "name": "Christmas market on Senate Square"
+     }
+    ],
+    "month_notes": [
+     "Cold, dark and often snowy.",
+     "Winter. The sea may be frozen.",
+     "Still winter, but lighter.",
+     "The snow melts. Grey before things turn green.",
+     "Spring comes quickly and the outdoor terraces open.",
+     "Bright nights. Best for Suomenlinna.",
+     "Warmest, with the most life in the squares and the archipelago.",
+     "Still summer, with darker evenings.",
+     "Autumn. Cooler and fewer tourists.",
+     "Raw and windy.",
+     "Dark and wet before the snow arrives.",
+     "The darkest time of the year. Christmas market on Senate Square."
+    ],
+    "prices": {
+     "summary": "Restaurants cost about the same as at home, but beer is more expensive.",
+     "tips": [
+      "Eat lunch on weekdays. A lunch menu costs roughly 12–17 euros."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "FI-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not normally count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen, which also includes Iceland and Norway. Within the Nordics a Swedish driving licence can be enough in some cases, but a passport or national ID card is recommended."
+  },
+  "FI-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "The same price as in Sweden for calls, texts and data.",
+   "body": "The EU's roaming rules apply: you pay as at home, but the operator may set a cap on data abroad."
+  },
+  "FI-fakta-betala": {
+   "title": "Currency: euro (EUR)",
+   "summary": "The country uses the euro (EUR)."
+  },
+  "FI-fakta-alkohol-18": {
+   "title": "Beer and wine from age 18",
+   "summary": "Age 18 for drinks below 22 per cent.",
+   "body": "Alko has a monopoly on drinks above 8 per cent. Weaker drinks are sold in ordinary shops."
+  },
+  "FI-fakta-alkohol-20": {
+   "title": "Spirits from age 20",
+   "summary": "Age 20 for drinks of 22 per cent or more.",
+   "body": "The same age limits apply to anyone bringing alcohol into the country: nobody under 18, and only weak drinks before 20."
+  },
+  "FI-helsingfors-fakta-ta-sig-dit": {
+   "title": "Airport to the centre in half an hour",
+   "summary": "Trains I and P run to the centre in about 27–32 minutes.",
+   "body": "The station is below the terminal. Both trains run to the central station in opposite directions around a ring line, so take whichever comes first. Buy an ABC ticket in the HSL app, from a machine or contactless."
+  },
+  "FI-fakta-varldsarv": {
+   "title": "Aalto became World Heritage",
+   "summary": "Alvar Aalto's buildings are Finland's newest World Heritage Site.",
+   "body": "Five of the works are in Helsinki, among them Finlandia Hall."
+  },
+  "FI-helsingfors-fakta-sveaborgsfarjan": {
+   "title": "The ferry to Suomenlinna runs on an ordinary ticket",
+   "summary": "15 minutes from the Market Square with an AB ticket.",
+   "body": "The ferry runs all year from the east side of the Market Square, in front of the Presidential Palace. Buy a ticket before the gates: contactless, in the HSL app or from the machine on the quay. Cash is not accepted on board."
+  }
+ },
+ "items": {
+  "FI-helsingfors-sveaborg": {
+   "name": "Suomenlinna",
+   "summary": "A sea fortress on islands off the city, a World Heritage Site since 1991.",
+   "body": "Finland's first World Heritage Site together with Old Rauma."
+  },
+  "FI-helsingfors-finlandiahuset": {
+   "name": "Finlandia Hall",
+   "summary": "Alvar Aalto's best-known building in the city, now World Heritage.",
+   "body": "One of five Aalto works in Helsinki on the World Heritage List."
+  },
+  "FI-gamla-raumo": {
+   "name": "Old Rauma",
+   "summary": "A wooden town, a World Heritage Site since 1991.",
+   "body": "Located on the west coast."
+  },
+  "FI-petajavesi": {
+   "name": "Petäjävesi Old Church",
+   "summary": "A wooden church, a World Heritage Site since 1994.",
+   "body": "Located in central Finland."
+  },
+  "FI-verla": {
+   "name": "Verla Groundwood and Board Mill",
+   "summary": "A World Heritage Site since 1996.",
+   "body": "A preserved mill community."
+  },
+  "FI-sammallahdenmaki": {
+   "name": "Sammallahdenmäki",
+   "summary": "Bronze Age burial cairns, a World Heritage Site since 1999.",
+   "body": "Located in the Rauma area."
+  },
+  "FI-kvarken": {
+   "name": "The Kvarken Archipelago",
+   "summary": "Finland's only natural heritage site, since 2006.",
+   "body": "Belongs together with the High Coast on the Swedish side."
+  },
+  "FI-helsingfors-oodi": {
+   "name": "Helsinki Central Library Oodi",
+   "summary": "A three-storey library by the railway station. Free admission.",
+   "body": "Open Mon–Fri 8 am–9 pm and Sat–Sun 10 am–8 pm. Free wifi throughout the building."
+  }
+ },
+ "compendium": {
+  "bakverk-karelsk-pirog": {
+   "name": "Karelian pasty",
+   "hint": "A rye crust with rice porridge, eaten with egg butter."
+  },
+  "bakverk-korvapuusti": {
+   "name": "Korvapuusti",
+   "hint": "A Finnish cinnamon bun, the name means a slap on the ear."
+  },
+  "godis-salmiakki": {
+   "name": "Salmiakki",
+   "hint": "Salty liquorice the Finnish way."
+  },
+  "sevardhet-bastu-allman": {
+   "name": "Public sauna",
+   "hint": "A sauna anyone can go to, often by the water."
+  },
+  "fardmedel-sparvagn-helsingfors": {
+   "name": "Tram in Helsinki",
+   "hint": "Green and yellow, running through the whole inner city."
+  }
+ },
+ "ideas": {
+  "FI-helsingfors-ide-sveaborg": {
+   "title": "Half a day on Suomenlinna",
+   "body": "Take the boat out to the fortress islands and walk around the ramparts.",
+   "duration": "Half a day"
+  },
+  "FI-helsingfors-ide-aalto": {
+   "title": "Aalto walk",
+   "body": "Start at Finlandia Hall and seek out more of Aalto's buildings.",
+   "duration": "about 2 h"
+  },
+  "FI-helsingfors-ide-oodi": {
+   "title": "Rainy day at Oodi",
+   "body": "Go up to the top floor, read for a while and look out over the city.",
+   "duration": "about 1 h"
+  },
+  "FI-helsingfors-ide-helg": {
+   "title": "Helsinki over the weekend",
+   "body": "Suomenlinna for half a day, the Aalto walk and Oodi for the rest.",
+   "duration": "Weekend"
+  }
+ },
+ "gifts": {
+  "FI-present-muminmugg": {
+   "name": "Moomin mug",
+   "body": "Collectible mugs with new designs every year."
+  },
+  "FI-present-choklad": {
+   "name": "Finnish milk chocolate",
+   "body": "The blue bar is in every shop."
+  },
+  "FI-present-salmiak": {
+   "name": "Salmiak",
+   "body": "Salty liquorice in many strengths."
+  }
+ }
+}

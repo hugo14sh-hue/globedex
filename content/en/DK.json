@@ -1,0 +1,253 @@
+{
+ "places": {
+  "DK": {
+   "name": "Denmark"
+  },
+  "DK-kopenhamn": {
+   "name": "Copenhagen",
+   "data": {
+    "best_text": "May to September when Tivoli is open and people eat outdoors, December for the Christmas markets.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "Nyhavn, Tivoli and a tower with a view."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time to cycle around, eat your way through Vesterbro and take a canal tour."
+     },
+     {
+      "label": "Five days",
+      "text": "Add a day trip by train, for example Louisiana or Helsingør."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Vesterbro",
+      "text": "Close to the central station and Tivoli, with the city's densest choice of food and bars."
+     },
+     {
+      "name": "Indre By",
+      "text": "Walking distance to everything. The most expensive area."
+     },
+     {
+      "name": "Nørrebro",
+      "text": "Younger and cheaper, with the metro into the centre."
+     },
+     {
+      "name": "The blocks right behind the central station",
+      "text": "Rowdy at night along Istedgade closest to the station. Choose a couple of blocks further into Vesterbro."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Metro M2 from the airport",
+      "text": "About 13 minutes to Kongens Nytorv. The metro runs around the clock."
+     }
+    ],
+    "events": [
+     {
+      "name": "Distortion",
+      "text": "Street parties in a new district each day, and a two-day festival by the harbour at the end."
+     },
+     {
+      "name": "Copenhagen Jazz Festival",
+      "text": "Concerts in squares, parks and clubs all over the city. The dates come from a travel guide, not from the festival itself."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Tivoli, summer season",
+      "text": "In 2026 the park was open from 7 April to 20 September."
+     },
+     {
+      "name": "Swimming in the harbour",
+      "text": "The harbour baths open on 1 June."
+     },
+     {
+      "name": "Christmas in Tivoli and Christmas markets"
+     }
+    ],
+    "month_notes": [
+     "Cold, windy and dark. Tivoli is closed.",
+     "Still winter. The cheapest time to stay.",
+     "Spring begins, but the wind is cold.",
+     "Tivoli opens for the season. The weather can turn.",
+     "Bright and green. The outdoor tables at Nyhavn fill up.",
+     "Long evenings and swimming in the harbour.",
+     "High summer. The warmest water and the most tourists.",
+     "Still summer and long evenings.",
+     "Late summer with fewer tourists.",
+     "Autumn. Cooler and windier.",
+     "Dark and raw before the Christmas season.",
+     "Christmas markets and Christmas at Tivoli. Dark early."
+    ],
+    "prices": {
+     "summary": "More expensive than at home, above all in restaurants and for beer and coffee.",
+     "tips": [
+      "A double room costs around 320 dollars per night on average according to Kayak. The source gives no breakdown by hotel class."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "DK-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not normally count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen, which also includes Iceland and Norway. Within the Nordics a Swedish driving licence can be enough in some cases, but a passport or national ID card is recommended."
+  },
+  "DK-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "The same price as in Sweden for calls, texts and data.",
+   "body": "The EU's roaming rules apply: you pay as at home, but the operator may set a cap on data abroad."
+  },
+  "DK-fakta-betala": {
+   "title": "Currency: Danish krone (DKK)",
+   "summary": "The country uses the Danish krone (DKK)."
+  },
+  "DK-fakta-alkohol-16": {
+   "title": "Beer and cider from age 16 in shops",
+   "summary": "16–17-year-olds may buy drinks of up to 6 per cent in shops.",
+   "body": "Since 1 April 2025 the limit is 6 per cent instead of 16.5. It applies to each individual product."
+  },
+  "DK-fakta-alkohol-18": {
+   "title": "Wine and spirits from age 18",
+   "summary": "Everything above 6 per cent requires age 18.",
+   "body": "Drinks stronger than 6 per cent may only be sold to those aged 18 or over. In practice that means all wine and all spirits."
+  },
+  "DK-kopenhamn-fakta-ta-sig-dit": {
+   "title": "Airport to the centre in 13 minutes",
+   "summary": "Metro M2 runs to Kongens Nytorv in about 13 minutes.",
+   "body": "The metro station is at Terminal 3. The line also stops at Christianshavn and Nørreport."
+  },
+  "DK-fakta-varldsarv": {
+   "title": "The rune stones came first",
+   "summary": "The Jelling monuments became Denmark's first World Heritage Site in 1994.",
+   "body": "They were followed by Roskilde Cathedral in 1995 and Kronborg in 2000."
+  }
+ },
+ "items": {
+  "DK-kronborg": {
+   "name": "Kronborg",
+   "summary": "The castle in Helsingør, a World Heritage Site since 2000.",
+   "body": "Located at the narrowest part of the Øresund, opposite Helsingborg."
+  },
+  "DK-roskilde-domkyrka": {
+   "name": "Roskilde Cathedral",
+   "summary": "A World Heritage Site since 1995.",
+   "body": "The church in Roskilde, west of Copenhagen."
+  },
+  "DK-jelling": {
+   "name": "The Jelling monuments",
+   "summary": "Burial mounds, rune stones and a church, a World Heritage Site since 1994.",
+   "body": "Denmark's first World Heritage Site."
+  },
+  "DK-stevns-klint": {
+   "name": "Stevns Klint",
+   "summary": "A chalk cliff on Zealand, a World Heritage Site since 2014.",
+   "body": "A natural heritage site south of Copenhagen."
+  },
+  "DK-vadehavet": {
+   "name": "The Wadden Sea",
+   "summary": "The Danish part became a World Heritage Site in 2014.",
+   "body": "A tidal landscape along the west coast of Jutland, shared with Germany and the Netherlands."
+  },
+  "DK-kopenhamn-nyhavn": {
+   "name": "Nyhavn",
+   "summary": "The harbour quarter at Kongens Nytorv.",
+   "body": "Get off the metro at Kongens Nytorv, and Nyhavn and Strøget are right there."
+  },
+  "DK-kopenhamn-tivoli": {
+   "name": "Tivoli",
+   "summary": "An amusement park from 1843 that is only open during its seasons.",
+   "body": "Open during Easter, summer, Halloween and Christmas, closed in between. The 2026 Christmas season runs 13 November–31 December, closed on Christmas Eve. Rides cost extra on top of admission."
+  },
+  "DK-kopenhamn-christiansborg-tornet": {
+   "name": "The tower at Christiansborg",
+   "summary": "A free view from 106 metres, the highest in the city.",
+   "body": "The lift up is free, but you go through a security check like at an airport."
+  },
+  "DK-kopenhamn-rundetarn": {
+   "name": "The Round Tower",
+   "summary": "The tower with a spiral ramp instead of stairs.",
+   "body": "The ramp is 209 metres long. Admission costs a small sum."
+  }
+ },
+ "compendium": {
+  "mat-smorrebrod": {
+   "name": "Smørrebrød",
+   "hint": "An open sandwich on rye bread with generous toppings."
+  },
+  "mat-rod-polse": {
+   "name": "Rød pølse",
+   "hint": "A red sausage from a pølsevogn, a hot dog stand."
+  },
+  "bakverk-wienerbrod": {
+   "name": "Danish pastry",
+   "hint": "The Danes call it wienerbrød, the rest of the world a Danish."
+  },
+  "bakverk-flodeboller": {
+   "name": "Flødebolle",
+   "hint": "Marshmallow foam on a base, dipped in chocolate."
+  },
+  "fardmedel-lastcykel": {
+   "name": "Cargo bike",
+   "hint": "A bicycle with a large box at the front, often with children in it."
+  }
+ },
+ "ideas": {
+  "DK-kopenhamn-ide-nyhavn": {
+   "title": "Nyhavn and Strøget on foot",
+   "body": "Start at Kongens Nytorv and walk along the quay.",
+   "duration": "about 2 h"
+  },
+  "DK-kopenhamn-ide-kronborg": {
+   "title": "Kronborg in Helsingør",
+   "body": "The castle that is a World Heritage Site. Can be combined with the ferry across to Helsingborg.",
+   "duration": "Half a day"
+  },
+  "DK-kopenhamn-ide-roskilde": {
+   "title": "Roskilde Cathedral",
+   "body": "A World Heritage Site west of the city.",
+   "duration": "Half a day"
+  },
+  "DK-kopenhamn-ide-torn": {
+   "title": "Two towers in one afternoon",
+   "body": "A free view from Christiansborg and the spiral ramp in the Round Tower.",
+   "duration": "about 2 h"
+  },
+  "DK-kopenhamn-ide-jul-i-tivoli": {
+   "title": "Christmas in Tivoli",
+   "body": "Go one evening when the lights are on. Check the season dates first, the park is closed between seasons.",
+   "duration": "Half a day"
+  },
+  "DK-kopenhamn-ide-helg": {
+   "title": "Copenhagen over the weekend",
+   "body": "Nyhavn and the towers on the first day, Tivoli in the evening and Kronborg or Roskilde on day two.",
+   "duration": "Weekend"
+  }
+ },
+ "gifts": {
+  "DK-present-lakrits": {
+   "name": "Danish liquorice",
+   "body": "Comes in everything from bags to gift tins."
+  },
+  "DK-present-porslin": {
+   "name": "Blue and white Danish porcelain",
+   "body": "A mug is the easiest to get home in one piece."
+  },
+  "DK-present-lego": {
+   "name": "Lego",
+   "body": "Danish from the start. Look for sets sold only in the brand store."
+  }
+ }
+}
