@@ -33,11 +33,16 @@ export function matches(name: string, query: string): boolean {
 /**
  * Filtrerar och sorterar: namn som börjar med frågan först, sedan övriga träffar. Inom varje del
  * behålls ordningen i listan (som redan är sorterad efter namn).
+ * name kan ge flera namn (en plats på svenska och engelska, Körning 20): det räcker att ett av dem matchar.
  */
-export function search<T>(list: T[], query: string, name: (x: T) => string): T[] {
+export function search<T>(list: T[], query: string, name: (x: T) => string | string[]): T[] {
   const q = fold(query.trim());
-  const hits = list.filter((x) => matches(name(x), query));
+  const names = (x: T) => {
+    const n = name(x);
+    return typeof n === 'string' ? [n] : n;
+  };
+  const hits = list.filter((x) => names(x).some((n) => matches(n, query)));
   if (!q) return hits;
-  const first = hits.filter((x) => fold(name(x)).startsWith(q));
+  const first = hits.filter((x) => names(x).some((n) => fold(n).startsWith(q)));
   return [...first, ...hits.filter((x) => !first.includes(x))];
 }

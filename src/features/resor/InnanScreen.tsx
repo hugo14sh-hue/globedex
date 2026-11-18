@@ -6,7 +6,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
-import { PRETRIP_SUGGESTIONS } from '../../lib/pretripContent';
+import { pretripSuggestions } from '../../lib/pretripContent';
 import { daysBeforeFor, daysBeforeLabel, pretripMissing, sortPretrip, todayIso } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, updateListRow, type PretripItem, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
@@ -39,18 +39,20 @@ function Innan({ trip }: { trip: Trip }) {
   }, [trip.id]);
 
   const all = list ?? [];
+  // Punkterna på valt språk. Titeln på båda språken hittar raden (och dess dag), oavsett språket den lades till på.
+  const suggestions = pretripSuggestions();
   const rows = sortPretrip(
     all.filter((r) => !r.removed),
-    PRETRIP_SUGGESTIONS,
+    suggestions,
   );
   const missing = pretripMissing(
-    PRETRIP_SUGGESTIONS,
+    suggestions,
     all.map((r) => r.title),
   );
   const nextPos = () => (all.length ? Math.max(...all.map((r) => r.pos)) + 1 : 0);
 
   const sub = (r: PretripItem) => {
-    const days = daysBeforeFor(PRETRIP_SUGGESTIONS, r.title);
+    const days = daysBeforeFor(suggestions, r.title);
     const when = days == null ? null : daysBeforeLabel(days);
     const label = when ? t(when.key, when.antal != null ? { antal: when.antal } : {}) : null;
     return [label, r.hint].filter(Boolean).join(' · ') || undefined;

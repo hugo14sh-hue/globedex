@@ -1,0 +1,585 @@
+{
+ "places": {
+  "PT-lissabon": {
+   "why": "Hills, tiles and trams at the mouth of the Tagus, with the Atlantic coast a short train ride away.",
+   "name": "Lisbon"
+  },
+  "PT-porto": {
+   "why": "Port wine cellars along the Douro and an old town that climbs up from the river."
+  },
+  "ES-barcelona": {
+   "why": "Gaudí's buildings, a city beach and late nights in one city.",
+   "level_note": "More expensive than the Spanish average, especially accommodation."
+  },
+  "ES-madrid": {
+   "why": "The Prado, tapas bars and a city life that starts late."
+  },
+  "ES-sevilla": {
+   "why": "The Alcázar, orange trees and flamenco. Summer is very hot, so spring and autumn are the time to go.",
+   "name": "Seville"
+  },
+  "ES-valencia": {
+   "why": "The home of paella, with a city beach, a park in an old riverbed and fewer tourists than Barcelona."
+  },
+  "ES-malaga": {
+   "why": "Picasso's birthplace, with a beach, museums and mild winters."
+  },
+  "ES-san-sebastian": {
+   "why": "A shell-shaped city beach and bars full of pintxos in the Basque Country.",
+   "level_note": "More expensive than the Spanish average, especially food and accommodation."
+  },
+  "ES-granada": {
+   "why": "The Alhambra above the city and the Sierra Nevada in the background."
+  },
+  "FR-paris": {
+   "why": "Museums, cafés and boulevards: the city most others are compared with."
+  },
+  "FR-nice": {
+   "why": "The largest city on the Riviera, with a seafront promenade, an old town and trains along the coast to Monaco."
+  },
+  "FR-menton": {
+   "why": "A pastel-coloured old town by the Italian border, on the same stretch of coast as Monaco but at a slower pace."
+  },
+  "FR-lyon": {
+   "why": "France's food capital, with bouchons and an old quarter between two rivers.",
+   "level_note": "Our judgement: cheaper than Paris and the Riviera, which pull up France's average."
+  },
+  "FR-bordeaux": {
+   "why": "A wine city with 18th-century quays along the Garonne and vineyards around the corner.",
+   "level_note": "Our judgement: cheaper than Paris and the Riviera, which pull up France's average."
+  },
+  "FR-strasbourg": {
+   "why": "Half-timbered houses and canals in Alsace, and one of Europe's oldest Christmas markets.",
+   "level_note": "Our judgement. The Post Office ranks the city as one of Western Europe's cheapest city breaks in 2026."
+  },
+  "FR-lille": {
+   "why": "Flemish façades and a large art museum, close to the Belgian border.",
+   "level_note": "Our judgement. The Post Office ranks the city as one of Western Europe's cheapest city breaks in 2026."
+  },
+  "IT-rom": {
+   "why": "The Colosseum, the Pantheon and the Vatican within walking distance of each other.",
+   "name": "Rome"
+  },
+  "IT-florens": {
+   "why": "The city of the Renaissance, with the Uffizi and the cathedral in the middle of Tuscany.",
+   "name": "Florence"
+  },
+  "IT-venedig": {
+   "why": "A city without cars, built on islands in a lagoon.",
+   "name": "Venice",
+   "level_note": "More expensive than the Italian average, especially accommodation and food near the canals."
+  },
+  "IT-neapel": {
+   "why": "The home of pizza, with Pompeii and Vesuvius within reach.",
+   "name": "Naples",
+   "level_note": "Our judgement: southern Italy is cheaper than the national average."
+  },
+  "IT-bologna": {
+   "why": "Arcades, towers and a cuisine the rest of Italy looks up to."
+  },
+  "IT-palermo": {
+   "why": "Markets, street food and Arab-Norman churches in Sicily.",
+   "level_note": "Our judgement: southern Italy is cheaper than the national average."
+  },
+  "IT-sanremo": {
+   "why": "The Italian Riviera's city of flowers, with a casino, palm trees and an old quarter on the hill."
+  },
+  "IT-trieste": {
+   "why": "A port city with Habsburg palaces and old coffee houses, in the corner by Slovenia."
+  },
+  "IT-lecce": {
+   "why": "A baroque city in sandstone at the far end of Puglia, with beaches on two seas.",
+   "level_note": "Our judgement: southern Italy is cheaper than the national average."
+  },
+  "BE-bryssel": {
+   "why": "The Grand-Place, art nouveau, waffles and beer.",
+   "name": "Brussels"
+  },
+  "BE-gent": {
+   "why": "Medieval quays and a castle in the middle of a lively student city.",
+   "name": "Ghent"
+  },
+  "NL-rotterdam": {
+   "why": "Modern architecture, a market hall and Europe's largest port."
+  },
+  "NL-utrecht": {
+   "why": "Canals with two-level quays and cafés down by the water."
+  },
+  "DE-munchen": {
+   "why": "Beer halls, parks and the Alps within a day trip.",
+   "name": "Munich",
+   "level_note": "Our judgement: one of Germany's most expensive cities."
+  },
+  "DE-hamburg": {
+   "why": "A port city with brick warehouse districts and the Elbphilharmonie concert hall."
+  },
+  "DE-leipzig": {
+   "why": "Bach's city, with a big cultural scene in old industrial districts."
+  },
+  "AT-wien": {
+   "why": "Imperial palaces, concert halls and coffee houses with newspapers on sticks.",
+   "name": "Vienna"
+  },
+  "AT-salzburg": {
+   "why": "Mozart's birthplace, with a baroque old town below a fortress."
+  },
+  "AT-graz": {
+   "why": "Austria's second-largest city, with red roofs, a clock tower on the hill and vineyards to the south.",
+   "level_note": "Our judgement: cheaper than Vienna and Salzburg."
+  },
+  "CH-zurich": {
+   "why": "An old town by a lake where people swim in summer, with the Alps as a backdrop.",
+   "name": "Zurich"
+  },
+  "CH-geneve": {
+   "why": "A lakeside city with a fountain and views of Mont Blanc.",
+   "name": "Geneva"
+  },
+  "CZ-prag": {
+   "why": "Charles Bridge, the castle and an old town that survived the war.",
+   "name": "Prague"
+  },
+  "CZ-brno": {
+   "why": "The Czech Republic's second city, with functionalist villas, wine bars and few tourists."
+  },
+  "PL-krakow": {
+   "why": "One of Europe's largest medieval squares and the royal castle of Wawel.",
+   "name": "Kraków"
+  },
+  "PL-gdansk": {
+   "why": "A Hanseatic city on the Baltic, with gabled houses, amber and sandy beaches not far away."
+  },
+  "PL-wroclaw": {
+   "why": "A colourful square, islands in the river Oder and small bronze dwarfs all over the city."
+  },
+  "HU-budapest": {
+   "why": "Thermal baths, ruin bars and the parliament by the Danube."
+  },
+  "SK-bratislava": {
+   "why": "A small capital on the Danube with a castle on the hill, an hour from Vienna."
+  },
+  "SI-ljubljana": {
+   "why": "A car-free centre along a river, with a castle on the hill and the mountains close by."
+  },
+  "SI-piran": {
+   "why": "A Venetian small town on a headland in the Adriatic."
+  },
+  "HR-rovinj": {
+   "why": "A fishing town on a peninsula in Istria, with alleys leading up to the church."
+  },
+  "HR-zadar": {
+   "why": "Roman ruins, a sea organ played by the waves and islands offshore."
+  },
+  "EE-tallinn": {
+   "why": "A medieval town with walls and towers, a ferry ride from Helsinki."
+  },
+  "LV-riga": {
+   "why": "Art nouveau façades, market halls in old zeppelin hangars and an old town."
+  },
+  "LT-vilnius": {
+   "why": "A baroque old town and the artists' quarter of Užupis."
+  },
+  "BA-sarajevo": {
+   "why": "An Ottoman bazaar and Austro-Hungarian quarters side by side, surrounded by mountains."
+  },
+  "BA-mostar": {
+   "why": "The stone bridge Stari Most over an emerald-green river."
+  },
+  "RS-belgrad": {
+   "why": "A fortress where the Sava meets the Danube, and nightlife on boats along the river.",
+   "name": "Belgrade"
+  },
+  "AL-tirana": {
+   "why": "A colourful capital with café culture, bunkers turned into museums and a mountain with a cable car."
+  },
+  "ME-kotor": {
+   "why": "A walled town at the innermost end of a fjord-like bay, with steep mountains rising straight up."
+  },
+  "MK-ohrid": {
+   "why": "An old town with Byzantine churches by one of Europe's oldest lakes."
+  },
+  "BG-sofia": {
+   "why": "Cathedrals, Roman ruins in the metro and Mount Vitosha at the city limits."
+  },
+  "BG-plovdiv": {
+   "why": "One of Europe's oldest cities, with a Roman theatre and painted wooden houses."
+  },
+  "RO-bukarest": {
+   "why": "Wide boulevards, an enormous parliament palace and an old quarter full of bars.",
+   "name": "Bucharest"
+  },
+  "RO-brasov": {
+   "why": "A Saxon town in the Carpathians, with castles and mountain trails all around."
+  },
+  "GR-thessaloniki": {
+   "why": "Greece's second city, with a seafront promenade, Byzantine churches and a reputation for the country's best food."
+  },
+  "GR-nafplio": {
+   "why": "A harbour town with Venetian fortresses in the Peloponnese, close to Mycenae and Epidaurus."
+  },
+  "GR-rhodos": {
+   "why": "The medieval city of the Knights inside the walls, with beaches outside.",
+   "name": "Rhodes Town"
+  },
+  "MT-valletta": {
+   "why": "A fortified capital in honey-coloured stone, surrounded by sea on three sides."
+  },
+  "IE-dublin": {
+   "why": "Pubs with live music, Georgian quarters and Trinity College."
+  },
+  "SE-goteborg": {
+   "why": "Canals, seafood and an archipelago reached by tram and ferry.",
+   "name": "Gothenburg",
+   "level_note": "Our judgement, the same level as we set for Stockholm."
+  },
+  "NO-bergen": {
+   "why": "The Hanseatic wharf Bryggen between seven mountains, and the gateway to the fjords."
+  },
+  "DK-arhus": {
+   "why": "Denmark's second city, with the ARoS art museum, the open-air museum Den Gamle By and harbour baths.",
+   "name": "Aarhus"
+  },
+  "JP-tokyo": {
+   "why": "The world's largest metropolitan area, where neon, temples and tiny six-seat bars share the same block.",
+   "level_note": "Our judgement: the yen has lost a lot of value since the index was measured in 2021, so Japan is cheaper for visitors today."
+  },
+  "JP-kyoto": {
+   "why": "Japan's old imperial capital, with temples, gardens and the geisha district of Gion.",
+   "level_note": "Our judgement: the yen has lost a lot of value since the index was measured in 2021, so Japan is cheaper for visitors today."
+  },
+  "JP-kanazawa": {
+   "why": "Kenrokuen garden, samurai quarters and a fish market, without Kyoto's crowds.",
+   "level_note": "Our judgement: the yen has lost a lot of value since the index was measured in 2021, so Japan is cheaper for visitors today."
+  },
+  "KR-seoul": {
+   "why": "Royal palaces between skyscrapers, street food and nightlife that never closes."
+  },
+  "KR-busan": {
+   "why": "South Korea's port city, with city beaches, a fish market and a temple by the sea."
+  },
+  "TW-taipei": {
+   "why": "Night markets, tea houses and hiking trails that start where the metro ends."
+  },
+  "HK-hongkong": {
+   "why": "Skyscrapers between mountains and sea, with dim sum and a ferry across the harbour.",
+   "name": "Hong Kong",
+   "level_note": "Our judgement: accommodation is expensive for visitors."
+  },
+  "SG-singapore": {
+   "why": "A city-state with hawker centres, gardens and four cuisines on the same street.",
+   "level_note": "Our judgement: hotels and alcohol are expensive for visitors, even though street food is cheap."
+  },
+  "TH-bangkok": {
+   "why": "Temples, canals and street food in one of Asia's most intense cities."
+  },
+  "TH-chiang-mai": {
+   "why": "An old town inside a moat in northern Thailand, with hundreds of temples and the mountains close by."
+  },
+  "TH-krabi": {
+   "why": "Limestone cliffs rising straight out of the sea and boats out to the islands."
+  },
+  "VN-hanoi": {
+   "why": "Narrow old quarters, lakes and noodle soup on a plastic stool."
+  },
+  "VN-hoi-an": {
+   "why": "An old trading town with lanterns, tailors and a beach within cycling distance."
+  },
+  "VN-ho-chi-minh": {
+   "why": "Vietnam's largest city, with mopeds, markets and war history.",
+   "name": "Ho Chi Minh City"
+  },
+  "KH-siem-reap": {
+   "why": "The town next to Angkor Wat and the other temples of the Khmer empire."
+  },
+  "LA-luang-prabang": {
+   "why": "A temple town where the Mekong meets a tributary, with waterfalls outside town."
+  },
+  "ID-ubud": {
+   "why": "Bali's cultural centre, surrounded by rice terraces and temples."
+  },
+  "ID-yogyakarta": {
+   "why": "Java's cultural centre, with the temples of Borobudur and Prambanan within reach."
+  },
+  "MY-kuala-lumpur": {
+   "why": "Twin towers, food markets and Malay, Chinese and Indian cooking side by side."
+  },
+  "MY-george-town": {
+   "why": "Penang's old town, known for street food, street art and shophouses."
+  },
+  "PH-el-nido": {
+   "why": "Lagoons and limestone islands on Palawan, explored by boat."
+  },
+  "IN-jaipur": {
+   "why": "The Pink City of Rajasthan, with palaces and Amber Fort."
+  },
+  "IN-kochi": {
+   "why": "A port city in Kerala with Chinese fishing nets, the spice trade and canals to the south."
+  },
+  "LK-galle": {
+   "why": "A Dutch fort on a headland in southern Sri Lanka, with beaches all around."
+  },
+  "NP-katmandu": {
+   "why": "Temple squares and stupas in a valley below the Himalayas, and the starting point for treks.",
+   "name": "Kathmandu"
+  },
+  "AE-dubai": {
+   "why": "Skyscrapers, shopping malls and beach in the desert.",
+   "level_note": "Our judgement: hotels, restaurants and alcohol are expensive for visitors."
+  },
+  "OM-muskat": {
+   "why": "A low white capital between mountains and sea, with a souk, forts and wadis outside town.",
+   "name": "Muscat"
+  },
+  "JO-petra": {
+   "why": "The town by Petra, the rock city the Nabataeans carved out of pink sandstone."
+  },
+  "GE-tbilisi": {
+   "why": "Wooden balconies, sulphur baths and one of the world's oldest wine countries around the corner."
+  },
+  "AM-jerevan": {
+   "why": "Pink tuff stone, cafés and views of Mount Ararat.",
+   "name": "Yerevan"
+  },
+  "UZ-samarkand": {
+   "why": "The Silk Road city, with Registan square and blue tiled domes."
+  },
+  "TR-antalya": {
+   "why": "An old harbour town on the Turkish Riviera, with beaches and ancient ruins nearby."
+  },
+  "TR-goreme": {
+   "why": "A village in the middle of Cappadocia, with rock formations, cave churches and hot-air balloons at dawn."
+  },
+  "MA-marrakech": {
+   "why": "Souks, riads and Jemaa el-Fna square, with the Atlas Mountains on the horizon."
+  },
+  "MA-chefchaouen": {
+   "why": "A blue-painted mountain town in the Rif."
+  },
+  "MA-essaouira": {
+   "why": "A windy harbour town with white walls by the Atlantic, calmer than Marrakech."
+  },
+  "EG-kairo": {
+   "why": "The pyramids of Giza on the edge of one of Africa's largest cities.",
+   "name": "Cairo"
+  },
+  "EG-luxor": {
+   "why": "Karnak, Luxor Temple and the Valley of the Kings on either side of the Nile."
+  },
+  "TN-tunis": {
+   "why": "The medina, the mosaics of the Bardo Museum and the ruins of Carthage in a suburb."
+  },
+  "ZA-kapstaden": {
+   "why": "Table Mountain above the city, beaches on two oceans and vineyards a short drive away.",
+   "name": "Cape Town"
+  },
+  "TZ-zanzibar": {
+   "why": "Zanzibar's old stone town, with carved doors, a spice market and beaches around the island.",
+   "level_note": "Our judgement: the island is more expensive for visitors than the Tanzanian average."
+  },
+  "NA-swakopmund": {
+   "why": "A coastal town with German colonial architecture where the dunes of the Namib meet the Atlantic."
+  },
+  "US-san-francisco": {
+   "why": "Hills, cable cars and the Golden Gate Bridge by a foggy bay.",
+   "level_note": "Our judgement, the same level as we set for New York."
+  },
+  "US-new-orleans": {
+   "why": "The birthplace of jazz, with the French Quarter and Creole cooking."
+  },
+  "US-chicago": {
+   "why": "The home of the skyscraper on Lake Michigan, with blues and deep-dish pizza."
+  },
+  "US-savannah": {
+   "why": "A Southern city with squares on a grid, oaks draped in Spanish moss and old wooden houses."
+  },
+  "CA-vancouver": {
+   "why": "A big city between sea and mountains, with rainforest in the city park."
+  },
+  "CA-quebec": {
+   "why": "A French-speaking city with a city wall and old quarters above the Saint Lawrence River.",
+   "name": "Quebec City"
+  },
+  "CA-montreal": {
+   "why": "A French-speaking metropolis with festivals all summer and bagels around the clock.",
+   "name": "Montreal"
+  },
+  "MX-mexico-city": {
+   "why": "A giant city at high altitude, with Aztec ruins, murals and tacos on every corner."
+  },
+  "MX-oaxaca": {
+   "why": "Mexico's food city, with mole, mezcal and the ruined city of Monte Albán above."
+  },
+  "MX-merida": {
+   "why": "A colonial capital on the Yucatán, close to Maya ruins and cenotes."
+  },
+  "CR-la-fortuna": {
+   "why": "A small town by the Arenal volcano, with hot springs, rainforest and hanging bridges."
+  },
+  "GT-antigua": {
+   "why": "A colonial town with cobbled streets, surrounded by three volcanoes."
+  },
+  "PA-panama": {
+   "why": "Skyscrapers, the old town Casco Viejo and ships on their way through the canal."
+  },
+  "CO-cartagena": {
+   "why": "A walled colonial city on the Caribbean, in strong colours."
+  },
+  "CO-medellin": {
+   "why": "A big city in a green valley, with cable cars up to the hillside neighbourhoods."
+  },
+  "PE-cusco": {
+   "why": "The capital of the Inca empire in the Andes, and the gateway to Machu Picchu."
+  },
+  "PE-lima": {
+   "why": "South America's food capital, on cliffs above the Pacific."
+  },
+  "EC-quito": {
+   "why": "A high-altitude capital in the Andes, with a large colonial centre, almost on the equator."
+  },
+  "CL-valparaiso": {
+   "why": "A port city on steep hills, with funiculars, street art and colourful houses."
+  },
+  "AR-buenos-aires": {
+   "why": "Tango, grilled meat and wide avenues.",
+   "level_note": "Our judgement: prices have risen sharply since the index was measured in 2021."
+  },
+  "BR-rio": {
+   "why": "Beaches, Sugarloaf Mountain and the Christ statue in a city squeezed between mountains and sea."
+  },
+  "BR-salvador": {
+   "why": "Brazil's first capital, with colourful colonial quarters and Afro-Brazilian music."
+  },
+  "UY-colonia": {
+   "why": "A Portuguese colonial small town on the Río de la Plata, a ferry ride from Buenos Aires."
+  },
+  "AU-melbourne": {
+   "why": "Coffee, laneways with street art and trams."
+  },
+  "AU-hobart": {
+   "why": "Tasmania's capital, with the MONA art museum, a Saturday market and wilderness close by."
+  },
+  "AU-cairns": {
+   "why": "The base for the Great Barrier Reef and the Daintree rainforest."
+  },
+  "NZ-queenstown": {
+   "why": "A small town by a lake between mountains, known for adventure sports."
+  },
+  "NZ-wellington": {
+   "why": "A compact capital on a bay, with the national museum Te Papa and a cable car up to the view."
+  },
+  "FJ-nadi": {
+   "why": "Fiji's gateway to the Mamanuca and Yasawa island groups."
+  }
+ },
+ "existing": {
+  "MC-monaco": {
+   "why": "A principality of two square kilometres, with a casino, superyachts and Formula 1 on the streets."
+  },
+  "DK-kopenhamn": {
+   "why": "A cycling city with canals, Tivoli and one of the best food scenes in the Nordics."
+  },
+  "NO-oslo": {
+   "why": "A capital between fjord and forest, with the Opera House, the Munch Museum and swimming in the city centre."
+  },
+  "NL-amsterdam": {
+   "why": "Canals, bicycles and museums such as the Rijksmuseum and the Van Gogh Museum."
+  },
+  "DE-berlin": {
+   "why": "History on every block, major museums and nightlife that runs until morning."
+  },
+  "SE-stockholm": {
+   "why": "A capital on fourteen islands, with the Old Town, the Vasa Museum and the archipelago beyond."
+  },
+  "FI-helsingfors": {
+   "why": "Design, saunas by the sea and the sea fortress of Suomenlinna a short ferry ride away."
+  },
+  "IS-reykjavik": {
+   "why": "A small capital and the base for waterfalls, geysers, hot pools and northern lights."
+  },
+  "GR-aten": {
+   "why": "The Acropolis above a messy, lively city with tavernas in every alley."
+  },
+  "HR-dubrovnik": {
+   "why": "A walled city on the Adriatic, with ramparts to walk and swimming from the rocks."
+  },
+  "HR-split": {
+   "why": "A city built inside a Roman emperor's palace, with ferries out to the islands."
+  },
+  "HR-zagreb": {
+   "why": "Café life, the upper town with its funicular and a big Christmas market in December."
+  },
+  "TR-istanbul": {
+   "why": "A city on two continents, with Hagia Sophia, bazaars and ferries across the Bosphorus."
+  },
+  "US-new-york": {
+   "why": "Skyscrapers, Central Park, museums and a city that stays open around the clock."
+  },
+  "AU-sydney": {
+   "why": "The Opera House and Harbour Bridge by the harbour, with surf beaches a bus ride away."
+  }
+ },
+ "alternatives": {
+  "MC-monaco>FR-menton": "The same stretch of coast and the same climate, at a slower pace.",
+  "MC-monaco>FR-nice": "The Riviera with city life and a beach, and Monaco as a day trip by train.",
+  "MC-monaco>IT-sanremo": "A casino and palm trees on the Italian side of the Riviera.",
+  "MC-monaco>ME-kotor": "A harbour, mountains and an old town on the Adriatic.",
+  "HR-dubrovnik>ME-kotor": "A walled town on the Adriatic, in neighbouring Montenegro.",
+  "HR-dubrovnik>HR-zadar": "An old town by the sea in the same country.",
+  "HR-dubrovnik>SI-piran": "A Venetian old town on the Adriatic.",
+  "DK-kopenhamn>SE-goteborg": "A port city with canals and good food, closer to home.",
+  "DK-kopenhamn>DK-arhus": "A Danish city with art and food on a smaller scale.",
+  "NL-amsterdam>NL-utrecht": "Canals and cafés, a short train ride from Amsterdam.",
+  "NL-amsterdam>BE-gent": "Canals and medieval houses in a student city.",
+  "NL-amsterdam>NL-rotterdam": "A Dutch big city with modern architecture.",
+  "IT-venedig>IT-trieste": "A port city on the same sea, with palaces and coffee houses.",
+  "IT-venedig>SI-piran": "Venetian architecture on a small-town scale.",
+  "IT-venedig>HR-rovinj": "Venetian heritage on a peninsula in Istria.",
+  "FR-paris>FR-lyon": "A French big city with even more focus on food.",
+  "FR-paris>FR-lille": "A French city with art and old quarters.",
+  "FR-paris>BE-bryssel": "A French-speaking capital with art nouveau.",
+  "CH-zurich>SI-ljubljana": "A small city by the water with the mountains close by.",
+  "CH-zurich>AT-graz": "An old town in Alpine country.",
+  "CH-geneve>SI-ljubljana": "A small city by the water with the mountains close by.",
+  "CH-geneve>MK-ohrid": "An old town by a large lake.",
+  "AT-wien>AT-graz": "An Austrian city with an old centre.",
+  "AT-wien>SK-bratislava": "A capital on the Danube, an hour away.",
+  "AT-wien>HU-budapest": "A big city on the Danube with coffee houses and baths.",
+  "AT-salzburg>RO-brasov": "An old town surrounded by mountains.",
+  "AT-salzburg>SI-ljubljana": "An old town with a castle and the mountains close by.",
+  "DE-munchen>DE-leipzig": "A German big city with a rich cultural life.",
+  "DE-munchen>CZ-brno": "Beer culture and an old town in Moravia.",
+  "CZ-prag>CZ-brno": "Same country, fewer tourists.",
+  "CZ-prag>PL-wroclaw": "A colourful old town by a river.",
+  "ES-barcelona>ES-valencia": "A Spanish big city with a city beach.",
+  "ES-barcelona>ES-malaga": "Beach and museums on the Mediterranean.",
+  "IT-florens>IT-bologna": "An old university city with perhaps Italy's best food, a short train ride away.",
+  "IT-florens>IT-lecce": "A city where the architecture is the main thing, in the south.",
+  "IE-dublin>PL-gdansk": "A port city with pubs and an old town.",
+  "IE-dublin>PT-porto": "An Atlantic city with wine cellars and lively evenings.",
+  "NO-bergen>ME-kotor": "An old town in a bay between steep mountains.",
+  "NO-oslo>SE-goteborg": "A Nordic port city with food and an archipelago.",
+  "NO-oslo>EE-tallinn": "A Nordic capital with a medieval centre.",
+  "FI-helsingfors>EE-tallinn": "On the other side of the Gulf of Finland, by ferry.",
+  "FI-helsingfors>LV-riga": "An art nouveau city on the Baltic.",
+  "IS-reykjavik>NO-bergen": "Nordic nature with mountains and sea.",
+  "SE-stockholm>EE-tallinn": "A Baltic city with an old town.",
+  "SE-stockholm>LV-riga": "A Baltic city with art nouveau and market halls.",
+  "FR-nice>IT-sanremo": "The Italian Riviera, a little further east.",
+  "FR-nice>ES-malaga": "A beach city on the Mediterranean with museums.",
+  "US-new-york>US-chicago": "An American big city with skyscrapers, museums and music.",
+  "US-new-york>CA-montreal": "A North American big city with food and festivals.",
+  "US-san-francisco>CL-valparaiso": "Hills, views and colourful houses on the Pacific.",
+  "US-san-francisco>CA-vancouver": "A big city on the Pacific with nature close by.",
+  "SG-singapore>MY-kuala-lumpur": "A big city in the neighbouring country with the same mix of cuisines.",
+  "SG-singapore>MY-george-town": "Street food and shophouses on Penang.",
+  "HK-hongkong>TW-taipei": "A Chinese-speaking big city with night markets and mountains.",
+  "HK-hongkong>MY-kuala-lumpur": "An Asian big city with skyscrapers and food markets.",
+  "AE-dubai>OM-muskat": "The Arabian Peninsula in a calmer, more traditional form.",
+  "JP-tokyo>TW-taipei": "An East Asian big city where food comes first.",
+  "JP-tokyo>KR-seoul": "An East Asian big city with palaces and nightlife.",
+  "JP-kyoto>JP-kanazawa": "Gardens and old quarters in the same country.",
+  "JP-kyoto>LA-luang-prabang": "A temple town at a slow pace.",
+  "AU-sydney>AU-melbourne": "An Australian big city with more focus on food and culture.",
+  "ZA-kapstaden>CL-valparaiso": "A coastal city with wine country close by."
+ }
+}

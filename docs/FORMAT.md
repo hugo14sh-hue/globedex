@@ -333,6 +333,82 @@ Ligger i content/_upptack.json och läses in till places av `npm run import` (sc
 
 En lätt plats har ingen kompendium, inga saker och inga priser. Den räknas inte bland städer med innehåll (hemort i Idag) och visas som stadsprick på kartan först när den har en status.
 
+## Engelska texter (content/en/)
+Svenskan i content/ är originalet. content/en/ innehåller bara översatta texter, aldrig siffror, id:n, datum, koordinater eller källor. Allt som inte är text kommer alltid från den svenska filen.
+
+`npm run import` skriver de engelska texterna till kolumnen en i places, place_facts, place_items, compendium_items, bucket_catalog, ideas och gift_tips (docs/schema.sql). Kolumnen har samma fältnamn som den svenska raden. Saknas engelska för en rad blir en null, så att en borttagen översättning också försvinner i databasen. Importen går att köra om utan att något dubbleras (upsert på id).
+
+I appen väljer src/lib/innehallSprak.ts texten för en rad och ett fält efter valt språk. Saknas en engelsk text (en fil, en rad, ett fält eller en post i en lista) visas den svenska, fält för fält. Landsnamn kommer som förut från webbläsaren på valt språk och från land.<id> i textfilerna. Sökfältet för plats hittar platser på båda språken oavsett valt språk.
+
+Gemensamt för alla filer:
+- En text får inte vara tom. Utelämna fältet i stället.
+- Ett fält som saknas på svenska får inte finnas på engelska.
+- Platshållare ({namn}) får bara finnas om de finns i den svenska texten.
+- Listor har samma längd och ordning som i den svenska filen. En post utan text är ett tomt objekt ({}), och i en lista med bara texter (month_notes, prices.tips, checklist_items) är en saknad text null.
+- Saknade översättningar är inte fel. `npm run import:check` skriver ut en sammanställning per fil: antal översatta texter av totalt antal svenska texter.
+
+### en/_upptack.json
+```json
+{
+  "places": { "PT-lissabon": { "why": "...", "name": "Lisbon" }, "ES-barcelona": { "why": "...", "level_note": "..." } },
+  "existing": { "MC-monaco": { "why": "..." } },
+  "alternatives": { "MC-monaco>FR-nice": "..." }
+}
+```
+- places: id ur places i _upptack.json. why, name (bara när namnet skiljer sig från det svenska) och level_note (bara när den svenska platsen har en).
+- existing: id ur existing i _upptack.json, med why (bara när den svenska har why).
+- alternatives: nyckeln är for, tecknet > och place ur alternativet i den svenska filen. Värdet är alternativets why.
+- I kolumnen en hamnar why och level_note under data, och alternativen som data.alternatives: en lista i samma ordning som den svenska, med { "why" } eller {}. name räknas inte i sammanställningen.
+
+### en/_bucket.json
+```json
+{ "bucket-norrsken": { "name": "...", "season": "...", "where_text": "..." }, "bucket-x": { "name": "...", "checklist_items": ["...", "..."] } }
+```
+checklist_items finns bara för delmål av typen delar och har samma antal och ordning som items i den svenska filen. I kolumnen en blir den checklist.items. Avbockade delmål sparas med den svenska titeln (bucket_items.parts), så en bock gäller på båda språken. Punkter ur katalogen visas med katalogens namn på valt språk.
+
+### en/_packlista.json
+```json
+{ "groups": { "Dokument": "Documents" }, "items": { "pass": { "title": "..." } } }
+```
+groups: svenskt gruppnamn ur _packlista.json till engelskt. items: id till { title }. Läses in i appen vid bygget. Hämta förslag lägger till sakerna på det språk som är valt just då, och befintliga rader ändras inte. Gruppnamnen sparas på svenska och översätts när raden visas, om gruppen är en av grupperna i mallen. En sak som redan står på listan på något av språken föreslås inte igen.
+
+### en/_innan-avresa.json
+```json
+{ "items": { "forsakring": { "title": "...", "hint": "..." } } }
+```
+id till { title, hint }. Läses in i appen vid bygget. Punkterna läggs till på det språk som är valt just då. days_before slås upp via titeln på båda språken, och en punkt som redan finns på något av språken läggs inte till igen.
+
+### en/<landskod>.json
+Samma toppnycklar som landsfilen, men som objekt med id som nyckel. Filen kräver content/<landskod>.json, och id:t ska finnas i samma del där.
+
+```json
+{
+  "places": { "PT-lissabon": { "name": "Lisbon", "data": { "best_text": "...", "month_notes": [null, null, "...", null, null, null, null, null, null, null, null, null] } } },
+  "facts": { "PT-fakta-mobil": { "title": "...", "summary": "...", "body": "..." } },
+  "items": { "PT-lissabon-belem": { "name": "...", "summary": "...", "body": "..." } },
+  "compendium": { "mat-pastel-de-nata": { "name": "...", "hint": "..." } },
+  "ideas": { "PT-x": { "title": "...", "body": "...", "duration": "..." } },
+  "gifts": { "PT-present-x": { "name": "...", "body": "..." } }
+}
+```
+
+data under places speglar den svenska data men har bara textfälten:
+
+| Fält | Form |
+|---|---|
+| best_text, day_budget_note | text |
+| flight_tips | lista med { title, text } |
+| stay | lista med { label, text } (samma fältnamn som på svenska) |
+| areas | lista med { name, text } |
+| transport | lista med { mode, text } |
+| month_notes | 12 texter (null för en saknad) |
+| events, seasons | lista med { name, text } |
+| prices | { summary, tips: [texter], rows: [{ note }] } |
+
+Samma kort i samlingsboken kan stå i flera landsfiler. Står det i flera engelska filer måste texterna vara lika.
+
+`npm run import:check` stoppar: okända filer i content/en/, okända delar och fält, id:n som inte finns i den svenska filen, listor med fel längd, tomma texter, platshållare som inte finns i den svenska texten, fält som finns på engelska men saknas på svenska, checklist_items på delmål som inte är av typen delar, och ett kort i samlingsboken med olika engelska texter i två filer.
+
 ## Gränssnittets texter
 Ligger i content/_texter.json och läses in i appen vid bygget (inte till databasen). Nycklar under texter, tre språkstilar (neutral, lekfull, romantisk), märken under marken. Reglerna står i filens _om.
 
@@ -342,3 +418,4 @@ Ligger i content/_texter.json och läses in i appen vid bygget (inte till databa
 3. Skriva i ordningen places, compendium, facts, items, ideas, gifts.
 4. Köras lokalt av Hugo med SUPABASE_SECRET_KEY från .env.local. Nyckeln får aldrig användas i appen.
 5. Aldrig skriva place_items bildfält (image_url, image_credit, image_license, image_page). De skrivs bara av `npm run import:images`.
+6. Skriva kolumnen en för de sju tabellerna ur content/en/, eller null när raden saknar engelska.

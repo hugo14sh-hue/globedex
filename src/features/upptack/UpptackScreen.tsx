@@ -41,7 +41,7 @@ import {
   type DiscoverSort,
 } from '../../lib/upptack';
 import { useMedia, WIDE } from '../../lib/useMedia';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { monthNames, shortMonthNames } from '../karta/months';
 import { AltRows } from './Alternativ';
 
@@ -50,6 +50,7 @@ const capital = (s: string) => s.charAt(0).toLocaleUpperCase() + s.slice(1);
 
 export default function UpptackScreen() {
   const t = useT();
+  const lang = useLang();
   const [params, setParams] = useSearchParams();
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
@@ -72,7 +73,7 @@ export default function UpptackScreen() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   const { filter, sort } = useMemo(() => fromParams(params, ALLOWED), [params]);
   // Filtren byts med replace: varje tryck blir inte ett eget steg bakåt, men filtreringen står kvar i adressen.

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
-import { PACK_SUGGESTIONS } from '../../lib/packContent';
+import { packGroupName, packSuggestions } from '../../lib/packContent';
 import { nights, packFor, packPatch } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, updateListRow, type PackItem, type Trip } from '../../lib/trips';
 import { useT } from '../../lib/useT';
@@ -40,7 +40,8 @@ function Pack({ trip }: { trip: Trip }) {
   const groups = useMemo(() => [...new Set(rows.map((r) => r.grp))], [rows]);
   const packed = rows.filter((r) => r.packed).length;
   const month = trip.start_date ? Number(trip.start_date.slice(5, 7)) - 1 : null;
-  const suggestions = packFor(PACK_SUGGESTIONS, nights(trip.start_date, trip.end_date), month, rows.map((r) => r.title));
+  // Förslagen på valt språk (useT ritar om skärmen när språket byts).
+  const suggestions = packFor(packSuggestions(), nights(trip.start_date, trip.end_date), month, rows.map((r) => r.title));
   const nextPos = () => (rows.length ? Math.max(...rows.map((r) => r.pos)) + 1 : 0);
 
   const add = async (e: FormEvent) => {
@@ -117,7 +118,7 @@ function Pack({ trip }: { trip: Trip }) {
 
       {groups.map((g) => (
         <section key={g} className="col">
-          <h2 className="eb">{g}</h2>
+          <h2 className="eb">{packGroupName(g)}</h2>
           {rows
             .filter((r) => r.grp === g)
             .map((r) => (

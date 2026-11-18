@@ -20,7 +20,7 @@ import {
 import { buildDeck, commonYes, isMatch, waitingFor, type CardKind, type CardRef, type Votes } from '../../lib/listLogic';
 import { fetchVotes, saveVote } from '../../lib/listor';
 import { useSession, useTravelMode } from '../../lib/session';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { useBucket } from './Bucketlist';
 
 export type SwipeView = 'kortbunt' | 'lista';
@@ -43,6 +43,7 @@ let refocus = false;
 
 export function Swipe({ view, onView }: { view: SwipeView; onView: (v: SwipeView) => void }) {
   const t = useT();
+  const lang = useLang();
   const { toast, party } = useFeedback();
   const { session, members } = useSession();
   const mode = useTravelMode();
@@ -81,7 +82,7 @@ export function Swipe({ view, onView }: { view: SwipeView; onView: (v: SwipeView
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   const memberKey = memberIds.join(',');
   useEffect(() => {

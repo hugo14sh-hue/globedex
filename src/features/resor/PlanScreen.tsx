@@ -14,7 +14,7 @@ import { addDays, budgetSuggestion, datesForMonth, nights, todayIso } from '../.
 import { createTrip, fetchHome, type Home, type NewLeg } from '../../lib/trips';
 import { useSession } from '../../lib/session';
 import { companyGroups, defaultTripGroup } from '../../lib/togetherLogic';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { SMART_COLORS } from '../../theme/palettes';
 import { monthNames } from '../karta/months';
 import { formatSek } from '../karta/format';
@@ -25,6 +25,7 @@ const STAY_TYPES: StayType[] = ['hotell', 'hostel', 'lagenhet', 'alla'];
 
 export default function PlanScreen() {
   const t = useT();
+  const lang = useLang();
   const nav = useNavigate();
   const { party, toast } = useFeedback();
   const [params] = useSearchParams();
@@ -57,7 +58,7 @@ export default function PlanScreen() {
     fetchPlaces()
       .then(setPlaces)
       .catch(() => undefined);
-  }, []);
+  }, [lang]);
   useEffect(() => {
     if (people.me) fetchHome(people.me).then(setHome).catch(() => undefined);
   }, [people.me]);

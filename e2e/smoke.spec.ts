@@ -6,6 +6,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { restore, snapshot, type Snapshot } from './cleanup';
 import { credentials, hasTestAccount, testClient } from './env';
 import { applyPatches, discoverRows } from '../scripts/lib/upptack.mjs';
+import { englishRows, readEnglishDir } from '../scripts/lib/en.mjs';
 import { COUNTRIES } from '../src/lib/countries';
 
 type Entry = string | Record<string, string>;
@@ -103,15 +104,52 @@ const DISCOVER = (() => {
   };
 })();
 
+/** Upptäcks platser och data, för svaret från places när de saknas i databasen. */
+function withDiscover(rows: { id: string }[]) {
+  const have = new Set(rows.map((r) => r.id));
+  const add = [...DISCOVER.countries, ...DISCOVER.cities].filter((p) => !have.has(p.id));
+  return [...applyPatches(rows, DISCOVER.patches), ...add] as { id: string }[];
+}
+
 /** Lägger till Upptäcks platser och data i svaret från places om de saknas i databasen. */
 async function injectDiscover(page: Page) {
   await page.route('**/rest/v1/places?*', async (route) => {
     const res = await route.fetch();
     const rows = (await res.json()) as { id: string }[];
     if (!Array.isArray(rows)) return route.fulfill({ response: res });
-    const have = new Set(rows.map((r) => r.id));
-    const add = [...DISCOVER.countries, ...DISCOVER.cities].filter((p) => !have.has(p.id));
-    await route.fulfill({ response: res, json: [...applyPatches(rows, DISCOVER.patches), ...add] });
+    await route.fulfill({ response: res, json: withDiscover(rows) });
+  });
+}
+
+// Engelskan i content/en/ (Körning 20), med samma kolumn en som importen skriver (scripts/lib/en.mjs).
+// Läggs in i svaret från places och bucket_catalog när Hugo inte har kört npm run import med den än.
+const EN_DIR = readEnglishDir(join(process.cwd(), 'content'));
+const EN_ROWS = (() => {
+  const dir = join(process.cwd(), 'content');
+  const content = readdirSync(dir)
+    .filter((f) => /^[A-Z]{2}\.json$/.test(f))
+    .flatMap((f) => JSON.parse(readFileSync(join(dir, f), 'utf8').replace(/^﻿/, '')).places as { id: string }[]);
+  return englishRows(EN_DIR, [...applyPatches(content, DISCOVER.patches), ...DISCOVER.cities]) as Record<string, Map<string, unknown>>;
+})();
+const EN_UPPTACK = EN_DIR['_upptack.json'] as { places: Record<string, { why: string; name?: string }> };
+const EN_BUCKET = EN_DIR['_bucket.json'] as Record<string, { name: string }>;
+
+/** Lägger till kolumnen en i svaren från places och bucket_catalog där den saknas (och Upptäck om det behövs). */
+async function injectEnglish(page: Page) {
+  const add = (map: Map<string, unknown>) => (r: { id: string; en?: unknown }) => (r.en == null && map.has(r.id) ? { ...r, en: map.get(r.id) } : r);
+  await page.unroute('**/rest/v1/places?*');
+  await page.route('**/rest/v1/places?*', async (route) => {
+    const res = await route.fetch();
+    const rows = (await res.json()) as { id: string; en?: unknown }[];
+    if (!Array.isArray(rows)) return route.fulfill({ response: res });
+    const all = hasDiscover ? rows : withDiscover(rows);
+    await route.fulfill({ response: res, json: all.map(add(EN_ROWS.places)) });
+  });
+  await page.route('**/rest/v1/bucket_catalog?*', async (route) => {
+    const res = await route.fetch();
+    const rows = (await res.json()) as { id: string; en?: unknown }[];
+    if (!Array.isArray(rows)) return route.fulfill({ response: res });
+    await route.fulfill({ response: res, json: rows.map(add(EN_ROWS.bucket)) });
   });
 }
 
@@ -1207,6 +1245,35 @@ test('röktest', async ({ page }) => {
       await expect(page.getByRole('heading', { name: txEn('pris.rubrik'), exact: true })).toBeVisible();
       await expect(page.getByText(txEn('pris.rad.hotell-3'), { exact: true })).toBeVisible();
     }
+
+    // Innehållet på engelska (Körning 20): Upptäck, bucketlistan och svenskan där engelskan saknas.
+    await injectEnglish(page);
+    const lisbon = EN_UPPTACK.places['PT-lissabon'];
+    expect(lisbon.name).toBe('Lisbon');
+    await page.goto('/upptack?land=PT');
+    const lisbonCard = page.locator('article.disc-card', {
+      has: page.getByRole('link', { name: txEn('upptack.kort.oppna').replace('{plats}', 'Lisbon'), exact: true }),
+    });
+    await expect(lisbonCard).toBeVisible({ timeout: 20_000 });
+    await expect(lisbonCard.getByText(lisbon.why, { exact: true })).toBeVisible();
+    await expect(page.getByText('Lissabon', { exact: true })).toHaveCount(0);
+
+    await page.goto('/listor?vy=bucketlist');
+    await page.getByRole('button', { name: txEn('bucket.katalog') }).click();
+    const catalog = page.getByRole('dialog');
+    const skydive = EN_BUCKET['bucket-fallskarm'].name;
+    await expect(catalog.getByText(skydive, { exact: true })).toBeVisible();
+    await catalog.getByRole('button', { name: txEn('knapp.stang') }).click();
+    await expect(catalog).toBeHidden();
+
+    // Stockholm (content/SE.json) har ingen engelsk guide (en/SE.json finns inte än): den svenska texten visas.
+    const stockholm = JSON.parse(readFileSync(join(process.cwd(), 'content/SE.json'), 'utf8').replace(/^﻿/, '')).places.find(
+      (p: { id: string }) => p.id === 'SE-stockholm',
+    ) as { name: string; data: { best_text: string } };
+    expect((EN_ROWS.places.get('SE-stockholm') as { data?: { best_text?: string } } | undefined)?.data?.best_text).toBeUndefined();
+    await page.goto('/karta/SE-stockholm');
+    await expect(page.getByRole('heading', { level: 1, name: stockholm.name })).toBeVisible();
+    await expect(page.getByText(stockholm.data.best_text, { exact: true }).first()).toBeVisible();
 
     // Utloggad: inloggningssidan följer valt språk.
     await page.goto('/vi');

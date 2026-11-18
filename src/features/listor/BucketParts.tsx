@@ -66,7 +66,7 @@ export function BucketParts({
         view.rows.map((r) =>
           r.auto ? (
             <Row
-              key={r.title}
+              key={r.key}
               to={r.placeId ? `/karta/${r.placeId}` : undefined}
               title={r.title}
               sub={t('bucket.delar.auto')}
@@ -77,7 +77,7 @@ export function BucketParts({
               }
             />
           ) : (
-            <CheckRow key={r.title} title={r.title} on={r.done} onToggle={() => !busy && onToggle(r.title)} />
+            <CheckRow key={r.key} title={r.title} on={r.done} onToggle={() => !busy && onToggle(r.key)} />
           ),
         )}
 

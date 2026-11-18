@@ -494,6 +494,8 @@ export function sortPlaces(places) {
 /** Gör en rad till en databasrad: utelämnade fält blir standardvärden i tabellen. */
 export function toDbRow(part, row) {
   const r = { ...row };
+  // Kolumnen en (Körning 20): engelskan för raden, eller null. En borttagen översättning nollas också.
+  if (r.en === undefined) r.en = null;
   if (part === 'places' && r.data === undefined) r.data = {};
   if (part === 'items') {
     // Bildfälten tas aldrig med: de skrivs av npm run import:images och ska ligga kvar vid nästa import.

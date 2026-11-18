@@ -1,5 +1,9 @@
 // Innehållet från content/ (via Supabase). Bara läsning. Texterna kommer från Hugo, inget skrivs här.
+// Varje rad har kolumnen en med de engelska texterna (Körning 20). Hämtningarna lämnar ut raderna på
+// valt språk (localize i innehallSprak.ts, svenskan fält för fält när engelskan saknas). Skärmarna hämtar
+// om när språket byts. Svaret från databasen sparas en gång, översättningen görs vid varje hämtning.
 import { supabase } from './supabase';
+import { localizeAll, type Translatable } from './innehallSprak';
 import { displayNames, LOCALE } from './locale';
 import { isCountryId, isSplitPart } from './delade';
 import { t } from './texter';
@@ -74,7 +78,7 @@ export interface PlaceEvent {
   source: string;
 }
 
-export interface Place {
+export interface Place extends Translatable {
   id: string;
   kind: PlaceKind;
   parent_id: string | null;
@@ -88,7 +92,7 @@ export interface Place {
   data: PlaceData;
 }
 
-export interface PlaceFact {
+export interface PlaceFact extends Translatable {
   id: string;
   place_id: string;
   topic: string;
@@ -101,7 +105,7 @@ export interface PlaceFact {
   verified_on: string | null;
 }
 
-export interface PlaceItem {
+export interface PlaceItem extends Translatable {
   id: string;
   place_id: string;
   category: string;
@@ -123,7 +127,7 @@ export interface PlaceItem {
   image_page?: string | null;
 }
 
-export interface GiftTip {
+export interface GiftTip extends Translatable {
   id: string;
   place_id: string;
   name: string;
@@ -147,7 +151,7 @@ function must<T>(res: { data: T | null; error: { message: string } | null }): T 
   return (res.data ?? []) as T;
 }
 
-const PLACE_COLS = 'id, kind, parent_id, layer, name, iso2, lat, lon, airport, smart_months, data';
+const PLACE_COLS = 'id, kind, parent_id, layer, name, iso2, lat, lon, airport, smart_months, data, en';
 
 // Alla platser är få (några hundra). De hämtas en gång per besök och delas av karta och landssidor.
 let placesPromise: Promise<Place[]> | null = null;
@@ -159,7 +163,7 @@ export function fetchPlaces(): Promise<Place[]> {
       placesPromise = null;
     });
   }
-  return placesPromise;
+  return placesPromise.then((rows) => localizeAll(rows));
 }
 
 /** Förslag på hemort: städer i Sverige. Tom lista om innehållet inte är importerat. */
@@ -196,12 +200,12 @@ export function countryOf(places: Place[], id: string): Place | null {
 
 export async function fetchFacts(placeIds: string[]): Promise<PlaceFact[]> {
   if (!placeIds.length) return [];
-  return must(await supabase.from('place_facts').select('*').in('place_id', placeIds).order('id')) as PlaceFact[];
+  return localizeAll(must(await supabase.from('place_facts').select('*').in('place_id', placeIds).order('id')) as PlaceFact[]);
 }
 
 export async function fetchItems(placeIds: string[]): Promise<PlaceItem[]> {
   if (!placeIds.length) return [];
-  return must(await supabase.from('place_items').select('*').in('place_id', placeIds).order('id')) as PlaceItem[];
+  return localizeAll(must(await supabase.from('place_items').select('*').in('place_id', placeIds).order('id')) as PlaceItem[]);
 }
 
 let markerPromise: Promise<PlaceItem[]> | null = null;
@@ -210,17 +214,17 @@ let markerPromise: Promise<PlaceItem[]> | null = null;
 export function fetchItemMarkers(): Promise<PlaceItem[]> {
   if (!markerPromise) {
     markerPromise = (async () =>
-      must(await supabase.from('place_items').select('id, place_id, category, name, lat, lon').not('lat', 'is', null)) as PlaceItem[])();
+      must(await supabase.from('place_items').select('id, place_id, category, name, lat, lon, en').not('lat', 'is', null)) as PlaceItem[])();
     markerPromise.catch(() => {
       markerPromise = null;
     });
   }
-  return markerPromise;
+  return markerPromise.then((rows) => localizeAll(rows));
 }
 
 export async function fetchGifts(placeIds: string[]): Promise<GiftTip[]> {
   if (!placeIds.length) return [];
-  return must(await supabase.from('gift_tips').select('*').in('place_id', placeIds).order('id')) as GiftTip[];
+  return localizeAll(must(await supabase.from('gift_tips').select('*').in('place_id', placeIds).order('id')) as GiftTip[]);
 }
 
 /** Sant om fältet är egen bedömning utan källa. */
@@ -260,7 +264,7 @@ export const COST_LEVELS: CostLevel[] = ['gratis', 'billigt', 'medel', 'dyrt'];
 /** Bucketkatalogens kategorier, i samma ordning som i content/_bucket.json. */
 export const BUCKET_CATEGORIES = ['aventyr', 'natur', 'resa', 'mat', 'kultur', 'tillsammans', 'hemma', 'milstolpe'] as const;
 
-export interface CompendiumItem {
+export interface CompendiumItem extends Translatable {
   id: string;
   category: string;
   name: string;
@@ -271,7 +275,7 @@ export interface CompendiumItem {
   source_url: string | null;
 }
 
-export interface BucketCatalogItem {
+export interface BucketCatalogItem extends Translatable {
   id: string;
   name: string;
   category: string;
@@ -283,7 +287,7 @@ export interface BucketCatalogItem {
   checklist?: unknown;
 }
 
-export interface Idea {
+export interface Idea extends Translatable {
   id: string;
   place_id: string | null;
   kind: string;
@@ -302,9 +306,12 @@ export interface Idea {
 export const IDEA_KINDS = ['hemma', 'i-stan', 'ut-en-svang', 'dagstripp', 'helg', 'utflykt', 'fotboll'] as const;
 export const IDEA_TAGS = ['inne', 'ute', 'gratis', 'nara'] as const;
 
-/** Hämtar en gång per besök och delar svaret. Misslyckas hämtningen prövas den igen nästa gång. */
-function once<T>(fn: () => Promise<T>): () => Promise<T> {
-  let p: Promise<T> | null = null;
+/**
+ * Hämtar en gång per besök och delar svaret. Misslyckas hämtningen prövas den igen nästa gång.
+ * Raderna lämnas ut på valt språk vid varje anrop.
+ */
+function once<T extends Translatable>(fn: () => Promise<T[]>): () => Promise<T[]> {
+  let p: Promise<T[]> | null = null;
   return () => {
     if (!p) {
       p = fn();
@@ -312,7 +319,7 @@ function once<T>(fn: () => Promise<T>): () => Promise<T> {
         p = null;
       });
     }
-    return p;
+    return p.then((rows) => localizeAll(rows));
   };
 }
 
@@ -323,13 +330,13 @@ export const fetchCompendium = once(
 export const fetchBucketCatalog = once(async () => must(await supabase.from('bucket_catalog').select('*').order('id')) as BucketCatalogItem[]);
 
 export const fetchIdeas = once(
-  async () => must(await supabase.from('ideas').select('id, place_id, kind, title, body, duration, cost_level, tags, drive_minutes, lat, lon').order('id')) as Idea[],
+  async () => must(await supabase.from('ideas').select('id, place_id, kind, title, body, duration, cost_level, tags, drive_minutes, lat, lon, en').order('id')) as Idea[],
 );
 
 /** Alla listpunkter (utan långa texter), för kortbunten. */
 export const fetchAllItems = once(
   async () =>
     must(
-      await supabase.from('place_items').select('id, place_id, category, name, summary, compendium_id, must_rank').order('id'),
-    ) as Pick<PlaceItem, 'id' | 'place_id' | 'category' | 'name' | 'summary' | 'compendium_id' | 'must_rank'>[],
+      await supabase.from('place_items').select('id, place_id, category, name, summary, compendium_id, must_rank, en').order('id'),
+    ) as Pick<PlaceItem, 'id' | 'place_id' | 'category' | 'name' | 'summary' | 'compendium_id' | 'must_rank' | 'en' | 'sv'>[],
 );

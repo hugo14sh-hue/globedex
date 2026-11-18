@@ -1,23 +1,11 @@
 import { useMemo } from 'react';
-import { PlaceCombobox, type PlaceOption } from '../../components/PlaceCombobox';
-import { countryName, countryOf, type Place } from '../../lib/content';
+import { PlaceCombobox } from '../../components/PlaceCombobox';
+import { type Place } from '../../lib/content';
 import { COUNTRIES } from '../../lib/countries';
-import { isCountryId, isSplitPart, isoOf, SPLIT_PARTS } from '../../lib/delade';
-import { LOCALE } from '../../lib/locale';
+import { SPLIT_PARTS } from '../../lib/delade';
+import { placeOptions } from '../../lib/placeOptions';
 
-/** Förslag för sökfältet: länder med namn, städer och regioner med landets namn. Sorterade efter namn. */
-export function placeOptions(places: Place[], ids: Iterable<string>): PlaceOption[] {
-  const out: PlaceOption[] = [];
-  for (const id of new Set(ids)) {
-    const p = places.find((x) => x.id === id);
-    const isCountry = p ? p.kind === 'country' : isCountryId(id);
-    // Delar av delade länder (GB-eng) får namnet från texten land.<id> på valt språk.
-    const name = isSplitPart(id) ? countryName(id) : (p?.name ?? (isCountry ? countryName(id) : id));
-    const land = isCountry ? null : (countryOf(places, id)?.name ?? (/^[A-Z]{2}-/.test(id) ? countryName(isoOf(id)) : undefined));
-    out.push({ id, name, country: isCountry, countryName: land ?? undefined });
-  }
-  return out.sort((a, b) => a.name.localeCompare(b.name, LOCALE));
-}
+export { placeOptions };
 
 /**
  * Alla resmål: länder, regioner och städer ur innehållet plus alla länder i världen (även utan innehåll).

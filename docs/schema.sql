@@ -196,6 +196,17 @@ create table public.gift_tips (
 );
 create index on public.gift_tips (place_id);
 
+-- Engelska texter (Körning 20). Kolumnen en har radens engelska texter med samma fältnamn som den svenska
+-- raden (för places även { data: { ... } } med bara textfälten). null när raden saknar engelska.
+-- Skrivs av npm run import från content/en/. Appen visar svenskan fält för fält när engelskan saknas.
+alter table public.places           add column if not exists en jsonb;
+alter table public.place_facts      add column if not exists en jsonb;
+alter table public.place_items      add column if not exists en jsonb;
+alter table public.compendium_items add column if not exists en jsonb;
+alter table public.bucket_catalog   add column if not exists en jsonb;
+alter table public.ideas            add column if not exists en jsonb;
+alter table public.gift_tips        add column if not exists en jsonb;
+
 -- ========== Användarens data ==========
 create table public.place_status (
   user_id uuid not null references auth.users(id) on delete cascade,

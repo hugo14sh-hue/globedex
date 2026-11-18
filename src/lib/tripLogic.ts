@@ -131,6 +131,8 @@ export interface PackSuggestion {
   max_nights?: number;
   /** Månader 1–12 när saken behövs. Saknas: hela året. */
   months?: number[];
+  /** Titeln på det andra språket (Körning 20). En sak med den titeln på listan räknas också som tillagd. */
+  alt?: string;
 }
 
 /**
@@ -141,6 +143,7 @@ export function packFor(list: PackSuggestion[], nightCount: number | null, month
   const have = new Set(existing.map((x) => x.trim().toLocaleLowerCase(LOCALE)));
   return list.filter((s) => {
     if (have.has(s.title.trim().toLocaleLowerCase(LOCALE))) return false;
+    if (s.alt && have.has(s.alt.trim().toLocaleLowerCase(LOCALE))) return false;
     if (s.min_nights != null || s.max_nights != null) {
       if (nightCount == null) return false;
       if (s.min_nights != null && nightCount < s.min_nights) return false;
@@ -163,6 +166,8 @@ export interface PretripSuggestion {
   hint?: string;
   /** Senast så här många dagar före avresan (0 = avresedagen). */
   days_before: number;
+  /** Titeln på det andra språket (Körning 20). Rader med den titeln räknas också som punkten. */
+  alt?: string;
 }
 
 const titleKey = (s: string) => s.trim().toLocaleLowerCase(LOCALE);
@@ -170,13 +175,13 @@ const titleKey = (s: string) => s.trim().toLocaleLowerCase(LOCALE);
 /** Färdiga punkter som saknas på listan. Samma titel läggs inte till igen. */
 export function pretripMissing(list: PretripSuggestion[], existing: string[]): PretripSuggestion[] {
   const have = new Set(existing.map(titleKey));
-  return list.filter((s) => !have.has(titleKey(s.title)));
+  return list.filter((s) => !have.has(titleKey(s.title)) && !(s.alt && have.has(titleKey(s.alt))));
 }
 
 /** Hur många dagar före avresan en rad senast bör vara gjord, ur innehållet (via titeln). Egna rader: null. */
 export function daysBeforeFor(list: PretripSuggestion[], title: string): number | null {
   const k = titleKey(title);
-  return list.find((s) => titleKey(s.title) === k)?.days_before ?? null;
+  return list.find((s) => titleKey(s.title) === k || (s.alt !== undefined && titleKey(s.alt) === k))?.days_before ?? null;
 }
 
 /** Sorterar på days_before, det som ska göras tidigast först. Rader utan days_before sist, i sin ordning. */

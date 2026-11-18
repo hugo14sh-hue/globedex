@@ -51,6 +51,13 @@ export function filterCatalog(list: BucketCatalogItem[], category: string | null
 }
 
 /** Ligger katalogpunkten redan på gruppens lista? */
+/**
+ * Punktens namn på listan: katalogens namn (på valt språk, Körning 20) för punkter ur katalogen, annars
+ * titeln som sparades när punkten lades till (egna punkter, eller när katalogen inte gick att hämta).
+ */
+export const bucketTitle = (item: Pick<BucketItem, 'title' | 'catalog_id'>, catalog: Map<string, Pick<BucketCatalogItem, 'name'>>): string =>
+  (item.catalog_id && catalog.get(item.catalog_id)?.name) || item.title;
+
 export const onList = (items: Pick<BucketItem, 'catalog_id'>[], catalogId: string) => items.some((i) => i.catalog_id === catalogId);
 
 /** Ogjorda först (äldst först), sedan gjorda (senast gjorda först). */

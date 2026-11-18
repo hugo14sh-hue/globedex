@@ -10,7 +10,7 @@ import { MANY, motifsFor, percent } from '../../lib/listLogic';
 import { addCollection, deleteCollection, deleteEntry, fetchCollections, saveEntry, type Collection, type CollectionEntry } from '../../lib/listor';
 import { useSession } from '../../lib/session';
 import { useMyPlaces } from '../../lib/status';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
 import { LOCALE } from '../../lib/locale';
@@ -50,11 +50,12 @@ export function Samlingar() {
   const [entry, setEntry] = useState<{ collection: Collection; e: CollectionEntry; isNew: boolean } | null>(null);
   const [remove, setRemove] = useState<Collection | null>(null);
 
+  const lang = useLang();
   useEffect(() => {
     fetchPlaces()
       .then(setPlaces)
       .catch(() => undefined);
-  }, []);
+  }, [lang]);
 
   // Länder man har varit i (i vald landlista), för räknaren per samling.
   const { theme } = useTheme();

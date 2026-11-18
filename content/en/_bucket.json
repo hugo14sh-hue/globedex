@@ -1,0 +1,315 @@
+{
+ "bucket-fallskarm": {
+  "name": "Do a tandem skydive",
+  "season": "Spring to autumn",
+  "where_text": "Skydiving clubs around Sweden"
+ },
+ "bucket-bungyjump": {
+  "name": "Go bungee jumping"
+ },
+ "bucket-paragliding": {
+  "name": "Fly a tandem paraglider"
+ },
+ "bucket-luftballong": {
+  "name": "Ride in a hot-air balloon",
+  "where_text": "Cappadocia is famous for its balloons"
+ },
+ "bucket-zipline": {
+  "name": "Ride a zipline"
+ },
+ "bucket-forsranning": {
+  "name": "Go white-water rafting",
+  "season": "Summer"
+ },
+ "bucket-dykcert": {
+  "name": "Get a diving certificate"
+ },
+ "bucket-snorkla-rev": {
+  "name": "Snorkel at a coral reef"
+ },
+ "bucket-surfa": {
+  "name": "Stand up on a surfboard"
+ },
+ "bucket-hundspann": {
+  "name": "Go dog sledding",
+  "season": "Winter",
+  "where_text": "The northern Nordics"
+ },
+ "bucket-skoter": {
+  "name": "Drive a snowmobile",
+  "season": "Winter",
+  "where_text": "The northern Nordics"
+ },
+ "bucket-via-ferrata": {
+  "name": "Climb a via ferrata",
+  "season": "Summer"
+ },
+ "bucket-helikopter": {
+  "name": "Fly in a helicopter"
+ },
+ "bucket-rida-strand": {
+  "name": "Ride a horse on a beach"
+ },
+ "bucket-kajak-natt": {
+  "name": "Paddle a kayak and sleep on an island",
+  "season": "Summer"
+ },
+ "bucket-vinterbad": {
+  "name": "Take a winter swim and a sauna",
+  "season": "Winter"
+ },
+ "bucket-norrsken": {
+  "name": "See the northern lights",
+  "season": "The dark months, roughly September to March",
+  "where_text": "The northern Nordics and Iceland"
+ },
+ "bucket-midnattssol": {
+  "name": "See the midnight sun",
+  "season": "Around midsummer",
+  "where_text": "North of the Arctic Circle"
+ },
+ "bucket-delfiner": {
+  "name": "Swim with dolphins in the wild"
+ },
+ "bucket-valar": {
+  "name": "See whales"
+ },
+ "bucket-skoldpaddor": {
+  "name": "Swim with sea turtles"
+ },
+ "bucket-vulkan": {
+  "name": "Stand on a volcano"
+ },
+ "bucket-glaciar": {
+  "name": "Walk on a glacier"
+ },
+ "bucket-varm-kalla": {
+  "name": "Bathe in a hot spring"
+ },
+ "bucket-vattenfall": {
+  "name": "Stand behind a waterfall"
+ },
+ "bucket-soluppgang-topp": {
+  "name": "Watch the sunrise from a mountain top"
+ },
+ "bucket-stjarnhimmel": {
+  "name": "Sleep under the open sky",
+  "season": "Summer"
+ },
+ "bucket-stjarnfall": {
+  "name": "See a shooting star together",
+  "season": "The Perseids in August"
+ },
+ "bucket-fjalltopp": {
+  "name": "Climb a mountain peak",
+  "season": "Summer"
+ },
+ "bucket-oken": {
+  "name": "Spend a night in the desert"
+ },
+ "bucket-regnskog": {
+  "name": "Hike in a rainforest"
+ },
+ "bucket-korsbar": {
+  "name": "See the cherry blossoms",
+  "season": "Spring"
+ },
+ "bucket-tagluff": {
+  "name": "Go interrailing in Europe",
+  "season": "Summer"
+ },
+ "bucket-roadtrip": {
+  "name": "Take a road trip with no fixed plan"
+ },
+ "bucket-nattag": {
+  "name": "Take a night train"
+ },
+ "bucket-ensam-biljett": {
+  "name": "Book a trip with a week's notice"
+ },
+ "bucket-alla-norden": {
+  "name": "Visit all the Nordic countries"
+ },
+ "bucket-tre-kontinenter": {
+  "name": "Visit three continents"
+ },
+ "bucket-ekvatorn": {
+  "name": "Cross the equator"
+ },
+ "bucket-nyar-utomlands": {
+  "name": "Celebrate New Year abroad",
+  "season": "New Year"
+ },
+ "bucket-ohopp": {
+  "name": "Go island hopping",
+  "season": "Summer"
+ },
+ "bucket-husbil": {
+  "name": "Live in a camper van for a week",
+  "season": "Summer"
+ },
+ "bucket-spontan-flygplats": {
+  "name": "Go to the airport and pick a trip there"
+ },
+ "bucket-hemlandet": {
+  "name": "Travel to a country one of you has roots in"
+ },
+ "bucket-alla-landskap": {
+  "name": "Visit all 25 provinces of Sweden"
+ },
+ "bucket-stjarnkrog": {
+  "name": "Eat at a Michelin-starred restaurant"
+ },
+ "bucket-matlagningskurs": {
+  "name": "Take a cooking class abroad"
+ },
+ "bucket-gatumat": {
+  "name": "Eat street food at a night market"
+ },
+ "bucket-vinprovning": {
+  "name": "Go to a wine tasting at a vineyard"
+ },
+ "bucket-fanga-fisk": {
+  "name": "Catch and cook your own fish",
+  "season": "Summer"
+ },
+ "bucket-pasta-fran-grunden": {
+  "name": "Make pasta from scratch"
+ },
+ "bucket-frukost-sang": {
+  "name": "Breakfast in bed with the full hotel tray"
+ },
+ "bucket-ratt-per-land": {
+  "name": "Cook a dish from every country you have visited"
+ },
+ "bucket-opera": {
+  "name": "Go to the opera"
+ },
+ "bucket-festival": {
+  "name": "Go to a music festival",
+  "season": "Summer"
+ },
+ "bucket-fotboll-utomlands": {
+  "name": "Watch a football match abroad"
+ },
+ "bucket-underverk": {
+  "name": "See one of the New Seven Wonders of the World"
+ },
+ "bucket-konsert-utomlands": {
+  "name": "See a favourite artist abroad"
+ },
+ "bucket-spraket": {
+  "name": "Learn a hundred words in each other's language"
+ },
+ "bucket-dansa": {
+  "name": "Take a dance class"
+ },
+ "bucket-julmarknad": {
+  "name": "Visit a Christmas market abroad",
+  "season": "Advent"
+ },
+ "bucket-dejt-overraskning": {
+  "name": "Plan a surprise date for the other"
+ },
+ "bucket-picknick-solnedgang": {
+  "name": "Picnic at sunset",
+  "season": "Summer"
+ },
+ "bucket-spa": {
+  "name": "Go on a spa weekend"
+ },
+ "bucket-fotobok": {
+  "name": "Make a photo book of the year's trips"
+ },
+ "bucket-tidskapsel": {
+  "name": "Write letters to yourselves in five years"
+ },
+ "bucket-samma-plats": {
+  "name": "Return to the place of your first date"
+ },
+ "bucket-dans-regn": {
+  "name": "Dance in the rain"
+ },
+ "bucket-keramik": {
+  "name": "Throw or paint pottery together"
+ },
+ "bucket-fotoautomat": {
+  "name": "Take pictures in a photo booth"
+ },
+ "bucket-stuga": {
+  "name": "Rent a cabin without wifi"
+ },
+ "bucket-bio-drive-in": {
+  "name": "Go to an outdoor cinema",
+  "season": "Summer"
+ },
+ "bucket-tradkoja": {
+  "name": "Sleep in a treehouse"
+ },
+ "bucket-hemma-filmmaraton": {
+  "name": "Movie marathon with a whole film series"
+ },
+ "bucket-hemma-land-kvall": {
+  "name": "Theme night with food and music from one country"
+ },
+ "bucket-hemma-koja": {
+  "name": "Build a blanket fort in the living room"
+ },
+ "bucket-hemma-pussel": {
+  "name": "Do a thousand-piece jigsaw"
+ },
+ "bucket-hemma-blindtest": {
+  "name": "Blind-test chocolate, soda or crisps"
+ },
+ "bucket-hemma-spelkvall": {
+  "name": "Game night with a tournament and a prize"
+ },
+ "bucket-hemma-baka": {
+  "name": "Bake something you have never baked before"
+ },
+ "bucket-hemma-planera": {
+  "name": "Plan the dream trip with a map and a budget"
+ },
+ "bucket-hemma-skarmfri": {
+  "name": "A completely screen-free day"
+ },
+ "bucket-hemma-soluppgang": {
+  "name": "Get up and watch the sunrise with coffee"
+ },
+ "bucket-mil-lopp": {
+  "name": "Run a race"
+ },
+ "bucket-mil-klassiker": {
+  "name": "Complete En svensk klassiker",
+  "checklist_items": [
+   "Vasaloppet or Engelbrektsloppet",
+   "Vätternrundan",
+   "Vansbrosimningen",
+   "Lidingöloppet"
+  ]
+ },
+ "bucket-mil-sprak": {
+  "name": "Manage a conversation in a new language"
+ },
+ "bucket-mil-korkort": {
+  "name": "Get a driving licence or a new licence category"
+ },
+ "bucket-mil-flytta": {
+  "name": "Move in together"
+ },
+ "bucket-mil-buffert": {
+  "name": "Save up for a trip without borrowing"
+ },
+ "bucket-mil-solo": {
+  "name": "Take a trip entirely on your own"
+ },
+ "bucket-mil-talang": {
+  "name": "Learn an instrument"
+ },
+ "bucket-mil-volontar": {
+  "name": "Volunteer for a day"
+ },
+ "bucket-mil-tio-lander": {
+  "name": "Visit ten countries"
+ }
+}

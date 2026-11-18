@@ -8,7 +8,7 @@ import { isLight } from '../../lib/upptack';
 import { useSession, useTravelMode } from '../../lib/session';
 import { STATUS_KEY, useMemberStatuses, useMyPlaces, type PlaceStatus } from '../../lib/status';
 import { statusesFor, type MapWho } from '../../lib/statusLogic';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { SMART_COLORS } from '../../theme/palettes';
 import { mapIsDark, statusColors } from '../../theme/theme';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -62,6 +62,7 @@ export default function KartaScreen() {
   const t = useT();
   const nav = useNavigate();
   const { theme, update } = useTheme();
+  const lang = useLang();
   const { session, members, groups, activeGroup } = useSession();
   const mode = useTravelMode();
   const me = session?.user.id ?? null;
@@ -185,10 +186,10 @@ export default function KartaScreen() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
-    if (mapMode !== 'upptack' || items.length) return;
+    if (mapMode !== 'upptack') return;
     let alive = true;
     fetchItemMarkers()
       .then((list) => alive && setItems(list))
@@ -196,7 +197,7 @@ export default function KartaScreen() {
     return () => {
       alive = false;
     };
-  }, [mapMode, items.length]);
+  }, [mapMode, lang]);
 
   // Kartans stil (kartstil.*) kan vara mörk när appen är ljus och tvärtom. Statusfärgerna på kartan, i förklaringen
   // och i listan följer kartan, och användarens egna färger går före paletten (src/theme/theme.ts).

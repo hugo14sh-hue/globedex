@@ -1,0 +1,52 @@
+{
+ "items": {
+  "pass-giltighet": {
+   "title": "Check your passport's expiry date",
+   "hint": "Some countries require the passport to be valid for a certain time after your return. Check the country's rules well in advance."
+  },
+  "inresekrav": {
+   "title": "Check entry requirements",
+   "hint": "Visa, travel authorisation or other requirements. Read up with the country's authorities or in the Swedish Foreign Ministry's travel information."
+  },
+  "forsakring": {
+   "title": "Check your travel insurance",
+   "hint": "See what your home insurance and payment card cover and whether you need anything more."
+  },
+  "eu-kort": {
+   "title": "Bring your EHIC card",
+   "hint": "The European Health Insurance Card is ordered from Försäkringskassan and is valid for travel within the EU and EEA."
+  },
+  "ledigt": {
+   "title": "Arrange time off from work or school"
+  },
+  "husdjur-blommor": {
+   "title": "Arrange for someone to look after your home"
+  },
+  "transport-flygplats": {
+   "title": "Decide how you will get to your departure"
+  },
+  "boka-entreer": {
+   "title": "Book tickets that tend to sell out",
+   "hint": "Check the list for your destination. Popular museums and viewpoints may need to be booked in advance."
+  },
+  "betalning": {
+   "title": "Check that your cards work abroad",
+   "hint": "Review spending limits and region blocks in your bank's app."
+  },
+  "mobil": {
+   "title": "Check what your mobile plan costs at the destination"
+  },
+  "offline": {
+   "title": "Download maps and tickets for offline use"
+  },
+  "checka-in": {
+   "title": "Check in online"
+  },
+  "ladda": {
+   "title": "Charge phone, power bank and headphones"
+  },
+  "sopor": {
+   "title": "Empty the fridge and take out the rubbish"
+  }
+ }
+}

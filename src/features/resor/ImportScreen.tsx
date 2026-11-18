@@ -8,13 +8,14 @@ import { useSession } from '../../lib/session';
 import { setPlaceStatus, useMyPlaces } from '../../lib/status';
 import { todayIso } from '../../lib/tripLogic';
 import { createTrip, fetchHome, type Home } from '../../lib/trips';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { DestSelect } from './DestSelect';
 import { emptyLeg, LegFields, toLeg, useNamedPoints, type LegDraft } from './LegFields';
 import { BackTo, saveError, usePeople } from './shared';
 
 export default function ImportScreen() {
   const t = useT();
+  const lang = useLang();
   const nav = useNavigate();
   const { toast } = useFeedback();
   const { activeGroup } = useSession();
@@ -35,7 +36,7 @@ export default function ImportScreen() {
     fetchPlaces()
       .then(setPlaces)
       .catch(() => undefined);
-  }, []);
+  }, [lang]);
   useEffect(() => {
     if (people.me) fetchHome(people.me).then(setHome).catch(() => undefined);
   }, [people.me]);

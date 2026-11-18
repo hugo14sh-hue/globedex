@@ -6,6 +6,8 @@
 // Kontrollerar också content/_packlista.json, content/_innan-avresa.json, content/_valutor.json och
 // content/_landlistor.json, som appen läser in vid bygget.
 // Körs lokalt av Hugo: npm run import (skriver) eller npm run import:check (bara validering).
+// content/en/ (Körning 20): de engelska texterna valideras mot svenskan och skrivs till kolumnen en i de sju
+// tabellerna (scripts/lib/en.mjs). Saknas engelska för en rad blir en null.
 // Nyckeln SUPABASE_SECRET_KEY läses ur .env.local och skrivs aldrig ut.
 // Bildfälten i place_items (image_url, image_credit, image_license, image_page) skrivs aldrig här,
 // bara av npm run import:images (toDbRow tar bort dem).
@@ -20,6 +22,7 @@ import { applyPatches, discoverRows, validateDiscover } from './lib/upptack.mjs'
 import { sortPlaces } from './lib/validate-content.mjs';
 import { splitRows } from './lib/delade.mjs';
 import { SPLIT_GEO } from '../src/lib/deladeGeo.ts';
+import { englishRows, formatSummary, readEnglishDir, validateEnglish, withEnglish } from './lib/en.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
@@ -51,8 +54,10 @@ async function main() {
 
   // Upptäck: lätta platser, klimat och taggar och alternativ. Saknas filen hoppas den över.
   let discover = null;
+  let discoverJson;
   if ((await readdir(contentDir)).includes('_upptack.json')) {
     const json = await readJson('_upptack.json');
+    discoverJson = json;
     const contentPlaces = parsed.flatMap(({ json: j }) => (Array.isArray(j?.places) ? j.places : [])).filter((p) => p && typeof p.id === 'string');
     const before = errors.length;
     errors.push(...validateDiscover(json, COUNTRIES.map(([iso]) => iso), contentPlaces));
@@ -64,9 +69,11 @@ async function main() {
 
   // Filerna som appen läser in vid bygget. De importeras inte, men kontrolleras här. Saknas en fil hoppas den över.
   const appLists = [];
+  const appJson = {};
   for (const [name, validate] of [['_packlista.json', validatePackList], ['_innan-avresa.json', validatePretripList]]) {
     if (!(await readdir(contentDir)).includes(name)) continue;
     const json = await readJson(name);
+    appJson[name] = json;
     errors.push(...validate(name, json));
     appLists.push([name, Array.isArray(json?.items) ? json.items.length : 0]);
   }
@@ -94,6 +101,21 @@ async function main() {
       rows.places = sortPlaces([...rows.places, ...split]);
     }
   }
+  // content/en/: engelska texter mot svenskan. Saknade översättningar är inte fel, de räknas i en sammanställning.
+  let english = { summary: [] };
+  let en = {};
+  try {
+    en = readEnglishDir(contentDir);
+  } catch (e) {
+    errors.push({ file: 'en', id: '-', field: '-', message: e.message });
+  }
+  {
+    const sv = { '_bucket.json': bucket.json, ...appJson };
+    if (discoverJson !== undefined) sv['_upptack.json'] = discoverJson;
+    for (const { name, json } of parsed) sv[name] = json;
+    english = validateEnglish(en, sv);
+    errors.push(...english.errors);
+  }
   // Gränssnittets texter på svenska och engelska: samma nycklar, form, platshållare och märken.
   const textErrors = compareTexts(textsSv, textsEn);
   if (errors.length || textErrors.length) {
@@ -113,6 +135,12 @@ async function main() {
   if (split.length) console.log(`  _landlistor.json, delade: ${split.length} länder (${split.map((p) => p.id).join(', ')})`);
   for (const [name, n] of appLists) console.log(`  ${name}: ${n} (läses in i appen vid bygget)`);
   console.log('  _texter.json och _texter.en.json: samma nycklar, form, platshållare och märken');
+  // Kolumnen en: engelskan per rad, eller null.
+  const enRows = englishRows(en, rows.places);
+  for (const part of [...ORDER, 'bucket']) rows[part] = withEnglish(rows[part], enRows[part]);
+  console.log(`Engelska texter (content/en/, ${english.summary.length} filer):`);
+  for (const s of english.summary) console.log(`  ${formatSummary(s)}`);
+  console.log(`  rader med engelska: ${[...ORDER, 'bucket'].map((p) => `${p === 'bucket' ? 'bucket_catalog' : TABLES[p]} ${rows[p].filter((r) => r.en).length}`).join(', ')}`);
   if (checkOnly) return 0;
 
   const { db, error: envError } = await secretClient(root);

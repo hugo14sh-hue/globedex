@@ -22,12 +22,13 @@ import {
 } from '../../lib/reviews';
 import { useSession, useTravelMode } from '../../lib/session';
 import { useMyPlaces } from '../../lib/status';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { PlaceSelect } from '../listor/PlaceSelect';
 import { useUrlState } from '../../lib/navMemory';
 
 export default function GuideScreen() {
   const t = useT();
+  const lang = useLang();
   const { session, activeGroup } = useSession();
   const mode = useTravelMode();
   const me = session?.user.id ?? '';
@@ -50,7 +51,7 @@ export default function GuideScreen() {
     return () => {
       alive = false;
     };
-  }, [gid, me]);
+  }, [gid, me, lang]);
 
   const name = (id: string) => placeName(places, id);
   const shown = useMemo(() => searchReviews(rows ?? [], q, (id) => placeName(places, id)), [rows, q, places]);

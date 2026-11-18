@@ -35,7 +35,7 @@ import { CollectionMotifs } from '../listor/Samlingar';
 import { AddGift, useTripsTo } from '../resor/InkopScreen';
 import { useFindFeedback } from '../listor/useFindFeedback';
 import { setItemCheck, STATUS_KEY, useMyPlaces } from '../../lib/status';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { useVault } from '../../lib/vault';
 import { ageOn, birthDate, rulesForAge } from '../../lib/vaultLogic';
 import { todayIso } from '../../lib/tripLogic';
@@ -100,6 +100,7 @@ export default function PlaceScreen() {
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
   const { theme } = useTheme();
+  const lang = useLang();
   const { party, toast } = useFeedback();
   const announceFind = useFindFeedback();
   const [places, setPlaces] = useState<Place[] | null>(null);
@@ -118,7 +119,7 @@ export default function PlaceScreen() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   const place = places?.find((p) => p.id === id) ?? null;
   const subIds = useMemo(() => (places && place ? [place.id, ...descendants(places, place.id).map((p) => p.id)] : []), [places, place]);

@@ -26,7 +26,7 @@ import {
   type Leg,
   type Trip,
 } from '../../lib/trips';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { emptyLeg, LegFields, toLeg, useNamedPoints, type LegDraft } from './LegFields';
 import { BackTo, formatOre, formatRange, saveError, TripGate, tripPlace, usePeople, useTrip } from './shared';
 import { currencySymbol } from '../karta/format';
@@ -56,6 +56,7 @@ const toDraft = (l: Leg): LegDraft => ({
 
 function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const t = useT();
+  const lang = useLang();
   const nav = useNavigate();
   const { toast } = useFeedback();
   const people = usePeople(trip.group_id);
@@ -92,7 +93,7 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
     return () => {
       alive = false;
     };
-  }, [trip.id]);
+  }, [trip.id, lang]);
 
   useEffect(() => {
     if (people.me) fetchHome(people.me).then(setHome).catch(() => undefined);

@@ -1,10 +1,10 @@
 // Hämtar allt som siffror, märken, Wrapped, tidslinjen och exporten räknas från.
 // Varje del hämtas för sig: misslyckas en del räknas resten ändå (den delen blir tom).
 import { useCallback, useEffect, useState } from 'react';
-import { fetchAllItems, fetchCompendium, fetchPlaces, type CompendiumItem, type Place } from '../../lib/content';
+import { fetchAllItems, fetchBucketCatalog, fetchCompendium, fetchPlaces, type CompendiumItem, type Place } from '../../lib/content';
 import { fetchSavedIdeas } from '../../lib/idag';
 import type { ExpenseLike } from '../../lib/kassa';
-import type { BucketItem } from '../../lib/listLogic';
+import { bucketTitle, type BucketItem } from '../../lib/listLogic';
 import { fetchBucketItems, fetchCollections, type Collection } from '../../lib/listor';
 import { fetchReviews, type Review } from '../../lib/reviews';
 import { useSession, useTravelMode } from '../../lib/session';
@@ -15,6 +15,7 @@ import { fetchExpenseRows, fetchLegCounts, fetchPackingStats, fetchTrips, type T
 import { todayIso } from '../../lib/tripLogic';
 import { CHECK_KIND } from '../../lib/vaultCrypto';
 import { useTheme } from '../../theme/ThemeProvider';
+import { useLang } from '../../lib/useT';
 import { emptyInput, type ViInput } from './marken';
 
 export interface ViData {
@@ -56,6 +57,7 @@ export function useViData() {
   const { session, activeGroup, members } = useSession();
   const mode = useTravelMode();
   const { theme } = useTheme();
+  const lang = useLang();
   const me = session?.user.id ?? '';
   const gid = activeGroup?.id ?? '';
   const memberKey = (mode === 'solo' ? [me] : members.map((m) => m.user_id)).filter(Boolean).sort().join(',');
@@ -106,6 +108,8 @@ export function useViData() {
         fetchExpenseRows(ids),
         fetchPackingStats(ids),
       ]);
+      // Katalogens namn på valt språk för punkter ur katalogen (tidslinjen, Wrapped och exporten).
+      const catalog = await fetchBucketCatalog().catch(() => []);
       if (!alive) return;
 
       const places = ok(placesR, [] as Place[]);
@@ -116,7 +120,8 @@ export function useViData() {
       for (const e of ok(expR, [])) (expensesByTrip[e.trip_id] ??= []).push(e);
       const collections = ok(colsR, [] as Collection[]);
       const reviews = ok(reviewsR, [] as Review[]);
-      const bucket = ok(bucketR, [] as BucketItem[]);
+      const catalogById = new Map(catalog.map((c) => [c.id, c]));
+      const bucket = ok(bucketR, [] as BucketItem[]).map((b) => ({ ...b, title: bucketTitle(b, catalogById) }));
 
       const input: ViInput = {
         ...emptyInput(mode, today),
@@ -149,7 +154,7 @@ export function useViData() {
     return () => {
       alive = false;
     };
-  }, [me, gid, mode, memberKey, customPalette, countryList, splitCountries, n]);
+  }, [me, gid, mode, memberKey, customPalette, countryList, splitCountries, n, lang]);
 
   return { data, reload };
 }

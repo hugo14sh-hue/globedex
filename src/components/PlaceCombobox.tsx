@@ -13,6 +13,8 @@ export interface PlaceOption {
   country: boolean;
   /** Landets namn, visas efter en stad eller region. */
   countryName?: string;
+  /** Alla namn som sökningen matchar (platsens namn på svenska och engelska). Saknas: bara name. */
+  names?: string[];
 }
 
 /** Hur många förslag som visas per grupp innan man har skrivit något. */
@@ -43,7 +45,7 @@ export function PlaceCombobox({
   const text = query ?? selected?.name ?? '';
   const q = query ?? '';
   const groups = useMemo(() => {
-    const hits = search(options, q, (o) => o.name);
+    const hits = search(options, q, (o) => o.names ?? o.name);
     const limit = q.trim() ? Infinity : MAX_EMPTY;
     return [
       { key: 'resa.vart.lander', list: hits.filter((o) => o.country).slice(0, limit) },

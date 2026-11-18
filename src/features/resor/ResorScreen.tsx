@@ -13,12 +13,13 @@ import { useSession } from '../../lib/session';
 import { companyGroups, filterTrips, isSoloTrip, showTripFilter, type TripFilter } from '../../lib/togetherLogic';
 import { countdown, sortTrips, todayIso, tripPhase } from '../../lib/tripLogic';
 import { fetchTripsIn, type Trip } from '../../lib/trips';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import type { Group } from '../../lib/types';
 import { formatRange, tripPlace } from './shared';
 
 export default function ResorScreen() {
   const t = useT();
+  const lang = useLang();
   const { activeGroup, groups } = useSession();
   const [trips, setTrips] = useState<Trip[] | null>(null);
   const [failed, setFailed] = useState(false);
@@ -45,7 +46,7 @@ export default function ResorScreen() {
     return () => {
       alive = false;
     };
-  }, [groupKey]);
+  }, [groupKey, lang]);
 
   const today = todayIso();
   const showFilter = showTripFilter(trips ?? [], groups);

@@ -13,7 +13,7 @@ import { countByCategory, MANY, percent } from '../../lib/listLogic';
 import { useSession, useTravelMode } from '../../lib/session';
 import { addFind, addFinds, removeFind, useMemberFinds, useMyPlaces, type Find } from '../../lib/status';
 import { todayIso } from '../../lib/tripLogic';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { RARITY_COLORS } from '../../theme/palettes';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
@@ -28,6 +28,7 @@ const catKey = (c: string) => `samling.kategori.${c}`;
 
 export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokView, extra?: Record<string, string>) => void }) {
   const t = useT();
+  const lang = useLang();
   const { session, members } = useSession();
   const travelMode = useTravelMode();
   const me = session?.user.id ?? null;
@@ -68,7 +69,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   // Egna fynd: det som går att lägga till och ta bort.
   const finds = mine.finds;

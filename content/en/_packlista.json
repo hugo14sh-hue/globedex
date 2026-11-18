@@ -1,0 +1,125 @@
+{
+ "groups": {
+  "Dokument": "Documents",
+  "Teknik": "Tech",
+  "Kläder": "Clothes",
+  "Hygien": "Toiletries",
+  "Övrigt": "Other"
+ },
+ "items": {
+  "pass": {
+   "title": "Passport or national ID card"
+  },
+  "biljetter": {
+   "title": "Tickets and bookings, saved offline"
+  },
+  "forsakring": {
+   "title": "Insurance details and emergency number"
+  },
+  "betalkort": {
+   "title": "Payment card and a backup card"
+  },
+  "korkort": {
+   "title": "Driving licence"
+  },
+  "laddare": {
+   "title": "Phone charger"
+  },
+  "powerbank": {
+   "title": "Power bank"
+  },
+  "horlurar": {
+   "title": "Headphones"
+  },
+  "adapter": {
+   "title": "Travel adapter"
+  },
+  "kamera": {
+   "title": "Camera and memory card"
+  },
+  "underklader": {
+   "title": "Underwear and socks"
+  },
+  "sovklader": {
+   "title": "Sleepwear"
+  },
+  "bekvama-skor": {
+   "title": "Comfortable walking shoes"
+  },
+  "extra-ombyte": {
+   "title": "A change of clothes in your hand luggage"
+  },
+  "regnjacka": {
+   "title": "Rain jacket"
+  },
+  "varm-troja": {
+   "title": "Warm jumper"
+  },
+  "mossa-vantar": {
+   "title": "Hat and gloves"
+  },
+  "vinterjacka": {
+   "title": "Winter jacket"
+  },
+  "badklader": {
+   "title": "Swimwear"
+  },
+  "solglasogon": {
+   "title": "Sunglasses"
+  },
+  "keps": {
+   "title": "Cap or sun hat"
+  },
+  "sandaler": {
+   "title": "Sandals"
+  },
+  "finare-ombyte": {
+   "title": "A smarter outfit"
+  },
+  "tandborste": {
+   "title": "Toothbrush and toothpaste"
+  },
+  "deodorant": {
+   "title": "Deodorant"
+  },
+  "schampo": {
+   "title": "Travel-size shampoo and soap"
+  },
+  "solkram": {
+   "title": "Sunscreen"
+  },
+  "vatskepase": {
+   "title": "Clear bag for liquids in hand luggage"
+  },
+  "rakhyvel": {
+   "title": "Razor"
+  },
+  "vattenflaska": {
+   "title": "Water bottle"
+  },
+  "dagryggsack": {
+   "title": "Small daypack"
+  },
+  "tygpase": {
+   "title": "Cloth bag for laundry"
+  },
+  "tvattmedel": {
+   "title": "Travel-size detergent"
+  },
+  "bok": {
+   "title": "Book or e-reader"
+  },
+  "snacks": {
+   "title": "Something to eat on the way"
+  },
+  "oronproppar": {
+   "title": "Earplugs and sleep mask"
+  },
+  "paraply": {
+   "title": "Small umbrella"
+  },
+  "plats-muggen": {
+   "title": "Room in the bag for what you buy to take home"
+  }
+ }
+}

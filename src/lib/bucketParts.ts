@@ -30,7 +30,10 @@ export interface Part {
 }
 
 export interface PartRow {
+  /** Det som visas. */
   title: string;
+  /** Det som sparas i parts när raden bockas av: katalogens svenska titel, så att bocken gäller på båda språken. */
+  key: string;
   done: boolean;
   /** Bockas av automatiskt från kartan och går inte att bocka av för hand. */
   auto: boolean;
@@ -122,14 +125,18 @@ export function visitedCount(
   return Object.keys(metric === 'countries_visited' ? visitedCountries(x) : visitedContinents(x)).length;
 }
 
-const manual = (title: string, parts: Part[]): PartRow => ({
+const manual = (key: string, parts: Part[], title = key): PartRow => ({
   title,
-  done: parts.some((p) => p.title === title && p.done),
+  key,
+  done: parts.some((p) => p.title === key && p.done),
   auto: false,
 });
 
-/** Delmålen för en punkt, eller null om den inte har några. */
-export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx: PartsContext): PartsView | null {
+/**
+ * Delmålen för en punkt, eller null om den inte har några. checklist är katalogens svenska checklist (titlarna
+ * i delar är nycklarna i parts). labels är titlarna i delar på valt språk, i samma ordning (Körning 20).
+ */
+export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx: PartsContext, labels: string[] = []): PartsView | null {
   const parts = parseParts(partsRaw);
   const rows = (list: PartRow[], own = false): PartsView => ({
     kind: 'rader',
@@ -140,6 +147,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
   });
   const auto = (id: string): PartRow => ({
     title: ctx.name(id),
+    key: id,
     done: VISITED.includes(ctx.statuses[id]),
     auto: true,
     placeId: id,
@@ -148,7 +156,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
   if (!checklist)
     return parts.length
       ? rows(
-          parts.map((p) => ({ title: p.title, done: p.done, auto: false })),
+          parts.map((p) => ({ title: p.title, key: p.title, done: p.done, auto: false })),
           true,
         )
       : null;
@@ -162,7 +170,7 @@ export function bucketParts(checklist: Checklist | null, partsRaw: unknown, ctx:
       total: checklist.target,
     };
   }
-  if (checklist.type === 'delar') return rows(checklist.items.map((title) => manual(title, parts)));
+  if (checklist.type === 'delar') return rows(checklist.items.map((title, i) => manual(title, parts, labels[i]?.trim() ? labels[i] : title)));
   if ('place_ids' in checklist) return rows(checklist.place_ids.map(auto));
   if ('parent_id' in checklist) {
     const { parent_id, layer } = checklist;

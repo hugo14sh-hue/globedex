@@ -50,7 +50,7 @@ import { useSession } from '../../lib/session';
 import { todayIso } from '../../lib/tripLogic';
 import { countryIdFor, setPlaceStatus, shouldMarkPlanned, useMyPlaces } from '../../lib/status';
 import { createTrip } from '../../lib/trips';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { saveError } from '../resor/shared';
 import { IdeaBudget } from './IdeaBudget';
@@ -90,6 +90,7 @@ type Open = { type: 'idea'; idea: Idea } | { type: 'place'; place: Place; item: 
 
 export default function IdagScreen() {
   const t = useT();
+  const lang = useLang();
   const nav = useNavigate();
   const { toast, party } = useFeedback();
   const { session, activeGroup } = useSession();
@@ -125,7 +126,7 @@ export default function IdagScreen() {
         setIdeas(i);
       })
       .catch(() => setFailed(true));
-  }, []);
+  }, [lang]);
   useEffect(load, [load]);
 
   useEffect(() => {

@@ -191,8 +191,10 @@ describe('validering av innehåll', () => {
 
   it('importen skriver wiki men aldrig bildfälten', () => {
     const row = toDbRow('items', { id: 'XX-a', wiki: 'en:A', image_url: 'https://x', image_credit: 'c', image_license: 'CC0', image_page: 'https://y' });
-    expect(row).toEqual({ id: 'XX-a', wiki: 'en:A' });
-    expect(toDbRow('items', { id: 'XX-a' })).toEqual({ id: 'XX-a', wiki: null });
+    // Kolumnen en (Körning 20) skrivs alltid: engelskan för raden, eller null.
+    expect(row).toEqual({ id: 'XX-a', wiki: 'en:A', en: null });
+    expect(toDbRow('items', { id: 'XX-a' })).toEqual({ id: 'XX-a', wiki: null, en: null });
+    expect(toDbRow('items', { id: 'XX-a', en: { name: 'A' } }).en).toEqual({ name: 'A' });
     // Bildfälten finns inte i innehållsfilerna: de stoppas av valideringen.
     const j = base();
     j.items[0].image_url = 'https://upload.wikimedia.org/a.jpg';

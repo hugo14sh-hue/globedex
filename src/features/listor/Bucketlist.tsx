@@ -15,14 +15,15 @@ import {
   type CostLevel,
   type Place,
 } from '../../lib/content';
-import { bucketPlaces, filterCatalog, onList, percent, sortBucket, type BucketItem } from '../../lib/listLogic';
+import { bucketPlaces, bucketTitle, filterCatalog, onList, percent, sortBucket, type BucketItem } from '../../lib/listLogic';
+import { swedish } from '../../lib/innehallSprak';
 import { addBucketItem, deleteBucketItem, fetchBucketItems, setBucketDone, setBucketParts } from '../../lib/listor';
 import { addedPart, allPartsDone, bucketParts, parseChecklist, toggledParts, type PartsView } from '../../lib/bucketParts';
 import { useUrlParam } from '../../lib/navMemory';
 import { BucketParts } from './BucketParts';
 import { useSession } from '../../lib/session';
 import { useMyPlaces } from '../../lib/status';
-import { useT } from '../../lib/useT';
+import { useT, useLang } from '../../lib/useT';
 import { formatDate } from '../karta/format';
 import { PlaceSelect } from './PlaceSelect';
 import { LOCALE } from '../../lib/locale';
@@ -67,6 +68,7 @@ export function useBucket() {
 export function Bucketlist() {
   const t = useT();
   const { theme } = useTheme();
+  const lang = useLang();
   const { toast, party } = useFeedback();
   const { session } = useSession();
   const mine = useMyPlaces(session?.user.id ?? null);
@@ -95,7 +97,7 @@ export function Bucketlist() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   const byId = useMemo(() => new Map(catalog.map((c) => [c.id, c])), [catalog]);
   const list = useMemo(() => sortBucket(items ?? []), [items]);
@@ -112,10 +114,17 @@ export function Bucketlist() {
     () => ({ places, statuses: mine.statuses, name: (id: string) => placeName(places, id), countryList: theme.countryList, splitCountries: theme.splitCountries }),
     [places, mine.statuses, theme.countryList, theme.splitCountries],
   );
+  // Delmålen bockas av med katalogens svenska titlar som nyckel och visas på valt språk (Körning 20).
   const partsOf = useCallback(
-    (b: BucketItem): PartsView | null => bucketParts(parseChecklist(b.catalog_id ? byId.get(b.catalog_id)?.checklist : null), b.parts, partsCtx),
+    (b: BucketItem): PartsView | null => {
+      const c = b.catalog_id ? byId.get(b.catalog_id) : undefined;
+      const shown = parseChecklist(c?.checklist);
+      return bucketParts(parseChecklist(c ? swedish(c, 'checklist') : null), b.parts, partsCtx, shown?.type === 'delar' ? shown.items : []);
+    },
     [byId, partsCtx],
   );
+  // Punktens namn: katalogens namn på valt språk, annars den sparade titeln.
+  const title = (b: BucketItem) => bucketTitle(b, byId);
 
   const saveParts = async (b: BucketItem, next: ReturnType<typeof toggledParts>) => {
     setPartsBusy(true);
@@ -143,7 +152,7 @@ export function Bucketlist() {
     if (!checking) return;
     try {
       await setBucketDone(checking.item.id, checking.date, checking.place || null);
-      party(t('bucket.klar', { namn: checking.item.title }));
+      party(t('bucket.klar', { namn: title(checking.item) }));
       setChecking(null);
       await reload();
     } catch {
@@ -248,13 +257,13 @@ export function Bucketlist() {
               type="button"
               className={`box${on ? ' on' : ''}`}
               aria-pressed={on}
-              aria-label={b.title}
+              aria-label={title(b)}
               onClick={() => (on ? undo(b) : startCheck(b))}
             >
               {on && <Icon name="check" size={16} stroke={3} />}
             </button>
             <button type="button" className="t" onClick={() => setOpen(b)}>
-              <b className={on ? 'done' : ''}>{b.title}</b>
+              <b className={on ? 'done' : ''}>{title(b)}</b>
               {sub && <span className="mu">{sub}</span>}
             </button>
             <span className="chev">
@@ -267,7 +276,7 @@ export function Bucketlist() {
       )}
 
       {/* Detaljvy för en punkt */}
-      <BottomSheet open={Boolean(open)} title={open?.title ?? ''} onClose={() => setOpen(null)}>
+      <BottomSheet open={Boolean(open)} title={open ? title(open) : ''} onClose={() => setOpen(null)}>
         {open && (
           <>
             <div className="chips">
@@ -324,7 +333,7 @@ export function Bucketlist() {
       </BottomSheet>
 
       {/* Avbockning med datum och valfri plats */}
-      <BottomSheet open={Boolean(checking)} title={checking?.item.title ?? ''} onClose={() => setChecking(null)}>
+      <BottomSheet open={Boolean(checking)} title={checking ? title(checking.item) : ''} onClose={() => setChecking(null)}>
         {checking && (
           <>
             <label>
@@ -351,10 +360,10 @@ export function Bucketlist() {
       </BottomSheet>
 
       {/* Ta bort */}
-      <BottomSheet open={Boolean(remove)} title={remove?.title ?? ''} onClose={() => setRemove(null)}>
+      <BottomSheet open={Boolean(remove)} title={remove ? title(remove) : ''} onClose={() => setRemove(null)}>
         {remove && (
           <>
-            <p>{t('allmant.ta-bort-fraga', { namn: remove.title })}</p>
+            <p>{t('allmant.ta-bort-fraga', { namn: title(remove) })}</p>
             <button type="button" className="btn" onClick={drop}>
               {t('knapp.ta-bort')}
             </button>
