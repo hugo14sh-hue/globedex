@@ -183,7 +183,10 @@ export default function PlaceScreen() {
   };
 
   return (
-    <main className="scr">
+    <main className="scr wide place-page">
+      {/* Från 1200 px (Körning 17): det som beskriver platsen till vänster (pl-a och pl-b), det man gör till höger
+          (pl-do). Ordningen i koden är densamma som på mobil. */}
+      <div className="pl-a">
       <BackToMap />
       <div className="hero">
         <div className="row">
@@ -208,12 +211,16 @@ export default function PlaceScreen() {
           )}
         </div>
       </div>
+      </div>
 
+      <div className="pl-do">
       <StatusPicker placeId={id} name={name} current={status} total={total} label={name} />
 
       {/* Landskap och delstater: räknare och lista att bocka av. Visas på översikten. */}
       {view === 'oversikt' && knownCountry && <RegionSection countryId={id} countryName={name} places={places} statuses={mine.statuses} />}
+      </div>
 
+      <div className="pl-b">
       {lightCity ? (
         <LightPlace place={place!} places={places} />
       ) : empty ? (
@@ -247,6 +254,7 @@ export default function PlaceScreen() {
           {view === 'kop' && <CollectionMotifs placeId={id} gifts={loaded.gifts} />}
         </>
       )}
+      </div>
 
       <BottomSheet open={Boolean(openItem)} title={openItem?.name ?? ''} onClose={() => setOpenItem(null)}>
         {openItem && (
@@ -331,7 +339,7 @@ function Oversikt({
       {must.length > 0 && (
         <section className="col">
           <h2 className="eb">{t('land.missa-inte')}</h2>
-          <div className="hs">
+          <div className="hs must">
             {must.map((i) => (
               <button key={i.id} type="button" className={`card${checks.has(i.id) ? ' soft' : ''}`} onClick={() => onItem(i)}>
                 <span className="num">{i.must_rank}</span>

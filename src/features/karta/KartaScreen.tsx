@@ -288,7 +288,7 @@ export default function KartaScreen() {
 
   // Listan Platser: per världsdel, länderna i bokstavsordning och städerna under sitt land.
   const groupsList = useMemo(
-    () => groupPlaces(keys, hidden, (id) => placeName(places, id), (c) => continentLabel(c, t), LOCALE),
+    () => groupPlaces(keys, hidden, (id) => placeName(places, id), (c) => continentLabel(c, t), LOCALE, (id) => places.find((x) => x.id === id)?.kind),
     [keys, hidden, places, t],
   );
   const total = Object.keys(mine.statuses).length;

@@ -27,7 +27,7 @@ export default function ListorScreen() {
     setParams({ vy, ...(d ? { del: d } : {}), ...extra }, { replace: true });
 
   return (
-    <main className="scr">
+    <main className="scr wide">
       <h1>{t('flik.listor')}</h1>
       <Ingress k="ingress.listor" />
       <Segment<View>

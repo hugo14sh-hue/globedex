@@ -9,7 +9,7 @@ import { Icon, isIcon } from '../../components/Icon';
 import { Row } from '../../components/Row';
 import { Segment } from '../../components/Segment';
 import { fetchCompendium, fetchPlaces, placeName, RARITIES, type CompendiumItem, type Place } from '../../lib/content';
-import { countByCategory, percent } from '../../lib/listLogic';
+import { countByCategory, MANY, percent } from '../../lib/listLogic';
 import { useSession, useTravelMode } from '../../lib/session';
 import { addFind, addFinds, removeFind, useMemberFinds, useMyPlaces, type Find } from '../../lib/status';
 import { todayIso } from '../../lib/tripLogic';
@@ -304,7 +304,7 @@ export function Samlingsbok({ view, onView }: { view: BokView; onView: (v: BokVi
                   </span>
                 </button>
                 {isOpen && (
-                  <ul id={listId} className="komp-list" role="list">
+                  <ul id={listId} className={`komp-list${list.length > MANY ? ' many' : ''}`} role="list">
                     {list.map((i) => {
                       const own = isMine(i.id);
                       const f = isFound(i.id);

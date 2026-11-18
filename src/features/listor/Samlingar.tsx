@@ -6,7 +6,7 @@ import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
 import { Row } from '../../components/Row';
 import { fetchPlaces, placeName, type GiftTip, type Place } from '../../lib/content';
-import { motifsFor, percent } from '../../lib/listLogic';
+import { MANY, motifsFor, percent } from '../../lib/listLogic';
 import { addCollection, deleteCollection, deleteEntry, fetchCollections, saveEntry, type Collection, type CollectionEntry } from '../../lib/listor';
 import { useSession } from '../../lib/session';
 import { useMyPlaces } from '../../lib/status';
@@ -125,8 +125,10 @@ export function Samlingar() {
         </div>
       )}
 
+      {list.length > 0 && (
+      <div className="dgrid">
       {list.map((c) => (
-        <section key={c.id} className="card" aria-label={c.name}>
+        <section key={c.id} className={`card${c.entries.length > MANY ? ' many' : ''}`} aria-label={c.name}>
           <div className="row">
             <h3>{c.name}</h3>
             <button type="button" className="chip" aria-label={`${t('knapp.ta-bort')}: ${c.name}`} onClick={() => setRemove(c)}>
@@ -141,6 +143,8 @@ export function Samlingar() {
               </div>
             </>
           )}
+          {c.entries.length > 0 && (
+          <div className="entries">
           {c.entries.map((e) => (
             <Row
               key={e.place_id}
@@ -150,6 +154,8 @@ export function Samlingar() {
               onClick={() => setEntry({ collection: c, e: { ...e }, isNew: false })}
             />
           ))}
+          </div>
+          )}
           <button
             type="button"
             className="btn ghost"
@@ -160,6 +166,8 @@ export function Samlingar() {
           </button>
         </section>
       ))}
+      </div>
+      )}
 
       <form className="card" onSubmit={create} noValidate>
         <label>

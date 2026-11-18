@@ -173,7 +173,9 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   const progress = (c: [number, number]) => (c[1] ? t('marke.framsteg', { antal: c[0], totalt: c[1] }) : undefined);
 
   return (
-    <main className="scr">
+    <main className="scr wide trip-page">
+      {/* Från 1200 px (Körning 17): översikten i en kolumn till vänster som följer med, resans delar till höger. */}
+      <div className="trip-side">
       <BackTo to="/resor" />
       <div className="hero">
         <span className="eb">{t(phase === 'avslutad' ? 'resor.avslutad' : phase === 'pagar' ? 'resor.pagar' : 'resor.kommande')}</span>
@@ -200,7 +202,9 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
           {t('resor.spela-upp')}
         </Link>
       )}
+      </div>
 
+      <div className="trip-main">
       <section className="col">
         <h2 className="eb">{t('resor.resplan')}</h2>
         {legs && !legs.length && (
@@ -267,6 +271,7 @@ function TripPage({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
         <button type="button" className="btn ghost" onClick={() => setAsking(true)}>
           {t('knapp.ta-bort')}
         </button>
+      </div>
       </div>
 
       <BottomSheet open={Boolean(editing)} title={editing?.id ? t('knapp.andra') : t('resor.etapp.ny')} onClose={() => setEditing(null)}>

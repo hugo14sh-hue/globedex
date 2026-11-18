@@ -1,6 +1,6 @@
 // Röktest: loggar in med testkontot i en 390 px bred mobilvy och går igenom appens viktigaste flöden.
 // Hoppas över om TEST_EMAIL och TEST_PASSWORD saknas i .env.local. Städar efter sig (e2e/cleanup.ts).
-import { readdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test, type Page } from '@playwright/test';
 import { restore, snapshot, type Snapshot } from './cleanup';
@@ -169,6 +169,8 @@ async function login(page: Page, button = tx('login.knapp-logga-in')) {
 }
 
 test('röktest', async ({ page }) => {
+  // Steget för större skärmar öppnar tretton sidor i fyra bredder (Körning 17): längre tid än standard.
+  test.setTimeout(480_000);
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
 
@@ -948,25 +950,55 @@ test('röktest', async ({ page }) => {
     await saved;
   });
 
-  await test.step('större skärmar: menyn står till vänster från 900 px och ingen sida rullar i sidled', async () => {
-    const paths = ['/karta', '/upptack', '/idag', '/listor', '/resor', '/vi', '/vi/anpassning', '/karta/SE'];
+  await test.step('större skärmar: menyn till vänster från 900 px, rutnäten från 1200 px och ingen sida rullar i sidled', async () => {
+    // Körning 17: också en landssida, en resa, en lista och Upptäck med ett filter valt.
+    await page.goto('/resor');
+    await expect(page.locator('nav.nav')).toBeVisible({ timeout: 20_000 });
+    await page.waitForTimeout(800);
+    const tripHref = await page
+      .locator('a[href^="/resor/"]')
+      .evaluateAll((as) => as.map((a) => a.getAttribute('href')!).find((h) => /^\/resor\/[0-9a-f-]{36}$/.test(h)));
+    const paths = [
+      '/karta',
+      '/upptack',
+      '/idag',
+      '/listor',
+      '/resor',
+      '/vi',
+      '/vi/anpassning',
+      '/karta/SE',
+      '/karta/NL',
+      ...(tripHref ? [tripHref] : []),
+      '/listor?vy=bucketlist',
+      '/listor?vy=samlingsbok&del=samlingar',
+      '/upptack?pris=4,5',
+    ];
+    // Skärmdumpar på 1440 och 768 px till en mapp som inte checkas in (se .gitignore).
+    const shots = join(process.cwd(), 'test-results', 'skarmdumpar-korning-17');
+    mkdirSync(shots, { recursive: true });
+    const shotName = (p: string, w: number) =>
+      `${w}-${p.replace(/^\//, '').replace(/[0-9a-f-]{36}/, 'resa').replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/, '') || 'start'}.png`;
     try {
       for (const width of [390, 768, 1024, 1440]) {
         await page.setViewportSize({ width, height: 900 });
-        for (const path of paths) {
-          await page.goto(path);
+        for (const p of paths) {
+          await page.goto(p);
           await expect(page.locator('nav.nav')).toBeVisible({ timeout: 20_000 });
+          await page.waitForLoadState('networkidle').catch(() => undefined);
           await page.waitForTimeout(600);
           const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-          expect(over, `${path} rullar i sidled vid ${width} px`).toBeLessThanOrEqual(0);
+          expect(over, `${p} rullar i sidled vid ${width} px`).toBeLessThanOrEqual(0);
           if (width === 1440) {
             const nav = (await page.locator('nav.nav').boundingBox())!;
-            expect(nav.x, `menyn vid ${path}`).toBe(0);
+            expect(nav.x, `menyn vid ${p}`).toBe(0);
             expect(nav.width).toBeLessThan(160);
             expect(nav.height).toBeGreaterThan(800);
           }
+          if (width === 1440 || width === 768) await page.screenshot({ path: join(shots, shotName(p, width)), fullPage: true });
         }
       }
+
+      await page.setViewportSize({ width: 1440, height: 900 });
       // Kartan fyller höjden till höger om menyn, och kolumnen till höger har listan.
       await page.goto('/karta');
       const map = (await page.locator('.k-map').boundingBox())!;
@@ -974,6 +1006,45 @@ test('röktest', async ({ page }) => {
       expect(map.x).toBeGreaterThanOrEqual(nav.width - 1);
       expect(map.height).toBeGreaterThan(880);
       await expect(page.locator('aside.k-side section.pl')).toBeVisible();
+      // Gruppens namn ligger längst ner i menyn.
+      await expect(page.locator('nav.nav a.nav-group')).toBeVisible();
+
+      // Upptäck: filtren i en kolumn till vänster och minst tre kort på en rad.
+      await page.goto('/upptack');
+      const cards = page.locator('.disc-list > li');
+      await expect(cards.nth(2)).toBeVisible({ timeout: 20_000 });
+      const filter = (await page.locator('.disc-filter').boundingBox())!;
+      const list = (await page.locator('.disc-list').boundingBox())!;
+      expect(filter.x + filter.width, 'filtren står till vänster om korten').toBeLessThanOrEqual(list.x);
+      await expect(page.locator('.disc-panel')).toBeVisible();
+      const tops = await cards.evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
+      expect(tops.filter((y) => y === tops[0]).length, 'kort på första raden i Upptäck').toBeGreaterThanOrEqual(3);
+
+      // Vi: fyra sifferrutor på en rad.
+      await page.goto('/vi');
+      const stats = page.locator('.vi-stats > .card');
+      await expect(stats.nth(3)).toBeVisible({ timeout: 20_000 });
+      const statTops = await stats.evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
+      expect(statTops.filter((y) => y === statTops[0]).length, 'sifferrutor på första raden i Vi').toBe(4);
+
+      // Landssidan: raden Missa inte klipps inte vid kanten.
+      await page.goto('/karta/SE');
+      const must = page.locator('.hs.must');
+      await expect(must).toBeVisible({ timeout: 20_000 });
+      expect(await must.evaluate((el) => el.scrollWidth - el.clientWidth), 'Missa inte rullar i sidled').toBeLessThanOrEqual(0);
+      const clipped = await must.evaluate((el) => {
+        const box = el.getBoundingClientRect();
+        return [...el.children].filter((c) => {
+          const r = c.getBoundingClientRect();
+          return r.left < box.left - 1 || r.right > box.right + 1;
+        }).length;
+      });
+      expect(clipped, 'kort i Missa inte utanför kanten').toBe(0);
+      // Två kolumner: statusvalet till höger om platsens översikt.
+      const a = (await page.locator('.pl-a').boundingBox())!;
+      const doCol = (await page.locator('.pl-do').boundingBox())!;
+      expect(doCol.x).toBeGreaterThanOrEqual(a.x + a.width);
+      console.log(`Skärmdumpar: ${shots}`);
     } finally {
       await page.setViewportSize({ width: 390, height: 844 });
     }

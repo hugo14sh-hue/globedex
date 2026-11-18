@@ -144,3 +144,6 @@ export function motifsFor(
     for (const [k, v] of Object.entries(g.collection_motifs ?? {})) if (norm(k) === n && v) out.push({ gift: g.name, text: v });
   return out;
 }
+
+/** En lista med fler punkter än så här visas i två kolumner från 1200 px (Körning 17). */
+export const MANY = 12;

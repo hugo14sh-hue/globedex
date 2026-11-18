@@ -375,7 +375,7 @@ export default function IdagScreen() {
   const openRow = open?.type === 'idea' ? savedFor(open.idea.id) : null;
 
   return (
-    <main className="scr">
+    <main className="scr wide">
       <h1>{t(when === 'helg' ? 'idag.rubrik.helg' : 'idag.rubrik.idag')}</h1>
         <Ingress k="ingress.idag" />
 
@@ -482,7 +482,8 @@ export default function IdagScreen() {
               )}
             </div>
           ) : (
-            near.map((n) =>
+            <div className="dgrid">
+            {near.map((n) =>
               n.type === 'idea' ? (
                 <button key={n.key} type="button" className="li" onClick={() => setOpen({ type: 'idea', idea: n.idea })}>
                   <span className="badge">
@@ -507,7 +508,8 @@ export default function IdagScreen() {
                   <span className="chip soft">{away(n)}</span>
                 </button>
               ),
-            )
+            )}
+            </div>
           )}
         </>
       )}
@@ -518,7 +520,8 @@ export default function IdagScreen() {
             <p>{t('idag.sparade.tom')}</p>
           </div>
         ) : (
-          saved.map((row) => {
+          <div className="dgrid">
+          {saved.map((row) => {
             const i = ideaById(row.idea_id);
             const title = i?.title ?? row.title ?? '';
             const done = Boolean(row.done_on);
@@ -546,7 +549,8 @@ export default function IdagScreen() {
                 </button>
               </div>
             );
-          })
+          })}
+          </div>
         ))}
 
       <LocationSheet

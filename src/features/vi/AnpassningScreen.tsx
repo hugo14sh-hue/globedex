@@ -48,10 +48,13 @@ export default function AnpassningScreen() {
   };
 
   return (
-    <main className="scr">
+    <main className="scr wide anp">
       <BackLink to="/vi" />
       <h1>{t('anpassa.rubrik')}</h1>
 
+      {/* Från 1200 px (Körning 17): valen till vänster, landlistan och kartans färger till höger. */}
+      <div className="anp-cols">
+      <div className="anp-col">
       <Segment<TravelMode>
         label={t('anpassa.reselage')}
         value={mode}
@@ -187,13 +190,17 @@ export default function AnpassningScreen() {
       />
       {/* Innehållet ur databasen finns bara på svenska ännu: sägs en gång här, inte på varje sida. */}
       {lang !== 'sv' && <p className="mu">{t('sprak.innehall-svenska')}</p>}
+      </div>
 
+      <div className="anp-col">
       {/* Vilka länder som räknas i statistik, mål och märken. Sparas lokalt och i profilen som språkvalet. */}
       <CountryListPicker />
 
       {/* Kartans färger och utseende (Körning 16). Sparas i profilen med temat. */}
       <MapColors />
       <MapStyleChoice />
+      </div>
+      </div>
 
       {/* Återställ gäller utseendet, också kartans färger och stil. Språkvalet, landlistan, kartans fokus och
           släckta statusar ligger kvar. */}

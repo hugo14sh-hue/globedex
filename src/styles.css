@@ -2519,8 +2519,26 @@ main.karta.fs {
 }
 
 /* ---------- Större skärmar (från 900 px) ---------- */
-.nav-brand {
+.nav-brand,
+.nav a.nav-group {
   display: none;
+}
+
+/* Omslag som bara gör något på större skärmar (Körning 17). Under brytpunkten är de genomskinliga för layouten,
+   så att mobilen ser ut precis som förut och ordningen i koden är densamma. */
+.dgrid,
+.entries,
+.disc-layout,
+.disc-main,
+.vi-forms,
+.trip-side,
+.trip-main,
+.pl-a,
+.pl-b,
+.pl-do,
+.anp-cols,
+.anp-col {
+  display: contents;
 }
 
 @media (min-width: 900px) {
@@ -2658,4 +2676,310 @@ main.karta.fs {
 /* Statusens prick på en tänd knapp: en ring i ytans färg, så att den syns också när den har primärfärgen. */
 .pl-show .dot {
   box-shadow: 0 0 0 2px var(--sf);
+}
+
+/* ---------- Större skärmar, del 2 (Körning 17) ----------
+   Samma två brytpunkter överallt: 900 px och 1200 px. Under 900 px gäller mobilens regler oförändrade. */
+@media (min-width: 900px) {
+  /* Ramen: 1200 px på sidorna med rutnät, 640 px för formulär och inställningar. Övriga sidor behåller 760 px. */
+  .scr.wide {
+    max-width: 1200px;
+  }
+
+  .scr.narrow,
+  .scr.wide.anp {
+    max-width: 640px;
+  }
+
+  /* Löpande text blir aldrig bredare än 70 tecken per rad: textblocken begränsas, inte sidan. */
+  .scr p,
+  .scr .ingress,
+  .sheet-in p {
+    max-width: 70ch;
+  }
+
+  /* Gruppens namn längst ner i menyn, på alla sidor. */
+  .nav a.nav-group {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    margin-top: auto;
+    min-height: 44px;
+    padding: 12px 6px;
+    border: 1px solid var(--ln);
+    color: var(--tx);
+    font-size: 0.733rem;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    flex: none;
+  }
+
+  /* Kort i rutnät: två kolumner från 900 px, tre från 1200 px. */
+  .dgrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .dgrid > .li {
+    height: 100%;
+  }
+
+  .dgrid > .card {
+    height: 100%;
+  }
+
+  /* Landssidan: raden Missa inte bryts till ett rutnät i stället för att klippas vid kanten. */
+  .hs.must {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hs.must .card {
+    width: auto;
+  }
+
+  /* Upptäck: filtren i en kolumn till vänster som följer med, korten i ett rutnät till höger. */
+  .disc-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .disc-filter {
+    position: sticky;
+    top: calc(16px + env(safe-area-inset-top));
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Plats för fokusringen inom kolumnen. */
+    padding: 4px;
+    margin: -4px;
+  }
+
+  .disc-filter .row {
+    min-height: 44px;
+  }
+
+  .disc-main {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .disc-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .disc-list > li > .card {
+    height: 100%;
+  }
+
+  /* Vi: sifferrutorna i fyra kolumner med en största bredd per ruta, märkena i fem. */
+  .vi-stats {
+    grid-template-columns: repeat(4, minmax(0, 220px));
+    gap: 10px;
+  }
+
+  .vi-marks {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  /* Wrapped centreras med samma bredd som på mobil (390 px minus kanterna). */
+  .vi-wrapped {
+    width: 100%;
+    max-width: 358px;
+    margin-inline: auto;
+  }
+
+  .vi-forms {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dgrid,
+  .disc-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .disc-layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  .vi-marks {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  /* Inne i en lista: två kolumner med punkter när listan har fler än tolv. En sådan lista tar hela raden. */
+  .dgrid > .card.many {
+    grid-column: 1 / -1;
+  }
+
+  .card.many .entries,
+  .komp-list.many {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  /* Landssidan: det som beskriver platsen till vänster, det man gör till höger. pl-do sträcker sig över båda
+     raderna, så att höger kolumn inte trycker isär den vänstra. */
+  .place-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
+    grid-template-rows: auto 1fr;
+    column-gap: 28px;
+    row-gap: 14px;
+    align-items: start;
+  }
+
+  .pl-a,
+  .pl-b,
+  .pl-do {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .pl-a {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .pl-b {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .pl-do {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  /* En resa: översikten i en fast kolumn till vänster som följer med, resans delar till höger. */
+  .trip-page {
+    display: grid;
+    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+    column-gap: 28px;
+    align-items: start;
+  }
+
+  .trip-side,
+  .trip-main {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .trip-side {
+    position: sticky;
+    top: calc(16px + env(safe-area-inset-top));
+  }
+
+  /* Anpassning: färgraderna och valen i två kolumner. */
+  .scr.wide.anp {
+    max-width: 1200px;
+  }
+
+  .anp-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: start;
+  }
+
+  .anp-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+}
+
+/* Hover på allt klickbart, bara där pekaren kan sväva och från 900 px. Fokusringen (:focus-visible) gäller överallt. */
+@media (min-width: 900px) and (hover: hover) {
+  button:not(:disabled),
+  select,
+  label.check,
+  label.switch,
+  input[type='checkbox'],
+  input[type='range'],
+  input[type='color'] {
+    cursor: pointer;
+  }
+
+  a.li:hover,
+  button.li:not(:disabled):hover,
+  .li:has(> .t:is(a, button):not(:disabled):hover),
+  a.card:hover,
+  button.card:not(:disabled):hover,
+  .disc-card:has(.disc-open:hover),
+  .bc:hover {
+    border-color: var(--p);
+    background-color: color-mix(in srgb, var(--p) 7%, var(--sf));
+  }
+
+  .chip:is(a, button):not(:disabled):not([aria-pressed='true']):hover {
+    border-color: var(--p);
+    background-color: var(--soft);
+  }
+
+  .chip:is(a, button)[aria-pressed='true']:not(:disabled):hover,
+  .btn:not(.ghost):not(:disabled):not([aria-disabled='true']):hover,
+  a.hero-link:hover,
+  button.hero:hover {
+    filter: brightness(1.08);
+  }
+
+  .btn.ghost:not(:disabled):hover {
+    border-color: var(--p);
+    background-color: var(--soft);
+  }
+
+  .seg button:not([aria-pressed='true']):not(:disabled):hover {
+    background: color-mix(in srgb, var(--sf) 55%, transparent);
+  }
+
+  .nav a:not([aria-current='page']):hover {
+    background: var(--soft);
+  }
+
+  .mini:not(:disabled):hover {
+    background: var(--soft);
+  }
+
+  .box:not(:disabled):hover::before {
+    border-color: var(--p);
+  }
+
+  .sw:not([aria-pressed='true']):hover {
+    border-color: var(--mu);
+  }
+
+  .back:hover,
+  .link-btn:hover,
+  .pl-cont-btn:hover,
+  a.src:hover {
+    text-decoration: underline;
+  }
 }

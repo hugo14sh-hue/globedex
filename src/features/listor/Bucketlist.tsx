@@ -230,6 +230,8 @@ export function Bucketlist() {
         </div>
       )}
 
+      {list.length > 0 && (
+      <div className="dgrid">
       {list.map((b) => {
         const on = Boolean(b.done_on);
         const pv = on ? null : partsOf(b);
@@ -261,6 +263,8 @@ export function Bucketlist() {
           </div>
         );
       })}
+      </div>
+      )}
 
       {/* Detaljvy för en punkt */}
       <BottomSheet open={Boolean(open)} title={open?.title ?? ''} onClose={() => setOpen(null)}>

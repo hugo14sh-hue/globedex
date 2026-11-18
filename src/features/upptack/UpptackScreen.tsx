@@ -34,6 +34,7 @@ import {
   type DiscoverFilter,
   type DiscoverSort,
 } from '../../lib/upptack';
+import { useMedia, WIDE } from '../../lib/useMedia';
 import { useT } from '../../lib/useT';
 import { monthNames, shortMonthNames } from '../karta/months';
 import { AltRows } from './Alternativ';
@@ -50,6 +51,8 @@ export default function UpptackScreen() {
   const [failed, setFailed] = useState(false);
   const [open, setOpen] = useState(false);
   const panelId = useId();
+  // Från 900 px står filtren alltid synliga i kolumnen till vänster.
+  const wide = useMedia(WIDE);
 
   useEffect(() => {
     let alive = true;
@@ -85,17 +88,25 @@ export default function UpptackScreen() {
   const countries = [...options.countries].sort((a, b) => placeName(places, a).localeCompare(placeName(places, b), LOCALE));
 
   return (
-    <main className="scr">
+    <main className="scr wide">
       <h1>{t('flik.upptack')}</h1>
       <Ingress k="ingress.upptack" />
 
-      <section className="col disc-filter">
+      {/* Från 900 px (Körning 17): filtren i en kolumn till vänster som följer med, korten i ett rutnät till höger. */}
+      <div className="disc-layout">
+      <section className="col disc-filter" aria-labelledby={wide ? `${panelId}-h` : undefined}>
         <div className="row">
-          <button type="button" className="chip" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((o) => !o)}>
-            <Icon name="filter" size={18} />
-            {t('upptack.filter.rubrik')}
-            {active > 0 && <span className="disc-cnt">{active}</span>}
-          </button>
+          {wide ? (
+            <h2 className="eb" id={`${panelId}-h`}>
+              {t('upptack.filter.rubrik')}
+            </h2>
+          ) : (
+            <button type="button" className="chip" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((o) => !o)}>
+              <Icon name="filter" size={18} />
+              {t('upptack.filter.rubrik')}
+              {active > 0 && <span className="disc-cnt">{active}</span>}
+            </button>
+          )}
           {active > 0 && (
             <button type="button" className="chip" onClick={() => update(NO_FILTER)}>
               {t('upptack.filter.rensa')}
@@ -103,7 +114,7 @@ export default function UpptackScreen() {
           )}
         </div>
 
-        <div id={panelId} className="col disc-panel" hidden={!open}>
+        <div id={panelId} className="col disc-panel" hidden={!open && !wide}>
           <ChipGroup legend={t('upptack.filter.pris')}>
             {[1, 2, 3, 4, 5].map((n) => (
               <button key={n} type="button" className="chip" aria-pressed={filter.prices.includes(n)} onClick={() => set({ prices: toggleIn(filter.prices, n) })}>
@@ -174,6 +185,7 @@ export default function UpptackScreen() {
         </div>
       </section>
 
+      <div className="disc-main">
       <Segment<DiscoverSort>
         label={t('upptack.sortera')}
         value={sort}
@@ -204,6 +216,8 @@ export default function UpptackScreen() {
           ))}
         </ul>
       )}
+      </div>
+      </div>
 
       <p className="mu fine">{t('upptack.kalla')}</p>
     </main>

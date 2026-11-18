@@ -63,7 +63,7 @@ export default function ResorScreen() {
   ];
 
   return (
-    <main className="scr">
+    <main className="scr wide">
       <h1>{t('flik.resor')}</h1>
       <Ingress k="ingress.resor" />
       <Link className="btn" to="/resor/planera">
@@ -106,17 +106,23 @@ export default function ResorScreen() {
       {rest.length > 0 && (
         <section className="col">
           <h2 className="eb">{t('resor.kommande')}</h2>
-          {rest.map((x) => (
-            <TripRow key={x.id} trip={x} places={places} groups={groups} mark={showFilter} />
-          ))}
+          <div className="dgrid">
+            {rest.map((x) => (
+              <TripRow key={x.id} trip={x} places={places} groups={groups} mark={showFilter} />
+            ))}
+          </div>
         </section>
       )}
 
       <section className="col">
         <h2 className="eb">{t('resor.tidigare')}</h2>
-        {past.map((x) => (
-          <TripRow key={x.id} trip={x} places={places} groups={groups} mark={showFilter} />
-        ))}
+        {past.length > 0 && (
+          <div className="dgrid">
+            {past.map((x) => (
+              <TripRow key={x.id} trip={x} places={places} groups={groups} mark={showFilter} />
+            ))}
+          </div>
+        )}
         <Link className="btn ghost" to="/resor/importera">
           <Icon name="download" size={20} />
           {t('resor.importera')}

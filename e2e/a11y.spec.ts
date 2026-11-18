@@ -1,4 +1,5 @@
-// Tillgänglighet: kör axe (WCAG 2.1 A och AA) på varje flik och undersida i 390 px mobilvy.
+// Tillgänglighet: kör axe (WCAG 2.1 A och AA) på varje flik och undersida i 390 px mobilvy, och från Körning 17
+// också på 1440 px (menyn till vänster och rutnäten).
 // Läser bara, skriver ingenting. Hoppas över utan testkonto.
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
@@ -41,7 +42,9 @@ async function scan(page: Page, path: string) {
   );
 }
 
-test('axe på alla flikar och undersidor', async ({ page }) => {
+for (const width of [390, 1440])
+test(`axe på alla flikar och undersidor (${width} px)`, async ({ page }) => {
+  if (width !== 390) await page.setViewportSize({ width, height: 900 });
   await login(page);
   await page.goto('/resor');
   const tripHref = await page

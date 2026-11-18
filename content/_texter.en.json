@@ -1020,7 +1020,9 @@
     "karta.lista.stader.en": "1 city",
     "karta.lista.tom": "No places with the selected statuses.",
     "karta.lista.falla-ut": "Show cities in {plats}",
-    "karta.lista.falla-in": "Hide cities in {plats}"
+    "karta.lista.falla-in": "Hide cities in {plats}",
+    "karta.lista.platser": "{antal} places",
+    "karta.lista.platser.en": "1 place"
   },
   "marken": [
     {

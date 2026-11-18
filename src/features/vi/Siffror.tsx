@@ -187,7 +187,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
           <p>{t(emptyKey)}</p>
         </div>
       )}
-      <div className="g2">
+      <div className="g2 vi-stats">
         {tiles.map((s) => (
           <button key={s.id} type="button" className="card stat" onClick={() => setStat(s.id)}>
             <span className="num">{s.value}</span>
@@ -197,7 +197,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
       </div>
 
       <h2 className="eb">{t('vi.del.marken')}</h2>
-      <div className="g3">
+      <div className="g3 vi-marks">
         {states.map((s) => (
           <button key={s.badge.id} type="button" className={`card mark${s.earned ? ' on' : ''}`} onClick={() => setBadge(s)}>
             <span className="badge" aria-hidden="true">

@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { Icon, type IconName } from './Icon';
 import { useT } from '../lib/useT';
 import { useSession, useTravelMode } from '../lib/session';
@@ -61,6 +61,12 @@ export function AppShell() {
             <span className="nav-label">{label}</span>
           </NavLink>
         ))}
+        {/* Gruppens namn längst ner i menyn från 900 px (Körning 17), där sidhuvudet på Karta inte visas. Döljs på mobil. */}
+        {activeGroup && (
+          <Link className="nav-group" to="/vi" aria-label={t('topp.till-gruppen', { namn: activeGroup.name })}>
+            {activeGroup.name}
+          </Link>
+        )}
       </nav>
     </div>
   );

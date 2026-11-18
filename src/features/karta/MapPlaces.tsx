@@ -6,7 +6,7 @@ import { Icon } from '../../components/Icon';
 import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
 import type { HideKey } from '../../config';
-import { countKey, type ListContinent, type ListCountry } from '../../lib/mapList';
+import { childrenKey, countKey, type ListContinent, type ListCountry } from '../../lib/mapList';
 import type { MapKey } from '../../lib/togetherLogic';
 import { useT } from '../../lib/useT';
 
@@ -70,8 +70,8 @@ export function MapPlaces({ groups, legend, colors, hidden, onToggle, label, lev
           <Row
             to={`/karta/${c.id}`}
             title={c.name}
-            sub={c.key ? label(c.key) : undefined}
-            lead={<Flag placeId={c.id} ring={c.key ? colors[c.key] : undefined} />}
+            sub={c.key ? label(c.key) : t('karta.status.ej-satt')}
+            lead={<Flag placeId={c.id} ring={c.key ? colors[c.key] : colors.ej} />}
           />
           {n > 0 && (
             <button
@@ -83,7 +83,7 @@ export function MapPlaces({ groups, legend, colors, hidden, onToggle, label, lev
             >
               {/* Namnet är karta.lista.falla-ut (eller falla-in) följt av den synliga texten (WCAG 2.5.3). */}
               <span className="sr-only">{t(expanded ? 'karta.lista.falla-in' : 'karta.lista.falla-ut', { plats: c.name })} </span>
-              <span>{t(countKey(n, 'karta.lista.stader.en', 'karta.lista.stader'), { antal: n })}</span>
+              <span>{t(childrenKey(c), { antal: n })}</span>
               <Icon name="down" size={16} />
             </button>
           )}

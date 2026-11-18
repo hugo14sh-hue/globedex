@@ -36,7 +36,7 @@ export function Wrapped({ data }: { data: ViData }) {
   };
 
   return (
-    <section className="col">
+    <section className="col vi-wrapped">
       <h2 className="h3">{t('wrapped.rubrik')}</h2>
       <label>
         {t('wrapped.valj-ar')}

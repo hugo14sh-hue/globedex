@@ -1024,7 +1024,9 @@
     "karta.lista.stader.en": "1 stad",
     "karta.lista.tom": "Inga platser med de valda statusarna.",
     "karta.lista.falla-ut": "Visa städer i {plats}",
-    "karta.lista.falla-in": "Dölj städer i {plats}"
+    "karta.lista.falla-in": "Dölj städer i {plats}",
+    "karta.lista.platser": "{antal} platser",
+    "karta.lista.platser.en": "1 plats"
   },
   "marken": [
     {

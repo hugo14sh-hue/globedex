@@ -49,7 +49,7 @@ export default function ViScreen() {
   }
 
   return (
-    <main className="scr">
+    <main className="scr wide">
       <h1>{t(LAST_TAB[mode])}</h1>
       <Ingress k={ingress} />
       <Segment<View>
@@ -63,6 +63,8 @@ export default function ViScreen() {
 
       {!data ? <Loading /> : view === 'siffror' ? <Siffror data={data} userId={session?.user.id ?? ''} /> : <Wrapped data={data} />}
 
+      {/* Formulär och inställningar: högst 640 px breda och centrerade från 900 px (Körning 17). */}
+      <div className="vi-forms">
       <div className="col">
         <Row to="/vi/valvet" icon="lock" title={t('vi.del.valvet')} sub={vault.state === 'oppen' ? undefined : t('valv.last')} />
         <Row to="/vi/guide" icon="star" title={t(mode === 'solo' ? 'vi.guide.jag' : 'vi.guide.vi')} />
@@ -99,6 +101,7 @@ export default function ViScreen() {
         <Icon name="out" size={20} />
         {t('knapp.logga-ut')}
       </button>
+      </div>
     </main>
   );
 }

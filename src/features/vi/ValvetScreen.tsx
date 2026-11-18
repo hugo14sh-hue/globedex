@@ -20,7 +20,7 @@ export default function ValvetScreen() {
   const t = useT();
   const vault = useVault();
   return (
-    <main className="scr">
+    <main className="scr narrow">
       <BackLink to="/vi" />
       <div className="row">
         <h1>{t('valv.rubrik')}</h1>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { countKey, groupPlaces } from './mapList';
+import { childrenKey, countKey, groupPlaces } from './mapList';
 import type { MapKey } from './togetherLogic';
 
 const NAMES: Record<string, string> = {
@@ -83,5 +83,21 @@ describe('listan Platser', () => {
     expect(countKey(1, 'en', 'flera')).toBe('en');
     expect(countKey(0, 'en', 'flera')).toBe('flera');
     expect(countKey(3, 'en', 'flera')).toBe('flera');
+  });
+
+  it('städer bara när allt under landet är städer, annars platser (Körning 17)', () => {
+    const KIND: Record<string, string> = { 'SE-stockholm': 'city', 'SE-goteborg': 'city', 'SE-vastergotland': 'region', 'NO-oslo': 'city' };
+    const run = (k: Record<string, MapKey>) =>
+      groupPlaces(k, [], (id) => NAMES[id] ?? id, (c) => CONT[c] ?? c, 'sv-SE', (id) => KIND[id]).find((x) => x.code === 'EU')!.countries;
+    const cities = run({ 'SE-stockholm': 'besokt', 'SE-goteborg': 'bor' })[0];
+    expect(cities.allCities).toBe(true);
+    expect(childrenKey(cities)).toBe('karta.lista.stader');
+    const mixed = run({ 'SE-stockholm': 'besokt', 'SE-vastergotland': 'vill' })[0];
+    expect(mixed.allCities).toBe(false);
+    expect(childrenKey(mixed)).toBe('karta.lista.platser');
+    expect(childrenKey(run({ 'SE-vastergotland': 'vill' })[0])).toBe('karta.lista.platser.en');
+    expect(childrenKey(run({ 'NO-oslo': 'vill' })[0])).toBe('karta.lista.stader.en');
+    // Okänd typ räknas inte som stad.
+    expect(childrenKey(run({ 'SE-okand': 'vill' })[0])).toBe('karta.lista.platser.en');
   });
 });
