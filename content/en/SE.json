@@ -1,0 +1,1144 @@
+{
+ "places": {
+  "SE": {
+   "name": "Sweden"
+  },
+  "SE-lappland": {
+   "name": "Lapland"
+  },
+  "SE-boras": {
+   "name": "Borås",
+   "data": {
+    "transport": [
+     {
+      "mode": "On foot",
+      "text": "The sculptures and murals stand outdoors in the city centre and can be seen around the clock."
+     }
+    ]
+   }
+  },
+  "SE-stockholm": {
+   "name": "Stockholm",
+   "data": {
+    "best_text": "June to August for the archipelago and bright evenings, December for the Christmas markets.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The Old Town, the Vasa Museum and a ferry across to Djurgården."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for Skansen, the metro art and half a day at Drottningholm."
+     },
+     {
+      "label": "One week",
+      "text": "Add the archipelago with an overnight stay and quieter days on Södermalm."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Södermalm",
+      "text": "The most restaurants and bars, views from the heights and the metro in every direction."
+     },
+     {
+      "name": "Norrmalm and City",
+      "text": "Closest to the Central Station and the airport train. Practical but impersonal."
+     },
+     {
+      "name": "Vasastan",
+      "text": "A quieter residential area with good food and walking distance to the city centre."
+     },
+     {
+      "name": "Gamla stan (the Old Town)",
+      "text": "Beautiful to walk in but expensive and cramped to stay in. Visit during the day."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "The Djurgården ferry",
+      "text": "Runs between Slussen and Djurgården via Skeppsholmen. SL cards are valid and single tickets can be bought on the quay."
+     },
+     {
+      "mode": "Metro",
+      "text": "The stations are decorated with art, so the ride is a sight in itself."
+     }
+    ],
+    "events": [
+     {
+      "name": "Stockholm International Film Festival",
+      "text": "Screenings in cinemas all over the city."
+     },
+     {
+      "name": "Nobel Week Lights",
+      "text": "Light installations in the city during Nobel Week. Free."
+     },
+     {
+      "name": "Lucia",
+      "text": "Lucia processions in churches and at Skansen."
+     },
+     {
+      "name": "Stockholm Design Week",
+      "text": "Exhibitions and open showrooms all over the city."
+     },
+     {
+      "name": "Stockholm Marathon",
+      "text": "Start and finish at the Stadium. Hotels are more expensive that weekend and streets are closed."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Cherry blossom in Kungsträdgården"
+     },
+     {
+      "name": "Archipelago boats and swimming"
+     },
+     {
+      "name": "Christmas markets"
+     }
+    ],
+    "month_notes": [
+     "Cold and dark. Cheap to stay.",
+     "Winter. Sometimes ice to walk on.",
+     "Still cold, but lighter.",
+     "Spring arrives and the cherry trees bloom in Kungsträdgården.",
+     "Green and bright. The archipelago boats start running more often.",
+     "Bright nights and Midsummer. Many people leave the city over the holiday.",
+     "Warmest. Swimming and the archipelago, but some restaurants are closed for the holidays.",
+     "Late summer and crayfish parties. Still swimming weather.",
+     "Clear autumn air and fewer tourists.",
+     "Autumn. Cooler and darker.",
+     "The darkest and greyest time, before Advent.",
+     "Christmas markets and Christmas buffets. Dark early."
+    ],
+    "prices": {
+     "summary": "Sweden's most expensive city, but the price level is familiar.",
+     "tips": [
+      "A double room costs around 195 euros per night on average according to Kayak, roughly 2,150 kronor."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {}
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "SE-fakta-systembolaget": {
+   "title": "Systembolaget from age 20",
+   "summary": "Age 20 at Systembolaget, 18 in restaurants.",
+   "body": "The age limit at Systembolaget, the state alcohol shop, is 20. In restaurants and bars anyone aged 18 or over may buy alcohol."
+  },
+  "SE-fakta-servering": {
+   "title": "Alcohol in bars from age 18",
+   "summary": "Serving alcohol is permitted from age 18.",
+   "body": "Parliament has set the age of majority, 18, as the limit for buying alcohol in restaurants. Individual venues may have a higher age limit at the door."
+  },
+  "SE-fakta-systemet-tider": {
+   "title": "Systembolaget closes early",
+   "summary": "Closes at 8 pm at the latest on weekdays and 3 pm on Saturdays. Closed on Sundays.",
+   "body": "The shops close at 8 pm at the latest on weekdays and at 3 pm on Saturdays. They are closed on Sundays, public holidays, Christmas Eve and Midsummer Eve. Shop before the weekend."
+  },
+  "SE-fakta-allemansratten": {
+   "title": "The right of public access: camp for a night or so",
+   "summary": "Do not disturb, do not destroy. Camping for the odd night is included.",
+   "body": "There is no law on how long you may camp in the same place, but the rule of thumb is a night or so with two or three tents. Do not disturb the landowner and do not damage nature. National parks and reserves have their own rules."
+  },
+  "SE-fakta-varldsarv": {
+   "title": "15 World Heritage Sites",
+   "summary": "Sweden has 15 World Heritage Sites, from Laponia to Karlskrona.",
+   "body": "The oldest Swedish World Heritage Site is Drottningholm from 1991 and the most recent is the Decorated Farmhouses of Hälsingland from 2012."
+  },
+  "SE-fakta-nationalparker": {
+   "title": "First in Europe with national parks",
+   "summary": "The first nine national parks were established in 1909.",
+   "body": "Sweden established its first nine national parks in 1909 and was then first in Europe. They include Abisko, Sarek and Garphyttan."
+  },
+  "SE-boras-fakta-pinocchio": {
+   "title": "Nine metres of Pinocchio",
+   "summary": "Jim Dine's bronze sculpture Walking to Borås is nine metres tall.",
+   "body": "The sculpture arrived in 2008 and was the start of Borås as a city of sculpture. The name is often associated with the knallar, the pedlars who walked the country selling textiles."
+  },
+  "SE-boras-fakta-arenan": {
+   "title": "Elfsborg started as Borås Fotbollslag",
+   "summary": "IF Elfsborg was founded on 26 June 1904 and has played at Borås Arena since 2005.",
+   "body": "The club was formed as Borås Fotbollslag and is known as Di Gule. The first match at Borås Arena was played on 17 April 2005."
+  },
+  "SE-stockholm-fakta-skansen": {
+   "title": "The world's oldest open-air museum",
+   "summary": "Skansen on Djurgården was founded in 1891 by Artur Hazelius.",
+   "body": "Skansen is regarded as the world's first open-air museum and is still on Djurgården."
+  }
+ },
+ "items": {
+  "SE-boras-walking-to-boras": {
+   "name": "Walking to Borås",
+   "summary": "A nine-metre bronze Pinocchio by Jim Dine.",
+   "body": "The city's most talked-about sculpture. A good starting point for a sculpture walk through the centre."
+  },
+  "SE-boras-gatukonsten": {
+   "name": "The murals",
+   "summary": "Wall paintings the size of seven-storey buildings, left from No Limit Street Art.",
+   "body": "The festival started in 2014 and has merged with the sculpture biennial into Borås Art Biennial. The works are outdoors and free to see."
+  },
+  "SE-boras-textilmuseet": {
+   "name": "The Textile Museum",
+   "summary": "Fashion and the textile industry in the Textile Fashion Center.",
+   "body": "Located at Skaraborgsvägen 3A in Simonsland, between the centre and Knalleland. Tickets are bought at the information desk outside the museum entrance."
+  },
+  "SE-boras-djurparken": {
+   "name": "Borås Zoo",
+   "summary": "40 hectares of African and Nordic animals in the middle of the city.",
+   "body": "The park has a savannah, bears, barbecue areas and playgrounds. Check the opening hours, they vary with the season."
+  },
+  "SE-boras-abecita": {
+   "name": "Abecita Pop Art & Photo",
+   "summary": "Around 500 works on three floors, including Warhol and Lichtenstein.",
+   "body": "Located north of the Textile Fashion Center, towards Knalleland and the zoo."
+  },
+  "SE-boras-konstmuseet": {
+   "name": "Borås Art Museum",
+   "summary": "Always free admission.",
+   "body": "The museum leads the work on the city's new murals and organises Borås Art Biennial together with the Textile Museum."
+  },
+  "SE-boras-arena": {
+   "name": "Borås Arena",
+   "summary": "IF Elfsborg's home ground since 2005.",
+   "body": "Watch Di Gule play at home. The arena is also used by Norrby IF."
+  },
+  "SE-stockholm-vasamuseet": {
+   "name": "The Vasa Museum",
+   "summary": "Free admission up to and including age 18. Allow 90 minutes.",
+   "body": "The museum recommends 90 minutes for a visit. The adult price is higher May–September than the rest of the year."
+  },
+  "SE-stockholm-skansen": {
+   "name": "Skansen",
+   "summary": "The world's oldest open-air museum, founded in 1891.",
+   "body": "Houses from all over the country and Nordic animals on Djurgården."
+  },
+  "SE-stockholm-djurgardsfarjan": {
+   "name": "The Djurgården ferry",
+   "summary": "Commuter boat Slussen–Skeppsholmen–Djurgården.",
+   "body": "The nicest way to Djurgården. SL cards are valid, and single tickets can be bought on the quay."
+  },
+  "SE-stockholm-tunnelbanekonsten": {
+   "name": "The art in the metro",
+   "summary": "Called the world's longest art exhibition.",
+   "body": "More than 150 artists have contributed. Tekniska högskolan station won a national architecture prize in 1973."
+  },
+  "SE-stockholm-drottningholm": {
+   "name": "Drottningholm",
+   "summary": "Sweden's first World Heritage Site, 1991.",
+   "body": "A royal palace on the French model, with the Chinese Pavilion and the palace theatre."
+  },
+  "SE-stockholm-skogskyrkogarden": {
+   "name": "Skogskyrkogården (the Woodland Cemetery)",
+   "summary": "A World Heritage Site since 1994.",
+   "body": "Regarded as one of the great works of modern architecture. Located in southern Stockholm."
+  },
+  "SE-uppland-birka": {
+   "name": "Birka and Hovgården",
+   "summary": "A Viking town in Lake Mälaren, a World Heritage Site since 1993.",
+   "body": "A trading place with far-reaching contacts in the 8th and 9th centuries."
+  },
+  "SE-sodermanland-tyresta": {
+   "name": "Tyresta National Park",
+   "summary": "A national park since 1993 in Haninge and Tyresö.",
+   "body": "1,964 hectares of forest just south of Stockholm."
+  },
+  "SE-lappland-laponia": {
+   "name": "Laponia",
+   "summary": "A World Heritage Site since 1996 and a Sami cultural landscape.",
+   "body": "Vast and remote wilderness that is also the cultural landscape of the Sami."
+  },
+  "SE-lappland-abisko": {
+   "name": "Abisko National Park",
+   "summary": "One of the first nine national parks, 1909.",
+   "body": "7,700 hectares south of Lake Torneträsk in Kiruna municipality."
+  },
+  "SE-lappland-sarek": {
+   "name": "Sarek",
+   "summary": "197,000 hectares of mountains without trails, a national park since 1909.",
+   "body": "Located in Jokkmokk municipality. For experienced mountain hikers."
+  },
+  "SE-norrbotten-gammelstad": {
+   "name": "Gammelstad Church Town",
+   "summary": "Around 400 church cottages, a World Heritage Site since 1996.",
+   "body": "The cottages were only used at church festivals and holidays."
+  },
+  "SE-norrbotten-haparanda-skargard": {
+   "name": "Haparanda Archipelago",
+   "summary": "A national park since 1995 in the Bothnian Bay.",
+   "body": "6,000 hectares of archipelago south of Haparanda and Kalix."
+  },
+  "SE-angermanland-hoga-kusten": {
+   "name": "The High Coast",
+   "summary": "A World Heritage Site since 2000, shaped by ice and land uplift.",
+   "body": "Here you can clearly see how the ice sheet, the rapid land uplift and the waves have shaped the landscape."
+  },
+  "SE-angermanland-skuleskogen": {
+   "name": "Skuleskogen National Park",
+   "summary": "A national park since 1984 in Örnsköldsvik and Kramfors.",
+   "body": "3,062 hectares in the middle of the High Coast."
+  },
+  "SE-halsingland-halsingegardar": {
+   "name": "The Decorated Farmhouses of Hälsingland",
+   "summary": "Richly decorated farmhouses, a World Heritage Site since 2012.",
+   "body": "The farms' festive rooms are the high point of a long building tradition among the farmers."
+  },
+  "SE-dalarna-falu-gruva": {
+   "name": "Falun and the Great Copper Mountain",
+   "summary": "The Great Copper Mountain, a World Heritage Site since 2001.",
+   "body": "The mine and the district around it are a rare reminder of early Swedish industry."
+  },
+  "SE-dalarna-fulufjallet": {
+   "name": "Fulufjället National Park",
+   "summary": "38,500 hectares of mountains in Älvdalen, a national park since 2002.",
+   "body": "Dalarna's largest national park."
+  },
+  "SE-vastmanland-engelsberg": {
+   "name": "Engelsberg Ironworks",
+   "summary": "A well-preserved ironworks, a World Heritage Site since 1993.",
+   "body": "Buildings and installations remain as they were."
+  },
+  "SE-gastrikland-farnebofjarden": {
+   "name": "Färnebofjärden National Park",
+   "summary": "A national park since 1998 by the Dalälven river.",
+   "body": "10,100 hectares, of which 4,110 are water, shared between the counties of Västmanland, Dalarna and Gävleborg."
+  },
+  "SE-bohuslan-tanum": {
+   "name": "The rock carvings in Tanum",
+   "summary": "Europe's largest collection of Bronze Age rock carvings.",
+   "body": "A World Heritage Site since 1994."
+  },
+  "SE-bohuslan-kosterhavet": {
+   "name": "Kosterhavet",
+   "summary": "A marine national park since 2009.",
+   "body": "38,878 hectares in northern Bohuslän, 98 per cent of it water."
+  },
+  "SE-gotland-visby": {
+   "name": "The Hanseatic Town of Visby",
+   "summary": "A town wall and church ruins, a World Heritage Site since 1995.",
+   "body": "A medieval Hanseatic town with small-scale buildings inside the wall."
+  },
+  "SE-gotland-gotska-sandon": {
+   "name": "Gotska Sandön",
+   "summary": "A national park since 1909.",
+   "body": "4,490 hectares of island and sea north of Gotland."
+  },
+  "SE-halland-grimeton": {
+   "name": "The Grimeton Radio Station",
+   "summary": "A World Heritage Site since 2004 outside Varberg.",
+   "body": "Built after the First World War as part of a global network of radio transmitters."
+  },
+  "SE-oland-sodra-oland": {
+   "name": "The Agricultural Landscape of Southern Öland",
+   "summary": "A World Heritage Site since 2000.",
+   "body": "A landscape shaped by farming over centuries."
+  },
+  "SE-blekinge-karlskrona": {
+   "name": "The Naval Port of Karlskrona",
+   "summary": "A World Heritage Site since 1998.",
+   "body": "Described as the world's best-preserved and most complete naval town."
+  },
+  "SE-skane-soderasen": {
+   "name": "Söderåsen National Park",
+   "summary": "A national park since 2001, about 30 km east of Helsingborg.",
+   "body": "1,625 hectares."
+  },
+  "SE-skane-stenshuvud": {
+   "name": "Stenshuvud",
+   "summary": "A national park since 1986 in Simrishamn municipality.",
+   "body": "390 hectares in Österlen."
+  },
+  "SE-smaland-store-mosse": {
+   "name": "Store Mosse",
+   "summary": "A national park since 1982.",
+   "body": "7,850 hectares in the municipalities of Gnosjö, Vaggeryd and Värnamo."
+  },
+  "SE-smaland-asnen": {
+   "name": "Åsnen National Park",
+   "summary": "A lake national park since 2018.",
+   "body": "1,868 hectares in the municipalities of Tingsryd and Alvesta, 75 per cent of it water."
+  },
+  "SE-vastergotland-tiveden": {
+   "name": "Tiveden National Park",
+   "summary": "A national park since 1983 in the municipalities of Laxå and Karlsborg.",
+   "body": "2,040 hectares on the border between Örebro and Västra Götaland counties."
+  },
+  "SE-narke-garphyttan": {
+   "name": "Garphyttan National Park",
+   "summary": "One of the first nine national parks, 1909.",
+   "body": "111 hectares in Lekeberg municipality."
+  },
+  "SE-dalsland-tresticklan": {
+   "name": "Tresticklan National Park",
+   "summary": "A national park since 1996 in Dals-Ed municipality.",
+   "body": "2,897 hectares."
+  },
+  "SE-harjedalen-sonfjallet": {
+   "name": "Sonfjället National Park",
+   "summary": "One of the first nine national parks, 1909.",
+   "body": "10,300 hectares in Härjedalen municipality."
+  },
+  "SE-blekinge-landskapsdjur": {
+   "name": "Provincial animal: Stag beetle",
+   "summary": "The stag beetle is the provincial animal of Blekinge.",
+   "body": "Tick it off when you have seen the animal in Blekinge."
+  },
+  "SE-blekinge-landskapsblomma": {
+   "name": "Provincial flower: Oak and great mullein",
+   "summary": "Oak and great mullein are the provincial flowers of Blekinge.",
+   "body": "The province has two provincial flowers. Tick it off when you have found either of them in Blekinge."
+  },
+  "SE-bohuslan-landskapsdjur": {
+   "name": "Provincial animal: Harbour seal",
+   "summary": "The harbour seal is the provincial animal of Bohuslän.",
+   "body": "Tick it off when you have seen the animal in Bohuslän."
+  },
+  "SE-bohuslan-landskapsblomma": {
+   "name": "Provincial flower: Honeysuckle",
+   "summary": "Honeysuckle is the provincial flower of Bohuslän.",
+   "body": "Tick it off when you have found it in Bohuslän."
+  },
+  "SE-dalarna-landskapsdjur": {
+   "name": "Provincial animal: Eagle owl",
+   "summary": "The eagle owl is the provincial animal of Dalarna.",
+   "body": "Tick it off when you have seen the animal in Dalarna."
+  },
+  "SE-dalarna-landskapsblomma": {
+   "name": "Provincial flower: Harebell and spreading bellflower",
+   "summary": "Harebell and spreading bellflower are the provincial flowers of Dalarna.",
+   "body": "The province has two provincial flowers. Tick it off when you have found either of them in Dalarna."
+  },
+  "SE-dalsland-landskapsdjur": {
+   "name": "Provincial animal: Raven",
+   "summary": "The raven is the provincial animal of Dalsland.",
+   "body": "Tick it off when you have seen the animal in Dalsland."
+  },
+  "SE-dalsland-landskapsblomma": {
+   "name": "Provincial flower: Forget-me-not",
+   "summary": "Forget-me-not is the provincial flower of Dalsland.",
+   "body": "Tick it off when you have found it in Dalsland."
+  },
+  "SE-gotland-landskapsdjur": {
+   "name": "Provincial animal: Hedgehog",
+   "summary": "The hedgehog is the provincial animal of Gotland.",
+   "body": "Tick it off when you have seen the animal on Gotland."
+  },
+  "SE-gotland-landskapsblomma": {
+   "name": "Provincial flower: Ivy",
+   "summary": "Ivy is the provincial flower of Gotland.",
+   "body": "Tick it off when you have found it on Gotland."
+  },
+  "SE-gastrikland-landskapsdjur": {
+   "name": "Provincial animal: Capercaillie",
+   "summary": "The capercaillie is the provincial animal of Gästrikland.",
+   "body": "Tick it off when you have seen the animal in Gästrikland."
+  },
+  "SE-gastrikland-landskapsblomma": {
+   "name": "Provincial flower: Lily of the valley",
+   "summary": "Lily of the valley is the provincial flower of Gästrikland.",
+   "body": "Tick it off when you have found it in Gästrikland."
+  },
+  "SE-halland-landskapsdjur": {
+   "name": "Provincial animal: Salmon",
+   "summary": "The salmon is the provincial animal of Halland.",
+   "body": "Tick it off when you have seen the animal in Halland."
+  },
+  "SE-halland-landskapsblomma": {
+   "name": "Provincial flower: Hairy greenweed",
+   "summary": "Hairy greenweed is the provincial flower of Halland.",
+   "body": "Tick it off when you have found it in Halland."
+  },
+  "SE-halsingland-landskapsdjur": {
+   "name": "Provincial animal: Lynx",
+   "summary": "The lynx is the provincial animal of Hälsingland.",
+   "body": "Tick it off when you have seen the animal in Hälsingland."
+  },
+  "SE-halsingland-landskapsblomma": {
+   "name": "Provincial flower: Flax",
+   "summary": "Flax is the provincial flower of Hälsingland.",
+   "body": "Tick it off when you have found it in Hälsingland."
+  },
+  "SE-harjedalen-landskapsdjur": {
+   "name": "Provincial animal: Brown bear",
+   "summary": "The brown bear is the provincial animal of Härjedalen.",
+   "body": "Tick it off when you have seen the animal in Härjedalen."
+  },
+  "SE-harjedalen-landskapsblomma": {
+   "name": "Provincial flower: Spring pasque flower and alpine yellow violet",
+   "summary": "Spring pasque flower and alpine yellow violet are the provincial flowers of Härjedalen.",
+   "body": "The province has two provincial flowers. Tick it off when you have found either of them in Härjedalen."
+  },
+  "SE-jamtland-landskapsdjur": {
+   "name": "Provincial animal: Moose",
+   "summary": "The moose is the provincial animal of Jämtland.",
+   "body": "Tick it off when you have seen the animal in Jämtland."
+  },
+  "SE-jamtland-landskapsblomma": {
+   "name": "Provincial flower: Black vanilla orchid",
+   "summary": "Black vanilla orchid is the provincial flower of Jämtland.",
+   "body": "Tick it off when you have found it in Jämtland."
+  },
+  "SE-lappland-landskapsdjur": {
+   "name": "Provincial animal: Arctic fox",
+   "summary": "The arctic fox is the provincial animal of Lapland.",
+   "body": "Tick it off when you have seen the animal in Lapland."
+  },
+  "SE-lappland-landskapsblomma": {
+   "name": "Provincial flower: Mountain avens",
+   "summary": "Mountain avens is the provincial flower of Lapland.",
+   "body": "Tick it off when you have found it in Lapland."
+  },
+  "SE-medelpad-landskapsdjur": {
+   "name": "Provincial animal: Mountain hare",
+   "summary": "The mountain hare is the provincial animal of Medelpad.",
+   "body": "Tick it off when you have seen the animal in Medelpad."
+  },
+  "SE-medelpad-landskapsblomma": {
+   "name": "Provincial flower: Spruce and globeflower",
+   "summary": "Spruce and globeflower are the provincial flowers of Medelpad.",
+   "body": "The province has two provincial flowers. Tick it off when you have found either of them in Medelpad."
+  },
+  "SE-norrbotten-landskapsdjur": {
+   "name": "Provincial animal: Siberian jay",
+   "summary": "The Siberian jay is the provincial animal of Norrbotten.",
+   "body": "Tick it off when you have seen the animal in Norrbotten."
+  },
+  "SE-norrbotten-landskapsblomma": {
+   "name": "Provincial flower: Arctic bramble",
+   "summary": "Arctic bramble is the provincial flower of Norrbotten.",
+   "body": "Tick it off when you have found it in Norrbotten."
+  },
+  "SE-narke-landskapsdjur": {
+   "name": "Provincial animal: Hazel dormouse",
+   "summary": "The hazel dormouse is the provincial animal of Närke.",
+   "body": "Tick it off when you have seen the animal in Närke."
+  },
+  "SE-narke-landskapsblomma": {
+   "name": "Provincial flower: Cowslip",
+   "summary": "Cowslip is the provincial flower of Närke.",
+   "body": "Tick it off when you have found it in Närke."
+  },
+  "SE-skane-landskapsdjur": {
+   "name": "Provincial animal: Red deer",
+   "summary": "The red deer is the provincial animal of Skåne.",
+   "body": "Tick it off when you have seen the animal in Skåne."
+  },
+  "SE-skane-landskapsblomma": {
+   "name": "Provincial flower: Oxeye daisy",
+   "summary": "Oxeye daisy is the provincial flower of Skåne.",
+   "body": "Tick it off when you have found it in Skåne."
+  },
+  "SE-smaland-landskapsdjur": {
+   "name": "Provincial animal: Otter",
+   "summary": "The otter is the provincial animal of Småland.",
+   "body": "Tick it off when you have seen the animal in Småland."
+  },
+  "SE-smaland-landskapsblomma": {
+   "name": "Provincial flower: Twinflower",
+   "summary": "Twinflower is the provincial flower of Småland.",
+   "body": "Tick it off when you have found it in Småland."
+  },
+  "SE-sodermanland-landskapsdjur": {
+   "name": "Provincial animal: Osprey",
+   "summary": "The osprey is the provincial animal of Södermanland.",
+   "body": "Tick it off when you have seen the animal in Södermanland."
+  },
+  "SE-sodermanland-landskapsblomma": {
+   "name": "Provincial flower: White water lily",
+   "summary": "White water lily is the provincial flower of Södermanland.",
+   "body": "Tick it off when you have found it in Södermanland."
+  },
+  "SE-uppland-landskapsdjur": {
+   "name": "Provincial animal: White-tailed eagle",
+   "summary": "The white-tailed eagle is the provincial animal of Uppland.",
+   "body": "Tick it off when you have seen the animal in Uppland."
+  },
+  "SE-uppland-landskapsblomma": {
+   "name": "Provincial flower: Snake's head fritillary",
+   "summary": "Snake's head fritillary is the provincial flower of Uppland.",
+   "body": "Tick it off when you have found it in Uppland."
+  },
+  "SE-varmland-landskapsdjur": {
+   "name": "Provincial animal: Wolf",
+   "summary": "The wolf is the provincial animal of Värmland.",
+   "body": "Tick it off when you have seen the animal in Värmland."
+  },
+  "SE-varmland-landskapsblomma": {
+   "name": "Provincial flower: Arctic starflower",
+   "summary": "Arctic starflower is the provincial flower of Värmland.",
+   "body": "Tick it off when you have found it in Värmland."
+  },
+  "SE-vasterbotten-landskapsdjur": {
+   "name": "Provincial animal: Curlew",
+   "summary": "The curlew is the provincial animal of Västerbotten.",
+   "body": "Tick it off when you have seen the animal in Västerbotten."
+  },
+  "SE-vasterbotten-landskapsblomma": {
+   "name": "Provincial flower: King Charles's sceptre",
+   "summary": "King Charles's sceptre is the provincial flower of Västerbotten.",
+   "body": "Tick it off when you have found it in Västerbotten."
+  },
+  "SE-vastergotland-landskapsdjur": {
+   "name": "Provincial animal: Crane",
+   "summary": "The crane is the provincial animal of Västergötland.",
+   "body": "Tick it off when you have seen the animal in Västergötland."
+  },
+  "SE-vastergotland-landskapsblomma": {
+   "name": "Provincial flower: Heather",
+   "summary": "Heather is the provincial flower of Västergötland.",
+   "body": "Tick it off when you have found it in Västergötland."
+  },
+  "SE-vastmanland-landskapsdjur": {
+   "name": "Provincial animal: Roe deer",
+   "summary": "The roe deer is the provincial animal of Västmanland.",
+   "body": "Tick it off when you have seen the animal in Västmanland."
+  },
+  "SE-vastmanland-landskapsblomma": {
+   "name": "Provincial flower: Mistletoe",
+   "summary": "Mistletoe is the provincial flower of Västmanland.",
+   "body": "Tick it off when you have found it in Västmanland."
+  },
+  "SE-angermanland-landskapsdjur": {
+   "name": "Provincial animal: Beaver",
+   "summary": "The beaver is the provincial animal of Ångermanland.",
+   "body": "Tick it off when you have seen the animal in Ångermanland."
+  },
+  "SE-angermanland-landskapsblomma": {
+   "name": "Provincial flower: Wild pansy",
+   "summary": "Wild pansy is the provincial flower of Ångermanland.",
+   "body": "Tick it off when you have found it in Ångermanland."
+  },
+  "SE-oland-landskapsdjur": {
+   "name": "Provincial animal: Thrush nightingale",
+   "summary": "The thrush nightingale is the provincial animal of Öland.",
+   "body": "Tick it off when you have seen the animal on Öland."
+  },
+  "SE-oland-landskapsblomma": {
+   "name": "Provincial flower: Öland rock rose",
+   "summary": "Öland rock rose is the provincial flower of Öland.",
+   "body": "Tick it off when you have found it on Öland."
+  },
+  "SE-ostergotland-landskapsdjur": {
+   "name": "Provincial animal: Mute swan",
+   "summary": "The mute swan is the provincial animal of Östergötland.",
+   "body": "Tick it off when you have seen the animal in Östergötland."
+  },
+  "SE-ostergotland-landskapsblomma": {
+   "name": "Provincial flower: Cornflower",
+   "summary": "Cornflower is the provincial flower of Östergötland.",
+   "body": "Tick it off when you have found it in Östergötland."
+  },
+  "SE-ostergotland-bergs-slussar": {
+   "name": "The Berg locks",
+   "summary": "Seven connected locks lift the boats 18.8 metres from Lake Roxen.",
+   "body": "The Carl Johan flight of locks is part of the Göta Canal, which is 190 km long and has 58 locks. Walk or cycle along the car-free towpath."
+  },
+  "SE-varmland-marbacka": {
+   "name": "Mårbacka",
+   "summary": "Selma Lagerlöf's childhood home in Sunne municipality.",
+   "body": "The first woman to win the Nobel Prize in Literature was born and grew up here. The estate is shown as a memorial home."
+  },
+  "SE-medelpad-stenstaden": {
+   "name": "The Stone City in Sundsvall",
+   "summary": "Lavish stone buildings built after the city fire of 1888.",
+   "body": "On a June day in 1888 most of Sundsvall burned down. The city was rebuilt in stone, and Hotel Knaust from 1891 still receives guests."
+  },
+  "SE-jamtland-tannforsen": {
+   "name": "Tännforsen",
+   "summary": "Sweden's largest unregulated waterfall, with a drop of 37 metres.",
+   "body": "A nature reserve in Åre municipality, about 15 km north-west of Duved. The path can be icy in winter."
+  },
+  "SE-vasterbotten-vasterbottensost": {
+   "name": "Västerbotten cheese in Burträsk",
+   "summary": "The cheese is only made in Burträsk, for the first time in 1872.",
+   "body": "The visitor centre is by the dairy and has an exhibition and a shop. The recipe was created by the dairymaid Ulrika Eleonora Lindström."
+  }
+ },
+ "compendium": {
+  "sevardhet-pinocchio-boras": {
+   "name": "Walking to Borås",
+   "hint": "Nine metres of bronze with a long nose."
+  },
+  "arena-boras-arena": {
+   "name": "Borås Arena",
+   "hint": "Di Gule's home ground."
+  },
+  "sevardhet-skeppet-vasa": {
+   "name": "The warship Vasa",
+   "hint": "Stands indoors on Djurgården."
+  },
+  "fardmedel-djurgardsfarjan": {
+   "name": "The Djurgården ferry",
+   "hint": "Leaves from Slussen."
+  },
+  "trad-ek": {
+   "name": "Oak",
+   "hint": "Provincial flower of Blekinge."
+  },
+  "blomma-kungsljus": {
+   "name": "Great mullein",
+   "hint": "Provincial flower of Blekinge."
+  },
+  "daggdjur-knubbsal": {
+   "name": "Harbour seal",
+   "hint": "Provincial animal of Bohuslän."
+  },
+  "blomma-vildkaprifol": {
+   "name": "Honeysuckle",
+   "hint": "Provincial flower of Bohuslän."
+  },
+  "fagel-berguv": {
+   "name": "Eagle owl",
+   "hint": "Provincial animal of Dalarna."
+  },
+  "blomma-blaklocka": {
+   "name": "Harebell",
+   "hint": "Provincial flower of Dalarna."
+  },
+  "blomma-angsklocka": {
+   "name": "Spreading bellflower",
+   "hint": "Provincial flower of Dalarna."
+  },
+  "fagel-korp": {
+   "name": "Raven",
+   "hint": "Provincial animal of Dalsland."
+  },
+  "blomma-forgatmigej": {
+   "name": "Forget-me-not",
+   "hint": "Provincial flower of Dalsland."
+  },
+  "daggdjur-igelkott": {
+   "name": "Hedgehog",
+   "hint": "Provincial animal of Gotland."
+  },
+  "blomma-murgrona": {
+   "name": "Ivy",
+   "hint": "Provincial flower of Gotland."
+  },
+  "fagel-tjader": {
+   "name": "Capercaillie",
+   "hint": "Provincial animal of Gästrikland."
+  },
+  "blomma-liljekonvalj": {
+   "name": "Lily of the valley",
+   "hint": "Provincial flower of Gästrikland."
+  },
+  "havsdjur-lax": {
+   "name": "Salmon",
+   "hint": "Provincial animal of Halland."
+  },
+  "blomma-harginst": {
+   "name": "Hairy greenweed",
+   "hint": "Provincial flower of Halland."
+  },
+  "daggdjur-lodjur": {
+   "name": "Lynx",
+   "hint": "Provincial animal of Hälsingland."
+  },
+  "blomma-lin": {
+   "name": "Flax",
+   "hint": "Provincial flower of Hälsingland."
+  },
+  "daggdjur-brunbjorn": {
+   "name": "Brown bear",
+   "hint": "Provincial animal of Härjedalen."
+  },
+  "blomma-mosippa": {
+   "name": "Spring pasque flower",
+   "hint": "Provincial flower of Härjedalen."
+  },
+  "blomma-fjallviol": {
+   "name": "Alpine yellow violet",
+   "hint": "Provincial flower of Härjedalen."
+  },
+  "daggdjur-alg": {
+   "name": "Moose",
+   "hint": "Provincial animal of Jämtland."
+  },
+  "blomma-brunkulla": {
+   "name": "Black vanilla orchid",
+   "hint": "Provincial flower of Jämtland."
+  },
+  "daggdjur-fjallrav": {
+   "name": "Arctic fox",
+   "hint": "Provincial animal of Lapland."
+  },
+  "blomma-fjallsippa": {
+   "name": "Mountain avens",
+   "hint": "Provincial flower of Lapland."
+  },
+  "daggdjur-skogshare": {
+   "name": "Mountain hare",
+   "hint": "Provincial animal of Medelpad."
+  },
+  "trad-gran": {
+   "name": "Spruce",
+   "hint": "Provincial flower of Medelpad."
+  },
+  "blomma-smorboll": {
+   "name": "Globeflower",
+   "hint": "Provincial flower of Medelpad."
+  },
+  "fagel-lavskrika": {
+   "name": "Siberian jay",
+   "hint": "Provincial animal of Norrbotten."
+  },
+  "blomma-akerbar": {
+   "name": "Arctic bramble",
+   "hint": "Provincial flower of Norrbotten."
+  },
+  "daggdjur-hasselmus": {
+   "name": "Hazel dormouse",
+   "hint": "Provincial animal of Närke."
+  },
+  "blomma-gullviva": {
+   "name": "Cowslip",
+   "hint": "Provincial flower of Närke."
+  },
+  "daggdjur-kronhjort": {
+   "name": "Red deer",
+   "hint": "Provincial animal of Skåne."
+  },
+  "blomma-prastkrage": {
+   "name": "Oxeye daisy",
+   "hint": "Provincial flower of Skåne."
+  },
+  "daggdjur-utter": {
+   "name": "Otter",
+   "hint": "Provincial animal of Småland."
+  },
+  "blomma-linnea": {
+   "name": "Twinflower",
+   "hint": "Provincial flower of Småland."
+  },
+  "fagel-fiskgjuse": {
+   "name": "Osprey",
+   "hint": "Provincial animal of Södermanland."
+  },
+  "blomma-vit-nackros": {
+   "name": "White water lily",
+   "hint": "Provincial flower of Södermanland."
+  },
+  "fagel-havsorn": {
+   "name": "White-tailed eagle",
+   "hint": "Provincial animal of Uppland."
+  },
+  "blomma-kungsangslilja": {
+   "name": "Snake's head fritillary",
+   "hint": "Provincial flower of Uppland."
+  },
+  "daggdjur-varg": {
+   "name": "Wolf",
+   "hint": "Provincial animal of Värmland."
+  },
+  "blomma-skogsstjarna": {
+   "name": "Arctic starflower",
+   "hint": "Provincial flower of Värmland."
+  },
+  "fagel-storspov": {
+   "name": "Curlew",
+   "hint": "Provincial animal of Västerbotten."
+  },
+  "blomma-kung-karls-spira": {
+   "name": "King Charles's sceptre",
+   "hint": "Provincial flower of Västerbotten."
+  },
+  "fagel-trana": {
+   "name": "Crane",
+   "hint": "Provincial animal of Västergötland."
+  },
+  "blomma-ljung": {
+   "name": "Heather",
+   "hint": "Provincial flower of Västergötland."
+  },
+  "daggdjur-radjur": {
+   "name": "Roe deer",
+   "hint": "Provincial animal of Västmanland."
+  },
+  "blomma-mistel": {
+   "name": "Mistletoe",
+   "hint": "Provincial flower of Västmanland."
+  },
+  "daggdjur-baver": {
+   "name": "Beaver",
+   "hint": "Provincial animal of Ångermanland."
+  },
+  "blomma-styvmorsviol": {
+   "name": "Wild pansy",
+   "hint": "Provincial flower of Ångermanland."
+  },
+  "fagel-naktergal": {
+   "name": "Thrush nightingale",
+   "hint": "Provincial animal of Öland."
+  },
+  "blomma-olandssolvanda": {
+   "name": "Öland rock rose",
+   "hint": "Provincial flower of Öland."
+  },
+  "fagel-knolsvan": {
+   "name": "Mute swan",
+   "hint": "Provincial animal of Östergötland."
+  },
+  "blomma-blaklint": {
+   "name": "Cornflower",
+   "hint": "Provincial flower of Östergötland."
+  }
+ },
+ "ideas": {
+  "SE-boras-skulpturpromenad": {
+   "title": "Sculpture walk through the centre",
+   "body": "Start at Pinocchio and walk towards the Textile Fashion Center. Count how many sculptures you find on the way.",
+   "duration": "about 2 h"
+  },
+  "SE-boras-muraljakt": {
+   "title": "Mural hunt",
+   "body": "Find the biggest wall paintings in the city and photograph your favourite.",
+   "duration": "about 2 h"
+  },
+  "SE-boras-museidag": {
+   "title": "Two museums in one afternoon",
+   "body": "The Art Museum always has free admission. Take the Textile Museum or Abecita afterwards.",
+   "duration": "Half a day"
+  },
+  "SE-boras-djurparken-matsack": {
+   "title": "The zoo with a packed lunch",
+   "body": "Walk around the savannah and barbecue at one of the barbecue areas.",
+   "duration": "Half a day"
+  },
+  "SE-boras-elfsborg": {
+   "title": "Elfsborg at home",
+   "body": "Watch a match at Borås Arena.",
+   "duration": "about 3 h"
+  },
+  "SE-boras-grimeton": {
+   "title": "World Heritage in Grimeton and the sea in Varberg",
+   "body": "Visit the radio station in Grimeton and finish by the sea in Varberg.",
+   "duration": "One day"
+  },
+  "SE-boras-store-mosse": {
+   "title": "Boardwalk hike at Store Mosse",
+   "body": "A national park in Småland with a walk across the bog.",
+   "duration": "One day"
+  },
+  "SE-boras-tiveden": {
+   "title": "Tiveden National Park",
+   "body": "A forest hike in the national park on the border with Närke.",
+   "duration": "One day"
+  },
+  "SE-stockholm-djurgardsdag": {
+   "title": "A Djurgården day by boat",
+   "body": "Take the Djurgården ferry from Slussen, visit the Vasa Museum and continue to Skansen.",
+   "duration": "One day"
+  },
+  "SE-stockholm-tunnelbanekonst": {
+   "title": "Art tour in the metro",
+   "body": "Choose three stations and get off at each. Works in any weather.",
+   "duration": "about 2 h"
+  },
+  "SE-stockholm-skogskyrkogarden-promenad": {
+   "title": "A walk in Skogskyrkogården",
+   "body": "A quiet walk in a World Heritage Site.",
+   "duration": "about 2 h"
+  },
+  "SE-stockholm-drottningholm-utflykt": {
+   "title": "Drottningholm",
+   "body": "The palace park, the Chinese Pavilion and the palace theatre on the same outing.",
+   "duration": "Half a day"
+  },
+  "SE-stockholm-tyresta": {
+   "title": "Tyresta National Park",
+   "body": "A forest hike just south of the city.",
+   "duration": "Half a day"
+  },
+  "SE-stockholm-helg": {
+   "title": "Stockholm over the weekend",
+   "body": "One day on Djurgården and one day with metro art and Skogskyrkogården or Drottningholm.",
+   "duration": "Weekend"
+  },
+  "SE-hemma-nasta-resa": {
+   "title": "Plan the next trip",
+   "body": "Open the map, choose a country each and compare what appeals most.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-laga-ett-land": {
+   "title": "Cook a country",
+   "body": "Choose a country from the bucket list and cook a dish from there.",
+   "duration": "about 2 h"
+  },
+  "SE-hemma-bucketlistkvall": {
+   "title": "Bucket list evening",
+   "body": "Swipe through the suggestions separately and see where you match.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-filmmaraton": {
+   "title": "Themed movie marathon",
+   "body": "Choose a director, a country or a decade and watch two films in a row. Whoever did not choose the films chooses the snacks.",
+   "duration": "Half a day"
+  },
+  "SE-hemma-blindtest": {
+   "title": "Blind test",
+   "body": "Buy three kinds of the same thing, for example chocolate or soda, and guess which is which. The loser does the dishes.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-ny-ratt": {
+   "title": "Cook something neither of you has cooked",
+   "body": "Choose a recipe that feels a little too hard and cook it together from start to finish.",
+   "duration": "about 2 h"
+  },
+  "SE-hemma-pizza-fran-grunden": {
+   "title": "Pizza from scratch",
+   "body": "Make the dough in the morning and let it rest. In the evening you each make a pizza and vote for the winner.",
+   "duration": "Half a day"
+  },
+  "SE-hemma-spelturnering": {
+   "title": "Game tournament",
+   "body": "Three different games, best of three. Decide the prize before you start.",
+   "duration": "about 2 h"
+  },
+  "SE-hemma-pussel": {
+   "title": "Jigsaw and podcast",
+   "body": "Do a big jigsaw and listen to a podcast or an audiobook meanwhile.",
+   "duration": "about 2 h"
+  },
+  "SE-hemma-fotokvall": {
+   "title": "Go through the year's photos",
+   "body": "Pick the ten best photos of the year and order them as real prints.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-koja": {
+   "title": "Build a blanket fort",
+   "body": "Blankets, cushions and a string of lights in the living room. Eat dinner in there.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-fragor": {
+   "title": "Questions you never ask",
+   "body": "Ask each other questions you never usually ask. The phones stay in another room.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-spellista": {
+   "title": "Make a playlist for each other",
+   "body": "Ten songs each that the other has not heard. Listen through both and explain why you chose them.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-baka": {
+   "title": "Bake something new",
+   "body": "Choose a pastry from a country you want to travel to and bake it at home.",
+   "duration": "about 2 h"
+  },
+  "SE-hemma-spakvall": {
+   "title": "Spa evening at home",
+   "body": "Face mask, foot bath and candles. Turn off all screens.",
+   "duration": "about 2 h"
+  },
+  "SE-hemma-dromresan": {
+   "title": "Plan the dream trip for real",
+   "body": "Choose a destination and work out flights, accommodation and days as if you were booking tomorrow.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-brev": {
+   "title": "Write letters to yourselves",
+   "body": "Each write a letter to be opened in a year. Put them in an envelope with the date on it.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-teckna": {
+   "title": "Draw each other",
+   "body": "Five minutes per portrait, without looking at the paper. Put the result up on the fridge.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-sprakkvall": {
+   "title": "Language evening",
+   "body": "Teach each other twenty words in a language the other does not know. Test each other the next day.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-frukost-middag": {
+   "title": "Breakfast for dinner",
+   "body": "Pancakes, eggs and freshly squeezed juice at seven in the evening.",
+   "duration": "about 1 h"
+  },
+  "SE-hemma-rensa": {
+   "title": "Clear out a wardrobe together",
+   "body": "Try everything on, keep what gets used and donate the rest. Finish with something nice to eat.",
+   "duration": "about 2 h"
+  },
+  "SE-ut-solnedgang": {
+   "title": "Sunset with a thermos",
+   "body": "Find the nearest hill or jetty with a view to the west and bring something warm to drink.",
+   "duration": "about 1 h"
+  },
+  "SE-ut-ny-vag": {
+   "title": "Walk a route you have never walked",
+   "body": "Turn the other way outside the door and keep going for half an hour. Take a different way home.",
+   "duration": "about 1 h"
+  },
+  "SE-ut-fika-ute": {
+   "title": "Fika outdoors",
+   "body": "Buy coffee and something sweet and sit in a park instead of a café. Works all year with the right clothes.",
+   "duration": "about 1 h"
+  },
+  "SE-ut-fotopromenad": {
+   "title": "Photo walk",
+   "body": "Choose a theme, for example doors or signs, and take ten photos each. Compare when you get home.",
+   "duration": "about 2 h"
+  },
+  "SE-ut-loppis": {
+   "title": "Flea market round",
+   "body": "Give each other fifty kronor and buy a present for the other at a flea market or second-hand shop.",
+   "duration": "about 2 h"
+  },
+  "SE-ut-stjarnor": {
+   "title": "Stargazing",
+   "body": "Travel a little way out from the city lights on a clear evening. Bring a blanket and something warm.",
+   "duration": "about 2 h"
+  },
+  "SE-ut-turist-hemma": {
+   "title": "Be tourists in your own city",
+   "body": "Do the things you would recommend to a visitor but have never done yourselves.",
+   "duration": "Half a day"
+  },
+  "SE-ut-slumpbuss": {
+   "title": "Take a bus to the last stop",
+   "body": "Get on a line you never ride and see what is at the far end.",
+   "duration": "about 2 h"
+  }
+ },
+ "gifts": {
+  "SE-present-dalahast": {
+   "name": "Dala horse",
+   "body": "The painted wooden horse from Dalarna. Choose a small one that fits in hand luggage."
+  },
+  "SE-present-polkagrisar": {
+   "name": "Polkagris candy canes from Gränna",
+   "body": "Red and white peppermint sticks. They keep for a long time and survive packing."
+  },
+  "SE-present-knackebrod": {
+   "name": "Crispbread in a round",
+   "body": "The large round with a hole in the middle. Light, cheap and looks Swedish."
+  },
+  "SE-present-lakrits": {
+   "name": "Salty liquorice",
+   "body": "A good gift for someone who already likes it, and a fun test for someone who has never tried it."
+  },
+  "SE-present-hjortronsylt": {
+   "name": "Cloudberry jam",
+   "body": "Berries from the bogs in the north. A glass jar, so pack it in checked baggage."
+  },
+  "SE-present-tramugg": {
+   "name": "Wooden kåsa",
+   "body": "A drinking cup with a handle for coffee outdoors. Comes in both wood and plastic for hiking."
+  },
+  "SE-present-glas": {
+   "name": "Glass from the Kingdom of Crystal",
+   "body": "Hand-blown glass from the glassworks in Småland. Buy something small, for example a tealight holder."
+  },
+  "SE-present-lovikka": {
+   "name": "Lovikka mittens",
+   "body": "Thick wool mittens with a coloured tassel, from Lovikka in Norrbotten."
+  }
+ }
+}

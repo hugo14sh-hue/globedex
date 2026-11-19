@@ -1,0 +1,261 @@
+{
+ "places": {
+  "US": {
+   "name": "United States"
+  },
+  "US-new-york": {
+   "name": "New York",
+   "data": {
+    "best_text": "May, September and October. December is lovely but the most expensive.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Four days",
+      "text": "Lower Manhattan, Midtown, one museum and the bridge."
+     },
+     {
+      "label": "One week",
+      "text": "Time for Brooklyn, the High Line and an observation deck without rushing."
+     },
+     {
+      "label": "Ten days",
+      "text": "Add more neighbourhoods and a day trip out of the city."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Midtown",
+      "text": "Closest to the theatres and observation decks, with the subway in every direction. Expensive and impersonal."
+     },
+     {
+      "name": "Lower East Side and East Village",
+      "text": "Food and bars, more local."
+     },
+     {
+      "name": "Williamsburg in Brooklyn",
+      "text": "Cheaper than Manhattan and one stop from the island."
+     },
+     {
+      "name": "Long Island City in Queens",
+      "text": "Often the cheapest, with a short subway ride to Midtown."
+     },
+     {
+      "name": "The blocks closest to Times Square",
+      "text": "Crowded, noisy and the most expensive per square metre. Visit, but stay a few blocks away."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Subway and bus",
+      "text": "Tap your payment card or phone at the turnstile. A ride costs 3 dollars, and after twelve paid rides in a week you ride free for the rest of the week."
+     },
+     {
+      "mode": "AirTrain and subway from JFK",
+      "text": "AirTrain to Jamaica and then the E line towards Manhattan. Allow 50–65 minutes. AirTrain has its own fare, which does not count towards the weekly cap."
+     }
+    ],
+    "events": [
+     {
+      "name": "Macy's Thanksgiving Day Parade",
+      "text": "The parade through Manhattan, this year for the hundredth time."
+     },
+     {
+      "name": "The Rockefeller Center tree lighting",
+      "text": "After that the tree is lit every evening over Christmas."
+     },
+     {
+      "name": "New York City Marathon",
+      "text": "Runs through all five boroughs. Many streets are closed and hotels are expensive that weekend."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Autumn colours in the parks"
+     },
+     {
+      "name": "Christmas window displays and ice rinks"
+     }
+    ],
+    "month_notes": [
+     "The coldest time of the year. The cheapest time to stay.",
+     "Cold, often snow.",
+     "Winter lets go slowly.",
+     "Spring arrives and Central Park is in bloom.",
+     "Warm without the summer humidity.",
+     "Warm. Lots of free outdoor concerts.",
+     "Hot and humid.",
+     "Hot and humid. Many New Yorkers are away.",
+     "Warm, clear and just right.",
+     "Autumn colours in the parks.",
+     "Cooler. Thanksgiving at the end of the month.",
+     "Christmas window displays and ice rinks. Lovely but the most expensive time of the year."
+    ],
+    "prices": {
+     "summary": "Expensive. Tips and tax are also added on top of the menu price.",
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "According to Expat Arrivals, not Numbeo."
+      }
+     ]
+    }
+   }
+  },
+  "US-ca": {
+   "name": "California"
+  }
+ },
+ "facts": {
+  "US-fakta-betala": {
+   "title": "Currency: US dollar (USD)",
+   "summary": "The country uses the US dollar (USD)."
+  },
+  "US-fakta-mobil": {
+   "title": "EU roaming does not apply",
+   "summary": "The United States is outside the EU's roaming rules.",
+   "body": "Operators can charge entirely different prices outside the EU. Check the price list or buy a local data package or eSIM before you turn on mobile data."
+  },
+  "US-fakta-inresa": {
+   "title": "ESTA is required before the trip",
+   "summary": "Swedish citizens need a valid ESTA or visa. Apply online.",
+   "body": "With an ESTA you may stay as a tourist for up to 90 days. The passport only needs to be valid for the duration of the trip. The rules can change at short notice, and under US law foreign citizens must carry their immigration documents with them."
+  },
+  "US-fakta-esta-avgift": {
+   "title": "ESTA costs 40 dollars",
+   "summary": "The fee was raised from 21 to 40 dollars in autumn 2025.",
+   "body": "Apply only on the US authority's own website. Other sites charge extra for the same application."
+  },
+  "US-fakta-dricks": {
+   "title": "A tip of 18–20 per cent is expected",
+   "summary": "In restaurants 20% is normal and 18% the minimum.",
+   "body": "The bill often has ready-made suggestions, usually 18, 20 and 22 per cent or 20, 22 and 25. Taxi drivers also expect a tip, and rounding up is not enough."
+  },
+  "US-fakta-alkohol": {
+   "title": "Alcohol from age 21",
+   "summary": "The age limit for alcohol is 21 throughout the country.",
+   "body": "Bring a passport or other ID if you want to order alcohol."
+  },
+  "US-new-york-fakta-betala-resor": {
+   "title": "Tap your card in the subway",
+   "summary": "The MetroCard has been abolished. You pay 3 dollars per ride with a card or phone.",
+   "body": "A transfer to a local bus within two hours is included. Each person must tap their own card or phone, otherwise the weekly cap is not counted correctly. Use the same card all week."
+  },
+  "US-new-york-fakta-ta-sig-dit": {
+   "title": "JFK to Manhattan in about an hour",
+   "summary": "Take AirTrain to Jamaica and change to the subway's E line.",
+   "body": "AirTrain runs around the clock every few minutes. You pay for AirTrain at the gates at Jamaica and for the subway separately, both by tapping your card."
+  }
+ },
+ "items": {
+  "US-new-york-frihetsgudinnan": {
+   "name": "The Statue of Liberty",
+   "summary": "Only one ferry company may dock at the island. Buy the ticket from Statue City Cruises.",
+   "body": "The national park charges no admission, but the ferry ticket is required and covers both Liberty Island and Ellis Island. The time on the ticket is when you should join the security queue, not when the boat leaves. The queue can take over an hour. Tickets sold by others in the street are overpriced or fake."
+  },
+  "US-new-york-kronan": {
+   "name": "Up into the Statue of Liberty's crown",
+   "summary": "Few places per day. Must be booked online in advance.",
+   "body": "There is no lift up to the crown. You climb 162 steps from the statue's feet. Tickets are only sold by Statue City Cruises."
+  },
+  "US-new-york-staten-island-farjan": {
+   "name": "The Staten Island Ferry",
+   "summary": "Runs around the clock and takes 25 minutes. Passes the Statue of Liberty.",
+   "body": "The ferry runs at least every half hour on weekdays and every hour at weekends, more often in rush hour. It leaves from the Whitehall Terminal at the bottom of Manhattan. Allow time for the security check and boarding."
+  },
+  "US-new-york-911-minnesplatsen": {
+   "name": "The 9/11 Memorial",
+   "summary": "The memorial is free and open 8 am–8 pm every day. The museum requires a ticket.",
+   "body": "The museum is open Wednesday to Monday 9 am–7 pm, with last admission at 5.30 pm. Tickets are for a set time and should be bought in advance."
+  },
+  "US-new-york-high-line": {
+   "name": "High Line",
+   "summary": "A park on an old freight line above the streets. Free.",
+   "body": "It is just over 2.3 kilometres long and runs from the Meatpacking District to Hudson Yards. Allow one to two hours for the whole stretch."
+  },
+  "US-new-york-brooklyn-bridge": {
+   "name": "Brooklyn Bridge",
+   "summary": "Free to walk across. The walkway is above the car traffic.",
+   "body": "From Brooklyn the walkway starts at the junction of Tillary Street and Boerum Place. There is also a staircase in the underpass at Washington Street. Below the bridge is Brooklyn Bridge Park, which is open 6 am–1 am and is free."
+  },
+  "US-new-york-met": {
+   "name": "Metropolitan Museum of Art",
+   "summary": "30 dollars for adults, free under 12. Closed on Wednesdays.",
+   "body": "Pay-what-you-wish applies only to residents of New York State and students from New York, New Jersey and Connecticut. Open 10 am–5 pm, Friday and Saturday until 9 pm. Start with the Egyptian wing when they open and do not try to see everything."
+  },
+  "US-new-york-utsiktsdack": {
+   "name": "The observation decks",
+   "summary": "Five towers to choose from. All sell timed tickets.",
+   "body": "The price varies with the day and time. Top of the Rock is on floors 67, 69 and 70 of Rockefeller Center and is the lowest of the five, but the source ranks its view as the best for first-time visitors."
+  },
+  "US-new-york-central-park": {
+   "name": "Central Park",
+   "summary": "Open every day from 6 am to 1 am.",
+   "body": "The park has several visitor centres where you can pick up a map and get tips. The Conservatory Garden in the northern part has its own hours and opens at 8 am."
+  }
+ },
+ "compendium": {
+  "mat-pizza-slice": {
+   "name": "Pizza slice",
+   "hint": "Bought by the slice and folded in half."
+  },
+  "bakverk-bagel": {
+   "name": "Bagel with cream cheese",
+   "hint": "The breakfast classic in New York."
+  },
+  "bakverk-cheesecake": {
+   "name": "New York cheesecake",
+   "hint": "Dense and tall, with no frills."
+  },
+  "mat-korv-gatuvagn": {
+   "name": "Hot dog from a street cart",
+   "hint": "The carts stand on street corners in Manhattan."
+  },
+  "fardmedel-gul-taxi": {
+   "name": "Yellow cab",
+   "hint": "The city's official taxis are yellow."
+  },
+  "daggdjur-gra-ekorre": {
+   "name": "Grey squirrel",
+   "hint": "Found in almost every park."
+  }
+ },
+ "ideas": {
+  "US-new-york-ide-frihetsgudinnan": {
+   "title": "The Statue of Liberty and Ellis Island",
+   "body": "Take the first ferry of the morning from Battery Park and spend half the day on both islands.",
+   "duration": "Half a day"
+  },
+  "US-new-york-ide-gratis-hamnen": {
+   "title": "The harbour without paying",
+   "body": "Take the Staten Island Ferry there and back at dusk and walk across Brooklyn Bridge the next day.",
+   "duration": "Half a day"
+  },
+  "US-new-york-ide-high-line": {
+   "title": "The High Line from south to north",
+   "body": "Start in the Meatpacking District and walk north towards Hudson Yards.",
+   "duration": "about 2 h"
+  },
+  "US-new-york-ide-nedre-manhattan": {
+   "title": "Lower Manhattan in one day",
+   "body": "The Statue of Liberty in the morning, the 9/11 Memorial after lunch and the bridge in the evening light.",
+   "duration": "One day"
+  }
+ },
+ "gifts": {
+  "US-present-mugg": {
+   "name": "Mug from a diner or a museum",
+   "body": "Thick white coffee mugs and museum mugs are found in almost every gift shop."
+  },
+  "US-present-godis": {
+   "name": "American candy",
+   "body": "Flavours and brands that are not sold at home."
+  },
+  "US-present-keps": {
+   "name": "Cap from a local team",
+   "body": "The baseball, basketball or hockey team's cap from the city you visit."
+  }
+ }
+}
