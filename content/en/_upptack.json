@@ -146,9 +146,6 @@
    "why": "One of Europe's largest medieval squares and the royal castle of Wawel.",
    "name": "Kraków"
   },
-  "PL-gdansk": {
-   "why": "A Hanseatic city on the Baltic, with gabled houses, amber and sandy beaches not far away."
-  },
   "PL-wroclaw": {
    "why": "A colourful square, islands in the river Oder and small bronze dwarfs all over the city."
   },
@@ -516,6 +513,9 @@
   },
   "AU-sydney": {
    "why": "The Opera House and Harbour Bridge by the harbour, with surf beaches a bus ride away."
+  },
+  "PL-gdansk": {
+   "why": "A Hanseatic city on the Baltic, with gabled houses, amber and sandy beaches not far away."
   }
  },
  "alternatives": {

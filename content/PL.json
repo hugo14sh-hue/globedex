@@ -1,0 +1,514 @@
+{
+ "places": [
+  {
+   "id": "PL",
+   "kind": "country",
+   "name": "Polen",
+   "iso2": "PL",
+   "lat": 52.0,
+   "lon": 19.5,
+   "airport": "WAW"
+  },
+  {
+   "id": "PL-gdansk",
+   "kind": "city",
+   "parent_id": "PL",
+   "name": "Gdańsk",
+   "lat": 54.352,
+   "lon": 18.6466,
+   "airport": "GDN",
+   "smart_months": [
+    1,
+    1,
+    2,
+    3,
+    4,
+    5,
+    5,
+    5,
+    4,
+    3,
+    2,
+    3
+   ],
+   "data": {
+    "transport": [
+     {
+      "mode": "Tåg från flygplatsen",
+      "rating": "bast",
+      "text": "PKM-tåget går mot Gdańsk Główny, ibland med byte i Gdańsk Wrzeszcz. Räkna med 25–45 minuter. Källorna anger olika biljettpriser, från under 5 till 13 zloty."
+     },
+     {
+      "mode": "Buss 210 från flygplatsen",
+      "rating": "bra",
+      "text": "Går till centralstationen på 35–40 minuter. En 75-minutersbiljett kostar 4,80 zloty. På natten går N3."
+     },
+     {
+      "mode": "SKM-tåg till Sopot och Gdynia",
+      "rating": "bra",
+      "text": "De gulblå pendeltågen binder ihop de tre städerna i Trójmiasto."
+     }
+    ],
+    "sources": [
+     "https://www.inyourpocket.com/poland/gdansk/articles/arriving-by-plane",
+     "https://www.airport.gdansk.pl/passenger-area/transportation/bus-p99.html",
+     "https://www.airporttransferportal.com/ar/airport-guides/gdn",
+     "https://www.numbeo.com/cost-of-living/in/Gdansk?displayCurrency=EUR"
+    ],
+    "day_budget_sek": 1000,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Gamla stan, Mariakyrkan och ett av de två stora museerna.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 3,
+      "text": "Hinner båda museerna och en halvdag i Sopot.",
+      "recommended": true
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Lägg till Westerplatte, Oliwa och en dagstur till Malbork.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Główne Miasto",
+      "stay": true,
+      "text": "Den historiska stadskärnan med allt på gångavstånd. Dyrast och mest folk."
+     },
+     {
+      "name": "Magasinsön (Wyspa Spichrzów)",
+      "stay": true,
+      "text": "Nyare hotell och restauranger på andra sidan floden, med utsikt mot kajen."
+     },
+     {
+      "name": "Wrzeszcz",
+      "stay": true,
+      "text": "Bostadsstadsdel med kaféer och egen station för tåget till flygplatsen och Sopot. Billigare."
+     },
+     {
+      "name": "Sopot",
+      "stay": true,
+      "text": "Badort mellan Gdańsk och Gdynia, en kort tågresa bort. Bäst på sommaren."
+     }
+    ],
+    "best_text": "Juni till augusti för stränderna och Dominikusmarknaden, december för julmarknaden.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "month_notes",
+     "smart_months",
+     "stay",
+     "seasons"
+    ],
+    "prices": {
+     "currency": "PLN",
+     "level": 2,
+     "checked": "2026-11-19",
+     "summary": "Billigare än hemma, särskilt öl och enklare mat. Kaffe kostar nästan som i Sverige.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 35,
+       "high": 70,
+       "typical": 45
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 170,
+       "high": 300,
+       "typical": 225
+      },
+      {
+       "key": "snabbmat",
+       "low": 32,
+       "high": 36,
+       "typical": 35
+      },
+      {
+       "key": "ol",
+       "low": 12,
+       "high": 20,
+       "typical": 15
+      },
+      {
+       "key": "kaffe",
+       "low": 10,
+       "high": 18,
+       "typical": 16
+      },
+      {
+       "key": "lokalresa",
+       "typical": 4.8,
+       "note": "75-minutersbiljett på buss och spårvagn."
+      }
+     ],
+     "tips": [
+      "Priserna är Numbeos, angivna i euro och omräknade med Numbeos egen kurs på ungefär 4,37 zloty per euro.",
+      "Andra världskrigets museum har fri entré på tisdagar."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Gdansk?displayCurrency=EUR",
+      "https://www.airporttransferportal.com/ar/airport-guides/gdn"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Kallt, mörkt och blåsigt från havet. Billigast att bo.",
+     "Fortfarande vinter. Bra museiväder.",
+     "Våren dröjer, men dagarna blir längre.",
+     "Milt, och uteserveringarna öppnar.",
+     "Grönt och ljust, före sommarens trängsel.",
+     "Långa kvällar och de första baddagarna.",
+     "Varmast. Dominikusmarknaden börjar i slutet av månaden och stan är full.",
+     "Badväder och Dominikusmarknaden till mitten av månaden. Dyrast att bo.",
+     "Sensommar, varmt i vattnet och färre turister.",
+     "Höst. Svalare och mer regn.",
+     "Grått och rått. Julmarknaden öppnar mot slutet.",
+     "Julmarknad på Targ Węglowy fram till dagen före julafton."
+    ],
+    "events": [
+     {
+      "name": "Julmarknaden",
+      "start": "2026-11-20",
+      "end": "2026-12-23",
+      "text": "På Targ Węglowy i gamla stan. Fri entré.",
+      "source": "https://www.inyourpocket.com/gdansk/christmas-fair_4328e"
+     },
+     {
+      "name": "Dominikusmarknaden (Jarmark św. Dominika)",
+      "start": "2027-07-24",
+      "end": "2027-08-15",
+      "text": "Tre veckors marknad på gatorna i gamla stan, med rötter i år 1260. Datumen kommer från en mässkalender, inte från arrangören. 2026 hölls den 25 juli–16 augusti.",
+      "source": "https://www.cantonfair.net/updated-information/st-dominics-fair-2027-july-gdansk-is-planned-for-2026-07-25"
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Badsäsong",
+      "from": 6,
+      "to": 8
+     },
+     {
+      "name": "Dominikusmarknaden",
+      "from": 7,
+      "to": 8,
+      "text": "Tre veckor från slutet av juli. 2026 hölls den 25 juli–16 augusti.",
+      "source": "https://www.eventseye.com/fairs/f-jarmark-sw.-dominika-16826-0.html"
+     },
+     {
+      "name": "Julmarknad",
+      "from": 11,
+      "to": 12,
+      "text": "2026 pågår den 20 november–23 december.",
+      "source": "https://www.se.pl/trojmiasto/gdansk-przygotowuje-sie-do-jarmarku-w-tym-roku-szykuja-sie-zmiany-w-lokalizacjach-aa-pFEt-b6cf-152r.html"
+     }
+    ]
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "PL-fakta-betala",
+   "place_id": "PL",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: polska zloty (PLN)",
+   "summary": "Landet har zloty (PLN), inte euro.",
+   "body": "",
+   "source_url": "https://www.numbeo.com/cost-of-living/in/Gdansk?displayCurrency=EUR",
+   "verified_on": "2026-11-19"
+  },
+  {
+   "id": "PL-fakta-inresa",
+   "place_id": "PL",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen. Svenskt körkort accepteras normalt inte som resehandling.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "PL-fakta-mobil",
+   "place_id": "PL",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "EU-roaming: samma pris som i Sverige.",
+   "body": "Du betalar som hemma för samtal, sms och surf, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "PL-gdansk-fakta-ta-sig-dit",
+   "place_id": "PL-gdansk",
+   "topic": "transport",
+   "is_rule": false,
+   "title": "Flygplatsen till centrum med tåg eller buss 210",
+   "summary": "Tåget är snabbast. Buss 210 går direkt till centralstationen på 35–40 minuter.",
+   "body": "Tågstationen ligger vid terminalen. Vissa avgångar kräver byte i Gdańsk Wrzeszcz, och då tar resan runt 45 minuter. Bussen stannar mittemot terminalen och en 75-minutersbiljett kostar 4,80 zloty. På natten går buss N3.",
+   "source_url": "https://www.inyourpocket.com/poland/gdansk/articles/arriving-by-plane",
+   "verified_on": "2026-11-19"
+  },
+  {
+   "id": "PL-gdansk-fakta-nattforbud",
+   "place_id": "PL-gdansk",
+   "topic": "alkohol",
+   "is_rule": true,
+   "title": "Butikerna säljer inte alkohol 22–06",
+   "summary": "Butiker och bensinstationer får inte sälja alkohol mellan 22.00 och 06.00.",
+   "body": "Förbudet gäller hela Gdańsk sedan 1 september 2025. Tidigare gällde det bara i stadskärnan. Taxfreebutikerna innanför säkerhetskontrollen på flygplatsen är undantagna.",
+   "source_url": "https://tvn24.pl/trojmiasto/gdansk-zakaz-sprzedazy-alkoholu-w-nocy-st8625051",
+   "verified_on": "2026-11-19"
+  },
+  {
+   "id": "PL-gdansk-fakta-gratis-tisdag",
+   "place_id": "PL-gdansk",
+   "topic": "kuriosa",
+   "is_rule": false,
+   "title": "Gratis museum på tisdagar",
+   "summary": "Andra världskrigets museum har fri entré på tisdagar, men bara 2 500 släpps in.",
+   "body": "Gratisbiljetten hämtas i museets kassa samma dag, en per person. Sista insläpp på tisdagar är 14.30.",
+   "source_url": "https://muzeum1939.pl/en/node/50",
+   "verified_on": "2026-11-19"
+  }
+ ],
+ "items": [
+  {
+   "id": "PL-gdansk-mariakyrkan",
+   "place_id": "PL-gdansk",
+   "category": "byggnad",
+   "name": "Mariakyrkan",
+   "summary": "Tegelkyrka byggd 1343–1502. 405 trappsteg upp till utsikten.",
+   "body": "Kallas världens största tegelkyrka. Tornet är ungefär 80 meter högt, källorna anger 78 eller 82 meter, och har en utsiktsplattform över gamla stan.",
+   "lat": 54.3499,
+   "lon": 18.6533,
+   "must_rank": 1,
+   "source_url": "https://dzieje.pl/dziedzictwo-kulturowe/odtworzono-siodma-wiezyczke-bazyliki-mariackiej-w-gdansku",
+   "verified_on": "2026-11-19",
+   "wiki": "en:St. Mary's Church, Gdańsk"
+  },
+  {
+   "id": "PL-gdansk-solidaritetscentret",
+   "place_id": "PL-gdansk",
+   "category": "museum",
+   "name": "Europeiska solidaritetscentret",
+   "summary": "Museet om Solidaritet vid det gamla varvet. Ljudguide ingår.",
+   "body": "Den fasta utställningen kostar 35–40 zloty beroende på vilken av museets prislistor man läser. Oktober till april är den öppen måndag och onsdag–fredag 10–17, lördag–söndag 10–18 och stängd tisdagar. Byggnaden och de tillfälliga utställningarna är gratis. Räkna med 2,5 timmar.",
+   "lat": 54.3611,
+   "lon": 18.6497,
+   "must_rank": 2,
+   "source_url": "https://ecs.gda.pl/en/plan-your-visit/opening-hours/",
+   "verified_on": "2026-11-19",
+   "wiki": "en:European Solidarity Centre"
+  },
+  {
+   "id": "PL-gdansk-andra-varldskrigets-museum",
+   "place_id": "PL-gdansk",
+   "category": "museum",
+   "name": "Andra världskrigets museum",
+   "summary": "Stort museum nära floden. Stängt måndagar, gratis tisdagar.",
+   "body": "Öppet tisdag–söndag 10–18. Museets egen sida anger 23 zloty för vuxna och 16 med rabatt, en annan källa 29 och 22. På tisdagar är det gratis för högst 2 500 besökare, med sista insläpp 14.30. Räkna med minst tre timmar.",
+   "lat": 54.356,
+   "lon": 18.66,
+   "must_rank": 3,
+   "source_url": "https://muzeum1939.pl/en/home",
+   "verified_on": "2026-11-19",
+   "wiki": "en:Museum of the Second World War"
+  },
+  {
+   "id": "PL-gdansk-westerplatte",
+   "place_id": "PL-gdansk",
+   "category": "sevardhet",
+   "name": "Westerplatte",
+   "summary": "Halvön vid hamninloppet, med ett museum som är en filial till Andra världskrigets museum.",
+   "body": "Utställningen i det gamla kraftverket är öppen tisdag–söndag, vintertid 10–16, och stängd måndagar. Besökscentret har öppet alla dagar.",
+   "lat": 54.4067,
+   "lon": 18.6714,
+   "must_rank": 4,
+   "source_url": "https://muzeum1939.pl/en/visit-and-tickets/westerplatte-visit/opening-hours-8032",
+   "verified_on": "2026-11-19",
+   "wiki": "en:Westerplatte"
+  },
+  {
+   "id": "PL-gdansk-julmarknaden",
+   "place_id": "PL-gdansk",
+   "category": "upplevelse",
+   "name": "Julmarknaden på Targ Węglowy",
+   "summary": "Julby i gamla stan, 20 november–23 december 2026. Fri entré.",
+   "body": "Marknaden har öppet från klockan 12 till 20 eller 21 beroende på veckodag.",
+   "lat": 54.3513,
+   "lon": 18.6484,
+   "must_rank": 5,
+   "source_url": "https://www.inyourpocket.com/gdansk/christmas-fair_4328e",
+   "verified_on": "2026-11-19",
+   "wiki": "pl:Targ Węglowy w Gdańsku"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-pierogi",
+   "category": "mat",
+   "name": "Pierogi",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Fyllda degknyten, kokta eller stekta.",
+   "place_id": "PL"
+  },
+  {
+   "id": "mat-zurek",
+   "category": "mat",
+   "name": "Żurek",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Syrlig soppa på rågmjöl, ofta med korv och ägg.",
+   "place_id": "PL"
+  },
+  {
+   "id": "bakverk-paczek",
+   "category": "bakverk",
+   "name": "Pączek",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Polsk munk fylld med sylt.",
+   "place_id": "PL"
+  },
+  {
+   "id": "fardmedel-skm",
+   "category": "fardmedel",
+   "name": "SKM-tåg",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "Gulblått pendeltåg mellan Gdańsk, Sopot och Gdynia.",
+   "place_id": "PL"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "PL-gdansk-ide-tornet",
+   "place_id": "PL-gdansk",
+   "kind": "i-stan",
+   "title": "Upp i Mariakyrkans torn",
+   "body": "Gå de 405 trappstegen och se gamla stan uppifrån.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "inne",
+    "ute"
+   ]
+  },
+  {
+   "id": "PL-gdansk-ide-gratis-tisdag",
+   "place_id": "PL-gdansk",
+   "kind": "i-stan",
+   "title": "Museum på en gratis tisdag",
+   "body": "Hämta gratisbiljetten till Andra världskrigets museum i kassan på förmiddagen. Sista insläpp är 14.30.",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "inne",
+    "gratis"
+   ]
+  },
+  {
+   "id": "PL-gdansk-ide-varvet",
+   "place_id": "PL-gdansk",
+   "kind": "i-stan",
+   "title": "Solidaritetscentret och varvet",
+   "body": "Ta ljudguiden genom den fasta utställningen. Stängt på tisdagar under vinterhalvåret.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "PL-gdansk-ide-sopot",
+   "place_id": "PL-gdansk",
+   "kind": "utflykt",
+   "title": "Sopot med pendeltåget",
+   "body": "Ta SKM-tåget till Sopot och gå längs stranden.",
+   "duration": "Halvdag",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "PL-gdansk-ide-julmarknad",
+   "place_id": "PL-gdansk",
+   "kind": "i-stan",
+   "title": "Kväll på julmarknaden",
+   "body": "Gå runt på Targ Węglowy när ljusen är tända.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute",
+    "gratis"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "PL-present-barnsten",
+   "place_id": "PL",
+   "name": "Bärnsten",
+   "body": "Gdańsk är känt för sin bärnsten. Köp i en butik som ger äkthetsintyg.",
+   "for_whom": [
+    "mamma",
+    "partner",
+    "mig"
+   ],
+   "keywords": [
+    "smycke",
+    "barnsten"
+   ]
+  },
+  {
+   "id": "PL-present-krowki",
+   "place_id": "PL",
+   "name": "Krówki",
+   "body": "Mjuka polska kolor i papper. Lätta att ta med.",
+   "for_whom": [
+    "van",
+    "pappa",
+    "mig"
+   ],
+   "keywords": [
+    "godis",
+    "kola"
+   ]
+  },
+  {
+   "id": "PL-present-keramik",
+   "place_id": "PL",
+   "name": "Keramik från Bolesławiec",
+   "body": "Blåvit prickig keramik. En mugg är lättast att få hem hel.",
+   "for_whom": [
+    "mamma",
+    "mig"
+   ],
+   "keywords": [
+    "keramik",
+    "kaffe",
+    "inredning"
+   ],
+   "collection_motifs": {
+    "Kaffemuggar": "Blåvit prickig mugg i Bolesławiec-mönster"
+   }
+  }
+ ]
+}

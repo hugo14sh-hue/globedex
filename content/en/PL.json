@@ -1,0 +1,231 @@
+{
+ "places": {
+  "PL": {
+   "name": "Poland"
+  },
+  "PL-gdansk": {
+   "name": "Gdańsk",
+   "data": {
+    "best_text": "June to August for the beaches and St Dominic's Fair, December for the Christmas market.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "The old town, St Mary's Church and one of the two big museums."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for both museums and half a day in Sopot."
+     },
+     {
+      "label": "Five days",
+      "text": "Add Westerplatte, Oliwa and a day trip to Malbork."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Główne Miasto (Main Town)",
+      "text": "The historic centre with everything within walking distance. The most expensive and most crowded."
+     },
+     {
+      "name": "Granary Island (Wyspa Spichrzów)",
+      "text": "Newer hotels and restaurants on the other side of the river, with a view of the quay."
+     },
+     {
+      "name": "Wrzeszcz",
+      "text": "A residential district with cafés and its own station for the train to the airport and Sopot. Cheaper."
+     },
+     {
+      "name": "Sopot",
+      "text": "A seaside resort between Gdańsk and Gdynia, a short train ride away. Best in summer."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "Train from the airport",
+      "text": "The PKM train runs towards Gdańsk Główny, sometimes with a change at Gdańsk Wrzeszcz. Allow 25–45 minutes. Sources give different ticket prices, from under 5 to 13 zloty."
+     },
+     {
+      "mode": "Bus 210 from the airport",
+      "text": "Runs to the central station in 35–40 minutes. A 75-minute ticket costs 4.80 zloty. At night the N3 runs."
+     },
+     {
+      "mode": "SKM train to Sopot and Gdynia",
+      "text": "The yellow and blue commuter trains link the three cities of the Tricity."
+     }
+    ],
+    "events": [
+     {
+      "name": "The Christmas market",
+      "text": "At Targ Węglowy in the old town. Free admission."
+     },
+     {
+      "name": "St Dominic's Fair (Jarmark św. Dominika)",
+      "text": "A three-week market in the streets of the old town, with roots in the year 1260. The dates come from a trade fair calendar, not from the organiser. In 2026 it was held 25 July–16 August."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Swimming season"
+     },
+     {
+      "name": "St Dominic's Fair",
+      "text": "Three weeks from late July. In 2026 it was held 25 July–16 August."
+     },
+     {
+      "name": "Christmas market",
+      "text": "In 2026 it runs 20 November–23 December."
+     }
+    ],
+    "month_notes": [
+     "Cold, dark and windy from the sea. The cheapest time to stay.",
+     "Still winter. Good museum weather.",
+     "Spring is slow to arrive, but the days are getting longer.",
+     "Mild, and the outdoor terraces open.",
+     "Green and bright, before the summer crowds.",
+     "Long evenings and the first swimming days.",
+     "Warmest. St Dominic's Fair starts at the end of the month and the city is full.",
+     "Swimming weather and St Dominic's Fair until mid-month. The most expensive time to stay.",
+     "Late summer, warm sea and fewer tourists.",
+     "Autumn. Cooler and more rain.",
+     "Grey and raw. The Christmas market opens towards the end.",
+     "Christmas market at Targ Węglowy until the day before Christmas Eve."
+    ],
+    "prices": {
+     "summary": "Cheaper than at home, especially beer and simple meals. Coffee costs almost the same as in Sweden.",
+     "tips": [
+      "The prices are Numbeo's, given in euros and converted at Numbeo's own rate of roughly 4.37 zloty per euro.",
+      "The Museum of the Second World War has free admission on Tuesdays."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "75-minute ticket on buses and trams."
+      }
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "PL-fakta-betala": {
+   "title": "Currency: Polish zloty (PLN)",
+   "summary": "The country uses the zloty (PLN), not the euro."
+  },
+  "PL-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen. A Swedish driving licence is not normally accepted as a travel document."
+  },
+  "PL-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "EU roaming: the same price as in Sweden.",
+   "body": "You pay as at home for calls, texts and data, but the operator may set a cap on data abroad."
+  },
+  "PL-gdansk-fakta-ta-sig-dit": {
+   "title": "Airport to the centre by train or bus 210",
+   "summary": "The train is fastest. Bus 210 runs directly to the central station in 35–40 minutes.",
+   "body": "The train station is by the terminal. Some departures require a change at Gdańsk Wrzeszcz, and then the journey takes around 45 minutes. The bus stops opposite the terminal and a 75-minute ticket costs 4.80 zloty. At night bus N3 runs."
+  },
+  "PL-gdansk-fakta-nattforbud": {
+   "title": "Shops do not sell alcohol 10 pm–6 am",
+   "summary": "Shops and petrol stations may not sell alcohol between 10 pm and 6 am.",
+   "body": "The ban has applied to all of Gdańsk since 1 September 2025. Before that it applied only in the city centre. The duty-free shops beyond security at the airport are exempt."
+  },
+  "PL-gdansk-fakta-gratis-tisdag": {
+   "title": "Free museum on Tuesdays",
+   "summary": "The Museum of the Second World War has free admission on Tuesdays, but only 2,500 are let in.",
+   "body": "The free ticket is collected at the museum's ticket office on the day, one per person. Last admission on Tuesdays is 2.30 pm."
+  }
+ },
+ "items": {
+  "PL-gdansk-mariakyrkan": {
+   "name": "St Mary's Church",
+   "summary": "A brick church built 1343–1502. 405 steps up to the view.",
+   "body": "Called the world's largest brick church. The tower is about 80 metres high, sources say 78 or 82 metres, and has a viewing platform over the old town."
+  },
+  "PL-gdansk-solidaritetscentret": {
+   "name": "European Solidarity Centre",
+   "summary": "The museum about Solidarity by the old shipyard. An audio guide is included.",
+   "body": "The permanent exhibition costs 35–40 zloty depending on which of the museum's price lists you read. From October to April it is open Monday and Wednesday–Friday 10 am–5 pm, Saturday–Sunday 10 am–6 pm and closed on Tuesdays. The building and the temporary exhibitions are free. Allow 2.5 hours."
+  },
+  "PL-gdansk-andra-varldskrigets-museum": {
+   "name": "Museum of the Second World War",
+   "summary": "A large museum near the river. Closed on Mondays, free on Tuesdays.",
+   "body": "Open Tuesday–Sunday 10 am–6 pm. The museum's own site gives 23 zloty for adults and 16 with a discount, another source 29 and 22. On Tuesdays it is free for a maximum of 2,500 visitors, with last admission at 2.30 pm. Allow at least three hours."
+  },
+  "PL-gdansk-westerplatte": {
+   "name": "Westerplatte",
+   "summary": "The peninsula at the harbour entrance, with a museum that is a branch of the Museum of the Second World War.",
+   "body": "The exhibition in the old power station is open Tuesday–Sunday, 10 am–4 pm in winter, and closed on Mondays. The visitor centre is open every day."
+  },
+  "PL-gdansk-julmarknaden": {
+   "name": "The Christmas market at Targ Węglowy",
+   "summary": "A Christmas village in the old town, 20 November–23 December 2026. Free admission.",
+   "body": "The market is open from noon to 8 or 9 pm depending on the day of the week."
+  }
+ },
+ "compendium": {
+  "mat-pierogi": {
+   "name": "Pierogi",
+   "hint": "Filled dumplings, boiled or fried."
+  },
+  "mat-zurek": {
+   "name": "Żurek",
+   "hint": "A sour rye-flour soup, often with sausage and egg."
+  },
+  "bakverk-paczek": {
+   "name": "Pączek",
+   "hint": "A Polish doughnut filled with jam."
+  },
+  "fardmedel-skm": {
+   "name": "SKM train",
+   "hint": "A yellow and blue commuter train between Gdańsk, Sopot and Gdynia."
+  }
+ },
+ "ideas": {
+  "PL-gdansk-ide-tornet": {
+   "title": "Up St Mary's Church tower",
+   "body": "Climb the 405 steps and see the old town from above.",
+   "duration": "about 1 h"
+  },
+  "PL-gdansk-ide-gratis-tisdag": {
+   "title": "Museum on a free Tuesday",
+   "body": "Collect the free ticket for the Museum of the Second World War at the ticket office in the morning. Last admission is 2.30 pm.",
+   "duration": "Half a day"
+  },
+  "PL-gdansk-ide-varvet": {
+   "title": "The Solidarity Centre and the shipyard",
+   "body": "Take the audio guide through the permanent exhibition. Closed on Tuesdays in the winter half of the year.",
+   "duration": "Half a day"
+  },
+  "PL-gdansk-ide-sopot": {
+   "title": "Sopot by commuter train",
+   "body": "Take the SKM train to Sopot and walk along the beach.",
+   "duration": "Half a day"
+  },
+  "PL-gdansk-ide-julmarknad": {
+   "title": "An evening at the Christmas market",
+   "body": "Walk around Targ Węglowy when the lights are on.",
+   "duration": "about 2 h"
+  }
+ },
+ "gifts": {
+  "PL-present-barnsten": {
+   "name": "Amber",
+   "body": "Gdańsk is known for its amber. Buy from a shop that gives a certificate of authenticity."
+  },
+  "PL-present-krowki": {
+   "name": "Krówki",
+   "body": "Soft Polish fudge sweets wrapped in paper. Easy to take along."
+  },
+  "PL-present-keramik": {
+   "name": "Ceramics from Bolesławiec",
+   "body": "Blue and white dotted ceramics. A mug is the easiest to get home in one piece."
+  }
+ }
+}

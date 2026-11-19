@@ -234,6 +234,15 @@
     "utsikt"
    ],
    "why": "Operahuset och Harbour Bridge vid hamnen, med surfstränder en bussresa bort."
+  },
+  "PL-gdansk": {
+   "climate": "kust",
+   "tags": [
+    "gamla-stan",
+    "kust",
+    "historia"
+   ],
+   "why": "Hansastad vid Östersjön, med gavelhus, bärnsten och sandstränder en bit bort."
   }
  },
  "places": [
@@ -1188,30 +1197,6 @@
    ],
    "gem": false,
    "why": "Ett av Europas största medeltida torg och kungaborgen Wawel."
-  },
-  {
-   "id": "PL-gdansk",
-   "name": "Gdańsk",
-   "country": "PL",
-   "lat": 54.35,
-   "lon": 18.65,
-   "level": 2,
-   "level_rule": 2,
-   "climate": "kust",
-   "best_months": [
-    5,
-    6,
-    7,
-    8,
-    9
-   ],
-   "tags": [
-    "gamla-stan",
-    "kust",
-    "historia"
-   ],
-   "gem": false,
-   "why": "Hansastad vid Östersjön, med gavelhus, bärnsten och sandstränder en bit bort."
   },
   {
    "id": "PL-wroclaw",
