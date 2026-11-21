@@ -1,9 +1,5 @@
 {
  "places": {
-  "PT-lissabon": {
-   "why": "Hills, tiles and trams at the mouth of the Tagus, with the Atlantic coast a short train ride away.",
-   "name": "Lisbon"
-  },
   "PT-porto": {
    "why": "Port wine cellars along the Douro and an old town that climbs up from the river."
   },
@@ -516,6 +512,9 @@
   },
   "PL-gdansk": {
    "why": "A Hanseatic city on the Baltic, with gabled houses, amber and sandy beaches not far away."
+  },
+  "PT-lissabon": {
+   "why": "Hills, tiles and trams at the mouth of the Tagus, with the Atlantic coast a short train ride away."
   }
  },
  "alternatives": {

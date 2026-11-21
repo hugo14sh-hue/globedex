@@ -1,0 +1,439 @@
+{
+ "places": [
+  {
+   "id": "PT",
+   "kind": "country",
+   "name": "Portugal",
+   "iso2": "PT",
+   "lat": 39.5,
+   "lon": -8.0,
+   "airport": "LIS"
+  },
+  {
+   "id": "PT-lissabon",
+   "kind": "city",
+   "parent_id": "PT",
+   "name": "Lissabon",
+   "lat": 38.7167,
+   "lon": -9.1333,
+   "airport": "LIS",
+   "smart_months": [
+    2,
+    2,
+    3,
+    5,
+    5,
+    4,
+    3,
+    3,
+    5,
+    4,
+    3,
+    2
+   ],
+   "data": {
+    "transport": [
+     {
+      "mode": "Tunnelbanans röda linje från flygplatsen",
+      "rating": "bast",
+      "text": "Flygplatsen ligger 7 km från centrum. En resa kostar 1,90 euro plus 0,50 euro för Navegante-kortet. Till Baixa och Rossio byter man linje, räkna med 20–35 minuter."
+     },
+     {
+      "mode": "Stadsbuss från flygplatsen",
+      "rating": "bra",
+      "text": "Linjerna 744 och 783 tar 30–45 minuter beroende på trafiken."
+     },
+     {
+      "mode": "Tunnelbana, buss och spårvagn",
+      "rating": "bra",
+      "text": "Ladda ett Navegante-kort i en automat. Tunnelbanan går ungefär 06.30–01.00 och en 24-timmarsbiljett kostar 7,25 euro."
+     }
+    ],
+    "sources": [
+     "https://blog.wego.com/lisbon-airport-to-city-centre/",
+     "https://thebettervacation.com/lisbon/lisbon-airport-to-city-centre/",
+     "https://www.lisbontourism.org/lisbon-metro-guide/",
+     "https://www.numbeo.com/cost-of-living/in/Lisbon?displayCurrency=EUR"
+    ],
+    "day_budget_sek": 1300,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Alfama, borgen och en eftermiddag i Belém.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 3,
+      "text": "Hinner Belém i lugn takt, utsiktsplatserna och en kväll i Bairro Alto.",
+      "recommended": true
+     },
+     {
+      "label": "Fem dagar",
+      "days": 5,
+      "text": "Lägg till Sintra och en dag vid kusten i Cascais.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "Baixa och Chiado",
+      "stay": true,
+      "text": "Platt och centralt, med tunnelbana åt alla håll. Dyrast."
+     },
+     {
+      "name": "Alfama",
+      "stay": true,
+      "text": "Den gamla stadsdelen under borgen. Vackert men brant och fullt av trappor."
+     },
+     {
+      "name": "Bairro Alto",
+      "stay": false,
+      "text": "Barkvarter som är högljutt till sent. Bra att gå ut i, sämre att sova i."
+     },
+     {
+      "name": "Príncipe Real",
+      "stay": true,
+      "text": "Lugnare gator med kaféer och butiker, gångavstånd till Chiado."
+     }
+    ],
+    "best_text": "April till juni och september till oktober. Juli och augusti är varma och fulla av turister.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "month_notes",
+     "smart_months",
+     "stay",
+     "seasons"
+    ],
+    "prices": {
+     "currency": "EUR",
+     "level": 2,
+     "checked": "2026-11-20",
+     "summary": "Billigare än hemma, särskilt öl, kaffe och lokaltrafik. Boendet har blivit dyrt.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 11,
+       "high": 20,
+       "typical": 15
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 40,
+       "high": 75,
+       "typical": 55
+      },
+      {
+       "key": "snabbmat",
+       "low": 8,
+       "high": 12,
+       "typical": 10
+      },
+      {
+       "key": "ol",
+       "low": 2,
+       "high": 5,
+       "typical": 3
+      },
+      {
+       "key": "kaffe",
+       "low": 1.2,
+       "high": 4,
+       "typical": 2.7
+      },
+      {
+       "key": "lokalresa",
+       "typical": 1.9,
+       "note": "Enkelbiljett i tunnelbanan med Navegante-kort. Numbeo anger 2,10 euro."
+      }
+     ],
+     "tips": [
+      "En pastel de nata kostar runt 1,30 euro och en bifana runt 2,50 enligt ett par som bott i stan.",
+      "Kyrkan i Jerónimosklostret är gratis. Det är klostergården som kostar."
+     ],
+     "sources": [
+      "https://www.numbeo.com/cost-of-living/in/Lisbon?displayCurrency=EUR",
+      "https://www.lisbontourism.org/lisbon-metro-guide/",
+      "https://www.twoticketsanywhere.com/?p=7188"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Milt men regnigt. Få turister och låga priser.",
+     "Milt och lugnt.",
+     "Våren börjar. Bra väder för att gå i backarna.",
+     "Varmt utan hetta. Bäst för utsiktsplatserna.",
+     "Varmt och torrt, före högsommarens trängsel.",
+     "Varmt och långa kvällar. Fler turister.",
+     "Hett och fullt.",
+     "Hetast, och många Lissabonbor är bortresta.",
+     "Värmen släpper och havet är varmt.",
+     "Milt och klart, med färre turister.",
+     "Mildare och mer regn.",
+     "Svalt och regnigt, men lugnt."
+    ],
+    "seasons": [
+     {
+      "name": "Badsäsong vid kusten",
+      "from": 6,
+      "to": 9
+     }
+    ]
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "PT-fakta-betala",
+   "place_id": "PT",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: euro (EUR)",
+   "summary": "Landet har euro (EUR)."
+  },
+  {
+   "id": "PT-fakta-inresa",
+   "place_id": "PT",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass eller nationellt id-kort",
+   "summary": "Ta pass eller nationellt id-kort. Körkort räknas inte som resehandling.",
+   "body": "Nationellt id-kort gäller för resor inom EU och Schengen. Svenskt körkort accepteras normalt inte som resehandling.",
+   "source_url": "https://regeringen.se/uds-reseinformation/forberedelser-infor-resan/kontrollera-pass-och-visum-innan-du-reser/",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "PT-fakta-mobil",
+   "place_id": "PT",
+   "topic": "mobil",
+   "is_rule": false,
+   "title": "Surfa och ring som hemma",
+   "summary": "EU-roaming: samma pris som i Sverige.",
+   "body": "Du betalar som hemma för samtal, sms och surf, men operatören får sätta ett tak för surfen utomlands.",
+   "source_url": "https://europa.eu/youreurope/citizens/consumers/telecoms-internet/mobile-roaming-costs/index_sv.htm",
+   "verified_on": "2026-11-11"
+  },
+  {
+   "id": "PT-lissabon-fakta-ta-sig-dit",
+   "place_id": "PT-lissabon",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Flygplatsen till centrum med tunnelbana",
+   "summary": "Röda linjen går från flygplatsen. 1,90 euro plus 0,50 för kortet.",
+   "body": "Stationen Aeroporto är linjens ändhållplats. Till Baixa, Chiado och Alfama byter man till gröna linjen i Alameda eller blå linjen i São Sebastião. Tunnelbanan går ungefär 06.30–01.00.",
+   "source_url": "https://blog.wego.com/lisbon-airport-to-city-centre/",
+   "verified_on": "2026-11-20"
+  },
+  {
+   "id": "PT-lissabon-fakta-navegante",
+   "place_id": "PT-lissabon",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Köp ett Navegante-kort direkt",
+   "summary": "Kortet kostar 0,50 euro och laddas i automaterna i tunnelbanan.",
+   "body": "Det gäller på tunnelbana, buss och spårvagn. Man kan också blippa ett kontaktlöst bankkort i tunnelbanan för 1,92 euro per resa.",
+   "source_url": "https://www.lisbontourism.org/lisbon-metro-guide/",
+   "verified_on": "2026-11-20"
+  }
+ ],
+ "items": [
+  {
+   "id": "PT-lissabon-jeronimos",
+   "place_id": "PT-lissabon",
+   "category": "byggnad",
+   "name": "Jerónimosklostret",
+   "summary": "Världsarv i Belém. Klostergården kostar 18 euro, kyrkan är gratis.",
+   "body": "Ett av de främsta exemplen på manuelinsk arkitektur. Biljetten gäller en bestämd tid, så boka den första tiden på morgonen.",
+   "lat": 38.6979,
+   "lon": -9.2068,
+   "must_rank": 1,
+   "source_url": "https://thebettervacation.com/pt/Lisboa/mosteiro-dos-jer%C3%B4nimos/",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Jerónimos Monastery"
+  },
+  {
+   "id": "PT-lissabon-belemtornet",
+   "place_id": "PT-lissabon",
+   "category": "byggnad",
+   "name": "Belémtornet",
+   "summary": "Befästning från 1500-talet vid floden Tejo. 8 euro för vuxna.",
+   "body": "Barn under 12 år går in gratis. Det finns ingen hiss och inga toaletter i tornet.",
+   "lat": 38.6916,
+   "lon": -9.216,
+   "must_rank": 2,
+   "source_url": "https://thebettervacation.com/pt/Lisboa/torre-de-belem/",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Belém Tower"
+  },
+  {
+   "id": "PT-lissabon-sao-jorge",
+   "place_id": "PT-lissabon",
+   "category": "byggnad",
+   "name": "Castelo de São Jorge",
+   "summary": "Borgen på kullen ovanför Alfama, med utsikt över hela staden.",
+   "body": "Öppen 09–21 enligt biljettsajten.",
+   "lat": 38.7139,
+   "lon": -9.1335,
+   "must_rank": 3,
+   "source_url": "https://www.tiqets.com/pt/bilhetes-castelo-de-sao-jorge-l219852/",
+   "verified_on": "2026-11-20",
+   "wiki": "en:São Jorge Castle"
+  },
+  {
+   "id": "PT-lissabon-sparvagn-28",
+   "place_id": "PT-lissabon",
+   "category": "upplevelse",
+   "name": "Spårvagn 28",
+   "summary": "Den gula spårvagnen genom de gamla kvarteren.",
+   "body": "Ingår i Lisboa Card tillsammans med tunnelbana, buss och hissen Santa Justa.",
+   "lat": 38.7119,
+   "lon": -9.1279,
+   "must_rank": 4,
+   "source_url": "https://www.tiqets.com/pt/lisboa-card-mosteiro-dos-jeronimos-b269163/",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Trams in Lisbon"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "bakverk-pastel-de-nata",
+   "category": "bakverk",
+   "name": "Pastel de nata",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Liten vaniljkrämstårta i smördeg, bäst varm med kanel.",
+   "place_id": "PT"
+  },
+  {
+   "id": "mat-bifana",
+   "category": "mat",
+   "name": "Bifana",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Fläskkött i bröd, ätet stående vid disken.",
+   "place_id": "PT"
+  },
+  {
+   "id": "mat-bacalhau",
+   "category": "mat",
+   "name": "Bacalhau",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Torkad och saltad torsk, i hundratals varianter.",
+   "place_id": "PT"
+  },
+  {
+   "id": "fardmedel-gul-sparvagn",
+   "category": "fardmedel",
+   "name": "Gul spårvagn",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "De gamla vagnarna som tar sig uppför Lissabons backar.",
+   "place_id": "PT"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "PT-lissabon-ide-belem",
+   "place_id": "PT-lissabon",
+   "kind": "i-stan",
+   "title": "En förmiddag i Belém",
+   "body": "Boka första tiden i Jerónimosklostret och gå sedan längs floden till Belémtornet.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "PT-lissabon-ide-borgen",
+   "place_id": "PT-lissabon",
+   "kind": "i-stan",
+   "title": "Solnedgång från borgen",
+   "body": "Gå upp genom Alfama till Castelo de São Jorge sent på eftermiddagen.",
+   "duration": "ca 2 h",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "PT-lissabon-ide-nata",
+   "place_id": "PT-lissabon",
+   "kind": "i-stan",
+   "title": "Pastel de nata-test",
+   "body": "Köp en var på tre olika bagerier och rösta om vilken som är bäst.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "PT-lissabon-ide-sparvagn",
+   "place_id": "PT-lissabon",
+   "kind": "i-stan",
+   "title": "Åk spårvagn 28",
+   "body": "Kliv på tidigt på morgonen innan köerna, och håll koll på väskan.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "PT-present-sardiner",
+   "place_id": "PT",
+   "name": "Sardiner i burk",
+   "body": "Burkarna har färgglada etiketter och tål resväskan.",
+   "for_whom": [
+    "pappa",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "mat",
+    "konserv"
+   ]
+  },
+  {
+   "id": "PT-present-kakel",
+   "place_id": "PT",
+   "name": "Azulejo",
+   "body": "En handmålad kakelplatta. Köp nytillverkat, inte gammalt kakel från husfasader.",
+   "for_whom": [
+    "mamma",
+    "mig"
+   ],
+   "keywords": [
+    "inredning",
+    "kakel"
+   ]
+  },
+  {
+   "id": "PT-present-kork",
+   "place_id": "PT",
+   "name": "Något i kork",
+   "body": "Plånböcker, underlägg och väskor i portugisisk kork.",
+   "for_whom": [
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "kork",
+    "vaska"
+   ]
+  }
+ ]
+}

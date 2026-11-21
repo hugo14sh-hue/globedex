@@ -226,7 +226,6 @@
    "is_rule": false,
    "title": "Valuta: polska zloty (PLN)",
    "summary": "Landet har zloty (PLN), inte euro.",
-   "body": "",
    "source_url": "https://www.numbeo.com/cost-of-living/in/Gdansk?displayCurrency=EUR",
    "verified_on": "2026-11-19"
   },
@@ -255,7 +254,7 @@
   {
    "id": "PL-gdansk-fakta-ta-sig-dit",
    "place_id": "PL-gdansk",
-   "topic": "transport",
+   "topic": "ta-sig-dit",
    "is_rule": false,
    "title": "Flygplatsen till centrum med tåg eller buss 210",
    "summary": "Tåget är snabbast. Buss 210 går direkt till centralstationen på 35–40 minuter.",
@@ -277,7 +276,7 @@
   {
    "id": "PL-gdansk-fakta-gratis-tisdag",
    "place_id": "PL-gdansk",
-   "topic": "kuriosa",
+   "topic": "fun-fact",
    "is_rule": false,
    "title": "Gratis museum på tisdagar",
    "summary": "Andra världskrigets museum har fri entré på tisdagar, men bara 2 500 släpps in.",
@@ -334,7 +333,7 @@
    "place_id": "PL-gdansk",
    "category": "sevardhet",
    "name": "Westerplatte",
-   "summary": "Halvön vid hamninloppet, med ett museum som är en filial till Andra världskrigets museum.",
+   "summary": "Halvön vid hamninloppet, med en filial till Andra världskrigets museum.",
    "body": "Utställningen i det gamla kraftverket är öppen tisdag–söndag, vintertid 10–16, och stängd måndagar. Besökscentret har öppet alla dagar.",
    "lat": 54.4067,
    "lon": 18.6714,
@@ -469,7 +468,6 @@
    "body": "Gdańsk är känt för sin bärnsten. Köp i en butik som ger äkthetsintyg.",
    "for_whom": [
     "mamma",
-    "partner",
     "mig"
    ],
    "keywords": [

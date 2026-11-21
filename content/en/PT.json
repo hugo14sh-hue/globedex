@@ -1,0 +1,195 @@
+{
+ "places": {
+  "PT-lissabon": {
+   "name": "Lisbon",
+   "data": {
+    "best_text": "April to June and September to October. July and August are hot and full of tourists.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "Alfama, the castle and an afternoon in Belém."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for Belém at an easy pace, the viewpoints and an evening in Bairro Alto."
+     },
+     {
+      "label": "Five days",
+      "text": "Add Sintra and a day on the coast in Cascais."
+     }
+    ],
+    "areas": [
+     {
+      "name": "Baixa and Chiado",
+      "text": "Flat and central, with the metro in every direction. The most expensive."
+     },
+     {
+      "name": "Alfama",
+      "text": "The old quarter below the castle. Beautiful but steep and full of stairs."
+     },
+     {
+      "name": "Bairro Alto",
+      "text": "A bar district that is noisy until late. Good for going out, worse for sleeping."
+     },
+     {
+      "name": "Príncipe Real",
+      "text": "Quieter streets with cafés and shops, walking distance to Chiado."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "The metro's red line from the airport",
+      "text": "The airport is 7 km from the centre. A ride costs 1.90 euros plus 0.50 euros for the Navegante card. For Baixa and Rossio you change lines, allow 20–35 minutes."
+     },
+     {
+      "mode": "City bus from the airport",
+      "text": "Lines 744 and 783 take 30–45 minutes depending on traffic."
+     },
+     {
+      "mode": "Metro, bus and tram",
+      "text": "Top up a Navegante card at a machine. The metro runs roughly 6.30 am–1 am and a 24-hour ticket costs 7.25 euros."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Swimming season on the coast"
+     }
+    ],
+    "month_notes": [
+     "Mild but rainy. Few tourists and low prices.",
+     "Mild and quiet.",
+     "Spring begins. Good weather for walking the hills.",
+     "Warm without the heat. Best for the viewpoints.",
+     "Warm and dry, before the high-summer crowds.",
+     "Warm with long evenings. More tourists.",
+     "Hot and full.",
+     "The hottest, and many Lisbon residents are away.",
+     "The heat eases and the sea is warm.",
+     "Mild and clear, with fewer tourists.",
+     "Milder and more rain.",
+     "Cool and rainy, but quiet."
+    ],
+    "prices": {
+     "summary": "Cheaper than at home, especially beer, coffee and local transport. Accommodation has become expensive.",
+     "tips": [
+      "A pastel de nata costs around 1.30 euros and a bifana around 2.50 according to a couple who lived in the city.",
+      "The church at Jerónimos Monastery is free. It is the cloister that costs money."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "Single metro ticket with a Navegante card. Numbeo gives 2.10 euros."
+      }
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "PT-fakta-betala": {
+   "title": "Currency: euro (EUR)",
+   "summary": "The country uses the euro (EUR)."
+  },
+  "PT-fakta-inresa": {
+   "title": "Passport or national ID card",
+   "summary": "Bring a passport or national ID card. A driving licence does not count as a travel document.",
+   "body": "A national ID card is valid for travel within the EU and Schengen. A Swedish driving licence is not normally accepted as a travel document."
+  },
+  "PT-fakta-mobil": {
+   "title": "Use data and call as at home",
+   "summary": "EU roaming: the same price as in Sweden.",
+   "body": "You pay as at home for calls, texts and data, but the operator may set a cap on data abroad."
+  },
+  "PT-lissabon-fakta-ta-sig-dit": {
+   "title": "Airport to the centre by metro",
+   "summary": "The red line runs from the airport. 1.90 euros plus 0.50 for the card.",
+   "body": "Aeroporto station is the end of the line. For Baixa, Chiado and Alfama you change to the green line at Alameda or the blue line at São Sebastião. The metro runs roughly 6.30 am–1 am."
+  },
+  "PT-lissabon-fakta-navegante": {
+   "title": "Buy a Navegante card straight away",
+   "summary": "The card costs 0.50 euros and is topped up at the machines in the metro.",
+   "body": "It is valid on the metro, buses and trams. You can also tap a contactless bank card in the metro for 1.92 euros per ride."
+  }
+ },
+ "items": {
+  "PT-lissabon-jeronimos": {
+   "name": "Jerónimos Monastery",
+   "summary": "A World Heritage Site in Belém. The cloister costs 18 euros, the church is free.",
+   "body": "One of the finest examples of Manueline architecture. The ticket is for a set time, so book the first slot of the morning."
+  },
+  "PT-lissabon-belemtornet": {
+   "name": "Belém Tower",
+   "summary": "A 16th-century fortification by the river Tagus. 8 euros for adults.",
+   "body": "Children under 12 enter free. There is no lift and no toilets in the tower."
+  },
+  "PT-lissabon-sao-jorge": {
+   "name": "Castelo de São Jorge",
+   "summary": "The castle on the hill above Alfama, with a view over the whole city.",
+   "body": "Open 9 am–9 pm according to the ticket site."
+  },
+  "PT-lissabon-sparvagn-28": {
+   "name": "Tram 28",
+   "summary": "The yellow tram through the old quarters.",
+   "body": "Included in the Lisboa Card together with the metro, buses and the Santa Justa lift."
+  }
+ },
+ "compendium": {
+  "bakverk-pastel-de-nata": {
+   "name": "Pastel de nata",
+   "hint": "A small custard tart in puff pastry, best warm with cinnamon."
+  },
+  "mat-bifana": {
+   "name": "Bifana",
+   "hint": "Pork in a bread roll, eaten standing at the counter."
+  },
+  "mat-bacalhau": {
+   "name": "Bacalhau",
+   "hint": "Dried and salted cod, in hundreds of variations."
+  },
+  "fardmedel-gul-sparvagn": {
+   "name": "Yellow tram",
+   "hint": "The old cars that climb Lisbon's hills."
+  }
+ },
+ "ideas": {
+  "PT-lissabon-ide-belem": {
+   "title": "A morning in Belém",
+   "body": "Book the first slot at Jerónimos Monastery and then walk along the river to Belém Tower.",
+   "duration": "Half a day"
+  },
+  "PT-lissabon-ide-borgen": {
+   "title": "Sunset from the castle",
+   "body": "Walk up through Alfama to Castelo de São Jorge late in the afternoon.",
+   "duration": "about 2 h"
+  },
+  "PT-lissabon-ide-nata": {
+   "title": "Pastel de nata test",
+   "body": "Buy one each at three different bakeries and vote for the best.",
+   "duration": "about 1 h"
+  },
+  "PT-lissabon-ide-sparvagn": {
+   "title": "Ride tram 28",
+   "body": "Board early in the morning before the queues, and keep an eye on your bag.",
+   "duration": "about 1 h"
+  }
+ },
+ "gifts": {
+  "PT-present-sardiner": {
+   "name": "Tinned sardines",
+   "body": "The tins have colourful labels and survive a suitcase."
+  },
+  "PT-present-kakel": {
+   "name": "Azulejo",
+   "body": "A hand-painted tile. Buy newly made ones, not old tiles from house façades."
+  },
+  "PT-present-kork": {
+   "name": "Something in cork",
+   "body": "Wallets, coasters and bags in Portuguese cork."
+  }
+ }
+}

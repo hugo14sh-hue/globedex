@@ -243,35 +243,19 @@
     "historia"
    ],
    "why": "Hansastad vid Östersjön, med gavelhus, bärnsten och sandstränder en bit bort."
-  }
- },
- "places": [
-  {
-   "id": "PT-lissabon",
-   "name": "Lissabon",
-   "country": "PT",
-   "lat": 38.7251,
-   "lon": -9.1498,
-   "level": 2,
-   "level_rule": 2,
+  },
+  "PT-lissabon": {
    "climate": "medelhav",
-   "best_months": [
-    4,
-    5,
-    6,
-    9,
-    10
-   ],
    "tags": [
     "storstad",
     "mat",
     "utsikt",
     "nattliv"
    ],
-   "gem": false,
-   "why": "Kullar, kakel och spårvagnar vid Tejos mynning, med Atlantkusten en kort tågresa bort.",
-   "citybreak_gbp": 358
-  },
+   "why": "Kullar, kakel och spårvagnar vid Tejos mynning, med Atlantkusten en kort tågresa bort."
+  }
+ },
+ "places": [
   {
    "id": "PT-porto",
    "name": "Porto",
