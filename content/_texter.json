@@ -1041,7 +1041,12 @@
     "land.GB-nir": "Nordirland",
     "landlista.delade.val": "Räkna England, Skottland, Wales och Nordirland som fyra länder",
     "landlista.delade.hjalp": "FN räknar Storbritannien som ett land. Med det här valet räknas de fyra delarna var för sig, på kartan och i statistiken.",
-    "karta.delade.flytta": "Du har markerat {plats} som ett land. Välj vilka delar det gäller."
+    "karta.delade.flytta": "Du har markerat {plats} som ett land. Välj vilka delar det gäller.",
+    "vi.vy.hjalp.jag": "Det du har markerat själv och det ni har markerat som tillsammans.",
+    "vi.vy.hjalp.annan": "Det {namn} har markerat och det ni har markerat som tillsammans. Privata markeringar visas inte.",
+    "vi.marken.for": "Märken för {namn}",
+    "vi.tidslinje.for": "Tidslinje för {namn}",
+    "vi.marken.valj": "Märken och tidslinje är personliga. Välj Jag eller ett namn ovan."
   },
   "marken": [
     {

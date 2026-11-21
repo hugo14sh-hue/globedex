@@ -797,11 +797,23 @@ test('röktest', async ({ page }) => {
       await expect(sheet.getByRole('radio')).toHaveCount(4);
       await sheet.getByRole('button', { name: tx('knapp.stang') }).click();
 
-      // Vi i läget Tillsammans (förvalt): landet räknas.
+      // Vi: läget Jag är förvalt och visar märken och tidslinje (Körning 22).
       await page.goto('/vi');
       const views = page.getByRole('group', { name: tx('vi.vy.aria') });
-      await expect(views.getByRole('button', { name: tx('vi.vy.tillsammans'), exact: true })).toHaveAttribute('aria-pressed', 'true', { timeout: 20_000 });
+      await expect(views.getByRole('button', { name: tx('vi.vy.jag'), exact: true })).toHaveAttribute('aria-pressed', 'true', { timeout: 20_000 });
+      await expect(page.getByText(tx('vi.vy.hjalp.jag'))).toBeVisible();
+      await expect(page.getByRole('heading', { name: tx('vi.del.marken'), exact: true })).toBeVisible();
+      await expect(page.locator('.vi-marks .card.mark').first()).toBeVisible();
+      await expect(page.getByText(tx('vi.marken.valj'))).toHaveCount(0);
+
+      // Läget Tillsammans: landet räknas, och märken och tidslinje ersätts av vi.marken.valj.
+      await views.getByRole('button', { name: tx('vi.vy.tillsammans'), exact: true }).click();
+      await expect(views.getByRole('button', { name: tx('vi.vy.tillsammans'), exact: true })).toHaveAttribute('aria-pressed', 'true');
       await expect(page.getByText(tx('vi.vy.hjalp.tillsammans'))).toBeVisible();
+      await expect(page.getByText(tx('vi.marken.valj'))).toBeVisible();
+      await expect(page.getByRole('heading', { name: tx('vi.del.marken'), exact: true })).toHaveCount(0);
+      await expect(page.locator('.vi-marks')).toHaveCount(0);
+      await expect(page.getByRole('heading', { name: tx('vi.del.tidslinje'), exact: true })).toHaveCount(0);
       await page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first().click();
       await expect(page.getByRole('dialog').getByText(name, { exact: true })).toBeVisible();
       await page.getByRole('dialog').getByRole('button', { name: tx('knapp.stang') }).click();
@@ -963,7 +975,7 @@ test('röktest', async ({ page }) => {
       await page.goto('/vi');
       const tile = page.locator('button.card.stat', { hasText: tx('vi.siffror.lander') }).first();
       await expect(tile.locator('.num')).toHaveText(/^\d+ av \d+$/, { timeout: 20_000 });
-      // Par och grupp: egna markeringar räknas i vyn Jag (Tillsammans är förvalt).
+      // Par och grupp: egna markeringar räknas i vyn Jag (förvalt sedan Körning 22).
       const jag = page.locator(`[aria-label="${tx('vi.vy.aria')}"]`).getByRole('button', { name: tx('vi.vy.jag'), exact: true });
       if (await jag.count()) {
         await jag.click();

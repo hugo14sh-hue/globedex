@@ -1037,7 +1037,12 @@
     "land.GB-nir": "Northern Ireland",
     "landlista.delade.val": "Count England, Scotland, Wales and Northern Ireland as four countries",
     "landlista.delade.hjalp": "The UN counts the United Kingdom as one country. With this on, the four parts are counted separately, on the map and in the statistics.",
-    "karta.delade.flytta": "You have marked {plats} as one country. Choose which parts it applies to."
+    "karta.delade.flytta": "You have marked {plats} as one country. Choose which parts it applies to.",
+    "vi.vy.hjalp.jag": "What you have marked yourself and what you have marked as together.",
+    "vi.vy.hjalp.annan": "What {namn} has marked and what you have marked as together. Private entries are not shown.",
+    "vi.marken.for": "Badges for {namn}",
+    "vi.tidslinje.for": "Timeline for {namn}",
+    "vi.marken.valj": "Badges and the timeline are personal. Choose Me or a name above."
   },
   "marken": [
     {

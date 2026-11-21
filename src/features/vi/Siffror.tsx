@@ -9,14 +9,14 @@ import { placeName } from '../../lib/content';
 import { badges } from '../../lib/texter';
 import { useT } from '../../lib/useT';
 import { formatDate } from '../karta/format';
-import { badgeStates, tripDays, type BadgeState } from './marken';
+import { tripDays, type BadgeState } from './marken';
 import type { ViData } from './useViData';
-import { numbers, timeline, type TimelineType } from './viLogic';
+import { numbers, timeline, toastBadges, viewBadges, viewInput, type TimelineType } from './viLogic';
 import { continentLabel } from '../../lib/continentNames';
 import { LOCALE, numberFormat } from '../../lib/locale';
 import { Segment } from '../../components/Segment';
 import { useSession } from '../../lib/session';
-import { viewStatuses, type ViView } from '../../lib/togetherLogic';
+import { isPersonView, type ViView } from '../../lib/togetherLogic';
 
 const nf = { format: (n: number) => numberFormat().format(n) };
 
@@ -54,27 +54,26 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
   const [badge, setBadge] = useState<BadgeState | null>(null);
   const [allTl, setAllTl] = useState(false);
   const x = data.input;
-  // Par och grupp: vems siffror (tillsammans, någon av oss, jag, den andra). Gäller länder, kontinenter,
-  // landskap och delstater. Resor, fynd och bucketlistan räknas som förut i alla lägen.
+  // Par och grupp: vems siffror (tillsammans, någon av oss, jag, den andra). Siffror, märken och tidslinje
+  // hör till en person (Körning 22). Resor och bucketlistan är gruppens och räknas lika i alla lägen.
   const others = useMemo(
     () => (x.mode === 'solo' ? [] : members.filter((m) => m.user_id !== userId && data.memberIds.includes(m.user_id))),
     [x.mode, members, userId, data.memberIds],
   );
   const views: ViView[] = x.mode !== 'solo' ? ['tillsammans', 'nagon', 'jag', ...others.map((m) => m.user_id)] : [];
-  const [viewPicked, setView] = useState<ViView>('tillsammans');
-  const view: ViView | null = views.length ? (views.includes(viewPicked) ? viewPicked : 'tillsammans') : null;
-  const counted = useMemo(
-    () => (view ? { ...x, statuses: viewStatuses(view, data.statusRows, userId, data.memberIds, data.groupId) } : x),
-    [view, x, data.statusRows, data.memberIds, data.groupId, userId],
-  );
+  const [viewPicked, setView] = useState<ViView>('jag');
+  const view: ViView | null = views.length ? (views.includes(viewPicked) ? viewPicked : 'jag') : null;
+  const counted = useMemo(() => viewInput(view, x, userId, data), [view, x, userId, data]);
   const nums = useMemo(() => numbers(counted, data.compendium.length), [counted, data.compendium.length]);
-  const states = useMemo(() => badgeStates(badges(), x), [x]);
-  useNewBadgeToast(states, userId);
+  // Märken och tidslinje: bara i en persons läge (null i Tillsammans och Någon av oss).
+  const states = useMemo(() => viewBadges(view, badges(), counted), [view, counted]);
+  useNewBadgeToast(toastBadges(view, states), userId);
+  const otherName = view && view !== 'jag' && isPersonView(view) ? (others.find((m) => m.user_id === view)?.display_name ?? '') : null;
   const findName = useMemo(() => {
     const m = new Map(data.compendium.map((c) => [c.id, c.name]));
     return (id: string) => m.get(id) ?? id;
   }, [data.compendium]);
-  const tl = useMemo(() => timeline(x, states, findName), [x, states, findName]);
+  const tl = useMemo(() => (states ? timeline(counted, states, findName) : []), [counted, states, findName]);
   const name = (id: string) => placeName(data.places, id);
 
   const tiles: { id: StatId; value: string; label: string }[] = [
@@ -141,7 +140,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
       case 'fynd':
         return {
           title: t('vi.siffror.fynd'),
-          rows: [...x.finds]
+          rows: [...counted.finds]
             .sort((a, b) => (b.found_on ?? '').localeCompare(a.found_on ?? ''))
             .map((f) => ({
               key: f.compendium_id,
@@ -179,7 +178,7 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
                   : t('vi.vy.annan', { namn: others.find((m) => m.user_id === v)?.display_name ?? '' }),
             }))}
           />
-          {(view === 'tillsammans' || view === 'nagon') && <p className="mu">{t(`vi.vy.hjalp.${view}`)}</p>}
+          <p className="mu">{otherName !== null ? t('vi.vy.hjalp.annan', { namn: otherName }) : t(`vi.vy.hjalp.${view}`)}</p>
         </div>
       )}
       {empty && (
@@ -196,49 +195,57 @@ export function Siffror({ data, userId }: { data: ViData; userId: string }) {
         ))}
       </div>
 
-      <h2 className="eb">{t('vi.del.marken')}</h2>
-      <div className="g3 vi-marks">
-        {states.map((s) => (
-          <button key={s.badge.id} type="button" className={`card mark${s.earned ? ' on' : ''}`} onClick={() => setBadge(s)}>
-            <span className="badge" aria-hidden="true">
-              <Icon name={s.earned ? 'star' : 'lock'} size={20} />
-            </span>
-            <b>{s.badge.name}</b>
-            <span className="mu">
-              {s.earned ? (s.levels.length > 1 ? t('marke.niva', { antal: s.level }) : t('marke.uppnatt')) : t('marke.last')}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <h2 className="eb">{t('vi.del.tidslinje')}</h2>
-      {tl.length === 0 ? (
+      {!states ? (
         <div className="card soft">
-          <p>{t('vi.tidslinje.tom')}</p>
+          <p>{t('vi.marken.valj')}</p>
         </div>
       ) : (
-        <div className="col">
-          {(allTl ? tl : tl.slice(0, TL_FIRST)).map((e, i) => {
-            const sub = `${t(`tidslinje.typ.${e.type}`)} · ${formatDate(e.date)}`;
-            const title = e.level ? `${e.title} · ${t('marke.niva', { antal: e.level })}` : e.title;
-            return (
-              <Row
-                key={`${e.type}-${e.date}-${e.title}-${i}`}
-                icon={TL_ICON[e.type]}
-                title={title}
-                sub={sub}
-                to={e.tripId ? `/resor/${e.tripId}` : undefined}
-                onClick={e.type === 'marke' ? () => setBadge(states.find((s) => s.badge.name === e.title) ?? null) : undefined}
-                right={e.tripId || e.type === 'marke' ? undefined : <span />}
-              />
-            );
-          })}
-          {!allTl && tl.length > TL_FIRST && (
-            <button type="button" className="btn ghost" onClick={() => setAllTl(true)}>
-              {t('knapp.visa-alla')}
-            </button>
+        <>
+          <h2 className="eb">{otherName !== null ? t('vi.marken.for', { namn: otherName }) : t('vi.del.marken')}</h2>
+          <div className="g3 vi-marks">
+            {states.map((s) => (
+              <button key={s.badge.id} type="button" className={`card mark${s.earned ? ' on' : ''}`} onClick={() => setBadge(s)}>
+                <span className="badge" aria-hidden="true">
+                  <Icon name={s.earned ? 'star' : 'lock'} size={20} />
+                </span>
+                <b>{s.badge.name}</b>
+                <span className="mu">
+                  {s.earned ? (s.levels.length > 1 ? t('marke.niva', { antal: s.level }) : t('marke.uppnatt')) : t('marke.last')}
+                </span>
+              </button>
+            ))}
+          </div>
+    
+          <h2 className="eb">{otherName !== null ? t('vi.tidslinje.for', { namn: otherName }) : t('vi.del.tidslinje')}</h2>
+          {tl.length === 0 ? (
+            <div className="card soft">
+              <p>{t('vi.tidslinje.tom')}</p>
+            </div>
+          ) : (
+            <div className="col">
+              {(allTl ? tl : tl.slice(0, TL_FIRST)).map((e, i) => {
+                const sub = `${t(`tidslinje.typ.${e.type}`)} · ${formatDate(e.date)}`;
+                const title = e.level ? `${e.title} · ${t('marke.niva', { antal: e.level })}` : e.title;
+                return (
+                  <Row
+                    key={`${e.type}-${e.date}-${e.title}-${i}`}
+                    icon={TL_ICON[e.type]}
+                    title={title}
+                    sub={sub}
+                    to={e.tripId ? `/resor/${e.tripId}` : undefined}
+                    onClick={e.type === 'marke' ? () => setBadge(states.find((s) => s.badge.name === e.title) ?? null) : undefined}
+                    right={e.tripId || e.type === 'marke' ? undefined : <span />}
+                  />
+                );
+              })}
+              {!allTl && tl.length > TL_FIRST && (
+                <button type="button" className="btn ghost" onClick={() => setAllTl(true)}>
+                  {t('knapp.visa-alla')}
+                </button>
+              )}
+            </div>
           )}
-        </div>
+        </>
       )}
 
       <BottomSheet open={stat !== null} title={d.title} onClose={() => setStat(null)}>

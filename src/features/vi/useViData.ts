@@ -9,7 +9,7 @@ import { fetchBucketItems, fetchCollections, type Collection } from '../../lib/l
 import { fetchReviews, type Review } from '../../lib/reviews';
 import { useSession, useTravelMode } from '../../lib/session';
 import { isStatus } from '../../lib/statusLogic';
-import { toRows, type StatusRow } from '../../lib/togetherLogic';
+import { personStatuses, toRows, type StatusRow } from '../../lib/togetherLogic';
 import { supabase } from '../../lib/supabase';
 import { fetchExpenseRows, fetchLegCounts, fetchPackingStats, fetchTrips, type Trip } from '../../lib/trips';
 import { todayIso } from '../../lib/tripLogic';
@@ -17,6 +17,7 @@ import { CHECK_KIND } from '../../lib/vaultCrypto';
 import { useTheme } from '../../theme/ThemeProvider';
 import { useLang } from '../../lib/useT';
 import { emptyInput, type ViInput } from './marken';
+import type { ViSource } from './viLogic';
 
 export interface ViData {
   input: ViInput;
@@ -30,6 +31,11 @@ export interface ViData {
   statusRows: StatusRow[];
   memberIds: string[];
   groupId: string;
+  /** Fynd och avbockat per medlem (andras privata rader släpps inte igenom av RLS). */
+  findsByUser: ViSource['findsByUser'];
+  checksByUser: ViSource['checksByUser'];
+  /** Egen palett per medlem, ur profiles.settings. */
+  customPaletteByUser: Record<string, boolean>;
 }
 
 const ok = <T,>(r: PromiseSettledResult<T>, fallback: T): T => (r.status === 'fulfilled' ? r.value : fallback);
@@ -75,17 +81,20 @@ export function useViData() {
     const memberIds = memberKey ? memberKey.split(',') : [me];
     (async () => {
       const today = todayIso();
-      const [placesR, compR, itemsR, statusR, findsR, checksR, tripsR, bucketR, votesR, ideasR, reviewsR, colsR, vaultR, groupStatusR] = await Promise.allSettled([
+      const [placesR, compR, itemsR, statusR, findsR, checksR, tripsR, bucketR, votesR, ideasR, reviewsR, colsR, vaultR, groupStatusR, profilesR] = await Promise.allSettled([
         fetchPlaces(),
         fetchCompendium(),
         fetchAllItems(),
         rows<{ place_id: string; status: string; updated_at: string | null }>(
           supabase.from('place_status').select('place_id, status, updated_at').eq('user_id', me),
         ),
-        rows<{ compendium_id: string; found_on: string | null; place_id: string | null }>(
-          supabase.from('finds').select('compendium_id, found_on, place_id').eq('user_id', me),
+        // Fynd och avbockat för alla medlemmar: siffror och märken hör till en person (Körning 22).
+        rows<{ user_id: string; compendium_id: string; found_on: string | null; place_id: string | null }>(
+          supabase.from('finds').select('user_id, compendium_id, found_on, place_id').in('user_id', memberIds),
         ),
-        rows<{ item_id: string; done_on: string }>(supabase.from('item_checks').select('item_id, done_on').eq('user_id', me)),
+        rows<{ user_id: string; item_id: string; done_on: string }>(
+          supabase.from('item_checks').select('user_id, item_id, done_on').in('user_id', memberIds),
+        ),
         fetchTrips(gid),
         fetchBucketItems(gid),
         rows<{ user_id: string; catalog_id: string; wants: boolean | null; voted_at: string }>(
@@ -100,6 +109,10 @@ export function useViData() {
         rows<{ user_id: string; place_id: string; status: string; together_group: string | null; updated_at: string | null }>(
           supabase.from('place_status').select('user_id, place_id, status, together_group, updated_at').in('user_id', memberIds),
         ),
+        // Bara paletten behövs, för märket för egen palett när man tittar på en annan medlem.
+        mode === 'solo'
+          ? Promise.resolve([] as { id: string; settings: { theme?: { palette?: string } } | null }[])
+          : rows<{ id: string; settings: { theme?: { palette?: string } } | null }>(supabase.from('profiles').select('id, settings').in('id', memberIds)),
       ]);
       const trips = ok(tripsR, [] as Trip[]);
       const ids = trips.map((t) => t.id);
@@ -122,26 +135,39 @@ export function useViData() {
       const reviews = ok(reviewsR, [] as Review[]);
       const catalogById = new Map(catalog.map((c) => [c.id, c]));
       const bucket = ok(bucketR, [] as BucketItem[]).map((b) => ({ ...b, title: bucketTitle(b, catalogById) }));
+      const findsByUser: ViSource['findsByUser'] = {};
+      for (const f of ok(findsR, [])) (findsByUser[f.user_id] ??= []).push({ compendium_id: f.compendium_id, found_on: f.found_on, place_id: f.place_id });
+      const checksByUser: ViSource['checksByUser'] = {};
+      for (const c of ok(checksR, [])) (checksByUser[c.user_id] ??= []).push({ item_id: c.item_id, done_on: c.done_on });
+      const customPaletteByUser: Record<string, boolean> = {};
+      for (const p of ok(profilesR, [])) customPaletteByUser[p.id] = p.settings?.theme?.palette === 'egen';
+      customPaletteByUser[me] = customPalette;
+      const statusRows = toRows(ok(groupStatusR, []));
+      const ownRows = ok(statusR, [])
+        .filter((s) => isStatus(s.status))
+        .map((s) => ({ place_id: s.place_id, status: s.status as ViInput['statuses'][number]['status'], updated_at: s.updated_at }));
+      // Par och grupp: mina platser är mina rader plus det gruppen har markerat som tillsammans.
+      // Solo räknar som förut på de egna raderna.
+      const statuses = mode !== 'solo' && groupStatusR.status === 'fulfilled' ? personStatuses(me, statusRows, memberIds, gid) : ownRows;
 
       const input: ViInput = {
         ...emptyInput(mode, today),
-        statuses: ok(statusR, [])
-          .filter((s) => isStatus(s.status))
-          .map((s) => ({ place_id: s.place_id, status: s.status as ViInput['statuses'][number]['status'], updated_at: s.updated_at })),
+        statuses,
         countryList,
         splitCountries,
         seRegions: places.filter((p) => p.parent_id === 'SE' && p.layer === 'landskap').map((p) => p.id),
         usStates: places.filter((p) => p.parent_id === 'US' && p.layer === 'delstat').map((p) => p.id),
         trips,
         legCounts: ok(legsR, {}),
-        finds: ok(findsR, []),
+        finds: findsByUser[me] ?? [],
         rarity: Object.fromEntries(compendium.map((c) => [c.id, c.rarity])),
         itemsByPlace,
-        checks: ok(checksR, []),
+        checks: checksByUser[me] ?? [],
         bucket,
         matches: matchesFrom(ok(votesR, []), memberIds),
         savedIdeas: ok(ideasR, []),
-        reviews,
+        // Omdömen räknas på den som skrev dem. Solo: alla i sologruppen är ens egna.
+        reviews: mode === 'solo' ? reviews : reviews.filter((r) => r.created_by === me),
         collectionEntries: collections.flatMap((c) => c.entries),
         expensesByTrip,
         memberIds,
@@ -149,7 +175,21 @@ export function useViData() {
         vault: ok(vaultR, []).filter((v) => v.kind !== CHECK_KIND),
         customPalette,
       };
-      setData({ input, places, compendium, trips, bucket, collections, reviews, statusRows: toRows(ok(groupStatusR, [])), memberIds, groupId: gid });
+      setData({
+        input,
+        places,
+        compendium,
+        trips,
+        bucket,
+        collections,
+        reviews,
+        statusRows,
+        memberIds,
+        groupId: gid,
+        findsByUser,
+        checksByUser,
+        customPaletteByUser,
+      });
     })();
     return () => {
       alive = false;

@@ -1,10 +1,101 @@
 // Ren logik för fliken Vi: siffror, Wrapped, tidslinje och texten till Exportera till Claude.
 // Allt räknas ut i appen. Testas i viLogic.test.ts.
 import type { BadgeState, TripLike, ViInput } from './marken';
-import { doneTrips, tripDays, visitedContinents, visitedCountries, visitedRegions } from './marken';
+import { badgeStates, doneTrips, parseRule, tripDays, visitedContinents, visitedCountries, visitedRegions } from './marken';
+import type { Badge } from '../../lib/texter';
+import { isPersonView, viewStatuses, type StatusRow, type ViView } from '../../lib/togetherLogic';
 import { countryIdFor } from '../../lib/statusLogic';
 import { countryListTotal, countsAsCountry } from '../../lib/landlistor';
 import { LOCALE } from '../../lib/locale';
+
+// ---------- Vems siffror (Körning 22) ----------
+
+type Find = ViInput['finds'][number];
+type Check = ViInput['checks'][number];
+
+/** Det som läget för siffrorna räknas från, utöver den inloggades underlag (ViInput). */
+export interface ViSource {
+  statusRows: StatusRow[];
+  memberIds: string[];
+  groupId: string;
+  /** Fynd per medlem. Andras privata rader släpps inte igenom av RLS. */
+  findsByUser: Record<string, Find[]>;
+  /** Avbockade listpunkter per medlem. Andras privata rader släpps inte igenom av RLS. */
+  checksByUser: Record<string, Check[]>;
+  /** Gruppens omdömen med vem som skrev dem. */
+  reviews: { created_by: string | null; created_at: string }[];
+  /** Egen palett per medlem (profiles.settings). */
+  customPaletteByUser: Record<string, boolean>;
+}
+
+/**
+ * Märken som bygger på sådant som bara personen själv kan läsa (samlingar och Valvet).
+ * De visas inte alls när man tittar på en annan medlem.
+ */
+export const OWN_ONLY_METRICS = new Set(['collection_entries_total', 'vault_items']);
+
+/**
+ * Fynden i gruppens lägen. Någon av oss: fynd som minst en medlem har (tidigaste datumet).
+ * Tillsammans: fynd som alla medlemmar har (datumet när den sista hittade det).
+ */
+export function groupFinds(view: 'tillsammans' | 'nagon', findsByUser: Record<string, Find[]>, memberIds: string[]): Find[] {
+  const by = new Map<string, { users: Set<string>; first: Find; last: Find }>();
+  for (const u of memberIds)
+    for (const f of findsByUser[u] ?? []) {
+      const cur = by.get(f.compendium_id);
+      if (!cur) {
+        by.set(f.compendium_id, { users: new Set([u]), first: f, last: f });
+        continue;
+      }
+      cur.users.add(u);
+      // Någon av oss: tidigaste kända datumet. Tillsammans: senaste datumet, okänt om någon saknar datum.
+      if (f.found_on && (!cur.first.found_on || f.found_on < cur.first.found_on)) cur.first = f;
+      if (!f.found_on || (cur.last.found_on && f.found_on > cur.last.found_on)) cur.last = f;
+    }
+  const out: Find[] = [];
+  for (const m of by.values()) {
+    if (view === 'nagon') out.push(m.first);
+    else if (memberIds.length && memberIds.every((u) => m.users.has(u))) out.push(m.last);
+  }
+  return out;
+}
+
+/**
+ * Underlaget för valt läge. x är den inloggades underlag (platserna redan enligt personStatuses).
+ * - null (solo) och jag: x som det är
+ * - en annan medlem: den medlemmens platser, fynd, avbockat, omdömen och palett. Samlingar och Valvet är tomma.
+ * - tillsammans och nagon: gruppens platser och fynd. Märken och tidslinje räknas inte i de lägena.
+ * Resor, bucketlistan, sparade idéer, resekassan och packlistorna är gruppens och lika i alla lägen.
+ */
+export function viewInput(view: ViView | null, x: ViInput, me: string, src: ViSource): ViInput {
+  if (!view || view === 'jag') return x;
+  const statuses = viewStatuses(view, src.statusRows, me, src.memberIds, src.groupId);
+  if (view === 'tillsammans' || view === 'nagon') return { ...x, statuses, finds: groupFinds(view, src.findsByUser, src.memberIds) };
+  return {
+    ...x,
+    statuses,
+    finds: src.findsByUser[view] ?? [],
+    checks: src.checksByUser[view] ?? [],
+    reviews: src.reviews.filter((r) => r.created_by === view),
+    collectionEntries: [],
+    vault: [],
+    customPalette: src.customPaletteByUser[view] ?? false,
+  };
+}
+
+/**
+ * Märkena i valt läge. Tillsammans och Någon av oss: inga (null). En annan medlem: utan märken för
+ * samlingar och Valvet. Solo (null) och jag: alla som visas i reseläget.
+ */
+export function viewBadges(view: ViView | null, list: Badge[], x: ViInput): BadgeState[] | null {
+  if (view && !isPersonView(view)) return null;
+  const own = !view || view === 'jag';
+  return badgeStates(own ? list : list.filter((b) => !OWN_ONLY_METRICS.has(parseRule(b).metric)), x);
+}
+
+/** Märken som får ge toast och konfetti: bara den inloggades egna, i solo eller läget Jag. */
+export const toastBadges = (view: ViView | null, states: BadgeState[] | null): BadgeState[] | null =>
+  !view || view === 'jag' ? states : null;
 
 // ---------- Siffror ----------
 

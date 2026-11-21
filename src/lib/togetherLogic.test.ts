@@ -3,10 +3,12 @@ import {
   allowsTogether,
   defaultTripGroup,
   filterTrips,
+  isPersonView,
   isSoloTrip,
   myMap,
   ourMap,
   ourVisited,
+  personStatuses,
   showTripFilter,
   togetherFor,
   togetherPlaces,
@@ -159,13 +161,69 @@ describe('de fyra lägena i Vi', () => {
     expect(ids('nagon')).toEqual(['DK:mellan', 'ES:bor', 'FR:besokt', 'IT:besokt', 'NO:vill']);
   });
 
-  it('jag: bara mina rader', () => {
-    expect(ids('jag')).toEqual(['DK:mellan', 'FR:besokt', 'IT:besokt']);
+  it('jag: mina rader plus det den andra har markerat som tillsammans', () => {
+    expect(ids('jag')).toEqual(['DK:mellan', 'ES:bor', 'FR:besokt', 'IT:besokt']);
   });
 
-  it('den andra: bara den personens rader, och en okänd person ger inget', () => {
-    expect(ids('du')).toEqual(['ES:bor', 'IT:besokt', 'NO:vill']);
+  it('den andra: den personens rader plus det jag har markerat som tillsammans, och en okänd person ger inget', () => {
+    expect(ids('du')).toEqual(['DK:mellan', 'ES:bor', 'IT:besokt', 'NO:vill']);
     expect(ids('okand')).toEqual([]);
+  });
+
+  it('personens lägen och gruppens lägen', () => {
+    expect(isPersonView('jag')).toBe(true);
+    expect(isPersonView('du')).toBe(true);
+    expect(isPersonView('tillsammans')).toBe(false);
+    expect(isPersonView('nagon')).toBe(false);
+  });
+});
+
+describe('en persons platser (Körning 22)', () => {
+  const members = ['jag', 'du'];
+  const ids = (rows: StatusRow[], person = 'jag') =>
+    personStatuses(person, rows, members, G)
+      .map((s) => `${s.place_id}:${s.status}`)
+      .sort();
+
+  it('egen rad räknas, med eller utan tillsammans', () => {
+    expect(ids([row('jag', 'FR', 'besokt'), row('jag', 'IT', 'besokt', G), row('jag', 'NO', 'vill')])).toEqual(['FR:besokt', 'IT:besokt', 'NO:vill']);
+  });
+
+  it('en annans rad med tillsammans räknas med samma status', () => {
+    expect(ids([row('du', 'ES', 'bor', G), row('du', 'PT', 'bott', G), row('du', 'DK', 'mellan', G), row('du', 'IT', 'besokt', G)])).toEqual([
+      'DK:mellan',
+      'ES:bor',
+      'IT:besokt',
+      'PT:bott',
+    ]);
+  });
+
+  it('en annans rad utan tillsammans räknas inte, inte heller tillsammans med en annan grupp', () => {
+    expect(ids([row('du', 'FR', 'besokt'), row('du', 'DE', 'besokt', ANNAN)])).toEqual([]);
+  });
+
+  it('en rad från någon som inte är medlem räknas inte', () => {
+    expect(ids([row('gammal', 'FR', 'besokt', G)])).toEqual([]);
+  });
+
+  it('högsta status vinner', () => {
+    expect(ids([row('jag', 'IT', 'mellan'), row('du', 'IT', 'besokt', G)])).toEqual(['IT:besokt']);
+    expect(ids([row('jag', 'SE', 'bor'), row('du', 'SE', 'besokt', G)])).toEqual(['SE:bor']);
+    expect(ids([row('jag', 'NO', 'vill'), row('du', 'NO', 'besokt', G)])).toEqual(['NO:besokt']);
+  });
+
+  it('vill åka och planerad följer aldrig med från någon annan', () => {
+    expect(ids([row('du', 'JP', 'vill', G), row('du', 'TH', 'planerad', G)])).toEqual([]);
+  });
+
+  it('datumet följer raden med den högsta statusen, vid lika status det tidigaste', () => {
+    const rows = [row('jag', 'IT', 'mellan', null, '2026-01-01'), row('du', 'IT', 'besokt', G, '2026-05-01'), row('du', 'FR', 'besokt', G, '2026-04-01'), row('jag', 'FR', 'besokt', G, '2026-03-01')];
+    const by = Object.fromEntries(personStatuses('jag', rows, members, G).map((s) => [s.place_id, s.updated_at]));
+    expect(by).toEqual({ IT: '2026-05-01', FR: '2026-03-01' });
+  });
+
+  it('samma regel åt båda håll: den andra får det jag har markerat som tillsammans', () => {
+    expect(ids([row('jag', 'IT', 'besokt', G)], 'du')).toEqual(['IT:besokt']);
   });
 });
 

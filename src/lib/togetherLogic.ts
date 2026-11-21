@@ -125,18 +125,43 @@ export type ViStatus = { place_id: string; status: PlaceStatus; updated_at: stri
 
 const earliest = (a: string | null | undefined, b: string | null | undefined) => (!a ? (b ?? null) : !b ? a : a < b ? a : b);
 
+/** Är läget en persons (jag eller en annan medlem)? Tillsammans och Någon av oss är gruppens. */
+export const isPersonView = (view: ViView): boolean => view !== 'tillsammans' && view !== 'nagon';
+
+/**
+ * En persons platser (Körning 22): personens egna rader, plus andra medlemmars rader där together_group
+ * är gruppens id och statusen kan vara tillsammans (TOGETHER_STATUSES). En sådan rad räknas för personen
+ * med samma status. Har personen flera rader för samma plats gäller den högsta statusen. Vill åka och
+ * planerad följer aldrig med från någon annan. memberIds begränsar till gruppens nuvarande medlemmar.
+ */
+export function personStatuses(person: string, rows: StatusRow[], memberIds: string[], groupId: string): ViStatus[] {
+  const members = new Set(memberIds);
+  members.add(person);
+  const out: Record<string, ViStatus> = {};
+  for (const r of rows) {
+    if (!members.has(r.user_id)) continue;
+    const mine = r.user_id === person;
+    if (!mine && !(groupId && r.together_group === groupId && allowsTogether(r.status))) continue;
+    const cur = out[r.place_id];
+    const status = higher(cur?.status, r.status)!;
+    const updated_at =
+      !cur || cur.status !== status ? (r.updated_at ?? null) : r.status === status ? earliest(cur.updated_at, r.updated_at) : cur.updated_at;
+    out[r.place_id] = { place_id: r.place_id, status, updated_at };
+  }
+  return Object.values(out);
+}
+
 /**
  * Raderna som länder, kontinenter, landskap och delstater räknas från i valt läge.
  * - tillsammans: bara platser besökta tillsammans med gruppen (en medlem räcker)
  * - nagon: allt som minst en medlem har markerat, tillsammans eller var för sig (högsta status per plats)
- * - jag: bara de egna raderna
- * - en medlems user_id: bara den personens rader
+ * - jag: mina platser (personStatuses)
+ * - en medlems user_id: den personens platser (personStatuses)
  */
 export function viewStatuses(view: ViView, rows: StatusRow[], me: string, memberIds: string[], groupId: string): ViStatus[] {
   const members = new Set(memberIds.length ? memberIds : [me]);
   members.add(me);
-  const own = (u: string) => rows.filter((r) => r.user_id === u).map((r) => ({ place_id: r.place_id, status: r.status, updated_at: r.updated_at ?? null }));
-  if (view === 'jag') return own(me);
+  if (view === 'jag') return personStatuses(me, rows, [...members], groupId);
   if (view === 'tillsammans') {
     const places = togetherPlaces(rows, groupId, [...members]);
     const out: Record<string, ViStatus> = {};
@@ -155,7 +180,7 @@ export function viewStatuses(view: ViView, rows: StatusRow[], me: string, member
     }
     return Object.values(out);
   }
-  return members.has(view) ? own(view) : [];
+  return members.has(view) ? personStatuses(view, rows, [...members], groupId) : [];
 }
 
 // ---------- Resor ----------
