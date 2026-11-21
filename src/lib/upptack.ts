@@ -2,7 +2,7 @@
 // filtren, sorteringen, filtren i adressen och alternativen till dyra platser.
 // Allt kommer från places (content/_upptack.json läses in av npm run import, se scripts/lib/upptack.mjs).
 // Ren logik utan text: namnen kommer från t() i komponenterna. Testas i upptack.test.ts.
-import { CONTINENT_OF } from './continents';
+import { continentOf, isCountryId, shownCountryOf } from './delade';
 import type { Place } from './content';
 import { pricesOf } from './prices';
 import type { PlaceStatus } from './statusLogic';
@@ -19,7 +19,7 @@ export interface Alternative {
 export interface DiscoverEntry {
   id: string;
   name: string;
-  /** Landskod (ISO). */
+  /** Landskod (ISO), eller delen för en plats i ett delat land (GB-eng, src/lib/delade.ts). */
   country: string;
   /** Prisnivå 1–5: data.level för lätta platser, data.prices.level för befintliga städer. */
   level: number | null;
@@ -69,7 +69,7 @@ export function toEntry(p: Place): DiscoverEntry | null {
   return {
     id: p.id,
     name: p.name,
-    country: p.id.slice(0, 2),
+    country: shownCountryOf(p.id),
     level: levelOf(p),
     months: light ? (Array.isArray(d.best_months) ? d.best_months.filter((m) => Number.isInteger(m) && m >= 1 && m <= 12) : []) : bestMonths(p.smart_months),
     climate: typeof d.climate === 'string' ? d.climate : null,
@@ -117,7 +117,7 @@ export function matches(e: DiscoverEntry, f: DiscoverFilter, statuses: Record<st
   if (f.month && !e.months.includes(f.month)) return false;
   if (f.climates.length && (!e.climate || !f.climates.includes(e.climate))) return false;
   if (f.tags.length && !f.tags.every((x) => e.tags.includes(x))) return false;
-  if (f.continent && CONTINENT_OF[e.country] !== f.continent) return false;
+  if (f.continent && continentOf(e.country) !== f.continent) return false;
   if (f.country && e.country !== f.country) return false;
   if (f.gem && !e.gem) return false;
   if (f.unvisited) {
@@ -133,7 +133,7 @@ export const applyFilter = (list: DiscoverEntry[], f: DiscoverFilter, statuses: 
 /** Världsdelar och länder som har minst en plats, för filtren upptack.filter.kontinent och upptack.filter.land. */
 export function filterOptions(list: DiscoverEntry[]): { continents: string[]; countries: string[] } {
   const countries = [...new Set(list.map((e) => e.country))];
-  const continents = [...new Set(countries.map((c) => CONTINENT_OF[c]).filter(Boolean))];
+  const continents = [...new Set(countries.map((c) => continentOf(c)).filter((c): c is NonNullable<typeof c> => Boolean(c)))];
   return { continents: continents.sort(), countries: countries.sort() };
 }
 
@@ -167,7 +167,7 @@ export function fromParams(p: URLSearchParams, allowed: { tags: string[]; climat
       climates: [...new Set(csv(p.get('klimat')))].filter((c) => allowed.climates.includes(c)),
       tags: [...new Set(csv(p.get('typ')))].filter((c) => allowed.tags.includes(c)),
       continent: continent && /^[A-Z]{2}$/.test(continent) ? continent : null,
-      country: country && /^[A-Z]{2}$/.test(country) ? country : null,
+      country: country && isCountryId(country) ? country : null,
       gem: p.get('smultron') === '1',
       unvisited: p.get('obesokt') === '1',
     },
@@ -255,6 +255,6 @@ export function alternativeRows(place: Pick<Place, 'data'>, places: Place[]): Al
   const byId = new Map(places.map((p) => [p.id, p]));
   return alternativesOf(place).flatMap((a) => {
     const p = byId.get(a.place);
-    return p ? [{ id: p.id, name: p.name, country: p.id.slice(0, 2), level: levelOf(p), why: a.why }] : [];
+    return p ? [{ id: p.id, name: p.name, country: shownCountryOf(p.id), level: levelOf(p), why: a.why }] : [];
   });
 }

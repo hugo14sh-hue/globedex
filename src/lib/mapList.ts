@@ -2,7 +2,7 @@
 // markerade städerna under sitt land. Släckta statusar tas bort ur listan. Ren logik, testas i mapList.test.ts.
 import type { HideKey } from '../config';
 import type { Continent } from './continents';
-import { continentOf, isCountryId } from './delade';
+import { continentOf, DEFAULT_SPLIT, isCountryId } from './delade';
 import { countryIdFor } from './statusLogic';
 import type { MapKey } from './togetherLogic';
 
@@ -44,6 +44,8 @@ export function groupPlaces(
   locale: string,
   /** Platsens typ (country, region, city, spot). En plats som inte är city gör raden till platser. Utan funktionen räknas allt som städer. */
   kindOf: (id: string) => string | undefined = () => 'city',
+  /** Valet delade länder: en plats i en del (GB-eng-london) ligger under delen med valet på och under landet med valet av. */
+  split: boolean = DEFAULT_SPLIT,
 ): ListContinent[] {
   const countries = new Map<string, ListCountry>();
   const country = (iso: string) => {
@@ -56,7 +58,7 @@ export function groupPlaces(
     // Länder och delar av delade länder (GB-eng) är egna rader. Vilka som visas styrs av valet (src/lib/delade.ts).
     if (isCountryId(id)) country(id).key = key;
     else {
-      const c = country(countryIdFor(id));
+      const c = country(countryIdFor(id, split));
       c.children.push({ id, name: nameOf(id), key });
       if (kindOf(id) !== 'city') c.allCities = false;
     }

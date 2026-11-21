@@ -8,6 +8,7 @@ import { isEstimate, placeName, type Place } from '../../lib/content';
 import { indexLine, monthList } from '../../lib/upptack';
 import { useT } from '../../lib/useT';
 import { shortMonthNames } from '../karta/months';
+import { parentOf } from '../../lib/delade';
 import { AltBox } from './Alternativ';
 
 /** Året för Post Office City Costs Barometer (upptack.barometer). */
@@ -82,7 +83,7 @@ export function LightPlace({ place, places }: { place: Place; places: Place[] })
 /** Städerna under ett lätt land (ett land som bara finns för att Upptäcks platser ska ha ett land). */
 export function LightCities({ countryId, places }: { countryId: string; places: Place[] }) {
   const t = useT();
-  const cities = places.filter((p) => p.parent_id === countryId && p.kind === 'city');
+  const cities = places.filter((p) => parentOf(p) === countryId && p.kind === 'city');
   if (!cities.length) return null;
   return (
     <section className="col">

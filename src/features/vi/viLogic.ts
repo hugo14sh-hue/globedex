@@ -71,7 +71,7 @@ export function wrapped(x: ViInput, year: number): WrappedYear | null {
   if (!trips.length) return null;
   const y = String(year);
   // Bara länder i vald landlista räknas.
-  const countries = [...new Set(trips.filter((t) => t.place_id).map((t) => countryIdFor(t.place_id!)))].filter((c) => countsAsCountry(c, x.countryList, x.splitCountries)).sort();
+  const countries = [...new Set(trips.filter((t) => t.place_id).map((t) => countryIdFor(t.place_id!, x.splitCountries)))].filter((c) => countsAsCountry(c, x.countryList, x.splitCountries)).sort();
   let longest: WrappedYear['longest'] = null;
   for (const t of trips) {
     const d = tripDays(t);

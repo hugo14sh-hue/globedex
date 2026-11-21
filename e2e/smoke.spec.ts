@@ -1044,6 +1044,49 @@ test('röktest', async ({ page }) => {
     }
   });
 
+  await test.step('städer i delade länder: England visar London och inresefaktan, London visar pris i pund och tillbaka går till England (Körning 21)', async () => {
+    // Innehållet ur content/GB.json (London och Storbritanniens inresefakta), så att testet inte skriver egna texter.
+    const gb = JSON.parse(readFileSync(join(process.cwd(), 'content/GB.json'), 'utf8').replace(/^﻿/, '')) as {
+      places: { id: string; name: string }[];
+      facts: { id: string; place_id: string; title: string }[];
+    };
+    const london = gb.places.find((p) => p.id === 'GB-eng-london')!;
+    const inresa = gb.facts.find((f) => f.id === 'GB-fakta-inresa')!;
+    expect(inresa.place_id).toBe('GB');
+    const main = page.locator('main');
+
+    // Englands sida (valet delade länder är på efter förra steget): London under städer.
+    await page.goto('/karta/GB-eng');
+    await expect(page.getByRole('heading', { level: 1, name: tx('land.GB-eng') })).toBeVisible({ timeout: 20_000 });
+    // London finns både under land.platser och under prisnivån i städerna (som länkar till #pris): raden under platser.
+    const londonRow = main.locator(`a[href="/karta/${london.id}"]`).filter({ hasText: london.name });
+    await expect(main.getByRole('heading', { name: tx('land.platser'), exact: true })).toBeVisible();
+    await expect(londonRow).toHaveAttribute('href', `/karta/${london.id}`);
+
+    // Guiden på Englands sida visar Storbritanniens inresefakta.
+    await main.getByRole('button', { name: tx('land.vy.guide'), exact: true }).click();
+    await expect(main.getByRole('button', { name: new RegExp(`^${esc(inresa.title)}`) })).toBeVisible();
+    await main.getByRole('button', { name: tx('land.vy.oversikt'), exact: true }).click();
+
+    // Londons sida: brödsmulan är England och priserna står i pund.
+    await londonRow.click();
+    await expect(page.getByRole('heading', { level: 1, name: london.name })).toBeVisible({ timeout: 20_000 });
+    await expect(main.locator('.hero-sub')).toContainText(tx('land.GB-eng'));
+    await expect(page.getByRole('heading', { name: tx('pris.rubrik'), exact: true })).toBeVisible();
+    // Beloppet i pund (Intl sätter ett hårt mellanslag före valutan) och omräknat till kronor med kursen i _valutor.json.
+    await expect(main.locator('.price-row').first()).toContainText(/\d[\s  ]GBP/);
+    await expect(main.locator('.price-row .price-sek').first()).toBeVisible();
+
+    // Tillbaka-länken går till England.
+    await main.locator('a.back').first().click();
+    await expect(page).toHaveURL(/\/karta\/GB-eng(\?|$)/);
+    await expect(page.getByRole('heading', { level: 1, name: tx('land.GB-eng') })).toBeVisible({ timeout: 20_000 });
+
+    // Öppnad direkt (utan historik) pekar tillbaka-länken också på England.
+    await page.goto(`/karta/${london.id}`);
+    await expect(main.locator('a.back').first()).toHaveAttribute('href', '/karta/GB-eng');
+  });
+
   await test.step('kartan: fokus Asien, helskärm med Escape, egen färg på vill åka och släckt besökt (Körning 16)', async () => {
     const patched = () => page.waitForResponse((r) => r.url().includes('/rest/v1/profiles') && r.request().method() === 'PATCH' && r.ok());
     await page.goto('/karta');
@@ -1249,14 +1292,22 @@ test('röktest', async ({ page }) => {
 
     // Innehållet på engelska (Körning 20): Upptäck, bucketlistan och svenskan där engelskan saknas.
     await injectEnglish(page);
-    const lisbon = EN_UPPTACK.places['PT-lissabon'];
+    // Lissabon är sedan Portugals landsfil en befintlig stad: namnet står i en/PT.json och meningen under
+    // existing i en/_upptack.json. Som lätt plats står båda under places i en/_upptack.json.
+    const enPt = EN_DIR['PT.json'] as { places?: Record<string, { name?: string }> } | undefined;
+    const enExisting = (EN_UPPTACK as { existing?: Record<string, { why: string }> }).existing;
+    const lisbon = {
+      name: enPt?.places?.['PT-lissabon']?.name ?? EN_UPPTACK.places['PT-lissabon']?.name,
+      why: enExisting?.['PT-lissabon']?.why ?? EN_UPPTACK.places['PT-lissabon']?.why,
+    };
     expect(lisbon.name).toBe('Lisbon');
+    expect(lisbon.why).toBeTruthy();
     await page.goto('/upptack?land=PT');
     const lisbonCard = page.locator('article.disc-card', {
       has: page.getByRole('link', { name: txEn('upptack.kort.oppna').replace('{plats}', 'Lisbon'), exact: true }),
     });
     await expect(lisbonCard).toBeVisible({ timeout: 20_000 });
-    await expect(lisbonCard.getByText(lisbon.why, { exact: true })).toBeVisible();
+    await expect(lisbonCard.getByText(lisbon.why!, { exact: true })).toBeVisible();
     await expect(page.getByText('Lissabon', { exact: true })).toHaveCount(0);
 
     await page.goto('/listor?vy=bucketlist');
@@ -1267,14 +1318,22 @@ test('röktest', async ({ page }) => {
     await catalog.getByRole('button', { name: txEn('knapp.stang') }).click();
     await expect(catalog).toBeHidden();
 
-    // Stockholm (content/SE.json) har ingen engelsk guide (en/SE.json finns inte än): den svenska texten visas.
-    const stockholm = JSON.parse(readFileSync(join(process.cwd(), 'content/SE.json'), 'utf8').replace(/^﻿/, '')).places.find(
-      (p: { id: string }) => p.id === 'SE-stockholm',
-    ) as { name: string; data: { best_text: string } };
-    expect((EN_ROWS.places.get('SE-stockholm') as { data?: { best_text?: string } } | undefined)?.data?.best_text).toBeUndefined();
-    await page.goto('/karta/SE-stockholm');
-    await expect(page.getByRole('heading', { level: 1, name: stockholm.name })).toBeVisible();
-    await expect(page.getByText(stockholm.data.best_text, { exact: true }).first()).toBeVisible();
+    // En plats utan engelsk best_text visar den svenska texten. Platsen letas upp i filerna, eftersom fler
+    // länder får engelska (Stockholm fick sin i en/SE.json). Har alla platser engelska hoppas kontrollen över:
+    // reserven till svenskan testas också i src/lib/innehallSprak.test.ts.
+    const svPlaces = readdirSync(join(process.cwd(), 'content'))
+      .filter((f) => /^[A-Z]{2}\.json$/.test(f))
+      .flatMap((f) => JSON.parse(readFileSync(join(process.cwd(), 'content', f), 'utf8').replace(/^﻿/, '')).places as { id: string; kind: string; name: string; data?: { best_text?: string } }[]);
+    const noEnglish = svPlaces.find(
+      (p) => p.kind !== 'spot' && p.data?.best_text && !(EN_ROWS.places.get(p.id) as { data?: { best_text?: string } } | undefined)?.data?.best_text,
+    );
+    if (noEnglish) {
+      await page.goto(`/karta/${noEnglish.id}`);
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      await expect(page.getByText(noEnglish.data!.best_text!, { exact: true }).first()).toBeVisible();
+    } else {
+      test.info().annotations.push({ type: 'hoppat över', description: 'alla platser med best_text har engelska: reserven till svenskan visas inte i röktestet' });
+    }
 
     // Utloggad: inloggningssidan följer valt språk.
     await page.goto('/vi');

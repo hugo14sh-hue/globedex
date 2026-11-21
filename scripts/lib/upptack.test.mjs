@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { applyPatches, discoverRows, ruleLevel, validateDiscover } from './upptack.mjs';
 
@@ -146,7 +146,8 @@ describe('validering av _upptack.json', () => {
     const dir = join(process.cwd(), 'content');
     const read = (n) => JSON.parse(readFileSync(join(dir, n), 'utf8').replace(/^﻿/, ''));
     const json = read('_upptack.json');
-    const countries = ['AU', 'DE', 'DK', 'FI', 'GR', 'HR', 'IS', 'MC', 'NL', 'NO', 'SE', 'TR', 'US'];
+    // Alla landsfiler i content/, så att nya länder kommer med utan att testet ändras.
+    const countries = readdirSync(dir).filter((n) => /^[A-Z]{2}\.json$/.test(n)).map((n) => n.slice(0, 2));
     const content = countries.flatMap((c) => read(`${c}.json`).places);
     const app = [...new Set([...Object.keys(json.pli_restaurants_hotels), ...json.places.map((p) => p.country), ...content.map((p) => p.id.slice(0, 2))])];
     expect(validateDiscover(json, app, content)).toEqual([]);

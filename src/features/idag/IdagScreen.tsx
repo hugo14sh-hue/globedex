@@ -49,6 +49,8 @@ import { googleMaps } from '../../lib/links';
 import { useSession } from '../../lib/session';
 import { todayIso } from '../../lib/tripLogic';
 import { countryIdFor, setPlaceStatus, shouldMarkPlanned, useMyPlaces } from '../../lib/status';
+import { useTheme } from '../../theme/ThemeProvider';
+import { parentOf } from '../../lib/delade';
 import { createTrip } from '../../lib/trips';
 import { useT, useLang } from '../../lib/useT';
 import { formatDate } from '../karta/format';
@@ -96,6 +98,7 @@ export default function IdagScreen() {
   const { session, activeGroup } = useSession();
   const me = session?.user.id ?? '';
   const mine = useMyPlaces(me || null);
+  const { theme } = useTheme();
 
   const [stored, setStored] = useState<Stored>(readStored);
   const { when, view, range } = stored;
@@ -294,7 +297,7 @@ export default function IdagScreen() {
         ],
       );
       // Samma regel som planeraren: landet blir planerat om status är tom eller vill åka.
-      const land = countryIdFor(to.placeId);
+      const land = countryIdFor(to.placeId, theme.splitCountries);
       if (shouldMarkPlanned(mine.statuses[land])) await setPlaceStatus(land, 'planerad').catch(() => undefined);
       party(t('resor.skapad'));
       nav(`/resor/${trip.id}`);
@@ -504,7 +507,7 @@ export default function IdagScreen() {
                   </span>
                   <span className="t">
                     <b>{n.place.name}</b>
-                    {n.place.parent_id && <span className="mu">{placeName(places, n.place.parent_id)}</span>}
+                    {parentOf(n.place) && <span className="mu">{placeName(places, parentOf(n.place)!)}</span>}
                   </span>
                   <span className="chip soft">{away(n)}</span>
                 </button>

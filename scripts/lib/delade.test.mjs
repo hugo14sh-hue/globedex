@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { splitRows } from './delade.mjs';
+import { splitRows, validateSplitPlaces } from './delade.mjs';
 import { validateCountryLists } from './validate-content.mjs';
 
 // Påhittade koder: AA, BB, CC är appens länder och AA delas. Namnen är platshållare för valideringen.
@@ -78,5 +78,40 @@ describe('delade: raderna i importen', () => {
       ['AA-b', 'AA'],
     ]);
     expect(r[0]).toMatchObject({ kind: 'country', name: 'namn AA', iso2: 'AA', lat: 1, lon: 2, data: { light: true } });
+  });
+});
+
+describe('delade: platserna i ett delat land (Körning 21)', () => {
+  const split = { AA: ['AA-a', 'AA-b'] };
+
+  it('godkänner platser vars id börjar med en dels id och bindestreck, och räknar dem per del', () => {
+    const r = validateSplitPlaces(split, [
+      { id: 'AA', file: 'AA.json' },
+      { id: 'AA-a-stad', file: 'AA.json' },
+      { id: 'AA-a-stad-park', file: 'AA.json' },
+      { id: 'BB-stad', file: 'BB.json' },
+    ]);
+    expect(r.errors).toEqual([]);
+    expect(r.perPart).toEqual({ 'AA-a': 2, 'AA-b': 0 });
+  });
+
+  it('en plats utan delens id ger fel med platsens id och vilka delar som finns', () => {
+    const r = validateSplitPlaces(split, [
+      { id: 'AA-stad', file: 'AA.json' },
+      { id: 'AA-ab-stad', file: '_upptack.json' },
+    ]);
+    expect(r.errors).toEqual([
+      { file: 'AA.json', id: 'AA-stad', field: 'id', message: 'AA är ett delat land: id ska börja med en av delarnas id och bindestreck (AA-a-, AA-b-)' },
+      { file: '_upptack.json', id: 'AA-ab-stad', field: 'id', message: 'AA är ett delat land: id ska börja med en av delarnas id och bindestreck (AA-a-, AA-b-)' },
+    ]);
+  });
+
+  it('de riktiga filerna: London hör till England', () => {
+    const root = join(process.cwd(), 'content');
+    const read = (n) => JSON.parse(readFileSync(join(root, n), 'utf8').replace(/^﻿/, ''));
+    const gb = read('GB.json');
+    const r = validateSplitPlaces(read('_landlistor.json').delade, gb.places.map((p) => ({ id: p.id, file: 'GB.json' })));
+    expect(r.errors).toEqual([]);
+    expect(r.perPart['GB-eng']).toBeGreaterThanOrEqual(1);
   });
 });

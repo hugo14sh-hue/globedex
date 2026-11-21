@@ -316,7 +316,14 @@ Länder som kan räknas som flera. Nyckeln är landets kod och värdet listan me
 - `npm run import` skriver delarna som platser av typen country med landet som parent_id, data.light = true och namnet ur land.<id> i _texter.json, som länderna utan landsfil. Finns landet inte bland platserna läggs det till på samma sätt. Världsdelen är landets (appen räknar den från landet).
 - Fler länder delas genom att bara lägga till dem i fältet, skriva namnen i textfilerna och köra skriptet.
 
-`npm run import:check` stoppar också: delade som inte är ett objekt, länder som inte finns bland appens länder, tomma listor, delar vars id inte börjar med landets kod och bindestreck, delar som finns två gånger, delar utan namn under land.<id> i _texter.json eller _texter.en.json och delar utan yta i src/lib/deladeGeo.ts.
+#### Städer, regioner och platser i ett delat land (Körning 21)
+Delarna finns bara i _landlistor.json, inte i landsfilen, så en plats i landsfilen kan inte ha en del som parent_id. Därför gäller:
+- En stad, region eller plats i ett delat land har landet som parent_id i filen och ett id som börjar med delens id och ett bindestreck. Exempel i content/GB.json: `{ "id": "GB-eng-london", "kind": "city", "parent_id": "GB", ... }` hör till England (GB-eng).
+- Platser längre ned har sin stad eller region som parent_id som vanligt, och id:t börjar ändå med delens id ("GB-eng-london-...").
+- Appen räknar ut delen ur id:t (src/lib/delade.ts, partOf). London visas på Englands sida, brödsmulan och tillbaka-länken går till England och där appen visar vilket land en plats ligger i står delens namn (land.GB-eng). I allt som räknar per land hör London till England med valet landlista.delade.val på och till Storbritannien med valet av.
+- Fakta (facts) och presenttips (gifts) som gäller hela landet ligger på landet (place_id "GB") och visas på varje dels sida. Kompendiets rader hör till landet som vanligt.
+
+`npm run import:check` stoppar också: delade som inte är ett objekt, länder som inte finns bland appens länder, tomma listor, delar vars id inte börjar med landets kod och bindestreck, delar som finns två gånger, delar utan namn under land.<id> i _texter.json eller _texter.en.json, delar utan yta i src/lib/deladeGeo.ts och platser under ett delat land vars id inte börjar med en av delarnas id och ett bindestreck (felet visar platsens id och vilka delar som finns). Sammanställningen visar antal platser per del.
 
 ## Upptäck
 Ligger i content/_upptack.json och läses in till places av `npm run import` (scripts/lib/upptack.mjs). Formatet står i filens _om.

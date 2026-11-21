@@ -6,6 +6,7 @@ import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
 import { Row } from '../../components/Row';
 import { countryOf, type GiftTip, type Place } from '../../lib/content';
+import { sameCountry, shownCountryOf } from '../../lib/delade';
 import { useSession } from '../../lib/session';
 import { todayIso, tripPhase } from '../../lib/tripLogic';
 import { addListRows, deleteListRow, fetchList, fetchTrips, updateListRow, updateTrip, type ShopItem, type Trip } from '../../lib/trips';
@@ -137,12 +138,12 @@ function Inkop({ trip, onTrip }: { trip: Trip; onTrip: (t: Trip) => void }) {
   );
 }
 
-/** Gruppens kommande och pågående resor till samma land som platsen. */
+/** Gruppens kommande och pågående resor till samma land som platsen. Ett delat land och dess delar räknas som samma (GB och GB-eng). */
 export function useTripsTo(places: Place[], placeId: string): Trip[] {
   const { activeGroup } = useSession();
   const [trips, setTrips] = useState<Trip[]>([]);
   const gid = activeGroup?.id ?? null;
-  const country = countryOf(places, placeId)?.id ?? placeId.slice(0, 2);
+  const country = countryOf(places, placeId)?.id ?? shownCountryOf(placeId);
   useEffect(() => {
     if (!gid) return;
     let alive = true;
@@ -150,7 +151,7 @@ export function useTripsTo(places: Place[], placeId: string): Trip[] {
     fetchTrips(gid)
       .then((all) => {
         if (!alive) return;
-        setTrips(all.filter((x) => x.place_id && (countryOf(places, x.place_id)?.id ?? x.place_id.slice(0, 2)) === country && tripPhase(x, today) !== 'avslutad'));
+        setTrips(all.filter((x) => x.place_id && sameCountry(countryOf(places, x.place_id)?.id ?? shownCountryOf(x.place_id), country) && tripPhase(x, today) !== 'avslutad'));
       })
       .catch(() => undefined);
     return () => {

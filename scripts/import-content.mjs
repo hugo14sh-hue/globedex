@@ -20,7 +20,7 @@ import { COUNTRIES } from '../src/lib/countries.ts';
 import { compareTexts, formatTextError } from './lib/validate-texts.mjs';
 import { applyPatches, discoverRows, validateDiscover } from './lib/upptack.mjs';
 import { sortPlaces } from './lib/validate-content.mjs';
-import { splitRows } from './lib/delade.mjs';
+import { splitRows, validateSplitPlaces } from './lib/delade.mjs';
 import { SPLIT_GEO } from '../src/lib/deladeGeo.ts';
 import { englishRows, formatSummary, readEnglishDir, validateEnglish, withEnglish } from './lib/en.mjs';
 
@@ -86,6 +86,7 @@ async function main() {
   // Vilka länder som räknas (FN:s medlemsländer och observatörer). Läses in i appen vid bygget.
   // Fältet delade blir dessutom platser: delarna som länder med landet som förälder.
   let split = [];
+  let splitPlaces = null;
   {
     const json = await readJson('_landlistor.json');
     const before = errors.length;
@@ -97,6 +98,13 @@ async function main() {
       const partCoords = (id) => (SPLIT_GEO[id] ? [SPLIT_GEO[id].lat, SPLIT_GEO[id].lon] : null);
       for (const id of Object.values(json.delade).flat())
         if (!SPLIT_GEO[id]) errors.push({ file: '_landlistor.json', id, field: 'delade', message: 'ingen yta i src/lib/deladeGeo.ts: kör node scripts/make-delade.mjs' });
+      // Platserna i ett delat land: id:t börjar med delens id (Körning 21).
+      const placeFiles = [
+        ...parsed.flatMap(({ name, json: j }) => (Array.isArray(j?.places) ? j.places.map((p) => ({ id: p?.id, file: name })) : [])),
+        ...(discover ? discover.cities.map((p) => ({ id: p.id, file: '_upptack.json' })) : []),
+      ];
+      splitPlaces = validateSplitPlaces(json.delade, placeFiles);
+      errors.push(...splitPlaces.errors);
       split = splitRows(json.delade, rows.places.map((p) => p.id), textsSv.texter, (iso) => svName.of(iso) ?? iso, countryCoords, partCoords);
       rows.places = sortPlaces([...rows.places, ...split]);
     }
@@ -133,6 +141,7 @@ async function main() {
       `  _upptack.json: ${discover.cities.length} lätta platser, ${discover.countries.length} länder utan landsfil, ${discover.patches.size} befintliga platser får klimat, taggar eller alternativ`,
     );
   if (split.length) console.log(`  _landlistor.json, delade: ${split.length} länder (${split.map((p) => p.id).join(', ')})`);
+  if (splitPlaces) console.log(`  platser per del i delade länder: ${Object.entries(splitPlaces.perPart).map(([p, n]) => `${p} ${n}`).join(', ')}`);
   for (const [name, n] of appLists) console.log(`  ${name}: ${n} (läses in i appen vid bygget)`);
   console.log('  _texter.json och _texter.en.json: samma nycklar, form, platshållare och märken');
   // Kolumnen en: engelskan per rad, eller null.

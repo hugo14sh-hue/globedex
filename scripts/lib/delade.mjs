@@ -36,6 +36,35 @@ export function validateSplit(split, appCountries, texts, check) {
   }
 }
 
+/**
+ * Platserna i ett delat land (Körning 21): varje plats under landet (stad, region eller plats, id som börjar
+ * med landets kod och bindestreck) ska ha ett id som börjar med en av delarnas id och ett bindestreck
+ * (GB-eng-london hör till GB-eng). Delarna själva räknas inte. Appen räknar ut delen ur id:t (src/lib/delade.ts).
+ * - split: fältet delade. places: { id, file } för platserna i filerna.
+ * Ger fel ({ file, id, field, message }) och antal platser per del ({ 'GB-eng': 1, ... }).
+ */
+export function validateSplitPlaces(split, places) {
+  const errors = [];
+  const perPart = {};
+  for (const [iso, parts] of Object.entries(split ?? {})) {
+    if (!Array.isArray(parts)) continue;
+    for (const p of parts) perPart[p] = 0;
+    for (const place of places) {
+      if (typeof place?.id !== 'string' || !place.id.startsWith(`${iso}-`) || parts.includes(place.id)) continue;
+      const part = parts.find((p) => place.id.startsWith(`${p}-`));
+      if (part) perPart[part]++;
+      else
+        errors.push({
+          file: place.file ?? `${iso}.json`,
+          id: place.id,
+          field: 'id',
+          message: `${iso} är ett delat land: id ska börja med en av delarnas id och bindestreck (${parts.map((p) => `${p}-`).join(', ')})`,
+        });
+    }
+  }
+  return { errors, perPart };
+}
+
 /** Namnet ur texten (en text eller språkstilens neutral). */
 const nameOf = (e) => (typeof e === 'string' ? e : e?.neutral);
 

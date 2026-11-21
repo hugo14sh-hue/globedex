@@ -14,8 +14,10 @@ import { PriceLevel } from '../../components/PriceLevel';
 import { Row } from '../../components/Row';
 import { Segment } from '../../components/Segment';
 import {
-  countryOf,
+  contentCountryOf,
   descendants,
+  factPlaceIds,
+  placesUnder,
   fetchCompendium,
   fetchFacts,
   fetchGifts,
@@ -48,7 +50,7 @@ import { monthNames, seasonPeriod, shortMonthNames } from './months';
 import { StatusPicker } from './StatusPicker';
 import { RegionSection } from './RegionSection';
 import { outsideCountryList } from '../../lib/landlistor';
-import { isCountryId, showsStatusPicker, splitParts } from '../../lib/delade';
+import { isCountryId, isSplitPart, parentOf, showsStatusPicker, splitParts } from '../../lib/delade';
 import { VISITED } from '../vi/marken';
 import { formatDate, formatDateRange, formatPercent, formatSek } from './format';
 import { domainOf } from '../../lib/prices';
@@ -124,6 +126,9 @@ export default function PlaceScreen() {
   const place = places?.find((p) => p.id === id) ?? null;
   const subIds = useMemo(() => (places && place ? [place.id, ...descendants(places, place.id).map((p) => p.id)] : []), [places, place]);
   const subKey = subIds.join(',');
+  // En del av ett delat land (GB-eng) visar också fakta och presenttips som ligger på landet (GB), som ett
+  // vanligt land visar sina (Körning 21). Listpunkterna hör bara till delens egna platser.
+  const countryIds = useMemo(() => factPlaceIds(id, subIds), [id, subKey]);
 
   useEffect(() => {
     if (!places) return;
@@ -133,13 +138,13 @@ export default function PlaceScreen() {
     }
     let alive = true;
     setLoaded(null);
-    Promise.all([fetchFacts(subIds), fetchItems(subIds), fetchGifts(subIds)])
+    Promise.all([fetchFacts(countryIds), fetchItems(subIds), fetchGifts(countryIds)])
       .then(([facts, items, gifts]) => alive && setLoaded({ facts, items, gifts }))
       .catch(() => alive && setLoaded({ facts: [], items: [], gifts: [] }));
     return () => {
       alive = false;
     };
-  }, [places, subKey]);
+  }, [places, subKey, countryIds]);
 
   if (!places || !loaded) return <Loading />;
 
@@ -160,12 +165,15 @@ export default function PlaceScreen() {
   const status = mine.statuses[id];
   const total = Object.keys(mine.statuses).length;
   const data = place?.data ?? {};
-  const hasData = Object.keys(data).length > 0;
+  // data.light är ingen innehållsuppgift (en del av ett delat land har bara den).
+  const hasData = Object.keys(data).some((k) => k !== 'light');
   // Lätta platser (Upptäck) har en egen, kortare sida. Ett lätt land visas som ett land utan innehåll.
-  const light = isLight(place);
+  // En del av ett delat land (GB-eng) är lätt i databasen men visas som ett vanligt land (Körning 21).
+  const light = isLight(place) && !isSplitPart(id);
   const lightCity = light && place?.kind === 'city';
   const empty = !place || light || (!hasData && !loaded.facts.length && !loaded.items.length && !loaded.gifts.length);
-  const parent = place?.parent_id ? places.find((p) => p.id === place.parent_id) : null;
+  // Brödsmulan: en plats i en del av ett delat land (GB-eng-london) ligger under delen (England).
+  const parentId = place ? parentOf(place) : null;
   const items = loaded.items;
   const done = items.filter((i) => mine.checks.has(i.id)).length;
   const pct = items.length ? Math.round((done / items.length) * 100) : 0;
@@ -190,7 +198,7 @@ export default function PlaceScreen() {
       {/* Från 1200 px (Körning 17): det som beskriver platsen till vänster (pl-a och pl-b), det man gör till höger
           (pl-do). Ordningen i koden är densamma som på mobil. */}
       <div className="pl-a">
-      <BackToMap />
+      <BackToMap to={parentId && isSplitPart(parentId) ? `/karta/${parentId}` : undefined} />
       <div className="hero">
         <div className="row">
           <div className="col" style={{ gap: 2 }}>
@@ -200,7 +208,7 @@ export default function PlaceScreen() {
             </span>
             <span className="hero-sub">
               {t(STATUS_KEY[status ?? 'ej'])}
-              {parent ? ` · ${placeName(places, parent.id)}` : ''}
+              {parentId ? ` · ${placeName(places, parentId)}` : ''}
             </span>
             {/* Besökt land utanför vald landlista: räknas inte i siffror, mål och märken. */}
             {status && VISITED.includes(status) && outsideCountryList(id, theme.countryList, theme.splitCountries) && (
@@ -271,7 +279,7 @@ export default function PlaceScreen() {
           {view === 'lista' && <Lista name={name} items={items} checks={mine.checks} onToggle={toggle} onItem={setOpenItem} />}
           {view === 'guide' && <Guide facts={loaded.facts} onFact={setOpenFact} places={places} placeId={id} />}
           {view === 'manad' && <Manad place={place!} />}
-          {view === 'boka' && <BokaView place={place!} country={countryOf(places, place!.id)} />}
+          {view === 'boka' && <BokaView place={place!} country={contentCountryOf(places, place!.id)} />}
           {view === 'kop' && <Kop name={name} gifts={loaded.gifts} places={places} placeId={id} />}
           {view === 'kop' && <CollectionMotifs placeId={id} gifts={loaded.gifts} />}
         </>
@@ -318,8 +326,9 @@ export default function PlaceScreen() {
   );
 }
 
-function BackToMap() {
-  return <BackLink to="/karta" />;
+/** Tillbaka till kartan, eller till delen för en plats i en del av ett delat land (London -> England). */
+function BackToMap({ to = '/karta' }: { to?: string }) {
+  return <BackLink to={to} />;
 }
 
 function Oversikt({
@@ -339,9 +348,8 @@ function Oversikt({
 }) {
   const t = useT();
   const d = place.data;
-  const children = places.filter((p) => p.parent_id === place.id && (p.kind === 'city' || p.kind === 'spot'));
-  // Städer som ligger under regioner (som i Sverige) visas också.
-  const cities = [...children, ...descendants(places, place.id).filter((p) => p.kind === 'city' && !children.includes(p))];
+  // Städer som ligger under regioner (som i Sverige) visas också, och en dels platser (src/lib/content.ts).
+  const cities = placesUnder(places, place.id);
   const must = items.filter((i) => i.must_rank != null).sort((a, b) => (a.must_rank ?? 0) - (b.must_rank ?? 0));
   const stayHere = d.areas?.filter((a) => a.stay) ?? [];
   const avoid = d.areas?.filter((a) => !a.stay) ?? [];

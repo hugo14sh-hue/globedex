@@ -194,8 +194,9 @@ describe('vad som visas med valet', () => {
     expect(flagCode('GB')).toBe('gb');
     expect(flagCode('SE-skane')).toBe('se');
     expect(PARTS.map(isoOf)).toEqual(['GB', 'GB', 'GB', 'GB']);
-    expect(countryIdFor('GB-eng')).toBe('GB-eng');
-    expect(countryIdFor('GB-london')).toBe('GB');
+    expect(countryIdFor('GB-eng', true)).toBe('GB-eng');
+    expect(countryIdFor('GB-eng', false)).toBe('GB-eng');
+    expect(countryIdFor('GB-london', true)).toBe('GB');
   });
 
   it('märkningen utanför listan', () => {

@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Estimate } from '../../components/Estimate';
 import { useFeedback } from '../../components/Feedback';
 import { HOME_AIRPORTS } from '../../config';
-import { countryOf, fetchPlaces, isEstimate, placeName, type Place } from '../../lib/content';
+import { contentCountryOf, fetchPlaces, isEstimate, placeName, type Place } from '../../lib/content';
 import { countryPoint } from '../../lib/countries';
 import { airbnb, airbnbFits, booking, googleFlights, skyscanner, validRange, type StayType } from '../../lib/links';
 import { countryIdFor, setPlaceStatus, shouldMarkPlanned, useMyPlaces } from '../../lib/status';
@@ -16,6 +16,7 @@ import { useSession } from '../../lib/session';
 import { companyGroups, defaultTripGroup } from '../../lib/togetherLogic';
 import { useT, useLang } from '../../lib/useT';
 import { SMART_COLORS } from '../../theme/palettes';
+import { useTheme } from '../../theme/ThemeProvider';
 import { monthNames } from '../karta/months';
 import { formatSek } from '../karta/format';
 import { DestSelect } from './DestSelect';
@@ -38,6 +39,7 @@ export default function PlanScreen() {
   const tripGroup = groups.find((g) => g.id === tripGroupId) ?? activeGroup;
   const people = usePeople(tripGroup?.id);
   const mine = useMyPlaces(people.me || null);
+  const { theme } = useTheme();
   const [places, setPlaces] = useState<Place[]>([]);
   const [home, setHome] = useState<Home | null>(null);
   const [dest, setDest] = useState(params.get('plats') ?? '');
@@ -65,7 +67,7 @@ export default function PlanScreen() {
 
   const place = places.find((p) => p.id === dest) ?? null;
   // En stad utan egna förslag använder landets.
-  const country = place ? countryOf(places, place.id) : null;
+  const country = place ? contentCountryOf(places, place.id) : null;
   const src = (field: 'stay' | 'day_budget_sek') => (place?.data[field] != null ? place : country?.data[field] != null ? country : null);
   const staySrc = src('stay');
   const stay = staySrc?.data.stay ?? [];
@@ -149,7 +151,7 @@ export default function PlanScreen() {
         [leg],
       );
       // Som i prototypen: resmålet blir planerat om det inte redan har en starkare status.
-      const land = country?.id ?? countryIdFor(dest);
+      const land = countryIdFor(dest, theme.splitCountries);
       const cur = mine.statuses[land];
       if (shouldMarkPlanned(cur)) await setPlaceStatus(land, 'planerad').catch(() => undefined);
       party(t('resor.skapad'));

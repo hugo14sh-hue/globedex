@@ -1,6 +1,7 @@
 // Ren logik för Idag: vald plats, vilka idéer som gäller, filter, slumpning och Nära. Testas i idagLogic.test.ts.
 import type { Idea, Place } from './content';
 import { addDays } from './tripLogic';
+import { parentOf } from './delade';
 import { LOCALE, numberFormat } from './locale';
 
 export type When = 'idag' | 'helg';
@@ -95,7 +96,9 @@ export function subtreeIds(places: Place[], rootId: string): Set<string> {
   while (grew) {
     grew = false;
     for (const p of places) {
-      if (p.parent_id && ids.has(p.parent_id) && !ids.has(p.id)) {
+      // En plats i en del av ett delat land (GB-eng-london) ligger under delen (src/lib/delade.ts).
+      const parent = parentOf(p);
+      if (parent && ids.has(parent) && !ids.has(p.id)) {
         ids.add(p.id);
         grew = true;
       }

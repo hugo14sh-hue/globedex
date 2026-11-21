@@ -5,7 +5,7 @@
 import { supabase } from './supabase';
 import { localizeAll, type Translatable } from './innehallSprak';
 import { displayNames, LOCALE } from './locale';
-import { isCountryId, isSplitPart } from './delade';
+import { isCountryId, isSplitPart, parentOf, shownCountryOf, splitParent } from './delade';
 import { t } from './texter';
 import type { Prices } from './prices';
 
@@ -181,7 +181,8 @@ export function descendants(places: Place[], id: string): Place[] {
   const out: Place[] = [];
   const walk = (pid: string) => {
     for (const p of places) {
-      if (p.parent_id === pid) {
+      // Platser i en del av ett delat land (GB-eng-london) ligger under delen (src/lib/delade.ts).
+      if (parentOf(p) === pid) {
         out.push(p);
         walk(p.id);
       }
@@ -192,10 +193,53 @@ export function descendants(places: Place[], id: string): Place[] {
 }
 
 /** Landet som en plats ligger i (eller platsen själv om den är ett land). */
+// En plats i en del av ett delat land ligger i delen (GB-eng-london -> GB-eng), eller i landet om delen inte
+// finns bland platserna.
 export function countryOf(places: Place[], id: string): Place | null {
+  const up = (q: Place) => places.find((x) => x.id === parentOf(q)) ?? places.find((x) => x.id === q.parent_id) ?? null;
   let p = places.find((x) => x.id === id) ?? null;
-  for (let i = 0; p && p.kind !== 'country' && i < 10; i++) p = places.find((x) => x.id === p!.parent_id) ?? null;
+  for (let i = 0; p && p.kind !== 'country' && i < 10; i++) p = up(p);
   return p;
+}
+
+/**
+ * Städerna och platserna som en sida listar under land.platser: platserna direkt under (städer och platser)
+ * och städer längre ned (under regioner, som i Sverige). En del av ett delat land (GB-eng) listar sina
+ * platser, som i databasen ligger under landet (GB-eng-london med parent_id GB).
+ */
+export function placesUnder(places: Place[], id: string): Place[] {
+  const children = places.filter((p) => parentOf(p) === id && (p.kind === 'city' || p.kind === 'spot'));
+  return [...children, ...descendants(places, id).filter((p) => p.kind === 'city' && !children.includes(p))];
+}
+
+/**
+ * Platserna vars fakta och presenttips en sida visar: platsen och allt under den (subIds), och för en del
+ * av ett delat land också landet (GB-eng visar GB:s fakta och presenttips, som ett vanligt land visar sina).
+ */
+export function factPlaceIds(id: string, subIds: string[]): string[] {
+  const parent = splitParent(id);
+  return parent && subIds.length ? [...subIds, parent] : subIds;
+}
+
+/**
+ * Landet vars innehåll (vistelse, dagsbudget, Smart månad, flygplats) en plats faller tillbaka på. En del av ett
+ * delat land har inget eget innehåll, så en plats i delen (och delen själv) använder landets (GB), som förut.
+ */
+export function contentCountryOf(places: Place[], id: string): Place | null {
+  const c = countryOf(places, id);
+  const parent = c ? splitParent(c.id) : null;
+  return (parent && places.find((x) => x.id === parent)) || c;
+}
+
+/**
+ * Namnet på landet som en plats ligger i, på valt språk: delens namn för en plats i en del (London -> England).
+ * null för länder och för id som inte börjar med en landskod.
+ */
+export function countryNameOf(places: Place[], id: string): string | null {
+  const p = places.find((x) => x.id === id);
+  if (p ? p.kind === 'country' : isCountryId(id)) return null;
+  const c = countryOf(places, id)?.id ?? (/^[A-Z]{2}-/.test(id) ? shownCountryOf(id) : null);
+  return c ? placeName(places, c) : null;
 }
 
 export async function fetchFacts(placeIds: string[]): Promise<PlaceFact[]> {

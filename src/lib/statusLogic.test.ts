@@ -46,7 +46,7 @@ describe('status när en resa skapas', () => {
     expect(shouldMarkPlanned(undefined)).toBe(true);
     expect(shouldMarkPlanned('vill')).toBe(true);
     for (const s of ['bor', 'bott', 'besokt', 'planerad', 'mellan'] as const) expect(shouldMarkPlanned(s)).toBe(false);
-    expect(countryIdFor('SE-vastergotland')).toBe('SE');
-    expect(countryIdFor('NL')).toBe('NL');
+    expect(countryIdFor('SE-vastergotland', true)).toBe('SE');
+    expect(countryIdFor('NL', false)).toBe('NL');
   });
 });

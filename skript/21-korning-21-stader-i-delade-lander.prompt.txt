@@ -1,0 +1,31 @@
+Läs CLAUDE.md, FORMAT.md för innehållet och docs/schema.sql innan du gör något. Körning 1 till 20 är klara.
+
+Körning 21: städer i delade länder
+
+Ny fil finns: content/GB.json med landet GB och staden GB-eng-london, och content/en/GB.json med de engelska texterna. content/_valutor.json har fått GBP. Ändra inte i innehållsfilerna: stämmer något inte, skriv det i slutrapporten. Textfilerna är oförändrade (737 nycklar per språk). Inga databasändringar behövs.
+
+Bakgrund: Storbritannien är ett delat land (content/_landlistor.json, fältet delade, Körning 19). Delarna GB-eng, GB-sct, GB-wls och GB-nir skrivs av importen som platser under GB. En stad i en landsfil kan inte ha en del som parent_id, eftersom valideringen bara känner till platserna i filerna. Därför gäller den här regeln från och med nu:
+
+Regeln: en stad, region eller plats i ett delat land har landet som parent_id i filen (GB) och ett id som börjar med delens id och ett bindestreck (GB-eng-london hör till GB-eng). Appen räknar ut delen ur id:t. Lägg funktionen bredvid den övriga logiken för delade länder (src/lib/delade.ts) och använd den överallt nedan.
+
+1. FORMAT.md: beskriv regeln under delade länder, med GB-eng-london som exempel.
+
+2. Valideringen (npm run import:check): i ett delat land ska varje plats under landet ha ett id som börjar med en av delarnas id och ett bindestreck. Annars fel, med platsens id och vilka delar som finns. Sammanställningen visar antal platser per del.
+
+3. Delens sida (England): visa delens städer, regioner och platser på samma sätt som ett vanligt lands sida visar sina. I dag finns bara London. Delar utan platser ser ut som i dag.
+
+4. Fakta och presenttips som ligger på landet (GB: inresa, valuta, eluttag, presenter) visas på varje dels sida, på samma sätt som ett vanligt land visar sina. Kompendiets rader för GB hör till landet som i dag.
+
+5. Stadens sida (London): brödsmulor och tillbaka-länk går till delen (England), inte till Storbritannien. Där appen visar vilket land en plats ligger i (Upptäck, sök, listor, resor, händelser, Idag, Wrapped) visas delens namn (land.GB-eng) för platser som hör till en del.
+
+6. Kartan och statistiken: London räknas till England i allt som räknar per land när delningen är på, och till Storbritannien när den är av, enligt samma regel som delarna själva följer sedan Körning 19. Stadens egen status sätts som för andra städer. Sätts en status på London ändras inte Englands status automatiskt, om inte appen redan gör så för vanliga länder: följ då samma beteende.
+
+7. Storbritanniens sida ändras inte: de fyra delarna visas som i dag, utan statusväljare.
+
+8. Priserna i London står i GBP. Kontrollera att pund visas rätt med kursen i _valutor.json, på samma sätt som DKK och PLN.
+
+9. Enhetstester: delen ur id (GB-eng-london ger GB-eng, GB ger ingen, SE-stockholm ger ingen), valideringens fel för en plats utan delens id, delens sida med och utan platser, landets fakta på delens sida, landsnamnet för London på båda språken. Röktestet: öppna England, kontrollera att London finns under städer och att inresefaktan visas, öppna London och kontrollera att ett pris visas i pund, gå tillbaka med tillbaka-länken och kontrollera att du hamnar på England.
+
+Regler: Skriv inga egna texter och översätt ingenting själv. Saknas en text på något av språken: lista nyckeln i slutrapporten. Gör inga databasändringar själv: behövs en, ge mig ett SQL-block. Lägg inte till funktioner utöver punkterna: idéer skrivs i docs/fas2.md. Kör inte importen mot databasen. Vänta inte på bakgrundsjobb.
+
+Avsluta med npm run import:check, npm run build, npm run typecheck, npm test och npm run test:e2e, kontrollera exitkoderna, gör en git commit med meddelandet "Körning 21: städer i delade länder" och skriv slutrapporten innan du avslutar, med rubrikerna Klart, Inte klart, Röktestet, Saknade textnycklar per språk, Det här behöver Hugo göra.

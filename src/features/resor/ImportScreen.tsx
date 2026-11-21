@@ -3,9 +3,10 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFeedback } from '../../components/Feedback';
 import { Icon } from '../../components/Icon';
-import { countryOf, fetchPlaces, placeName, type Place } from '../../lib/content';
+import { fetchPlaces, placeName, type Place } from '../../lib/content';
 import { useSession } from '../../lib/session';
-import { setPlaceStatus, useMyPlaces } from '../../lib/status';
+import { countryIdFor, setPlaceStatus, useMyPlaces } from '../../lib/status';
+import { useTheme } from '../../theme/ThemeProvider';
 import { todayIso } from '../../lib/tripLogic';
 import { createTrip, fetchHome, type Home } from '../../lib/trips';
 import { useT, useLang } from '../../lib/useT';
@@ -21,6 +22,7 @@ export default function ImportScreen() {
   const { activeGroup } = useSession();
   const people = usePeople();
   const mine = useMyPlaces(people.me || null);
+  const { theme } = useTheme();
   const [places, setPlaces] = useState<Place[]>([]);
   const [home, setHome] = useState<Home | null>(null);
   const [dest, setDest] = useState('');
@@ -67,7 +69,7 @@ export default function ImportScreen() {
       );
       // Bor eller har bott är starkare än besökt och skrivs inte över.
       // Statusen sätts på landet (kartan färgar länder), även när resmålet är en stad.
-      const land = countryOf(places, dest)?.id ?? dest.slice(0, 2);
+      const land = countryIdFor(dest, theme.splitCountries);
       const cur = mine.statuses[land];
       if (cur !== 'bor' && cur !== 'bott' && cur !== 'besokt') await setPlaceStatus(land, 'besokt').catch(() => undefined);
       toast(t('allmant.sparat'));
