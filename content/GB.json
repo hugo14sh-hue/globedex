@@ -1,0 +1,523 @@
+{
+ "places": [
+  {
+   "id": "GB",
+   "kind": "country",
+   "name": "Storbritannien",
+   "iso2": "GB",
+   "lat": 54.0,
+   "lon": -2.0,
+   "airport": "LHR"
+  },
+  {
+   "id": "GB-eng-london",
+   "kind": "city",
+   "parent_id": "GB",
+   "name": "London",
+   "lat": 51.5085,
+   "lon": -0.1257,
+   "airport": "LHR",
+   "smart_months": [
+    2,
+    2,
+    3,
+    4,
+    5,
+    5,
+    4,
+    4,
+    5,
+    4,
+    3,
+    4
+   ],
+   "data": {
+    "transport": [
+     {
+      "mode": "Tunnelbanans Piccadilly line från Heathrow",
+      "rating": "bast",
+      "text": "Billigast: 5,90 pund med kontaktlöst kort, samma pris hela dagen. Räkna med 50–60 minuter till centrum."
+     },
+     {
+      "mode": "Elizabeth line från Heathrow",
+      "rating": "bra",
+      "text": "Snabbare och bekvämare med väskor: runt 35 minuter till centrum. Kostar 15,50 pund sedan mars 2026."
+     },
+     {
+      "mode": "Heathrow Express",
+      "rating": "dyrt",
+      "text": "15 minuter till Paddington, men runt 25 pund om man köper biljetten samma dag."
+     },
+     {
+      "mode": "Tunnelbana och buss i stan",
+      "rating": "bast",
+      "text": "Blippa bankkortet eller mobilen, ingen biljett behövs. En resa i zon 1 kostar 3,10 pund i rusningstid och 3,00 pund övrig tid. Bussen kostar 1,85 pund och man får byta fritt inom en timme."
+     }
+    ],
+    "sources": [
+     "https://www.airalo.com/blog/the-cheapest-way-to-get-to-heathrow-airport-from-london",
+     "https://londonairport-taxi.com/cheapest-way-heathrow-to-london",
+     "https://railway-news.com/tfl-reminds-customers-of-rising-tube-and-rail-fares-from-1-march-2026/",
+     "https://www.london.gov.uk/md3464-march-2026-transport-london-fare-changes",
+     "https://www.london.gov.uk/mayor-announces-plans-2026-tfl-fares-package-including-further-freeze-seventh-time-bus-and-tram",
+     "https://www.london.gov.uk/md3517-july-2026-fare-changes",
+     "https://www.expatica.com/uk/cost-of-living/london/"
+    ],
+    "day_budget_sek": 2100,
+    "day_budget_note": "Per person och dag utan flyg: del i dubbelrum i mellanklass, mat, lokaltrafik och en sevärdhet. Grov uppskattning.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "days": 2,
+      "text": "Westminster, en promenad längs Themsen och ett av de stora museerna.",
+      "recommended": false
+     },
+     {
+      "label": "Långhelg",
+      "days": 4,
+      "text": "Hinner Towern, två museer, en marknad och en kväll i Soho utan att stressa.",
+      "recommended": true
+     },
+     {
+      "label": "En vecka",
+      "days": 7,
+      "text": "Lägg till Greenwich och en dagsutflykt med tåg, till exempel Windsor eller Oxford.",
+      "recommended": false
+     }
+    ],
+    "areas": [
+     {
+      "name": "South Bank och Waterloo",
+      "stay": true,
+      "text": "Vid Themsen, med gångavstånd till Westminster och bra förbindelser åt alla håll."
+     },
+     {
+      "name": "Covent Garden och Soho",
+      "stay": true,
+      "text": "Mitt i teater- och restaurangkvarteren. Dyrast, och livligt till sent."
+     },
+     {
+      "name": "South Kensington",
+      "stay": true,
+      "text": "Lugnt och fint, intill de stora gratismuseerna och Hyde Park."
+     },
+     {
+      "name": "King's Cross",
+      "stay": true,
+      "text": "Sex tunnelbanelinjer och direkt Piccadilly line från Heathrow. Praktiskt mer än charmigt."
+     },
+     {
+      "name": "Shoreditch",
+      "stay": false,
+      "text": "Barer, gatukonst och marknader i öster. Bäst en kväll eller en söndag."
+     }
+    ],
+    "best_text": "Maj, juni och september: ljust, milt och utan högsommarens trängsel. December är mörkt men bäst för julstämning.",
+    "own_judgment": [
+     "areas",
+     "best_text",
+     "day_budget_sek",
+     "month_notes",
+     "smart_months",
+     "stay",
+     "seasons"
+    ],
+    "prices": {
+     "currency": "GBP",
+     "level": 4,
+     "checked": "2026-11-21",
+     "summary": "Dyrt, särskilt boende, öl och restauranger. De stora museerna är gratis, och det drar ner dagskostnaden.",
+     "rows": [
+      {
+       "key": "enkel-maltid",
+       "low": 15.5,
+       "high": 41,
+       "typical": 20.7
+      },
+      {
+       "key": "middag-for-tva",
+       "low": 62,
+       "high": 134,
+       "typical": 83
+      },
+      {
+       "key": "snabbmat",
+       "low": 7.2,
+       "high": 10.3,
+       "typical": 9.3
+      },
+      {
+       "key": "ol",
+       "low": 4.7,
+       "high": 8.3,
+       "typical": 7.2
+      },
+      {
+       "key": "kaffe",
+       "low": 2.6,
+       "high": 5.2,
+       "typical": 4.2
+      },
+      {
+       "key": "lokalresa",
+       "typical": 3.1,
+       "note": "Tunnelbana i zon 1 i rusningstid. Bussen kostar 1,85 pund."
+      }
+     ],
+     "tips": [
+      "Många restauranger lägger på 12,5 procent i serviceavgift. Titta på notan innan du lägger dricks.",
+      "Dagstaket för tunnelbana och buss i zon 1–6 är 16,30 pund. Efter det åker man gratis resten av dagen, om man blippar samma kort.",
+      "Köp biljetten till Towern på nätet. Den kostar 38 pund för en vuxen."
+     ],
+     "sources": [
+      "https://www.expatica.com/uk/cost-of-living/london/",
+      "https://www.london.gov.uk/md3464-march-2026-transport-london-fare-changes",
+      "https://www.airalo.com/blog/the-cheapest-way-to-get-to-heathrow-airport-from-london",
+      "https://visitlondon.com/traveller-information/essential-information/money/tipping",
+      "https://www.hrp.org.uk/tower-of-london/visit/tickets-and-prices/?Step=Buy"
+     ],
+     "own_judgment": [
+      "level",
+      "summary"
+     ]
+    },
+    "month_notes": [
+     "Kallt och mörkt, men lägst priser och rea i butikerna.",
+     "Kallt och lugnt. Bra museimånad.",
+     "Våren börjar och parkerna blir gröna.",
+     "Milt och växlande. Ta med regnjacka.",
+     "Ljust och milt, en av de bästa månaderna.",
+     "Långa kvällar och varmt nog för parkerna.",
+     "Varmast och mest turister. Köer till sevärdheterna.",
+     "Varmt, fullt och dyrt boende.",
+     "Milt och klart, med färre turister.",
+     "Höstfärger och kortare köer.",
+     "Grått och regnigt. Julbelysningen tänds och Winter Wonderland öppnar.",
+     "Mörkt men pyntat, med julmarknader och fullt i butikerna."
+    ],
+    "events": [
+     {
+      "name": "Hyde Park Winter Wonderland",
+      "start": "2026-11-19",
+      "end": "2027-01-03",
+      "text": "Julmarknad, tivoli och isbana i Hyde Park. Öppet varje dag utom juldagen, oftast 10–22. Inträdet bokas i förväg och är gratis på lugna tider.",
+      "source": "https://visitlondon.com/things-to-do/event/8696953"
+     },
+     {
+      "name": "Nyårsfyrverkeriet vid London Eye",
+      "start": "2026-12-31",
+      "end": "2027-01-01",
+      "text": "Evenemanget börjar 20.00 och man kommer inte in i områdena utan biljett. Biljetterna säljs via Ticketmaster och brukar ta slut.",
+      "source": "https://www.london.gov.uk/NYE"
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Julbelysning och julmarknader",
+      "from": 11,
+      "to": 12
+     }
+    ]
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "GB-fakta-inresa",
+   "place_id": "GB",
+   "topic": "inresa",
+   "is_rule": true,
+   "title": "Pass och resetillstånd (ETA) krävs",
+   "summary": "Sök ETA på nätet före resan. Det kostar 20 pund och gäller i två år.",
+   "body": "Sedan 25 februari 2026 får man inte gå ombord utan ETA. Det gäller alla EU-medborgare, även barn och spädbarn. Tillståndet gäller för flera resor i två år, eller tills passet går ut. Sök på gov.uk eller i appen UK ETA och akta dig för sajter som tar extra betalt. De flesta får svar inom några minuter, men sök minst tre arbetsdagar i förväg.",
+   "source_url": "https://www.thelocal.dk/20260207/uk-to-hike-price-of-electronic-travel-authorisation-for-foreign-travellers",
+   "verified_on": "2026-11-21"
+  },
+  {
+   "id": "GB-fakta-betala",
+   "place_id": "GB",
+   "topic": "betala",
+   "is_rule": false,
+   "title": "Valuta: brittiska pund (GBP)",
+   "summary": "Landet har pund (GBP). Ett pund är ungefär 13,30 kronor.",
+   "source_url": "https://www.bancaditalia.it/compiti/operazioni-cambi/cambio/cambi_rif_20261116",
+   "verified_on": "2026-11-21"
+  },
+  {
+   "id": "GB-fakta-eluttag",
+   "place_id": "GB",
+   "topic": "eluttag",
+   "is_rule": false,
+   "title": "Adapter behövs: uttag typ G",
+   "summary": "Tre platta stift, 220–240 volt. Svenska kontakter passar inte.",
+   "source_url": "https://www.visitbritain.com/jp/ja/node/53971",
+   "verified_on": "2026-11-21"
+  },
+  {
+   "id": "GB-eng-london-fakta-dricks",
+   "place_id": "GB-eng-london",
+   "topic": "dricks",
+   "is_rule": false,
+   "title": "Dricks: titta på notan först",
+   "summary": "Ofta ingår 12,5 procent i serviceavgift. Annars 10–15 procent.",
+   "body": "På pubar och barer väntas ingen dricks. I taxi rundar man upp eller lägger 5–10 procent.",
+   "source_url": "https://visitlondon.com/traveller-information/essential-information/money/tipping",
+   "verified_on": "2026-11-21"
+  },
+  {
+   "id": "GB-eng-london-fakta-ta-sig-dit",
+   "place_id": "GB-eng-london",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Heathrow till centrum: tre tåg att välja på",
+   "summary": "Piccadilly line 5,90 pund, Elizabeth line 15,50, Heathrow Express runt 25.",
+   "body": "Piccadilly line tar 50–60 minuter och går bland annat till South Kensington, Green Park och King's Cross. Elizabeth line tar runt 35 minuter och går via Paddington, Bond Street och Tottenham Court Road. Heathrow Express tar 15 minuter men går bara till Paddington.",
+   "source_url": "https://londonairport-taxi.com/cheapest-way-heathrow-to-london",
+   "verified_on": "2026-11-21"
+  },
+  {
+   "id": "GB-eng-london-fakta-kontaktlost",
+   "place_id": "GB-eng-london",
+   "topic": "ta-sig-dit",
+   "is_rule": false,
+   "title": "Blippa kortet, köp ingen biljett",
+   "summary": "Kontaktlöst kort eller mobil gäller på tunnelbana, buss och tåg i London.",
+   "body": "Använd samma kort eller samma mobil hela dagen, annars räknas inte dagstaket. På tunnelbanan blippar man både in och ut, på bussen bara när man kliver på. En pappersbiljett i zon 1 kostar 7 pund, mer än dubbelt så mycket.",
+   "source_url": "https://www.london.gov.uk/md3464-march-2026-transport-london-fare-changes",
+   "verified_on": "2026-11-21"
+  },
+  {
+   "id": "GB-eng-london-fakta-gratis-museer",
+   "place_id": "GB-eng-london",
+   "topic": "tank-pa",
+   "is_rule": false,
+   "title": "De statliga museerna är gratis",
+   "summary": "British Museum och Natural History Museum kostar inget att gå in på.",
+   "body": "Regeringen bekräftade 2026 att de nationella museerna i England förblir gratis för alla. Fri entré infördes 2001.",
+   "source_url": "https://www.gov.uk/government/news/national-museums-to-remain-free-for-everyone",
+   "verified_on": "2026-11-21"
+  }
+ ],
+ "items": [
+  {
+   "id": "GB-eng-london-towern",
+   "place_id": "GB-eng-london",
+   "category": "byggnad",
+   "name": "Tower of London",
+   "summary": "Borg från 1000-talet med kronjuvelerna. 38 pund för vuxna.",
+   "body": "Barn 5–15 år betalar 19 pund och barn under 5 går in gratis. Kronjuvelerna och de guidade turerna med vakterna ingår i biljetten. Sista insläpp är redan 15.00.",
+   "lat": 51.5081,
+   "lon": -0.0759,
+   "must_rank": 1,
+   "source_url": "https://www.hrp.org.uk/tower-of-london/visit/tickets-and-prices/?Step=Buy",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Tower of London"
+  },
+  {
+   "id": "GB-eng-london-british-museum",
+   "place_id": "GB-eng-london",
+   "category": "museum",
+   "name": "British Museum",
+   "summary": "Rosettastenen och Parthenonskulpturerna. Gratis inträde.",
+   "body": "Ett av världens mest besökta museer, med 6,4 miljoner besökare 2025.",
+   "lat": 51.5194,
+   "lon": -0.127,
+   "must_rank": 2,
+   "source_url": "https://www.gov.uk/government/news/national-museums-to-remain-free-for-everyone",
+   "verified_on": "2026-11-20",
+   "wiki": "en:British Museum"
+  },
+  {
+   "id": "GB-eng-london-westminster-abbey",
+   "place_id": "GB-eng-london",
+   "category": "byggnad",
+   "name": "Westminster Abbey",
+   "summary": "Kröningskyrkan sedan 1066. 31 pund för vuxna.",
+   "body": "Barn 6–17 år betalar 14 pund. Kvällsgudstjänsten Evensong är gratis, men då får man inte gå runt i kyrkan.",
+   "lat": 51.4994,
+   "lon": -0.1273,
+   "must_rank": 3,
+   "source_url": "https://www.ianvisits.co.uk/articles/tag/westminster-abbey/",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Westminster Abbey"
+  },
+  {
+   "id": "GB-eng-london-natural-history-museum",
+   "place_id": "GB-eng-london",
+   "category": "museum",
+   "name": "Natural History Museum",
+   "summary": "Dinosaurier och ett blåvalsskelett i en katedrallik byggnad. Gratis.",
+   "body": "Landets mest besökta museum 2025, med 7,1 miljoner besökare. Ligger i South Kensington.",
+   "lat": 51.4967,
+   "lon": -0.1764,
+   "must_rank": 4,
+   "source_url": "https://www.gov.uk/government/news/national-museums-to-remain-free-for-everyone",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Natural History Museum, London"
+  },
+  {
+   "id": "GB-eng-london-winter-wonderland",
+   "place_id": "GB-eng-london",
+   "category": "upplevelse",
+   "name": "Hyde Park Winter Wonderland",
+   "summary": "Julmarknad, tivoli och isbana, 19 november–3 januari.",
+   "body": "Närmaste tunnelbanestationer är Hyde Park Corner, Knightsbridge och Marble Arch. Boka en tid i förväg, även för gratistiderna.",
+   "lat": 51.5073,
+   "lon": -0.1657,
+   "must_rank": 5,
+   "source_url": "https://visitlondon.com/things-to-do/event/8696953",
+   "verified_on": "2026-11-20",
+   "wiki": "en:Winter Wonderland"
+  }
+ ],
+ "compendium": [
+  {
+   "id": "mat-fish-and-chips",
+   "category": "mat",
+   "name": "Fish and chips",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Friterad vit fisk med tjocka pommes, salt och vinäger.",
+   "place_id": "GB"
+  },
+  {
+   "id": "mat-sunday-roast",
+   "category": "mat",
+   "name": "Sunday roast",
+   "rarity": "vanlig",
+   "icon": "food",
+   "hint": "Söndagsstek på puben med ugnspotatis, sky och Yorkshire pudding.",
+   "place_id": "GB"
+  },
+  {
+   "id": "dryck-afternoon-tea",
+   "category": "dryck",
+   "name": "Afternoon tea",
+   "rarity": "vanlig",
+   "icon": "cup",
+   "hint": "Te med små smörgåsar, scones och bakelser på en våningsbricka.",
+   "place_id": "GB"
+  },
+  {
+   "id": "fardmedel-rod-dubbeldackare",
+   "category": "fardmedel",
+   "name": "Röd dubbeldäckare",
+   "rarity": "vanlig",
+   "icon": "tram",
+   "hint": "Londons bussar. Bäst utsikt längst fram på övervåningen.",
+   "place_id": "GB"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "GB-eng-london-ide-themsen",
+   "place_id": "GB-eng-london",
+   "kind": "i-stan",
+   "title": "Gå längs Themsen",
+   "body": "Börja vid Westminster Bridge och gå South Bank österut förbi Tate Modern till Tower Bridge.",
+   "duration": "ca 2 h",
+   "cost_level": "gratis",
+   "tags": [
+    "ute"
+   ]
+  },
+  {
+   "id": "GB-eng-london-ide-museidag",
+   "place_id": "GB-eng-london",
+   "kind": "i-stan",
+   "title": "Regndag på museum",
+   "body": "Välj British Museum eller Natural History Museum och bestäm tre saker ni vill se, i stället för att försöka hinna allt.",
+   "duration": "Halvdag",
+   "cost_level": "gratis",
+   "tags": [
+    "inne"
+   ]
+  },
+  {
+   "id": "GB-eng-london-ide-bussen",
+   "place_id": "GB-eng-london",
+   "kind": "i-stan",
+   "title": "Sightseeing med vanlig buss",
+   "body": "Ta en röd dubbeldäckare genom centrum och sätt er längst fram på övervåningen. Det kostar 1,85 pund.",
+   "duration": "ca 1 h",
+   "cost_level": "billigt",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "GB-eng-london-ide-towern",
+   "place_id": "GB-eng-london",
+   "kind": "i-stan",
+   "title": "Towern före lunch",
+   "body": "Boka första tiden, gå direkt till kronjuvelerna och ta sedan en guidad tur med en av vakterna.",
+   "duration": "Halvdag",
+   "cost_level": "medel",
+   "tags": [
+    "ute",
+    "inne"
+   ]
+  },
+  {
+   "id": "GB-eng-london-ide-winter-wonderland",
+   "place_id": "GB-eng-london",
+   "kind": "i-stan",
+   "title": "Julkväll i Hyde Park",
+   "body": "Boka en gratistid på Winter Wonderland, åk skridskor och ät på julmarknaden.",
+   "duration": "ca 3 h",
+   "cost_level": "medel",
+   "tags": [
+    "ute"
+   ]
+  }
+ ],
+ "gifts": [
+  {
+   "id": "GB-present-te",
+   "place_id": "GB",
+   "name": "Te i plåtburk",
+   "body": "Löste eller påsar i en dekorerad burk som går att använda efteråt.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "van"
+   ],
+   "keywords": [
+    "te",
+    "burk"
+   ]
+  },
+  {
+   "id": "GB-present-shortbread",
+   "place_id": "GB",
+   "name": "Shortbread",
+   "body": "Skotska smörkakor i plåtask. Håller länge och tål resväskan.",
+   "for_whom": [
+    "mamma",
+    "pappa",
+    "barn",
+    "van"
+   ],
+   "keywords": [
+    "kakor",
+    "mat"
+   ]
+  },
+  {
+   "id": "GB-present-museibutik",
+   "place_id": "GB",
+   "name": "Något från en museibutik",
+   "body": "Museernas butiker har böcker, affischer och leksaker som inte finns hemma.",
+   "for_whom": [
+    "barn",
+    "van",
+    "mig"
+   ],
+   "keywords": [
+    "museum",
+    "bok"
+   ]
+  }
+ ]
+}

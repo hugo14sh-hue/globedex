@@ -1,0 +1,236 @@
+{
+ "places": {
+  "GB": {
+   "name": "United Kingdom"
+  },
+  "GB-eng-london": {
+   "name": "London",
+   "data": {
+    "best_text": "May, June and September: light, mild and without the high-summer crowds. December is dark but best for a Christmas mood.",
+    "day_budget_note": "Per person per day excluding flights: a share of a mid-range double room, food, local transport and one sight. A rough estimate.",
+    "stay": [
+     {
+      "label": "Weekend",
+      "text": "Westminster, a walk along the Thames and one of the big museums."
+     },
+     {
+      "label": "Long weekend",
+      "text": "Time for the Tower, two museums, a market and an evening in Soho without rushing."
+     },
+     {
+      "label": "A week",
+      "text": "Add Greenwich and a day trip by train, for example Windsor or Oxford."
+     }
+    ],
+    "areas": [
+     {
+      "name": "South Bank and Waterloo",
+      "text": "By the Thames, within walking distance of Westminster and with good connections in every direction."
+     },
+     {
+      "name": "Covent Garden and Soho",
+      "text": "In the middle of the theatre and restaurant districts. The most expensive, and lively until late."
+     },
+     {
+      "name": "South Kensington",
+      "text": "Quiet and smart, next to the big free museums and Hyde Park."
+     },
+     {
+      "name": "King's Cross",
+      "text": "Six Tube lines and a direct Piccadilly line from Heathrow. Practical more than charming."
+     },
+     {
+      "name": "Shoreditch",
+      "text": "Bars, street art and markets in the east. Best for an evening or a Sunday."
+     }
+    ],
+    "transport": [
+     {
+      "mode": "The Tube's Piccadilly line from Heathrow",
+      "text": "Cheapest: 5.90 pounds with a contactless card, the same price all day. Allow 50–60 minutes to the centre."
+     },
+     {
+      "mode": "Elizabeth line from Heathrow",
+      "text": "Faster and more comfortable with luggage: around 35 minutes to the centre. Costs 15.50 pounds since March 2026."
+     },
+     {
+      "mode": "Heathrow Express",
+      "text": "15 minutes to Paddington, but around 25 pounds if you buy the ticket on the day."
+     },
+     {
+      "mode": "Tube and bus in the city",
+      "text": "Tap your bank card or phone, no ticket needed. A ride in zone 1 costs 3.10 pounds at peak times and 3.00 pounds at other times. The bus costs 1.85 pounds and you can change freely within an hour."
+     }
+    ],
+    "events": [
+     {
+      "name": "Hyde Park Winter Wonderland",
+      "text": "Christmas market, funfair and ice rink in Hyde Park. Open every day except Christmas Day, usually 10 am–10 pm. Entry is booked in advance and is free at quiet times."
+     },
+     {
+      "name": "New Year's Eve fireworks at the London Eye",
+      "text": "The event starts at 8 pm and you cannot enter the viewing areas without a ticket. Tickets are sold through Ticketmaster and usually sell out."
+     }
+    ],
+    "seasons": [
+     {
+      "name": "Christmas lights and Christmas markets"
+     }
+    ],
+    "month_notes": [
+     "Cold and dark, but the lowest prices and sales in the shops.",
+     "Cold and quiet. A good month for museums.",
+     "Spring begins and the parks turn green.",
+     "Mild and changeable. Bring a rain jacket.",
+     "Light and mild, one of the best months.",
+     "Long evenings and warm enough for the parks.",
+     "Warmest and most tourists. Queues for the sights.",
+     "Warm, crowded and expensive to stay.",
+     "Mild and clear, with fewer tourists.",
+     "Autumn colours and shorter queues.",
+     "Grey and rainy. The Christmas lights are switched on and Winter Wonderland opens.",
+     "Dark but decorated, with Christmas markets and busy shops."
+    ],
+    "prices": {
+     "summary": "Expensive, especially accommodation, beer and restaurants. The big museums are free, which brings the daily cost down.",
+     "tips": [
+      "Many restaurants add a 12.5 per cent service charge. Check the bill before you tip.",
+      "The daily cap for Tube and bus in zones 1–6 is 16.30 pounds. After that you travel free for the rest of the day, if you tap the same card.",
+      "Buy your Tower ticket online. It costs 38 pounds for an adult."
+     ],
+     "rows": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+       "note": "Tube in zone 1 at peak times. The bus costs 1.85 pounds."
+      }
+     ]
+    }
+   }
+  }
+ },
+ "facts": {
+  "GB-fakta-inresa": {
+   "title": "Passport and travel authorisation (ETA) required",
+   "summary": "Apply for an ETA online before you travel. It costs 20 pounds and is valid for two years.",
+   "body": "Since 25 February 2026 you cannot board without an ETA. This applies to all EU citizens, including children and babies. The authorisation covers multiple trips for two years, or until the passport expires. Apply on gov.uk or in the UK ETA app, and beware of sites that charge extra. Most people get an answer within minutes, but apply at least three working days ahead."
+  },
+  "GB-fakta-betala": {
+   "title": "Currency: pound sterling (GBP)",
+   "summary": "The country uses the pound (GBP). One pound is about 13.30 Swedish kronor."
+  },
+  "GB-fakta-eluttag": {
+   "title": "Adapter needed: type G sockets",
+   "summary": "Three flat pins, 220–240 volts. Swedish plugs do not fit."
+  },
+  "GB-eng-london-fakta-dricks": {
+   "title": "Tipping: check the bill first",
+   "summary": "A 12.5 per cent service charge is often included. Otherwise 10–15 per cent.",
+   "body": "In pubs and bars no tip is expected. In taxis you round up or add 5–10 per cent."
+  },
+  "GB-eng-london-fakta-ta-sig-dit": {
+   "title": "Heathrow to the centre: three trains to choose from",
+   "summary": "Piccadilly line 5.90 pounds, Elizabeth line 15.50, Heathrow Express around 25.",
+   "body": "The Piccadilly line takes 50–60 minutes and stops at South Kensington, Green Park and King's Cross, among others. The Elizabeth line takes around 35 minutes and runs via Paddington, Bond Street and Tottenham Court Road. The Heathrow Express takes 15 minutes but only goes to Paddington."
+  },
+  "GB-eng-london-fakta-kontaktlost": {
+   "title": "Tap your card, don't buy a ticket",
+   "summary": "A contactless card or phone works on the Tube, buses and trains in London.",
+   "body": "Use the same card or the same phone all day, otherwise the daily cap is not counted. On the Tube you tap both in and out, on the bus only when you board. A paper ticket in zone 1 costs 7 pounds, more than twice as much."
+  },
+  "GB-eng-london-fakta-gratis-museer": {
+   "title": "The national museums are free",
+   "summary": "The British Museum and the Natural History Museum cost nothing to enter.",
+   "body": "The government confirmed in 2026 that the national museums in England will stay free for everyone. Free entry was introduced in 2001."
+  }
+ },
+ "items": {
+  "GB-eng-london-towern": {
+   "name": "Tower of London",
+   "summary": "Castle from the 11th century with the Crown Jewels. 38 pounds for adults.",
+   "body": "Children aged 5–15 pay 19 pounds and children under 5 go free. The Crown Jewels and the guided tours with the Yeoman Warders are included in the ticket. Last entry is as early as 3 pm."
+  },
+  "GB-eng-london-british-museum": {
+   "name": "British Museum",
+   "summary": "The Rosetta Stone and the Parthenon sculptures. Free entry.",
+   "body": "One of the world's most visited museums, with 6.4 million visitors in 2025."
+  },
+  "GB-eng-london-westminster-abbey": {
+   "name": "Westminster Abbey",
+   "summary": "The coronation church since 1066. 31 pounds for adults.",
+   "body": "Children aged 6–17 pay 14 pounds. The evening service, Evensong, is free, but then you cannot walk around the church."
+  },
+  "GB-eng-london-natural-history-museum": {
+   "name": "Natural History Museum",
+   "summary": "Dinosaurs and a blue whale skeleton in a cathedral-like building. Free.",
+   "body": "The country's most visited museum in 2025, with 7.1 million visitors. It is in South Kensington."
+  },
+  "GB-eng-london-winter-wonderland": {
+   "name": "Hyde Park Winter Wonderland",
+   "summary": "Christmas market, funfair and ice rink, 19 November–3 January.",
+   "body": "The nearest Tube stations are Hyde Park Corner, Knightsbridge and Marble Arch. Book a time slot in advance, even for the free slots."
+  }
+ },
+ "compendium": {
+  "mat-fish-and-chips": {
+   "name": "Fish and chips",
+   "hint": "Deep-fried white fish with thick chips, salt and vinegar."
+  },
+  "mat-sunday-roast": {
+   "name": "Sunday roast",
+   "hint": "Sunday roast at the pub with roast potatoes, gravy and Yorkshire pudding."
+  },
+  "dryck-afternoon-tea": {
+   "name": "Afternoon tea",
+   "hint": "Tea with small sandwiches, scones and cakes on a tiered stand."
+  },
+  "fardmedel-rod-dubbeldackare": {
+   "name": "Red double-decker",
+   "hint": "London's buses. The best view is at the front of the top deck."
+  }
+ },
+ "ideas": {
+  "GB-eng-london-ide-themsen": {
+   "title": "Walk along the Thames",
+   "body": "Start at Westminster Bridge and walk the South Bank east past Tate Modern to Tower Bridge.",
+   "duration": "about 2 h"
+  },
+  "GB-eng-london-ide-museidag": {
+   "title": "Rainy day at a museum",
+   "body": "Pick the British Museum or the Natural History Museum and decide on three things you want to see, instead of trying to cover everything.",
+   "duration": "Half a day"
+  },
+  "GB-eng-london-ide-bussen": {
+   "title": "Sightseeing by regular bus",
+   "body": "Take a red double-decker through the centre and sit at the front of the top deck. It costs 1.85 pounds.",
+   "duration": "about 1 h"
+  },
+  "GB-eng-london-ide-towern": {
+   "title": "The Tower before lunch",
+   "body": "Book the first slot, go straight to the Crown Jewels and then join a guided tour with one of the Yeoman Warders.",
+   "duration": "Half a day"
+  },
+  "GB-eng-london-ide-winter-wonderland": {
+   "title": "Christmas evening in Hyde Park",
+   "body": "Book a free slot at Winter Wonderland, go ice skating and eat at the Christmas market.",
+   "duration": "about 3 h"
+  }
+ },
+ "gifts": {
+  "GB-present-te": {
+   "name": "Tea in a tin",
+   "body": "Loose leaf or bags in a decorated tin you can keep using afterwards."
+  },
+  "GB-present-shortbread": {
+   "name": "Shortbread",
+   "body": "Scottish butter biscuits in a tin. They keep well and survive a suitcase."
+  },
+  "GB-present-museibutik": {
+   "name": "Something from a museum shop",
+   "body": "The museum shops have books, posters and toys you cannot find at home."
+  }
+ }
+}

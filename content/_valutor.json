@@ -1,5 +1,5 @@
 {
- "_om": "Ungefärliga kurser för att visa priser i kronor, avrundade. Räknade ur ECB:s referenskurser mot euron den 17 november 2026, publicerade av Banca d'Italia. USD är räknad ur dollarkursen den 3 november 2026, eftersom den saknades i utdraget för den 17.",
+ "_om": "Ungefärliga kurser för att visa priser i kronor, avrundade. Räknade ur ECB:s referenskurser mot euron den 17 november 2026, publicerade av Banca d'Italia. USD är räknad ur dollarkursen den 3 november 2026, eftersom den saknades i utdraget för den 17. PLN är härledd från eurons kurs och Numbeos kurs på ungefär 4,37 zloty per euro. GBP är räknad ur kurserna den 16 november 2026 (0,8345 pund och 11,095 kronor per euro).",
  "checked": "2026-11-17",
  "source": "https://www.bancaditalia.it/compiti/operazioni-cambi/cambio/cambi_rif_20261117",
  "sek_per": {
@@ -10,6 +10,7 @@
   "NOK": 1.05,
   "ISK": 0.081,
   "TRY": 0.2,
-  "PLN": 2.5
+  "PLN": 2.5,
+  "GBP": 13.3
  }
 }
